@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:server/LinServer.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:core/LinCore.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:util/LinUtil.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:client/LinClient.xcodeproj">
+   </FileRef>
+</Workspace>
