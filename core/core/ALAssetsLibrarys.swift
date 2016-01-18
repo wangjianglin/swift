@@ -9,9 +9,7 @@
 import Foundation
 import UIKit
 import AssetsLibrary
-#if !iOS7
 import LinUtil
-#endif
 
 public extension ALAssetsLibrary{
     

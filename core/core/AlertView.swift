@@ -7,9 +7,6 @@
 //
 
 import UIKit
-#if !iOS7
-//import LinClient
-#endif
 
 public class AlertView{
     

@@ -7,9 +7,7 @@
 //
 
 import Foundation
-#if !iOS7
 import LinUtil
-#endif
 
 
 //HTTP通信实现类

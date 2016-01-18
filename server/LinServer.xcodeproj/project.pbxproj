@@ -7,65 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0249A21C4CECB8001FC3F8 /* LinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0249A11C4CEB17001FC3F8 /* LinServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E45BC401B20C55E0037CE17 /* LinHTTPConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E45BC3F1B20C55E0037CE17 /* LinHTTPConnection.swift */; };
-		3E8982671B1E1D9100DE0AC8 /* server-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8982661B1E1D9100DE0AC8 /* server-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E8982671B1E1D9100DE0AC8 /* LinServer-Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8982661B1E1D9100DE0AC8 /* LinServer-Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E89826D1B1E1D9100DE0AC8 /* LinServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8982611B1E1D9100DE0AC8 /* LinServer.framework */; };
 		3E8982741B1E1D9100DE0AC8 /* serverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8982731B1E1D9100DE0AC8 /* serverTests.swift */; };
-		3EDFEC3C1B1E1E1000F24A24 /* DDData.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC161B1E1E1000F24A24 /* DDData.h */; };
+		3EDFEC3C1B1E1E1000F24A24 /* DDData.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC161B1E1E1000F24A24 /* DDData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC3D1B1E1E1000F24A24 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC171B1E1E1000F24A24 /* DDData.m */; };
-		3EDFEC3E1B1E1E1000F24A24 /* DDNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC181B1E1E1000F24A24 /* DDNumber.h */; };
+		3EDFEC3E1B1E1E1000F24A24 /* DDNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC181B1E1E1000F24A24 /* DDNumber.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC3F1B1E1E1000F24A24 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC191B1E1E1000F24A24 /* DDNumber.m */; };
-		3EDFEC401B1E1E1000F24A24 /* DDRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC1A1B1E1E1000F24A24 /* DDRange.h */; };
+		3EDFEC401B1E1E1000F24A24 /* DDRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC1A1B1E1E1000F24A24 /* DDRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC411B1E1E1000F24A24 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC1B1B1E1E1000F24A24 /* DDRange.m */; };
-		3EDFEC421B1E1E1000F24A24 /* HTTPAuthenticationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC1C1B1E1E1000F24A24 /* HTTPAuthenticationRequest.h */; };
+		3EDFEC421B1E1E1000F24A24 /* HTTPAuthenticationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC1C1B1E1E1000F24A24 /* HTTPAuthenticationRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC431B1E1E1000F24A24 /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC1D1B1E1E1000F24A24 /* HTTPAuthenticationRequest.m */; };
-		3EDFEC441B1E1E1000F24A24 /* HTTPConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC1E1B1E1E1000F24A24 /* HTTPConnection.h */; };
+		3EDFEC441B1E1E1000F24A24 /* HTTPConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC1E1B1E1E1000F24A24 /* HTTPConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC451B1E1E1000F24A24 /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC1F1B1E1E1000F24A24 /* HTTPConnection.m */; };
-		3EDFEC461B1E1E1000F24A24 /* HTTPLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC201B1E1E1000F24A24 /* HTTPLogging.h */; };
-		3EDFEC471B1E1E1000F24A24 /* HTTPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC211B1E1E1000F24A24 /* HTTPMessage.h */; };
+		3EDFEC461B1E1E1000F24A24 /* HTTPLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC201B1E1E1000F24A24 /* HTTPLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3EDFEC471B1E1E1000F24A24 /* HTTPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC211B1E1E1000F24A24 /* HTTPMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC481B1E1E1000F24A24 /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC221B1E1E1000F24A24 /* HTTPMessage.m */; };
-		3EDFEC491B1E1E1000F24A24 /* HTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC231B1E1E1000F24A24 /* HTTPResponse.h */; };
-		3EDFEC4A1B1E1E1000F24A24 /* HTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC241B1E1E1000F24A24 /* HTTPServer.h */; };
+		3EDFEC491B1E1E1000F24A24 /* HTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC231B1E1E1000F24A24 /* HTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3EDFEC4A1B1E1E1000F24A24 /* HTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC241B1E1E1000F24A24 /* HTTPServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC4B1B1E1E1000F24A24 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC251B1E1E1000F24A24 /* HTTPServer.m */; };
-		3EDFEC4C1B1E1E1000F24A24 /* MultipartFormDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC271B1E1E1000F24A24 /* MultipartFormDataParser.h */; };
+		3EDFEC4C1B1E1E1000F24A24 /* MultipartFormDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC271B1E1E1000F24A24 /* MultipartFormDataParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC4D1B1E1E1000F24A24 /* MultipartFormDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC281B1E1E1000F24A24 /* MultipartFormDataParser.m */; };
-		3EDFEC4E1B1E1E1000F24A24 /* MultipartMessageHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC291B1E1E1000F24A24 /* MultipartMessageHeader.h */; };
+		3EDFEC4E1B1E1E1000F24A24 /* MultipartMessageHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC291B1E1E1000F24A24 /* MultipartMessageHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC4F1B1E1E1000F24A24 /* MultipartMessageHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC2A1B1E1E1000F24A24 /* MultipartMessageHeader.m */; };
-		3EDFEC501B1E1E1000F24A24 /* MultipartMessageHeaderField.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC2B1B1E1E1000F24A24 /* MultipartMessageHeaderField.h */; };
+		3EDFEC501B1E1E1000F24A24 /* MultipartMessageHeaderField.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC2B1B1E1E1000F24A24 /* MultipartMessageHeaderField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC511B1E1E1000F24A24 /* MultipartMessageHeaderField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC2C1B1E1E1000F24A24 /* MultipartMessageHeaderField.m */; };
-		3EDFEC521B1E1E1000F24A24 /* HTTPAsyncFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC2E1B1E1E1000F24A24 /* HTTPAsyncFileResponse.h */; };
+		3EDFEC521B1E1E1000F24A24 /* HTTPAsyncFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC2E1B1E1E1000F24A24 /* HTTPAsyncFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC531B1E1E1000F24A24 /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC2F1B1E1E1000F24A24 /* HTTPAsyncFileResponse.m */; };
-		3EDFEC541B1E1E1000F24A24 /* HTTPDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC301B1E1E1000F24A24 /* HTTPDataResponse.h */; };
+		3EDFEC541B1E1E1000F24A24 /* HTTPDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC301B1E1E1000F24A24 /* HTTPDataResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC551B1E1E1000F24A24 /* HTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC311B1E1E1000F24A24 /* HTTPDataResponse.m */; };
-		3EDFEC561B1E1E1000F24A24 /* HTTPDynamicFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC321B1E1E1000F24A24 /* HTTPDynamicFileResponse.h */; };
+		3EDFEC561B1E1E1000F24A24 /* HTTPDynamicFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC321B1E1E1000F24A24 /* HTTPDynamicFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC571B1E1E1000F24A24 /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC331B1E1E1000F24A24 /* HTTPDynamicFileResponse.m */; };
-		3EDFEC581B1E1E1000F24A24 /* HTTPErrorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC341B1E1E1000F24A24 /* HTTPErrorResponse.h */; };
+		3EDFEC581B1E1E1000F24A24 /* HTTPErrorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC341B1E1E1000F24A24 /* HTTPErrorResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC591B1E1E1000F24A24 /* HTTPErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC351B1E1E1000F24A24 /* HTTPErrorResponse.m */; };
-		3EDFEC5A1B1E1E1000F24A24 /* HTTPFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC361B1E1E1000F24A24 /* HTTPFileResponse.h */; };
+		3EDFEC5A1B1E1E1000F24A24 /* HTTPFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC361B1E1E1000F24A24 /* HTTPFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC5B1B1E1E1000F24A24 /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC371B1E1E1000F24A24 /* HTTPFileResponse.m */; };
-		3EDFEC5C1B1E1E1000F24A24 /* HTTPRedirectResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC381B1E1E1000F24A24 /* HTTPRedirectResponse.h */; };
+		3EDFEC5C1B1E1E1000F24A24 /* HTTPRedirectResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC381B1E1E1000F24A24 /* HTTPRedirectResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC5D1B1E1E1000F24A24 /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC391B1E1E1000F24A24 /* HTTPRedirectResponse.m */; };
-		3EDFEC5E1B1E1E1000F24A24 /* WebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC3A1B1E1E1000F24A24 /* WebSocket.h */; };
+		3EDFEC5E1B1E1E1000F24A24 /* WebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC3A1B1E1E1000F24A24 /* WebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC5F1B1E1E1000F24A24 /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC3B1B1E1E1000F24A24 /* WebSocket.m */; };
 		3EDFEC651B1E1ED200F24A24 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC641B1E1ED200F24A24 /* Server.swift */; };
 		3EDFEC781B1E1FAF00F24A24 /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3EDFEC671B1E1FAF00F24A24 /* About.txt */; };
-		3EDFEC791B1E1FAF00F24A24 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC681B1E1FAF00F24A24 /* DDAbstractDatabaseLogger.h */; };
+		3EDFEC791B1E1FAF00F24A24 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC681B1E1FAF00F24A24 /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC7A1B1E1FAF00F24A24 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC691B1E1FAF00F24A24 /* DDAbstractDatabaseLogger.m */; };
-		3EDFEC7B1B1E1FAF00F24A24 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC6A1B1E1FAF00F24A24 /* DDASLLogger.h */; };
+		3EDFEC7B1B1E1FAF00F24A24 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC6A1B1E1FAF00F24A24 /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC7C1B1E1FAF00F24A24 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC6B1B1E1FAF00F24A24 /* DDASLLogger.m */; };
-		3EDFEC7D1B1E1FAF00F24A24 /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC6C1B1E1FAF00F24A24 /* DDFileLogger.h */; };
+		3EDFEC7D1B1E1FAF00F24A24 /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC6C1B1E1FAF00F24A24 /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC7E1B1E1FAF00F24A24 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC6D1B1E1FAF00F24A24 /* DDFileLogger.m */; };
-		3EDFEC7F1B1E1FAF00F24A24 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC6E1B1E1FAF00F24A24 /* DDLog.h */; };
+		3EDFEC7F1B1E1FAF00F24A24 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC6E1B1E1FAF00F24A24 /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC801B1E1FAF00F24A24 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC6F1B1E1FAF00F24A24 /* DDLog.m */; };
-		3EDFEC811B1E1FAF00F24A24 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC701B1E1FAF00F24A24 /* DDTTYLogger.h */; };
+		3EDFEC811B1E1FAF00F24A24 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC701B1E1FAF00F24A24 /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC821B1E1FAF00F24A24 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC711B1E1FAF00F24A24 /* DDTTYLogger.m */; };
-		3EDFEC831B1E1FAF00F24A24 /* ContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC731B1E1FAF00F24A24 /* ContextFilterLogFormatter.h */; };
+		3EDFEC831B1E1FAF00F24A24 /* ContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC731B1E1FAF00F24A24 /* ContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC841B1E1FAF00F24A24 /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC741B1E1FAF00F24A24 /* ContextFilterLogFormatter.m */; };
-		3EDFEC851B1E1FAF00F24A24 /* DispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC751B1E1FAF00F24A24 /* DispatchQueueLogFormatter.h */; };
+		3EDFEC851B1E1FAF00F24A24 /* DispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC751B1E1FAF00F24A24 /* DispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC861B1E1FAF00F24A24 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC761B1E1FAF00F24A24 /* DispatchQueueLogFormatter.m */; };
 		3EDFEC871B1E1FAF00F24A24 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3EDFEC771B1E1FAF00F24A24 /* README.txt */; };
 		3EDFEC8C1B1E1FC500F24A24 /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3EDFEC891B1E1FC500F24A24 /* About.txt */; };
-		3EDFEC8D1B1E1FC500F24A24 /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC8A1B1E1FC500F24A24 /* GCDAsyncSocket.h */; };
+		3EDFEC8D1B1E1FC500F24A24 /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC8A1B1E1FC500F24A24 /* GCDAsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC8E1B1E1FC500F24A24 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC8B1B1E1FC500F24A24 /* GCDAsyncSocket.m */; };
 /* End PBXBuildFile section */
 
@@ -80,10 +81,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E0249A11C4CEB17001FC3F8 /* LinServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinServer.h; sourceTree = "<group>"; };
 		3E45BC3F1B20C55E0037CE17 /* LinHTTPConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinHTTPConnection.swift; sourceTree = "<group>"; };
 		3E8982611B1E1D9100DE0AC8 /* LinServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinServer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8982651B1E1D9100DE0AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E8982661B1E1D9100DE0AC8 /* server-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "server-Bridging-Header.h"; sourceTree = "<group>"; };
+		3E8982661B1E1D9100DE0AC8 /* LinServer-Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LinServer-Bridging.h"; sourceTree = "<group>"; };
 		3E89826C1B1E1D9100DE0AC8 /* LinServerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinServerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8982721B1E1D9100DE0AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E8982731B1E1D9100DE0AC8 /* serverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = serverTests.swift; sourceTree = "<group>"; };
@@ -188,8 +190,9 @@
 				3EDFEC641B1E1ED200F24A24 /* Server.swift */,
 				3E45BC3F1B20C55E0037CE17 /* LinHTTPConnection.swift */,
 				3EDFEC141B1E1DC500F24A24 /* CocoaHTTPServer */,
-				3E8982661B1E1D9100DE0AC8 /* server-Bridging-Header.h */,
+				3E8982661B1E1D9100DE0AC8 /* LinServer-Bridging.h */,
 				3E8982641B1E1D9100DE0AC8 /* Supporting Files */,
+				3E0249A11C4CEB17001FC3F8 /* LinServer.h */,
 			);
 			path = server;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E0249A21C4CECB8001FC3F8 /* LinServer.h in Headers */,
 				3EDFEC471B1E1E1000F24A24 /* HTTPMessage.h in Headers */,
 				3EDFEC441B1E1E1000F24A24 /* HTTPConnection.h in Headers */,
 				3EDFEC4E1B1E1E1000F24A24 /* MultipartMessageHeader.h in Headers */,
@@ -361,7 +365,6 @@
 				3EDFEC831B1E1FAF00F24A24 /* ContextFilterLogFormatter.h in Headers */,
 				3EDFEC3E1B1E1E1000F24A24 /* DDNumber.h in Headers */,
 				3EDFEC491B1E1E1000F24A24 /* HTTPResponse.h in Headers */,
-				3E8982671B1E1D9100DE0AC8 /* server-Bridging-Header.h in Headers */,
 				3EDFEC461B1E1E1000F24A24 /* HTTPLogging.h in Headers */,
 				3EDFEC5E1B1E1E1000F24A24 /* WebSocket.h in Headers */,
 				3EDFEC851B1E1FAF00F24A24 /* DispatchQueueLogFormatter.h in Headers */,
@@ -369,6 +372,7 @@
 				3EDFEC581B1E1E1000F24A24 /* HTTPErrorResponse.h in Headers */,
 				3EDFEC541B1E1E1000F24A24 /* HTTPDataResponse.h in Headers */,
 				3EDFEC4A1B1E1E1000F24A24 /* HTTPServer.h in Headers */,
+				3E8982671B1E1D9100DE0AC8 /* LinServer-Bridging.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,7 +628,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = LinServer;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "server/server-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -641,7 +645,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = LinServer;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "server/server-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

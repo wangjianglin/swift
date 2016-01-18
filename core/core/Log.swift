@@ -8,9 +8,7 @@
 
 import Foundation
 import UIKit
-#if !iOS7
 import LinUtil
-#endif
 
 public enum LogLevel:Int{
     case Off = 0

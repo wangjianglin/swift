@@ -7,9 +7,7 @@
 //
 
 import Foundation
-#if !iOS7
 import LinUtil
-#endif
 
 //
 // 采用标准HTTP请求方式传递请求参数，但返回的是json格式的数据
