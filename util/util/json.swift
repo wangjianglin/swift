@@ -172,12 +172,18 @@ extension Json {
     
     public func setValue(value:AnyObject?,forName name:String){
         if value == nil{
-//            self[name] = Json();
+            //            self[name] = Json();
             self.remove(name);
         }else{
             self[name] = Json(value!);
         }
     }
+    
+    public func setIntValue(value:Int,forName name:String){
+        self.setValue(NSNumber(integer: value), forName: name);
+    }
+    
+    
     
     public func remove(name:String){
         switch _value {

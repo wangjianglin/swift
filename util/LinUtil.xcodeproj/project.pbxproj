@@ -33,6 +33,7 @@
 		3ECB95CB1C48115300E5E67C /* tasks.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB95CA1C48115300E5E67C /* tasks.txt */; };
 		3ECE27C41C479C560094F9D1 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECE27C31C479C560094F9D1 /* libsqlite3.0.tbd */; };
 		3ECE27C61C47A01B0094F9D1 /* LinUtil.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 3ECE27C51C47A01B0094F9D1 /* LinUtil.podspec */; };
+		3ECF6F981C5390B900C78DFA /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECF6F971C5390B900C78DFA /* Bytes.swift */; };
 		3EF90C701A5E71A3004F2E85 /* Synchronized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF90C6F1A5E71A3004F2E85 /* Synchronized.swift */; };
 		3EF90C771A5E7211004F2E85 /* ObjCSynchronized.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF90C751A5E7211004F2E85 /* ObjCSynchronized.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EF90C781A5E7211004F2E85 /* ObjCSynchronized.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF90C761A5E7211004F2E85 /* ObjCSynchronized.m */; };
@@ -59,7 +60,6 @@
 		3E37468D1A264C1700B980E9 /* json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
 		3E3746DE1A2DED5300B980E9 /* AutoResetEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoResetEvent.swift; sourceTree = "<group>"; };
 		3E64C1E01A6BF612007185E2 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		3E64C1E21A6BF62D007185E2 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		3E64C1E41A6BF685007185E2 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
 		3E64C1E51A6BF685007185E2 /* md5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = md5.m; sourceTree = "<group>"; };
 		3E64C1E81A6BFB6A007185E2 /* Documents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Documents.swift; sourceTree = "<group>"; };
@@ -79,6 +79,7 @@
 		3ECB95CA1C48115300E5E67C /* tasks.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tasks.txt; sourceTree = "<group>"; };
 		3ECE27C31C479C560094F9D1 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3ECE27C51C47A01B0094F9D1 /* LinUtil.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LinUtil.podspec; sourceTree = "<group>"; };
+		3ECF6F971C5390B900C78DFA /* Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
 		3EF90C6F1A5E71A3004F2E85 /* Synchronized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronized.swift; sourceTree = "<group>"; };
 		3EF90C751A5E7211004F2E85 /* ObjCSynchronized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCSynchronized.h; sourceTree = "<group>"; };
 		3EF90C761A5E7211004F2E85 /* ObjCSynchronized.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCSynchronized.m; sourceTree = "<group>"; };
@@ -110,7 +111,6 @@
 				3ECB95CA1C48115300E5E67C /* tasks.txt */,
 				3ECE27C51C47A01B0094F9D1 /* LinUtil.podspec */,
 				3ECE27C31C479C560094F9D1 /* libsqlite3.0.tbd */,
-				3E64C1E21A6BF62D007185E2 /* libcommonCrypto.dylib */,
 				3E37466F1A26368100B980E9 /* util */,
 				3E37467C1A26368100B980E9 /* utilTests */,
 				3E37466E1A26368100B980E9 /* Products */,
@@ -146,6 +146,7 @@
 				3EF90C6F1A5E71A3004F2E85 /* Synchronized.swift */,
 				3E64C1E01A6BF612007185E2 /* Strings.swift */,
 				3E64C1E81A6BFB6A007185E2 /* Documents.swift */,
+				3ECF6F971C5390B900C78DFA /* Bytes.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -258,7 +259,7 @@
 				TargetAttributes = {
 					3E37466C1A26368100B980E9 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 2BTRF8URM5;
+						DevelopmentTeam = 52EW4R7GEM;
 					};
 					3E3746771A26368100B980E9 = {
 						CreatedOnToolsVersion = 6.1;
@@ -308,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E76ADA21A41C8B000B0C2BB /* Schema.swift in Sources */,
+				3ECF6F981C5390B900C78DFA /* Bytes.swift in Sources */,
 				3E9927BA1A8BC0DE00D9246A /* DelegateAction.swift in Sources */,
 				3E76ADA11A41C8B000B0C2BB /* Query.swift in Sources */,
 				3E76AD9F1A41C8B000B0C2BB /* Database.swift in Sources */,
@@ -437,6 +439,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -449,6 +453,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.util;
 				PRODUCT_NAME = LinUtil;
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
@@ -458,6 +463,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -470,6 +477,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.util;
 				PRODUCT_NAME = LinUtil;
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};

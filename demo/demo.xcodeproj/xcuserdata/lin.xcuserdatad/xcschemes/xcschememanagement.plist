@@ -4,20 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>server.xcscheme</key>
+		<key>demo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3E8982601B1E1D9100DE0AC8</key>
+		<key>3E200EA31C4D5FB000A00A10</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3E89826B1B1E1D9100DE0AC8</key>
+		<key>3E200EB71C4D5FB000A00A10</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3E200EC21C4D5FB000A00A10</key>
 		<dict>
 			<key>primary</key>
 			<true/>

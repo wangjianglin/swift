@@ -21,6 +21,16 @@ public class AsynOperation : NSOperation{
 }
 public class Queue{
     
+    private var _queue:NSOperationQueue;
+    public init(count:Int = 5){
+        _queue = NSOperationQueue();
+        _queue.maxConcurrentOperationCount = count;
+    }
+    
+    public func asynQueue(action:(()->())){
+        let operation = AsynOperation(action: action);
+        _queue.addOperation(operation);
+    }
     
     private class var asynQueue:NSOperationQueue{
         struct YRSingleton{
