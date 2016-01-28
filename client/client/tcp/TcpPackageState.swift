@@ -9,7 +9,7 @@
 import Foundation
 
 public enum TcpPackageState{
-    case NONE
+//    case NONE
     case REQUEST
     case RESPONSE
 }

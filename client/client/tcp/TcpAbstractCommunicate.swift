@@ -12,8 +12,12 @@ import Foundation
 public class TcpAbstractCommunicate: TcpCommunicate{
     public var mainThread:Bool = false;
     
-    public func send(pack: TcpPackage)->TcpPackageResponse {
+    public func send(pack: TcpRequestPackage)->TcpPackageResponse {
         return TcpPackageResponse();
+    }
+    
+    public init(){
+        fatalError("init() has not been implemented")
     }
     
     public func close() {

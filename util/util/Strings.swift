@@ -26,15 +26,15 @@ extension String {
 //        return String(format: hash)
     }
     
-    public static func fromBuffer(var buffer:[UInt8],var count:Int = 0)->String!{
+    public static func fromBuffer(var buffer:[UInt8],offset:Int = 0,var count:Int = 0,encoding: UInt = NSUTF8StringEncoding)->String!{
         let arrayPtr = UnsafeMutableBufferPointer<UInt8>(start: &buffer, count: buffer.count)
-        let basePtr = arrayPtr.baseAddress as UnsafeMutablePointer<UInt8>
+        let basePtr = arrayPtr.baseAddress.advancedBy(offset) as UnsafeMutablePointer<UInt8>
         
         let data = NSData(bytesNoCopy: basePtr, length: count,freeWhenDone:false);
         if(count == 0){
             count = buffer.count;
         }
-        let s = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
+        let s = NSString(data: data, encoding: encoding) as! String
         return s;
     }
 }

@@ -8,7 +8,7 @@
 
 import LinUtil
 
-public class TcpErrorPackage : TcpPackage{
+public final class TcpErrorPackage : TcpResponsePackage{
     
     public override class var type:UInt8{
         return 0;
@@ -23,6 +23,10 @@ public class TcpErrorPackage : TcpPackage{
     }
     init(json:Json) {
         _json = json;
+    }
+
+    public required init() {
+        fatalError("init() has not been implemented")
     }
     private var _json:Json;
     private var code:Int{

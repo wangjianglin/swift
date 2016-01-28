@@ -14,14 +14,14 @@
 		3E200EB21C4D5FB000A00A10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E200EB01C4D5FB000A00A10 /* LaunchScreen.storyboard */; };
 		3E200EBD1C4D5FB000A00A10 /* demoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EBC1C4D5FB000A00A10 /* demoTests.swift */; };
 		3E200EC81C4D5FB000A00A10 /* demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EC71C4D5FB000A00A10 /* demoUITests.swift */; };
-		3E200EF21C4E3F3600A00A10 /* LinServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E200EF11C4E3F3600A00A10 /* LinServer.framework */; };
-		3E200EF31C4E3F3600A00A10 /* LinServer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E200EF11C4E3F3600A00A10 /* LinServer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3E200EF61C4E3F4500A00A10 /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E200EF51C4E3F4500A00A10 /* LinCore.framework */; };
-		3E200EF71C4E3F4500A00A10 /* LinCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E200EF51C4E3F4500A00A10 /* LinCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3E200EF91C4E3F4500A00A10 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E200EF81C4E3F4500A00A10 /* LinUtil.framework */; };
-		3E200EFA1C4E3F4500A00A10 /* LinUtil.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E200EF81C4E3F4500A00A10 /* LinUtil.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3E200EFC1C4E3F4500A00A10 /* LinClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E200EFB1C4E3F4500A00A10 /* LinClient.framework */; };
-		3E200EFD1C4E3F4500A00A10 /* LinClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E200EFB1C4E3F4500A00A10 /* LinClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3ED1EC771C57E14700E2AC3B /* LinServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED1EC761C57E14700E2AC3B /* LinServer.framework */; };
+		3ED1EC781C57E14700E2AC3B /* LinServer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED1EC761C57E14700E2AC3B /* LinServer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3ED1EC7A1C57E14700E2AC3B /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED1EC791C57E14700E2AC3B /* LinCore.framework */; };
+		3ED1EC7B1C57E14700E2AC3B /* LinCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED1EC791C57E14700E2AC3B /* LinCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3ED1EC7D1C57E14700E2AC3B /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED1EC7C1C57E14700E2AC3B /* LinUtil.framework */; };
+		3ED1EC7E1C57E14700E2AC3B /* LinUtil.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED1EC7C1C57E14700E2AC3B /* LinUtil.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3ED1EC801C57E14700E2AC3B /* LinClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED1EC7F1C57E14700E2AC3B /* LinClient.framework */; };
+		3ED1EC811C57E14700E2AC3B /* LinClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED1EC7F1C57E14700E2AC3B /* LinClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,16 +42,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3E200EF41C4E3F3700A00A10 /* Embed Frameworks */ = {
+		3ED1EC821C57E14700E2AC3B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3E200EFA1C4E3F4500A00A10 /* LinUtil.framework in Embed Frameworks */,
-				3E200EFD1C4E3F4500A00A10 /* LinClient.framework in Embed Frameworks */,
-				3E200EF31C4E3F3600A00A10 /* LinServer.framework in Embed Frameworks */,
-				3E200EF71C4E3F4500A00A10 /* LinCore.framework in Embed Frameworks */,
+				3ED1EC7E1C57E14700E2AC3B /* LinUtil.framework in Embed Frameworks */,
+				3ED1EC811C57E14700E2AC3B /* LinClient.framework in Embed Frameworks */,
+				3ED1EC781C57E14700E2AC3B /* LinServer.framework in Embed Frameworks */,
+				3ED1EC7B1C57E14700E2AC3B /* LinCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,10 +72,10 @@
 		3E200EC31C4D5FB000A00A10 /* demoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = demoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E200EC71C4D5FB000A00A10 /* demoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoUITests.swift; sourceTree = "<group>"; };
 		3E200EC91C4D5FB000A00A10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E200EF11C4E3F3600A00A10 /* LinServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinServer.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinServer.framework"; sourceTree = "<absolute>"; };
-		3E200EF51C4E3F4500A00A10 /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinCore.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinCore.framework"; sourceTree = "<absolute>"; };
-		3E200EF81C4E3F4500A00A10 /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinUtil.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinUtil.framework"; sourceTree = "<absolute>"; };
-		3E200EFB1C4E3F4500A00A10 /* LinClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinClient.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinClient.framework"; sourceTree = "<absolute>"; };
+		3ED1EC761C57E14700E2AC3B /* LinServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinServer.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinServer.framework"; sourceTree = "<absolute>"; };
+		3ED1EC791C57E14700E2AC3B /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinCore.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinCore.framework"; sourceTree = "<absolute>"; };
+		3ED1EC7C1C57E14700E2AC3B /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinUtil.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinUtil.framework"; sourceTree = "<absolute>"; };
+		3ED1EC7F1C57E14700E2AC3B /* LinClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinClient.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinClient.framework"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,10 +83,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E200EF91C4E3F4500A00A10 /* LinUtil.framework in Frameworks */,
-				3E200EFC1C4E3F4500A00A10 /* LinClient.framework in Frameworks */,
-				3E200EF21C4E3F3600A00A10 /* LinServer.framework in Frameworks */,
-				3E200EF61C4E3F4500A00A10 /* LinCore.framework in Frameworks */,
+				3ED1EC7D1C57E14700E2AC3B /* LinUtil.framework in Frameworks */,
+				3ED1EC801C57E14700E2AC3B /* LinClient.framework in Frameworks */,
+				3ED1EC771C57E14700E2AC3B /* LinServer.framework in Frameworks */,
+				3ED1EC7A1C57E14700E2AC3B /* LinCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,10 +110,10 @@
 		3E200E9B1C4D5FB000A00A10 = {
 			isa = PBXGroup;
 			children = (
-				3E200EFB1C4E3F4500A00A10 /* LinClient.framework */,
-				3E200EF81C4E3F4500A00A10 /* LinUtil.framework */,
-				3E200EF51C4E3F4500A00A10 /* LinCore.framework */,
-				3E200EF11C4E3F3600A00A10 /* LinServer.framework */,
+				3ED1EC7F1C57E14700E2AC3B /* LinClient.framework */,
+				3ED1EC7C1C57E14700E2AC3B /* LinUtil.framework */,
+				3ED1EC791C57E14700E2AC3B /* LinCore.framework */,
+				3ED1EC761C57E14700E2AC3B /* LinServer.framework */,
 				3E200EA61C4D5FB000A00A10 /* demo */,
 				3E200EBB1C4D5FB000A00A10 /* demoTests */,
 				3E200EC61C4D5FB000A00A10 /* demoUITests */,
@@ -172,7 +172,7 @@
 				3E200EA01C4D5FB000A00A10 /* Sources */,
 				3E200EA11C4D5FB000A00A10 /* Frameworks */,
 				3E200EA21C4D5FB000A00A10 /* Resources */,
-				3E200EF41C4E3F3700A00A10 /* Embed Frameworks */,
+				3ED1EC821C57E14700E2AC3B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -442,6 +442,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -456,6 +457,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

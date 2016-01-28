@@ -19,6 +19,16 @@ public class TcpPackageResponse{
         
     }
     
+    private var _error:TcpErrorPackage!
+    public var error:TcpErrorPackage!{
+        return _error;
+    }
+    
+    public func setError(error:TcpErrorPackage){
+        _error = error;
+        _set.set();
+    }
+    
     private var pack:TcpPackage!;
 
     func response(pack:TcpPackage){

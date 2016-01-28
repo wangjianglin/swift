@@ -6,13 +6,35 @@
 //  Copyright © 2016 lin. All rights reserved.
 //
 
+import LinUtil
+
 public class TcpCommandProtocolParser_010:TcpAbstractProtocolParser{
     required public init(){
         
     }
     
     public override func parse()->TcpPackage!{
-        return TcpCommandPackageManager.parse(buffer);
+        
+        let command = readInt32(buffer, offset: 3);
+        //        let cls = YRSingleton.instance[Int32(command)]?.resp;
+        //        if cls == nil{
+        //            return nil;
+        //        }
+        //        let pack = cls!.init();
+        //
+        //        if pack is TcpCommandResponsePackage {
+        //            (pack as! TcpCommandResponsePackage).parse(buffer,offset: offset);
+        //        }
+        //        
+        //        return pack;
+        var commandPack:TcpCommandPackage! = nil;
+        if state == TcpPackageState.REQUEST {
+            //return TcpCommandPackageManager.requestParse(buffer);
+            commandPack = TcpCommandPackageManager.newRequestInstance(command);
+        }
+        //return TcpCommandPackageManager.responseParse(buffer);
+        commandPack = TcpCommandPackageManager.newResponseInstance(command);
+        return commandPack;
     }
     
   public override class

@@ -10,6 +10,18 @@ import UIKit
 import LinClient
 import LinUtil
 
+//public class TcpCommandDetectPackage2 : TcpCommandPackage{
+//    
+//    override public class var command:Int32{
+//        return 0x1;
+//    }
+//    
+////    public override var command:Int32{
+////        return (Mirror(reflecting: self).subjectType as! TcpCommandPackage.Type).command;
+////    }
+//}
+
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -21,7 +33,9 @@ class ViewController: UIViewController {
         
         //testServer();
         
-        testCommClient();
+        LinClient.testCommClient();
+//        testCommClient();
+        
         
         //test(buffer,count: count);
         //let s = NSString(data: data, encoding: NSUTF8StringEncoding)
@@ -36,10 +50,20 @@ class ViewController: UIViewController {
             print("pack:\(pack)");
         };
         
-//        let pack = TcpCommandDetectPackage();
+        let commandPack = TcpCommandDetectPackage();
+        
+        print(commandPack.command)
+        //print((Mirror(reflecting: commandPack).subjectType as! TcpCommandDetectPackage.Type).command)
+//        print("\(LinClient.TcpCommandDetectPackage.command)");
+//        commandPack.test()
         comm.start();
-        let pack = TcpJsonPackage();
-        let rpack = comm.send(pack).response;
+        let jsonPack = TcpJsonRequestPackage();
+        
+        print(jsonPack.path)
+//        jsonPack.test();
+        
+        let rpack = comm.send(jsonPack).response as! TcpJsonPackage;
+//        rpack.header("name", value:"value");
         print(rpack);
         //comm.send(pack);
     }

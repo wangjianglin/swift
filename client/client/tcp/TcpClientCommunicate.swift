@@ -37,7 +37,7 @@ public class TcpClientCommunicate:TcpAbstractCommunicate{
     }
     
     
-    override public func send(pack: TcpPackage)->TcpPackageResponse {
+    override public func send(pack: TcpRequestPackage)->TcpPackageResponse {
         return session.send(pack);
     }
 }

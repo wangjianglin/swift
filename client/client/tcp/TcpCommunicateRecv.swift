@@ -72,17 +72,23 @@ class TcpCommunicateRecv {
                 if (ch[n] == 0xC0)
                 {//如果isCo0为true，表示数据结束
                 
-                    if let parser = parser {
+                    if var parser = parser {
+                        
+                        if(sequeueBytes[0] == 0){
+                            parser.state = TcpPackageState.REQUEST;
+                        }else{
+                            parser.state = TcpPackageState.RESPONSE;
+                        }
                         let p = parser.parse();
                         if let p = p{
                             
                             let seq = readInt64(sequeueBytes, offset: 1);
-                            p.setSequeue(asUInt64(seq));
-                            if(sequeueBytes[0] == 0){
-                                p.setState(TcpPackageState.REQUEST);
-                            }else{
-                                p.setState(TcpPackageState.RESPONSE);
-                            }
+                            (p as! TcpAbstractPackage).setSequeue(asUInt64(seq));
+//                            if(sequeueBytes[0] == 0){
+//                                p.setState(TcpPackageState.REQUEST);
+//                            }else{
+//                                p.setState(TcpPackageState.RESPONSE);
+//                            }
                             
                             communicateListener(p);//
                         }

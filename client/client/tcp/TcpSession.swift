@@ -21,19 +21,19 @@ public class TcpSession{
         self._socket = socket;
     }
     
-    public func send(pack:TcpPackage)->TcpPackageResponse{
+    public func send(pack:TcpRequestPackage)->TcpPackageResponse{
 
         let response = TcpPackageResponse();
         recv.addRequest(pack.sequeue, response: response)
-        sendImpl(pack, isRequest: true);
+        sendImpl(pack);
         return response;
     }
     
-    func response(pack:TcpPackage){
-        sendImpl(pack, isRequest: false);
+    func response(pack:TcpResponsePackage){
+        sendImpl(pack);
     }
     
-    private func sendImpl(pack:TcpPackage,isRequest:Bool = true){
+    private func sendImpl(pack:TcpPackage){
 
         let bs = pack.write();
         var tmpBs = [UInt8](count: 2 * bs.count + 3 + 18, repeatedValue: 0);
@@ -41,7 +41,7 @@ public class TcpSession{
 //    //将包中的数据写入数组
         tmpBs[0] = 0xC0;
         tmpBs[1] = pack.type;
-        if(isRequest){
+        if(pack is TcpRequestPackage){
             tmpBs[2] = 0;
         }else{
             tmpBs[2] = 1;

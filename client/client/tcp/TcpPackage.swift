@@ -6,22 +6,47 @@
 //  Copyright © 2016 lin. All rights reserved.
 //
 
-public class TcpPackage{
+//@objc
+public protocol TcpPackage{
+    
+
+    var sequeue:UInt64{get}
+    
+    //internal func setSequeue(seq:UInt64)
+    
+    static var state:TcpPackageState{get}
+    
+    var state:TcpPackageState{get}
+    
+    static var type:UInt8{get}
+    
+    var type:UInt8{get}
+    
+    
+    func write()->[UInt8];
+    
+    func write(inout buffer:[UInt8]);
+    
+    //UInt32.max表示无法计算出包的大小
+    var length:UInt32{get}
+}
+
+public class TcpAbstractPackage : TcpPackage{
     
     private static var gloalSequeue:UInt64 = 0;
     private static var lock:NSLock = NSLock();
     
     public init(){
         
-        TcpPackage.lock.lock()
+        TcpAbstractPackage.lock.lock()
         
-        if(TcpPackage.gloalSequeue == UInt64.max){
-            TcpPackage.gloalSequeue = 0;
+        if(TcpAbstractPackage.gloalSequeue == UInt64.max){
+            TcpAbstractPackage.gloalSequeue = 0;
         }
-        TcpPackage.gloalSequeue++;
-        _sequeue = TcpPackage.gloalSequeue;
+        TcpAbstractPackage.gloalSequeue++;
+        _sequeue = TcpAbstractPackage.gloalSequeue;
         
-        TcpPackage.lock.unlock()
+        TcpAbstractPackage.lock.unlock()
     }
     
     private var _sequeue:UInt64 = 0;
@@ -33,23 +58,21 @@ public class TcpPackage{
         _sequeue = seq;
     }
     
-    private var _state:TcpPackageState = TcpPackageState.NONE;
-    public var state:TcpPackageState{
-        return _state;
+    public class var state:TcpPackageState{
+        return TcpPackageState.REQUEST;
+    }
+    public final var state:TcpPackageState{
+        return (Mirror(reflecting: self).subjectType as! TcpPackage.Type).state;
     }
     
-    func setState(state:TcpPackageState){
-        self._state = state;
-    }
-
     public class var type:UInt8{
         return UInt8.max;
     }
     
-    public var type:UInt8{
+    public final var type:UInt8{
         return (Mirror(reflecting: self).subjectType as! TcpPackage.Type).type;
     }
-
+    
     
     public func write()->[UInt8]{
         return [UInt8]();

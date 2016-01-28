@@ -9,8 +9,8 @@
 import Foundation
 
 
-public class TcpCommandDetectRespPackage : TcpCommandPackage{
-    override public class var command:Int32{
-        return -0x1;
-    }
+public class TcpCommandDetectResponsePackage : TcpCommandResponsePackage{
+//    override public class var command:Int32{
+//        return -0x1;
+//    }
 }

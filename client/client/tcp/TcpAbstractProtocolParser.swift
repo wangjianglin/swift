@@ -10,13 +10,15 @@ import Foundation
 
 public class TcpAbstractProtocolParser:TcpProtocolParser{
     required public init(){
-        
+        fatalError("can't init.")
     }
     public class
         var type:UInt8{
             return 255;
     }
     
+    
+    public final var state:TcpPackageState = TcpPackageState.REQUEST;
     
     //已经读取的数据个数
     private var packageSize:Int = 0;

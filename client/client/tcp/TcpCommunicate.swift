@@ -13,7 +13,7 @@ public protocol TcpCommunicate{
     
     var mainThread:Bool{get set};// = false;
     
-    func send(pack:TcpPackage)->TcpPackageResponse;
+    func send(pack:TcpRequestPackage)->TcpPackageResponse;
     
     func start()->Bool;
     func close();

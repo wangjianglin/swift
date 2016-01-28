@@ -7,4 +7,4 @@
 //
 
 
-public typealias TcpResponse = ((pack:TcpPackage)->()) ;
+public typealias TcpResponse = ((pack:TcpResponsePackage)->()) ;

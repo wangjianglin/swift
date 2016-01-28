@@ -9,7 +9,7 @@
 import Foundation
 
 
-public class TcpEmptyPackage : TcpPackage{
+public class TcpEmptyPackage : TcpResponsePackage{
     
     override public class var type:UInt8{
         return 255;

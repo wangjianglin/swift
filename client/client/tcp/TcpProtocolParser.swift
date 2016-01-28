@@ -19,6 +19,8 @@ public protocol TcpProtocolParser{
     static var type:UInt8{get}//
     
     func clear();
+    
+    var state:TcpPackageState{get set};
 }
 
 public class ProtocolParsers{
