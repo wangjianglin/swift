@@ -31,9 +31,9 @@ public class TcpCommandProtocolParser_010:TcpAbstractProtocolParser{
         if state == TcpPackageState.REQUEST {
             //return TcpCommandPackageManager.requestParse(buffer);
             commandPack = TcpCommandPackageManager.newRequestInstance(command);
+        }else{
+            commandPack = TcpCommandPackageManager.newResponseInstance(command);
         }
-        //return TcpCommandPackageManager.responseParse(buffer);
-        commandPack = TcpCommandPackageManager.newResponseInstance(command);
         return commandPack;
     }
     

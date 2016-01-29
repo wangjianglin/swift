@@ -17,7 +17,7 @@ public class TcpAbstractCommunicate: TcpCommunicate{
     }
     
     public init(){
-        fatalError("init() has not been implemented")
+        //fatalError("init() has not been implemented")
     }
     
     public func close() {

@@ -12,12 +12,19 @@ public func testCommClient(){
         print("pack:\(pack)");
     };
     
-    let commandPack = TcpCommandDetectPackage();
-    print(commandPack.command)
     //print((Mirror(reflecting: commandPack).subjectType as! TcpCommandDetectPackage.Type).command)
     //        print("\(LinClient.TcpCommandDetectPackage.command)");
     //        commandPack.test()
     comm.start();
+    
+    
+    
+//    let commandPack = TcpCommandDetectPackage();
+//    print(commandPack.command)
+//    let response = comm.send(commandPack);
+//    
+//    print("response:\(response.response)");
+    
     let jsonPack = TcpJsonRequestPackage();
     
     jsonPack.addHeader("name", value: "value");

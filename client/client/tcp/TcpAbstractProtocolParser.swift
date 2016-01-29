@@ -10,7 +10,7 @@ import Foundation
 
 public class TcpAbstractProtocolParser:TcpProtocolParser{
     required public init(){
-        fatalError("can't init.")
+        //fatalError("can't init.")
     }
     public class
         var type:UInt8{

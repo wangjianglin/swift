@@ -30,42 +30,51 @@ public class TcpPackageManager<K : Hashable,QT ,RT,QV,RV>{
     
     private var toKey:((QT)->(K));
     
-    public init(toKey:((QT)->(K))){
+    public init(reg:((manager:TcpPackageManager<K,QT ,RT,QV,RV>)->()),toKey:((QT)->(K))){
         self.toKey = toKey;
+        
+        reg(manager: self);
     }
     
     private var requests:Dictionary<K,QT> = [:]
 //
 //    
-    private var responses:Dictionary<String,K> = [:];
+    private var responses:Dictionary<K,RT> = [:];
+    
+    private var responseKeys:Dictionary<String,K> = [:];
 //
 ////    public class var commands:Dictionary<Int32,TcpCommandRequestPackage.Type>{
 ////        return YRSingleton.instance
 ////    }
 //    
     public func request(resp:RT)->K!{
-        return responses[NSStringFromClass((resp as! AnyClass))];
+        return responseKeys[NSStringFromClass((resp as! AnyClass))];
     }
 
     public func register(cls:QT){
         //YRSingleton.instance[command.command] = command;
         let k = toKey(cls);
         requests[k] = cls;
-        responses[NSStringFromClass((cls as! AnyClass))] = k;
+        let respType = (cls as! TcpRequestPackage.Type).resp;
+        responses[k] = respType as? RT;
+        responseKeys[NSStringFromClass(respType)] = k;
+        
     }
     
     public func remove(cls:QT){
         //YRSingleton.instance.removeValueForKey(command.command);
         let k = toKey(cls);
         requests.removeValueForKey(k)
-        responses.removeValueForKey(NSStringFromClass((cls as! AnyClass)));
+        let respType = responses.removeValueForKey(k)
+        responseKeys.removeValueForKey(NSStringFromClass(respType as! AnyClass));
     }
     
     public func remove(key:K){
         //YRSingleton.instance.removeValueForKey(command);
         if let v = self.requests[key] {
             self.requests.removeValueForKey(key);
-            self.responses.removeValueForKey(NSStringFromClass((v as! AnyClass)))
+            self.responses.removeValueForKey(key)
+            self.responseKeys.removeValueForKey(NSStringFromClass((v as! AnyClass)))
         }
     }
     
@@ -77,8 +86,8 @@ public class TcpPackageManager<K : Hashable,QT ,RT,QV,RV>{
     }
     
     public func newResponseInstance(key:K)->RV!{
-        if let cls = requests[key] {
-            return (responses[NSStringFromClass(cls as! AnyClass)] as! TcpRequestPackage.Type).init() as! RV;
+        if let cls = responses[key] {
+            return (cls as! TcpResponsePackage.Type).init() as! RV;
         }
         return nil;
     }
@@ -114,12 +123,16 @@ public class TcpPackageManager<K : Hashable,QT ,RT,QV,RV>{
 
 
 
-public let TcpCommandPackageManager = TcpPackageManager<Int32,TcpCommandRequestPackage.Type,TcpCommandResponsePackage.Type,TcpCommandRequestPackage,TcpCommandResponsePackage>() { (
-    q) -> Int32 in
-    return q.command;
+public let TcpCommandPackageManager = TcpPackageManager<Int32,TcpCommandRequestPackage.Type,TcpCommandResponsePackage.Type,TcpCommandRequestPackage,TcpCommandResponsePackage>(reg: { (manager) -> () in
+        manager.register(TcpCommandDetectPackage);
+    }) { (
+        q) -> Int32 in
+        return q.command;
 }
 
-public let TcpJsonPackageManager = TcpPackageManager<String,TcpJsonRequestPackage.Type,TcpJsonResponsePackage.Type,TcpJsonRequestPackage,TcpJsonResponsePackage>() { (
+public let TcpJsonPackageManager = TcpPackageManager<String,TcpJsonRequestPackage.Type,TcpJsonResponsePackage.Type,TcpJsonRequestPackage,TcpJsonResponsePackage>(reg: { (manager) -> () in
+    //manager.register(TcpCommandDetectPackage.Type);
+    }) { (
     q) -> String in
     return q.path;
 }
