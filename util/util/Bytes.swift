@@ -29,7 +29,7 @@ public func writeInt16(inout buffer:[UInt8],var value:Int16,offset:Int = 0){
     withUnsafePointer(&value) { ptr -> () in
         let uptr = UnsafePointer<UInt8>(ptr);
         for(var n=0;n<2;n++){
-            buffer[n + offset] = (UInt8)(uptr[1-n].value);
+            buffer[n + offset] = (UInt8)(uptr[1-n]);
         }
     };
 }
@@ -54,7 +54,7 @@ public func writeInt32(inout buffer:[UInt8],var value:Int32,offset:Int = 0){
     withUnsafePointer(&value) { ptr -> () in
         let uptr = UnsafePointer<UInt8>(ptr);
         for(var n=0;n<4;n++){
-            buffer[n + offset] = (UInt8)(uptr[3-n].value);
+            buffer[n + offset] = (UInt8)(uptr[3-n]);
         }
     };
 }
@@ -79,7 +79,7 @@ public func writeInt64(inout buffer:[UInt8],var value:Int64,offset:Int = 0){
     withUnsafePointer(&value) { ptr -> () in
         let uptr = UnsafePointer<UInt8>(ptr);
         for(var n=0;n<8;n++){
-            buffer[n + offset] = (UInt8)(uptr[7-n].value);
+            buffer[n + offset] = (UInt8)(uptr[7-n]);
         }
     };
 }
@@ -116,7 +116,7 @@ public func writeFloat(inout buffer:[UInt8],var value:Float32,offset:Int = 0){
     withUnsafePointer(&value) { ptr -> () in
         let uptr = UnsafePointer<UInt8>(ptr);
         for(var n=0;n<4;n++){
-            buffer[n + offset] = (UInt8)(uptr[7-n].value);
+            buffer[n + offset] = (UInt8)(uptr[7-n]);
         }
     };
 }
@@ -140,7 +140,7 @@ public func writeDouble(inout buffer:[UInt8],var value:Float64,offset:Int = 0){
     withUnsafePointer(&value) { ptr -> () in
         let uptr = UnsafePointer<UInt8>(ptr);
         for(var n=0;n<8;n++){
-            buffer[n + offset] = (UInt8)(uptr[7-n].value);
+            buffer[n + offset] = (UInt8)(uptr[7-n]);
         }
     };
 }

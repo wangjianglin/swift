@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         //testServer();
         
         LinClient.testCommClient();
-//        testCommClient();
+        testCommClient();
         
         
         //test(buffer,count: count);
@@ -50,20 +50,25 @@ class ViewController: UIViewController {
             print("pack:\(pack)");
         };
         
-        let commandPack = TcpCommandDetectPackage();
-        
-        print(commandPack.command)
         //print((Mirror(reflecting: commandPack).subjectType as! TcpCommandDetectPackage.Type).command)
-//        print("\(LinClient.TcpCommandDetectPackage.command)");
-//        commandPack.test()
+        //        print("\(LinClient.TcpCommandDetectPackage.command)");
+        //        commandPack.test()
         comm.start();
+        
+        
+        
+        //    let commandPack = TcpCommandDetectPackage();
+        //    print(commandPack.command)
+        //    let response = comm.send(commandPack);
+        //
+        //    print("response:\(response.response)");
+        
         let jsonPack = TcpJsonRequestPackage();
         
-        print(jsonPack.path)
-//        jsonPack.test();
+        jsonPack.addHeader("name", value: "value");
         
         let rpack = comm.send(jsonPack).response as! TcpJsonPackage;
-//        rpack.header("name", value:"value");
+        //            rpack.header("name", value:"value");
         print(rpack);
         //comm.send(pack);
     }

@@ -53,6 +53,8 @@ extension UIDevice{
             return "Pad";
         case .TV:
             return "TV";
+        case .CarPlay:
+            return "CarPlay";
         }
     }
     
