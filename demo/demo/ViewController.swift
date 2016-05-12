@@ -9,6 +9,7 @@
 import UIKit
 import LinClient
 import LinUtil
+import LinClient
 
 //public class TcpCommandDetectPackage2 : TcpCommandPackage{
 //    
@@ -29,12 +30,31 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        print(UInt64.max)
+        
+        HttpCommunicate.commUrl = "http://s.feicuibaba.com";
+        HttpCommunicate.httpDns = AliHttpDNS(account: "172280");
+        HttpCommunicate.httpDns?.setDelegateForDegradationFilter({ (hostName) -> Bool in
+            if hostName.hasSuffix("feicuibaba.com"){
+                return false;
+            }
+            return true;
+        })
+        
+        HttpCommunicate.httpDns?.setPreResolveHosts(["s.feicuibaba.com"]);
+        
+//        for n in 0...100{
+//            
+//            print("*******\(n)")
+//            Queue.asynQueue({ 
+//                print("n:\(n)")
+//            })
+//            print("=====\(n)")
+//        }
         
         //testServer();
         
-        LinClient.testCommClient();
-        testCommClient();
+//        LinClient.testCommClient();
+//        testCommClient();
         
         
         //test(buffer,count: count);
@@ -120,5 +140,29 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func http(){
+        
+        
+        let pack = TestPackage();
+        pack.data = "测试数据！";
+        
+        HttpCommunicate.request(pack, result: { (obj, warning) in
+            print("obj:\(obj)");
+            }) { (error) in
+                print("error:\(error)");
+        }
+    }
+}
+
+class TestPackage: HttpPackage {
+    
+    init(){
+        super.init(url: "/core/comm/test.action", method: HttpMethod.POST);
+    }
+    
+    var data:String{
+        get{return self["data"].asString("");}
+        set{self.setValue(newValue, forName: "data");}
+    }
 }
 

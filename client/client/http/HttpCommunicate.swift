@@ -29,6 +29,11 @@ public class HttpCommunicate{
         set{ global.isDebug = newValue; }
     }
     
+    public class var httpDns:HttpDNS?{
+        get{return global.httpDns;}
+        set{global.httpDns = newValue;}
+    }
+    
     public class func request(package:HttpPackage,result:((obj:AnyObject!,warning:[HttpError])->())? = nil,fault:((error:HttpError)->())? = nil)->HttpCommunicateResult{
         return global.request(package,result:result,fault:fault);
     }
@@ -92,6 +97,8 @@ public class HttpCommunicateImpl{
     public var isDebug:Bool = false;
     
     private var name:String;
+    
+    public var httpDns:HttpDNS?;
     //private var request:HttpTask;
     
     private var _commUrl = "http://192.168.1.8:8080/lin.demo/";
@@ -107,6 +114,7 @@ public class HttpCommunicateImpl{
     
     public func upload(package:HttpUploadPackage,result:((obj:AnyObject!,warning:[HttpError])->())! = nil,fault:((error:HttpError)->())! = nil,progress:((send:Int64,total:Int64) -> Void)! = nil)->HttpCommunicateResult{
         let task = HttpTask();
+        task.httpDns = self.httpDns;
         
         var params = Dictionary<String,AnyObject>();
         let httpResult = HttpCommunicateResult();
@@ -209,6 +217,8 @@ public class HttpCommunicateImpl{
         
         self.httprequest?(package);
         let request:HttpTask = HttpTask();
+        request.httpDns = self.httpDns;
+        
         requestImpl(request,package:package,url:HttpUtils.url(self, pack: package), parameters: package.handle.getParams(request,package:package),isDebug:self.isDebug, success: {(response: HttpResponse) in
             
             package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,set:set,result:result), fault: self.mainThreadFault(httpResult,pack:package,set:set,fault:fault));

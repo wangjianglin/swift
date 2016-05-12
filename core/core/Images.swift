@@ -11,6 +11,15 @@ import UIKit
 
 extension UIImage{
     
+    public class func initImage(size imageSize:CGSize,color:UIColor)->UIImage{
+        UIGraphicsBeginImageContextWithOptions(imageSize,false, UIScreen.mainScreen().scale);
+        color.set();
+        UIRectFill(CGRectMake(0,0, imageSize.width, imageSize.height));
+        var image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return image;
+    }
+    
     public func scaledToSize(size newSize:CGSize)->UIImage{
     
         UIGraphicsBeginImageContext(newSize);

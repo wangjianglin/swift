@@ -163,9 +163,9 @@ public class CacheImageView : UIImageView{
 ////        super.init();
 //    }
     
-//    public init(){
-//        super.init();
-//    }
+    public init(){
+        super.init(frame:CGRectMake(0, 0, 0, 0));
+    }
 
     public override init(frame: CGRect) {
         super.init(frame:frame);

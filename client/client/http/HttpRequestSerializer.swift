@@ -112,6 +112,7 @@ public class HttpRequestSerializer: NSObject {
             var newUrl = "\(request.URL!.absoluteString)"
             if queryString.characters.count > 0 {
                 newUrl += "\(para)\(queryString)"
+                newUrl = newUrl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) ?? "";
             }
             request.URL = NSURL(string: newUrl)
         } else {

@@ -34,7 +34,7 @@ public final class TcpErrorPackage : TcpResponsePackage{
     }
     
     private var message:String{
-        return _json["message"].asString("")!;
+        return _json["message"].asString("");
     }
     
     public var cause:String!{

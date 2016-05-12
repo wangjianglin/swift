@@ -141,6 +141,7 @@ public class HttpTask : NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate
     //var sess: NSURLSession?
     
     public var baseURL: String?
+    public var httpDns:HttpDNS?;
     public var requestSerializer = HttpRequestSerializer()
     public var responseSerializer: HttpResponseSerializer?
     //This gets called on auth challenges. If nil, default handling is use.
@@ -400,12 +401,39 @@ public class HttpTask : NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate
             let split = url.hasPrefix("/") ? "" : "/"
             urlVal = "\(self.baseURL!)\(split)\(url)"
         }
-    let result = self.requestSerializer.createRequest(NSURL(string: urlVal)!,
+        
+        var nsurl = NSURL(string: urlVal);
+        
+        var hostName:String?;
+        var ip:String?;
+        
+        if let httpDns = self.httpDns {
+            hostName = nsurl!.host;
+//            ip = [httpDNS getIpByHost:hostName];
+            ip = httpDns.getIpByHost(hostName!);
+            if ip != nil {
+                
+                var hostFirstRange = urlVal.rangeOfString(hostName!);
+                if let hostFirstRange = hostFirstRange {
+                    var newUrl = urlVal.stringByReplacingCharactersInRange(hostFirstRange, withString: ip!);
+                    nsurl = NSURL(string: newUrl);
+                }else{
+                    ip = nil;
+                }
+            }
+            
+            
+        }
+        
+        let result = self.requestSerializer.createRequest(NSURL(string: urlVal)!,
         method: method, parameters: parameters,isMulti : isMulti);
         
         result.request.setValue("",forHTTPHeaderField:HTTP_COMM_PROTOCOL);
         if isDebug {
             result.request.setValue("",forHTTPHeaderField:HTTP_COMM_PROTOCOL_DEBUG);
+        }
+        if ip != nil {
+            result.request.setValue(hostName, forHTTPHeaderField: "Host");
         }
         return result;
     }

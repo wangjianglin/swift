@@ -43,6 +43,8 @@
 		3E3EEC731A2E1E9E00024D97 /* HttpTestPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3EEC721A2E1E9E00024D97 /* HttpTestPackage.swift */; };
 		3E3EEC791A2F4BBE00024D97 /* StandardHttpRequestHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3EEC781A2F4BBE00024D97 /* StandardHttpRequestHandle.swift */; };
 		3E3EEC7B1A2F4CB100024D97 /* StandardJsonHttpRequestHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3EEC7A1A2F4CB100024D97 /* StandardJsonHttpRequestHandle.swift */; };
+		3E4244F81CD3A8F0006533C4 /* HttpDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4244F71CD3A8F0006533C4 /* HttpDNS.swift */; };
+		3E4244FA1CD3BC46006533C4 /* AliHttpDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4244F91CD3BC46006533C4 /* AliHttpDNS.swift */; };
 		3E5062571C58B3C200B529F6 /* TcpTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5062561C58B3C200B529F6 /* TcpTest.swift */; };
 		3E5062591C58CB8D00B529F6 /* TcpRespPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5062581C58CB8D00B529F6 /* TcpRespPackage.swift */; };
 		3E50625B1C58CC3B00B529F6 /* TcpRequestPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E50625A1C58CC3B00B529F6 /* TcpRequestPackage.swift */; };
@@ -129,6 +131,8 @@
 		3E3EEC721A2E1E9E00024D97 /* HttpTestPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HttpTestPackage.swift; path = http/HttpTestPackage.swift; sourceTree = "<group>"; };
 		3E3EEC781A2F4BBE00024D97 /* StandardHttpRequestHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandardHttpRequestHandle.swift; path = http/StandardHttpRequestHandle.swift; sourceTree = "<group>"; };
 		3E3EEC7A1A2F4CB100024D97 /* StandardJsonHttpRequestHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandardJsonHttpRequestHandle.swift; path = http/StandardJsonHttpRequestHandle.swift; sourceTree = "<group>"; };
+		3E4244F71CD3A8F0006533C4 /* HttpDNS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HttpDNS.swift; path = httpdns/HttpDNS.swift; sourceTree = "<group>"; };
+		3E4244F91CD3BC46006533C4 /* AliHttpDNS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AliHttpDNS.swift; path = httpdns/AliHttpDNS.swift; sourceTree = "<group>"; };
 		3E5062561C58B3C200B529F6 /* TcpTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TcpTest.swift; path = tcp/TcpTest.swift; sourceTree = "<group>"; };
 		3E5062581C58CB8D00B529F6 /* TcpRespPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TcpRespPackage.swift; path = tcp/TcpRespPackage.swift; sourceTree = "<group>"; };
 		3E50625A1C58CC3B00B529F6 /* TcpRequestPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TcpRequestPackage.swift; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 		3E3746A81A27757B00B980E9 /* client */ = {
 			isa = PBXGroup;
 			children = (
+				3E4244F61CD31AF2006533C4 /* httpdns */,
 				3E200F0E1C4F7EF500A00A10 /* socket */,
 				3E3EEC7C1A2F729300024D97 /* tcp */,
 				3E3746C21A27759D00B980E9 /* http */,
@@ -326,6 +331,15 @@
 				3E50625A1C58CC3B00B529F6 /* TcpRequestPackage.swift */,
 			);
 			name = tcp;
+			sourceTree = "<group>";
+		};
+		3E4244F61CD31AF2006533C4 /* httpdns */ = {
+			isa = PBXGroup;
+			children = (
+				3E4244F71CD3A8F0006533C4 /* HttpDNS.swift */,
+				3E4244F91CD3BC46006533C4 /* AliHttpDNS.swift */,
+			);
+			name = httpdns;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,6 +462,7 @@
 				3E3746D81A2CC95B00B980E9 /* HttpRequestSerializer.swift in Sources */,
 				3E200F1D1C4F7F2900A00A10 /* SocketNSStreamImpl.swift in Sources */,
 				3ECF6F921C538ED300C78DFA /* TcpCommandDetectPackage.swift in Sources */,
+				3E4244F81CD3A8F0006533C4 /* HttpDNS.swift in Sources */,
 				3ECF6F801C50D6CF00C78DFA /* TcpAbstractCommunicate.swift in Sources */,
 				3E200F231C4F7F2900A00A10 /* UnixUtils.swift in Sources */,
 				3E3746D11A2CC5CF00B980E9 /* HttpCommunicate.swift in Sources */,
@@ -462,6 +477,7 @@
 				3E200F241C4F7F2900A00A10 /* SocketAddress.swift in Sources */,
 				3ED1EC731C5775EB00E2AC3B /* TcpEmptyProtocolParser.swift in Sources */,
 				3ECF6F861C51338800C78DFA /* TcpCommandProtocolParser_010.swift in Sources */,
+				3E4244FA1CD3BC46006533C4 /* AliHttpDNS.swift in Sources */,
 				3E200F1C1C4F7F2900A00A10 /* SocketCFNetworkImpl.swift in Sources */,
 				3E3746E71A2E0A1300B980E9 /* HttpUrlType.swift in Sources */,
 				3E3746C41A277BE100B980E9 /* HttpPackage.swift in Sources */,

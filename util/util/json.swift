@@ -325,7 +325,7 @@ extension Json {
             case "c", "C":
                 return nil
             default:
-                return Int(o.longLongValue)
+                return o.longValue;
             }
         default: return nil
         }
@@ -335,6 +335,25 @@ extension Json {
             return v;
         }
         _value = def;
+        return def;
+    }
+    public var asInt64:Int64? {
+        switch _value {
+        case let o as NSNumber:
+            switch String.fromCString(o.objCType)! {
+            case "c", "C":
+                return nil
+            default:
+                return o.longLongValue
+            }
+        default: return nil
+        }
+    }
+    public func asInt64(def:Int64 = 0)->Int64{
+        if let v = self.asInt64 {
+            return v;
+        }
+        _value = NSNumber(longLong: def);
         return def;
     }
     /// gives Double if self holds it. nil otherwise
@@ -358,8 +377,8 @@ extension Json {
         return def;
     }
     // an alias to asDouble
-    public var asNumber:Double? { return asDouble }
-    public func asNumber(def:Double = 0)->Double{
+    public var asNumber:NSNumber? { return asDouble }
+    public func asNumber(def:NSNumber = 0)->NSNumber{
         if let v = self.asNumber {
             return v;
         }
@@ -374,7 +393,7 @@ extension Json {
     default: return nil
         }
     }
-    public func asString(def:String = "")->String?{
+    public func asString(def:String = "")->String{
         if let v = self.asString {
             return v;
         }
@@ -393,7 +412,7 @@ extension Json {
         return nil
         }
     }
-    public func asObjectArray<T:JsonModel>(item itemCreate:(Json)->T)->[T]{
+    public func asObjectArray<T>(item itemCreate:(Json)->T)->[T]{
         
         var result = [T]();
         if let array = self.asArray {
@@ -481,7 +500,7 @@ extension Json {
     
     /// gives the number of elements if an array or a dictionary.
     /// you can use this to check if you can iterate.
-    public var length:Int {
+    public var count:Int {
     switch _value {
     case let o as NSArray:      return o.count
     case let o as NSDictionary: return o.count

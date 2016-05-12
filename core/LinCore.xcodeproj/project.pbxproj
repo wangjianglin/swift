@@ -172,6 +172,8 @@
 		3E8EB4511A66BB1700324952 /* LinCore-Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8EB4501A66BB1700324952 /* LinCore-Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E8EB4531A66C2B000324952 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8EB4521A66C2B000324952 /* Images.swift */; };
 		3EA768691A70230D00FF8C57 /* UIGestureRecognizers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA768681A70230D00FF8C57 /* UIGestureRecognizers.swift */; };
+		3EB10D431CE4F3D900168158 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB10D411CE4F3D900168158 /* MBProgressHUD.h */; };
+		3EB10D441CE4F3D900168158 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB10D421CE4F3D900168158 /* MBProgressHUD.m */; };
 		3EB8A2C71BBB0E3500871123 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB8A2C61BBB0E3500871123 /* Network.swift */; };
 		3EB8A2CB1BBB110D00871123 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB8A2CA1BBB110D00871123 /* SystemConfiguration.framework */; };
 		3EC4FE221A55D97300E05771 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC4FE211A55D97300E05771 /* LinUtil.framework */; };
@@ -374,6 +376,8 @@
 		3E8EB4501A66BB1700324952 /* LinCore-Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LinCore-Bridging.h"; sourceTree = "<group>"; };
 		3E8EB4521A66C2B000324952 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		3EA768681A70230D00FF8C57 /* UIGestureRecognizers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizers.swift; sourceTree = "<group>"; };
+		3EB10D411CE4F3D900168158 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgress/MBProgressHUD.h; sourceTree = "<group>"; };
+		3EB10D421CE4F3D900168158 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgress/MBProgressHUD.m; sourceTree = "<group>"; };
 		3EB8A2C61BBB0E3500871123 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		3EB8A2C81BBB10E800871123 /* libsystem_configuration.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsystem_configuration.tbd; path = usr/lib/system/libsystem_configuration.tbd; sourceTree = SDKROOT; };
 		3EB8A2CA1BBB110D00871123 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -495,6 +499,7 @@
 		3E3746491A26365A00B980E9 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				3EB10D401CE4F35C00168158 /* MBProgress */,
 				3E0854531A8A5F470052DCEE /* Table */,
 				3E73DA4A1A8795A20052C16A /* AlertView.swift */,
 				3E73DA4B1A8795A20052C16A /* CacheImageView.swift */,
@@ -715,6 +720,15 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		3EB10D401CE4F35C00168158 /* MBProgress */ = {
+			isa = PBXGroup;
+			children = (
+				3EB10D411CE4F3D900168158 /* MBProgressHUD.h */,
+				3EB10D421CE4F3D900168158 /* MBProgressHUD.m */,
+			);
+			name = MBProgress;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -739,6 +753,7 @@
 				3E0854821A8A6DE30052DCEE /* PureLayout.h in Headers */,
 				3E73DA9A1A8795A30052C16A /* QCheckBox.h in Headers */,
 				3E426D251A4A988E00A1C815 /* RBStoryboardPushSegue.h in Headers */,
+				3EB10D431CE4F3D900168158 /* MBProgressHUD.h in Headers */,
 				3E73DAB41A8795A30052C16A /* QBImagePickerAssetCell.h in Headers */,
 				3E0854A21A8A6EEA0052DCEE /* UIScrollView+MJRefresh.h in Headers */,
 				3E73DADB1A8795A30052C16A /* HZLocation.h in Headers */,
@@ -916,6 +931,7 @@
 				3E76AE111A41DC5000B0C2BB /* UserDefaults.swift in Sources */,
 				3E0789561A7943650087A3CC /* Log.swift in Sources */,
 				3E426D281A4A988E00A1C815 /* RBStoryboardSegue.m in Sources */,
+				3EB10D441CE4F3D900168158 /* MBProgressHUD.m in Sources */,
 				3E73DA9C1A8795A30052C16A /* FormBaseCell.swift in Sources */,
 				3E0854801A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.m in Sources */,
 				3E4242641B2F424C004DF7C5 /* MGSwipeButton.m in Sources */,
