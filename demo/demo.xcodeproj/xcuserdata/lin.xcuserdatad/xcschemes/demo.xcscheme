@@ -14,6 +14,62 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3E3746A51A27757B00B980E9"
+               BuildableName = "LinComm.framework"
+               BlueprintName = "LinComm"
+               ReferencedContainer = "container:../client/LinComm.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3E3746461A26365A00B980E9"
+               BuildableName = "LinCore.framework"
+               BlueprintName = "LinCore iOS"
+               ReferencedContainer = "container:../core/LinCore.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3E8982601B1E1D9100DE0AC8"
+               BuildableName = "LinServer.framework"
+               BlueprintName = "LinServer"
+               ReferencedContainer = "container:../server/LinServer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3E37466C1A26368100B980E9"
+               BuildableName = "LinUtil.framework"
+               BlueprintName = "LinUtil"
+               ReferencedContainer = "container:../util/LinUtil.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "3E200EA31C4D5FB000A00A10"
                BuildableName = "demo.app"
                BlueprintName = "demo"

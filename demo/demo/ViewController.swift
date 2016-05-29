@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import LinClient
 import LinUtil
-import LinClient
+import LinComm
 
 //public class TcpCommandDetectPackage2 : TcpCommandPackage{
 //    
@@ -109,8 +108,20 @@ class ViewController: UIViewController {
 //        }
     }
     
-    internal func test(){
+    private var server:HttpServer!;
+    @IBAction func serverAction(){
         
+        server = HttpServer(documentRoot: pathFor(Documents.Bundle, path: "web")!,port:8099);
+        
+        server.register("/test.action") { (request) -> HttpResponse! in
+            return nil;
+        }
+        print("\(server.start())");
+    }
+    
+    
+    func tcp(){
+    
         let socket = Socket(host: "192.168.1.66",port: 1337);
         var buffer = [UInt8](count: 1024, repeatedValue: 0);
         socket.connect();
@@ -151,6 +162,7 @@ class ViewController: UIViewController {
             }) { (error) in
                 print("error:\(error)");
         }
+        
     }
 }
 

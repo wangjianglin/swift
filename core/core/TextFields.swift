@@ -9,6 +9,7 @@
 
 import Foundation
 import UIKit
+import LinUtil
 
 extension UITextField{
     
@@ -20,8 +21,8 @@ extension UITextField{
         
         let defaultCenter = NSNotificationCenter.defaultCenter();
         
-        defaultCenter.addObserver(self, selector: "textFieldDidBeginEditing:", name: UITextFieldTextDidBeginEditingNotification, object: self);
-        defaultCenter.addObserver(self, selector: "textFieldDidEndEditing:", name: UITextFieldTextDidEndEditingNotification, object: self);
+        defaultCenter.addObserver(self, selector: #selector(UITextFieldDelegate.textFieldDidBeginEditing(_:)), name: UITextFieldTextDidBeginEditingNotification, object: self);
+        defaultCenter.addObserver(self, selector: #selector(UITextFieldDelegate.textFieldDidEndEditing(_:)), name: UITextFieldTextDidEndEditingNotification, object: self);
         
         //        toolbar.frame = CGRectMake(0, 0, self.window.frame.size.width, 44);
         
@@ -35,7 +36,7 @@ extension UITextField{
         
         toolbar.barStyle = UIBarStyle.Default;
         
-        let doneBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "doneButtonIsClicked:");
+        let doneBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(UITextField.doneButtonIsClicked(_:)));
         
 //        UIBarButtonItem   *SpaceButton=[[UIBarButtonItem alloc]  initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace     target:nil   action:nil];
 //        [buttons addObject:SpaceButton];
@@ -58,11 +59,11 @@ extension UITextField{
         
         let defaultCenter = NSNotificationCenter.defaultCenter();
         
-        defaultCenter.addObserver(self,selector:"keyboardDidShow:",name:UIKeyboardDidShowNotification,object:nil);
+        defaultCenter.addObserver(self,selector:#selector(UITextField.keyboardDidShow(_:)),name:UIKeyboardDidShowNotification,object:nil);
         
-        defaultCenter.addObserver(self,selector:"keyboardWillHide:",name:UIKeyboardWillHideNotification,object:nil);
+        defaultCenter.addObserver(self,selector:#selector(UITextField.keyboardWillHide(_:)),name:UIKeyboardWillHideNotification,object:nil);
         
-        defaultCenter.addObserver(self,selector:"keyboardWillHide:",name:UIDeviceOrientationDidChangeNotification,object:nil);
+        defaultCenter.addObserver(self,selector:#selector(UITextField.keyboardWillHide(_:)),name:UIDeviceOrientationDidChangeNotification,object:nil);
         
         //self.setBarButtonNeedsDisplayAtTag(textView.tag);
         
@@ -151,6 +152,131 @@ extension UITextField{
             frame.origin.y = aRect.origin.y + aRect.size.height - rect.origin.y - keyboardSize.height - 40 - 40;
         }
         self.window?.frame = frame;
+    }
+    
+}
+
+
+
+private class _UITextFieldLinCoreDelegateAction : DelegateAction,UITextFieldDelegate{
+    
+    private var _textFieldShouldBeginEditing:((textField: UITextField) -> Bool)?
+    private var _textFieldDidBeginEditing:((textField: UITextField)->())?; // became first responder
+    private var _textFieldShouldEndEditing:((textField: UITextField) -> Bool)? // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
+    private var _textFieldDidEndEditing:((textField: UITextField)->())? // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
+    
+    private var _textFieldshouldChangeCharactersInRange:((textField: UITextField, shouldChangeCharactersInRange: NSRange, replacementString: String) -> Bool)?; // return NO to not change text
+    
+    private var _textFieldShouldClear:((textField: UITextField) -> Bool)? // called when clear button pressed. return NO to ignore (no notifications)
+    private var _textFieldShouldReturn:((textField: UITextField) -> Bool)? // called when 'return' key pressed. return NO to ignore.
+    
+    
+    //====
+    
+    @objc func textFieldShouldBeginEditing(textField: UITextField) -> Bool{ // return NO to disallow editing.{
+        return self._textFieldShouldBeginEditing?(textField: textField) ?? true;
+    }
+    @objc func textFieldDidBeginEditing(textField: UITextField){ // became first responder
+        self._textFieldDidBeginEditing?(textField: textField);
+    }
+    @objc func textFieldShouldEndEditing(textField: UITextField) -> Bool{ // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
+        return self._textFieldShouldEndEditing?(textField: textField) ?? true;
+    }
+    @objc func textFieldDidEndEditing(textField: UITextField){ // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
+        self._textFieldDidEndEditing?(textField: textField);
+    }
+    
+    @objc func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool{ // return NO to not change text
+        return self._textFieldshouldChangeCharactersInRange?(textField: textField,shouldChangeCharactersInRange: range,replacementString: string) ?? true;
+    }
+    
+    @objc func textFieldShouldClear(textField: UITextField) -> Bool{ // called when clear button pressed. return NO to ignore (no notifications)
+        return self._textFieldShouldClear?(textField: textField) ?? true;
+    }
+    @objc func textFieldShouldReturn(textField: UITextField) -> Bool{ // called when 'return' key pressed. return NO to ignore.
+        return self._textFieldShouldReturn?(textField: textField) ?? true;
+    }
+
+//-(void (^)(UITextView *))textViewDidChange{
+//    return [self delegateAction]->_textViewDidChange;
+//}
+//
+//-(void)setTextViewDidChange:(void (^)(UITextView *))textViewDidChange{
+//    [self delegateAction]->_textViewDidChange = textViewDidChange;
+//}
+
+}
+
+extension UITextField{
+    
+    private var actionDelegate:_UITextFieldLinCoreDelegateAction{
+        if let d = self.delegate {
+            if d is _UITextFieldLinCoreDelegateAction {
+                return d as! _UITextFieldLinCoreDelegateAction;
+            }
+        }
+        let da = _UITextFieldLinCoreDelegateAction();
+        da.withObjectSameLifecycle = self;
+        self.delegate = da;
+        return da;
+    }
+    public var textFieldShouldBeginEditing:((textField: UITextField) -> Bool)?{
+        get{
+            return actionDelegate._textFieldShouldBeginEditing;
+        }
+        set{
+            actionDelegate._textFieldShouldBeginEditing = newValue;
+        }
+    }
+    public var textFieldDidBeginEditing:((textField: UITextField)->())?{ // became first responder
+        get{
+            return actionDelegate._textFieldDidBeginEditing;
+        }
+        set{
+            actionDelegate._textFieldDidBeginEditing = newValue;
+        }
+    }
+    public var textFieldShouldEndEditing:((textField: UITextField) -> Bool)?{ // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
+        get{
+            return actionDelegate._textFieldShouldEndEditing;
+        }
+        set{
+            actionDelegate._textFieldShouldEndEditing = newValue;
+        }
+    }
+    public var textFieldDidEndEditing:((textField: UITextField)->())?{ // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
+        get{
+            return actionDelegate._textFieldDidEndEditing;
+        }
+        set{
+            actionDelegate._textFieldDidEndEditing = newValue;
+        }
+    }
+    
+    public var textFieldshouldChangeCharactersInRange:((textField: UITextField, shouldChangeCharactersInRange: NSRange, replacementString: String) -> Bool)?{ // return NO to not change text
+        get{
+            return actionDelegate._textFieldshouldChangeCharactersInRange;
+        }
+        set{
+            actionDelegate._textFieldshouldChangeCharactersInRange = newValue;
+        }
+    }
+    
+    public var textFieldShouldClear:((textField: UITextField) -> Bool)?{ // called when clear button pressed. return NO to ignore (no notifications)
+        get{
+            return actionDelegate._textFieldShouldClear;
+        }
+        set{
+            actionDelegate._textFieldShouldClear = newValue;
+        }
+    }
+    public var textFieldShouldReturn:((textField: UITextField) -> Bool)?{ // called when 'return' key pressed. return NO to ignore.
+        get{
+            return actionDelegate._textFieldShouldReturn;
+        }
+        set{
+            actionDelegate._textFieldShouldReturn = newValue;
+        }
     }
     
 }

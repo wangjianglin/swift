@@ -10,10 +10,12 @@ import Foundation
 import UIKit
 import LinUtil
 
-public class CacheImageOperation:NSOperation{
+//class CacheImageView;
+
+public class CacheImageOperation : NSOperation{
     
-    private var path:String;
-    private var imageView:CacheImageView;
+    private var path:String!;
+    private var imageView:CacheImageView!;
     
     private init(path:String,imageView:CacheImageView){
         self.path = path;
@@ -29,63 +31,83 @@ public class CacheImageOperation:NSOperation{
         if isCancelled {
             return;
         }
-//        var url = NSURL(string:self.path);
-        var data:NSData? = nil;
-        if let url = NSURL(string:self.path){
-            data = CacheImageView.cachedataForUrl(url)
-        }
+        //        var url = NSURL(string:self.path);
+//        var data:NSData? = nil;
+//        if let url = NSURL(string:self.path){
+        let image = CacheImageView.cachedataForUrl(url: self.path)
+//        }
         
         
         dispatch_async(dispatch_get_main_queue(), {() in
             if !self.cancelled {
-                if let data = data {
-                self.imageView.setImage(UIImage(data:data));
+                if let image = image {
+                    self.imageView.setImage(image);
                 }else{
                     self.imageView.setImage(nil);
                 }
             }
         });
         
-//        let md5 = self.path.md5 + ".imagecache";
-//        //var urlString = HTTP_COMM_URL + photo.path + "/" + photo.name;// + "." + photo.ext;
-//        var filename:String!;
-//        if CacheImageView.cachePath.hasSuffix("/") {
-//            filename = CacheImageView.cachePath + md5;
-//        }else{
-//            filename = CacheImageView.cachePath + "/" + md5;
-//        }
-//
-//        
-//        var data = NSData(contentsOfFile: filename);
-//        if data == nil {
-//            var url = NSURL(string:self.path);
-//            data = NSData(contentsOfURL:url!);
-//            if let data = data {
-//                dispatch_async(dispatch_get_main_queue(), {() in
-//                    if !self.cancelled {
-//                        self.imageView.setImage(UIImage(data:data));
-//                    }
-//                });
-//                data.writeToFile(filename, atomically: true);
-//            }
-//        }else{
-//            dispatch_async(dispatch_get_main_queue(), {() in
-//                //self.imageView.lock.lock();
-//                if !self.cancelled {
-//                    self.imageView.setImage(UIImage(data:data!));
-//                }
-//                ///self.imageView.lock.unlock();
-//                
-//            });
-//        }
+        //        let md5 = self.path.md5 + ".imagecache";
+        //        //var urlString = HTTP_COMM_URL + photo.path + "/" + photo.name;// + "." + photo.ext;
+        //        var filename:String!;
+        //        if CacheImageView.cachePath.hasSuffix("/") {
+        //            filename = CacheImageView.cachePath + md5;
+        //        }else{
+        //            filename = CacheImageView.cachePath + "/" + md5;
+        //        }
+        //
+        //
+        //        var data = NSData(contentsOfFile: filename);
+        //        if data == nil {
+        //            var url = NSURL(string:self.path);
+        //            data = NSData(contentsOfURL:url!);
+        //            if let data = data {
+        //                dispatch_async(dispatch_get_main_queue(), {() in
+        //                    if !self.cancelled {
+        //                        self.imageView.setImage(UIImage(data:data));
+        //                    }
+        //                });
+        //                data.writeToFile(filename, atomically: true);
+        //            }
+        //        }else{
+        //            dispatch_async(dispatch_get_main_queue(), {() in
+        //                //self.imageView.lock.lock();
+        //                if !self.cancelled {
+        //                    self.imageView.setImage(UIImage(data:data!));
+        //                }
+        //                ///self.imageView.lock.unlock();
+        //
+        //            });
+        //        }
     }
 }
 
 private var CacheImageView_Cache_Path_tmpvar:String?;
+
 public class CacheImageView : UIImageView{
     
     
-    public class func cachedataForUrl(url:NSURL)->NSData!{
+//    public class func cachedataForUrl(url:NSURL)->NSData!{
+    public class func cachedataForUrl(url urlStr:String?)->UIImage!{
+        if urlStr == nil {
+            return nil;
+        }
+        let lowerUrlStr = urlStr!.lowercaseString;
+        if !(lowerUrlStr.hasPrefix("http://")
+            || lowerUrlStr.hasPrefix("https://")
+            || lowerUrlStr.hasPrefix("ftp://")) {
+            return UIImage(named: urlStr!);
+        }
+        
+        let urlOpt = NSURL(string: urlStr!);
+        
+        if urlOpt == nil {
+            return nil;
+        }
+        
+        let url = urlOpt!;
+        
         let md5 = "\(url)".md5 + ".imagecache";
         
         var filename:String!;
@@ -94,8 +116,8 @@ public class CacheImageView : UIImageView{
         }else{
             filename = CacheImageView.cachePath + "/" + md5;
         }
-    
-    
+        
+        
         var data = NSData(contentsOfFile: filename);
         if data == nil {
             data = NSData(contentsOfURL:url);
@@ -103,7 +125,10 @@ public class CacheImageView : UIImageView{
                 data.writeToFile(filename, atomically: true);
             }
         }
-        return data;
+        if let data = data {
+            return UIImage(data: data);
+        }
+        return nil;
     }
     
     public class var cachePath:String{
@@ -119,7 +144,7 @@ public class CacheImageView : UIImageView{
     
     private class func createCachePath(){
         let fileManager = NSFileManager.defaultManager();
-//        isDirectory: UnsafeMutablePointer<ObjCBool>
+        //        isDirectory: UnsafeMutablePointer<ObjCBool>
         let isDir = UnsafeMutablePointer<ObjCBool>.alloc(1);
         isDir.initialize(ObjCBool(false));
         if !fileManager.fileExistsAtPath(CacheImageView_Cache_Path_tmpvar!,isDirectory:isDir) ||
@@ -143,7 +168,7 @@ public class CacheImageView : UIImageView{
         })
         return YRSingleton.instance!
     }
-
+    
     
     private var operation:CacheImageOperation?;
     
@@ -157,16 +182,16 @@ public class CacheImageView : UIImageView{
     }
     //
     
-//    public init(path:String){
-//        super.init();
-//        self.path = path;
-////        super.init();
-//    }
+    //    public init(path:String){
+    //        super.init();
+    //        self.path = path;
+    ////        super.init();
+    //    }
     
     public init(){
         super.init(frame:CGRectMake(0, 0, 0, 0));
     }
-
+    
     public override init(frame: CGRect) {
         super.init(frame:frame);
     }
@@ -185,8 +210,8 @@ public class CacheImageView : UIImageView{
         lock.unlock();
     }
     
-    public var imageChanged:(()->())?
-
+    public var imageChanged:((imageView:CacheImageView)->())?
+    
     private var isImage:Bool = false;
     private var lock:NSRecursiveLock = NSRecursiveLock();
     public override var image: UIImage?{
@@ -202,7 +227,7 @@ public class CacheImageView : UIImageView{
             super.image = newValue;
             lock.unlock();
             if let imageChanged = self.imageChanged {
-                imageChanged();
+                imageChanged(imageView: self);
             }
         }
     }
@@ -214,10 +239,10 @@ public class CacheImageView : UIImageView{
         }
         lock.unlock();
         if let imageChanged = self.imageChanged {
-            imageChanged();
+            imageChanged(imageView: self);
         }
     }
-
+    
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -229,11 +254,11 @@ public class CacheImageView : UIImageView{
         }
     }
     
-//    public func reuse(){
-//    
-//    }
-
-//    required public init(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder);
-//    }
+    //    public func reuse(){
+    //    
+    //    }
+    
+    //    required public init(coder aDecoder: NSCoder) {
+    //        super.init(coder: aDecoder);
+    //    }
 }

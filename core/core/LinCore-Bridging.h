@@ -39,8 +39,22 @@
 #import "HZLocation.h"
 #import "HZAreaPickerView.h"
 
+#import "MRProgress.h"
+#import "MRProgressOverlayView.h"
+#import "SCEmptyOverlayView.h"
 
 #import "Tables.h"
+
+#import "UILabels.h"
+
+#import "ImagesView.h"
+#import "Vedios.h"
+
+#import "QBImagePickerController.h"
+
+#import "CameraViewController.h"
+
+#import "IOS7ScrollView.h"
 
 extern NSString* CTSettingCopyMyPhoneNumber();
 

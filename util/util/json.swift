@@ -12,17 +12,50 @@ public class Json {
     public var value:AnyObject{return self._value;}
     public init(isArray:Bool = false){
         if isArray {
-            _value = [AnyObject]();
+            _value = NSMutableArray();//[AnyObject]();
         }else{
-            _value = Dictionary<String,AnyObject>();
+            _value = NSMutableDictionary()//Dictionary<String,AnyObject>();
         }
     }
     /// pass the object that was returned from
     /// NSJSONSerialization
-    public init(_ obj:AnyObject) {self._value = obj}
-    /// pass the JSON object for another instance
-    public init(_ json:Json){ self._value = json._value; }
+//    public init(_ obj:AnyObject) {self._value = obj}
+//    public init(_ json:Json){ self._value = json._value; }
     
+    public init(_ obj:AnyObject) {
+//        let cls = NSStringFromClass(obj.classForCoder);
+//        if cls == "Dictionary" {
+//            let dict = cls as Dictionary;
+//        }
+        self._value = obj
+    }
+    public init(_ array:[AnyObject]){
+        let arr = NSMutableArray();
+        for item in array {
+            arr.addObject(item);
+        }
+        self._value = arr;
+    }
+    
+    public init(_ array:[AnyObject?]){
+        let arr = NSMutableArray();
+        for item in array {
+            if let item = item {
+                arr.addObject(item);
+            }else{
+                arr.addObject(NSNull.init());
+            }
+        }
+        self._value = arr;
+    }
+    
+//    public init(value array:[Hashable:AnyObject]){
+////        var  a = Dictionary<String,String>()
+//        self._value = NSMutableArray();
+//    }
+    public init(value json:Json){
+        self._value = json._value;
+    }
     public var description:String { return toString() }
     
     public func copyDescription()->String{return toString();}
@@ -151,7 +184,7 @@ extension Json {
                         var count = ary.count;
                         while idx == count - 1 {
                             ary.append(Json.null);
-                            count++;
+                            count += 1;
                         }
                         ary.append(newValue.value);
                         self._value = ary;
@@ -171,30 +204,40 @@ extension Json {
 //    public func setValue(name:String,value:AnyObject?){
     
     public func setValue(value:AnyObject?,forName name:String){
-        if value == nil{
-            //            self[name] = Json();
-            self.remove(name);
+        if var value = value{
+            if value is Json {
+                self[name] = Json((value as! Json)._value);
+            }else{
+                self[name] = Json(value);
+            }
         }else{
-            self[name] = Json(value!);
+            self.remove(name);
         }
     }
     
     public func setIntValue(value:Int,forName name:String){
-        self.setValue(NSNumber(integer: value), forName: name);
+        self.setValue(value as NSNumber, forName: name);
     }
     
+    public func setDoubleValue(value:Double,forName name:String){
+        self.setValue(value as NSNumber,forName:name);
+    }
+    
+    public func setBoolValue(value:Bool,forName name:String){
+        self.setValue(value as NSNumber, forName: name);
+    }
     
     
     public func remove(name:String){
         switch _value {
 //        case let err as NSError:
 //            return self
-        case var dic as Dictionary<String,AnyObject>:
-            if let _:AnyObject = dic[name] {
+        case let dic as NSMutableDictionary://Dictionary<String,AnyObject>:
+            if var _:AnyObject = dic[name] {
 //                dic.removeValueForKey(name);
                 //dic.removeAtIndex(dic.indexForKey(name));
                 dic[name] = nil;
-                self._value = dic;
+//                self._value = dic;
             }
         default:
             break;
@@ -210,8 +253,10 @@ extension Json {
         switch _value {
         case _ as NSError:
             return self
-        case let dic as Dictionary<String,AnyObject>:
-            if let val:AnyObject = dic[key] { return Json(val) }
+        case let dic as NSDictionary://Dictionary<String,AnyObject>:
+            if let val:AnyObject = dic[key] {
+                return Json(val)
+            }
             return Json(NSError(
                 domain:"JsonErrorDomain", code:404, userInfo:[
                     NSLocalizedDescriptionKey:
@@ -225,9 +270,9 @@ extension Json {
             }
         }
         set{
-            var dic = _value as! Dictionary<String,AnyObject>;
+            let dic = _value as! NSMutableDictionary;//Dictionary<String,AnyObject>;
             dic[key] = newValue._value;
-            _value = dic;
+//            _value = dic;
         }
     }
     
@@ -513,19 +558,20 @@ extension Json : SequenceType {
         switch _value {
         case let o as NSArray:
             var i = -1
-            return anyGenerator {
-                if ++i == o.count { return nil }
+            return AnyGenerator {
+                i += 1
+                if i == o.count { return nil }
                 return (i, Json(o[i]))
             }
         case let o as NSDictionary:
             var ks = Array(o.allKeys.reverse())
-            return anyGenerator {
+            return AnyGenerator {
                 if ks.isEmpty { return nil }
                 let k = ks.removeLast() as! String
                 return (k, Json(o.valueForKey(k)!))
             }
         default:
-            return anyGenerator{ nil }
+            return AnyGenerator{ nil }
         }
     }
     public func mutableCopyOfTheObject() -> AnyObject {

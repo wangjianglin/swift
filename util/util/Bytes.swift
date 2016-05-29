@@ -28,7 +28,7 @@ public func readInt8(buffer:[UInt8],offset:Int = 0)->Int8{
 public func writeInt16(inout buffer:[UInt8],var value:Int16,offset:Int = 0){
     withUnsafePointer(&value) { ptr -> () in
         let uptr = UnsafePointer<UInt8>(ptr);
-        for(var n=0;n<2;n++){
+        for n in 0 ..< 2 {
             buffer[n + offset] = (UInt8)(uptr[1-n]);
         }
     };

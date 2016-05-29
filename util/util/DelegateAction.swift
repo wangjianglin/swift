@@ -82,8 +82,12 @@ public class DelegateAction :NSObject {
     }
     
     public func actionForObjectExist(action:(()->())){
-        let tmp: AnyObject? = self.withObjectSameLifecycle;
-        if isWithObjectSameLifecycle == false || tmp != nil {
+        if isWithObjectSameLifecycle == false {
+            action();
+        }
+        
+        let tmp = self.withObjectSameLifecycle;
+        if let tmp = tmp {
             action();
         }
     }

@@ -4,17 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>LinCore iOS7.xcscheme</key>
+		<key>LinCore iOS.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
-		</dict>
-		<key>core.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<true/>
-			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -25,41 +18,6 @@
 			<true/>
 		</dict>
 		<key>3E3746511A26365A00B980E9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3E73275A1A547E3F000C5524</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3E76ADB41A41D8F200B0C2BB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3E76ADBE1A41D8F200B0C2BB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3E76ADD21A41D98600B0C2BB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3E76ADDC1A41D98700B0C2BB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3E76ADF01A41D9A800B0C2BB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3E76ADFA1A41D9A800B0C2BB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

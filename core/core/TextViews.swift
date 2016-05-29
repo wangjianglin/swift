@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import LinUtil
 
 
 //private var set_toolbar_dispatch_queue:dispatch_queue_attr_t{
@@ -31,8 +32,8 @@ extension UITextView{
         
         let defaultCenter = NSNotificationCenter.defaultCenter();
         
-        defaultCenter.addObserver(self, selector: "textViewDidBeginEditing:", name: UITextViewTextDidBeginEditingNotification, object: self);
-        defaultCenter.addObserver(self, selector: "textViewDidEndEditing:", name: UITextViewTextDidEndEditingNotification, object: self);
+        defaultCenter.addObserver(self, selector: #selector(UITextViewDelegate.textViewDidBeginEditing(_:)), name: UITextViewTextDidBeginEditingNotification, object: self);
+        defaultCenter.addObserver(self, selector: #selector(UITextViewDelegate.textViewDidEndEditing(_:)), name: UITextViewTextDidEndEditingNotification, object: self);
 
 //        toolbar.frame = CGRectMake(0, 0, self.window.frame.size.width, 44);
         
@@ -57,7 +58,7 @@ extension UITextView{
             
             toolbar.barStyle = UIBarStyle.Default;
             
-            let doneBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "doneButtonIsClicked:");
+            let doneBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(UITextView.doneButtonIsClicked(_:)));
             
             let spaceBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil);
             
@@ -78,9 +79,9 @@ extension UITextView{
  
         let defaultCenter = NSNotificationCenter.defaultCenter();
         
-        defaultCenter.addObserver(self,selector:"keyboardDidShow:",name:UIKeyboardDidShowNotification,object:nil);
+        defaultCenter.addObserver(self,selector:#selector(UITextView.keyboardDidShow(_:)),name:UIKeyboardDidShowNotification,object:nil);
         
-        defaultCenter.addObserver(self,selector:"keyboardWillHide:",name:UIKeyboardWillHideNotification,object:nil);
+        defaultCenter.addObserver(self,selector:#selector(UITextView.keyboardWillHide(_:)),name:UIKeyboardWillHideNotification,object:nil);
         
 //        defaultCenter.addObserver(self,selector:"UIDeviceOrientationDidChangeNotificationFun:",name:UIDeviceOrientationDidChangeNotification,object:nil);
         
@@ -192,3 +193,221 @@ extension UITextView{
 }
 
 private var preUIDeviceOrientationDidChangeNotification:UIDeviceOrientation?
+
+
+//MARK:actoins
+
+
+private class __UITextViewLinCoreDelegateAction : DelegateAction,UITextViewDelegate {
+//    @private
+    private var _target:UITextView?;
+////}
+////
+////-initWithTarget:(UITextView*)target;
+////-(void)textFieldDidBeginEditing:(NSNotification *) notification;
+////-(void) keyboardDidShow:(NSNotification *) notification;
+////-(void)keyboardWillHide:(NSNotification*)notification;
+////-(void)doneButtonIsClicked:(NSObject*)sender;
+////-(void)textFieldDidEndEditing:(NSNotification*)notification;
+////-(void)deviceOrientationDidChangeNotification:(NSNotification*)notification;
+////
+////@end
+//
+//@interface UITextViewsLinCoreDelegateActionImple : DelegateAction<UITextViewDelegate>{
+//    @public
+    private var _textViewDidChange:((textView:UITextView)->())?;
+    private var _textViewShouldBeginEditing:((textView:UITextView)->Bool)?;
+    private var _textViewShouldEndEditing:((textView:UITextView)->Bool)?;
+    private var _textViewDidBeginEditing:((textView:UITextView)->())?;
+    private var _textViewDidEndEditing:((textView:UITextView)->())?;
+    private var _textViewDidChangeSelection:((textView:UITextView)->())?;
+    private var _textViewShouldChangeTextInRange:((textView: UITextView, shouldChangeTextInRange: NSRange, replacementText: String)->Bool)?;
+    
+
+    private var _textViewShouldInteraceWithURL:((textView: UITextView, shouldInteractWithURL: NSURL, inRange: NSRange) -> Bool)?
+    
+    private var _textViewShouldInteractWithTextAttachment:((textView: UITextView, shouldInteractWithTextAttachment: NSTextAttachment, inRange: NSRange) -> Bool)?
+    
+    @objc private func textViewShouldBeginEditing(textView: UITextView) -> Bool{
+        return _textViewShouldBeginEditing?(textView: textView) ?? true;
+    }
+    
+    @objc private func textViewShouldEndEditing(textView: UITextView) -> Bool{
+        return self._textViewShouldEndEditing?(textView: textView) ?? true;
+    }
+    
+    @objc private func textViewDidBeginEditing(textView: UITextView){
+        self._textViewDidBeginEditing?(textView: textView);
+    }
+    
+    @objc private func textViewDidEndEditing(textView: UITextView){
+        self._textViewDidEndEditing?(textView: textView);
+    }
+    
+    @objc private func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{
+        return self._textViewShouldChangeTextInRange?(textView: textView,shouldChangeTextInRange: range,replacementText: text) ?? true;
+    }
+    
+    @objc private func textViewDidChange(textView: UITextView){
+        self._textViewDidChange?(textView: textView);
+    }
+    
+    @objc private func textViewDidChangeSelection(textView: UITextView){
+        self._textViewDidChangeSelection?(textView: textView);
+    }
+    
+    @objc private func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool{
+        return self._textViewShouldInteraceWithURL?(textView: textView,shouldInteractWithURL: URL,inRange: characterRange) ?? true;
+    }
+    
+    @objc private func textView(textView: UITextView, shouldInteractWithTextAttachment textAttachment: NSTextAttachment, inRange characterRange: NSRange) -> Bool{
+        return self._textViewShouldInteractWithTextAttachment?(textView: textView,shouldInteractWithTextAttachment: textAttachment,inRange: characterRange) ?? true;
+    }
+
+
+}
+
+extension UITextView{
+    
+    private var actionDelegate:__UITextViewLinCoreDelegateAction{
+        
+        let d = self.delegate;
+        if d is __UITextViewLinCoreDelegateAction {
+            return d as! __UITextViewLinCoreDelegateAction;
+        }
+        
+        let da = __UITextViewLinCoreDelegateAction();
+        self.delegate = da;
+        da.withObjectSameLifecycle = self;
+        return da;
+    }
+
+    public var textViewDidChange:((textView:UITextView)->())?{
+        get{
+            return actionDelegate._textViewDidChange;
+        }
+        set{
+            actionDelegate._textViewDidChange = newValue;
+        }
+    }
+    public var textViewShouldBeginEditing:((textView:UITextView)->Bool)?{
+        get{
+            return actionDelegate._textViewShouldBeginEditing;
+        }
+        set{
+            actionDelegate._textViewShouldBeginEditing = newValue;
+        }
+    }
+    public var textViewShouldEndEditing:((textView:UITextView)->Bool)?{
+        get{
+            return actionDelegate._textViewShouldEndEditing;
+        }
+        set{
+            actionDelegate._textViewShouldEndEditing = newValue;
+        }
+    }
+    public var textViewDidBeginEditing:((textView:UITextView)->())?{
+        get{
+            return actionDelegate._textViewDidBeginEditing;
+        }
+        set{
+            actionDelegate._textViewDidBeginEditing = newValue;
+        }
+    }
+    public var textViewDidEndEditing:((textView:UITextView)->())?{
+        get{
+            return actionDelegate._textViewDidEndEditing;
+        }
+        set{
+            actionDelegate._textViewDidEndEditing = newValue;
+        }
+    }
+    public var textViewDidChangeSelection:((textView:UITextView)->())?{
+        get{
+            return actionDelegate._textViewDidChangeSelection;
+        }
+        set{
+            actionDelegate._textViewDidChangeSelection = newValue;
+        }
+    }
+    public var textViewShouldChangeTextInRange:((textView: UITextView, shouldChangeTextInRange: NSRange, replacementText: String)->Bool)?{
+        get{
+            return actionDelegate._textViewShouldChangeTextInRange;
+        }
+        set{
+            actionDelegate._textViewShouldChangeTextInRange = newValue;
+        }
+    }
+}
+
+//-(UITextViewsLinCoreDelegateActionImple*)delegateAction{
+//    id action = self.delegate;
+//    if ([action isKindOfClass:[UITextViewsLinCoreDelegateActionImple class]]) {
+//        return action;
+//    }
+//    UITextViewsLinCoreDelegateActionImple * delegateA = [[UITextViewsLinCoreDelegateActionImple alloc] init];
+//    delegateA.withObjectSameLifecycle = self;
+//    self.delegate = delegateA;
+//    return delegateA;
+//}
+//
+//-(void (^)(UITextView *))textViewDidChange{
+//    return [self delegateAction]->_textViewDidChange;
+//}
+//
+//-(void)setTextViewDidChange:(void (^)(UITextView *))textViewDidChange{
+//    [self delegateAction]->_textViewDidChange = textViewDidChange;
+//}
+//
+//-(BOOL (^)(UITextView *))textViewShouldBeginEditing{
+//    return [self delegateAction]->_textViewShouldBeginEditing;
+//}
+//
+//-(void)setTextViewShouldBeginEditing:(BOOL (^)(UITextView *))textViewShouldBeginEditing{
+//    [self delegateAction]->_textViewShouldBeginEditing = textViewShouldBeginEditing;
+//}
+//
+//-(BOOL (^)(UITextView *))textViewShouldEndEditing{
+//    return [self delegateAction]->_textViewShouldEndEditing;
+//}
+//
+//-(void)setTextViewShouldEndEditing:(BOOL (^)(UITextView *))textViewShouldEndEditing{
+//    [self delegateAction]->_textViewShouldEndEditing = textViewShouldEndEditing;
+//}
+//
+//-(void (^)(UITextView *))textViewDidBeginEditing{
+//    return [self delegateAction]->_textViewDidBeginEditing;
+//}
+//
+//-(void)setTextViewDidBeginEditing:(void (^)(UITextView *))textViewDidBeginEditing{
+//    [self delegateAction]->_textViewDidBeginEditing = textViewDidBeginEditing;
+//}
+//
+//-(void (^)(UITextView *))textViewDidEndEditing{
+//    return [self delegateAction]->_textViewDidEndEditing;
+//}
+//
+//-(void)setTextViewDidEndEditing:(void (^)(UITextView *))textViewDidEndEditing{
+//    [self delegateAction]->_textViewDidEndEditing = textViewDidEndEditing;
+//}
+//
+//-(BOOL (^)(UITextView *, NSRange, NSString *))textView{
+//    return [self delegateAction]->_textView;
+//}
+//
+//-(void)setTextView:(BOOL (^)(UITextView *, NSRange, NSString *))textView{
+//    [self delegateAction]->_textView = textView;
+//}
+//
+//
+//-(void)setup{
+//    NSNotificationCenter * defaultConter = [NSNotificationCenter defaultCenter];
+//    UITextViewLinCoreDelegateAction * delegateAction = [[UITextViewLinCoreDelegateAction alloc] initWithTarget:self];
+//    
+//    [defaultConter addObserver:delegateAction selector:@selector(textFieldDidBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:self];
+//    [defaultConter addObserver:delegateAction selector:@selector(textFieldDidEndEditing:) name:UITextViewTextDidEndEditingNotification object:self];
+//    
+//    delegateAction.withObjectSameLifecycle = self;
+//}
+//
+//@end

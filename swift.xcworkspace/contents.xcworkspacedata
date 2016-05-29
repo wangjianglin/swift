@@ -5,15 +5,12 @@
       location = "group:demo/demo.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:server/LinServer.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:core/LinCore.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:util/LinUtil.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:client/LinClient.xcodeproj">
+      location = "group:comm/LinComm.xcodeproj">
    </FileRef>
 </Workspace>

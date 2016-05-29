@@ -8,12 +8,13 @@
 
 import Foundation
 
-public class JsonModel{
+public class JsonModel : CustomStringConvertible{
     
     private var _json:Json;
     public var json:Json{
         return _json;
     }
+    
     public init(json:Json){
         self._json = json;
     }
@@ -30,7 +31,9 @@ public class JsonModel{
 //        //执行析构
 //        println("Json Model deinit.");
 //    }
+    
     public var description:String { return self._json.description; }
+    
 }
 
 extension JsonModel{
@@ -61,7 +64,23 @@ extension JsonModel{
     
 //    public func setValue(name:String,value:AnyObject?){
     public func setValue(value:AnyObject?,forName name:String){
-        self._json.setValue(value, forName: name);
+        if value is JsonModel {
+            self._json.setValue((value as! JsonModel)._json, forName: name);
+        }else{
+            self._json.setValue(value, forName: name);
+        }
+    }
+    
+    public func setIntValue(value:Int,forName name:String){
+        self._json.setIntValue(value, forName: name);
+    }
+    
+    public func setBoolValue(value:Bool,forName name:String){
+        self._json.setBoolValue(value, forName: name);
+    }
+    
+    public func setDoubleValue(value:Double,forName name:String){
+        self._json.setDoubleValue(value, forName:name);
     }
     public func getValue(name:String)->AnyObject?{
         return self._json.getValue(name);

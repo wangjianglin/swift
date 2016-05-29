@@ -31,5 +31,6 @@
 //#import "SQLite-Bridging.h"
 #import "ObjCSynchronized.h"
 #import "md5.h"
+#import "NSObjects.h"
 
 #endif

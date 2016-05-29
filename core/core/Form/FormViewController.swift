@@ -125,7 +125,7 @@ public class FormViewController : UITableViewController {
             }
         }
         
-        delegate?.formViewController!(self, didSelectRowDescriptor: rowDescriptor)
+        delegate?.formViewController?(self, didSelectRowDescriptor: rowDescriptor)
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }

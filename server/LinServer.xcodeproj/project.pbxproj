@@ -68,6 +68,7 @@
 		3EDFEC8C1B1E1FC500F24A24 /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3EDFEC891B1E1FC500F24A24 /* About.txt */; };
 		3EDFEC8D1B1E1FC500F24A24 /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDFEC8A1B1E1FC500F24A24 /* GCDAsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EDFEC8E1B1E1FC500F24A24 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDFEC8B1B1E1FC500F24A24 /* GCDAsyncSocket.m */; };
+		3EE51D0A1CE7AEF20032729F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE51D091CE7AEF20032729F /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		3EDFEC891B1E1FC500F24A24 /* About.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = About.txt; sourceTree = "<group>"; };
 		3EDFEC8A1B1E1FC500F24A24 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		3EDFEC8B1B1E1FC500F24A24 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		3EE51D091CE7AEF20032729F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 				3E8982661B1E1D9100DE0AC8 /* LinServer-Bridging.h */,
 				3E8982641B1E1D9100DE0AC8 /* Supporting Files */,
 				3E0249A11C4CEB17001FC3F8 /* LinServer.h */,
+				3EE51D091CE7AEF20032729F /* Utils.swift */,
 			);
 			path = server;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				3EDFEC411B1E1E1000F24A24 /* DDRange.m in Sources */,
 				3EDFEC4D1B1E1E1000F24A24 /* MultipartFormDataParser.m in Sources */,
 				3EDFEC5D1B1E1E1000F24A24 /* HTTPRedirectResponse.m in Sources */,
+				3EE51D0A1CE7AEF20032729F /* Utils.swift in Sources */,
 				3EDFEC551B1E1E1000F24A24 /* HTTPDataResponse.m in Sources */,
 				3EDFEC7C1B1E1FAF00F24A24 /* DDASLLogger.m in Sources */,
 				3EDFEC861B1E1FAF00F24A24 /* DispatchQueueLogFormatter.m in Sources */,

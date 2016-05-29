@@ -22,16 +22,18 @@ public class GlobalArgs{
     }
 }
 
-public class Global{
-    
-    public class var items:GlobalArgs{
-        struct YRSingleton{
-            static var predicate:dispatch_once_t = 0
-            static var instance:GlobalArgs? = nil
-        }
-        dispatch_once(&YRSingleton.predicate,{
-            YRSingleton.instance = GlobalArgs()
-        })
-        return YRSingleton.instance!
-    }
-}
+//public class Global{
+//    
+//    public class var items:GlobalArgs{
+//        struct YRSingleton{
+//            static var predicate:dispatch_once_t = 0
+//            static var instance:GlobalArgs? = nil
+//        }
+//        dispatch_once(&YRSingleton.predicate,{
+//            YRSingleton.instance = GlobalArgs()
+//        })
+//        return YRSingleton.instance!
+//    }
+//}
+
+public let Global = GlobalArgs();

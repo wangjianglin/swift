@@ -9,6 +9,7 @@
 @import Foundation;
 
 
+//#include <ifaddrs.h>
 //! Project version number for util.
 FOUNDATION_EXPORT double serverVersionNumber;
 
