@@ -13,7 +13,7 @@ import UIKit
 public typealias TitleFormatter = (NSObject) -> String!
 
 public class FormRowDescriptor: NSObject {
-
+    
     /// MARK: Properties
     
     public var title: String!
@@ -25,14 +25,14 @@ public class FormRowDescriptor: NSObject {
             if let vc = self.valueChange{
                 let oldValue = self._value;
                 self._value = newValue;
-                vc(oldValue: oldValue, newValue: newValue);
+                vc(newValue: newValue, oldValue: oldValue);
             }else{
                 self._value = newValue;
             }
         }
         get {return _value;}
     }
-    public var valueChange:((oldValue:NSObject?,newValue:NSObject?)->())?;
+    public var valueChange:((newValue:NSObject?,oldValue:NSObject?)->())?;
     //public var options: [NSObject]!
     
     public var titleFormatter: TitleFormatter!
@@ -63,9 +63,9 @@ public class FormRowDescriptor: NSObject {
     
     /// MARK: Public interface
     
-//    public func titleForOptionAtIndex(index: Int) -> String! {
-//        return titleForOptionValue(options[index])
-//    }
+    //    public func titleForOptionAtIndex(index: Int) -> String! {
+    //        return titleForOptionValue(options[index])
+    //    }
     
     public func titleForOptionValue(optionValue: NSObject) -> String! {
         if titleFormatter != nil {
@@ -76,7 +76,7 @@ public class FormRowDescriptor: NSObject {
         }
         return "\(optionValue)"
     }
-
+    
     
     
     
@@ -89,4 +89,4 @@ public class FormRowDescriptor: NSObject {
 
 // 版权属于原作者
 // http://code4app.com (cn) http://code4app.net (en)
-// 发布代码于最专业的源码分享网站: Code4App.com 
+// 发布代码于最专业的源码分享网站: Code4App.com
