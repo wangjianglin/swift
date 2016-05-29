@@ -30,7 +30,7 @@
         UIImageView *iconImageView = [[UIImageView alloc] initWithFrame:iconImageViewFrame];
 //#if iOS7
 //        NSBundle * b = [NSBundle bundleForClass:[QBImagePickerVideoInfoView class]];
-        iconImageView.image = [UIImage imageNamed:@"LinCore.bundle/QBImagePickerController/video.png"];
+        iconImageView.image = [UIImage imageNamed:@"LinCore.bundle/QBImagePickerController/video.png" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
 //#else
 //        iconImageView.image = [UIImage imageNamed:@"Frameworks/LinControls.framework/QBImagePickerController.bundle/video.png"];
 //#endif

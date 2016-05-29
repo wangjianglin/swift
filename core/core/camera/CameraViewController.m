@@ -149,11 +149,12 @@
     
     [self.view addSubview:cancelButton];
     
+    NSBundle * b = [NSBundle bundleForClass:[self class]];
     
     UIButton * cameraButton = [[UIButton alloc] init];
     cameraButton.frame = CGRectMake(self.view.frame.size.width - 75, 20, 60, 35);
     //[cameraButton setImage:[UIImage imageNamed:@"LinCore.bundle/camera/camera_icon_camera.png"] forState:UIControlStateNormal];
-    [cameraButton setImage:[UIImage imageNamed:@"LinCore.bundle/camera/capture_flip.png"] forState:UIControlStateNormal];
+    [cameraButton setImage:[UIImage imageNamed:@"LinCore.bundle/camera/capture_flip.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [cameraButton addTarget:self action:@selector(switchCameraMode:) forControlEvents:UIControlEventTouchUpInside];
     //[cameraButton setTitle:@"取消00" forState:UIControlStateNormal];
     
@@ -164,7 +165,7 @@
     
     flashButton = [[UIButton alloc] init];
     flashButton.frame = CGRectMake(5, 20, 60, 35);
-    [flashButton setImage:[UIImage imageNamed:@"LinCore.bundle/camera/camera_icon_toggle_flash.png"] forState:UIControlStateNormal];
+    [flashButton setImage:[UIImage imageNamed:@"LinCore.bundle/camera/camera_icon_toggle_flash.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [flashButton setTitle:@"  关" forState:UIControlStateNormal];
     flashButton.titleLabel.font = [UIFont fontWithName:@"STHeitiSC-Light" size:14.0];
     //cameraButton.backgroundColor = [UIColor grayColor];

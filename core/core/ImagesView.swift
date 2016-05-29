@@ -528,7 +528,8 @@ public class ImagesViewAddImageCollectionViewCell : UICollectionViewCell{
         
         let iconImage = FillImageView();
         
-        iconImage.setFillImage("LinCore.bundle/camera/camera_icon_image.png");
+//        iconImage.setFillImage("LinCore.bundle/camera/camera_icon_image.png");
+        iconImage.setFillImage(UIImage(named: "LinCore.bundle/camera/camera_icon_image.png", inBundle: NSBundle(forClass:self.classForCoder), compatibleWithTraitCollection: nil));
         
         iconImage.frame = CGRectMake(15, 10, _dashImageView.frame.size.width - 10, _dashImageView.frame.size.width - 10);
         iconImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleWidth.rawValue | UIViewAutoresizing.FlexibleHeight.rawValue);
@@ -632,7 +633,8 @@ public class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
         
         let iconImage = FillImageView();
         
-        iconImage.setFillImage("LinCore.bundle/camera/camera_icon_camera.png");
+        //iconImage.setFillImage("LinCore.bundle/camera/camera_icon_camera.png");
+        iconImage.setFillImage(UIImage(named: "LinCore.bundle/camera/camera_icon_camera.png", inBundle: NSBundle(forClass:self.classForCoder), compatibleWithTraitCollection: nil));
         
         iconImage.frame = CGRectMake(15, 10, _dashImageView.frame.size.width - 10, _dashImageView.frame.size.width - 10);
         iconImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleWidth.rawValue | UIViewAutoresizing.FlexibleHeight.rawValue);
@@ -778,7 +780,7 @@ class ImagesViewUICollectionViewCell : UICollectionViewCell{
         
         let minusImageView = UIImageView();
         
-        minusImageView.image = UIImage(named:"LinCore.bundle/QBImagePickerController/minus.png");
+        minusImageView.image = UIImage(named:"LinCore.bundle/QBImagePickerController/minus.png", inBundle: NSBundle(forClass: self.classForCoder),compatibleWithTraitCollection: nil);
         minusImageView.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.deleteImage)));
         minusImageView.userInteractionEnabled = true;
         self.addSubview(minusImageView);
