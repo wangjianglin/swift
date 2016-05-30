@@ -791,7 +791,13 @@ static void *MRProgressOverlayViewObservationContext = &MRProgressOverlayViewObs
 }
 
 - (void)setProgress:(float)progress animated:(BOOL)animated {
-    NSParameterAssert(progress >= 0 && progress <= 1);
+//    NSParameterAssert(progress >= 0 && progress <= 1);
+    if(progress < 0) {
+        progress = 0;
+    }
+    if(progress>1){
+        progress = 1;
+    }
     _progress = progress;
     [self applyProgressAnimated:(BOOL)animated];
 }

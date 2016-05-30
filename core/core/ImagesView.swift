@@ -371,7 +371,7 @@ public class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataS
             }
             
             //        ImagesView * sself = wself;
-            self?._vedioUrl = file;
+            self?.vedioUrl = file;
         });
         self.viewController?.presentViewController(camera, animated:true, completion:nil);
         return;
@@ -492,11 +492,11 @@ public class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataS
         
         let h = self.bounds.size.width / 4 + 10;
         
-        let row = CGFloat(_imagePaths.count + 2);
+        let row = _imagePaths.count + 2;
         if _heightConstraint != nil {
             self.removeConstraint(_heightConstraint);
         }
-        _heightConstraint = NSLayoutConstraint(item:self, attribute:NSLayoutAttribute.Height, relatedBy:NSLayoutRelation.Equal, toItem:nil, attribute:NSLayoutAttribute.NotAnAttribute, multiplier:1.0, constant:h * ((row + 3) / 4));
+        _heightConstraint = NSLayoutConstraint(item:self, attribute:NSLayoutAttribute.Height, relatedBy:NSLayoutRelation.Equal, toItem:nil, attribute:NSLayoutAttribute.NotAnAttribute, multiplier:1.0, constant:h * CGFloat((row + 3) / 4));
         self.addConstraint(_heightConstraint);
     }
 }

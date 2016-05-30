@@ -714,9 +714,9 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             if _playImageView != nil && n == 0 {
                 itemAddImage.hidden = false;
                 if (self.edited) {
-                    itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png");
+                    itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png",inBundle: NSBundle(forClass: self.classForCoder),compatibleWithTraitCollection: nil);
                 }else{
-                    itemAddImage.image = UIImage(named:"LinCore.bundle/play.png");
+                    itemAddImage.image = UIImage(named:"LinCore.bundle/play.png",inBundle: NSBundle(forClass: self.classForCoder),compatibleWithTraitCollection: nil);
                 }
             }
             
