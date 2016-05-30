@@ -8,7 +8,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 import Foundation
-
+import LinUtil
 
 /// Object representation of a HTTP Response.
 
@@ -114,6 +114,7 @@ public class HttpTask : NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate
     //Returning nil from this method will cause the request to be rejected and cancelled
     public var auth:((NSURLAuthenticationChallenge) -> NSURLCredential?)?
     
+    private var impl:HttpCommunicateImpl
     //MARK: Public Methods
     
     /// A newly minted HTTPTask for your enjoyment.
@@ -121,7 +122,7 @@ public class HttpTask : NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate
     //private var config:NSURLSessionConfiguration;// = NSURLSessionConfiguration.defaultSessionConfiguration()
     //private var cookies:NSHTTPCookieStorage;
     private var session:NSURLSession!;//(configuration: config, delegate: self, delegateQueue: nil)
-    public override init() {
+    public init(impl:HttpCommunicateImpl) {
         //self.config = NSURLSessionConfiguration.defaultSessionConfiguration();
         //self.config.HTTPCookieStorage = NSHTTPCookieStorage();
         //self.cookies = NSHTTPCookieStorage()
@@ -129,6 +130,7 @@ public class HttpTask : NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate
         // makes no difference whether it's set or left at default
         //self.config.HTTPCookieStorage = self.cookies;
         //self.config.HTTPCookieAcceptPolicy = NSHTTPCookieAcceptPolicy.Always
+        self.impl = impl;
         super.init()
         
         let config:NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration();
@@ -161,7 +163,7 @@ public class HttpTask : NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate
     */
     public func create(url: String, method: HttpMethod, parameters: Dictionary<String,AnyObject>!,isDebug:Bool, success:((HttpResponse) -> Void)!, failure:((NSError, HttpResponse?) -> Void)!) ->  HttpOperation? {
 
-        let serialReq = createRequest(url, method: method, parameters: parameters,isDebug:isDebug)
+        let serialReq = createRequest(url, method: method, parameters: parameters,isDebug:isDebug,headers:impl.headers)
         if serialReq.error != nil {
             if failure != nil {
                 failure(serialReq.error!, nil)
@@ -307,7 +309,7 @@ public class HttpTask : NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate
         - parameter failure: The block that is run on a failed HTTP Request.
     */
     public func download(url: String, parameters: Dictionary<String,AnyObject>?,progress:((Double) -> Void)!,isDebug:Bool, success:((HttpResponse) -> Void)!, failure:((NSError, HttpResponse?) -> Void)!) -> NSURLSessionDownloadTask? {
-        let serialReq = createRequest(url,method: .GET, parameters: parameters,isDebug:isDebug)
+        let serialReq = createRequest(url,method: .GET, parameters: parameters,isDebug:isDebug,headers:impl.headers)
         if serialReq.error != nil {
             failure(serialReq.error!, nil)
             return nil
@@ -327,7 +329,7 @@ public class HttpTask : NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate
     public func uploadFile(url: String, parameters: Dictionary<String,AnyObject>?,isDebug:Bool, progress:((Int64,Int64) -> Void)!, success:((HttpResponse) -> Void)!, failure:((NSError,HttpResponse?) -> Void)!) -> Void {
         
 
-        let serialReq = createRequest(url,method: .GET, parameters: parameters,isDebug:isDebug,isMulti:true)
+        let serialReq = createRequest(url,method: .GET, parameters: parameters,isDebug:isDebug,isMulti:true,headers:impl.headers)
         if serialReq.error != nil {
             failure(serialReq.error!,nil)
             return
@@ -360,7 +362,7 @@ public class HttpTask : NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate
     
         - returns: A NSURLRequest from configured requestSerializer.
     */
-    private func createRequest(url: String, method: HttpMethod, parameters: Dictionary<String,AnyObject>!,isDebug:Bool,isMulti:Bool? = nil) -> (request: NSMutableURLRequest, error: NSError?) {
+    private func createRequest(url: String, method: HttpMethod, parameters: Dictionary<String,AnyObject>!,isDebug:Bool,isMulti:Bool? = nil,headers:IndexProperty<String,String>) -> (request: NSMutableURLRequest, error: NSError?) {
         var urlVal = url
         //probably should change the 'http' to something more generic
         if !url.hasPrefix("http") && self.baseURL != nil {
@@ -394,10 +396,14 @@ public class HttpTask : NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate
         let result = self.requestSerializer.createRequest(NSURL(string: urlVal)!,
         method: method, parameters: parameters,isMulti : isMulti);
         
-        result.request.setValue("",forHTTPHeaderField:HTTP_COMM_PROTOCOL);
-        if isDebug {
-            result.request.setValue("",forHTTPHeaderField:HTTP_COMM_PROTOCOL_DEBUG);
+        for (key,value) in headers {
+            result.request.setValue(value,forHTTPHeaderField:key);
         }
+        
+//        result.request.setValue("",forHTTPHeaderField:HTTP_COMM_PROTOCOL);
+//        if isDebug {
+//            result.request.setValue("",forHTTPHeaderField:HTTP_COMM_PROTOCOL_DEBUG);
+//        }
         if ip != nil {
             result.request.setValue(hostName, forHTTPHeaderField: "Host");
         }

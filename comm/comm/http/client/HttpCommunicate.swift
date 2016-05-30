@@ -34,6 +34,14 @@ public class HttpCommunicate{
         set{global.httpDns = newValue;}
     }
     
+    public class var headers:IndexProperty<String,String>{
+        return global.headers;
+    }
+    
+    public class func removeHeader(header:String){
+        global.removeHeader(header);
+    }
+    
     public class func request(package:HttpPackage,result:((obj:AnyObject!,warning:[HttpError])->())? = nil,fault:((error:HttpError)->())? = nil)->HttpCommunicateResult{
         return global.request(package,result:result,fault:fault);
     }
@@ -80,17 +88,12 @@ public class HttpCommunicate{
         }
     }
     
-//    class public func commUlr(){
-//        
-//    }
-    
 }
 
 public class HttpCommunicateImpl{
     
     private init(name:String){
         self.name = name;
-        //self.request = HttpTask();
     }
     
     public var mainThread:Bool = false;
@@ -99,6 +102,15 @@ public class HttpCommunicateImpl{
     private var name:String;
     
     public var httpDns:HttpDNS?;
+    
+    public var _headers = IndexProperty<String,String>();
+    public var headers:IndexProperty<String,String>{
+        return _headers;
+    }
+    
+    public func removeHeader(header:String){
+        headers.remove(header);
+    }
     //private var request:HttpTask;
     
     private var _commUrl = "http://192.168.1.8:8080/lin.demo/";
@@ -113,13 +125,11 @@ public class HttpCommunicateImpl{
     }
     
     public func upload(package:HttpUploadPackage,result:((obj:AnyObject!,warning:[HttpError])->())! = nil,fault:((error:HttpError)->())! = nil,progress:((send:Int64,total:Int64) -> Void)! = nil)->HttpCommunicateResult{
-        let task = HttpTask();
+        let task = HttpTask(impl:self);
         task.httpDns = self.httpDns;
         
         var params = Dictionary<String,AnyObject>();
         let httpResult = HttpCommunicateResult();
-//        let set = AutoResetEvent();
-//        httpResult.set = set;
         
         for (name,value) in package.json.toParams() {
             params[name] = value;
@@ -130,23 +140,17 @@ public class HttpCommunicateImpl{
         }
         self.httprequest?(package);
         task.uploadFile(HttpUtils.url(self, pack: package), parameters: params,isDebug:self.isDebug,progress: package.progress, success: { (response) -> Void in
-                //println("success");
-//                httpResult.setResult(true);
             package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,result:result), fault: self.mainThreadFault(httpResult,pack:package,fault:fault));
-                
-                //set.set();
-                
+            
             }) { (error,response) -> Void in
-                //println("error.")
+                
                 let e:HttpError = HttpError(code:-1);
                 e.message = "net error.";
                 e.cause = "net error.";
                 e.strackTrace = error.description;
                 
-//                httpResult.setResult(false);
                 self.mainThreadFault(httpResult,pack:package,fault:fault)(error:e);
                 
-                //set.set();
         };
 
         return httpResult;
@@ -170,18 +174,15 @@ public class HttpCommunicateImpl{
                 if self.mainThread == false || NSThread.currentThread().isMainThread || httpResult?.set.canEnterMainThread() ?? false == false {
                     
                     result(obj: obj,warning: warning);
-//                    set.set();
                     httpResult?.set.set();
                 }else{
                     
                     dispatch_async(dispatch_get_main_queue(), {() in
                         result(obj: obj,warning: warning);
-//                        set.set();
                         httpResult?.set.set();
                     });
                 }
             }else{
-//                set.set();
                 httpResult?.set.set();
             }
         }
@@ -191,23 +192,19 @@ public class HttpCommunicateImpl{
     private func mainThreadFault(httpResult:HttpCommunicateResult,pack:HttpPackage,fault:((error:HttpError)->())?)->((error:HttpError)->()){
     
         let tmpFault = {[weak httpResult](error:HttpError) ->() in
-//            httpResult?.setResult(nil,success:false);
             httpResult?.setError(error);
             self.httprequestFault?(pack,error);
             if let fault = fault {
                 if self.mainThread == false || NSThread.currentThread().isMainThread || httpResult?.set.canEnterMainThread() ?? false == false {
                     fault(error: error);
-//                    set.set();
                     httpResult?.set.set();
                 }else{
                     dispatch_async(dispatch_get_main_queue(), {() in
                         fault(error: error);
-//                        set.set();
                         httpResult?.set.set();
                     });
                 }
             }else{
-//                set.set();
                 httpResult?.set.set();
             }
         }
@@ -219,17 +216,14 @@ public class HttpCommunicateImpl{
             return self.upload(uploadPackage,result:result,fault:fault,progress:uploadPackage.progress);
         }
         let httpResult = HttpCommunicateResult();
-//        let set = AutoResetEvent();
-//        httpResult.set = set;
         
         self.httprequest?(package);
-        let request:HttpTask = HttpTask();
+        let request:HttpTask = HttpTask(impl:self);
         request.httpDns = self.httpDns;
         
         requestImpl(request,package:package,url:HttpUtils.url(self, pack: package), parameters: package.handle.getParams(request,package:package),isDebug:self.isDebug, success: {(response: HttpResponse) in
             
             package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,result:result), fault: self.mainThreadFault(httpResult,pack:package,fault:fault));
-                //set.set();
             },failure: {(error: NSError?,response: HttpResponse?) in
                 
                 //println("error: \(error)")
@@ -243,8 +237,6 @@ public class HttpCommunicateImpl{
                 e.cause = "net error.";
                 e.strackTrace = error?.description;
                 self.mainThreadFault(httpResult,pack:package,fault:fault)(error:e);
-                
-                //set.set();
         })
         
         return httpResult;

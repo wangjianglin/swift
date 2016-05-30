@@ -11,6 +11,11 @@ import Foundation
 
 public class StandardHttpRequestHandle:HttpRequestHandle{
     public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,String>?{
+        
+        request.requestSerializer.headers[HTTP_COMM_PROTOCOL] = "";
+//        if isDebug {
+            request.requestSerializer.headers[HTTP_COMM_PROTOCOL_DEBUG] = "";
+//        }
         return package.json.toParams();
     }
     

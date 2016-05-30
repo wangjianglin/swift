@@ -145,7 +145,7 @@ extension Json {
         return Json(obj).toString(pretty)
     }
 }
-/// instance properties
+//MARK:instance properties
 extension Json {
     /// access the element like array
     public subscript(idx:Int) -> Json {
@@ -553,6 +553,7 @@ extension Json {
         }
     }
 }
+//MARK:SequenceType
 extension Json : SequenceType {
     public func generate()->AnyGenerator<(AnyObject,Json)> {
         switch _value {
@@ -578,6 +579,7 @@ extension Json : SequenceType {
         return _value.mutableCopy()
     }
 }
+//MARK:CustomStringConvertible
 extension Json : CustomStringConvertible {
     /// stringifies self.
     /// if pretty:true it pretty prints
