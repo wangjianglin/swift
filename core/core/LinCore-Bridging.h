@@ -56,8 +56,6 @@
 
 #import "IOS7ScrollView.h"
 
-#import "AppStoreUpdate.h"
-#import "EnterpriseUpdate.h"
 
 extern NSString* CTSettingCopyMyPhoneNumber();
 

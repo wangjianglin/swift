@@ -18,39 +18,18 @@ public class EnterpriseUpdate{
     request.URL = url;
     let data = try? NSURLConnection.sendSynchronousRequest(request, returningResponse:nil);
     if let data = data {
-        let updateVersion = String(data:data, encoding:NSUTF8StringEncoding);
+        let updateVerString = String(data:data, encoding:NSUTF8StringEncoding);
         
-        if updateVersion == nil {
+        if updateVerString == nil {
             return;
         }
         
-        let updateVersions = parserVersion(updateVersion!);
-        if updateVersion == nil {
+        let versionJson = Json.parse(updateVerString!)
+        let updateVersions = parserVersion(versionJson["version"].asString(""));
+        if updateVersions == nil {
             return;
         }
-//        NSString * appVersion = [NSString stringWithFormat:@"%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-//        NSArray * appVersions = [EnterpriseUpdate parserVersion:appVersion];
-//        if (appVersions == nil) {
-//            return;
-//        }
-//        int flag = 0;//0不需要更新，1、必须更新，2、非必须更新
-//        
-//        
-//        if ([updateVersions[0] compare: appVersions[0]] == 1) {
-//            flag = 1;
-//        }else if([updateVersions[0] isEqualToNumber: appVersions[0]]){
-//            if ([updateVersions[1] compare: appVersions[1]] == 1) {
-//                flag = 1;
-//            }else if([updateVersions[1] isEqualToNumber: appVersions[1]]){
-//                if ([updateVersions[2] compare: appVersions[2]] == 1) {
-//                    flag = 2;
-//                    //                    flag = 1;
-//                }
-//            }
-//        }
-//        if (flag == 0) {
-//            return;
-//        }
+        
         let appVersions = parserVersion(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String);
         if appVersions == nil {
             return;
@@ -66,17 +45,13 @@ public class EnterpriseUpdate{
                 flag = 1;
             }else if updateVersions[1] == appVersions[1] {
                 if updateVersions[2] > appVersions[2] {
-                flag = 2;
-                //                    flag = 1;
+                    flag = 2;
                 }
             }
         }
         if (flag == 0) {
             return;
         }
-//        if (flag == 2 && [UserDefaults[@"isupdateofversion"] isEqualToString:@"true"] && [UserDefaults[@"isupdateofversion_version"] isEqualToString:updateVersion]) {
-//            return;
-//        }
         
         var updateString:String! = nil;
         if (flag == 1) {
@@ -84,36 +59,28 @@ public class EnterpriseUpdate{
         }else{
             updateString = "应用有新版本，是否需要更新！";
         }
+        updateString = versionJson["message"].asString(updateString);
         Queue.mainQueue(){
             var alert:UIAlertView! = nil;
             if flag == 1 {
                 
                 alert = UIAlertView(title:"", message:updateString, delegate:nil, cancelButtonTitle:"确定");
                 alert.clickedButtonAtIndexAction = {(alertView:UIAlertView, buttonIndex:Int) in
-                    //                    if (buttonIndex == 1) {
-//                    NSURL * url = [[NSURL alloc] initWithString:@"itms-services://?action=download-manifest&url=https://www.feicuibaba.com/buyers/buyers.plist.php"];
-//                    [[UIApplication sharedApplication] openURL:url];
+                    
                     if let url = NSURL(string:appUrl) {
                         UIApplication.sharedApplication().openURL(url);
                     }
-                    //UserDefaults[@"isupdateofversion"] = @"false";
-                    //                    }else{
-                    //                        UserDefaults[@"isupdateofversion"] = @"true";
-                    //                        UserDefaults[@"isupdateofversion_version"] = updateVersion;
-                    //                    }
+                    
                 };
             }else{
                 alert = UIAlertView(title:"", message:updateString, delegate:nil, cancelButtonTitle:"取消", otherButtonTitles:"确定");
                 alert.clickedButtonAtIndexAction = {(alertView:UIAlertView, buttonIndex:Int) in
                     if buttonIndex == 1 {
-//                        NSURL * url = [[NSURL alloc] initWithString:@"itms-services://?action=download-manifest&url=https://www.feicuibaba.com/buyers/buyers.plist.php"];
+                        
                         if let url = NSURL(string:appUrl) {
                             UIApplication.sharedApplication().openURL(url);
                         }
-                        //UserDefaults[@"isupdateofversion"] = @"false";
-                    }else{
-                        //UserDefaults[@"isupdateofversion"] = @"true";
-                        //UserDefaults[@"isupdateofversion_version"] = updateVersion;
+                        
                     }
                 };
             }

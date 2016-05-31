@@ -122,6 +122,16 @@ public class AppStoreUpdate{
                     }
                 };
             }
+            
+            alert.willPresentAlertViewAction = {(alert:UIAlertView) in
+                for view in alert.subviews {
+                    
+                    if view is UILabel {
+                        (view as! UILabel).textAlignment = NSTextAlignment.Left;
+                    }
+                }
+            }
+            
             alert.show();
             
         };

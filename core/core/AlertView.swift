@@ -37,116 +37,116 @@ public extension UIAlertView{
     }
     public var alertViewCancelAction:((alertView:UIAlertView)->())?{
         set{
-            delegateAction.alertViewCancelAction = newValue;
+            delegateAction._alertViewCancelAction = newValue;
         }
         get{
-            return delegateAction.alertViewCancelAction;
+            return delegateAction._alertViewCancelAction;
         }
     }
     public var clickedButtonAtIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?{
         set{
-            delegateAction.clickedButtonAtIndexAction = newValue;
+            delegateAction._clickedButtonAtIndexAction = newValue;
         }
         get{
-            return delegateAction.clickedButtonAtIndexAction;
+            return delegateAction._clickedButtonAtIndexAction;
         }
     }
     public var willPresentAlertViewAction:((alertView:UIAlertView)->())?{
         set{
-            delegateAction.willPresentAlertViewAction = newValue;
+            delegateAction._willPresentAlertViewAction = newValue;
         }
         get{
-            return delegateAction.willPresentAlertViewAction;
+            return delegateAction._willPresentAlertViewAction;
         }
     }
     public var didPresentAlertViewAction:((alertView:UIAlertView)->())?{
         set{
-            delegateAction.didPresentAlertViewAction = newValue;
+            delegateAction._didPresentAlertViewAction = newValue;
         }
         get{
-            return delegateAction.didPresentAlertViewAction;
+            return delegateAction._didPresentAlertViewAction;
         }
     }
     public var willDismissWithButtonIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?{
         set{
-            delegateAction.willDismissWithButtonIndexAction = newValue;
+            delegateAction._willDismissWithButtonIndexAction = newValue;
         }
         get{
-            return delegateAction.willDismissWithButtonIndexAction;
+            return delegateAction._willDismissWithButtonIndexAction;
         }
     }
     public var didDismissWithButtonIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?{
         set{
-            delegateAction.didDismissWithButtonIndexAction = newValue;
+            delegateAction._didDismissWithButtonIndexAction = newValue;
         }
         get{
-            return delegateAction.didDismissWithButtonIndexAction;
+            return delegateAction._didDismissWithButtonIndexAction;
         }
     }
     public var alertViewShouldEnableFirstOtherButtonAction:((alertView:UIAlertView)->Bool)?{
         set{
-            delegateAction.alertViewShouldEnableFirstOtherButtonAction = newValue;
+            delegateAction._alertViewShouldEnableFirstOtherButtonAction = newValue;
         }
         get{
-            return delegateAction.alertViewShouldEnableFirstOtherButtonAction;
+            return delegateAction._alertViewShouldEnableFirstOtherButtonAction;
         }
     }
 }
 
 
 private class __LinCore_UIAlertViewDelegateImpl : DelegateAction,UIAlertViewDelegate{
-    private var alertViewCancelAction:((alertView:UIAlertView)->())?;
-    private var clickedButtonAtIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?;
-    private var willPresentAlertViewAction:((alertView:UIAlertView)->())?;
-    private var didPresentAlertViewAction:((alertView:UIAlertView)->())?;
-    private var willDismissWithButtonIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?;
-    private var didDismissWithButtonIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?;
-    private var alertViewShouldEnableFirstOtherButtonAction:((alertView:UIAlertView)->Bool)?;
+    private var _alertViewCancelAction:((alertView:UIAlertView)->())?;
+    private var _clickedButtonAtIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?;
+    private var _willPresentAlertViewAction:((alertView:UIAlertView)->())?;
+    private var _didPresentAlertViewAction:((alertView:UIAlertView)->())?;
+    private var _willDismissWithButtonIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?;
+    private var _didDismissWithButtonIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?;
+    private var _alertViewShouldEnableFirstOtherButtonAction:((alertView:UIAlertView)->Bool)?;
     
     private override init() {
         super.init();
     }
     
-    public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
-        if let clickedButtonAtIndexAction = self.clickedButtonAtIndexAction {
+    @objc private func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        if let clickedButtonAtIndexAction = self._clickedButtonAtIndexAction {
             clickedButtonAtIndexAction(alertView: alertView, buttonIndex: buttonIndex);
         }
     }
     
     // Called when we cancel a view (eg. the user clicks the Home button). This is not called when the user clicks the cancel button.
     // If not defined in the delegate, we simulate a click in the cancel button
-    public func alertViewCancel(alertView: UIAlertView){
-        if let alertViewCancelAction = self.alertViewCancelAction {
+    @objc private func alertViewCancel(alertView: UIAlertView){
+        if let alertViewCancelAction = self._alertViewCancelAction {
             alertViewCancelAction(alertView: alertView);
         }
     }
     
-    public func willPresentAlertView(alertView: UIAlertView){
-        if let willPresentAlertViewAction = self.willPresentAlertViewAction {
+    @objc private func willPresentAlertView(alertView: UIAlertView){
+        if let willPresentAlertViewAction = self._willPresentAlertViewAction {
             willPresentAlertViewAction(alertView: alertView);
         }
     }
     
-    public func didPresentAlertView(alertView: UIAlertView){
-        if let didPresentAlertViewAction = self.didPresentAlertViewAction {
+    @objc private func didPresentAlertView(alertView: UIAlertView){
+        if let didPresentAlertViewAction = self._didPresentAlertViewAction {
             didPresentAlertViewAction(alertView: alertView);
         }
     }
     
-    public func alertView(alertView: UIAlertView, willDismissWithButtonIndex buttonIndex: Int){
-        if let willDismissWithButtonIndexAction = self.willDismissWithButtonIndexAction {
+    @objc private func alertView(alertView: UIAlertView, willDismissWithButtonIndex buttonIndex: Int){
+        if let willDismissWithButtonIndexAction = self._willDismissWithButtonIndexAction {
             willDismissWithButtonIndexAction(alertView: alertView, buttonIndex: buttonIndex);
         }
     }
     
-    public func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int){
-        if let didDismissWithButtonIndexAction = self.didDismissWithButtonIndexAction{
+    @objc private func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int){
+        if let didDismissWithButtonIndexAction = self._didDismissWithButtonIndexAction{
             didDismissWithButtonIndexAction(alertView: alertView, buttonIndex: buttonIndex);
         }
     }
     
-    public func alertViewShouldEnableFirstOtherButton(alertView: UIAlertView) -> Bool{
-        if let alertViewShouldEnableFirstOtherButtonAction = self.alertViewShouldEnableFirstOtherButtonAction {
+    @objc private func alertViewShouldEnableFirstOtherButton(alertView: UIAlertView) -> Bool{
+        if let alertViewShouldEnableFirstOtherButtonAction = self._alertViewShouldEnableFirstOtherButtonAction {
             return alertViewShouldEnableFirstOtherButtonAction(alertView: alertView);
         }
         return true;
