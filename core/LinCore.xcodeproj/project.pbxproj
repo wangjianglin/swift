@@ -251,6 +251,12 @@
 		3EA768691A70230D00FF8C57 /* UIGestureRecognizers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA768681A70230D00FF8C57 /* UIGestureRecognizers.swift */; };
 		3EB8A2C71BBB0E3500871123 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB8A2C61BBB0E3500871123 /* Network.swift */; };
 		3EB8A2CB1BBB110D00871123 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB8A2CA1BBB110D00871123 /* SystemConfiguration.framework */; };
+		3EBEC2321CFD4B6D005ABB52 /* AppStoreUpdate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EBEC22E1CFD4B6D005ABB52 /* AppStoreUpdate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3EBEC2331CFD4B6D005ABB52 /* AppStoreUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEC22F1CFD4B6D005ABB52 /* AppStoreUpdate.m */; };
+		3EBEC2341CFD4B6D005ABB52 /* EnterpriseUpdate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EBEC2301CFD4B6D005ABB52 /* EnterpriseUpdate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3EBEC2351CFD4B6D005ABB52 /* EnterpriseUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEC2311CFD4B6D005ABB52 /* EnterpriseUpdate.m */; };
+		3EBEC2381CFD4C21005ABB52 /* AppStoreUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEC2361CFD4C21005ABB52 /* AppStoreUpdate.swift */; };
+		3EBEC2391CFD4C21005ABB52 /* EnterpriseUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEC2371CFD4C21005ABB52 /* EnterpriseUpdate.swift */; };
 		3EC4FE221A55D97300E05771 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC4FE211A55D97300E05771 /* LinUtil.framework */; };
 		3ECB95CE1C48EA4800E5E67C /* Tables.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0854841A8A6E5C0052DCEE /* Tables.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ECD40751CEDC1E300D57372 /* MRBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECD40501CEDC1E300D57372 /* MRBlurView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -564,6 +570,12 @@
 		3EB8A2C61BBB0E3500871123 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		3EB8A2C81BBB10E800871123 /* libsystem_configuration.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsystem_configuration.tbd; path = usr/lib/system/libsystem_configuration.tbd; sourceTree = SDKROOT; };
 		3EB8A2CA1BBB110D00871123 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3EBEC22E1CFD4B6D005ABB52 /* AppStoreUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreUpdate.h; sourceTree = "<group>"; };
+		3EBEC22F1CFD4B6D005ABB52 /* AppStoreUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreUpdate.m; sourceTree = "<group>"; };
+		3EBEC2301CFD4B6D005ABB52 /* EnterpriseUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterpriseUpdate.h; sourceTree = "<group>"; };
+		3EBEC2311CFD4B6D005ABB52 /* EnterpriseUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterpriseUpdate.m; sourceTree = "<group>"; };
+		3EBEC2361CFD4C21005ABB52 /* AppStoreUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreUpdate.swift; sourceTree = "<group>"; };
+		3EBEC2371CFD4C21005ABB52 /* EnterpriseUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseUpdate.swift; sourceTree = "<group>"; };
 		3EC4FE211A55D97300E05771 /* LinUtil.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinUtil.framework; path = "../../../../Users/lin/Library/Developer/Xcode/DerivedData/lin-gxczwykgogkdagbgjamhtdcqlhnr/Build/Products/Debug-iphoneos/LinUtil.framework"; sourceTree = "<group>"; };
 		3ECD40501CEDC1E300D57372 /* MRBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBlurView.h; sourceTree = "<group>"; };
 		3ECD40511CEDC1E300D57372 /* MRBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBlurView.m; sourceTree = "<group>"; };
@@ -795,6 +807,7 @@
 		3E3746491A26365A00B980E9 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				3EBEC22D1CFD4B6D005ABB52 /* Update */,
 				3E5917C81CF8C62300CCFBC2 /* IOS7ScrollView.m */,
 				3E5917C91CF8C62300CCFBC2 /* IOS7ScrollView.h */,
 				3E121A281CF8942600D43267 /* ScrollImagesView.swift */,
@@ -1029,6 +1042,19 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		3EBEC22D1CFD4B6D005ABB52 /* Update */ = {
+			isa = PBXGroup;
+			children = (
+				3EBEC2361CFD4C21005ABB52 /* AppStoreUpdate.swift */,
+				3EBEC2371CFD4C21005ABB52 /* EnterpriseUpdate.swift */,
+				3EBEC22E1CFD4B6D005ABB52 /* AppStoreUpdate.h */,
+				3EBEC22F1CFD4B6D005ABB52 /* AppStoreUpdate.m */,
+				3EBEC2301CFD4B6D005ABB52 /* EnterpriseUpdate.h */,
+				3EBEC2311CFD4B6D005ABB52 /* EnterpriseUpdate.m */,
+			);
+			path = Update;
+			sourceTree = "<group>";
+		};
 		3ECD404E1CEDC1E300D57372 /* MRProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -1116,6 +1142,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EBEC2321CFD4B6D005ABB52 /* AppStoreUpdate.h in Headers */,
+				3EBEC2341CFD4B6D005ABB52 /* EnterpriseUpdate.h in Headers */,
 				3E5917CB1CF8C62300CCFBC2 /* IOS7ScrollView.h in Headers */,
 				3E1219E71CF845A400D43267 /* SCAssetExportSession.h in Headers */,
 				3E1219EB1CF845A400D43267 /* SCAudioTools.h in Headers */,
@@ -1340,6 +1368,7 @@
 				3E1219FC1CF845A400D43267 /* SCPhotoConfiguration.m in Sources */,
 				3E8EB4531A66C2B000324952 /* Images.swift in Sources */,
 				3E08549D1A8A6EEA0052DCEE /* MJRefreshFooterView.m in Sources */,
+				3EBEC2331CFD4B6D005ABB52 /* AppStoreUpdate.m in Sources */,
 				3E73DABE1A8795A30052C16A /* QBImagePickerFooterView.m in Sources */,
 				3E12199A1CF8358D00D43267 /* ImageViews.m in Sources */,
 				3ECD40821CEDC1E300D57372 /* MRProgressOverlayView.m in Sources */,
@@ -1396,6 +1425,7 @@
 				3E0854751A8A6DE30052DCEE /* JAActionButton.m in Sources */,
 				3E76AE111A41DC5000B0C2BB /* UserDefaults.swift in Sources */,
 				3ECD408C1CEDC1E300D57372 /* MRProgressOverlayView+AFNetworking.m in Sources */,
+				3EBEC2391CFD4C21005ABB52 /* EnterpriseUpdate.swift in Sources */,
 				3E0789561A7943650087A3CC /* Log.swift in Sources */,
 				3E1219EA1CF845A400D43267 /* SCAudioConfiguration.m in Sources */,
 				3E426D281A4A988E00A1C815 /* RBStoryboardSegue.m in Sources */,
@@ -1404,6 +1434,7 @@
 				3E73DA9C1A8795A30052C16A /* FormBaseCell.swift in Sources */,
 				3E0854801A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.m in Sources */,
 				3E121A231CF8848400D43267 /* CameraViewController.swift in Sources */,
+				3EBEC2381CFD4C21005ABB52 /* AppStoreUpdate.swift in Sources */,
 				3E1219E81CF845A400D43267 /* SCAssetExportSession.m in Sources */,
 				3E4242641B2F424C004DF7C5 /* MGSwipeButton.m in Sources */,
 				3E121A291CF8942600D43267 /* ScrollImagesView.swift in Sources */,
@@ -1454,6 +1485,7 @@
 				3E121A0C1CF845A400D43267 /* SCRecordSessionSegment.m in Sources */,
 				3E76AE0D1A41DC0F00B0C2BB /* Keychain.swift in Sources */,
 				3E73DAAF1A8795A30052C16A /* FormTextEditController.swift in Sources */,
+				3EBEC2351CFD4B6D005ABB52 /* EnterpriseUpdate.m in Sources */,
 				3EA768691A70230D00FF8C57 /* UIGestureRecognizers.swift in Sources */,
 				3E73DA991A8795A30052C16A /* CacheImageView.swift in Sources */,
 				3E73DAAA1A8795A30052C16A /* FormSelector.swift in Sources */,
