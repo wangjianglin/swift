@@ -14,6 +14,10 @@
 		3E200EB21C4D5FB000A00A10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E200EB01C4D5FB000A00A10 /* LaunchScreen.storyboard */; };
 		3E200EBD1C4D5FB000A00A10 /* demoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EBC1C4D5FB000A00A10 /* demoTests.swift */; };
 		3E200EC81C4D5FB000A00A10 /* demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EC71C4D5FB000A00A10 /* demoUITests.swift */; };
+		3E98399B1D21023D00CF3049 /* ScrollImagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E98399A1D21023D00CF3049 /* ScrollImagesController.swift */; };
+		3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EAE1D0AEF2500717357 /* WebViewController.swift */; };
+		3EC64EB31D0AF02200717357 /* LinWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC64EB21D0AF02200717357 /* LinWeb.framework */; };
+		3EC64EB41D0AF02200717357 /* LinWeb.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC64EB21D0AF02200717357 /* LinWeb.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ECD41171CEE1F3900D57372 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD41161CEE1F3900D57372 /* LinUtil.framework */; };
 		3ECD41181CEE1F3900D57372 /* LinUtil.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD41161CEE1F3900D57372 /* LinUtil.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ECD411A1CEE1F3E00D57372 /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD41191CEE1F3E00D57372 /* LinCore.framework */; };
@@ -48,6 +52,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				3ECD41181CEE1F3900D57372 /* LinUtil.framework in Embed Frameworks */,
+				3EC64EB41D0AF02200717357 /* LinWeb.framework in Embed Frameworks */,
 				3ECD411B1CEE1F3E00D57372 /* LinCore.framework in Embed Frameworks */,
 				3EE51EE71CE8CC570032729F /* LinComm.framework in Embed Frameworks */,
 			);
@@ -70,6 +75,10 @@
 		3E200EC31C4D5FB000A00A10 /* demoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = demoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E200EC71C4D5FB000A00A10 /* demoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoUITests.swift; sourceTree = "<group>"; };
 		3E200EC91C4D5FB000A00A10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E98399A1D21023D00CF3049 /* ScrollImagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollImagesController.swift; sourceTree = "<group>"; };
+		3EC64EAE1D0AEF2500717357 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		3EC64EB01D0AF00100717357 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		3EC64EB21D0AF02200717357 /* LinWeb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinWeb.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphonesimulator/LinWeb.framework"; sourceTree = "<absolute>"; };
 		3ECD41161CEE1F3900D57372 /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinUtil.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphonesimulator/LinUtil.framework"; sourceTree = "<absolute>"; };
 		3ECD41191CEE1F3E00D57372 /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinCore.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphonesimulator/LinCore.framework"; sourceTree = "<absolute>"; };
 		3ED1EC761C57E14700E2AC3B /* LinServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinServer.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinServer.framework"; sourceTree = "<absolute>"; };
@@ -88,6 +97,7 @@
 				3ECD41171CEE1F3900D57372 /* LinUtil.framework in Frameworks */,
 				3ECD411A1CEE1F3E00D57372 /* LinCore.framework in Frameworks */,
 				3EE51EE61CE8CC570032729F /* LinComm.framework in Frameworks */,
+				3EC64EB31D0AF02200717357 /* LinWeb.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +121,8 @@
 		3E200E9B1C4D5FB000A00A10 = {
 			isa = PBXGroup;
 			children = (
+				3EC64EB21D0AF02200717357 /* LinWeb.framework */,
+				3EC64EB01D0AF00100717357 /* WebKit.framework */,
 				3ECD41191CEE1F3E00D57372 /* LinCore.framework */,
 				3ECD41161CEE1F3900D57372 /* LinUtil.framework */,
 				3EE51EE41CE8CA3E0032729F /* LinComm.framework */,
@@ -145,6 +157,8 @@
 				3E200EAE1C4D5FB000A00A10 /* Assets.xcassets */,
 				3E200EB01C4D5FB000A00A10 /* LaunchScreen.storyboard */,
 				3E200EB31C4D5FB000A00A10 /* Info.plist */,
+				3EC64EAE1D0AEF2500717357 /* WebViewController.swift */,
+				3E98399A1D21023D00CF3049 /* ScrollImagesController.swift */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -301,7 +315,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E98399B1D21023D00CF3049 /* ScrollImagesController.swift in Sources */,
 				3E200EAA1C4D5FB000A00A10 /* ViewController.swift in Sources */,
+				3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */,
 				3E200EA81C4D5FB000A00A10 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

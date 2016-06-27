@@ -1,5 +1,5 @@
 //
-//  LinImagesController.m
+//  ScrollImagesView.swift
 //  seller
 //
 //  Created by lin on 12/28/14.
@@ -9,40 +9,13 @@
 import MediaPlayer
 import UIKit
 
-//int LinImagesViewFullScreenCurrentItem = 0;
-//BOOL isLinImagesViewFullScreen = FALSE;
-//LinImagesView * preLinImagesView;
-//LinImagesController * fullScreenController;
-
-
-
-//@interface LinImagesController (){
-//@public
-//    BOOL _isFullScreen;
-//    int _fullScreenItem;
-//@private
-//    LinImagesView * _imageView;
-//    BOOL _edited;
-//    NSArray * _imagePaths;
-//    BOOL _fullScreen;
-//    //    BOOL _isFullScreen;
-//    BOOL _showPositionLabel;
-//    LinImagesFill _fill;
-//    BOOL _zoom;
-//    NSString * _noImage;
-//    NSURL * _vedioUrl;
-//    BOOL _hasVedio;
-//}
-
-//-(void)setImageView:(LinImagesVi ew*)imageView;
-//@end
 
 private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
-    //    @package
+
     private var _imagePath:String?;
     private var _imageView:CacheImageView!;
     private var fill:ImageFill = ImageFill.Default;
-    //    private var _zoom = false;
+    
     private var _contentView:UIView!;
     private var _preImageSize = CGSizeMake(0, 0);
     private var _preViewSize = CGSizeMake(0, 0);
@@ -51,22 +24,6 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
     
     private init(imagePath:String, fill:ImageFill, zoom:Bool, linImagesView:ScrollImagesView){
         
-        //@property UIImage * image;
-        ////
-        ////    //使图像填满
-        //@property ImageFill fill;
-        ////
-        ////    //缩放
-        //@property BOOL zoom;
-        //
-        //@end
-        
-        
-        
-        //@implementation LinImagesContentView
-        //
-        //-(id)initWithImagePath:(NSString *)imagePath fill:(ImageFill)fill zoom:(BOOL)zoom linImagesView:(ScrollImagesView*)linImagesView{
-        //    self = [super initWithFrame:CGRectMake(0, 0, 0, 0)];
         super.init(frame: CGRectMake(0, 0, 0, 0));
         
         self._imagePath = imagePath;
@@ -88,13 +45,7 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
             self._imageView?.image = newValue;
         }
     }
-    //    //使图像填满
-    //-(ImageFill)fill{
-    //    return self->_fill;
-    //}
-    //-(void)setFill:(ImageFill)fill{
-    //    self->_fill = fill;
-    //}
+
     
     //    //缩放
     private var zoom:Bool = false{
@@ -193,35 +144,22 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
 }
 
 
-public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-    //    @public
+public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate{
+
     private var _isFullScreen = false;
     private var _fullScreenItem = 0;
     
-    //    @private
-    //    private var _edited = false;
     private var _fill = ImageFill.Default;
-    //    private var _zoom = false;
-    //    private var _showPositionLabel = false;
-    //    private var _fullScreen = false;
     private var _addImages = [UIImageView]();
     private var _views = [UIView]();
     private var _positionLabelView:UIView!;
     private var _resetImagePaths = false;
-    //    private var _imagePaths = [String]();
-    //    private var _vedioUrl:NSURL?;
-//    private var _hasVedio = false;
     private var _noneImageLabels = [UILabel]();
     private var _scrollView:UIScrollView!;
     private var _currentItem = 0;
     private var _positionLabel:UILabel!;
-    //    MPMoviePlayerController * player;
     private var _playImageView:FillImageView?;
     
-    //}
-    //@end
-    //
-    //@implementation ScrollImagesView
     
     public init() {
         //    self = [super init];
@@ -242,9 +180,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     public var edited = false{
         didSet{
             self.userInteractionEnabled = true;
-            //    NSLog(@"userInteractionEnabled:%d",self.userInteractionEnabled);
-            //    NSLog(@"controller:%@",self->_controller);
-            //            if let addImages = _addImages {
+            
             for item in _addImages {
                 item.hidden = !edited;
             }
@@ -252,39 +188,12 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     }
     
     
-    //-(BOOL)edited{
-    //    return self->_edited;
-    //}
-    //-(void)setEdited:(BOOL)edited{
-    //    self->_edited = edited;
-    ////    self.userInteractionEnabled = self->_edited || self->_fullScreen;
-    ////    self.userInteractionEnabled = (self->_edited || self->_fullScreen || self->_isFullScreen);
-    //    self.userInteractionEnabled = TRUE;
-    ////    NSLog(@"userInteractionEnabled:%d",self.userInteractionEnabled);
-    ////    NSLog(@"controller:%@",self->_controller);
-    //    if (addImages != nil) {
-    //        for (UIView * item in addImages) {
-    //            item.hidden = !edited;
-    //        }
-    //    }
-    //}
-    
     public var fullScreen = false{
         didSet{
 //            self.userInteractionEnabled = true;
         }
     }
-    //-(BOOL)fullScreen{
-    //    return _fullScreen;
-    //}
-    //
-    //-(void)setFullScreen:(BOOL)fullScreen{
-    //    _fullScreen = fullScreen;
-    ////    self.userInteractionEnabled = self->_edited || self->_fullScreen;
-    ////     self.userInteractionEnabled = (self->_edited || self->_fullScreen || self->_isFullScreen);
-    //    self.userInteractionEnabled = TRUE;
-    ////    NSLog(@"userInteractionEnabled:%d",self.userInteractionEnabled);
-    //}
+    
     
     ////使图像填满
     public var fill = ImageFill.Default{
@@ -296,16 +205,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             }
         }
     }
-    //    return _fill;
-    //}
-    //-(void)setFill:(ImageFill)fill{
-    //    _fill = fill;
-    //    if (views != nil) {
-    //        for (LinImagesContentView * item in views) {
-    //            item.fill = self.fill;
-    //        }
-    //    }
-    //}
+    
     ////缩放
     public var zoom = false{
         didSet{
@@ -316,26 +216,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             }
         }
     }
-    //-(BOOL)zoom{
-    //    return _zoom;
-    //}
-    //-(void)setZoom:(BOOL)zoom{
-    //    _zoom = zoom;
-    //    if (views != nil) {
-    //        for (LinImagesContentView * item in views) {
-    //            item.zoom = zoom;
-    //        }
-    //    }
-    //}
-    //
-    ////是否显示位置标记
-    //-(BOOL)showPositionLabel{
-    //    return _showPositionLabel;
-    //}
-    //-(void)setShowPositionLabel:(BOOL)showPositionLabel{
-    //    _showPositionLabel = showPositionLabel;
-    //    positionLabelView.hidden = !showPositionLabel;
-    //}
+    
     public var showPositionLabel = false{
         didSet{
             self._positionLabelView.hidden = !showPositionLabel;
@@ -355,19 +236,6 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
         }
         return images;
     }
-    //-(NSArray *)imagesForEdited{
-    //    NSMutableArray * images = [[NSMutableArray alloc] init];
-    //    if (views!=nil) {
-    //        for (LinImagesContentView * item in views) {
-    //            if (item.tag == 2) {
-    //                [images addObject:item.image];
-    //            }else{
-    //                [images addObject:[NSNull null]];
-    //            }
-    //        }
-    //    }
-    //    return images;
-    //}
     
     public var images:[UIImage?]{
         var images = [UIImage?]();
@@ -378,34 +246,12 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
         }
         return images;
     }
-    //-(NSArray *)images{
-    //    NSMutableArray * images = [[NSMutableArray alloc] init];
-    //
-    //    if (views != nil) {
-    //        for (LinImagesContentView * item in views) {
-    //            if (item->imageView.image == nil) {
-    //                [images addObject:[NSNull null]];
-    //            }else{
-    //                [images addObject:item->imageView.image];
-    //            }
-    //        }
-    //    }
-    //
-    //    return  images;
-    //}
     
-    //-(NSURL *)vedioUrl{
-    //    return _vedioUrl;
-    //}
-    //
-    //-(void)setVedioUrl:(NSURL*)vedioUrl{
-    //    _vedioUrl = vedioUrl;
-    //    [self resetVedioView];
-    //}
+    private var _vedioURL:NSURL?;
+    
     public var vedioUrl:NSURL?{
-        didSet{
-            self.resetVedioView();
-        }
+        get{ return _vedioURL;}
+        set{ _vedioURL = newValue;self.resetVedioView();}
     }
     
     public var hasVedio:Bool = false{
@@ -414,20 +260,6 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
         }
     }
     
-    //-(BOOL)hasVedio{
-    //    return _hasVedio;
-    //}
-    //-(void)setHasVedio:(BOOL)hasVedio{
-    //    _hasVedio = hasVedio;
-    //    [self resetVedioView];
-    //}
-    //-(NSArray *)imagePaths{
-    //    return _imagePaths;
-    //}
-    //-(void)setImagePaths:(NSArray *)imagePaths{
-    //    _imagePaths = imagePaths;
-    //    [self resetImageViews];
-    //}
     public var imagePaths:[String]?{
         didSet{
             self.resetImageViews();
@@ -479,7 +311,8 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             let itemAddImage = UIImageView();
             //[addImages addObject:itemAddImage];
             _addImages.insert(itemAddImage, atIndex:0);
-            itemAddImage.image = UIImage(named:"LinCore.bundle/camera/camera_icon_camera_add.png");
+            
+            itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png", inBundle: NSBundle(forClass:self.classForCoder), compatibleWithTraitCollection: nil);
             
             _scrollView.addSubview(itemAddImage);
             
@@ -596,7 +429,8 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
                 
                 let itemAddImage = UIImageView();
                 _addImages.append(itemAddImage);
-                itemAddImage.image = UIImage(named:"resources.bundle/publish/imagesEditAdd.png");
+//                itemAddImage.image = UIImage(named:"resources.bundle/publish/imagesEditAdd.png");
+                itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png", inBundle: NSBundle(forClass:self.classForCoder), compatibleWithTraitCollection: nil);
                 _scrollView.addSubview(itemAddImage);
 //                itemAddImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleBottomMargin.rawValue | UIViewAutoresizing.FlexibleLeftMargin.rawValue | UIViewAutoresizing.FlexibleTopMargin.rawValue | UIViewAutoresizing.FlexibleRightMargin.rawValue);
                 itemAddImage.frame = CGRectMake(0, 0, 60, 60);
@@ -759,78 +593,63 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             
             if hasVedio && _currentItem == 0 {
                 
-                //            __weak ScrollImagesView * wself = self;
-                //            let camera = CameraViewController();
-                //CameraViewController
-                //self dismissViewControllerAnimated:<#(BOOL)#> completion:<#^(void)completion#>
-                //[self presentViewController:]
-                //            [camera setResult:^(NSURL *file) {
-                //                NSLog(@"file:%@",file);
-                ////                player.contentURL = file;
-                ////                [player play];
-                //                ScrollImagesView * w = wself;
-                //                w->_vedioUrl = file;
-                //            }];
-                //            [self.viewController presentViewController:camera animated:TRUE completion:nil];
-                //            return;
+                let camera = CameraViewController();
+                camera.setResult({[weak self] (url) in
+                    self?._vedioURL = url;
+                })
+                self.viewController?.presentViewController(camera, animated: true, completion: nil);
+                return;
             }
-            //        int videoCount = _hasVedio?1:0;
-            //        int index = _currentItem - videoCount;
-            //
-            //        QBImagePickerController * imagePickerController = [[QBImagePickerController alloc] init];
-            //        imagePickerController.delegate = self;
-            //        imagePickerController.filterType = QBImagePickerFilterTypeAllPhotos;
-            //        imagePickerController.allowsMultipleSelection = TRUE;
-            //        uint maxSelection = 0;
-            ////        for (NSObject * item in self.imagePaths) {
-            //        NSObject * item = nil;
-            //        for (int n=0; n<self.imagePaths.count; n++) {
-            //            item = self.imagePaths[n];
-            //            if ((item == nil || [item isKindOfClass:[NSNull class]]) && [views[n+videoCount] isKindOfClass:[LinImagesContentView class]] &&
-            //                ((LinImagesContentView*)views[n+videoCount]).image == nil
-            //                //&&
-            //                //(((LinImagesContentView*)views[n])->_imagePath == nil || [((LinImagesContentView*)views[n])->_imagePath isKindOfClass:[NSNull class]])
-            //                ) {
-            //                maxSelection++;
-            //            }
-            //        }
-            //        if ((self.imagePaths[index] != nil && ![self.imagePaths[index] isKindOfClass:[NSNull class]])
-            //            || ((LinImagesContentView*)views[_currentItem]).image != nil)
-            //             {
-            //            maxSelection++;
-            //        }
-            //        imagePickerController.maximumNumberOfSelection = maxSelection;
-            //        imagePickerController.limitsMaximumNumberOfSelection = TRUE;
-            //        UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
-            //        [self.viewController presentViewController:navigationController animated:TRUE completion:nil];
+            
+            let imagePickerController = QBImagePickerController();
+            imagePickerController.delegate = self;
+            imagePickerController.filterType = QBImagePickerFilterTypeAllPhotos;
+            var maxSelection:UInt = 0;
+            
+            for n in 0..<_views.count {
+                
+                if n == _currentItem {
+                    maxSelection += 1;
+                    continue;
+                }
+                if _views[n] is LinImagesContentView{
+                    let litem = _views[n] as! LinImagesContentView;
+                    if litem.image == nil{
+                        maxSelection += 1;
+                    }
+                }
+            }
+
+
+            imagePickerController.maximumNumberOfSelection = maxSelection;
+            imagePickerController.allowsMultipleSelection = maxSelection > 1;
+            imagePickerController.limitsMaximumNumberOfSelection = true;
+            
+            let navigationController = UINavigationController(rootViewController: imagePickerController);
+
+            self.viewController?.presentViewController(navigationController, animated: true, completion: nil);
             
         }else {
             if self._isFullScreen {//退出全屏
-                //            isLinImagesViewFullScreen = FALSE;
-                //            [preLinImagesView setCurrentItem:[self currentItem]];
+                
                 self.viewController?.dismissViewControllerAnimated(true, completion:nil);
             }else if self.fullScreen {//进入全屏
-                //            LinImagesViewFullScreenCurrentItem = [self currentItem];
-                //            isLinImagesViewFullScreen = TRUE;
                 
-                //            preLinImagesView = self;
                 
                 let fullScreenView = ScrollImagesView();
-                //            fullScreenController = [[LinImagesController alloc] init];
                 
-                //            LinImagesView * fullImagesView = [[LinImagesView alloc] init];
                 fullScreenView.edited = false;
                 fullScreenView.fill = ImageFill.Default;
                 fullScreenView.zoom = true;
                 fullScreenView.fullScreen = false;
                 fullScreenView.imagePaths = self.imagePaths;
-                //            fullScreenView.noImage = self.noImage;
+                
                 fullScreenView._isFullScreen = true;
                 fullScreenView._fullScreenItem = self._currentItem;
-                //            fullImagesView.controller = fullScreenController;
+                
                 fullScreenView.showPositionLabel = false;
                 
-                //            [fullScreenController setImageView:fullImagesView];
+                
                 fullScreenView.backgroundColor = UIColor(red:0.72, green:0.72, blue:0.72, alpha:1.0);
                 
                 let fullScreenController = UIViewController();
@@ -884,53 +703,57 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     }
     
     
-    //- (void)imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingMediaWithInfo:(id)info{
-    //
-    //    if (imagePickerController.allowsMultipleSelection) {
-    //        NSArray * mediaInfoArray = (NSArray*)info;
-    //        int start = [self currentItem];
-    //        for (NSDictionary * item in mediaInfoArray) {
-    //            while (!([views[start % views.count] isKindOfClass:[LinImagesContentView class]]) || (
-    //                   ((LinImagesContentView*)views[start % views.count]).image != nil &&
-    //                   ![((LinImagesContentView*)views[start % views.count]).image isKindOfClass:[NSNull class]] && start != [self currentItem]))
-    //            {
-    //                start++;
-    //            }
-    //            UIImage * image = (UIImage*)(item[@"UIImagePickerControllerOriginalImage"]);
-    //            ((LinImagesContentView*)views[start%views.count]).image = image;
-    //            ((LinImagesContentView*)views[start%views.count]).tag = 2;
-    //            start++;
-    //        }
-    //    }
-    //    [imagePickerController dismissViewControllerAnimated:TRUE completion:nil];
-    //
-    //}
-    //
-    //-(void)imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController{
-    //    [imagePickerController dismissViewControllerAnimated:TRUE completion:nil];
-    //}
-    //
-    //-(NSString *)descriptionForSelectingAllAssets:(QBImagePickerController *)imagePickerController{
-    //    return @"选择所有";
-    //}
-    //
-    //-(NSString *)descriptionForDeselectingAllAssets:(QBImagePickerController *)imagePickerController{
-    //    return @"取消所有选择";
-    //}
-    //
-    //-(NSString *)imagePickerController:(QBImagePickerController *)imagePickerController descriptionForNumberOfPhotos:(NSUInteger)numberOfPhotos{
-    //    return [[NSString alloc] initWithFormat:@"共有%lu张照片",(unsigned long)numberOfPhotos];
-    //}
-    //
-    //-(NSString *)imagePickerController:(QBImagePickerController *)imagePickerController descriptionForNumberOfVideos:(NSUInteger)numberOfVideos{
-    //    return [[NSString alloc] initWithFormat:@"共有%lu个视频",(unsigned long)numberOfVideos];
-    //}
-    //
-    //- (NSString *)imagePickerController:(QBImagePickerController *)imagePickerController descriptionForNumberOfPhotos:(NSUInteger)numberOfPhotos numberOfVideos:(NSUInteger)numberOfVideos{
-    //    return [[NSString alloc] initWithFormat:@"共有%lu张照片，%lu个视频",(unsigned long)numberOfPhotos,(unsigned long)numberOfVideos];
-    //}
+    public func imagePickerController(imagePickerController: QBImagePickerController, didFinishPickingMediaWithInfo info: AnyObject!) {
+        
+    
+        if imagePickerController.allowsMultipleSelection {
+            let mediaInfoArray = info as! [NSDictionary];
+            var start = _currentItem;
+            for item in mediaInfoArray {
+                while !(_views[start % _views.count] is LinImagesContentView)
+                    || (_views[start % _views.count] as! LinImagesContentView).image == nil
+//                    || ((_views[start % _views.count] as! LinImagesContentView).image is NSNull && start != _currentItem) 
+                {
+                    start += 1;
+                }
+                let image = item["UIImagePickerControllerOriginalImage"] as! UIImage?;
+                (_views[start % _views.count] as! LinImagesContentView).image = image;
+                (_views[start % _views.count] as! LinImagesContentView).tag = 2;
+                start + 1;
+            }
+        }else{
+            let item = info as! NSDictionary;
+            let image = item["UIImagePickerControllerOriginalImage"] as! UIImage?;
+            (_views[_currentItem] as! LinImagesContentView).image = image;
+            (_views[_currentItem] as! LinImagesContentView).tag = 2;
+        }
+        imagePickerController.dismissViewControllerAnimated(true, completion: nil);
+    }
+    
+    public func imagePickerControllerDidCancel(imagePickerController: QBImagePickerController!) {
+        imagePickerController.dismissViewControllerAnimated(true, completion: nil);
+    }
+    
+    @objc public func descriptionForSelectingAllAssets(imagePickerController: QBImagePickerController!) -> String! {
+        return "选择所有";
+    }
+    
+    @objc public func descriptionForDeselectingAllAssets(imagePickerController: QBImagePickerController!) -> String! {
+        return "取消所有选择";
+    }
+    
+    @objc public func imagePickerController(imagePickerController: QBImagePickerController!, descriptionForNumberOfPhotos numberOfPhotos: UInt) -> String! {
+        return "共有\(numberOfPhotos)张照片";
+    }
+    
+    @objc public func imagePickerController(imagePickerController: QBImagePickerController!, descriptionForNumberOfVideos numberOfVideos: UInt) -> String! {
+        return "共有\(numberOfVideos)个视频"
+    }
     
     
+    @objc public func imagePickerController(imagePickerController: QBImagePickerController!, descriptionForNumberOfPhotos numberOfPhotos: UInt, numberOfVideos: UInt) -> String! {
+        return "共有\(numberOfPhotos)张照片，\(numberOfVideos)个视频";
+    }
 }
 
 

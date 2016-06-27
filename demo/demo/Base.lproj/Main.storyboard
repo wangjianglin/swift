@@ -31,6 +31,20 @@
                                     <action selector="serverAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="ffP-rb-enL"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFH-mJ-DxK">
+                                <rect key="frame" x="43" y="227" width="64" height="30"/>
+                                <state key="normal" title="web view"/>
+                                <connections>
+                                    <segue destination="Fe8-a6-n3k" kind="modal" id="3BN-5M-Rpa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ql-Vl-c1x">
+                                <rect key="frame" x="33" y="326" width="88" height="30"/>
+                                <state key="normal" title="ScrollImages"/>
+                                <connections>
+                                    <segue destination="9L4-oh-fbU" kind="modal" id="ScV-6k-OkM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -38,6 +52,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="AMb-uv-D6r">
+            <objects>
+                <viewController id="Fe8-a6-n3k" customClass="WebViewController" customModule="demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xAc-i2-NGM"/>
+                        <viewControllerLayoutGuide type="bottom" id="R07-Z0-R39"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yb4-9L-Buk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="sRy-E7-QD4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TRB-UK-MoD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="960" y="-8"/>
+        </scene>
+        <!--Scroll Images Controller-->
+        <scene sceneID="ZIC-E1-b0z">
+            <objects>
+                <viewController id="9L4-oh-fbU" customClass="ScrollImagesController" customModule="demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Frg-Wv-aSs"/>
+                        <viewControllerLayoutGuide type="bottom" id="k7l-X4-BdS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NSS-BB-ZDr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="sEJ-dH-Xcf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2l9-du-0fP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1018" y="455"/>
         </scene>
     </scenes>
 </document>

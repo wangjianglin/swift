@@ -3,3 +3,6 @@
 2、实现TcpPackageResponse
 
 TCP实现异步响应
+
+
+3、每次http请求，可以单独传一些个性化参数（timeout、mainThread、debug）
