@@ -237,14 +237,27 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
         return images;
     }
     
-    public var images:[UIImage?]{
-        var images = [UIImage?]();
+//    public var images:[UIImage?]{
+//        var images = [UIImage?]();
+//        for item in _views {
+//            if item is LinImagesContentView {
+//                images.append((item as! LinImagesContentView)._imageView.image);
+//            }
+//        }
+//        return images;
+//    }
+    dynamic var images:NSArray{
+        let _images = NSMutableArray();
         for item in _views {
             if item is LinImagesContentView {
-                images.append((item as! LinImagesContentView)._imageView.image);
+                if let image = (item as! LinImagesContentView)._imageView.image {
+                    _images.addObject(image)
+                }else{
+                    _images.addObject(NSNull());
+                }
             }
         }
-        return images;
+        return _images;
     }
     
     private var _vedioURL:NSURL?;
