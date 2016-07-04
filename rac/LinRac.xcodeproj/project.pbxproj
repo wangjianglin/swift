@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3E8AA1521D2A55D8006E4922 /* rac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8AA1511D2A55D8006E4922 /* rac.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E8AA15A1D2A5904006E4922 /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA1591D2A5904006E4922 /* RAC.swift */; };
+		3E8AA15A1D2A5904006E4922 /* RACCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA1591D2A5904006E4922 /* RACCommand.swift */; };
+		3E8AA15C1D2A628F006E4922 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA15B1D2A628F006E4922 /* RACSignal.swift */; };
 		8526918FFC362C5C099FD0F1 /* Pods_LinRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF4A7D206427ED9655063152 /* Pods_LinRac.framework */; };
 /* End PBXBuildFile section */
 
@@ -16,7 +17,8 @@
 		3E8AA14E1D2A55D8006E4922 /* LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8AA1511D2A55D8006E4922 /* rac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rac.h; sourceTree = "<group>"; };
 		3E8AA1531D2A55D8006E4922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E8AA1591D2A5904006E4922 /* RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAC.swift; sourceTree = "<group>"; };
+		3E8AA1591D2A5904006E4922 /* RACCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACCommand.swift; sourceTree = "<group>"; };
+		3E8AA15B1D2A628F006E4922 /* RACSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACSignal.swift; sourceTree = "<group>"; };
 		7E4CDAF2B3E38BCABE01224F /* Pods-LinRac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinRac.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LinRac/Pods-LinRac.release.xcconfig"; sourceTree = "<group>"; };
 		9ADAE0B38D9AE84342F293A9 /* Pods-LinRac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinRac.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LinRac/Pods-LinRac.debug.xcconfig"; sourceTree = "<group>"; };
 		BF4A7D206427ED9655063152 /* Pods_LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,7 +67,8 @@
 			children = (
 				3E8AA1511D2A55D8006E4922 /* rac.h */,
 				3E8AA1531D2A55D8006E4922 /* Info.plist */,
-				3E8AA1591D2A5904006E4922 /* RAC.swift */,
+				3E8AA1591D2A5904006E4922 /* RACCommand.swift */,
+				3E8AA15B1D2A628F006E4922 /* RACSignal.swift */,
 			);
 			path = rac;
 			sourceTree = "<group>";
@@ -192,7 +195,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E8AA15A1D2A5904006E4922 /* RAC.swift in Sources */,
+				3E8AA15C1D2A628F006E4922 /* RACSignal.swift in Sources */,
+				3E8AA15A1D2A5904006E4922 /* RACCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
