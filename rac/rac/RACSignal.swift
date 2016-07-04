@@ -10,7 +10,4 @@ import ReactiveCocoa
 
 public extension RACSignal{
     
-    public func sendError(error:String){
-        
-    }
 }
