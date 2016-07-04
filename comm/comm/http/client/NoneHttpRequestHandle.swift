@@ -11,7 +11,7 @@ import Foundation
 
 public class NoneHttpRequestHandle:HttpRequestHandle{
     
-    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,String>?{
+    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
         return nil;
     }
     

@@ -5,4 +5,6 @@
 TCP实现异步响应
 
 
+3、Handle 实现对 debug 参数的处理
+
 3、每次http请求，可以单独传一些个性化参数（timeout、mainThread、debug）

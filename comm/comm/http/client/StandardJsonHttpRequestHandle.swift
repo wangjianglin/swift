@@ -13,7 +13,20 @@ import LinUtil
 // 采用标准HTTP请求方式传递请求参数，但返回的是json格式的数据
 //
 public class StandardJsonHttpRequestHandle:HttpRequestHandle{
-    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,String>?{
+    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
+        request.requestSerializer.headers[HttpConstants.HTTP_COMM_PROTOCOL] = HttpConstants.HTTP_VERSION;
+        request.requestSerializer.headers[HttpConstants.HTTP_COMM_PROTOCOL_DEBUG] = "";
+        
+        if package is HttpUploadPackage {
+            var params = Dictionary<String,AnyObject>();
+            for (name,value) in package.json.toParams() {
+                params[name] = value;
+            }
+            for (name,value) in (package as! HttpUploadPackage).files {
+                params[name] = value;
+            }
+            return params;
+        }
         return package.json.toParams();
     }
     

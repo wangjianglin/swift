@@ -128,17 +128,20 @@ public class HttpCommunicateImpl{
         let task = HttpTask(impl:self);
         task.httpDns = self.httpDns;
         
-        var params = Dictionary<String,AnyObject>();
+        //        var params = Dictionary<String,AnyObject>();
+        //
+        //        for (name,value) in package.json.toParams() {
+        //            params[name] = value;
+        //        }
+        //
+        //        for (name,value) in package.files {
+        //            params[name] = value;
+        //        }
+        
+        self.httprequest?(package);
+        let params = package.handle.getParams(task,package:package);
         let httpResult = HttpCommunicateResult();
         
-        for (name,value) in package.json.toParams() {
-            params[name] = value;
-        }
-        
-        for (name,value) in package.files {
-            params[name] = value;
-        }
-        self.httprequest?(package);
         task.uploadFile(HttpUtils.url(self, pack: package), parameters: params,isDebug:self.isDebug,progress: package.progress, success: { (response) -> Void in
             package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,result:result), fault: self.mainThreadFault(httpResult,pack:package,fault:fault));
             

@@ -11,7 +11,7 @@ import Foundation
 
 public class FileUploadHttpRequestHandle:HttpRequestHandle{
     
-    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,String>?{
+    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
         //return return package.get
         return package.json.toParams();
     }

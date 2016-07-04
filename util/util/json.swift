@@ -23,11 +23,14 @@ public class Json {
 //    public init(_ json:Json){ self._value = json._value; }
     
     public init(_ obj:AnyObject) {
-//        let cls = NSStringFromClass(obj.classForCoder);
-//        if cls == "Dictionary" {
-//            let dict = cls as Dictionary;
-//        }
-        self._value = obj
+        let cls = NSStringFromClass(obj.classForCoder);
+        if cls == "NSDictionary" {
+            self._value = NSMutableDictionary(dictionary: obj as! NSDictionary);
+        }else if cls == "NSArray" {
+            self._value = NSMutableArray(array: obj as! NSArray);
+        }else{
+            self._value = obj
+        }
     }
     public init(_ array:[AnyObject]){
         let arr = NSMutableArray();
@@ -270,9 +273,17 @@ extension Json {
             }
         }
         set{
-            let dic = _value as! NSMutableDictionary;//Dictionary<String,AnyObject>;
-            dic[key] = newValue._value;
-//            _value = dic;
+            if _value is NSMutableDictionary {
+                let dict = _value as! NSMutableDictionary;
+                dict[key] = newValue._value;
+            }else if _value is NSDictionary{
+                let rdict = _value as! NSDictionary;
+                let dict = NSMutableDictionary(dictionary: rdict)
+                
+                dict[key] = newValue._value;
+                
+                _value = dict;
+            }
         }
     }
     
@@ -359,7 +370,7 @@ extension Json {
         if let v = self.asBool {
             return v;
         }
-        _value = def;
+//        _value = def;
         return def;
     }
     /// gives Int if self holds it. nil otherwise
@@ -379,7 +390,7 @@ extension Json {
         if let v = self.asInt {
             return v;
         }
-        _value = def;
+//        _value = def;
         return def;
     }
     public var asInt64:Int64? {
@@ -398,7 +409,7 @@ extension Json {
         if let v = self.asInt64 {
             return v;
         }
-        _value = NSNumber(longLong: def);
+//        _value = NSNumber(longLong: def);
         return def;
     }
     /// gives Double if self holds it. nil otherwise
@@ -418,7 +429,7 @@ extension Json {
         if let v = self.asDouble {
             return v;
         }
-        _value = def;
+//        _value = def;
         return def;
     }
     // an alias to asDouble
@@ -427,7 +438,7 @@ extension Json {
         if let v = self.asNumber {
             return v;
         }
-        _value = def;
+//        _value = def;
         return def;
     }
     /// gives String if self holds it. nil otherwise
@@ -442,7 +453,7 @@ extension Json {
         if let v = self.asString {
             return v;
         }
-        _value = def;
+//        _value = def;
         return def;
     }
     /// if self holds NSArray, gives a [Json]
@@ -498,7 +509,7 @@ extension Json {
             return v;
         }
         let def = NSDate();
-        _value = def;
+//        _value = def;
         return def;
     }
 //    public var asObject:T<T:JsonModel>?{
@@ -539,7 +550,7 @@ extension Json {
                 defValue = def();
             }
         }
-        self._value = defValue!
+//        self._value = defValue!
         return defValue!;
     }
     

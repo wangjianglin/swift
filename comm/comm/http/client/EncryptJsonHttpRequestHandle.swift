@@ -11,7 +11,7 @@ import Foundation
 
 public class EncryptJsonHttpRequestHandle:HttpRequestHandle{
     
-    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,String>?{
+    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
         request.requestSerializer.headers[HttpConstants.HTTP_COMM_PROTOCOL] = HttpConstants.HTTP_VERSION;
         var params = Dictionary<String,String>();
         

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class JsonModel : CustomStringConvertible{
+public class JsonModel : NSObject{
     
     private var _json:Json;
     public var json:Json{
@@ -19,7 +19,7 @@ public class JsonModel : CustomStringConvertible{
         self._json = json;
     }
     
-    public init(){
+    public override init(){
         self._json = Json();
     }
     
@@ -32,7 +32,7 @@ public class JsonModel : CustomStringConvertible{
 //        println("Json Model deinit.");
 //    }
     
-    public var description:String { return self._json.description; }
+    public override var description:String { return self._json.description; }
     
 }
 

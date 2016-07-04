@@ -31,4 +31,8 @@ public class HttpConstants{
     public class var HTTP_VERSION:String {
         return "0.1";
     }
+    
+    public class var HTTP_COMM_PROTOCOL_DEBUG:String {
+        return "__http_comm_protocol_debug__"
+    }
 }

@@ -48,3 +48,34 @@ public class HttpError :NSObject{
         return desc;
     }
 }
+
+public extension HttpError{
+    
+    public func toNSError()->NSError{
+        return NSError(domain: self.message ?? "", code: self._code, userInfo: ["cause":self.cause ?? "","strackTrace":self.strackTrace ?? ""]);
+    }
+}
+
+public extension NSError{
+    
+    public func toErrorString()->String{
+        
+        var desc:String;
+        if self.code < 0 {
+            desc = String(format: "-0x%0x", -self.code);
+        }else{
+            desc = String(format: "0x%0x", -self.code);
+        }
+        desc = (desc as NSString).uppercaseString;
+        if desc.characters.count > (self.code>0 ? 4 : 5) {
+            desc.insert("_", atIndex: desc.startIndex.advancedBy(desc.characters.count - 4));
+        }
+        //        println("message:\(message)");
+        if self.domain == "" {
+            desc = "错误码：\(desc)\n错误消息：无";
+        }else{
+            desc = "错误码：\(desc)\n错误消息：\(self.domain)！";
+        }
+        return desc;
+    }
+}

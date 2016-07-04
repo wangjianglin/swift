@@ -10,7 +10,7 @@ import Foundation
 
 
 public class StandardHttpRequestHandle:HttpRequestHandle{
-    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,String>?{
+    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
         
         request.requestSerializer.headers[HTTP_COMM_PROTOCOL] = "";
 //        if isDebug {
