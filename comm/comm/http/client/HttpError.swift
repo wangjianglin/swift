@@ -58,8 +58,10 @@ public extension HttpError{
 
 public extension NSError{
     
-    public func toErrorString()->String{
-        
+    public func toHttpErrorString()->String{
+        if self.code == 0{
+            return self.domain;
+        }
         var desc:String;
         if self.code < 0 {
             desc = String(format: "-0x%0x", -self.code);

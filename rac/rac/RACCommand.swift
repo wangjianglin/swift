@@ -91,7 +91,7 @@ public extension RACCommand{
                     AlertView.show(e);
                 }else if v is NSError{
                     let error = v as! NSError;
-                    AlertView.show(error.toErrorString())
+                    AlertView.show(error.toHttpErrorString())
                 }
             }
         }
