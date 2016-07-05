@@ -718,6 +718,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     
     public func imagePickerController(imagePickerController: QBImagePickerController, didFinishPickingMediaWithInfo info: AnyObject!) {
         
+        self.willChangeValueForKey("images")
     
         if imagePickerController.allowsMultipleSelection {
             let mediaInfoArray = info as! [NSDictionary];
@@ -741,6 +742,8 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             (_views[_currentItem] as! LinImagesContentView).tag = 2;
         }
         imagePickerController.dismissViewControllerAnimated(true, completion: nil);
+        
+        self.didChangeValueForKey("images")
     }
     
     public func imagePickerControllerDidCancel(imagePickerController: QBImagePickerController!) {
