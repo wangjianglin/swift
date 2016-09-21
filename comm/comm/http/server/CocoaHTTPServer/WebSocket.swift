@@ -65,7 +65,7 @@ import Foundation
 //#pragma mark -
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-public class WebSocket : NSObject{
+open class WebSocket : NSObject{
     //@implementation WebSocket
     //{
     //	BOOL isRFC6455;
@@ -75,7 +75,7 @@ public class WebSocket : NSObject{
     //}
     //
     //+ (BOOL)isWebSocketRequest:(HTTPMessage *)request
-    public class func isWebSocketRequest(request:HTTPMessage)->Bool{
+    open class func isWebSocketRequest(_ request:HTTPMessage)->Bool{
     //{
     //	// Request (Draft 75):
     //	// 
@@ -114,10 +114,10 @@ public class WebSocket : NSObject{
             || connectionHeaderValue == nil {
     		isWebSocket = false;
     	}
-    	else if upgradeHeaderValue!.caseInsensitiveCompare("WebSocket") !=  NSComparisonResult.OrderedSame {
+    	else if upgradeHeaderValue!.caseInsensitiveCompare("WebSocket") !=  ComparisonResult.orderedSame {
     		isWebSocket = false;
     	}
-    	else if connectionHeaderValue!.rangeOfString("Upgrade", options:NSStringCompareOptions.CaseInsensitiveSearch) == nil {
+    	else if connectionHeaderValue!.range(of: "Upgrade", options:NSString.CompareOptions.caseInsensitive) == nil {
     		isWebSocket = false;
     	}
     	
@@ -155,13 +155,13 @@ public class WebSocket : NSObject{
     //	return isRFC6455;
     //}
     
-    private var _websocketQueue:dispatch_queue_t;
-    private var _request:HTTPMessage;
-    private var _asyncSocket:GCDAsyncSocket;
-    private var _isOpen = false;
-    private var _isVersion76 = false;// = [[self class] isVersion76Request:request];
-    private var _isRFC6455 = false;
-    private var _isStarted = false;
+    fileprivate var _websocketQueue:DispatchQueue;
+    fileprivate var _request:HTTPMessage;
+    fileprivate var _asyncSocket:GCDAsyncSocket;
+    fileprivate var _isOpen = false;
+    fileprivate var _isVersion76 = false;// = [[self class] isVersion76Request:request];
+    fileprivate var _isRFC6455 = false;
+    fileprivate var _isStarted = false;
     //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //#pragma mark Setup and Teardown
@@ -188,8 +188,9 @@ public class WebSocket : NSObject{
     //			NSString *temp = [[NSString alloc] initWithData:requestHeaders encoding:NSUTF8StringEncoding];
     //			HTTPLogVerbose(@"%@[%p] Request Headers:\n%@", THIS_FILE, self, temp);
     //		}
-    //		
-    		_websocketQueue = dispatch_queue_create("WebSocket", nil);
+        //
+        //_websocketQueue = DispatchQueue(label: "WebSocket", qos: []);
+        _websocketQueue = DispatchQueue(label: "WebSocket");
     		_request = aRequest;
     //
     		_asyncSocket = socket;
@@ -243,12 +244,12 @@ public class WebSocket : NSObject{
     // * Starting point for the WebSocket after it has been fully initialized (including subclasses).
     // * This method is called by the HTTPConnection it is spawned from.
     //**/
-    public func start(){
+    open func start(){
     //{
     //	// This method is not exactly designed to be overriden.
     //	// Subclasses are encouraged to override the didOpen method instead.
     //	
-    	dispatch_async(_websocketQueue, {
+    	_websocketQueue.async(execute: {
     		
             if self._isStarted {
                 return;
@@ -269,11 +270,11 @@ public class WebSocket : NSObject{
     // * This method is called by the HTTPServer if it is asked to stop.
     // * The server, in turn, invokes stop on each WebSocket instance.
     //**/
-    public func stop(){
+    open func stop(){
     	// This method is not exactly designed to be overriden.
     	// Subclasses are encouraged to override the didClose method instead.
     	
-    	dispatch_async(_websocketQueue, {
+    	_websocketQueue.async(execute: {
     		
     		self._asyncSocket.disconnect();
     	});

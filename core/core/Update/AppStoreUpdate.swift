@@ -10,13 +10,13 @@
 import UIKit
 import LinUtil
 
-public class AppStoreUpdate{
+open class AppStoreUpdate{
     
     struct YRSignal{
         static var TIME_INTERVAL = 600.0;
     }
     
-    public class var interval:Double{
+    open class var interval:Double{
         get{
             return YRSignal.TIME_INTERVAL;
         }
@@ -28,25 +28,25 @@ public class AppStoreUpdate{
         }
     }
     
-    public class func update(appId:String){
+    open class func update(_ appId:String){
         Queue.asynThread {
             while(true){
                 updateImpl(appId);
-                NSThread.sleepForTimeInterval(YRSignal.TIME_INTERVAL);
+                Thread.sleep(forTimeInterval: YRSignal.TIME_INTERVAL);
             }
         }
     }
     
     
-    private class func updateImpl(appId:String){
+    fileprivate class func updateImpl(_ appId:String){
         
         
-        let url = NSURL(string:"https://itunes.apple.com/lookup?id=\(appId)");
+        let url = URL(string:"https://itunes.apple.com/lookup?id=\(appId)");
         let  request = NSMutableURLRequest();
-        request.URL = url;
-        let data = try? NSURLConnection.sendSynchronousRequest(request, returningResponse:nil);
+        request.url = url;
+        let data = try? NSURLConnection.sendSynchronousRequest(request as URLRequest, returning:nil);
         if let data = data {
-            let updateVersion = String(data:data, encoding:NSUTF8StringEncoding);
+            let updateVersion = String(data:data, encoding:String.Encoding.utf8);
             
             if updateVersion == nil {
                 return;
@@ -54,15 +54,19 @@ public class AppStoreUpdate{
             let json = Json.parse(updateVersion!);
             
             
-            let updateVersions = parserVersion(json["results"][0]["version"].asString(""));
-            if updateVersions == nil {
+            let updateVersionsOption = parserVersion(json["results"][0]["version"].asString(""));
+            if updateVersionsOption == nil {
                 return;
             }
             
-            let appVersions = parserVersion(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String);
-            if appVersions == nil {
+            let updateVersions = updateVersionsOption!;
+            
+            let appVersionsOption = parserVersion(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String);
+            if appVersionsOption == nil {
                 return;
             }
+            
+            let appVersions = appVersionsOption!;
             
             var flag = 0;//0不需要更新，1、必须更新，2、非必须更新
             
@@ -100,8 +104,8 @@ public class AppStoreUpdate{
                     
                     alert = UIAlertView(title:"", message:updateString, delegate:nil, cancelButtonTitle:"更新");
                     alert.clickedButtonAtIndexAction = {(alertView:UIAlertView, buttonIndex:Int) in
-                        if let url = NSURL(string:"https://itunes.apple.com/cn/app/wei/id\(appId)") {
-                            UIApplication.sharedApplication().openURL(url);
+                        if let url = URL(string:"https://itunes.apple.com/cn/app/wei/id\(appId)") {
+                            UIApplication.shared.openURL(url);
                         }
                     };
                 }else{
@@ -109,8 +113,8 @@ public class AppStoreUpdate{
                     alert.clickedButtonAtIndexAction = {(alertView:UIAlertView, buttonIndex:Int) in
                         if (buttonIndex == 1) {
                             
-                            if let url = NSURL(string:"https://itunes.apple.com/cn/app/wei/id\(appId)") {
-                                UIApplication.sharedApplication().openURL(url);
+                            if let url = URL(string:"https://itunes.apple.com/cn/app/wei/id\(appId)") {
+                                UIApplication.shared.openURL(url);
                             }
                         }
                     };
@@ -120,7 +124,7 @@ public class AppStoreUpdate{
                     for view in alert.subviews {
                         
                         if view is UILabel {
-                            (view as! UILabel).textAlignment = NSTextAlignment.Left;
+                            (view as! UILabel).textAlignment = NSTextAlignment.left;
                         }
                     }
                 }
@@ -132,13 +136,13 @@ public class AppStoreUpdate{
         }
     }
     
-    private class func parserVersion(version:String!)->[Int]!{
+    fileprivate class func parserVersion(_ version:String!)->[Int]!{
         if version == nil || version == "" {
             return nil;
         }
-        let vs = version.componentsSeparatedByString(".");
+        let vs = version.components(separatedBy: ".");
         
-        var arr = [Int](count:3,repeatedValue:0);
+        var arr = [Int](repeating: 0,count: 3);
         for n in 0 ..< 3 {
             if n < vs.count {
                 arr[n] = (vs[n] as NSString).integerValue;

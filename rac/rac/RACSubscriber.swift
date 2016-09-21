@@ -10,7 +10,7 @@ import ReactiveCocoa
 
 public extension RACSubscriber{
     
-    public func sendError(error:String,code:Int = 0,userInfo info:[NSObject:AnyObject]? = nil){
+    public func sendError(_ error:String,code:Int = 0,userInfo info:[AnyHashable: Any]? = nil){
         self.sendError(NSError(domain: error, code: code, userInfo: info));
     }
 }

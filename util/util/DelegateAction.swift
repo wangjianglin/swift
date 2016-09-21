@@ -12,12 +12,34 @@ import Foundation
 private var delegateActionItems:[DelegateAction] = [DelegateAction]();
 private var lock = NSLock();
 
-private var DelegateActionThreadPredicate:dispatch_once_t = 0;
+private var DelegateActionThreadPredicate:Int = 0;
 
 @objc
-public class DelegateAction :NSObject {
+open class DelegateAction :NSObject {
     
-    private class func resetObj(){
+    fileprivate static var __once: () = {
+
+            let threadAction = EventDelegateAction(threadAction: { (obj:AnyObject) -> () in
+
+                while true {
+
+                    DelegateAction.resetObj();
+                    Thread.sleep(forTimeInterval: 2);
+
+                }
+            });
+
+            let thread = Thread(target: threadAction, selector: #selector(EventDelegateAction.action(_:)), object: nil);
+
+            thread.name = "delegate action thread";
+
+            thread.start();
+
+        }()
+
+    
+
+    fileprivate class func resetObj(){
         
         if delegateActionItems.count < 1 {
             return;
@@ -25,21 +47,22 @@ public class DelegateAction :NSObject {
         lock.lock()
         if delegateActionItems.count > 0 {
             var array = [Int]();
-            for (index,item) in delegateActionItems.enumerate() {
+            for (index,item) in delegateActionItems.enumerated() {
                 if item.withObjectSameLifecycle == nil {
                     array.append(index);
                 }
             }
-            for var index = array.count - 1 ; index >= 0 ;index-- {
-                delegateActionItems.removeAtIndex(array[index]);
+            //for var index = array.count - 1 ; index >= 0 ;index -= 1 {
+            for index in array.count-1 ... 0 {
+                delegateActionItems.remove(at: array[index]);
             }
         }
         lock.unlock();
     }
     
-    private var isWithObjectSameLifecycle = false;
+    fileprivate var isWithObjectSameLifecycle = false;
     
-    public weak var withObjectSameLifecycle:AnyObject? {
+    open weak var withObjectSameLifecycle:AnyObject? {
         didSet{
         
             if withObjectSameLifecycle != nil {
@@ -58,30 +81,17 @@ public class DelegateAction :NSObject {
         }
     }
     
-    private init(threadAction:((AnyObject)->())){
+    fileprivate init(threadAction:@escaping((AnyObject)->())){
         //self.delegateAction = threadAction;
         super.init();
     }
     public override init(){
         super.init();
             
-        dispatch_once(&DelegateActionThreadPredicate,{
-            
-            let threadAction = EventDelegateAction(threadAction: { (obj:AnyObject) -> () in
-                while true {
-                    DelegateAction.resetObj();
-                
-                    NSThread.sleepForTimeInterval(2);
-                }
-                
-            });
-            let thread = NSThread(target: threadAction, selector: "action:", object: nil);
-            thread.name = "delegate action thread";
-            thread.start();
-        })
+        _ = DelegateAction.__once
     }
     
-    public func actionForObjectExist(action:(()->())){
+    open func actionForObjectExist(_ action:(()->())){
         if isWithObjectSameLifecycle == false {
             action();
         }
@@ -93,20 +103,20 @@ public class DelegateAction :NSObject {
     }
 }
 
-public class EventDelegateAction : DelegateAction{
+open class EventDelegateAction : DelegateAction{
     
-    private override init(threadAction:((AnyObject)->())){
+    fileprivate override init(threadAction: @escaping ((AnyObject)->())){
         self.delegateAction = threadAction;
         super.init(threadAction:threadAction);
     }
     
-    public init(action:((AnyObject)->())){
+    public init(action:@escaping ((AnyObject)->())){
         self.delegateAction = action;
         super.init();
     }
-    private var delegateAction:((AnyObject)->());
+    fileprivate var delegateAction:((AnyObject)->());
     
-    public func action(send:AnyObject){
+    open func action(_ send:AnyObject){
         let tmp: AnyObject? = self.withObjectSameLifecycle;
         if isWithObjectSameLifecycle == false || tmp != nil {
             delegateAction(send);

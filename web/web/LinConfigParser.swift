@@ -9,7 +9,7 @@
 import Foundation
 
 
-class LinConfigParser:NSObject,NSXMLParserDelegate {
+class LinConfigParser:NSObject,XMLParserDelegate {
     
 //}@interface LinConfigParser (){
 //    NSString* pluginName;
@@ -129,13 +129,15 @@ class LinConfigParser:NSObject,NSXMLParserDelegate {
 //        
 //        NSArray * defaultPlugins = @[@"LinAppPlugin",@"LinDevicePlugin",@"LinStoragePlugin",@"LinHttpDNSPlugin"];
 //        
-        let defaultPlugins = ["LinAppPlugin","LinDevicePlugin","LinStoragePlugin","LinHttpDNSPlugin"]
+//        let defaultPlugins = ["LinWeb.LinAppPlugin","LinDevicePlugin","LinStoragePlugin","LinHttpDNSPlugin"]
+        let defaultPlugins:[AnyClass] = [LinAppPlugin.self,LinDevicePlugin.self,LinStoragePlugin.self,LinHttpDNSPlugin.self];
         let defaultPluginNames = ["app","device","storage","httpDns"];
         
         for n in 0 ..< defaultPlugins.count {
-            if let cls = NSClassFromString(defaultPlugins[n]){
-            _plugins[defaultPluginNames[n].lowercaseString] = cls;
-            }
+//            if let cls = NSClassFromString(defaultPlugins[n]){
+//            _plugins[defaultPluginNames[n].lowercased()] = cls;
+//            }
+            _plugins[defaultPluginNames[n].lowercased()] = defaultPlugins[n];
         }
 //        
 //        NSArray * defaultPluginNames = @[@"app",@"device",@"storage",@"httpDns"];
@@ -153,11 +155,11 @@ class LinConfigParser:NSObject,NSXMLParserDelegate {
 //        
 //        // read from config.xml in the app bundle
 //        NSString* path = [[NSBundle mainBundle] pathForResource:xml ofType:nil];
-        let path = NSBundle.mainBundle().pathForResource(xml, ofType: nil);
+        let path = Bundle.main.path(forResource: xml, ofType: nil);
         if let path = path {
 //            return;
 //        }
-        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
+        if !FileManager.default.fileExists(atPath: path) {
             return;
         }
 //        
@@ -169,9 +171,9 @@ class LinConfigParser:NSObject,NSXMLParserDelegate {
 //        if (path != nil) {
 //            
 //            NSURL* url = [NSURL fileURLWithPath:path];
-        let url = NSURL(fileURLWithPath: path);
+        let url = URL(fileURLWithPath: path);
             
-            let configParser = NSXMLParser(contentsOfURL: url);
+            let configParser = XMLParser(contentsOf: url);
             
             configParser?.delegate = self;
             configParser?.parse();
@@ -209,17 +211,17 @@ class LinConfigParser:NSObject,NSXMLParserDelegate {
     //    self.pluginObjects = [[NSMutableDictionary alloc] initWithCapacity:20];
     
     //- (void)parser:(NSXMLParser*)parser didStartElement:(NSString*)elementName namespaceURI:(NSString*)namespaceURI qualifiedName:(NSString*)qualifiedName attributes:(NSDictionary*)attributeDict
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         
     
     //{
     //    if ([elementName isEqualToString:@"preference"]) {
         if elementName == "preference" {
-            if let name = attributeDict["name"]?.lowercaseString {
+            if let name = attributeDict["name"]?.lowercased() {
                 _settings[name] = attributeDict["value"];
             }
         }else if elementName == "plugin" {
-            _pluginName = attributeDict["name"]?.lowercaseString;
+            _pluginName = attributeDict["name"]?.lowercased();
         }
     //        self.settings[[attributeDict[@"name"] lowercaseString]] = attributeDict[@"value"];
     //    } else if ([elementName isEqualToString:@"plugin"]) { // store feature name to use with correct parameter set
@@ -227,7 +229,7 @@ class LinConfigParser:NSObject,NSXMLParserDelegate {
     //    } else if ((pluginName != nil) && [elementName isEqualToString:@"param"]) {
         else if _pluginName != nil && elementName == "param" {
     //        NSString* paramName = [attributeDict[@"name"] lowercaseString];
-            if let paramName = attributeDict["name"]?.lowercaseString {
+            if let paramName = attributeDict["name"]?.lowercased() {
                 if let value = attributeDict["value"] {
                     if paramName == "ios-package" {
                     
@@ -238,7 +240,7 @@ class LinConfigParser:NSObject,NSXMLParserDelegate {
                             _startPlugins.append(_pluginName!);
                         }
                     }
-                }else if attributeDict["onload"]?.lowercaseString == "true" {
+                }else if attributeDict["onload"]?.lowercased() == "true" {
                     if !_startPlugins.contains(_pluginName!){
                         _startPlugins.append(_pluginName!);
                     }
@@ -269,7 +271,7 @@ class LinConfigParser:NSObject,NSXMLParserDelegate {
     //
     //    - (void)parser:(NSXMLParser*)parser didEndElement:(NSString*)elementName namespaceURI:(NSString*)namespaceURI qualifiedName:(NSString*)qualifiedName
     //{
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "plugin" {
             _pluginName = nil;
         }
@@ -281,7 +283,7 @@ class LinConfigParser:NSObject,NSXMLParserDelegate {
     //
     //    - (void)parser:(NSXMLParser*)parser parseErrorOccurred:(NSError*)parseError
     //{
-    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
+    func parser(_ parser: XMLParser, parseErrorOccurred parseError: NSError) {
         
     }
     //    NSAssert(NO, @"config.xml parse error line %ld col %ld", (long)[parser lineNumber], (long)[parser columnNumber]);

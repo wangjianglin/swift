@@ -9,9 +9,9 @@
 import LinUtil
 
 
-public class TcpPackageResponse{
+open class TcpPackageResponse{
 
-    private var _set:AutoResetEvent = AutoResetEvent();
+    fileprivate var _set:AutoResetEvent = AutoResetEvent();
     var set:AutoResetEvent{
         return _set;
     }
@@ -19,33 +19,33 @@ public class TcpPackageResponse{
         
     }
     
-    private var _error:TcpErrorPackage!
-    public var error:TcpErrorPackage!{
+    fileprivate var _error:TcpErrorPackage!
+    open var error:TcpErrorPackage!{
         return _error;
     }
     
-    public func setError(error:TcpErrorPackage){
+    open func setError(_ error:TcpErrorPackage){
         _error = error;
         _set.set();
     }
     
-    private var pack:TcpPackage!;
+    fileprivate var pack:TcpPackage!;
 
-    func response(pack:TcpPackage){
+    func response(_ pack:TcpPackage){
         self.pack = pack;
         _set.set();
     }
     
-    public var response:TcpPackage!{
+    open var response:TcpPackage!{
         self.waitFofEnd();
         return self.pack;
     }
 
-    public func waitFofEnd()->TcpPackageResponse{
+    open func waitFofEnd()->TcpPackageResponse{
         return self.waitForEnd(120000);
     }
 
-    public func waitForEnd(timeout:Int)->TcpPackageResponse{
+    open func waitForEnd(_ timeout:Int)->TcpPackageResponse{
         _set.waitOne();
         return self;
     }

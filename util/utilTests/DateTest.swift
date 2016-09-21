@@ -25,16 +25,16 @@ class DateTest: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         XCTAssert(true, "Pass")
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
 //        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // superset of OP's format
-        let str = dateFormatter.stringFromDate(NSDate())
+        let str = dateFormatter.string(from: Date())
         print("date:\(str)");
-        print("date:\(NSDate())");
+        print("date:\(Date())");
     }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
         }
     }

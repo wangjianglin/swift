@@ -7,9 +7,12 @@
 //
 import Foundation
 /// init
-public class Json {
-    private var _value:AnyObject
-    public var value:AnyObject{return self._value;}
+open class Json : NSObject {
+
+//    fileprivate var _value:AnyObject
+    fileprivate var _value:Any
+    public var originalValue:Any{return self._value;}
+    public var value:Any{return self._value;}
     public init(isArray:Bool = false){
         if isArray {
             _value = NSMutableArray();//[AnyObject]();
@@ -22,31 +25,65 @@ public class Json {
 //    public init(_ obj:AnyObject) {self._value = obj}
 //    public init(_ json:Json){ self._value = json._value; }
     
-    public init(_ obj:AnyObject) {
-        let cls = NSStringFromClass(obj.classForCoder);
-        if cls == "NSDictionary" {
-            self._value = NSMutableDictionary(dictionary: obj as! NSDictionary);
-        }else if cls == "NSArray" {
-            self._value = NSMutableArray(array: obj as! NSArray);
-        }else{
-            self._value = obj
+//    public  init(_ obj:AnyObject) {
+//        let cls = NSStringFromClass(obj.classForCoder);
+//        if cls == "NSDictionary" {
+//            self._value = NSMutableDictionary(dictionary: obj as! NSDictionary);
+//        }else if cls == "NSArray" {
+//            self._value = NSMutableArray(array: obj as! NSArray);
+//        }else{
+//            self._value = obj
+//        }
+//    }
+    
+    public init(_ obj:Any){
+        switch obj {
+        case let obj as NSDictionary:
+            self._value = NSMutableDictionary(dictionary: obj);
+        case let obj as NSArray:
+            self._value = NSMutableArray(array: obj);
+        default:
+            self._value = obj;
         }
+//        switch obj {
+//        case let obj as AnyObject:
+////            self.init(obj)
+//            let cls = NSStringFromClass(obj.classForCoder);
+//            if cls == "NSDictionary" {
+//                let dic = obj as? NSDictionary;
+////                NSMutableDictionary.init(dictionary: dic);
+//                let mdic = NSMutableDictionary();
+////                for var key in dic.allKeys {
+//////                    mdic[key] = dic[key];
+////                    mdic.setObject(dic[key], forKey: key as! NSCopying);
+////                }
+//                self._value = mdic;
+//                self._value = NSMutableDictionary(dictionary: obj as! NSDictionary);
+//            }else if cls == "NSArray" {
+//                self._value = NSMutableArray(array: obj as! NSArray);
+//            }else{
+//                self._value = obj
+//            }
+//        default:
+//            self._value = obj;
+//        }
     }
-    public init(_ array:[AnyObject]){
+    
+    public init(array:[AnyObject]){
         let arr = NSMutableArray();
         for item in array {
-            arr.addObject(item);
+            arr.add(item);
         }
         self._value = arr;
     }
     
-    public init(_ array:[AnyObject?]){
+    public init(array:[Any?]){
         let arr = NSMutableArray();
         for item in array {
             if let item = item {
-                arr.addObject(item);
+                arr.add(item);
             }else{
-                arr.addObject(NSNull.init());
+                arr.add(NSNull.init());
             }
         }
         self._value = arr;
@@ -59,28 +96,29 @@ public class Json {
     public init(value json:Json){
         self._value = json._value;
     }
-    public var description:String { return toString() }
+    open override var description:String { return toString() }
     
-    public func copyDescription()->String{return toString();}
+    open func copyDescription()->String{return toString();}
 }
 
-extension Json {
-    public func copy()->Json{
-        return Json(string:self.toString());
-    }
-}
+//extension Json {
+//    public override func copy()->Json{
+//        return Json(string:self.toString());
+//    }
+//}
 /// class properties
 extension Json {
     public typealias NSNull = Foundation.NSNull
     public typealias NSError = Foundation.NSError
     public class var null:NSNull { return NSNull() }
+    
     /// constructs JSON object from data
-    public convenience init(data:NSData) {
+    public convenience init(data:Data) {
         var err:NSError?
-        var obj:AnyObject?
+        var obj:Any?
         do {
-            obj = try NSJSONSerialization.JSONObjectWithData(
-                        data, options:[])
+            obj = try JSONSerialization.jsonObject(
+                        with: data, options:[.allowFragments,.mutableLeaves])
         } catch let error as NSError {
             err = error
             obj = nil
@@ -89,22 +127,23 @@ extension Json {
     }
     /// constructs JSON object from string
     public convenience init(string:String) {
-        let enc:NSStringEncoding = NSUTF8StringEncoding
-        self.init(data: string.dataUsingEncoding(enc)!)
+        let enc:String.Encoding = String.Encoding.utf8
+        self.init(data: string.data(using: enc)!)
     }
     /// parses string to the JSON object
     /// same as JSON(string:String)
-    public class func parse(string:String)->Json {
+    public class func parse(_ string:String)->Json {
         return Json(string:string)
     }
     /// constructs JSON object from the content of NSURL
-    public convenience init(nsurl:NSURL) {
-        var enc:NSStringEncoding = NSUTF8StringEncoding
+    public convenience init(nsurl:URL) {
+        var enc:String.Encoding = String.Encoding.utf8
         var err:NSError?
         let str:String?
         do {
-            str = try String(
-                        contentsOfURL:nsurl, usedEncoding:&enc)
+            //str = try String(
+                        //contentsOfURL:nsurl, usedEncoding:&enc)
+            str = try String(contentsOf: nsurl, usedEncoding: &enc)
         } catch let error as NSError {
             err = error
             str = nil
@@ -114,12 +153,12 @@ extension Json {
     }
     /// fetch the JSON string from NSURL and parse it
     /// same as JSON(nsurl:NSURL)
-    public class func fromNSURL(nsurl:NSURL) -> Json {
+    public class func fromNSURL(_ nsurl:URL) -> Json {
         return Json(nsurl:nsurl)
     }
     /// constructs JSON object from the content of URL
     public convenience init(url:String) {
-        if let nsurl = NSURL(string:url) as NSURL? {
+        if let nsurl = URL(string:url) as URL? {
             self.init(nsurl:nsurl)
         } else {
             self.init(NSError(
@@ -131,13 +170,13 @@ extension Json {
         }
     }
     /// fetch the JSON string from URL in the string
-    public class func fromURL(url:String) -> Json {
+    public class func fromURL(_ url:String) -> Json {
         return Json(url:url)
     }
     /// does what JSON.stringify in ES5 does.
     /// when the 2nd argument is set to true it pretty prints
-    public class func stringify(obj:AnyObject, pretty:Bool=false) -> String! {
-        if !NSJSONSerialization.isValidJSONObject(obj) {
+    public class func stringify(_ obj:AnyObject, pretty:Bool=false) -> String! {
+        if !JSONSerialization.isValidJSONObject(obj) {
 //            Json(NSError(
 //                domain:"JSONErrorDomain",
 //                code:422,
@@ -176,12 +215,12 @@ extension Json {
             switch _value {
 //            case let err as NSError:
 //                return self
-            case var ary as [AnyObject]:
+            case var ary as [Any]:
                 
                 if 0 <= idx && idx < ary.count {
 //                    return Json(ary[idx])
                     //ary[idx] = newValue.value;
-                    ary[idx] = newValue.value;
+                    ary[idx] = newValue.originalValue;
                 }else{
                     synchronized(self){
                         var count = ary.count;
@@ -189,8 +228,8 @@ extension Json {
                             ary.append(Json.null);
                             count += 1;
                         }
-                        ary.append(newValue.value);
-                        self._value = ary;
+                        ary.append(newValue.originalValue);
+                        self._value = ary as AnyObject;
                     }
                 }
 //                return Json(NSError(
@@ -206,8 +245,8 @@ extension Json {
     
 //    public func setValue(name:String,value:AnyObject?){
     
-    public func setValue(value:AnyObject?,forName name:String){
-        if var value = value{
+    public func setValue(_ value:Any?,forName name:String){
+        if let value = value{
             if value is Json {
                 self[name] = Json((value as! Json)._value);
             }else{
@@ -218,25 +257,25 @@ extension Json {
         }
     }
     
-    public func setIntValue(value:Int,forName name:String){
+    public func setIntValue(_ value:Int,forName name:String){
         self.setValue(value as NSNumber, forName: name);
     }
     
-    public func setDoubleValue(value:Double,forName name:String){
+    public func setDoubleValue(_ value:Double,forName name:String){
         self.setValue(value as NSNumber,forName:name);
     }
     
-    public func setBoolValue(value:Bool,forName name:String){
+    public func setBoolValue(_ value:Bool,forName name:String){
         self.setValue(value as NSNumber, forName: name);
     }
     
     
-    public func remove(name:String){
+    public func remove(_ name:String){
         switch _value {
 //        case let err as NSError:
 //            return self
         case let dic as NSMutableDictionary://Dictionary<String,AnyObject>:
-            if var _:AnyObject = dic[name] {
+            if var _:Any = dic[name] {
 //                dic.removeValueForKey(name);
                 //dic.removeAtIndex(dic.indexForKey(name));
                 dic[name] = nil;
@@ -247,8 +286,8 @@ extension Json {
         }
     }
     
-    public func getValue(name:String)->AnyObject?{
-        return self[name].value;
+    public func getValue(_ name:String)->Any?{
+        return self[name].originalValue;
     }
     /// access the element like dictionary
     public subscript(key:String)->Json {
@@ -257,7 +296,7 @@ extension Json {
         case _ as NSError:
             return self
         case let dic as NSDictionary://Dictionary<String,AnyObject>:
-            if let val:AnyObject = dic[key] {
+            if let val:Any = dic[key] {
                 return Json(val)
             }
             return Json(NSError(
@@ -291,7 +330,7 @@ extension Json {
     
     
     /// access Json data object
-    public var data:AnyObject? {
+    public var data:Any? {
         return self.isError ? nil : self._value
     }
     /// Gives the type name as string.
@@ -302,7 +341,7 @@ extension Json {
     case is NSError:        return "NSError"
     case is NSNull:         return "NSNull"
     case let o as NSNumber:
-        switch String.fromCString(o.objCType)! {
+        switch String(cString: o.objCType) {
         case "c", "C":              return "Bool"
         case "q", "l", "i", "s":    return "Int"
         case "Q", "L", "I", "S":    return "UInt"
@@ -311,7 +350,7 @@ extension Json {
     case is NSString:               return "String"
     case is NSArray:                return "Array"
     case is NSDictionary:           return "Dictionary"
-    case is NSDate:              return "Date"
+    case is Date:              return "Date"
     default:                        return "NSError"
         }
     }
@@ -331,7 +370,7 @@ extension Json {
     /// check if self is any type of number
     public var isNumber:     Bool {
     if let o = _value as? NSNumber {
-        let t = String.fromCString(o.objCType)!
+        let t = String(cString: o.objCType)
         return  t != "c" && t != "C"
     }
     return false
@@ -358,7 +397,7 @@ extension Json {
     public var asBool:Bool? {
     switch _value {
     case let o as NSNumber:
-        switch String.fromCString(o.objCType)! {
+        switch String(cString: o.objCType) {
         case "c", "C":  return Bool(o.boolValue)
         default:
             return nil
@@ -366,7 +405,7 @@ extension Json {
     default: return nil
         }
     }
-    public func asBool(def:Bool = false)->Bool{
+    public func asBool(_ def:Bool = false)->Bool{
         if let v = self.asBool {
             return v;
         }
@@ -377,16 +416,16 @@ extension Json {
     public var asInt:Int? {
         switch _value {
         case let o as NSNumber:
-            switch String.fromCString(o.objCType)! {
+            switch String(cString: o.objCType) {
             case "c", "C":
                 return nil
             default:
-                return o.longValue;
+                return o.intValue;
             }
         default: return nil
         }
     }
-    public func asInt(def:Int = 0)->Int{
+    public func asInt(_ def:Int = 0)->Int{
         if let v = self.asInt {
             return v;
         }
@@ -396,16 +435,16 @@ extension Json {
     public var asInt64:Int64? {
         switch _value {
         case let o as NSNumber:
-            switch String.fromCString(o.objCType)! {
+            switch String(cString: o.objCType) {
             case "c", "C":
                 return nil
             default:
-                return o.longLongValue
+                return o.int64Value
             }
         default: return nil
         }
     }
-    public func asInt64(def:Int64 = 0)->Int64{
+    public func asInt64(_ def:Int64 = 0)->Int64{
         if let v = self.asInt64 {
             return v;
         }
@@ -416,7 +455,7 @@ extension Json {
     public var asDouble:Double? {
     switch _value {
     case let o as NSNumber:
-        switch String.fromCString(o.objCType)! {
+        switch String(cString: o.objCType) {
         case "c", "C":
             return nil
         default:
@@ -425,7 +464,7 @@ extension Json {
     default: return nil
         }
     }
-    public func asDouble(def:Double = 0)->Double{
+    public func asDouble(_ def:Double = 0)->Double{
         if let v = self.asDouble {
             return v;
         }
@@ -433,8 +472,8 @@ extension Json {
         return def;
     }
     // an alias to asDouble
-    public var asNumber:NSNumber? { return asDouble }
-    public func asNumber(def:NSNumber = 0)->NSNumber{
+    public var asNumber:NSNumber? { return asDouble as NSNumber? }
+    public func asNumber(_ def:NSNumber = 0)->NSNumber{
         if let v = self.asNumber {
             return v;
         }
@@ -449,7 +488,7 @@ extension Json {
     default: return nil
         }
     }
-    public func asString(def:String = "")->String{
+    public func asString(_ def:String = "")->String{
         if let v = self.asString {
             return v;
         }
@@ -462,7 +501,9 @@ extension Json {
     switch _value {
     case let o as NSArray:
         var result = [Json]()
-        for v:AnyObject in o { result.append(Json(v)) }
+        for v:Any in o {
+            result.append(Json(v))
+        }
         return result
     default:
         return nil
@@ -486,7 +527,7 @@ extension Json {
     switch _value {
     case let o as NSDictionary:
         var result = [String:Json]()
-        for (k, v): (AnyObject, AnyObject) in o {
+        for (k, v): (Any, Any) in o {
             result[k as! String] = Json(v)
         }
         return result
@@ -494,21 +535,21 @@ extension Json {
         }
     }
     /// Yields date from string
-    public var asDate:NSDate? {
+    public var asDate:Date? {
         if let dateString = _value as? NSString {
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
             //dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            return dateFormatter.dateFromString(dateString as String)
+            return dateFormatter.date(from: dateString as String)
         }
         return nil
     }
     
-    public func asDateDef()->NSDate{
+    public func asDateDef()->Date{
         if let v = self.asDate {
             return v;
         }
-        let def = NSDate();
+        let def = Date();
 //        _value = def;
         return def;
     }
@@ -521,13 +562,13 @@ extension Json {
 //    }
     
 
-    public func asObject<T:JsonModel>(create:(Json)->T)->T?{
+    public func asObject<T:JsonModel>(_ create:(Json)->T)->T?{
         if self.isError || self.isNull {
             return nil;
         }
         return create(self);
     }
-    public func asObject<T:AnyObject>(def:()->T)->T{
+    public func asObject<T:AnyObject>(_ def: @escaping()->T)->T{
 //        var _value:AnyObject! = self[name];
         switch _value {
         case let o as T:
@@ -565,36 +606,36 @@ extension Json {
     }
 }
 //MARK:SequenceType
-extension Json : SequenceType {
-    public func generate()->AnyGenerator<(AnyObject,Json)> {
+extension Json : Sequence {
+    public func makeIterator()->AnyIterator<(AnyObject,Json)> {
         switch _value {
         case let o as NSArray:
             var i = -1
-            return AnyGenerator {
+            return AnyIterator {
                 i += 1
                 if i == o.count { return nil }
-                return (i, Json(o[i]))
+                return (i as NSNumber, Json(o[i]))
             }
         case let o as NSDictionary:
-            var ks = Array(o.allKeys.reverse())
-            return AnyGenerator {
+            var ks = Array(o.allKeys.reversed())
+            return AnyIterator {
                 if ks.isEmpty { return nil }
                 let k = ks.removeLast() as! String
-                return (k, Json(o.valueForKey(k)!))
+                return (k as NSString, Json(o.value(forKey: k)!))
             }
         default:
-            return AnyGenerator{ nil }
+            return AnyIterator{ nil }
         }
     }
-    public func mutableCopyOfTheObject() -> AnyObject {
-        return _value.mutableCopy()
-    }
+//    public func mutableCopyOfTheObject() -> Any {
+//        return (_value as AnyObject).mutableCopy as Any
+//    }
 }
 //MARK:CustomStringConvertible
-extension Json : CustomStringConvertible {
+extension Json {
     /// stringifies self.
     /// if pretty:true it pretty prints
-    public func toString(pretty:Bool=false)->String {
+    public func toString(_ pretty:Bool=false)->String {
         
         if let str = toStringJson(self){
             return str;
@@ -640,14 +681,16 @@ extension Json : CustomStringConvertible {
 //        }
     }
     
-    private func toStringJson(v:AnyObject)->String?{
+    fileprivate func toStringJson(_ v:Any)->String?{
         ///var dic = Dictionary<String,String>();
         var string:String = "";
         //var dic2 = dic;
         var t:Int = 0;
-        var tmpv: AnyObject = v;
-        if tmpv.respondsToSelector("jsonSkip:") {
-            return nil;
+        var tmpv: Any = v;
+        if let tmpv = tmpv as AnyObject? {
+            if tmpv.responds(to: Selector(("jsonSkip:"))) {
+                return nil;
+            }
         }
         switch v{
         case is NSNull:
@@ -664,7 +707,7 @@ extension Json : CustomStringConvertible {
             }else if json.isDate{
                 t = 4;
             }
-            tmpv = json.value;
+            tmpv = json.originalValue;
         default:
             if v is NSArray{
                 t = 1;
@@ -672,7 +715,7 @@ extension Json : CustomStringConvertible {
                 t = 2;
             }else if v is String{
                 t = 3;
-            }else if v is NSDate{
+            }else if v is Date{
                 t = 4;
             }
         }
@@ -683,9 +726,9 @@ extension Json : CustomStringConvertible {
         case 0:
             string = "\(v)";
         case 4:
-            let dateFormatter = NSDateFormatter();
+            let dateFormatter = DateFormatter();
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss";
-            string = dateFormatter.stringFromDate(v as! NSDate);
+            string = dateFormatter.string(from: v as! Date);
         case 1:
             string = toArrayString(tmpv as! [AnyObject]);
         case 2:
@@ -708,9 +751,9 @@ extension Json : CustomStringConvertible {
         return string;
     }
     
-    private func toArrayString(v:[AnyObject])->String{
+    fileprivate func toArrayString(_ v:[AnyObject])->String{
         var string:String = "[";
-        for (index,item) in v.enumerate(){
+        for (index,item) in v.enumerated(){
             if let s = toStringJson(item){
                 if index != 0 {
                     string += ",";
@@ -724,7 +767,7 @@ extension Json : CustomStringConvertible {
         return string;
     }
     
-    private func toDicString(v:Dictionary<String,AnyObject>)->String{
+    fileprivate func toDicString(_ v:Dictionary<String,AnyObject>)->String{
         
         var string:String = "{";
         var n:Int = 0;
@@ -734,7 +777,7 @@ extension Json : CustomStringConvertible {
                     string += ",";
                 }
                 
-                n++;
+                n += 1;
                 
                 string += "\"\(name)\":"
                 string += s;
@@ -762,9 +805,9 @@ extension Json{
         
     }
     
-    private func toParamsJson(pre:String,v:AnyObject)->Dictionary<String,String>{
+    fileprivate func toParamsJson(_ pre:String,v:AnyObject)->Dictionary<String,String>{
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // superset of OP's format
         //let str = dateFormatter.stringFromDate(NSDate())
         //println("date:\(str)");
@@ -774,10 +817,12 @@ extension Json{
         
         //-1、nil，1、数据，2：字典，4：日期
         var t:Int = 0;
-        var tmpv: AnyObject = v;
+        var tmpv: Any = v;
         
-        if tmpv.respondsToSelector("jsonSkip:") {
-            return dic;
+        if let tmpv = tmpv as AnyObject? {
+            if tmpv.responds(to: Selector(("jsonSkip:"))) {
+                return dic;
+            }
         }
         
         switch v{
@@ -793,7 +838,7 @@ extension Json{
             }else if jsonModel.json.isDate {
                 t = 4;
             }
-            tmpv = jsonModel.json.value;
+            tmpv = jsonModel.json.originalValue;
             break;
         case let json as Json:
             if json.isError{
@@ -805,13 +850,13 @@ extension Json{
             }else if json.isDate {
                 t = 4;
             }
-            tmpv = json.value;
+            tmpv = json.originalValue;
         default:
             if v is NSArray{
                 t = 1;
             }else if v is NSDictionary{
                 t = 2;
-            }else if v is NSDate {
+            }else if v is Date {
                 t = 4;
             }
         }
@@ -822,14 +867,14 @@ extension Json{
         case 0:
             dic[pre] = "\(v)";
         case 4:
-            dic[pre] = dateFormatter.stringFromDate(v as! NSDate);
+            dic[pre] = dateFormatter.string(from: v as! Date);
         case 1:
             let d = toArrayParams(pre,v:tmpv as! [AnyObject]);
             for (name,item) in d{
                 dic[name] = item;
             }
         case 2:
-            if pre.lengthOfBytesUsingEncoding(1) != 0{
+            if pre.lengthOfBytes(using: String.Encoding(rawValue: UInt(1))) != 0{
                 let d = toDicParams("\(pre).", v: tmpv as! Dictionary<String,AnyObject>)
                 for (name,item) in d{
                     dic[name] = item;
@@ -846,9 +891,9 @@ extension Json{
         return dic;
     }
     
-    private func toArrayParams(pre:String,v:[AnyObject])->Dictionary<String,String>{
+    fileprivate func toArrayParams(_ pre:String,v:[AnyObject])->Dictionary<String,String>{
         var dic = Dictionary<String,String>();
-        for (index,item) in v.enumerate(){
+        for (index,item) in v.enumerated(){
             let d = toParamsJson("\(pre)[\(index)]",v:item);
             for (name,item) in d{
                 dic[name] = item;
@@ -857,7 +902,7 @@ extension Json{
         return dic;
     }
     
-    private func toDicParams(pre:String,v:Dictionary<String,AnyObject>)->Dictionary<String,String>{
+    fileprivate func toDicParams(_ pre:String,v:Dictionary<String,AnyObject>)->Dictionary<String,String>{
         
         var dic = Dictionary<String,String>();
         for (name,item) in v{

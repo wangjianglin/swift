@@ -32,7 +32,7 @@ public protocol HttpDNS{
 /*
  * 获取一个IP
  */
-    func getIpByHost(host:String)->String!;
+    func getIpByHost(_ host:String)->String!;
 //
 //
 ///*
@@ -41,7 +41,7 @@ public protocol HttpDNS{
 // */
 //-(NSArray*)getIpsByHost:(NSString*)host;
     
-    func setDelegateForDegradationFilter(action:((hostName:String)->Bool));
+    func setDelegateForDegradationFilter(_ action:@escaping((_ hostName:String)->Bool));
     
-    func setPreResolveHosts(hosts:[String]);
+    func setPreResolveHosts(_ hosts:[String]);
 }

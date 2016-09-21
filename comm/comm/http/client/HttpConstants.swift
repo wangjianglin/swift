@@ -9,30 +9,30 @@
 import Foundation
 
 
-public class HttpConstants{
+open class HttpConstants{
     
-    public class var HTTP_JSON_PARAM:String {
+    open class var HTTP_JSON_PARAM:String {
         return "__json_param__";
     }
     
-    public class var HTTP_REQUEST_CODING:String {
+    open class var HTTP_REQUEST_CODING:String {
         return "__request_coding__";
     }
     
     
-    public class var HTTP_COMM_PROTOCOL:String{
+    open class var HTTP_COMM_PROTOCOL:String{
         return "__http_comm_protocol__";
     }
     
-    public class var HTTP_COMM_PROTOCOL_VERSION:String{
+    open class var HTTP_COMM_PROTOCOL_VERSION:String{
         return "/__http_comm_protocol__/__version__";
     }
     
-    public class var HTTP_VERSION:String {
+    open class var HTTP_VERSION:String {
         return "0.1";
     }
     
-    public class var HTTP_COMM_PROTOCOL_DEBUG:String {
+    open class var HTTP_COMM_PROTOCOL_DEBUG:String {
         return "__http_comm_protocol_debug__"
     }
 }

@@ -22,11 +22,11 @@ protocol AbstractServerSocketImpl{
 }
 
 
-public class ServerSocket{
+open class ServerSocket{
     
-    private var impl:AbstractServerSocketImpl
+    fileprivate var impl:AbstractServerSocketImpl
     
-    public init(port:Int,type:SocketType = SocketType.CFNetwork){
+    public init(port:Int,type:SocketType = SocketType.cfNetwork){
 
 //        switch(type){
 //        case .BSD:
@@ -42,15 +42,15 @@ public class ServerSocket{
 //        impl.listener();
 //    }
     
-    public func listener()->Bool{
+    open func listener()->Bool{
         return impl.listener();
     }
     
-    public func accept()->Socket!{
+    open func accept()->Socket!{
         return impl.accept();
     }
     
-    public func close(){
+    open func close(){
         impl.close();
     }
 }

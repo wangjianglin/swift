@@ -9,12 +9,12 @@
 import Foundation
 import LinUtil
 
-public class HttpCommunicateResult {
+open class HttpCommunicateResult {
     
-    private var _r:AnyObject! = nil;
+    fileprivate var _r:AnyObject! = nil;
 //    internal var set:AutoResetEvent?;
-    private var _success = false;
-    private var _set:AutoResetEvent;
+    fileprivate var _success = false;
+    fileprivate var _set:AutoResetEvent;
     
     internal init(){
         self._set = AutoResetEvent();
@@ -24,39 +24,39 @@ public class HttpCommunicateResult {
         return _set;
     }
     
-    public func abort(){
+    open func abort(){
     
     }
     
-    public func waitForEnd(){
+    open func waitForEnd(){
 //        if let set = self.set{
             _set.waitOne();
 //        }
     }
     
     
-    public var success:Bool{
+    open var success:Bool{
         self.waitForEnd();
         return self._success;
     }
-    internal func setResult(result:AnyObject!,success:Bool){
+    internal func setResult(_ result:AnyObject!,success:Bool){
         self._r = result;
         self._success = success;
     }
     
-    public var result:AnyObject!{
+    open var result:AnyObject!{
         self.waitForEnd();
         return _r;
     }
     
-    private var _error:HttpError!;
+    fileprivate var _error:HttpError!;
     
-    public var error:HttpError!{
+    open var error:HttpError!{
         self.waitForEnd();
         return _error;
     }
     
-    internal func setError(error:HttpError?){
+    internal func setError(_ error:HttpError?){
         self._error = error;
         self._success = false;
     }

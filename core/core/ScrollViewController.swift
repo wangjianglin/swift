@@ -8,23 +8,23 @@
 
 import UIKit
 
-public class ScrollViewController : UIViewController{
+open class ScrollViewController : UIViewController{
     
-    private var scrollView:ScrollView!;
+    fileprivate var scrollView:ScrollView!;
     
-    public override func loadView() {
+    open override func loadView() {
         self.scrollView = ScrollView();
         self.scrollView.showsVerticalScrollIndicator = true;
         self.scrollView.showsHorizontalScrollIndicator = false;
         self.view = scrollView;
     }
     
-    public override func viewDidLayoutSubviews() {
+    open override func viewDidLayoutSubviews() {
         
         var rect = scrollView.size();
         
         var navHeight:CGFloat = 0;
-        if !UIApplication.sharedApplication().statusBarHidden {
+        if !UIApplication.shared.isStatusBarHidden {
             navHeight += 20;
         }
         if let height = self.navigationController?.navigationBar.bounds.height {
@@ -36,15 +36,15 @@ public class ScrollViewController : UIViewController{
         
         rect.size.width = self.view.bounds.width;
         
-        scrollView.contentSize = CGSizeMake(320, self.view.bounds.height - 63);
+        scrollView.contentSize = CGSize(width: 320, height: self.view.bounds.height - 63);
         
     }
     
-    private class ScrollView : IOS7ScrollView{
+    fileprivate class ScrollView : IOS7ScrollView{
         
-        private var views = [UIView]();
+        fileprivate var views = [UIView]();
         
-        override func addSubview(view: UIView) {
+        override func addSubview(_ view: UIView) {
             super.addSubview(view);
             views.append(view);
         }
@@ -60,7 +60,7 @@ public class ScrollViewController : UIViewController{
             }
             for n in 0 ..< self.views.count - scount {
                 let view = self.views[n];
-                let srect = view.convertRect(view.bounds, toView: self);
+                let srect = view.convert(view.bounds, to: self);
                 
                 if rect == nil {
                     rect = srect;
@@ -69,13 +69,13 @@ public class ScrollViewController : UIViewController{
                 }
             }
             if rect == nil {
-                return CGRectMake(0, 0, 0, 0);
+                return CGRect(x: 0, y: 0, width: 0, height: 0);
             }
             return rect;
         }
         
-        private func mergeRect(rect1:CGRect,rect2:CGRect)->CGRect{
-            var result = CGRectMake(0, 0, 0, 0);
+        fileprivate func mergeRect(_ rect1:CGRect,rect2:CGRect)->CGRect{
+            var result = CGRect(x: 0, y: 0, width: 0, height: 0);
             result.origin.x = rect1.origin.x > rect2.origin.x ? rect2.origin.x : rect1.origin.x;
             
             result.origin.y = rect1.origin.y > rect2.origin.y ? rect2.origin.y : rect1.origin.y;

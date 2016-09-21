@@ -9,33 +9,38 @@
 import UIKit
 import LinUtil
 
-public class AlertView{
+open class AlertView{
     
-    public class func show(titie:String,message:String,buttonTitle:String){
+    open class func show(_ titie:String,message:String,buttonTitle:String){
         UIAlertView(title: titie, message: message, delegate: nil, cancelButtonTitle: buttonTitle).show();
     }
     
-    public class func show(message:String){
+    open class func show(_ message:String){
         UIAlertView(title: "", message: message, delegate: nil, cancelButtonTitle: "确定").show();
     }
 }
 
 public extension UIAlertView{
     
-    private var delegateAction:__LinCore_UIAlertViewDelegateImpl{
-        struct YSignal{
-            static var predicate:dispatch_once_t = 0;
-            static var install:__LinCore_UIAlertViewDelegateImpl?;
-        }
+    struct YSignal{
+        fileprivate static var install:__LinCore_UIAlertViewDelegateImpl?;
+    }
+ 
+    fileprivate static var __once:() = {
+    
+        YSignal.install = __LinCore_UIAlertViewDelegateImpl();
+    }()
+    
+    fileprivate var delegateAction:__LinCore_UIAlertViewDelegateImpl{
         
-        dispatch_once(&YSignal.predicate) {
-            YSignal.install = __LinCore_UIAlertViewDelegateImpl();
-            YSignal.install?.withObjectSameLifecycle = self;
-        }
+        _ = UIAlertView.__once;
+        
+        YSignal.install?.withObjectSameLifecycle = self;
+        
         self.delegate = YSignal.install;
         return YSignal.install!;
     }
-    public var alertViewCancelAction:((alertView:UIAlertView)->())?{
+    public var alertViewCancelAction:((_ alertView:UIAlertView)->())?{
         set{
             delegateAction._alertViewCancelAction = newValue;
         }
@@ -43,7 +48,7 @@ public extension UIAlertView{
             return delegateAction._alertViewCancelAction;
         }
     }
-    public var clickedButtonAtIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?{
+    public var clickedButtonAtIndexAction:((_ alertView:UIAlertView,_ buttonIndex:Int)->())?{
         set{
             delegateAction._clickedButtonAtIndexAction = newValue;
         }
@@ -51,7 +56,7 @@ public extension UIAlertView{
             return delegateAction._clickedButtonAtIndexAction;
         }
     }
-    public var willPresentAlertViewAction:((alertView:UIAlertView)->())?{
+    public var willPresentAlertViewAction:((_ alertView:UIAlertView)->())?{
         set{
             delegateAction._willPresentAlertViewAction = newValue;
         }
@@ -59,7 +64,7 @@ public extension UIAlertView{
             return delegateAction._willPresentAlertViewAction;
         }
     }
-    public var didPresentAlertViewAction:((alertView:UIAlertView)->())?{
+    public var didPresentAlertViewAction:((_ alertView:UIAlertView)->())?{
         set{
             delegateAction._didPresentAlertViewAction = newValue;
         }
@@ -67,7 +72,7 @@ public extension UIAlertView{
             return delegateAction._didPresentAlertViewAction;
         }
     }
-    public var willDismissWithButtonIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?{
+    public var willDismissWithButtonIndexAction:((_ alertView:UIAlertView,_ buttonIndex:Int)->())?{
         set{
             delegateAction._willDismissWithButtonIndexAction = newValue;
         }
@@ -75,7 +80,7 @@ public extension UIAlertView{
             return delegateAction._willDismissWithButtonIndexAction;
         }
     }
-    public var didDismissWithButtonIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?{
+    public var didDismissWithButtonIndexAction:((_ alertView:UIAlertView,_ buttonIndex:Int)->())?{
         set{
             delegateAction._didDismissWithButtonIndexAction = newValue;
         }
@@ -83,7 +88,7 @@ public extension UIAlertView{
             return delegateAction._didDismissWithButtonIndexAction;
         }
     }
-    public var alertViewShouldEnableFirstOtherButtonAction:((alertView:UIAlertView)->Bool)?{
+    public var alertViewShouldEnableFirstOtherButtonAction:((_ alertView:UIAlertView)->Bool)?{
         set{
             delegateAction._alertViewShouldEnableFirstOtherButtonAction = newValue;
         }
@@ -94,60 +99,60 @@ public extension UIAlertView{
 }
 
 
-private class __LinCore_UIAlertViewDelegateImpl : DelegateAction,UIAlertViewDelegate{
-    private var _alertViewCancelAction:((alertView:UIAlertView)->())?;
-    private var _clickedButtonAtIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?;
-    private var _willPresentAlertViewAction:((alertView:UIAlertView)->())?;
-    private var _didPresentAlertViewAction:((alertView:UIAlertView)->())?;
-    private var _willDismissWithButtonIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?;
-    private var _didDismissWithButtonIndexAction:((alertView:UIAlertView,buttonIndex:Int)->())?;
-    private var _alertViewShouldEnableFirstOtherButtonAction:((alertView:UIAlertView)->Bool)?;
+fileprivate class __LinCore_UIAlertViewDelegateImpl : DelegateAction,UIAlertViewDelegate{
+    fileprivate var _alertViewCancelAction:((_ alertView:UIAlertView)->())?;
+    fileprivate var _clickedButtonAtIndexAction:((_ alertView:UIAlertView,_ buttonIndex:Int)->())?;
+    fileprivate var _willPresentAlertViewAction:((_ alertView:UIAlertView)->())?;
+    fileprivate var _didPresentAlertViewAction:((_ alertView:UIAlertView)->())?;
+    fileprivate var _willDismissWithButtonIndexAction:((_ alertView:UIAlertView,_ buttonIndex:Int)->())?;
+    fileprivate var _didDismissWithButtonIndexAction:((_ alertView:UIAlertView,_ buttonIndex:Int)->())?;
+    fileprivate var _alertViewShouldEnableFirstOtherButtonAction:((_ alertView:UIAlertView)->Bool)?;
     
-    private override init() {
+    fileprivate override init() {
         super.init();
     }
     
-    @objc private func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+    @objc fileprivate func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int){
         if let clickedButtonAtIndexAction = self._clickedButtonAtIndexAction {
-            clickedButtonAtIndexAction(alertView: alertView, buttonIndex: buttonIndex);
+            clickedButtonAtIndexAction(alertView, buttonIndex);
         }
     }
     
     // Called when we cancel a view (eg. the user clicks the Home button). This is not called when the user clicks the cancel button.
     // If not defined in the delegate, we simulate a click in the cancel button
-    @objc private func alertViewCancel(alertView: UIAlertView){
+    @objc fileprivate func alertViewCancel(_ alertView: UIAlertView){
         if let alertViewCancelAction = self._alertViewCancelAction {
-            alertViewCancelAction(alertView: alertView);
+            alertViewCancelAction(alertView);
         }
     }
     
-    @objc private func willPresentAlertView(alertView: UIAlertView){
+    @objc fileprivate func willPresent(_ alertView: UIAlertView){
         if let willPresentAlertViewAction = self._willPresentAlertViewAction {
-            willPresentAlertViewAction(alertView: alertView);
+            willPresentAlertViewAction(alertView);
         }
     }
     
-    @objc private func didPresentAlertView(alertView: UIAlertView){
+    @objc fileprivate func didPresent(_ alertView: UIAlertView){
         if let didPresentAlertViewAction = self._didPresentAlertViewAction {
-            didPresentAlertViewAction(alertView: alertView);
+            didPresentAlertViewAction(alertView);
         }
     }
     
-    @objc private func alertView(alertView: UIAlertView, willDismissWithButtonIndex buttonIndex: Int){
+    @objc fileprivate func alertView(_ alertView: UIAlertView, willDismissWithButtonIndex buttonIndex: Int){
         if let willDismissWithButtonIndexAction = self._willDismissWithButtonIndexAction {
-            willDismissWithButtonIndexAction(alertView: alertView, buttonIndex: buttonIndex);
+            willDismissWithButtonIndexAction(alertView, buttonIndex);
         }
     }
     
-    @objc private func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int){
+    @objc fileprivate func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int){
         if let didDismissWithButtonIndexAction = self._didDismissWithButtonIndexAction{
-            didDismissWithButtonIndexAction(alertView: alertView, buttonIndex: buttonIndex);
+            didDismissWithButtonIndexAction(alertView, buttonIndex);
         }
     }
     
-    @objc private func alertViewShouldEnableFirstOtherButton(alertView: UIAlertView) -> Bool{
+    @objc fileprivate func alertViewShouldEnableFirstOtherButton(_ alertView: UIAlertView) -> Bool{
         if let alertViewShouldEnableFirstOtherButtonAction = self._alertViewShouldEnableFirstOtherButtonAction {
-            return alertViewShouldEnableFirstOtherButtonAction(alertView: alertView);
+            return alertViewShouldEnableFirstOtherButtonAction(alertView);
         }
         return true;
     }

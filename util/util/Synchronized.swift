@@ -9,13 +9,13 @@
 import Foundation
 
 
-public func synchronized<T>(object: AnyObject, closure: () -> T) -> T {
+public func synchronized<T>(_ object: AnyObject, closure: @escaping () -> T) -> T {
     var result: Any? = nil
     objc_synchronized(object) {
         result = closure()
     }
     return result as! T
 }
-public func synchronized(object: AnyObject, closure: () -> Void) {
+public func synchronized(_ object: AnyObject, closure: @escaping () -> Void) {
     objc_synchronized(object, closure)
 }

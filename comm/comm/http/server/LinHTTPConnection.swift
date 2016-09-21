@@ -11,7 +11,7 @@ import Foundation
 
 extension HTTPConnection{
     
-    private class var lock:NSLock{
+    fileprivate class var lock:NSLock{
         struct YRSingleton{
             static var lock:NSLock = NSLock();
         }
@@ -19,7 +19,7 @@ extension HTTPConnection{
     }
     
     struct actions{
-        static var instance = Dictionary<String, ((connection:HTTPConnection,method:String,path:String)->protocol<NSObjectProtocol, HTTPResponse>!)>();
+        static var instance = Dictionary<String, ((_ connection:HTTPConnection,_ method:String,_ path:String)->(NSObjectProtocol & HTTPResponse)?)>();
     }
     
 //    private class var pathsAction:Dictionary<String,((connection:HTTPConnection,method:String,path:String)->protocol<NSObjectProtocol, HTTPResponse>!)>{
@@ -35,7 +35,7 @@ extension HTTPConnection{
 //        return YRSingleton.instance!;
 //    }
     
-    public class func register(method:HttpMethod!,path:String,action:((connection:HTTPConnection,method:String,path:String)->protocol<NSObjectProtocol, HTTPResponse>!)){
+    public class func register(_ method:HttpMethod!,path:String,action:@escaping ((_ connection:HTTPConnection,_ method:String,_ path:String)->(NSObjectProtocol & HTTPResponse)?)){
         lock.lock();
 //        var tmp = LinHTTPConnection.pathsAction;
         if(method == nil){
@@ -48,29 +48,29 @@ extension HTTPConnection{
 //            YRSingleton.instance = tmp;
 
         }else{
-            actions.instance[method.rawValue.uppercaseString + ":" + path] = action;
+            actions.instance[method.rawValue.uppercased() + ":" + path] = action;
         }
         lock.unlock();
     }
     
-    public class func remove(method:HttpMethod!,path:String){
+    public class func remove(_ method:HttpMethod!,path:String){
         lock.lock();
 //        var tmp = LinHTTPConnection.pathsAction;
         if(method == nil){
-            actions.instance.removeValueForKey("GET:" + path);
-            actions.instance.removeValueForKey("POST:" + path);
+            actions.instance.removeValue(forKey: "GET:" + path);
+            actions.instance.removeValue(forKey: "POST:" + path);
 //            tmp.removeValueForKey("HEAD:" + path);
         }else{
-            actions.instance.removeValueForKey(method.rawValue.uppercaseString + ":" + path);
+            actions.instance.removeValue(forKey: method.rawValue.uppercased() + ":" + path);
         }
         lock.unlock();
     }
 }
 
-public class LinHTTPConnection : HTTPConnection{
+open class LinHTTPConnection : HTTPConnection{
     
 //    override public func httpResponseForMethod(method: String!, URI path: String!) -> protocol<NSObjectProtocol, HTTPResponse>! {
-    public override func httpResponseForMethod(method:String, URI path:String)->HTTPResponse? {
+    open override func httpResponseForMethod(_ method:String, URI path:String)->HTTPResponse? {
 //    <#code#>
 //    }
 //        <#code#>
@@ -89,8 +89,8 @@ public class LinHTTPConnection : HTTPConnection{
 //        print("body\(super.request.url().path)");
 //        
 //        print(method+":"+super.request.url().path!);
-        if let action = actions.instance[method+":"+super.request.url!.path!] {
-            return action(connection: self,method: method,path: path);
+        if let action = actions.instance[method+":"+super.request.url!.path] {
+            return action(self,method,path);
         }
         return super.httpResponseForMethod(method, URI: path);
     }

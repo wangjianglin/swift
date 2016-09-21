@@ -13,9 +13,9 @@ import LinUtil
 extension UIGestureRecognizer {
     
     convenience
-    public init(action:((AnyObject)->())){
-        var delegateAction = EventDelegateAction(action: action);
-        self.init(target:delegateAction,action:"action:");
+    public init(action:@escaping ((AnyObject)->())){
+        let delegateAction = EventDelegateAction(action: action);
+        self.init(target:delegateAction,action:#selector(EventDelegateAction.action(_:)));
         delegateAction.withObjectSameLifecycle = self;
     }
 }

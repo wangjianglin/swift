@@ -8,16 +8,16 @@
 
 import UIKit
 
-public class FormButtonDescriptor:FormRowDescriptor{
+open class FormButtonDescriptor:FormRowDescriptor{
     
     public init(title:String){
         super.init(title: title, name: "", value: nil);
     }
     
-    public override func formBaseCellClassFromRowDescriptor() -> FormBaseCell.Type! {
+    open override func formBaseCellClassFromRowDescriptor() -> FormBaseCell.Type! {
         
         return FormButtonCell.self;
     }
     
-    public var click:(()->())!;
+    open var click:(()->())!;
 }

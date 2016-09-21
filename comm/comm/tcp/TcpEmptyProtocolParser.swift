@@ -9,23 +9,23 @@
 import Foundation
 
 
-public class TcpEmptyPackage : TcpResponsePackage{
+open class TcpEmptyPackage : TcpResponsePackage{
     
-    override public class var type:UInt8{
+    override open class var type:UInt8{
         return 255;
     }
 }
 
-public class TcpEmptyProtocolParser : TcpAbstractProtocolParser{
+open class TcpEmptyProtocolParser : TcpAbstractProtocolParser{
     required public init(){
         
     }
     
-    public override func parse()->TcpPackage!{
+    open override func parse()->TcpPackage!{
         return TcpEmptyPackage();
     }
     
-    public override class
+    open override class
     var type:UInt8{
         return 255;
     }

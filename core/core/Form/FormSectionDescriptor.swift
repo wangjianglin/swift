@@ -8,24 +8,24 @@
 
 import UIKit
 
-public class FormSectionDescriptor: NSObject {
+open class FormSectionDescriptor: NSObject {
 
     /// MARK: Properties
     
-    public var headerTitle: String!
-    public var footerTitle: String!
+    open var headerTitle: String!
+    open var footerTitle: String!
     
-    public var rows: [FormRowDescriptor] = []
+    open var rows: [FormRowDescriptor] = []
     
     /// MARK: Public interface
     
-    public func addRow(row: FormRowDescriptor) {
+    open func addRow(_ row: FormRowDescriptor) {
         rows.append(row)
     }
     
-    public func removeRow(row: FormRowDescriptor) {
-        if let index = rows.indexOf(row) {
-            rows.removeAtIndex(index)
+    open func removeRow(_ row: FormRowDescriptor) {
+        if let index = rows.index(of: row) {
+            rows.remove(at: index)
         }
     }
 }

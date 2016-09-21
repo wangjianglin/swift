@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FormSwitchCell: FormBaseCell {
+open class FormSwitchCell: FormBaseCell {
 
     /// MARK: Properties
     
@@ -16,31 +16,31 @@ public class FormSwitchCell: FormBaseCell {
     
     /// MARK: FormBaseCell
     
-    override public func configure() {
+    override open func configure() {
         super.configure()
-        selectionStyle = .None
+        selectionStyle = .none
         accessoryView = switchView
-        switchView.addTarget(self, action: "valueChanged:", forControlEvents: .ValueChanged)
+        switchView.addTarget(self, action: #selector(FormSwitchCell.valueChanged(_:)), for: .valueChanged)
         //switchView.enabled = false;
     }
     
-    override public func update() {
+    override open func update() {
         super.update()
         textLabel?.text = rowDescriptor.title
-        switchView.enabled = rowDescriptor.enabled;
+        switchView.isEnabled = rowDescriptor.enabled;
         
         if rowDescriptor.value != nil {
-            switchView.on = rowDescriptor.value as! Bool
+            switchView.isOn = rowDescriptor.value as! Bool
         }
         else {
-            switchView.on = false
+            switchView.isOn = false
         }
     }
     
     /// MARK: Actions
     
     func valueChanged(_: UISwitch) {
-        rowDescriptor.value = switchView.on as Bool
+        rowDescriptor.value = switchView.isOn as Bool
     }
 }
 

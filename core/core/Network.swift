@@ -10,24 +10,25 @@ import Foundation
 import SystemConfiguration
 
 
-public class Network{
+open class Network{
     
-    private class func connectedToNetwork()->Bool{
+    fileprivate class func connectedToNetwork()->Bool{
         
 //    + (BOOL) connectedToNetwork
 //    // ----------------------------------------------------------------------------------------------------------
 //    {
 //        sockaddr_in 
-//        var zeroAddress:sockaddr_in;
-        let zeroAddressPrt:UnsafeMutablePointer<sockaddr_in> = UnsafeMutablePointer<sockaddr_in>.alloc(1);
+        //        var zeroAddress:sockaddr_in;
+//        let zeroAddressPrt:UnsafeMutablePointer<sockaddr_in> = UnsafeMutablePointer<sockaddr_in>(allocatingCapacity: 1);
+        let zeroAddressPrt:UnsafeMutablePointer<sockaddr_in> = UnsafeMutablePointer<sockaddr_in>.allocate(capacity: 1);
         
 //        bzero(<#T##UnsafeMutablePointer<Void>#>, <#T##Int#>)
-        bzero(zeroAddressPrt, sizeof(sockaddr_in));
+        bzero(zeroAddressPrt, MemoryLayout<sockaddr_in>.size);
 //    struct sockaddr_in zeroAddress;
 //    bzero(&zeroAddress, sizeof(zeroAddress));
 //    zeroAddress.sin_len = sizeof(zeroAddress);
         var zeroAddress:sockaddr_in = zeroAddressPrt.move();
-        zeroAddress.sin_len = __uint8_t(sizeof(sockaddr_in));
+        zeroAddress.sin_len = __uint8_t(MemoryLayout<sockaddr_in>.size);
         
 //    zeroAddress.sin_family = AF_INET;
         zeroAddress.sin_family = __uint8_t(AF_INET);
@@ -35,8 +36,17 @@ public class Network{
 //    // 用0.0.0.0来判断本机网络状态
 //    SCNetworkReachabilityRef defaultRouteReachability =
 //    SCNetworkReachabilityCreateWithAddress(NULL, (struct
-//    sockaddr*)&zeroAddress);
-        var defaultRouteReachability:SCNetworkReachabilityRef = SCNetworkReachabilityCreateWithAddress(nil,UnsafePointer(zeroAddressPrt))!;
+        //    sockaddr*)&zeroAddress);
+//        var _:SCNetworkReachability = SCNetworkReachabilityCreateWithAddress(nil,UnsafePointer(zeroAddressPrt))!;
+
+        var defaultRouteReachability = zeroAddressPrt.withMemoryRebound(to: sockaddr.self, capacity: 1) { (ptr) -> SCNetworkReachability in
+            return SCNetworkReachabilityCreateWithAddress(nil,ptr)!;
+        }
+        
+//        var _:SCNetworkReachability = SCNetworkReachabilityCreateWithAddress(nil,UnsafePointer.init(zeroAddressPrt))!;
+//        defaultRouteReachability
+        
+        
 //    SCNetworkReachabilityFlags flags;
 //    BOOL didRetrieveFlags
 //    = SCNetworkReachabilityGetFlags(defaultRouteReachability,&flags);

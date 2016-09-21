@@ -8,31 +8,31 @@
 
 import UIKit
 
-public class FormSegueCell:FormBaseCell{
+open class FormSegueCell:FormBaseCell{
     let titleLabel = UILabel()
     let textField = UITextField()
     
-    private var customConstraints: [AnyObject]!
+    fileprivate var customConstraints: [AnyObject]!
     
     /// MARK: FormBaseCell
     
-    override public func configure() {
+    override open func configure() {
         super.configure()
-        accessoryType = .DisclosureIndicator
-        selectionStyle = .None
+        accessoryType = .disclosureIndicator
+        selectionStyle = .none
         
         //self.titleLabel.text = self.rowDescriptor.title;
     }
     
-    override public func update() {
+    override open func update() {
         super.update()
         
         titleLabel.text = rowDescriptor.title
         //self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0);
     }
 
-    public override class func formViewController(formViewController: FormViewController, didSelectRow: FormBaseCell) {
+    open override class func formViewController(_ formViewController: FormViewController, didSelectRow: FormBaseCell) {
         let segue:FormSegueDescriptor = didSelectRow.rowDescriptor as! FormSegueDescriptor;
-        formViewController.performSegueWithIdentifier(segue.segue, sender: nil);
+        formViewController.performSegue(withIdentifier: segue.segue, sender: nil);
     }
 }

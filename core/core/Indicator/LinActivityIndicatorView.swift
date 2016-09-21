@@ -10,12 +10,12 @@ import UIKit
 
 
 //public class LinActivityIndicatorView : UIActivityIndicatorView{
-public class LinActivityIndicatorView : UIView{
+open class LinActivityIndicatorView : UIView{
     
-    private var indicator:UIActivityIndicatorView!;
+    fileprivate var indicator:UIActivityIndicatorView!;
     
-    private var _label:UILabel!
-    public var label:UILabel{
+    fileprivate var _label:UILabel!
+    open var label:UILabel{
         return _label;
     }
     // sizes the view according to the style
@@ -31,18 +31,18 @@ public class LinActivityIndicatorView : UIView{
 
     public init(){
         //indicator = UIActivityIndicatorView();
-        super.init(frame:CGRectMake(0, 0, 0, 0));
-        self.userInteractionEnabled = true;
+        super.init(frame:CGRect(x: 0, y: 0, width: 0, height: 0));
+        self.isUserInteractionEnabled = true;
         
         indicator = UIActivityIndicatorView();
         
         indicator.startAnimating();
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge;
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge;
         
         _label = UILabel();
-        _label.textAlignment = NSTextAlignment.Center;
+        _label.textAlignment = NSTextAlignment.center;
         _label.font = UIFont(name: "STHeitiSC-Light", size: 12.0);
-        _label.textColor = UIColor.grayColor();
+        _label.textColor = UIColor.gray;
 //        super.init(frame: frame);
         //self.backgroundColor = UIColor.redColor();
         self.addSubview(indicator);
@@ -52,9 +52,9 @@ public class LinActivityIndicatorView : UIView{
         
         _label.translatesAutoresizingMaskIntoConstraints = false;
         
-        self.addConstraints([NSLayoutConstraint(item: _label, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self ,attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: _label, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: _label, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 25),
+        self.addConstraints([NSLayoutConstraint(item: _label, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self ,attribute: NSLayoutAttribute.left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: _label, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.right, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: _label, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 25),
             //            NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 25)
             ]);
     }
@@ -62,43 +62,43 @@ public class LinActivityIndicatorView : UIView{
         fatalError("init(coder:) has not been implemented")
     }
     // default is UIActivityIndicatorViewStyleWhite
-    public var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
+    open var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
         get{return indicator.activityIndicatorViewStyle;}
         set{indicator.activityIndicatorViewStyle = newValue;}
     }
     // default is YES. calls -setHidden when animating gets set to NO
-    public var hidesWhenStopped: Bool{
+    open var hidesWhenStopped: Bool{
         get{return indicator.hidesWhenStopped;}
         set{indicator.hidesWhenStopped = newValue;}
     }
     
-    @available(iOS, introduced=5.0)
-    public var color: UIColor!{
+    @available(iOS, introduced: 5.0)
+    open var color: UIColor!{
         get{return indicator.color;}
         set{indicator.color = newValue;}
     }
     
-    public func startAnimating(){
+    open func startAnimating(){
         indicator.startAnimating();
     }
-    public func stopAnimating(){
+    open func stopAnimating(){
         indicator.stopAnimating();
     }
-    public func isAnimating() -> Bool{
-        return indicator.isAnimating();
+    open func isAnimating() -> Bool{
+        return indicator.isAnimating;
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
        
 
         if let rect = self.superview?.bounds {
             self.frame = rect;
-            indicator.center = CGPointMake(rect.width*0.5, rect.height*0.5);
+            indicator.center = CGPoint(x: rect.width*0.5, y: rect.height*0.5);
         }
         super.layoutSubviews();
     }
     
-    public func remove(){
+    open func remove(){
         indicator.stopAnimating();
         self.removeFromSuperview();
     }

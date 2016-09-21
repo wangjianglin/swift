@@ -9,7 +9,7 @@
 import Foundation
 
 public enum SocketType{
-    case CFNetwork
-    case BSD
-    case NSStream
+    case cfNetwork
+    case bsd
+    case nsStream
 }

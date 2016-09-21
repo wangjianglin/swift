@@ -9,17 +9,17 @@
 import Foundation
 
 
-public class StandardHttpRequestHandle:HttpRequestHandle{
-    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
+open class StandardHttpRequestHandle:HttpRequestHandle{
+    open func getParams(_ request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
         
         request.requestSerializer.headers[HTTP_COMM_PROTOCOL] = "";
 //        if isDebug {
             request.requestSerializer.headers[HTTP_COMM_PROTOCOL_DEBUG] = "";
 //        }
-        return package.json.toParams();
+        return package.json.toParams() as Dictionary<String, AnyObject>?;
     }
     
-    public func response(package:HttpPackage,response:AnyObject!,result:((obj:AnyObject!,warning:[HttpError])->()),fault:((error:HttpError)->())){
+    open func response(_ package:HttpPackage,response:AnyObject!,result:((_ obj:AnyObject?,_ warning:[HttpError])->()),fault:((_ error:HttpError)->())){
         
     }
 }

@@ -9,6 +9,26 @@
 import Foundation
 import LinUtil
 import Dispatch
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 
 // Log levels: off, error, warn, info, verbose
@@ -99,13 +119,13 @@ private let HTTPConnectionDidDieNotification = "HTTPConnectionDidDie";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //@implementation HTTPConfig
-public class HTTPConfig{
+open class HTTPConfig{
 //@synthesize server;
 //@synthesize documentRoot;
 //@synthesize queue;
-    public var server:HTTPServer;
-    public var documentRoot:String;
-    public var queue:dispatch_queue_t?;
+    open var server:HTTPServer;
+    open var documentRoot:String;
+    open var queue:DispatchQueue?;
 
 //- (id)initWithServer:(HTTPServer *)aServer documentRoot:(NSString *)aDocumentRoot
 //{
@@ -126,14 +146,14 @@ public class HTTPConfig{
 //{
 //    if ((self = [super init]))
 //    {
-    public init(server aServer:HTTPServer,documentRoot aDocumentRoot:String,queue q:dispatch_queue_t?){
+    public init(server aServer:HTTPServer,documentRoot aDocumentRoot:String,queue q:DispatchQueue?){
         
         self.server = aServer;
         
 //        documentRoot = [aDocumentRoot stringByStandardizingPath];
-        self.documentRoot = (aDocumentRoot as NSString).stringByStandardizingPath;
+        self.documentRoot = (aDocumentRoot as NSString).standardizingPath;
         if self.documentRoot.hasSuffix("/"){
-            documentRoot = documentRoot.stringByAppendingString("/");
+            documentRoot = documentRoot + "/";
         }
         self.queue = q;
 //        if (q)
@@ -161,10 +181,31 @@ public class HTTPConfig{
 //
 //@implementation HTTPConnection
 //
-private var recentNonceQueue:dispatch_queue_t = dispatch_queue_create("HTTPConnection-Nonce", nil);
+//private var recentNonceQueue:DispatchQueue = DispatchQueue(label: "HTTPConnection-Nonce", qos: []);
+private var recentNonceQueue:DispatchQueue = DispatchQueue(label: "HTTPConnection-Nonce");
+
 private var recentNonces = [String]();
 
-public class HTTPConnection : NSObject{
+open class HTTPConnection : NSObject{
+    
+    struct YRSignal{
+        static var onceToken:Int = 0;
+        static var df:DateFormatter!;
+    }
+    
+fileprivate static var __once: () = {
+            
+            // Example: Sun, 06 Nov 1994 08:49:37 GMT
+            
+            YRSignal.df = DateFormatter();
+            YRSignal.df.formatterBehavior = DateFormatter.Behavior.behavior10_4;//NSDateFormatterBehavior10_4
+            YRSignal.df.timeZone = TimeZone(abbreviation:"GMT");
+            YRSignal.df.dateFormat = "EEE, dd MMM y HH:mm:ss 'GMT'";
+            YRSignal.df.locale = Locale(identifier:"en_US");
+    //YRSignal.df.locale = Locale.
+    
+            // For some reason, using zzz in the format string produces GMT+00:00
+        }()
 /**
  * This method is automatically called (courtesy of Cocoa) before the first instantiation of this class.
  * We use it to initialize any static variables.
@@ -185,37 +226,37 @@ public class HTTPConnection : NSObject{
  * A nonce is a  server-specified string uniquely generated for each 401 response.
  * The default implementation uses a single nonce for each session.
 **/
-    private let _connectionQueue:dispatch_queue_t;
-    private var _asyncSocket:GCDAsyncSocket?;
-    private var _config:HTTPConfig;
+    fileprivate let _connectionQueue:DispatchQueue;
+    fileprivate var _asyncSocket:GCDAsyncSocket?;
+    fileprivate var _config:HTTPConfig;
     //
-    private var _started:Bool = false;;
+    fileprivate var _started:Bool = false;;
     //
 //        HTTPMessage * request;
-    private var _numHeaderLines:UInt = 0;
+    fileprivate var _numHeaderLines:UInt = 0;
     //
-    private var _sentResponseHeaders:Bool = false;
+    fileprivate var _sentResponseHeaders:Bool = false;
     //
-    private var _nonce:String?;
-    private var _lastNC:Int64 = 0;
+    fileprivate var _nonce:String?;
+    fileprivate var _lastNC:Int64 = 0;
     //
-    private var _httpResponse:HTTPResponse?;
+    fileprivate var _httpResponse:HTTPResponse?;
     //
-    private var _ranges = [NSValue]();
-    private var _ranges_headers = [NSData]();
-    private var _ranges_boundry:String?;
+    fileprivate var _ranges = [NSValue]();
+    fileprivate var _ranges_headers = [Data]();
+    fileprivate var _ranges_boundry:String?;
 //    private let _rangeIndex:Int = 0;
     //
-    private var _requestContentLength:UInt = 0;
-    private var _requestContentLengthReceived:UInt64 = 0;
-    private var _requestChunkSize:UInt64 = 0;
-    private var _requestChunkSizeReceived:UInt64 = 0;
+    fileprivate var _requestContentLength:UInt = 0;
+    fileprivate var _requestContentLengthReceived:UInt64 = 0;
+    fileprivate var _requestChunkSize:UInt64 = 0;
+    fileprivate var _requestChunkSizeReceived:UInt64 = 0;
     //  
-    private var _responseDataSizes = [NSNumber]();
+    fileprivate var _responseDataSizes = [NSNumber]();
     
-    private var _rangeIndex = 0;
+    fileprivate var _rangeIndex = 0;
     
-    public class func generateNonce()->String{
+    open class func generateNonce()->String{
         // We use the Core Foundation UUID class to generate a nonce value for us
         // UUIDs (Universally Unique Identifiers) are 128-bit values guaranteed to be unique.
         let theUUID = CFUUIDCreate(nil);
@@ -233,19 +274,19 @@ public class HTTPConnection : NSObject{
         // It then disconnects, and creates a new connection with the nonce, and proper authentication.
         // If we don't honor the nonce for the second connection, QuickTime will repeat the process and never connect.
 
-        dispatch_async(recentNonceQueue, {
+        recentNonceQueue.async(execute: {
             
 //            [recentNonces addObject:newNonce];
             recentNonces.append(newNonce);
         });
 
 //        double delayInSeconds = TIMEOUT_NONCE;
-        let popTime = dispatch_time(DISPATCH_TIME_NOW, TIMEOUT_NONCE * Int64(NSEC_PER_SEC));
-        dispatch_after(popTime, recentNonceQueue, {
+        let popTime = DispatchTime.now() + Double(TIMEOUT_NONCE * Int64(NSEC_PER_SEC)) / Double(NSEC_PER_SEC);
+        recentNonceQueue.asyncAfter(deadline: popTime, execute: {
             
 //            [recentNonces removeObject:newNonce];
-            if let index = recentNonces.indexOf(newNonce) {
-                recentNonces.removeAtIndex(index);
+            if let index = recentNonces.index(of: newNonce) {
+                recentNonces.remove(at: index);
             }
         });
 
@@ -255,11 +296,11 @@ public class HTTPConnection : NSObject{
     /**
      * Returns whether or not the given nonce is in the list of recently generated nonce's.
     **/
-    public class func hasRecentNonce(recentNonce:String)->Bool
+    open class func hasRecentNonce(_ recentNonce:String)->Bool
     {
         var result = false;
         
-        dispatch_sync(recentNonceQueue, {
+        recentNonceQueue.sync(execute: {
             
 //            result = [recentNonces containsObject:recentNonce];
             result = recentNonces.contains(recentNonce)
@@ -273,8 +314,8 @@ public class HTTPConnection : NSObject{
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //    @synthesize request;
-    private var _request:HTTPMessage!
-    public var request:HTTPMessage{
+    fileprivate var _request:HTTPMessage!
+    open var request:HTTPMessage{
         return _request;
     }
     /**
@@ -297,7 +338,8 @@ public class HTTPConnection : NSObject{
         }
         else
         {
-            _connectionQueue = dispatch_queue_create("HTTPConnection", nil);
+            //_connectionQueue = DispatchQueue(label: "HTTPConnection", qos: []);
+            _connectionQueue = DispatchQueue(label: "HTTPConnection");
         }
         
         // Take over ownership of the socket
@@ -354,7 +396,7 @@ public class HTTPConnection : NSObject{
      * Returns whether or not the server will accept messages of a given method
      * at a particular URI.
     **/
-    public func supportsMethod(method:String,atPath path:String)->Bool{
+    open func supportsMethod(_ method:String,atPath path:String)->Bool{
 //        HTTPLogTrace();
         
         // Override me to support methods such as POST.
@@ -388,7 +430,7 @@ public class HTTPConnection : NSObject{
      * This would be true in the case of a POST, where the client is sending data,
      * or for something like PUT where the client is supposed to be uploading a file.
     **/
-    public func expectsRequestBodyFromMethod(method:String,atPath path:String)->Bool{
+    open func expectsRequestBodyFromMethod(_ method:String,atPath path:String)->Bool{
 //        HTTPLogTrace();
         
         // Override me to add support for other methods that expect the client
@@ -422,7 +464,7 @@ public class HTTPConnection : NSObject{
      * 
      * Note: In order to support secure connections, the sslIdentityAndCertificates method must be implemented.
     **/
-    public var isSecureServer:Bool{
+    open var isSecureServer:Bool{
 //        HTTPLogTrace();
         
         // Override me to create an https server...
@@ -434,7 +476,7 @@ public class HTTPConnection : NSObject{
      * This method is expected to returns an array appropriate for use in kCFStreamSSLCertificates SSL Settings.
      * It should be an array of SecCertificateRefs except for the first element in the array, which is a SecIdentityRef.
     **/
-    public var sslIdentityAndCertificates:[AnyObject]?{
+    open var sslIdentityAndCertificates:[AnyObject]?{
 //        HTTPLogTrace();
         
         // Override me to provide the proper required SSL identity.
@@ -450,7 +492,7 @@ public class HTTPConnection : NSObject{
      * Returns whether or not the requested resource is password protected.
      * In this generic implementation, nothing is password protected.
     **/
-    public func isPasswordProtected(path:String)->Bool{
+    open func isPasswordProtected(_ path:String)->Bool{
 //        HTTPLogTrace();
         
         // Override me to provide password protection...
@@ -466,7 +508,7 @@ public class HTTPConnection : NSObject{
      * If at all possible, digest access authentication should be used because it's more secure.
      * Basic authentication sends passwords in the clear and should be avoided unless using SSL/TLS.
     **/
-    public var useDigestAccessAuthentication:Bool{
+    open var useDigestAccessAuthentication:Bool{
 //        HTTPLogTrace();
         
         // Override me to customize the authentication scheme
@@ -479,7 +521,7 @@ public class HTTPConnection : NSObject{
      * Returns the authentication realm.
      * In this generic implmentation, a default realm is used for the entire server.
     **/
-    public var realm:String{
+    open var realm:String{
 //        HTTPLogTrace();
         
         // Override me to provide a custom realm...
@@ -491,7 +533,7 @@ public class HTTPConnection : NSObject{
     /**
      * Returns the password for the given username.
     **/
-    public func passwordForUser(username:String)->String?{
+    open func passwordForUser(_ username:String)->String?{
 //        HTTPLogTrace();
         
         // Override me to provide proper password authentication
@@ -507,7 +549,7 @@ public class HTTPConnection : NSObject{
     /**
      * Returns whether or not the user is properly authenticated.
     **/
-    public var isAuthenticated:Bool{
+    open var isAuthenticated:Bool{
 //        HTTPLogTrace();
         
         // Extract the authentication information from the Authorization header
@@ -566,7 +608,7 @@ public class HTTPConnection : NSObject{
                 }
             }
             
-            let authNC = Int64(strtol((auth.nc! as NSString).UTF8String, nil, 16));
+            let authNC = Int64(strtol((auth.nc! as NSString).utf8String, nil, 16));
             
             if (authNC <= _lastNC)
             {
@@ -579,13 +621,18 @@ public class HTTPConnection : NSObject{
             let HA1str = "\(auth.username):\(auth.realm):\(password)";
             let HA2str = "\(_request.method!):\(auth.uri!)";
             
-            let HA1 = HA1str.dataUsingEncoding(NSUTF8StringEncoding)!.md5Digest().hexStringValue();// [[[HA1str dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];
             
-            let HA2 = HA2str.dataUsingEncoding(NSUTF8StringEncoding)!.md5Digest().hexStringValue();
+//            let HA1 = (HA1str.data(using: String.Encoding.utf8)! as Data).md5Digest().hexStringValue();// [[[HA1str dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];
+            
+//            let HA2 = (HA2str.data(using: String.Encoding.utf8)! as Data).md5Digest().hexStringValue();
+            
+            let HA1 = HA1str.md5;
+            let HA2 = HA2str.md5;
             
             let responseStr = "\(HA1):\(auth.nonce):\(auth.nc):\(auth.cnonce):\(auth.qop):\(HA2)";
             
-            let response = responseStr.dataUsingEncoding(NSUTF8StringEncoding)!.md5Digest().hexStringValue();
+//            let response = (responseStr.data(using: String.Encoding.utf8)! as NSData).md5Digest().hexStringValue();
+            let response = responseStr.md5;
             
             return response == auth.response;
         }
@@ -601,22 +648,24 @@ public class HTTPConnection : NSObject{
             // Decode the base 64 encoded credentials
             let base64Credentials = auth.base64Credentials;
             
-            let temp = base64Credentials!.dataUsingEncoding(NSUTF8StringEncoding)!.base64Decoded();
+//            let temp = (base64Credentials!.data(using: String.Encoding.utf8)! as Data).base64Decoded();
+//            let temp = base64Credentials?.data(using: String.Encoding.utf8)?.
+            let temp = Data.init(base64Encoded: base64Credentials ?? "");
             
-            let credentials = String.init(data: temp, encoding: NSUTF8StringEncoding);// [[NSString alloc] initWithData:temp encoding:NSUTF8StringEncoding];
+            let credentials = String.init(data: temp!, encoding: String.Encoding.utf8);// [[NSString alloc] initWithData:temp encoding:NSUTF8StringEncoding];
             
             // The credentials should be of the form "username:password"
             // The username is not allowed to contain a colon
             
-            let colonRange = credentials!.rangeOfString(":");
+            let colonRange = credentials!.range(of: ":");
             
             if colonRange == nil {
                 // Malformed credentials
                 return false;
             }
             
-            let credUsername = credentials!.substringToIndex(colonRange!.startIndex);
-            let credPassword = credentials!.substringFromIndex(colonRange!.endIndex);
+            let credUsername = credentials!.substring(to: colonRange!.lowerBound);
+            let credPassword = credentials!.substring(from: colonRange!.upperBound);
             
             let password = self.passwordForUser(credUsername);
             if (password == nil){
@@ -631,7 +680,7 @@ public class HTTPConnection : NSObject{
     /**
      * Adds a digest access authentication challenge to the given response.
     **/
-    public func addDigestAuthChallenge(response:HTTPMessage){
+    open func addDigestAuthChallenge(_ response:HTTPMessage){
 //        HTTPLogTrace();
     
         let authInfo = "Digest realm=\"\(self.realm)\", qop=\"auth\", nonce=\"\(HTTPConnection.generateNonce())\"";
@@ -643,7 +692,7 @@ public class HTTPConnection : NSObject{
     /**
      * Adds a basic authentication challenge to the given response.
     **/
-    public func addBasicAuthChallenge(response:HTTPMessage){
+    open func addBasicAuthChallenge(_ response:HTTPMessage){
 //        HTTPLogTrace();
         
         let authInfo = "Basic realm=\"%\(self.realm)\"";
@@ -660,8 +709,8 @@ public class HTTPConnection : NSObject{
      * Starting point for the HTTP connection after it has been fully initialized (including subclasses).
      * This method is called by the HTTP server.
     **/
-    public func start(){
-        dispatch_async(_connectionQueue, {
+    open func start(){
+        _connectionQueue.async(execute: {
             
             if !self._started{
                 self._started = true;
@@ -674,8 +723,8 @@ public class HTTPConnection : NSObject{
      * This method is called by the HTTPServer if it is asked to stop.
      * The server, in turn, invokes stop on each HTTPConnection instance.
     **/
-    public func stop(){
-        dispatch_async(_connectionQueue, {
+    open func stop(){
+        _connectionQueue.async(execute: {
             
             // Disconnect the socket.
             // The socketDidDisconnect delegate method will handle everything else.
@@ -686,7 +735,7 @@ public class HTTPConnection : NSObject{
     /**
      * Starting point for the HTTP connection.
     **/
-    public func startConnection(){
+    open func startConnection(){
         // Override me to do any custom work before the connection starts.
         // 
         // Be sure to invoke [super startConnection] when you're done.
@@ -701,20 +750,20 @@ public class HTTPConnection : NSObject{
             
             if certificates?.count > 0 {
                 // All connections are assumed to be secure. Only secure connections are allowed on this server.
-                var settings = [NSObject : AnyObject]();//[NSMutableDictionary dictionaryWithCapacity:3];
+                var settings = [AnyHashable: Any]();//[NSMutableDictionary dictionaryWithCapacity:3];
                 
                 // Configure this connection as the server
 //                [settings setObject:[NSNumber numberWithBool:YES]
 //                             forKey:(NSString *)kCFStreamSSLIsServer];
-                settings[kCFStreamSSLIsServer] = true;
+                settings[kCFStreamSSLIsServer as AnyHashable] = true;
                 
 //                [settings setObject:certificates
 //                             forKey:(NSString *)kCFStreamSSLCertificates];
-                settings[kCFStreamSSLCertificates] = certificates;
+                settings[kCFStreamSSLCertificates as AnyHashable] = certificates;
                 // Configure this connection to use the highest possible SSL level
 //                [settings setObject:(NSString *)kCFStreamSocketSecurityLevelNegotiatedSSL
 //                             forKey:(NSString *)kCFStreamSSLLevel];
-                settings[kCFStreamSSLLevel] = kCFStreamSocketSecurityLevelNegotiatedSSL as String;
+                settings[kCFStreamSSLLevel as AnyHashable] = kCFStreamSocketSecurityLevelNegotiatedSSL as String;
                 
                 _asyncSocket?.startTLS(settings);
             }
@@ -726,14 +775,14 @@ public class HTTPConnection : NSObject{
     /**
      * Starts reading an HTTP request.
     **/
-    private func startReadingRequest(){
+    fileprivate func startReadingRequest(){
 //        HTTPLogTrace();
         
 //        [asyncSocket readDataToData:[GCDAsyncSocket CRLFData]
 //                        withTimeout:TIMEOUT_READ_FIRST_HEADER_LINE
 //                          maxLength:MAX_HEADER_LINE_LENGTH
 //                                tag:HTTP_REQUEST_HEADER];
-        _asyncSocket?.readDataToData(GCDAsyncSocket.CRLFData(), withTimeout: TIMEOUT_READ_FIRST_HEADER_LINE, maxLength:MAX_HEADER_LINE_LENGTH, tag:HTTP_REQUEST_HEADER);
+        _asyncSocket?.readData(to: GCDAsyncSocket.crlfData(), withTimeout: TIMEOUT_READ_FIRST_HEADER_LINE, maxLength:MAX_HEADER_LINE_LENGTH, tag:HTTP_REQUEST_HEADER);
         
 //        _asyncSocket.readDataToData(<#T##data: NSData!##NSData!#>, withTimeout: <#T##NSTimeInterval#>, maxLength: <#T##UInt#>, tag: <#T##Int#>)
     }
@@ -748,25 +797,25 @@ public class HTTPConnection : NSObject{
      *   num = "50" 
      * }
     **/
-    private func parseParams(query:String)->Dictionary<String,String?>{
-        let components = query.componentsSeparatedByString("&");
+    fileprivate func parseParams(_ query:String)->Dictionary<String,String?>{
+        let components = query.components(separatedBy: "&");
         var result = Dictionary<String,String?>();
         
         for i in 0 ..< components.count {
             let component = components[i];
-            if component.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
-                let range = component.rangeOfString("=");
+            if component.lengthOfBytes(using: String.Encoding.utf8) > 0 {
+                let range = component.range(of: "=");
 //                if range.location != NSNotFound { 
                 if let range = range {
                     
-                    let escapedKey = component.substringToIndex(range.startIndex);
-                    let escapedValue = component.substringFromIndex(range.endIndex);
+                    let escapedKey = component.substring(to: range.lowerBound);
+                    let escapedValue = component.substring(from: range.upperBound);
                     
-                    if escapedKey.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
+                    if escapedKey.lengthOfBytes(using: String.Encoding.utf8) > 0 {
 //                        CFStringRef k, v;
                         
-                        let key = CFURLCreateStringByReplacingPercentEscapes(nil, escapedKey, "");
-                        let value = CFURLCreateStringByReplacingPercentEscapes(nil, escapedValue, "");
+                        let key = CFURLCreateStringByReplacingPercentEscapes(nil, escapedKey as CFString!, "" as CFString!);
+                        let value = CFURLCreateStringByReplacingPercentEscapes(nil, escapedValue as CFString!, "" as CFString!);
                         
 //                        NSString *key, *value;
                         
@@ -798,7 +847,7 @@ public class HTTPConnection : NSObject{
      *   num = "50" 
      * } 
     **/ 
-    public func parseGetParams()->Dictionary<String,String?>?{
+    open func parseGetParams()->Dictionary<String,String?>?{
         if !request.isHeaderComplete {
             return nil;
         }
@@ -821,7 +870,7 @@ public class HTTPConnection : NSObject{
      * If successfull, the variables 'ranges' and 'rangeIndex' will be updated, and YES will be returned.
      * Otherwise, NO is returned, and the range request should be ignored.
      **/
-    private func parseRangeRequest(rangeHeader:String, withContentLength contentLength:UInt64)->Bool{
+    fileprivate func parseRangeRequest(_ rangeHeader:String, withContentLength contentLength:UInt64)->Bool{
 //        HTTPLogTrace();
         
         // Examples of byte-ranges-specifier values (assuming an entity-body of length 10000):
@@ -841,7 +890,7 @@ public class HTTPConnection : NSObject{
         // bytes=500-700,601-999
         // 
         
-        let eqsignRange = rangeHeader.rangeOfString("=");
+        let eqsignRange = rangeHeader.range(of: "=");
         
 //        if eqsignRange.location == NSNotFound {
         if eqsignRange == nil {
@@ -851,19 +900,19 @@ public class HTTPConnection : NSObject{
 //        NSUInteger tIndex = eqsignRange.location;
 //        NSUInteger fIndex = eqsignRange.location + eqsignRange.length;
         
-        var rangeType  = rangeHeader.substringToIndex(eqsignRange!.startIndex);
-        var rangeValue = rangeHeader.substringFromIndex(eqsignRange!.endIndex)
+        var rangeType  = rangeHeader.substring(to: eqsignRange!.lowerBound);
+        var rangeValue = rangeHeader.substring(from: eqsignRange!.upperBound)
         
 //        CFStringTrimWhitespace((__bridge CFMutableStringRef)rangeType);
 //        CFStringTrimWhitespace((__bridge CFMutableStringRef)rangeValue);
         rangeType = rangeType.trim();
         rangeValue = rangeValue.trim();
         
-        if rangeType.caseInsensitiveCompare("bytes") != NSComparisonResult.OrderedSame {
+        if rangeType.caseInsensitiveCompare("bytes") != ComparisonResult.orderedSame {
             return false;
         }
         
-        let rangeComponents = rangeValue.componentsSeparatedByString(",");
+        let rangeComponents = rangeValue.components(separatedBy: ",");
         
         if rangeComponents.count == 0 {
             return false;
@@ -880,7 +929,7 @@ public class HTTPConnection : NSObject{
         for i in 0 ..< rangeComponents.count {
             let rangeComponent = rangeComponents[i];
             
-            let dashRange = rangeComponent.rangeOfString("-");
+            let dashRange = rangeComponent.range(of: "-");
             
             if (dashRange == nil)
             {
@@ -905,7 +954,7 @@ public class HTTPConnection : NSObject{
 //                let r = CGRectMake(0, 0, 0, 0)
 //                let m = UnsafePointer<DDRange>.alloc(1);
 //                let v2 = NSValue(bytes: <#T##UnsafePointer<Void>#>, objCType: <#T##UnsafePointer<Int8>#>) //return [NSValue valueWithBytes:&range objCType:@encode(DDRange)];
-                _ranges.append(NSValue(DDRange:DDMakeRange(byteIndex,1)));
+                _ranges.append(NSValue(ddRange:DDMakeRange(byteIndex,1)));
             }
             else
             {
@@ -916,8 +965,8 @@ public class HTTPConnection : NSObject{
                 
 //                NSString *r1str = [rangeComponent substringToIndex:tIndex];
 //                NSString *r2str = [rangeComponent substringFromIndex:fIndex];
-                let r1str = rangeComponent.substringToIndex(dashRange!.startIndex);
-                let r2str = rangeComponent.substringFromIndex(dashRange!.endIndex);
+                let r1str = rangeComponent.substring(to: dashRange!.lowerBound);
+                let r2str = rangeComponent.substring(from: dashRange!.upperBound);
                 
                 
 //                UInt64 r1, r2;
@@ -944,7 +993,7 @@ public class HTTPConnection : NSObject{
                     let startIndex = contentLength - r2;
                     
 //                    [ranges addObject:[NSValue valueWithDDRange:DDMakeRange(startIndex, r2)]];
-                    _ranges.append(NSValue(DDRange:DDMakeRange(startIndex,r2)));
+                    _ranges.append(NSValue(ddRange:DDMakeRange(startIndex,r2)));
                 }
                 else if r2 == 0
                 {
@@ -958,7 +1007,7 @@ public class HTTPConnection : NSObject{
                     }
                     
 //                    [ranges addObject:[NSValue valueWithDDRange:DDMakeRange(r1, contentLength - r1)]];
-                    _ranges.append(NSValue(DDRange:DDMakeRange(r1,contentLength-r2)));
+                    _ranges.append(NSValue(ddRange:DDMakeRange(r1,contentLength-r2)));
                 }
                 else
                 {
@@ -976,7 +1025,7 @@ public class HTTPConnection : NSObject{
                     }
                     
 //                    [ranges addObject:[NSValue valueWithDDRange:DDMakeRange(r1, r2 - r1 + 1)]];
-                    _ranges.append(NSValue(DDRange:DDMakeRange(r1,r2-r1+1)));
+                    _ranges.append(NSValue(ddRange:DDMakeRange(r1,r2-r1+1)));
                 }
             }
         }
@@ -1009,13 +1058,13 @@ public class HTTPConnection : NSObject{
         // Sort the ranges
         
 //        [ranges sortUsingSelector:@selector(ddrangeCompare:)];
-        _ranges.sortInPlace(self.ddrangeCompare);
+        _ranges.sort(by: self.ddrangeCompare);
 //        _ranges.sort(<#T##isOrderedBefore: (NSValue, NSValue) -> Bool##(NSValue, NSValue) -> Bool#>)
         
         return true;
     }
     
-    private func ddrangeCompare(that:NSValue,other:NSValue)->Bool{
+    fileprivate func ddrangeCompare(_ that:NSValue,other:NSValue)->Bool{
         return false;
         var r1 = that.ddrangeValue();
         var r2 = other.ddrangeValue();
@@ -1024,7 +1073,7 @@ public class HTTPConnection : NSObject{
     }
 
 //    - (NSString *)requestURI
-    public var requestURI:String?{
+    open var requestURI:String?{
 //        if(request == nil) return nil;
 //        
 //        return [[request url] relativeString];
@@ -1039,7 +1088,7 @@ public class HTTPConnection : NSObject{
      * The current request is in the HTTPMessage request variable.
     **/
 //    - (void)replyToHTTPRequest
-    public func replyToHTTPRequest(){
+    open func replyToHTTPRequest(){
 //        HTTPLogTrace();
         
 //        if (HTTP_LOG_VERBOSE)
@@ -1153,7 +1202,7 @@ public class HTTPConnection : NSObject{
      * Note: The returned HTTPMessage is owned by the sender, who is responsible for releasing it.
     **/
 //    - (HTTPMessage *)newUniRangeResponse:(UInt64)contentLength
-    public func newUniRangeResponse(contentLength:UInt64)->HTTPMessage{
+    open func newUniRangeResponse(_ contentLength:UInt64)->HTTPMessage{
 //        HTTPLogTrace();
         
         // Status Code 206 - Partial Content
@@ -1176,7 +1225,7 @@ public class HTTPConnection : NSObject{
      * 
      * Note: The returned HTTPMessage is owned by the sender, who is responsible for releasing it.
     **/
-    public func newMultiRangeResponse(contentLength:UInt64)->HTTPMessage{
+    open func newMultiRangeResponse(_ contentLength:UInt64)->HTTPMessage{
 //        HTTPLogTrace();
         
         // Status Code 206 - Partial Content
@@ -1220,18 +1269,18 @@ public class HTTPConnection : NSObject{
             let contentRangeVal = "bytes \(rangeStr)/\(contentLength)";
             let contentRangeStr = "Content-Range: \(contentRangeVal)\r\n\r\n";
             
-            let fullHeader = startingBoundryStr.stringByAppendingString(contentRangeStr);
-            let fullHeaderData = fullHeader.dataUsingEncoding(NSUTF8StringEncoding);
+            let fullHeader = startingBoundryStr + contentRangeStr;
+            let fullHeaderData = fullHeader.data(using: String.Encoding.utf8);
             
             _ranges_headers.append(fullHeaderData!);
             
-            actualContentLength += UInt64(fullHeaderData!.length);
+            actualContentLength += UInt64(fullHeaderData!.count);
             actualContentLength += UInt64(range.length);
         }
         
-        let endingBoundryData = endingBoundryStr.dataUsingEncoding(NSUTF8StringEncoding);
+        let endingBoundryData = endingBoundryStr.data(using: String.Encoding.utf8);
         
-        actualContentLength += UInt64(endingBoundryData!.length);
+        actualContentLength += UInt64(endingBoundryData!.count);
         
         let contentLengthStr = "\(actualContentLength)";
         response.setHeaderField("Content-Length", value:contentLengthStr);
@@ -1246,25 +1295,25 @@ public class HTTPConnection : NSObject{
      * Returns the chunk size line that must precede each chunk of data when using chunked transfer encoding.
      * This consists of the size of the data, in hexadecimal, followed by a CRLF.
     **/
-    public func chunkedTransferSizeLineForLength(length:UInt64)->NSData
+    open func chunkedTransferSizeLineForLength(_ length:UInt64)->Data
     {
-        return "\(length)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!// ?? NSData();
+        return "\(length)\r\n".data(using: String.Encoding.utf8)!// ?? NSData();
     }
 
     /**
      * Returns the data that signals the end of a chunked transfer.
     **/
-    public func chunkedTransferFooter()->NSData{
+    open func chunkedTransferFooter()->Data{
         // Each data chunk is preceded by a size line (in hex and including a CRLF),
         // followed by the data itself, followed by another CRLF.
         // After every data chunk has been sent, a zero size line is sent,
         // followed by optional footer (which are just more headers),
         // and followed by a CRLF on a line by itself.
         
-        return "\r\n0\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!;
+        return "\r\n0\r\n\r\n".data(using: String.Encoding.utf8)!;
     }
 
-    public func sendResponseHeadersAndBody(){
+    open func sendResponseHeadersAndBody(){
 //        if ([httpResponse respondsToSelector:@selector(delayResponseHeaders)])
 //        {
 //            if ([httpResponse delayResponseHeaders])
@@ -1272,7 +1321,7 @@ public class HTTPConnection : NSObject{
 //                return;
 //            }
 //        }
-        if ((_httpResponse?.delayResponseHeaders?()) != nil) {
+        if ((_httpResponse?.delayHeaders?()) != nil) {
             return;
         }
         
@@ -1348,7 +1397,7 @@ public class HTTPConnection : NSObject{
         
         if request.method! == "HEAD" || isZeroLengthResponse{
             let responseData = self.preprocessResponse(response);
-            _asyncSocket?.writeData(responseData, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_RESPONSE);
+            _asyncSocket?.write(responseData, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_RESPONSE);
             
             _sentResponseHeaders = true;
         }
@@ -1356,36 +1405,36 @@ public class HTTPConnection : NSObject{
         {
             // Write the header response
             let responseData = self.preprocessResponse(response);
-            _asyncSocket?.writeData(responseData, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_PARTIAL_RESPONSE_HEADER);
+            _asyncSocket?.write(responseData, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_PARTIAL_RESPONSE_HEADER);
             
             _sentResponseHeaders = true;
             
             // Now we need to send the body of the response
             if !isRangeRequest{
                 // Regular request
-                let data = _httpResponse!.readDataOfLength(READ_CHUNKSIZE);
+                let data = _httpResponse!.readData(ofLength: READ_CHUNKSIZE);
                 
-                if data.length > 0{
-                    _responseDataSizes.append(NSNumber(integer:data.length));
+                if data?.count > 0{
+                    _responseDataSizes.append(NSNumber(value:(data?.count)!));
                     
                     if isChunked {
-                        let chunkSize = self.chunkedTransferSizeLineForLength(UInt64(data.length));
-                        _asyncSocket?.writeData(chunkSize, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_CHUNKED_RESPONSE_HEADER);
+                        let chunkSize = self.chunkedTransferSizeLineForLength(UInt64((data?.count)!));
+                        _asyncSocket?.write(chunkSize, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_CHUNKED_RESPONSE_HEADER);
                         
-                        _asyncSocket?.writeData(data, withTimeout:TIMEOUT_WRITE_BODY, tag:HTTP_CHUNKED_RESPONSE_BODY);
+                        _asyncSocket?.write(data, withTimeout:TIMEOUT_WRITE_BODY, tag:HTTP_CHUNKED_RESPONSE_BODY);
                         
                         if _httpResponse!.isDone {
                             let footer = self.chunkedTransferFooter();
-                            _asyncSocket?.writeData(footer, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_RESPONSE);
+                            _asyncSocket?.write(footer, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_RESPONSE);
                         }
                         else {
-                            let footer = GCDAsyncSocket.CRLFData();
-                            _asyncSocket?.writeData(footer, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_CHUNKED_RESPONSE_FOOTER);
+                            let footer = GCDAsyncSocket.crlfData();
+                            _asyncSocket?.write(footer, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_CHUNKED_RESPONSE_FOOTER);
                         }
                     }
                     else {
                         let tag = _httpResponse!.isDone ? HTTP_RESPONSE : HTTP_PARTIAL_RESPONSE_BODY;
-                        _asyncSocket?.writeData(data, withTimeout:TIMEOUT_WRITE_BODY, tag:tag);
+                        _asyncSocket?.write(data, withTimeout:TIMEOUT_WRITE_BODY, tag:tag);
                     }
                 }
             }
@@ -1400,13 +1449,13 @@ public class HTTPConnection : NSObject{
                     
                     let bytesToRead = UInt(range.length) < READ_CHUNKSIZE ? UInt(range.length) : READ_CHUNKSIZE;
                     
-                    let data = _httpResponse!.readDataOfLength(bytesToRead);
+                    let data = _httpResponse!.readData(ofLength: bytesToRead);
                     
-                    if data.length == 0 {
-                        _responseDataSizes.append(NSNumber(integer:data.length));
+                    if data?.count == 0 {
+                        _responseDataSizes.append(NSNumber(value:(data?.count)!));
                         
-                        let tag = Int(data.length) == Int(range.length) ? HTTP_RESPONSE : HTTP_PARTIAL_RANGE_RESPONSE_BODY;
-                        _asyncSocket?.writeData(data, withTimeout:TIMEOUT_WRITE_BODY, tag:tag);
+                        let tag = Int((data?.count)!) == Int(range.length) ? HTTP_RESPONSE : HTTP_PARTIAL_RANGE_RESPONSE_BODY;
+                        _asyncSocket?.write(data, withTimeout:TIMEOUT_WRITE_BODY, tag:tag);
                     }
                 }
                 else{
@@ -1415,7 +1464,7 @@ public class HTTPConnection : NSObject{
                     
                     // Write range header
                     let rangeHeaderData = _ranges_headers[0];
-                    _asyncSocket?.writeData(rangeHeaderData, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_PARTIAL_RESPONSE_HEADER);
+                    _asyncSocket?.write(rangeHeaderData, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_PARTIAL_RESPONSE_HEADER);
                     
                     // Start writing range body
                     let range = _ranges[0].ddrangeValue();
@@ -1424,12 +1473,12 @@ public class HTTPConnection : NSObject{
                     
                     let bytesToRead = UInt(range.length) < READ_CHUNKSIZE ? UInt(range.length) : READ_CHUNKSIZE;
                     
-                    let data = _httpResponse!.readDataOfLength(bytesToRead);
+                    let data = _httpResponse!.readData(ofLength: bytesToRead);
                     
-                    if data.length > 0{
-                        _responseDataSizes.append(NSNumber(integer:data.length));
+                    if data?.count > 0{
+                        _responseDataSizes.append(NSNumber(value:(data?.count)!));
                         
-                        _asyncSocket?.writeData(data, withTimeout:TIMEOUT_WRITE_BODY, tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY);
+                        _asyncSocket?.write(data, withTimeout:TIMEOUT_WRITE_BODY, tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY);
                     }
                 }
             }
@@ -1443,11 +1492,11 @@ public class HTTPConnection : NSObject{
      * We keep track of this information in order to keep our memory footprint low while
      * working with asynchronous HTTPResponse objects.
     **/
-    public var writeQueueSize:UInt{
+    open var writeQueueSize:UInt{
         var result:UInt = 0;
         
         for i in 0 ..< _responseDataSizes.count {
-            result += _responseDataSizes[i].unsignedIntegerValue;
+            result += _responseDataSizes[i].uintValue;
         }
         
         return result;
@@ -1459,7 +1508,7 @@ public class HTTPConnection : NSObject{
      * 
      * This method should only be called for standard (non-range) responses.
     **/
-    public func continueSendingStandardResponseBody(){
+    open func continueSendingStandardResponseBody(){
 //        HTTPLogTrace();
         
         // This method is called when either asyncSocket has finished writing one of the response data chunks,
@@ -1483,10 +1532,10 @@ public class HTTPConnection : NSObject{
         }
         
         let available = READ_CHUNKSIZE - writeQueueSize;
-        let data = _httpResponse!.readDataOfLength(available);
+        let data = _httpResponse!.readData(ofLength: available);
         
-        if data.length > 0 {
-            _responseDataSizes.append(NSNumber(unsignedInteger:UInt(data.length)));
+        if data?.count > 0 {
+            _responseDataSizes.append(NSNumber(value:UInt((data?.count)!)));
             
 //            BOOL isChunked = NO;
 //            
@@ -1497,23 +1546,23 @@ public class HTTPConnection : NSObject{
             let isChunked = _httpResponse?.isChunked?() ?? false;
             
             if isChunked {
-                let chunkSize = self.chunkedTransferSizeLineForLength(UInt64(data.length));
-                _asyncSocket?.writeData(chunkSize, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_CHUNKED_RESPONSE_HEADER);
+                let chunkSize = self.chunkedTransferSizeLineForLength(UInt64((data?.count)!));
+                _asyncSocket?.write(chunkSize, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_CHUNKED_RESPONSE_HEADER);
                 
-                _asyncSocket?.writeData(data, withTimeout:TIMEOUT_WRITE_BODY, tag:HTTP_CHUNKED_RESPONSE_BODY);
+                _asyncSocket?.write(data, withTimeout:TIMEOUT_WRITE_BODY, tag:HTTP_CHUNKED_RESPONSE_BODY);
                 
                 if _httpResponse!.isDone {
                     let footer = self.chunkedTransferFooter();
-                    _asyncSocket?.writeData(footer, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_RESPONSE);
+                    _asyncSocket?.write(footer, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_RESPONSE);
                 }
                 else{
-                    let footer = GCDAsyncSocket.CRLFData();
-                    _asyncSocket?.writeData(footer, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_CHUNKED_RESPONSE_FOOTER);
+                    let footer = GCDAsyncSocket.crlfData();
+                    _asyncSocket?.write(footer, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_CHUNKED_RESPONSE_FOOTER);
                 }
             }
             else{
                 let tag = _httpResponse!.isDone ? HTTP_RESPONSE : HTTP_PARTIAL_RESPONSE_BODY;
-                _asyncSocket?.writeData(data, withTimeout:TIMEOUT_WRITE_BODY, tag:tag);
+                _asyncSocket?.write(data, withTimeout:TIMEOUT_WRITE_BODY, tag:tag);
             }
         }
     }
@@ -1524,7 +1573,7 @@ public class HTTPConnection : NSObject{
      * 
      * This method should only be called for single-range responses.
     **/
-    public func continueSendingSingleRangeResponseBody(){
+    open func continueSendingSingleRangeResponseBody(){
 //        HTTPLogTrace();
         
         // This method is called when either asyncSocket has finished writing one of the response data chunks,
@@ -1557,13 +1606,13 @@ public class HTTPConnection : NSObject{
             let available = READ_CHUNKSIZE - writeQueueSize;
             let bytesToRead = UInt(bytesLeft) < available ? UInt(bytesLeft) : available;
             
-            let data = _httpResponse!.readDataOfLength(bytesToRead);
+            let data = _httpResponse!.readData(ofLength: bytesToRead);
             
-            if data.length > 0 {
-                _responseDataSizes.append(NSNumber(integer:data.length));
+            if data?.count > 0 {
+                _responseDataSizes.append(NSNumber(value:(data?.count)!));
                 
-                let tag = Int(data.length) == Int(bytesLeft) ? HTTP_RESPONSE : HTTP_PARTIAL_RANGE_RESPONSE_BODY;
-                _asyncSocket?.writeData(data, withTimeout:TIMEOUT_WRITE_BODY, tag:tag);
+                let tag = Int((data?.count)!) == Int(bytesLeft) ? HTTP_RESPONSE : HTTP_PARTIAL_RANGE_RESPONSE_BODY;
+                _asyncSocket?.write(data, withTimeout:TIMEOUT_WRITE_BODY, tag:tag);
             }
         }
     }
@@ -1574,7 +1623,7 @@ public class HTTPConnection : NSObject{
      * 
      * This method should only be called for multi-range responses.
     **/
-    public func continueSendingMultiRangeResponseBody(){
+    open func continueSendingMultiRangeResponseBody(){
 //        HTTPLogTrace();
         
         // This method is called when either asyncSocket has finished writing one of the response data chunks,
@@ -1605,12 +1654,12 @@ public class HTTPConnection : NSObject{
             let available = READ_CHUNKSIZE - writeQueueSize;
             let bytesToRead = UInt(bytesLeft) < available ? UInt(bytesLeft) : available;
             
-            let data = _httpResponse!.readDataOfLength(bytesToRead);
+            let data = _httpResponse!.readData(ofLength: bytesToRead);
             
-            if data.length > 0 {
-                _responseDataSizes.append(NSNumber(integer:data.length));
+            if data?.count > 0 {
+                _responseDataSizes.append(NSNumber(value:(data?.count)!));
                 
-                _asyncSocket?.writeData(data, withTimeout:TIMEOUT_WRITE_BODY, tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY);
+                _asyncSocket?.write(data, withTimeout:TIMEOUT_WRITE_BODY, tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY);
             }
         }
         else{
@@ -1618,7 +1667,7 @@ public class HTTPConnection : NSObject{
             if _rangeIndex < _ranges.count {
                 // Write range header
                 let rangeHeader = _ranges_headers[_rangeIndex];
-                _asyncSocket?.writeData(rangeHeader, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_PARTIAL_RESPONSE_HEADER);
+                _asyncSocket?.write(rangeHeader, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_PARTIAL_RESPONSE_HEADER);
                 
                 // Start writing range body
                 range = _ranges[_rangeIndex].ddrangeValue();
@@ -1628,20 +1677,20 @@ public class HTTPConnection : NSObject{
                 let available = READ_CHUNKSIZE - writeQueueSize;
                 let bytesToRead = UInt(range.length) < available ? UInt(range.length) : available;
                 
-                let data = _httpResponse!.readDataOfLength(bytesToRead);
+                let data = _httpResponse!.readData(ofLength: bytesToRead);
                 
-                if data.length > 0 {
-                    _responseDataSizes.append(NSNumber(integer:data.length));
+                if data?.count > 0 {
+                    _responseDataSizes.append(NSNumber(value:(data?.count)!));
                     
-                    _asyncSocket?.writeData(data, withTimeout:TIMEOUT_WRITE_BODY, tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY);
+                    _asyncSocket?.write(data, withTimeout:TIMEOUT_WRITE_BODY, tag:HTTP_PARTIAL_RANGES_RESPONSE_BODY);
                 }
             }
             else{
                 // We're not done yet - we still have to send the closing boundry tag
                 let endingBoundryStr = "\r\n--\(_ranges_boundry)--\r\n";
-                let endingBoundryData = endingBoundryStr.dataUsingEncoding(NSUTF8StringEncoding);
+                let endingBoundryData = endingBoundryStr.data(using: String.Encoding.utf8);
                 
-                _asyncSocket?.writeData(endingBoundryData, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_RESPONSE);
+                _asyncSocket?.write(endingBoundryData, withTimeout:TIMEOUT_WRITE_HEAD, tag:HTTP_RESPONSE);
             }
         }
     }
@@ -1654,7 +1703,7 @@ public class HTTPConnection : NSObject{
      * Returns an array of possible index pages.
      * For example: {"index.html", "index.htm"}
     **/
-    public func directoryIndexFileNames()->[String]{
+    open func directoryIndexFileNames()->[String]{
 //        HTTPLogTrace();
         
         // Override me to support other index pages.
@@ -1662,14 +1711,14 @@ public class HTTPConnection : NSObject{
         return ["index.html", "index.htm"];
     }
 
-    public func filePathForURI(path:String)->String {
+    open func filePathForURI(_ path:String)->String {
         return self.filePathForURI(path, allowDirectory:false);
     }
 
     /**
      * Converts relative URI path into full file-system path.
     **/
-    public func filePathForURI(path:String, allowDirectory:Bool)->String!{
+    open func filePathForURI(_ path:String, allowDirectory:Bool)->String!{
 //        HTTPLogTrace();
         
         // Override me to perform custom path mapping.
@@ -1692,13 +1741,13 @@ public class HTTPConnection : NSObject{
         // 
         // E.g.: /page.html?q=22&var=abc -> /page.html
         
-        let docRoot = NSURL.fileURLWithPath(documentRoot, isDirectory:true);
+        let docRoot = URL(fileURLWithPath: documentRoot, isDirectory:true);
 //        if docRoot == nil{
 ////            HTTPLogWarn(@"%@[%p]: Document root is invalid file path", THIS_FILE, self);
 //            return nil;
 //        }
         
-        let relativePath = NSURL(string:path, relativeToURL:docRoot)!.relativePath;
+        let relativePath = URL(string:path, relativeTo:docRoot)!.relativePath;
         
         // Part 2: Append relative path to document root (base path)
         // 
@@ -1710,10 +1759,10 @@ public class HTTPConnection : NSObject{
         // 
         // E.g.: "Users/robbie/Sites/images/../index.html" -> "/Users/robbie/Sites/index.html"
         
-        var fullPath = ((documentRoot as NSString).stringByAppendingPathComponent(relativePath!) as NSString).stringByStandardizingPath;
+        var fullPath = ((documentRoot as NSString).appendingPathComponent(relativePath) as NSString).standardizingPath;
         
         if relativePath ==  "/" {
-            fullPath = fullPath.stringByAppendingString("/");
+            fullPath = fullPath + "/";
         }
         
         // Part 3: Prevent serving files outside the document root.
@@ -1729,7 +1778,7 @@ public class HTTPConnection : NSObject{
         //           fullPath="/Users/robbie/Sites_Secret/TopSecret"
         
         if documentRoot.hasSuffix("/") {
-            documentRoot = documentRoot.stringByAppendingString("/");
+            documentRoot = documentRoot + "/";
         }
         
         if !fullPath.hasPrefix(documentRoot) {
@@ -1740,15 +1789,15 @@ public class HTTPConnection : NSObject{
         // Part 4: Search for index page if path is pointing to a directory
         if !allowDirectory {
 //            var isDir = false;
-            let isDir = UnsafeMutablePointer<ObjCBool>.alloc(1);
+            let isDir = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1);
             
-            if NSFileManager.defaultManager().fileExistsAtPath(fullPath, isDirectory: isDir) && isDir.memory {
+            if FileManager.default.fileExists(atPath: fullPath, isDirectory: isDir) && isDir.pointee.boolValue {
                 let indexFileNames = self.directoryIndexFileNames();
 
                 for  indexFileName in indexFileNames {
-                    let indexFilePath = (fullPath as NSString).stringByAppendingPathComponent(indexFileName);
+                    let indexFilePath = (fullPath as NSString).appendingPathComponent(indexFileName);
 
-                    if NSFileManager.defaultManager().fileExistsAtPath(indexFilePath, isDirectory:isDir) && !isDir.memory {
+                    if FileManager.default.fileExists(atPath: indexFilePath, isDirectory:isDir) && !isDir.pointee.boolValue {
                         return indexFilePath;
                     }
                 }
@@ -1768,17 +1817,18 @@ public class HTTPConnection : NSObject{
      * HTTPFileResponse is a wrapper for an NSFileHandle object, and is the preferred way to send a file response.
      * HTTPDataResponse is a wrapper for an NSData object, and may be used to send a custom response.
     **/
-    public func httpResponseForMethod(method:String, URI path:String)->HTTPResponse?{
+    public func httpResponseForMethod(_ method:String, URI path:String)->HTTPResponse?{
 //        HTTPLogTrace();
         
         // Override me to provide custom responses.
         
         let filePath = self.filePathForURI(path, allowDirectory:false);
         
-        let isDir = UnsafeMutablePointer<ObjCBool>.alloc(1);
+        //let isDir = UnsafeMutablePointer<ObjCBool>(allocatingCapacity: 1);
+        let isDir = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1);
         
-        if filePath != nil && NSFileManager.defaultManager().fileExistsAtPath(filePath, isDirectory:isDir) && !isDir.memory{
-            return HTTPFileResponse(filePath:filePath, forConnection:self);
+        if filePath != nil && FileManager.default.fileExists(atPath: filePath!, isDirectory:isDir) && !(isDir.pointee.boolValue){
+            return HTTPFileResponse(filePath:filePath!, forConnection:self);
         
             // Use me instead for asynchronous file IO.
             // Generally better for larger files.
@@ -1789,7 +1839,7 @@ public class HTTPConnection : NSObject{
         return nil;
     }
 
-    public func webSocketForURI(path:String)->WebSocket?{
+    public func webSocketForURI(_ path:String)->WebSocket?{
 //        HTTPLogTrace();
         
         // Override me to provide custom WebSocket responses.
@@ -1815,7 +1865,7 @@ public class HTTPConnection : NSObject{
     /**
      * This method is called after receiving all HTTP headers, but before reading any of the request body.
     **/
-    public func prepareForBodyWithSize(contentLength:UInt64)
+    public func prepareForBodyWithSize(_ contentLength:UInt64)
     {
         // Override me to allocate buffers, file handles, etc.
     }
@@ -1824,7 +1874,7 @@ public class HTTPConnection : NSObject{
      * This method is called to handle data read from a POST / PUT.
      * The given data is part of the request body.
     **/
-    public func processBodyData(postDataChunk:NSData){
+    public func processBodyData(_ postDataChunk:Data){
         // Override me to do something useful with a POST / PUT.
         // If the post is small, such as a simple form, you may want to simply append the data to the request.
         // If the post is big, such as a file upload, you may want to store the file to disk.
@@ -1851,7 +1901,7 @@ public class HTTPConnection : NSObject{
     /**
      * Called if the HTML version is other than what is supported
     **/
-    public func handleVersionNotSupported(version:String){
+    public func handleVersionNotSupported(_ version:String){
         // Override me for custom error handling of unsupported http version responses
         // If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
         // You can also use preprocessErrorResponse: to add an optional HTML body.
@@ -1862,7 +1912,7 @@ public class HTTPConnection : NSObject{
         response.setHeaderField("Content-Length", value:"0");
         
         let responseData = self.preprocessErrorResponse(response);
-        _asyncSocket?.writeData(responseData, withTimeout:TIMEOUT_WRITE_ERROR, tag:HTTP_RESPONSE);
+        _asyncSocket?.write(responseData, withTimeout:TIMEOUT_WRITE_ERROR, tag:HTTP_RESPONSE);
         
     }
 
@@ -1888,7 +1938,7 @@ public class HTTPConnection : NSObject{
         }
         
         let responseData = self.preprocessErrorResponse(response);
-        _asyncSocket?.writeData(responseData, withTimeout:TIMEOUT_WRITE_ERROR, tag:HTTP_RESPONSE);
+        _asyncSocket?.write(responseData, withTimeout:TIMEOUT_WRITE_ERROR, tag:HTTP_RESPONSE);
         
     }
 
@@ -1897,7 +1947,7 @@ public class HTTPConnection : NSObject{
      * The data parameter is the invalid HTTP header line, including CRLF, as read from GCDAsyncSocket.
      * The data parameter may also be nil if the request as a whole was invalid, such as a POST with no Content-Length.
     **/
-    public func handleInvalidRequest(data:NSData?){
+    public func handleInvalidRequest(_ data:Data?){
         // Override me for custom error handling of invalid HTTP requests
         // If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
         // You can also use preprocessErrorResponse: to add an optional HTML body.
@@ -1910,7 +1960,7 @@ public class HTTPConnection : NSObject{
         response.setHeaderField("Connection", value:"close");
         
         let responseData = self.preprocessErrorResponse(response);
-        _asyncSocket?.writeData(responseData, withTimeout:TIMEOUT_WRITE_ERROR, tag:HTTP_FINAL_RESPONSE);
+        _asyncSocket?.write(responseData, withTimeout:TIMEOUT_WRITE_ERROR, tag:HTTP_FINAL_RESPONSE);
         
         
         // Note: We used the HTTP_FINAL_RESPONSE tag to disconnect after the response is sent.
@@ -1922,7 +1972,7 @@ public class HTTPConnection : NSObject{
     /**
      * Called if we receive a HTTP request with a method other than GET or HEAD.
     **/
-    public func handleUnknownMethod(method:String){
+    public func handleUnknownMethod(_ method:String){
         // Override me for custom error handling of 405 method not allowed responses.
         // If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
         // You can also use preprocessErrorResponse: to add an optional HTML body.
@@ -1937,7 +1987,7 @@ public class HTTPConnection : NSObject{
         response.setHeaderField("Connection", value:"close");
         
         let responseData = self.preprocessErrorResponse(response);
-        _asyncSocket?.writeData(responseData, withTimeout:TIMEOUT_WRITE_ERROR, tag:HTTP_FINAL_RESPONSE);
+        _asyncSocket?.write(responseData, withTimeout:TIMEOUT_WRITE_ERROR, tag:HTTP_FINAL_RESPONSE);
         
         
         // Note: We used the HTTP_FINAL_RESPONSE tag to disconnect after the response is sent.
@@ -1960,7 +2010,7 @@ public class HTTPConnection : NSObject{
         response.setHeaderField("Content-Length", value:"0");
         
         let responseData = self.preprocessErrorResponse(response);
-        _asyncSocket?.writeData(responseData, withTimeout:TIMEOUT_WRITE_ERROR, tag:HTTP_RESPONSE);
+        _asyncSocket?.write(responseData, withTimeout:TIMEOUT_WRITE_ERROR, tag:HTTP_RESPONSE);
         
     }
 
@@ -1971,7 +2021,7 @@ public class HTTPConnection : NSObject{
     /**
      * Gets the current date and time, formatted properly (according to RFC) for insertion into an HTTP header.
     **/
-    public func dateAsString(date:NSDate)->String{
+    public func dateAsString(_ date:Date)->String{
         // From Apple's Documentation (Data Formatting Guide -> Date Formatters -> Cache Formatters for Efficiency):
         // 
         // "Creating a date formatter is not a cheap operation. If you are likely to use a formatter frequently,
@@ -1986,39 +2036,25 @@ public class HTTPConnection : NSObject{
         // 
         // Thus, we are using a static NSDateFormatter here.
         
-        struct YRSignal{
-            static var onceToken:dispatch_once_t = 0;
-            static var df:NSDateFormatter!;
-        }
         
-        dispatch_once(&YRSignal.onceToken, {
-            
-            // Example: Sun, 06 Nov 1994 08:49:37 GMT
-            
-            YRSignal.df = NSDateFormatter();
-            YRSignal.df.formatterBehavior = NSDateFormatterBehavior.Behavior10_4;//NSDateFormatterBehavior10_4
-            YRSignal.df.timeZone = NSTimeZone(abbreviation:"GMT");
-            YRSignal.df.dateFormat = "EEE, dd MMM y HH:mm:ss 'GMT'";
-            YRSignal.df.locale = NSLocale(localeIdentifier:"en_US");
-            
-            // For some reason, using zzz in the format string produces GMT+00:00
-        });
         
-        return YRSignal.df.stringFromDate(date);
+        _ = HTTPConnection.__once;
+        
+        return YRSignal.df.string(from: date);
     }
 
     /**
      * This method is called immediately prior to sending the response headers.
      * This method adds standard header fields, and then converts the response to an NSData object.
     **/
-    public func preprocessResponse(response:HTTPMessage)->NSData{
+    public func preprocessResponse(_ response:HTTPMessage)->Data{
 //        HTTPLogTrace();
         
         // Override me to customize the response headers
         // You'll likely want to add your own custom headers, and then return [super preprocessResponse:response]
         
         // Add standard headers
-        let now = self.dateAsString(NSDate());
+        let now = self.dateAsString(Date());
         response.setHeaderField("Date", value:now);
         
         // Add server capability headers
@@ -2038,19 +2074,19 @@ public class HTTPConnection : NSObject{
 //                
 //                [response setHeaderField:key value:value];
 //            }
-            for (key,value) in responseHeaders {
+            for (key,value) in responseHeaders! {
                 response.setHeaderField(key as! String, value: value as! String);
             }
         }
         
-        return response.messageData!;
+        return response.messageData! as Data;
     }
 
     /**
      * This method is called immediately prior to sending the response headers (for an error).
      * This method adds standard header fields, and then converts the response to an NSData object.
     **/
-    public func preprocessErrorResponse(response:HTTPMessage )->NSData{
+    public func preprocessErrorResponse(_ response:HTTPMessage )->Data{
 //        HTTPLogTrace();
         
         // Override me to customize the error response headers
@@ -2073,7 +2109,7 @@ public class HTTPConnection : NSObject{
         // }
         
         // Add standard headers
-        let now = self.dateAsString(NSDate());
+        let now = self.dateAsString(Date());
         response.setHeaderField("Date", value:now);
         
         // Add server capability headers
@@ -2106,12 +2142,12 @@ public class HTTPConnection : NSObject{
             //
             //                [response setHeaderField:key value:value];
             //            }
-            for (key,value) in responseHeaders {
+            for (key,value) in responseHeaders! {
                 response.setHeaderField(key as! String, value: value as! String);
             }
         }
         
-        return response.messageData!;
+        return response.messageData! as Data;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2122,7 +2158,7 @@ public class HTTPConnection : NSObject{
      * This method is called after the socket has successfully read data from the stream.
      * Remember that this method will only be called after the socket reaches a CRLF, or after it's read the proper length.
     **/
-    public func socket(sock:GCDAsyncSocket, didReadData data:NSData, withTag tag:Int64){
+    public func socket(_ sock:GCDAsyncSocket, didReadData data:Data, withTag tag:Int64){
         if tag == Int64(HTTP_REQUEST_HEADER) {
             // Append the header line to the http message
             let result = request.appendData(data);
@@ -2144,7 +2180,7 @@ public class HTTPConnection : NSObject{
                     return;
                 }
                 else{
-                    _asyncSocket?.readDataToData(GCDAsyncSocket.CRLFData(),
+                    _asyncSocket?.readData(to: GCDAsyncSocket.crlfData(),
                                     withTimeout:TIMEOUT_READ_SUBSEQUENT_HEADER_LINE,
                                       maxLength:MAX_HEADER_LINE_LENGTH,
                                             tag:HTTP_REQUEST_HEADER);
@@ -2171,7 +2207,7 @@ public class HTTPConnection : NSObject{
                 let expectsUpload = self.expectsRequestBodyFromMethod(method, atPath:uri!);
                 
                 if expectsUpload {
-                    if transferEncoding != nil && transferEncoding!.caseInsensitiveCompare("Chunked") != NSComparisonResult.OrderedSame {
+                    if transferEncoding != nil && transferEncoding!.caseInsensitiveCompare("Chunked") != ComparisonResult.orderedSame {
                         _requestContentLength = UInt.max;//-1;
                     }
                     else{
@@ -2241,7 +2277,7 @@ public class HTTPConnection : NSObject{
                         if _requestContentLength == UInt.max {//-1 {
                             // Chunked transfer
                             
-                            _asyncSocket?.readDataToData(GCDAsyncSocket.CRLFData(),
+                            _asyncSocket?.readData(to: GCDAsyncSocket.crlfData(),
                                             withTimeout:TIMEOUT_READ_BODY,
                                               maxLength:MAX_CHUNK_LINE_LENGTH,
                                                     tag:HTTP_REQUEST_CHUNK_SIZE);
@@ -2254,7 +2290,7 @@ public class HTTPConnection : NSObject{
                             }else{
                                 bytesToRead = POST_CHUNKSIZE;
                             }
-                            _asyncSocket?.readDataToLength(bytesToRead,
+                            _asyncSocket?.readData(toLength: bytesToRead,
                                               withTimeout:TIMEOUT_READ_BODY,
                                                       tag:HTTP_REQUEST_BODY);
                         }
@@ -2300,10 +2336,10 @@ public class HTTPConnection : NSObject{
                 // possibly followed by a semicolon and extra parameters that can be ignored,
                 // and ending with CRLF.
                 
-                let sizeLine = NSString(data:data, encoding:NSUTF8StringEncoding);
+                let sizeLine = NSString(data:data, encoding:String.Encoding.utf8.rawValue);
                 
 //                errno = 0;  // Reset errno before calling strtoull() to ensure it is always zero on success
-                _requestChunkSize = strtoull(sizeLine!.UTF8String, nil, 16);
+                _requestChunkSize = strtoull(sizeLine!.utf8String, nil, 16);
                 _requestChunkSizeReceived = 0;
                 
                 if errno != 0 {
@@ -2317,7 +2353,7 @@ public class HTTPConnection : NSObject{
                     var bytesToRead:UInt = 0;
                     bytesToRead = (UInt(_requestChunkSize) < POST_CHUNKSIZE) ? UInt(_requestChunkSize) : POST_CHUNKSIZE;
                     
-                    _asyncSocket?.readDataToLength(bytesToRead,
+                    _asyncSocket?.readData(toLength: bytesToRead,
                                       withTimeout:TIMEOUT_READ_BODY,
                                               tag:HTTP_REQUEST_CHUNK_DATA);
                 }
@@ -2326,7 +2362,7 @@ public class HTTPConnection : NSObject{
                     // This is the "0" (zero) line,
                     // which is to be followed by optional footers (just like headers) and finally a blank line.
                     
-                    _asyncSocket?.readDataToData(GCDAsyncSocket.CRLFData(),
+                    _asyncSocket?.readData(to: GCDAsyncSocket.crlfData(),
                                     withTimeout:TIMEOUT_READ_BODY,
                                       maxLength:MAX_HEADER_LINE_LENGTH,
                                             tag:HTTP_REQUEST_CHUNK_FOOTER);
@@ -2337,8 +2373,8 @@ public class HTTPConnection : NSObject{
             else if tag == Int64(HTTP_REQUEST_CHUNK_DATA){
                 // We just read part of the actual data.
                 
-                _requestContentLengthReceived += UInt64(data.length);
-                _requestChunkSizeReceived += UInt64(data.length);
+                _requestContentLengthReceived += UInt64(data.count);
+                _requestChunkSizeReceived += UInt64(data.count);
                 
                 self.processBodyData(data);
                 
@@ -2347,7 +2383,7 @@ public class HTTPConnection : NSObject{
                 {
                     let bytesToRead = (bytesLeft < POST_CHUNKSIZE) ? bytesLeft : POST_CHUNKSIZE;
                     
-                    _asyncSocket?.readDataToLength(bytesToRead,
+                    _asyncSocket?.readData(toLength: bytesToRead,
                                       withTimeout:TIMEOUT_READ_BODY,
                                               tag:HTTP_REQUEST_CHUNK_DATA);
                 }
@@ -2356,7 +2392,7 @@ public class HTTPConnection : NSObject{
                     // We've read in all the data for this chunk.
                     // The data is followed by a CRLF, which we need to read (and basically ignore)
                     
-                    _asyncSocket?.readDataToLength(2,
+                    _asyncSocket?.readData(toLength: 2,
                                       withTimeout:TIMEOUT_READ_BODY,
                                               tag:HTTP_REQUEST_CHUNK_TRAILER);
                 }
@@ -2367,7 +2403,7 @@ public class HTTPConnection : NSObject{
                 // This should be the CRLF following the data.
                 // Just ensure it's a CRLF.
                 
-                if data != GCDAsyncSocket.CRLFData(){
+                if data != GCDAsyncSocket.crlfData(){
 //                    HTTPLogWarn(@"%@[%p]: Method expects chunk trailer, but is missing", THIS_FILE, self);
                     
                     self.handleInvalidRequest(nil);
@@ -2376,7 +2412,7 @@ public class HTTPConnection : NSObject{
                 
                 // Now continue with the next chunk
                 
-                _asyncSocket?.readDataToData(GCDAsyncSocket.CRLFData(),
+                _asyncSocket?.readData(to: GCDAsyncSocket.crlfData(),
                                 withTimeout:TIMEOUT_READ_BODY,
                                   maxLength:MAX_CHUNK_LINE_LENGTH,
                                         tag:HTTP_REQUEST_CHUNK_SIZE);
@@ -2393,12 +2429,12 @@ public class HTTPConnection : NSObject{
                     return;
                 }
                 
-                if data.length > 2 {
+                if data.count > 2 {
                     // We read in a footer.
                     // In the future we may want to append these to the request.
                     // For now we ignore, and continue reading the footers, waiting for the final blank line.
                     
-                    _asyncSocket?.readDataToData(GCDAsyncSocket.CRLFData(),
+                    _asyncSocket?.readData(to: GCDAsyncSocket.crlfData(),
                                     withTimeout:TIMEOUT_READ_BODY,
                                       maxLength:MAX_HEADER_LINE_LENGTH,
                                             tag:HTTP_REQUEST_CHUNK_FOOTER);
@@ -2412,7 +2448,7 @@ public class HTTPConnection : NSObject{
             {
                 // Handle a chunk of data from the POST body
                 
-                _requestContentLengthReceived += UInt64(data.length);
+                _requestContentLengthReceived += UInt64(data.count);
                 self.processBodyData(data);
                 
                 if UInt(_requestContentLengthReceived) < _requestContentLength {
@@ -2422,7 +2458,7 @@ public class HTTPConnection : NSObject{
                     
                     let bytesToRead = bytesLeft < POST_CHUNKSIZE ? bytesLeft : POST_CHUNKSIZE;
                     
-                    _asyncSocket?.readDataToLength(bytesToRead,
+                    _asyncSocket?.readData(toLength: bytesToRead,
                                       withTimeout:TIMEOUT_READ_BODY,
                                               tag:HTTP_REQUEST_BODY);
                 }
@@ -2445,13 +2481,13 @@ public class HTTPConnection : NSObject{
     /**
      * This method is called after the socket has successfully written data to the stream.
     **/
-    public func socket(sock:GCDAsyncSocket, didWriteDataWithTag tag:Int64){
+    public func socket(_ sock:GCDAsyncSocket, didWriteDataWithTag tag:Int64){
         var doneSendingResponse = true;
         
         if tag == Int64(HTTP_PARTIAL_RESPONSE_BODY) {
             // Update the amount of data we have in asyncSocket's write queue
             if _responseDataSizes.count > 0 {
-                self._responseDataSizes.removeAtIndex(0);
+                self._responseDataSizes.remove(at: 0);
             }
             
             // We only wrote a part of the response - there may be more
@@ -2461,7 +2497,7 @@ public class HTTPConnection : NSObject{
             // Update the amount of data we have in asyncSocket's write queue.
             // This will allow asynchronous responses to continue sending more data.
             if _responseDataSizes.count > 0 {
-                _responseDataSizes.removeAtIndex(0);
+                _responseDataSizes.remove(at: 0);
             }
             // Don't continue sending the response yet.
             // The chunked footer that was sent after the body will tell us if we have more data to send.
@@ -2473,7 +2509,7 @@ public class HTTPConnection : NSObject{
         else if Int(tag) == HTTP_PARTIAL_RANGE_RESPONSE_BODY {
             // Update the amount of data we have in asyncSocket's write queue
             if _responseDataSizes.count > 0 {
-                _responseDataSizes.removeAtIndex(0);
+                _responseDataSizes.remove(at: 0);
             }
             // We only wrote a part of the range - there may be more
             self.continueSendingSingleRangeResponseBody();
@@ -2481,7 +2517,7 @@ public class HTTPConnection : NSObject{
         else if Int(tag) == HTTP_PARTIAL_RANGES_RESPONSE_BODY {
             // Update the amount of data we have in asyncSocket's write queue
             if _responseDataSizes.count > 0 {
-                _responseDataSizes.removeAtIndex(0);
+                _responseDataSizes.remove(at: 0);
             }
             // We only wrote part of the range - there may be more, or there may be more ranges
             self.continueSendingMultiRangeResponseBody();
@@ -2489,7 +2525,7 @@ public class HTTPConnection : NSObject{
         else if Int(tag) == HTTP_RESPONSE || Int(tag) == HTTP_FINAL_RESPONSE {
             // Update the amount of data we have in asyncSocket's write queue
             if _responseDataSizes.count > 0 {
-                _responseDataSizes.removeAtIndex(0)
+                _responseDataSizes.remove(at: 0)
             }
             
             doneSendingResponse = true;
@@ -2551,7 +2587,7 @@ public class HTTPConnection : NSObject{
     /**
      * Sent after the socket has been disconnected.
     **/
-    public func socketDidDisconnect(sock:GCDAsyncSocket, withError err:NSError){
+    public func socketDidDisconnect(_ sock:GCDAsyncSocket, withError err:NSError){
 //        HTTPLogTrace();
         
         _asyncSocket = nil;
@@ -2569,7 +2605,7 @@ public class HTTPConnection : NSObject{
      * 
      * This informs us that the response object has generated more data that we may be able to send.
     **/
-    public func responseHasAvailableData(sender:HTTPResponse){
+    public func responseHasAvailableData(_ sender:HTTPResponse){
 //        HTTPLogTrace();
         
         // We always dispatch this asynchronously onto our connectionQueue,
@@ -2578,7 +2614,7 @@ public class HTTPConnection : NSObject{
         // We do this to give the HTTPResponse classes the flexibility to call
         // this method whenever they want, even from within a readDataOfLength method.
         
-        dispatch_async(_connectionQueue, {
+        _connectionQueue.async(execute: {
             
             if sender as! NSObject != self._httpResponse! as! NSObject {
 //                HTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", THIS_FILE, self, THIS_METHOD);
@@ -2608,7 +2644,7 @@ public class HTTPConnection : NSObject{
      * This method is called if the response encounters some critical error,
      * and it will be unable to fullfill the request.
     **/
-    public func responseDidAbort(sender:HTTPResponse){
+    public func responseDidAbort(_ sender:HTTPResponse){
 //        HTTPLogTrace();
         
         // We always dispatch this asynchronously onto our connectionQueue,
@@ -2617,7 +2653,7 @@ public class HTTPConnection : NSObject{
         // We do this to give the HTTPResponse classes the flexibility to call
         // this method whenever they want, even from within a readDataOfLength method.
         
-        dispatch_async(_connectionQueue, {
+        _connectionQueue.async(execute: {
             
             if (sender as! NSObject != self._httpResponse! as! NSObject)
             {
@@ -2678,7 +2714,7 @@ public class HTTPConnection : NSObject{
             
             let connection = request.headerField("Connection");
             
-            shouldDie = connection != nil && (connection! as NSString).caseInsensitiveCompare("close") == NSComparisonResult.OrderedSame;
+            shouldDie = connection != nil && (connection! as NSString).caseInsensitiveCompare("close") == ComparisonResult.orderedSame;
         }
         else if version != nil && version == kCFHTTPVersion1_0 as String {
             // HTTP version 1.0
@@ -2689,7 +2725,7 @@ public class HTTPConnection : NSObject{
             if connection == nil {
                 shouldDie = true;
             }else{
-                shouldDie = (connection! as NSString).caseInsensitiveCompare("Keep-Alive") != NSComparisonResult.OrderedSame
+                shouldDie = (connection! as NSString).caseInsensitiveCompare("Keep-Alive") != ComparisonResult.orderedSame
             }
         }
         
@@ -2719,7 +2755,7 @@ public class HTTPConnection : NSObject{
         
         // Post notification of dead connection
         // This will allow our server to release us from its array of connections
-        NSNotificationCenter.defaultCenter().postNotificationName(HTTPConnectionDidDieNotification, object:self);
+        NotificationCenter.default.post(name: Notification.Name(rawValue: HTTPConnectionDidDieNotification), object:self);
     }
 
 }

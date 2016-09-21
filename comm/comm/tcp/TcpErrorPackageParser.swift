@@ -17,9 +17,9 @@ public final class TcpErrorPackage : TcpResponsePackage{
     public init(code:Int,message:String,cause:String!,detial:String!) {
         _json = Json();
         _json.setIntValue(code, forName: "code");
-        _json.setValue(message, forName: "message")
-        _json.setValue(cause, forName: "cause");
-        _json.setValue(detial, forName: "detial");
+        _json.setValue(message as NSString, forName: "message")
+        _json.setValue(cause as NSString, forName: "cause");
+        _json.setValue(detial as NSString, forName: "detial");
     }
     init(json:Json) {
         _json = json;
@@ -28,12 +28,12 @@ public final class TcpErrorPackage : TcpResponsePackage{
     public required init() {
         fatalError("init() has not been implemented")
     }
-    private var _json:Json;
-    private var code:Int{
+    fileprivate var _json:Json;
+    fileprivate var code:Int{
         return _json["code"].asInt!;
     }
     
-    private var message:String{
+    fileprivate var message:String{
         return _json["message"].asString("");
     }
     
@@ -49,24 +49,24 @@ public final class TcpErrorPackage : TcpResponsePackage{
         let s = _json.toString();
         
         
-        let len = s.lengthOfBytesUsingEncoding(NSUTF8StringEncoding);
-        let ptr:[Int8] = s.cStringUsingEncoding(NSUTF8StringEncoding)!;
+        let len = s.lengthOfBytes(using: String.Encoding.utf8);
+        let ptr:[Int8] = s.cString(using: String.Encoding.utf8)!;
         
-        var r = [UInt8](count: len, repeatedValue: 0);
-        for(var n=0;n<len;n++){
+        var r = [UInt8](repeating: 0, count: len);
+        for n in 0 ..< len {
             r[n] = asUInt8(ptr[n]);
         }
         return r;
     }
 }
-public class TcpErrorPackageParser : TcpAbstractProtocolParser{
+open class TcpErrorPackageParser : TcpAbstractProtocolParser{
     
-    public override class
+    open override class
         var type:UInt8{
             return 0;
     }
     
-    public override func parse() -> TcpPackage! {
+    open override func parse() -> TcpPackage! {
         let json = Json.parse(String.fromBuffer(buffer, count: size));
         return TcpErrorPackage(json: json);
     }

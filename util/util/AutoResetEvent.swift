@@ -9,18 +9,41 @@
 import Foundation
 
 
-public class AutoResetEvent {
+open class AutoResetEvent {
     
-    private var lock:NSCondition;
+    fileprivate var lock:NSCondition;
     //var  timeToDoWork:Int = 0;
-    private var isSet:Bool;
+    fileprivate var isSet:Bool;
+    private var mainThreadction:(()->())?;
     
     public init(isSet:Bool = false){
         self.isSet = isSet;
         self.lock = NSCondition();
     }
     
-    public func set(){
+    open func set(mainThreadction:(()->())? = nil){
+        
+        if let mainThreadction = mainThreadction {
+            if Thread.isMainThread {
+                mainThreadction();
+                setImpl();
+            }else{
+                if canEnterMainThread {
+                    Queue.mainQueue {
+                        mainThreadction();
+                        self.setImpl();
+                    }
+                }else{
+                    self.mainThreadction = mainThreadction;
+                    setImpl();
+                }
+            }
+        }else{
+            setImpl();
+        }
+    }
+    
+    private func setImpl(){
         lock.lock();
         //timeToDoWork++;
         self.isSet = true;
@@ -28,39 +51,26 @@ public class AutoResetEvent {
         lock.unlock();
     }
     
-    private var canMainThread:Int = 1;
+
+    private var canEnterMainThread = false;
     
-    public func canEnterMainThread()->Bool{
-        var can = false;
-        lock.lock();
-        if canMainThread == 1 {
-            can = true;
-            canMainThread = 2;
-        }
-        lock.unlock();
-        return can;
-    }
-    
-    public func waitOne(){
+    open func waitOne(){
         
         
         lock.lock();
         
-        if NSThread.isMainThread() {
-            if canMainThread == 2  {
-                lock.unlock();
-                return;
-            }
-            
-            canMainThread = 0;
-        }
+        canEnterMainThread = !Thread.isMainThread;
         while(!self.isSet){
             lock.wait();
         }
+        if let mainThreadction = mainThreadction {
+            mainThreadction();
+            self.mainThreadction = nil;
+        }
         lock.unlock();
     }
     
-    public func reset(){
+    open func reset(){
         lock.lock();
         isSet = false;
         lock.signal();

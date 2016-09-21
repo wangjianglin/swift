@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class FormSegueDescriptor:FormRowDescriptor{
+open class FormSegueDescriptor:FormRowDescriptor{
     
-    private var _segue:String;
-    public var segue:String{
+    fileprivate var _segue:String;
+    open var segue:String{
         return _segue;
     }
     public init(title:String,segue:String){
@@ -19,7 +19,7 @@ public class FormSegueDescriptor:FormRowDescriptor{
         super.init(title: title, name: "");
     }
     
-    override public func formBaseCellClassFromRowDescriptor() -> FormBaseCell.Type! {
+    override open func formBaseCellClassFromRowDescriptor() -> FormBaseCell.Type! {
         
         return FormSegueCell.self;
     }

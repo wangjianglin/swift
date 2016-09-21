@@ -9,12 +9,12 @@
 import Foundation
 
 
-public class KeychainImpl{
-    private init(service:String){
+open class KeychainImpl{
+    fileprivate init(service:String){
         
     }
     
-    public subscript(service:String)->AnyObject {
+    open subscript(service:String)->Any {
         get{
             return ""
         }
@@ -28,18 +28,18 @@ public class KeychainImpl{
 //
 //
 //
-public class KeychainArgs{
+open class KeychainArgs{
     
     
     var insts:Dictionary<String,KeychainImpl>;
-    private var lock:NSLock;
+    fileprivate var lock:NSLock;
     
-    private init(){
+    fileprivate init(){
         self.insts = Dictionary<String,KeychainImpl>();
         self.lock = NSLock();
     }
     
-    public subscript(service:String)->KeychainImpl {
+    open subscript(service:String)->KeychainImpl {
         get{
             //线程同步
             //@synchronized(self){
@@ -73,15 +73,16 @@ public class KeychainArgs{
 //    }
 }
 
+private struct YRSingleton{
+    static var instance:KeychainArgs? = nil
+}
+
+private var __once:() = {
+    YRSingleton.instance = KeychainArgs()
+}();
 
 public var Keychain:KeychainArgs{
-    struct YRSingleton{
-        static var predicate:dispatch_once_t = 0
-        static var instance:KeychainArgs? = nil
-    }
-    dispatch_once(&YRSingleton.predicate,{
-        YRSingleton.instance = KeychainArgs()
-    })
+    _ = __once;
     return YRSingleton.instance!
 }
 

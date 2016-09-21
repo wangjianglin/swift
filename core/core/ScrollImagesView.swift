@@ -12,19 +12,19 @@ import UIKit
 
 private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
 
-    private var _imagePath:String?;
-    private var _imageView:CacheImageView!;
-    private var fill:ImageFill = ImageFill.Default;
+    fileprivate var _imagePath:String?;
+    fileprivate var _imageView:CacheImageView!;
+    fileprivate var fill:ImageFill = ImageFill.default;
     
-    private var _contentView:UIView!;
-    private var _preImageSize = CGSizeMake(0, 0);
-    private var _preViewSize = CGSizeMake(0, 0);
-    private var _linImagesView:ScrollImagesView!;
+    fileprivate var _contentView:UIView!;
+    fileprivate var _preImageSize = CGSize(width: 0, height: 0);
+    fileprivate var _preViewSize = CGSize(width: 0, height: 0);
+    fileprivate var _linImagesView:ScrollImagesView!;
     
     
-    private init(imagePath:String, fill:ImageFill, zoom:Bool, linImagesView:ScrollImagesView){
+    fileprivate init(imagePath:String, fill:ImageFill, zoom:Bool, linImagesView:ScrollImagesView){
         
-        super.init(frame: CGRectMake(0, 0, 0, 0));
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0));
         
         self._imagePath = imagePath;
         self.fill = fill;
@@ -37,7 +37,7 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var image:UIImage?{
+    fileprivate var image:UIImage?{
         get{
             return self._imageView?.image;
         }
@@ -48,7 +48,7 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
 
     
     //    //缩放
-    private var zoom:Bool = false{
+    fileprivate var zoom:Bool = false{
         didSet{
             //    self->_zoom = zoom;
             self.bouncesZoom = zoom;
@@ -59,18 +59,18 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
     }
     
     
-    @objc private func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    @objc fileprivate func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return _contentView;
     }
     
-    private func initView(){
+    fileprivate func initView(){
         //    __weak LinImagesContentView * wself = self;
         
         //    self.backgroundColor = [UIColor grayColor];
-        self.backgroundColor = UIColor.clearColor();
-        _contentView = UIView(frame:CGRectMake(0, 0, 200, 200));
+        self.backgroundColor = UIColor.clear;
+        _contentView = UIView(frame:CGRect(x: 0, y: 0, width: 200, height: 200));
         //    contentView.backgroundColor = [[UIColor alloc] initWithRed:0.72 green:0.72 blue:0.72 alpha:1.0];
-        _contentView.backgroundColor = UIColor.clearColor();
+        _contentView.backgroundColor = UIColor.clear;
         self.addSubview(_contentView);
         
         _imageView = CacheImageView();
@@ -84,18 +84,18 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
         self.delegate = self;
         self.autoresizesSubviews = true;
         //    self.userInteractionEnabled = FALSE;
-        self.contentMode = UIViewContentMode.Redraw;
+        self.contentMode = UIViewContentMode.redraw;
         
         self.scrollsToTop = false;
         self.delaysContentTouches = false;
         self.showsVerticalScrollIndicator = false;
         self.showsHorizontalScrollIndicator = false;
-        self.contentMode = UIViewContentMode.Redraw;
-        self.userInteractionEnabled = true;
+        self.contentMode = UIViewContentMode.redraw;
+        self.isUserInteractionEnabled = true;
         self.autoresizesSubviews = false;
     }
     
-    private func update(){
+    fileprivate func update(){
         var contentViewRect = _contentView.bounds;
         if self.bounds.size.width == 0 || self.bounds.size.height == 0 {
             return;
@@ -111,7 +111,7 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
             _contentView.frame = contentViewRect2;
             self.zoomScale = 1;
         }
-        let imageSize = _imageView.image?.size ?? CGSizeMake(0, 0);
+        let imageSize = _imageView.image?.size ?? CGSize(width: 0, height: 0);
         if imageSize.width != _preImageSize.width || imageSize.height != _preImageSize.height
             || self.bounds.size.width != _preViewSize.width || self.bounds.size.height != _preViewSize.height
         {
@@ -119,10 +119,10 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
             _preViewSize = self.bounds.size;
             contentViewRect = _contentView.bounds;
             var s:CGFloat = 1.0;
-            if self.fill != ImageFill.Fill {
+            if self.fill != ImageFill.fill {
                 s = (_preImageSize.width * 1.0 / _preImageSize.height)/(self.bounds.size.width * 1.0 / self.bounds.size.height);
             }
-            if (ImageFill.Default == self.fill && s > 1) || self.fill == ImageFill.Width {
+            if (ImageFill.default == self.fill && s > 1) || self.fill == ImageFill.width {
                 contentViewRect.size.width = self.bounds.size.width;
                 contentViewRect.size.height = self.bounds.size.height / s;
                 contentViewRect.origin.x = 0;
@@ -138,33 +138,33 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
         }
     }
     
-    private override func layoutSubviews() {
+    fileprivate override func layoutSubviews() {
         self.update();
     }
 }
 
 
-public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate{
+open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate{
 
-    private var _isFullScreen = false;
-    private var _fullScreenItem = 0;
+    fileprivate var _isFullScreen = false;
+    fileprivate var _fullScreenItem = 0;
     
-    private var _fill = ImageFill.Default;
-    private var _addImages = [UIImageView]();
-    private var _views = [UIView]();
-    private var _positionLabelView:UIView!;
-    private var _resetImagePaths = false;
-    private var _noneImageLabels = [UILabel]();
-    private var _scrollView:UIScrollView!;
-    private var _currentItem = 0;
-    private var _positionLabel:UILabel!;
-    private var _playImageView:FillImageView?;
+    fileprivate var _fill = ImageFill.default;
+    fileprivate var _addImages = [UIImageView]();
+    fileprivate var _views = [UIView]();
+    fileprivate var _positionLabelView:UIView!;
+    fileprivate var _resetImagePaths = false;
+    fileprivate var _noneImageLabels = [UILabel]();
+    fileprivate var _scrollView:UIScrollView!;
+    fileprivate var _currentItem = 0;
+    fileprivate var _positionLabel:UILabel!;
+    fileprivate var _playImageView:FillImageView?;
     
     
     public init() {
         //    self = [super init];
         //    if (self) {
-        super.init(frame:CGRectMake(0, 0, 0, 0));
+        super.init(frame:CGRect(x: 0, y: 0, width: 0, height: 0));
         self.initView();
         _resetImagePaths = true;
         self.showPositionLabel = true;
@@ -175,20 +175,20 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     }
     
     
-    public var vedioImage:AnyObject?;
+    open var vedioImage:AnyObject?;
     
-    public var edited = false{
+    open var edited = false{
         didSet{
-            self.userInteractionEnabled = true;
+            self.isUserInteractionEnabled = true;
             
             for item in _addImages {
-                item.hidden = !edited;
+                item.isHidden = !edited;
             }
         }
     }
     
     
-    public var fullScreen = false{
+    open var fullScreen = false{
         didSet{
 //            self.userInteractionEnabled = true;
         }
@@ -196,7 +196,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     
     
     ////使图像填满
-    public var fill = ImageFill.Default{
+    open var fill = ImageFill.default{
         didSet{
             for item in _views {
                 if item is LinImagesContentView {
@@ -207,7 +207,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     }
     
     ////缩放
-    public var zoom = false{
+    open var zoom = false{
         didSet{
             for item in _views {
                 if item is LinImagesContentView {
@@ -217,13 +217,13 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
         }
     }
     
-    public var showPositionLabel = false{
+    open var showPositionLabel = false{
         didSet{
-            self._positionLabelView.hidden = !showPositionLabel;
+            self._positionLabelView.isHidden = !showPositionLabel;
         }
     }
     
-    public var imageForEdited:[UIImage?]{
+    open var imageForEdited:[UIImage?]{
         var images = [UIImage?]();
         for item in _views {
             if item is LinImagesContentView {
@@ -251,44 +251,44 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
         for item in _views {
             if item is LinImagesContentView {
                 if let image = (item as! LinImagesContentView)._imageView.image {
-                    _images.addObject(image)
+                    _images.add(image)
                 }else{
-                    _images.addObject(NSNull());
+                    _images.add(NSNull());
                 }
             }
         }
         return _images;
     }
     
-    private var _vedioURL:NSURL?;
+    fileprivate var _vedioURL:URL?;
     
-    public var vedioUrl:NSURL?{
+    open var vedioUrl:URL?{
         get{ return _vedioURL;}
         set{ _vedioURL = newValue;self.resetVedioView();}
     }
     
-    public var hasVedio:Bool = false{
+    open var hasVedio:Bool = false{
         didSet{
             self.resetVedioView();
         }
     }
     
-    public var imagePaths:[String]?{
+    open var imagePaths:[String]?{
         didSet{
             self.resetImageViews();
         }
     }
     
-    private func resetVedioView(){
+    fileprivate func resetVedioView(){
         if !hasVedio {
             
             //if (views != nil && views.count > 0 && [NSStringFromClass([views[0] class]) isEqualToString:@"MPMovieView"] ){
             if let playImageView = _playImageView {
                 playImageView.removeFromSuperview();
                 //            [views removeObjectAtIndex:0];
-                _views.removeAtIndex(0);
+                _views.remove(at: 0);
                 //            [addImages removeObjectAtIndex:0];
-                _addImages.removeAtIndex(0);
+                _addImages.remove(at: 0);
                 self.update();
             }
             return;
@@ -308,31 +308,31 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             //        player.view.backgroundColor = [UIColor clearColor];
             
             _playImageView = FillImageView();
-            _playImageView?.frame = CGRectMake(0, 0, 100, 100);
+            _playImageView?.frame = CGRect(x: 0, y: 0, width: 100, height: 100);
             //        [views insertObject:player.view atIndex:0];
             //        [scrollView addSubview:player.view];
-            _views.insert(_playImageView!, atIndex:0);
+            _views.insert(_playImageView!, at:0);
             _scrollView.addSubview(_playImageView!);
             //        _playImageView?.image = self.vedioImage;
             _playImageView?.setFillImage(self.vedioImage);
             //        _playImageView.image = [UIImage imageNamed:@"LinCore.bundle/camera/camera_icon_camera_add.png"];;
             
-            _playImageView?.userInteractionEnabled = true;
+            _playImageView?.isUserInteractionEnabled = true;
             
             _playImageView?.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.playVedio)));
             
             let itemAddImage = UIImageView();
             //[addImages addObject:itemAddImage];
-            _addImages.insert(itemAddImage, atIndex:0);
+            _addImages.insert(itemAddImage, at:0);
             
-            itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png", inBundle: NSBundle(forClass:self.classForCoder), compatibleWithTraitCollection: nil);
+            itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png", in: Bundle(for:self.classForCoder), compatibleWith: nil);
             
             _scrollView.addSubview(itemAddImage);
             
             
-            itemAddImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleBottomMargin.rawValue | UIViewAutoresizing.FlexibleLeftMargin.rawValue | UIViewAutoresizing.FlexibleTopMargin.rawValue | UIViewAutoresizing.FlexibleRightMargin.rawValue);
-            itemAddImage.frame = CGRectMake(0, 0, 64, 64);
-            itemAddImage.hidden = !self.edited;
+            itemAddImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleBottomMargin.rawValue | UIViewAutoresizing.flexibleLeftMargin.rawValue | UIViewAutoresizing.flexibleTopMargin.rawValue | UIViewAutoresizing.flexibleRightMargin.rawValue);
+            itemAddImage.frame = CGRect(x: 0, y: 0, width: 64, height: 64);
+            itemAddImage.isHidden = !self.edited;
             
             
         }
@@ -341,8 +341,8 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
         
     }
     
-    @objc private func movieFinishedCallback(sender:AnyObject){
-        let playerViewController = (sender as! NSNotification).object;
+    @objc fileprivate func movieFinishedCallback(_ sender:AnyObject){
+        let playerViewController = (sender as! Notification).object;
         //    playerViewController view
         //    [playerViewController removeFromParentViewController];
         if let playerViewController = playerViewController{
@@ -351,7 +351,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             }
         }
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:MPMoviePlayerPlaybackDidFinishNotification, object:nil);
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object:nil);
         
         //    self.navigationController.navigationBar.hidden = FALSE;
     }
@@ -361,26 +361,26 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
         
         //    MPMoviePlayerViewController *playerViewController = [[MPMoviePlayerViewController alloc] init];
         
-        self.rootViewController?.addChildViewController(playerViewController);
+        self.rootViewController?.addChildViewController(playerViewController!);
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(self.movieFinishedCallback),
-                                                         name:MPMoviePlayerPlaybackDidFinishNotification,
-                                                         object:(playerViewController.moviePlayer));
+        NotificationCenter.default.addObserver(self, selector:#selector(self.movieFinishedCallback),
+                                                         name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+                                                         object:(playerViewController?.moviePlayer));
         //-- add to view---
-        self.rootViewController?.view.addSubview(playerViewController.view);
+        self.rootViewController?.view.addSubview((playerViewController?.view)!);
         
         //playerViewController.view.frame = CGRectMake(20, 20, 200, 300);
         
         //playerViewController.
         
         //---play movie---
-        let player = playerViewController.moviePlayer;
+        let player = playerViewController?.moviePlayer;
         
         //player.contentURL = [NSURL URLWithString:@"http://i.feicuibaba.com/test.mp4"];
         //    player.contentURL = _vedioUrl;
         
         //    [player prepareToPlay];
-        player.play();
+        player?.play();
     }
     
     private func resetImageViews(){
@@ -414,7 +414,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             //        [views addObject:player.view];
             //        [scrollView addSubview:player.view];
             _views.append(playImageView);
-            playImageView.hidden = true;
+            playImageView.isHidden = true;
             _scrollView.addSubview(playImageView);
             
             let itemAddImage = UIImageView();
@@ -423,8 +423,8 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             //        itemAddImage.image = [UIImage imageNamed:@"LinCore.bundle/camera/camera_icon_camera_add.png"];
             
 //            itemAddImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleBottomMargin.rawValue | UIViewAutoresizing.FlexibleLeftMargin.rawValue | UIViewAutoresizing.FlexibleTopMargin.rawValue | UIViewAutoresizing.FlexibleRightMargin.rawValue);
-            itemAddImage.frame = CGRectMake(0, 0, 60, 60);
-            itemAddImage.hidden = !self.edited;
+            itemAddImage.frame = CGRect(x: 0, y: 0, width: 60, height: 60);
+            itemAddImage.isHidden = !self.edited;
             
             
         }
@@ -436,26 +436,26 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             for n in 0 ..< imagePaths.count {
                 itemView = LinImagesContentView(imagePath:imagePaths[n], fill:self.fill, zoom:self.zoom, linImagesView:self);
                 //        itemView.backgroundColor = [[UIColor alloc] initWithRed:0.72 green:0.72 blue:0.72 alpha:1.0];
-                itemView.backgroundColor = UIColor.clearColor();
+                itemView.backgroundColor = UIColor.clear;
                 _scrollView.addSubview(itemView);
                 _views.append(itemView);
                 
                 let itemAddImage = UIImageView();
                 _addImages.append(itemAddImage);
 //                itemAddImage.image = UIImage(named:"resources.bundle/publish/imagesEditAdd.png");
-                itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png", inBundle: NSBundle(forClass:self.classForCoder), compatibleWithTraitCollection: nil);
+                itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png", in: Bundle(for:self.classForCoder), compatibleWith: nil);
                 _scrollView.addSubview(itemAddImage);
 //                itemAddImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleBottomMargin.rawValue | UIViewAutoresizing.FlexibleLeftMargin.rawValue | UIViewAutoresizing.FlexibleTopMargin.rawValue | UIViewAutoresizing.FlexibleRightMargin.rawValue);
-                itemAddImage.frame = CGRectMake(0, 0, 60, 60);
-                itemAddImage.hidden = !self.edited;
+                itemAddImage.frame = CGRect(x: 0, y: 0, width: 60, height: 60);
+                itemAddImage.isHidden = !self.edited;
                 itemAddImage.tag = n;
                 
                 let itemNoneImageLabel = UILabel();
                 _noneImageLabels.append(itemNoneImageLabel);
                 itemNoneImageLabel.text = "没有图像";
-                itemNoneImageLabel.textAlignment = NSTextAlignment.Center;
-                itemNoneImageLabel.frame = CGRectMake(0, 0, 160, 60);
-                itemNoneImageLabel.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleWidth.rawValue | UIViewAutoresizing.FlexibleTopMargin.rawValue | UIViewAutoresizing.FlexibleBottomMargin.rawValue);
+                itemNoneImageLabel.textAlignment = NSTextAlignment.center;
+                itemNoneImageLabel.frame = CGRect(x: 0, y: 0, width: 160, height: 60);
+                itemNoneImageLabel.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleTopMargin.rawValue | UIViewAutoresizing.flexibleBottomMargin.rawValue);
                 _scrollView.addSubview(itemNoneImageLabel);
             }
         }
@@ -469,67 +469,67 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     
     private func initView(){
         
-        self.userInteractionEnabled = true;
+        self.isUserInteractionEnabled = true;
         
         //    __weak ScrollImagesView * wself = self;
         _scrollView = UIScrollView();
         self.backgroundColor = UIColor(red:0.72, green:0.72, blue:0.72, alpha:1.0);
-        _scrollView.backgroundColor = UIColor.clearColor();
+        _scrollView.backgroundColor = UIColor.clear;
         _scrollView.autoresizesSubviews = true;
-        _scrollView.contentMode = UIViewContentMode.Redraw;
+        _scrollView.contentMode = UIViewContentMode.redraw;
         _scrollView.showsHorizontalScrollIndicator = false;
         _scrollView.showsVerticalScrollIndicator = false;
         _scrollView.scrollsToTop = false;
         _scrollView.delaysContentTouches = false;
-        _scrollView.pagingEnabled = true;
+        _scrollView.isPagingEnabled = true;
         _scrollView.bouncesZoom = false;
         _scrollView.zoomScale = 1;
         _scrollView.minimumZoomScale = 1;
         _scrollView.maximumZoomScale = 1;
         _scrollView.delegate = self;
         self.addSubview(_scrollView);
-        _scrollView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
-        _scrollView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleWidth.rawValue | UIViewAutoresizing.FlexibleHeight.rawValue);
+        _scrollView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height);
+        _scrollView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
         
-        _positionLabelView = UIView(frame:CGRectMake(0, 0, 40, 40));
-        _positionLabelView.userInteractionEnabled = false;
-        _positionLabelView.hidden = !self.showPositionLabel;
-        _positionLabelView.backgroundColor = UIColor.clearColor();
+        _positionLabelView = UIView(frame:CGRect(x: 0, y: 0, width: 40, height: 40));
+        _positionLabelView.isUserInteractionEnabled = false;
+        _positionLabelView.isHidden = !self.showPositionLabel;
+        _positionLabelView.backgroundColor = UIColor.clear;
         self.addSubview(_positionLabelView);
         
         _positionLabel = UILabel();
         _positionLabel.font = UIFont(name:"STHeitiSC-Light", size:14.0);
-        _positionLabel.textAlignment = NSTextAlignment.Center;
-        _positionLabel.backgroundColor = UIColor.clearColor();
+        _positionLabel.textAlignment = NSTextAlignment.center;
+        _positionLabel.backgroundColor = UIColor.clear;
         
-        let pathFrame = CGRectMake(0, 0, 40, 40);
+        let pathFrame = CGRect(x: 0, y: 0, width: 40, height: 40);
         let path = UIBezierPath(roundedRect:pathFrame, cornerRadius:20);
         
         let circleShape = CAShapeLayer();
-        circleShape.path = path.CGPath;
-        circleShape.position = CGPointMake(0, 0);
-        circleShape.fillColor = UIColor(red:0.5, green:0.5, blue:0.5, alpha:0.85).CGColor;
-        circleShape.strokeColor = UIColor.clearColor().CGColor;
+        circleShape.path = path.cgPath;
+        circleShape.position = CGPoint(x: 0, y: 0);
+        circleShape.fillColor = UIColor(red:0.5, green:0.5, blue:0.5, alpha:0.85).cgColor;
+        circleShape.strokeColor = UIColor.clear.cgColor;
         circleShape.lineWidth = 1.0;
         
         _positionLabelView.layer.addSublayer(circleShape);
         _positionLabelView.addSubview(_positionLabel);
         //    positionLabelView.backgroundColor = [UIColor redColor];
-        _positionLabel.frame = CGRectMake(_positionLabelView.bounds.origin.x, _positionLabelView.bounds.origin.y, _positionLabelView.bounds.size.width, _positionLabelView.bounds.size.height);
-        _positionLabel.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleHeight.rawValue | UIViewAutoresizing.FlexibleWidth.rawValue);
+        _positionLabel.frame = CGRect(x: _positionLabelView.bounds.origin.x, y: _positionLabelView.bounds.origin.y, width: _positionLabelView.bounds.size.width, height: _positionLabelView.bounds.size.height);
+        _positionLabel.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleHeight.rawValue | UIViewAutoresizing.flexibleWidth.rawValue);
         
         self.addGestureRecognizer(UITapGestureRecognizer(action:{[weak self](sender:AnyObject) in
             self?.addImageTap();
             }));
         //    self.userInteractionEnabled = FALSE;
         //     self.userInteractionEnabled = (self->_edited || self->_fullScreen || self->_isFullScreen);
-        self.userInteractionEnabled = true;
+        self.isUserInteractionEnabled = true;
         //    NSLog(@"userInteractionEnabled:%d",self.userInteractionEnabled);
     }
     
     private func update(){
         //    self.userInteractionEnabled = (self->_edited || self->_fullScreen || self->_isFullScreen) && self->_controller;
-        self.userInteractionEnabled = true;
+        self.isUserInteractionEnabled = true;
         let rect = self.bounds;
         if rect.size.width == 0 || rect.size.height == 0 {
             return;
@@ -556,14 +556,14 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             
             let itemAddImage = _addImages[n];
             
-            itemAddImage.hidden = !self.edited;
+            itemAddImage.isHidden = !self.edited;
             
             if _playImageView != nil && n == 0 {
-                itemAddImage.hidden = false;
+                itemAddImage.isHidden = false;
                 if (self.edited) {
-                    itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png",inBundle: NSBundle(forClass: self.classForCoder),compatibleWithTraitCollection: nil);
+                    itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png",in: Bundle(for: self.classForCoder),compatibleWith: nil);
                 }else{
-                    itemAddImage.image = UIImage(named:"LinCore.bundle/play.png",inBundle: NSBundle(forClass: self.classForCoder),compatibleWithTraitCollection: nil);
+                    itemAddImage.image = UIImage(named:"LinCore.bundle/play.png",in: Bundle(for: self.classForCoder),compatibleWith: nil);
                 }
             }
             
@@ -572,7 +572,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             itemAddImageRect.origin.y = (rect.size.height - itemAddImageRect.size.height) / 2.0;
             itemAddImage.frame = itemAddImageRect;
             
-            _scrollView.bringSubviewToFront(itemAddImage);
+            _scrollView.bringSubview(toFront: itemAddImage);
             
             if _views[n] is LinImagesContentView {
                 
@@ -580,15 +580,15 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
                 
                 let imageItme = _views[n] as! LinImagesContentView;
                 
-                _noneImageLabels[imageItemN].hidden = imageItme._imagePath != nil || self.edited;
+                _noneImageLabels[imageItemN].isHidden = imageItme._imagePath != nil || self.edited;
             }
         }
-        _scrollView.contentSize = CGSizeMake(rect.size.width * CGFloat(_views.count), rect.size.height);
+        _scrollView.contentSize = CGSize(width: rect.size.width * CGFloat(_views.count), height: rect.size.height);
         var offsetX = _scrollView.contentOffset;
         offsetX.x = rect.size.width * CGFloat(self._currentItem);
         _scrollView.contentOffset = offsetX;
         
-        var positionLabelRect = CGRectMake(0, 0, 40, 40);
+        var positionLabelRect = CGRect(x: 0, y: 0, width: 40, height: 40);
         positionLabelRect.origin.x = rect.size.width - 40 - rect.size.width * 0.05;
         positionLabelRect.origin.y = rect.size.height * 0.05;
         _positionLabelView.frame = positionLabelRect;
@@ -596,7 +596,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
         self.setCurrentItem(self._currentItem);
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews();
         self.update();
     }
@@ -610,7 +610,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
                 camera.setResult({[weak self] (url) in
                     self?._vedioURL = url;
                 })
-                self.viewController?.presentViewController(camera, animated: true, completion: nil);
+                self.viewController?.present(camera, animated: true, completion: nil);
                 return;
             }
             
@@ -640,19 +640,19 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             
             let navigationController = UINavigationController(rootViewController: imagePickerController);
 
-            self.viewController?.presentViewController(navigationController, animated: true, completion: nil);
+            self.viewController?.present(navigationController, animated: true, completion: nil);
             
         }else {
             if self._isFullScreen {//退出全屏
                 
-                self.viewController?.dismissViewControllerAnimated(true, completion:nil);
+                self.viewController?.dismiss(animated: true, completion:nil);
             }else if self.fullScreen {//进入全屏
                 
                 
                 let fullScreenView = ScrollImagesView();
                 
                 fullScreenView.edited = false;
-                fullScreenView.fill = ImageFill.Default;
+                fullScreenView.fill = ImageFill.default;
                 fullScreenView.zoom = true;
                 fullScreenView.fullScreen = false;
                 fullScreenView.imagePaths = self.imagePaths;
@@ -668,10 +668,10 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
                 let fullScreenController = UIViewController();
                 
                 fullScreenController.view.addSubview(fullScreenView);
-                fullScreenView.frame = CGRectMake(0, 0, fullScreenController.view.bounds.size.width, fullScreenController.view.bounds.size.height);
-                fullScreenView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleWidth.rawValue | UIViewAutoresizing.FlexibleHeight.rawValue);
+                fullScreenView.frame = CGRect(x: 0, y: 0, width: fullScreenController.view.bounds.size.width, height: fullScreenController.view.bounds.size.height);
+                fullScreenView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
                 
-                self.viewController?.presentViewController(fullScreenController, animated:true, completion:nil);
+                self.viewController?.present(fullScreenController, animated:true, completion:nil);
             }
         }
     }
@@ -679,7 +679,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     //-(int)currentItem{
     //    return _currentItem;
     //}
-    private func setCurrentItem(currentItem:Int){
+    private func setCurrentItem(_ currentItem:Int){
         //    if (views != nil) {
         if _views.count > 0 {
             _positionLabel.text = "\(currentItem+1)/\(_views.count)";
@@ -699,7 +699,7 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     }
     
     
-    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         let contentOffsetX = scrollView.contentOffset.x;
         //    if (views != nil) {
@@ -716,9 +716,9 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
     }
     
     
-    public func imagePickerController(imagePickerController: QBImagePickerController, didFinishPickingMediaWithInfo info: AnyObject!) {
+    @nonobjc public func imagePickerController(_ imagePickerController: QBImagePickerController, didFinishPickingMediaWithInfo info: AnyObject!) {
         
-        self.willChangeValueForKey("images")
+        self.willChangeValue(forKey: "images")
     
         if imagePickerController.allowsMultipleSelection {
             let mediaInfoArray = info as! [NSDictionary];
@@ -741,33 +741,33 @@ public class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollVie
             (_views[_currentItem] as! LinImagesContentView).image = image;
             (_views[_currentItem] as! LinImagesContentView).tag = 2;
         }
-        imagePickerController.dismissViewControllerAnimated(true, completion: nil);
+        imagePickerController.dismiss(animated: true, completion: nil);
         
-        self.didChangeValueForKey("images")
+        self.didChangeValue(forKey: "images")
     }
     
-    public func imagePickerControllerDidCancel(imagePickerController: QBImagePickerController!) {
-        imagePickerController.dismissViewControllerAnimated(true, completion: nil);
+    public func imagePickerControllerDidCancel(_ imagePickerController: QBImagePickerController!) {
+        imagePickerController.dismiss(animated: true, completion: nil);
     }
     
-    @objc public func descriptionForSelectingAllAssets(imagePickerController: QBImagePickerController!) -> String! {
+    @objc public func description(forSelectingAllAssets imagePickerController: QBImagePickerController!) -> String! {
         return "选择所有";
     }
     
-    @objc public func descriptionForDeselectingAllAssets(imagePickerController: QBImagePickerController!) -> String! {
+    @objc public func description(forDeselectingAllAssets imagePickerController: QBImagePickerController!) -> String! {
         return "取消所有选择";
     }
     
-    @objc public func imagePickerController(imagePickerController: QBImagePickerController!, descriptionForNumberOfPhotos numberOfPhotos: UInt) -> String! {
+    @objc public func imagePickerController(_ imagePickerController: QBImagePickerController!, descriptionForNumberOfPhotos numberOfPhotos: UInt) -> String! {
         return "共有\(numberOfPhotos)张照片";
     }
     
-    @objc public func imagePickerController(imagePickerController: QBImagePickerController!, descriptionForNumberOfVideos numberOfVideos: UInt) -> String! {
+    @objc public func imagePickerController(_ imagePickerController: QBImagePickerController!, descriptionForNumberOfVideos numberOfVideos: UInt) -> String! {
         return "共有\(numberOfVideos)个视频"
     }
     
     
-    @objc public func imagePickerController(imagePickerController: QBImagePickerController!, descriptionForNumberOfPhotos numberOfPhotos: UInt, numberOfVideos: UInt) -> String! {
+    @objc public func imagePickerController(_ imagePickerController: QBImagePickerController!, descriptionForNumberOfPhotos numberOfPhotos: UInt, numberOfVideos: UInt) -> String! {
         return "共有\(numberOfPhotos)张照片，\(numberOfVideos)个视频";
     }
 }

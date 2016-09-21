@@ -8,29 +8,29 @@
 
 import UIKit
 
-public class FormDescriptor: NSObject {
+open class FormDescriptor: NSObject {
 
     /// MARK: Properties
     
-    public var title: String!
+    open var title: String!
     
-    public var sections: [FormSectionDescriptor] = []
+    open var sections: [FormSectionDescriptor] = []
     
     /// MARK: Public interface
     
-    public func addSection(section: FormSectionDescriptor) {
+    open func addSection(_ section: FormSectionDescriptor) {
         sections.append(section)
     }
     
-    public func removeSection(section: FormSectionDescriptor) {
-        if let index = sections.indexOf(section) {
-            sections.removeAtIndex(index)
+    open func removeSection(_ section: FormSectionDescriptor) {
+        if let index = sections.index(of: section) {
+            sections.remove(at: index)
         }
     }
     
-    public func formValues() -> Dictionary<String, NSObject> {
+    open func formValues() -> Dictionary<String, Any> {
         
-        var formValues: Dictionary<String, NSObject> = [:]
+        var formValues: Dictionary<String, Any> = [:]
 
         for section in sections {
             for row in section.rows {

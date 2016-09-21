@@ -11,17 +11,17 @@ import Foundation
 
 public protocol HttpRequestHandle{
     
-    func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?;
+    func getParams(_ request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?;
     
-    func response(package:HttpPackage,response:AnyObject!,result:((obj:AnyObject!,warning:[HttpError])->()),fault:((error:HttpError)->()) );
+    func response(_ package:HttpPackage,response:AnyObject!,result:((_ obj:AnyObject?,_ warning:[HttpError])->()),fault:((_ error:HttpError)->()) );
 }
 
-public class AbstractHttpRequestHandle : HttpRequestHandle{
-    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
+open class AbstractHttpRequestHandle : HttpRequestHandle{
+    open func getParams(_ request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
         return nil;
     }
     
-    public func response(package:HttpPackage,response:AnyObject!,result:((obj:AnyObject!,warning:[HttpError])->()),fault:((error:HttpError)->()) ){
+    open func response(_ package:HttpPackage,response:AnyObject!,result:((_ obj:AnyObject?,_ warning:[HttpError])->()),fault:((_ error:HttpError)->()) ){
         
     }
 }

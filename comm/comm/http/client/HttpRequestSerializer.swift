@@ -17,30 +17,30 @@ extension String {
         - returns: Encoded version of of string it was called as.
     */
     var escaped: String {
-        return CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,self,"[].",":/?&=;+!@#$()',*",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)) as String;
+        return CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,self as CFString!,"[]." as CFString!,":/?&=;+!@#$()',*" as CFString!,CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue)) as String;
     }
 }
 
 /// Default Serializer for serializing an object to an HTTP request. This applies to form serialization, parameter encoding, etc.
-public class HttpRequestSerializer: NSObject {
+open class HttpRequestSerializer: NSObject {
     let contentTypeKey = "Content-Type"
     
     /// headers for the request.
-    public var headers = Dictionary<String,String>()
+    open var headers = Dictionary<String,String>()
     /// encoding for the request.
-    public var stringEncoding: UInt = NSUTF8StringEncoding
+    open var stringEncoding: String.Encoding = String.Encoding.utf8
     /// Send request if using cellular network or not. Defaults to true.
-    public var allowsCellularAccess = true
+    open var allowsCellularAccess = true
     /// If the request should handle cookies of not. Defaults to true.
-    public var HTTPShouldHandleCookies = true
+    open var HTTPShouldHandleCookies = true
     /// If the request should use piplining or not. Defaults to false.
-    public var HTTPShouldUsePipelining = false
+    open var HTTPShouldUsePipelining = false
     /// How long the timeout interval is. Defaults to 60 seconds.
-    public var timeoutInterval: NSTimeInterval = 60
+    open var timeoutInterval: TimeInterval = 60
     /// Set the request cache policy. Defaults to UseProtocolCachePolicy.
-    public var cachePolicy: NSURLRequestCachePolicy = NSURLRequestCachePolicy.UseProtocolCachePolicy
+    open var cachePolicy: URLRequest.CachePolicy = NSURLRequest.CachePolicy.useProtocolCachePolicy
     /// Set the network service. Defaults to NetworkServiceTypeDefault.
-    public var networkServiceType = NSURLRequestNetworkServiceType.NetworkServiceTypeDefault
+    open var networkServiceType = NSURLRequest.NetworkServiceType.default
     
     /// Initializes a new HTTPRequestSerializer Object.
     public override init() {
@@ -55,14 +55,14 @@ public class HttpRequestSerializer: NSObject {
     
         - returns: A new NSMutableURLRequest with said options.
     */
-    func newRequest(url: NSURL, method: HttpMethod) -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(URL: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
-        request.HTTPMethod = method.rawValue
+    func newRequest(_ url: URL, method: HttpMethod) -> NSMutableURLRequest {
+        let request = NSMutableURLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
+        request.httpMethod = method.rawValue
         request.cachePolicy = self.cachePolicy
         request.timeoutInterval = self.timeoutInterval
         request.allowsCellularAccess = self.allowsCellularAccess
-        request.HTTPShouldHandleCookies = self.HTTPShouldHandleCookies
-        request.HTTPShouldUsePipelining = self.HTTPShouldUsePipelining
+        request.httpShouldHandleCookies = self.HTTPShouldHandleCookies
+        request.httpShouldUsePipelining = self.HTTPShouldUsePipelining
         request.networkServiceType = self.networkServiceType
         for (key,val) in self.headers {
             request.addValue(val, forHTTPHeaderField: key)
@@ -79,7 +79,7 @@ public class HttpRequestSerializer: NSObject {
         
         - returns: A new NSMutableURLRequest with said options or an error.
     */
-    func createRequest(url: NSURL, method: HttpMethod, parameters: Dictionary<String,AnyObject>?,isMulti isDefMulti:Bool? = nil) -> (request: NSMutableURLRequest, error: NSError?) {
+    func createRequest(_ url: URL, method: HttpMethod, parameters: Dictionary<String,AnyObject>?,isMulti isDefMulti:Bool? = nil) -> (request: NSMutableURLRequest, error: NSError?) {
         
         let request = newRequest(url, method: method)
         var isMulti = isDefMulti;
@@ -91,13 +91,13 @@ public class HttpRequestSerializer: NSObject {
         }
         if isMulti! {
             if(method != .POST && method != .PUT) {
-                request.HTTPMethod = HttpMethod.POST.rawValue // you probably wanted a post
+                request.httpMethod = HttpMethod.POST.rawValue // you probably wanted a post
             }
             let boundary = "Boundary+\(arc4random())\(arc4random())"
             if parameters != nil {
-                request.HTTPBody = dataFromParameters(parameters!,boundary: boundary)
+                request.httpBody = dataFromParameters(parameters!,boundary: boundary)
             }
-            if request.valueForHTTPHeaderField(contentTypeKey) == nil {
+            if request.value(forHTTPHeaderField: contentTypeKey) == nil {
                 request.setValue("multipart/form-data; boundary=\(boundary)",
                     forHTTPHeaderField:contentTypeKey)
             }
@@ -108,26 +108,27 @@ public class HttpRequestSerializer: NSObject {
             queryString = self.stringFromParameters(parameters!)
         }
         if isURIParam(method) {
-            let para = (request.URL!.query != nil) ? "&" : "?"
-            var newUrl = "\(request.URL!.absoluteString)"
+            let para = (request.url!.query != nil) ? "&" : "?"
+            var newUrl = "\(request.url!.absoluteString)"
             if queryString.characters.count > 0 {
                 newUrl += "\(para)\(queryString)"
-                newUrl = newUrl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) ?? "";
+                newUrl = newUrl.addingPercentEscapes(using: String.Encoding.utf8) ?? "";
             }
-            request.URL = NSURL(string: newUrl)
+            request.url = URL(string: newUrl)
         } else {
-            let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.stringEncoding));
-            if request.valueForHTTPHeaderField(contentTypeKey) == nil {
+            let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.stringEncoding.rawValue));
+            if request.value(forHTTPHeaderField: contentTypeKey) == nil {
                 request.setValue("application/x-www-form-urlencoded; charset=\(charset)",
                     forHTTPHeaderField:contentTypeKey)
             }
-            request.HTTPBody = queryString.dataUsingEncoding(self.stringEncoding)
+//            request.httpBody = queryString.data(using: String.Encoding(rawValue: self.stringEncoding))
+            request.httpBody = queryString.data(using: self.stringEncoding)
         }
         return (request,nil)
     }
     
     ///check for multi form objects
-    func isMultiForm(params: Dictionary<String,AnyObject>) -> Bool {
+    func isMultiForm(_ params: Dictionary<String,AnyObject>) -> Bool {
         for (_, object) in params {
             if object is HttpUpload {
                 return true
@@ -140,14 +141,14 @@ public class HttpRequestSerializer: NSObject {
         return false
     }
     ///convert the parameter dict to its HTTP string representation
-    func stringFromParameters(parameters: Dictionary<String,AnyObject>) -> String {
-        return serializeObject(parameters, key: nil).map({(pair) in
+    func stringFromParameters(_ parameters: Dictionary<String,AnyObject>) -> String {
+        return serializeObject(parameters as AnyObject, key: nil).map({(pair) in
             return pair.stringValue()
-            }).joinWithSeparator("&")
+            }).joined(separator: "&")
     }
     
     ///check if enum is a HTTPMethod that requires the params in the URL
-    func isURIParam(method: HttpMethod) -> Bool {
+    func isURIParam(_ method: HttpMethod) -> Bool {
         if(method == .GET || method == .HEAD || method == .DELETE) {
             return true
         }
@@ -155,16 +156,16 @@ public class HttpRequestSerializer: NSObject {
     }
     
     ///the method to serialized all the objects
-    func serializeObject(object: AnyObject,key: String?) -> Array<HttpPair> {
+    func serializeObject(_ object: AnyObject,key: String?) -> Array<HttpPair> {
         var collect = Array<HttpPair>()
         if let array = object as? Array<AnyObject> {
             for nestedValue : AnyObject in array {
-                collect.appendContentsOf(self.serializeObject(nestedValue,key: "\(key!)[]"))
+                collect.append(contentsOf: self.serializeObject(nestedValue,key: "\(key!)[]"))
             }
         } else if let dict = object as? Dictionary<String,AnyObject> {
             for (nestedKey, nestedObject) in dict {
                 let newKey = key != nil ? "\(key!)[\(nestedKey)]" : nestedKey
-                collect.appendContentsOf(self.serializeObject(nestedObject,key: newKey))
+                collect.append(contentsOf: self.serializeObject(nestedObject,key: newKey))
             }
         } else {
             collect.append(HttpPair(value: object, key: key))
@@ -173,44 +174,44 @@ public class HttpRequestSerializer: NSObject {
     }
     
     //create a multi form data object of the parameters
-    func dataFromParameters(parameters: Dictionary<String,AnyObject>,boundary: String) -> NSData {
+    func dataFromParameters(_ parameters: Dictionary<String,AnyObject>,boundary: String) -> Data {
         let mutData = NSMutableData()
         let multiCRLF = "\r\n"
-        let boundSplit =  "\(multiCRLF)--\(boundary)\(multiCRLF)".dataUsingEncoding(self.stringEncoding)!
-        let lastBound =  "\(multiCRLF)--\(boundary)--\(multiCRLF)".dataUsingEncoding(self.stringEncoding)!
-        mutData.appendData("--\(boundary)\(multiCRLF)".dataUsingEncoding(self.stringEncoding)!)
+        let boundSplit =  "\(multiCRLF)--\(boundary)\(multiCRLF)".data(using: self.stringEncoding)!
+        let lastBound =  "\(multiCRLF)--\(boundary)--\(multiCRLF)".data(using: self.stringEncoding)!
+        mutData.append("--\(boundary)\(multiCRLF)".data(using: self.stringEncoding)!)
         
-        let pairs = serializeObject(parameters, key: nil)
+        let pairs = serializeObject(parameters as AnyObject, key: nil)
         let count = pairs.count-1
         var i = 0
         for pair in pairs {
             var append = true
             if let upload = pair.getUpload() {
                  if let data = upload.data {
-                    mutData.appendData(multiFormHeader(pair.key, fileName: upload.fileName,
-                        type: upload.mimeType, multiCRLF: multiCRLF).dataUsingEncoding(self.stringEncoding)!)
-                    mutData.appendData(data)
+                    mutData.append(multiFormHeader(pair.key, fileName: upload.fileName,
+                        type: upload.mimeType, multiCRLF: multiCRLF).data(using: self.stringEncoding)!)
+                    mutData.append(data as Data)
                 } else {
                     append = false
                 }
             } else {
                 let str = "\(self.multiFormHeader(pair.key, fileName: nil, type: nil, multiCRLF: multiCRLF))\(pair.getValue())"
-                mutData.appendData(str.dataUsingEncoding(self.stringEncoding)!)
+                mutData.append(str.data(using: self.stringEncoding)!)
             }
             if append {
                 if i == count {
-                    mutData.appendData(lastBound)
+                    mutData.append(lastBound)
                 } else {
-                    mutData.appendData(boundSplit)
+                    mutData.append(boundSplit)
                 }
             }
-            i++
+            i += 1
         }
-        return mutData
+        return mutData as Data
     }
     
     ///helper method to create the multi form headers
-    func multiFormHeader(name: String, fileName: String?, type: String?, multiCRLF: String) -> String {
+    func multiFormHeader(_ name: String, fileName: String?, type: String?, multiCRLF: String) -> String {
         var str = "Content-Disposition: form-data; name=\"\(name.escaped)\""
         if fileName != nil {
             str += "; filename=\"\(fileName!)\""
@@ -260,7 +261,7 @@ public class HttpRequestSerializer: NSObject {
 }
 
 /// JSON Serializer for serializing an object to an HTTP request. Same as HTTPRequestSerializer, expect instead of HTTP form encoding it does JSON.
-public class JSONRequestSerializer: HttpRequestSerializer {
+open class JSONRequestSerializer: HttpRequestSerializer {
     
     /**
         Creates a new NSMutableURLRequest object with configured options.
@@ -271,20 +272,20 @@ public class JSONRequestSerializer: HttpRequestSerializer {
         
         - returns: A new NSMutableURLRequest with said options or an error.
     */
-    public override func createRequest(url: NSURL, method: HttpMethod, parameters: Dictionary<String,AnyObject>?,isMulti isDefMutil:Bool? = nil) -> (request: NSMutableURLRequest, error: NSError?) {
+    open override func createRequest(_ url: URL, method: HttpMethod, parameters: Dictionary<String,AnyObject>?,isMulti isDefMutil:Bool? = nil) -> (request: NSMutableURLRequest, error: NSError?) {
         if self.isURIParam(method) {
             return super.createRequest(url, method: method, parameters: parameters)
         }
         let request = newRequest(url, method: method)
         var error: NSError?
         if parameters != nil {
-            let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+            let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue));
             request.setValue("application/json; charset=\(charset)", forHTTPHeaderField: self.contentTypeKey)
             do {
-                request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(parameters!, options: NSJSONWritingOptions())
+                request.httpBody = try JSONSerialization.data(withJSONObject: parameters!, options: JSONSerialization.WritingOptions())
             } catch let error1 as NSError {
                 error = error1
-                request.HTTPBody = nil
+                request.httpBody = nil
             }
         }
         return (request, error)

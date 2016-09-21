@@ -30,10 +30,10 @@ extension UITextView{
 //    
     public func setup(){
         
-        let defaultCenter = NSNotificationCenter.defaultCenter();
+        let defaultCenter = NotificationCenter.default;
         
-        defaultCenter.addObserver(self, selector: #selector(UITextViewDelegate.textViewDidBeginEditing(_:)), name: UITextViewTextDidBeginEditingNotification, object: self);
-        defaultCenter.addObserver(self, selector: #selector(UITextViewDelegate.textViewDidEndEditing(_:)), name: UITextViewTextDidEndEditingNotification, object: self);
+        defaultCenter.addObserver(self, selector: #selector(UITextViewDelegate.textViewDidBeginEditing(_:)), name: NSNotification.Name.UITextViewTextDidBeginEditing, object: self);
+        defaultCenter.addObserver(self, selector: #selector(UITextViewDelegate.textViewDidEndEditing(_:)), name: NSNotification.Name.UITextViewTextDidEndEditing, object: self);
 
 //        toolbar.frame = CGRectMake(0, 0, self.window.frame.size.width, 44);
         
@@ -54,13 +54,13 @@ extension UITextView{
 //            })
 //            
 //        }else{
-            let toolbar = UIToolbar(frame: CGRectMake(0, 0, 100, 44));
+            let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 44));
             
-            toolbar.barStyle = UIBarStyle.Default;
+            toolbar.barStyle = UIBarStyle.default;
             
-            let doneBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(UITextView.doneButtonIsClicked(_:)));
+            let doneBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(UITextView.doneButtonIsClicked(_:)));
             
-            let spaceBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil);
+            let spaceBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil);
             
             let barButtonItems = [spaceBarButton,doneBarButton];
             
@@ -71,21 +71,21 @@ extension UITextView{
     }
     
     //- (void)textFieldDidBeginEditing:(NSNotification *) notification
-    public func textViewDidBeginEditing(notification:NSNotification){
+    public func textViewDidBeginEditing(_ notification:Notification){
         //println("begin...");
         
         
         //var textView = notification.object as UITextView;
  
-        let defaultCenter = NSNotificationCenter.defaultCenter();
+        let defaultCenter = NotificationCenter.default;
         
-        defaultCenter.addObserver(self,selector:#selector(UITextView.keyboardDidShow(_:)),name:UIKeyboardDidShowNotification,object:nil);
+        defaultCenter.addObserver(self,selector:#selector(UITextView.keyboardDidShow(_:)),name:NSNotification.Name.UIKeyboardDidShow,object:nil);
         
-        defaultCenter.addObserver(self,selector:#selector(UITextView.keyboardWillHide(_:)),name:UIKeyboardWillHideNotification,object:nil);
+        defaultCenter.addObserver(self,selector:#selector(UITextView.keyboardWillHide(_:)),name:NSNotification.Name.UIKeyboardWillHide,object:nil);
         
 //        defaultCenter.addObserver(self,selector:"UIDeviceOrientationDidChangeNotificationFun:",name:UIDeviceOrientationDidChangeNotification,object:nil);
         
-        preUIDeviceOrientationDidChangeNotification = UIDevice.currentDevice().orientation;
+        preUIDeviceOrientationDidChangeNotification = UIDevice.current.orientation;
 //        if orientation == preUIDeviceOrientationDidChangeNotification {
 //            return;
 //        }
@@ -106,17 +106,17 @@ extension UITextView{
     }
     
     //-(void) keyboardDidShow:(NSNotification *) notification
-    public func keyboardDidShow(notification:NSNotification)
+    public func keyboardDidShow(_ notification:Notification)
     {
-        var info = notification.userInfo;
+        var info = (notification as NSNotification).userInfo;
         
         let aValue = info![UIKeyboardFrameBeginUserInfoKey] as! NSValue;
         //var aValue = info objectForKey:UIKeyboardFrameBeginUserInfoKey];
-        let keyboardSize = aValue.CGRectValue().size;
+        let keyboardSize = aValue.cgRectValue.size;
         self.scrollToTextView(keyboardSize);
     
     }
-    public func keyboardWillHide(notification:NSNotification)
+    public func keyboardWillHide(_ notification:Notification)
     {
         //println("**********************");
         var frame = self.window!.frame;
@@ -126,7 +126,7 @@ extension UITextView{
         self.resignFirstResponder();
     }
     
-    public func doneButtonIsClicked(sender:AnyObject)
+    public func doneButtonIsClicked(_ sender:AnyObject)
     {
         var frame = self.window!.frame;
         frame.origin.y = 0;
@@ -160,13 +160,13 @@ extension UITextView{
 //    }
     //[[UIDevicecurrentDevice]orientation]UIDeviceOrientationDidChangeNotification
 //    
-    public func textViewDidEndEditing(notification:NSNotification){
+    public func textViewDidEndEditing(_ notification:Notification){
 
-        let defaultCenter = NSNotificationCenter.defaultCenter();
+        let defaultCenter = NotificationCenter.default;
 //        func removeObserver(observer: AnyObject, name aName: String?, object anObject: AnyObject?)
-        defaultCenter.removeObserver(self,name:UIKeyboardDidShowNotification,object:nil);
+        defaultCenter.removeObserver(self,name:NSNotification.Name.UIKeyboardDidShow,object:nil);
         
-        defaultCenter.removeObserver(self,name:UIKeyboardWillHideNotification,object:nil);
+        defaultCenter.removeObserver(self,name:NSNotification.Name.UIKeyboardWillHide,object:nil);
         
         var frame = self.window!.frame;
         frame.origin.y = 0;
@@ -174,12 +174,12 @@ extension UITextView{
         self.window?.frame = frame;
     }
     
-    private func scrollToTextView(keyboardSize:CGSize)
+    private func scrollToTextView(_ keyboardSize:CGSize)
     {
         var frame = self.window!.frame;
         
         var rect = self.bounds;
-        rect.origin = self.convertPoint(rect.origin, toView: self.window!);
+        rect.origin = self.convert(rect.origin, to: self.window!);
         
         let aRect = self.window!.bounds;
         
@@ -198,9 +198,9 @@ private var preUIDeviceOrientationDidChangeNotification:UIDeviceOrientation?
 //MARK:actoins
 
 
-private class __UITextViewLinCoreDelegateAction : DelegateAction,UITextViewDelegate {
+fileprivate class __UITextViewLinCoreDelegateAction : DelegateAction,UITextViewDelegate {
 //    @private
-    private var _target:UITextView?;
+    fileprivate var _target:UITextView?;
 ////}
 ////
 ////-initWithTarget:(UITextView*)target;
@@ -215,53 +215,53 @@ private class __UITextViewLinCoreDelegateAction : DelegateAction,UITextViewDeleg
 //
 //@interface UITextViewsLinCoreDelegateActionImple : DelegateAction<UITextViewDelegate>{
 //    @public
-    private var _textViewDidChange:((textView:UITextView)->())?;
-    private var _textViewShouldBeginEditing:((textView:UITextView)->Bool)?;
-    private var _textViewShouldEndEditing:((textView:UITextView)->Bool)?;
-    private var _textViewDidBeginEditing:((textView:UITextView)->())?;
-    private var _textViewDidEndEditing:((textView:UITextView)->())?;
-    private var _textViewDidChangeSelection:((textView:UITextView)->())?;
-    private var _textViewShouldChangeTextInRange:((textView: UITextView, shouldChangeTextInRange: NSRange, replacementText: String)->Bool)?;
+    fileprivate var _textViewDidChange:((_ textView:UITextView)->())?;
+    fileprivate var _textViewShouldBeginEditing:((_ textView:UITextView)->Bool)?;
+    fileprivate var _textViewShouldEndEditing:((_ textView:UITextView)->Bool)?;
+    fileprivate var _textViewDidBeginEditing:((_ textView:UITextView)->())?;
+    fileprivate var _textViewDidEndEditing:((_ textView:UITextView)->())?;
+    fileprivate var _textViewDidChangeSelection:((_ textView:UITextView)->())?;
+    fileprivate var _textViewShouldChangeTextInRange:((_ textView: UITextView, _ shouldChangeTextInRange: NSRange, _ replacementText: String)->Bool)?;
     
 
-    private var _textViewShouldInteraceWithURL:((textView: UITextView, shouldInteractWithURL: NSURL, inRange: NSRange) -> Bool)?
+    fileprivate var _textViewShouldInteraceWithURL:((_ textView: UITextView, _ shouldInteractWithURL: URL, _ inRange: NSRange) -> Bool)?
     
-    private var _textViewShouldInteractWithTextAttachment:((textView: UITextView, shouldInteractWithTextAttachment: NSTextAttachment, inRange: NSRange) -> Bool)?
+    fileprivate var _textViewShouldInteractWithTextAttachment:((_ textView: UITextView, _ shouldInteractWithTextAttachment: NSTextAttachment, _ inRange: NSRange) -> Bool)?
     
-    @objc private func textViewShouldBeginEditing(textView: UITextView) -> Bool{
-        return _textViewShouldBeginEditing?(textView: textView) ?? true;
+    @objc fileprivate func textViewShouldBeginEditing(_ textView: UITextView) -> Bool{
+        return _textViewShouldBeginEditing?(textView) ?? true;
     }
     
-    @objc private func textViewShouldEndEditing(textView: UITextView) -> Bool{
-        return self._textViewShouldEndEditing?(textView: textView) ?? true;
+    @objc fileprivate func textViewShouldEndEditing(_ textView: UITextView) -> Bool{
+        return self._textViewShouldEndEditing?(textView) ?? true;
     }
     
-    @objc private func textViewDidBeginEditing(textView: UITextView){
-        self._textViewDidBeginEditing?(textView: textView);
+    @objc fileprivate func textViewDidBeginEditing(_ textView: UITextView){
+        self._textViewDidBeginEditing?(textView);
     }
     
-    @objc private func textViewDidEndEditing(textView: UITextView){
-        self._textViewDidEndEditing?(textView: textView);
+    @objc fileprivate func textViewDidEndEditing(_ textView: UITextView){
+        self._textViewDidEndEditing?(textView);
     }
     
-    @objc private func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{
-        return self._textViewShouldChangeTextInRange?(textView: textView,shouldChangeTextInRange: range,replacementText: text) ?? true;
+    @objc fileprivate func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool{
+        return self._textViewShouldChangeTextInRange?(textView,range,text) ?? true;
     }
     
-    @objc private func textViewDidChange(textView: UITextView){
-        self._textViewDidChange?(textView: textView);
+    @objc fileprivate func textViewDidChange(_ textView: UITextView){
+        self._textViewDidChange?(textView);
     }
     
-    @objc private func textViewDidChangeSelection(textView: UITextView){
-        self._textViewDidChangeSelection?(textView: textView);
+    @objc fileprivate func textViewDidChangeSelection(_ textView: UITextView){
+        self._textViewDidChangeSelection?(textView);
     }
     
-    @objc private func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool{
-        return self._textViewShouldInteraceWithURL?(textView: textView,shouldInteractWithURL: URL,inRange: characterRange) ?? true;
+    @objc fileprivate func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool{
+        return self._textViewShouldInteraceWithURL?(textView,URL,characterRange) ?? true;
     }
     
-    @objc private func textView(textView: UITextView, shouldInteractWithTextAttachment textAttachment: NSTextAttachment, inRange characterRange: NSRange) -> Bool{
-        return self._textViewShouldInteractWithTextAttachment?(textView: textView,shouldInteractWithTextAttachment: textAttachment,inRange: characterRange) ?? true;
+    @objc fileprivate func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange) -> Bool{
+        return self._textViewShouldInteractWithTextAttachment?(textView,textAttachment,characterRange) ?? true;
     }
 
 
@@ -269,7 +269,7 @@ private class __UITextViewLinCoreDelegateAction : DelegateAction,UITextViewDeleg
 
 extension UITextView{
     
-    private var actionDelegate:__UITextViewLinCoreDelegateAction{
+    fileprivate var actionDelegate:__UITextViewLinCoreDelegateAction{
         
         let d = self.delegate;
         if d is __UITextViewLinCoreDelegateAction {
@@ -282,7 +282,7 @@ extension UITextView{
         return da;
     }
 
-    public var textViewDidChange:((textView:UITextView)->())?{
+    public var textViewDidChange:((_ textView:UITextView)->())?{
         get{
             return actionDelegate._textViewDidChange;
         }
@@ -290,7 +290,7 @@ extension UITextView{
             actionDelegate._textViewDidChange = newValue;
         }
     }
-    public var textViewShouldBeginEditing:((textView:UITextView)->Bool)?{
+    public var textViewShouldBeginEditing:((_ textView:UITextView)->Bool)?{
         get{
             return actionDelegate._textViewShouldBeginEditing;
         }
@@ -298,7 +298,7 @@ extension UITextView{
             actionDelegate._textViewShouldBeginEditing = newValue;
         }
     }
-    public var textViewShouldEndEditing:((textView:UITextView)->Bool)?{
+    public var textViewShouldEndEditing:((_ textView:UITextView)->Bool)?{
         get{
             return actionDelegate._textViewShouldEndEditing;
         }
@@ -306,7 +306,7 @@ extension UITextView{
             actionDelegate._textViewShouldEndEditing = newValue;
         }
     }
-    public var textViewDidBeginEditing:((textView:UITextView)->())?{
+    public var textViewDidBeginEditing:((_ textView:UITextView)->())?{
         get{
             return actionDelegate._textViewDidBeginEditing;
         }
@@ -314,7 +314,7 @@ extension UITextView{
             actionDelegate._textViewDidBeginEditing = newValue;
         }
     }
-    public var textViewDidEndEditing:((textView:UITextView)->())?{
+    public var textViewDidEndEditing:((_ textView:UITextView)->())?{
         get{
             return actionDelegate._textViewDidEndEditing;
         }
@@ -322,7 +322,7 @@ extension UITextView{
             actionDelegate._textViewDidEndEditing = newValue;
         }
     }
-    public var textViewDidChangeSelection:((textView:UITextView)->())?{
+    public var textViewDidChangeSelection:((_ textView:UITextView)->())?{
         get{
             return actionDelegate._textViewDidChangeSelection;
         }
@@ -330,7 +330,7 @@ extension UITextView{
             actionDelegate._textViewDidChangeSelection = newValue;
         }
     }
-    public var textViewShouldChangeTextInRange:((textView: UITextView, shouldChangeTextInRange: NSRange, replacementText: String)->Bool)?{
+    public var textViewShouldChangeTextInRange:((_ textView: UITextView, _ shouldChangeTextInRange: NSRange, _ replacementText: String)->Bool)?{
         get{
             return actionDelegate._textViewShouldChangeTextInRange;
         }

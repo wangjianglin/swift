@@ -14,7 +14,7 @@ import LinComm
 
 public extension RACCommand{
     
-    public func onSuccess(action:((_:AnyObject!)->())){
+    public func onSuccess(_ action:@escaping ((_:AnyObject?)->())){
         let s = self.executionListener;
         
         var dict = Dictionary<String,AnyObject!>();
@@ -38,7 +38,7 @@ public extension RACCommand{
         }
     }
     
-    public func onFault(action:((_:NSError!)->())){
+    public func onFault(_ action:((_:NSError?)->())){
         let s = self.executionListener;
         
         s.subscribeNext { (v) in
@@ -48,7 +48,7 @@ public extension RACCommand{
         }
     }
     
-    public func onExecure(action:(()->())){
+    public func onExecure(_ action:@escaping (()->())){
         let s = self.executionListener;
         
         s.subscribeNext { (v) in
@@ -61,14 +61,14 @@ public extension RACCommand{
         }
     }
     
-    public func addExecuteOverlayNoErrorMessage(view:UIView,message:String = "正在加载数据..."){
+    public func addExecuteOverlayNoErrorMessage(_ view:UIView,message:String = "正在加载数据..."){
         addExecuteOverlayImpl(view,message: message,errorMessage: nil,showError: false);
     }
-    public func addExecuteOverlay(view:UIView,message:String = "正在加载数据...",errorMessage e:String!=nil){
+    public func addExecuteOverlay(_ view:UIView,message:String = "正在加载数据...",errorMessage e:String!=nil){
         addExecuteOverlayImpl(view,message: message,errorMessage: e,showError: true);
     }
     
-    private func addExecuteOverlayImpl(view:UIView,message:String = "正在加载数据...",errorMessage e:String!,showError:Bool){
+    fileprivate func addExecuteOverlayImpl(_ view:UIView,message:String = "正在加载数据...",errorMessage e:String!,showError:Bool){
         
         var progressView:MRProgressOverlayView? = MRProgressOverlayView();
         let s = self.executionListener;
@@ -112,7 +112,7 @@ public extension RACCommand{
         return signal;
     }
     
-    private func executionListenerFun(subscriber:RACSubscriber!){
+    fileprivate func executionListenerFun(_ subscriber:RACSubscriber!){
         
         var hasError = false;
         
@@ -140,7 +140,7 @@ public extension RACCommand{
         
     }
     
-    public func load(view:UIView,input: AnyObject! = nil,message:String = "正在加载数据...",errorMessage e:String! = nil)->RACSignal{
+    public func load(_ view:UIView,input: AnyObject! = nil,message:String = "正在加载数据...",errorMessage e:String! = nil)->RACSignal{
         return RACSignal.createSignal({[weak self](subscriber:RACSubscriber!)->RACDisposable! in
             
             self?.executeImpl(view, input: input, message: message, errorMessage: e, subscriber:subscriber);
@@ -148,7 +148,7 @@ public extension RACCommand{
             });
     }
     
-    public func save(view:UIView,input: AnyObject! = nil,message:String = "正在保存数据...",errorMessage e:String! = nil)->RACSignal{
+    public func save(_ view:UIView,input: AnyObject! = nil,message:String = "正在保存数据...",errorMessage e:String! = nil)->RACSignal{
         return RACSignal.createSignal({[weak self](subscriber:RACSubscriber!)->RACDisposable! in
             
             self?.executeImpl(view, input: input, message: message, errorMessage: e, subscriber:subscriber);
@@ -156,7 +156,7 @@ public extension RACCommand{
             });
     }
     
-    private func executeImpl(view:UIView,input: AnyObject!,message:String,errorMessage e:String!,subscriber:RACSubscriber!){
+    fileprivate func executeImpl(_ view:UIView,input: AnyObject!,message:String,errorMessage e:String!,subscriber:RACSubscriber!){
         let progressView = MRProgressOverlayView();
         progressView.mode = MRProgressOverlayViewMode.IndeterminateSmallDefault;
         progressView.titleLabelText = message;

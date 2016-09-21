@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class FormBaseCell: UITableViewCell {
+open class FormBaseCell: UITableViewCell {
 
     /// MARK: Properties
     
-    public var rowDescriptor: FormRowDescriptor! {
+    open var rowDescriptor: FormRowDescriptor! {
         didSet {
             if let backgroundColor = self.rowDescriptor.backgroundColor{
 //                contentView.backgroundColor = backgroundColor;
@@ -33,21 +33,21 @@ public class FormBaseCell: UITableViewCell {
     }
     
     /// MARK: Public interface
-    private var valueLabel:UILabel?;
+    fileprivate var valueLabel:UILabel?;
     
-    public func configure() {
+    open func configure() {
         /// override
         //self.textLabel?.text=self.rowDescriptor.title;
         valueLabel = UILabel();
-        valueLabel!.textAlignment = NSTextAlignment.Right;
+        valueLabel!.textAlignment = NSTextAlignment.right;
         valueLabel!.translatesAutoresizingMaskIntoConstraints = false;
         contentView.addSubview(valueLabel!);
         contentView.addConstraints([
-            NSLayoutConstraint(item: valueLabel!, attribute: .Left, relatedBy: .Equal, toItem: self.textLabel!, attribute: .Left, multiplier: 1.0, constant: 0.0),NSLayoutConstraint(item: valueLabel!, attribute: .Right, relatedBy: .Equal, toItem: contentView, attribute: .Right, multiplier: 1.0, constant: -30.0),NSLayoutConstraint(item: valueLabel!, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1.0, constant: 0.0),NSLayoutConstraint(item: valueLabel!, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1.0, constant: 0.0)]);
-        accessoryType = .None
+            NSLayoutConstraint(item: valueLabel!, attribute: .left, relatedBy: .equal, toItem: self.textLabel!, attribute: .left, multiplier: 1.0, constant: 0.0),NSLayoutConstraint(item: valueLabel!, attribute: .right, relatedBy: .equal, toItem: contentView, attribute: .right, multiplier: 1.0, constant: -30.0),NSLayoutConstraint(item: valueLabel!, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1.0, constant: 0.0),NSLayoutConstraint(item: valueLabel!, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1.0, constant: 0.0)]);
+        accessoryType = .none
     }
     
-    public func update() {
+    open func update() {
         /// override
         self.textLabel?.text=self.rowDescriptor.title;
         if let value = self.rowDescriptor.value as? String{
@@ -57,11 +57,11 @@ public class FormBaseCell: UITableViewCell {
         }
     }
     
-    public class func formRowCellHeight() -> CGFloat {
+    open class func formRowCellHeight() -> CGFloat {
         return 44.0
     }
     
-    public class func formViewController(formViewController: FormViewController, didSelectRow: FormBaseCell) {
+    open class func formViewController(_ formViewController: FormViewController, didSelectRow: FormBaseCell) {
     }
 }
 

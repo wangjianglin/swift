@@ -15,17 +15,17 @@ public protocol TcpCommandPackage : TcpPackage{
     
     var command:Int32{get};
     
-    func parse(bs:[UInt8],offset:Int);
+    func parse(_ bs:[UInt8],offset:Int);
     
     func write() -> [UInt8];
     
-    func write(inout buffer: [UInt8]);
+    func write(_ buffer: inout [UInt8]);
     
     var bodyLength:UInt32{get};
     
 }
 //@objc
-public class TcpCommandRequestPackage:TcpRequestPackage,TcpCommandPackage{
+open class TcpCommandRequestPackage:TcpRequestPackage,TcpCommandPackage{
     
     public required init() {
         
@@ -35,11 +35,11 @@ public class TcpCommandRequestPackage:TcpRequestPackage,TcpCommandPackage{
         return 1;
     }
     
-    public override class var resp:TcpResponsePackage.Type{
+    open override class var resp:TcpResponsePackage.Type{
         return TcpEmptyPackage.self;
     }
     
-    public class var command:Int32{
+    open class var command:Int32{
         return 0;
     }
     
@@ -47,17 +47,17 @@ public class TcpCommandRequestPackage:TcpRequestPackage,TcpCommandPackage{
         return (Mirror(reflecting: self).subjectType as! TcpCommandRequestPackage.Type).command;
     }
     
-    public func parse(bs:[UInt8],offset:Int){
+    open func parse(_ bs:[UInt8],offset:Int){
         
     }
     
-    override public func write() -> [UInt8] {
-        var buffer = [UInt8](count: Int(self.length), repeatedValue: 0);
+    override open func write() -> [UInt8] {
+        var buffer = [UInt8](repeating: 0, count: Int(self.length));
         write(&buffer);
         return buffer;
     }
     
-    override public func write(inout buffer: [UInt8]) {
+    override open func write(_ buffer: inout [UInt8]) {
         
         writeInt8(&buffer,value: 0,offset: 0);
         writeInt8(&buffer,value: 1,offset: 1);
@@ -72,14 +72,14 @@ public class TcpCommandRequestPackage:TcpRequestPackage,TcpCommandPackage{
         return 19 + bodyLength;
     }
     
-    public var bodyLength:UInt32{
+    open var bodyLength:UInt32{
         return 0;
     }
 }
 
-public class TcpCommandResponsePackage:TcpResponsePackage,TcpCommandPackage{
+open class TcpCommandResponsePackage:TcpResponsePackage,TcpCommandPackage{
     
-    private var _command:Int32!;
+    fileprivate var _command:Int32!;
     public required init() {
         super.init();
         
@@ -99,17 +99,17 @@ public class TcpCommandResponsePackage:TcpResponsePackage,TcpCommandPackage{
         return _command;//(Mirror(reflecting: self).subjectType as! TcpCommandRequestPackage.Type).command;
     }
     
-    public func parse(bs:[UInt8],offset:Int){
+    open func parse(_ bs:[UInt8],offset:Int){
         
     }
     
-    override public func write() -> [UInt8] {
-        var buffer = [UInt8](count: Int(self.length), repeatedValue: 0);
+    override open func write() -> [UInt8] {
+        var buffer = [UInt8](repeating: 0, count: Int(self.length));
         write(&buffer);
         return buffer;
     }
     
-    override public func write(inout buffer: [UInt8]) {
+    override open func write(_ buffer: inout [UInt8]) {
         
         writeInt8(&buffer,value: 0,offset: 0);
         writeInt8(&buffer,value: 1,offset: 1);
@@ -124,7 +124,7 @@ public class TcpCommandResponsePackage:TcpResponsePackage,TcpCommandPackage{
         return 19 + bodyLength;
     }
     
-    public var bodyLength:UInt32{
+    open var bodyLength:UInt32{
         return 0;
     }
 }

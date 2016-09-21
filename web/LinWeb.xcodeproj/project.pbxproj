@@ -7,21 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E1DF47E1D9064DB0041D2AA /*  LinWebURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1DF47D1D9064DB0041D2AA /*  LinWebURLProtocol.swift */; };
+		3E2E759F1D91A410000DCBD3 /* LinUIWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E759E1D91A410000DCBD3 /* LinUIWebView.swift */; };
 		3E9839991D21019300CF3049 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9839981D21019300CF3049 /* LinUtil.framework */; };
-		3EC64EAD1D0AD8FE00717357 /* LinWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EAC1D0AD8FE00717357 /* LinWebViewController.swift */; };
+		3EA3B3EA1D8E60AE00FC8EB7 /* AsynResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3B3E91D8E60AE00FC8EB7 /* AsynResult.swift */; };
+		3EA3B3EC1D8EFCE400FC8EB7 /* LinAppPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3B3EB1D8EFCE400FC8EB7 /* LinAppPlugin.swift */; };
+		3EA3B3EE1D8EFCFB00FC8EB7 /* LinDevicePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3B3ED1D8EFCFB00FC8EB7 /* LinDevicePlugin.swift */; };
+		3EA3B3F01D8EFD0D00FC8EB7 /* LinHttpDNSPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3B3EF1D8EFD0D00FC8EB7 /* LinHttpDNSPlugin.swift */; };
+		3EA3B3F21D8EFD1E00FC8EB7 /* LinStoragePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3B3F11D8EFD1E00FC8EB7 /* LinStoragePlugin.swift */; };
+		3EC64EAD1D0AD8FE00717357 /* LinWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EAC1D0AD8FE00717357 /* LinWebView.swift */; };
 		3EC64EB61D0AF81200717357 /* LinWebPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EB51D0AF81200717357 /* LinWebPlugin.swift */; };
 		3EC64EB81D0AFA7300717357 /* LinConfigParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EB71D0AFA7300717357 /* LinConfigParser.swift */; };
-		3EC64EBA1D0BF0D700717357 /* LinWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EB91D0BF0D700717357 /* LinWebView.swift */; };
+		3EC64EBA1D0BF0D700717357 /* LinWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EB91D0BF0D700717357 /* LinWKWebView.swift */; };
 		3EC64EBC1D0BF44400717357 /* LinJavaScriptBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EBB1D0BF44400717357 /* LinJavaScriptBridge.swift */; };
 		3ECA87681CFB78E8000CEC60 /* web.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECA87671CFB78E8000CEC60 /* web.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E1DF47D1D9064DB0041D2AA /*  LinWebURLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = " LinWebURLProtocol.swift"; sourceTree = "<group>"; };
+		3E2E759E1D91A410000DCBD3 /* LinUIWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinUIWebView.swift; sourceTree = "<group>"; };
 		3E9839981D21019300CF3049 /* LinUtil.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinUtil.framework; path = "../../../../../Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphonesimulator/LinUtil.framework"; sourceTree = "<group>"; };
-		3EC64EAC1D0AD8FE00717357 /* LinWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinWebViewController.swift; sourceTree = "<group>"; };
+		3EA3B3E91D8E60AE00FC8EB7 /* AsynResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynResult.swift; sourceTree = "<group>"; };
+		3EA3B3EB1D8EFCE400FC8EB7 /* LinAppPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinAppPlugin.swift; path = plugins/LinAppPlugin.swift; sourceTree = "<group>"; };
+		3EA3B3ED1D8EFCFB00FC8EB7 /* LinDevicePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinDevicePlugin.swift; path = plugins/LinDevicePlugin.swift; sourceTree = "<group>"; };
+		3EA3B3EF1D8EFD0D00FC8EB7 /* LinHttpDNSPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinHttpDNSPlugin.swift; path = plugins/LinHttpDNSPlugin.swift; sourceTree = "<group>"; };
+		3EA3B3F11D8EFD1E00FC8EB7 /* LinStoragePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinStoragePlugin.swift; path = plugins/LinStoragePlugin.swift; sourceTree = "<group>"; };
+		3EC64EAC1D0AD8FE00717357 /* LinWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinWebView.swift; sourceTree = "<group>"; };
 		3EC64EB51D0AF81200717357 /* LinWebPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinWebPlugin.swift; sourceTree = "<group>"; };
 		3EC64EB71D0AFA7300717357 /* LinConfigParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinConfigParser.swift; sourceTree = "<group>"; };
-		3EC64EB91D0BF0D700717357 /* LinWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinWebView.swift; sourceTree = "<group>"; };
+		3EC64EB91D0BF0D700717357 /* LinWKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinWKWebView.swift; sourceTree = "<group>"; };
 		3EC64EBB1D0BF44400717357 /* LinJavaScriptBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinJavaScriptBridge.swift; sourceTree = "<group>"; };
 		3ECA87641CFB78E8000CEC60 /* LinWeb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinWeb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ECA87671CFB78E8000CEC60 /* web.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = web.h; sourceTree = "<group>"; };
@@ -40,6 +54,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EA3B3E81D8E607E00FC8EB7 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				3EA3B3EB1D8EFCE400FC8EB7 /* LinAppPlugin.swift */,
+				3EA3B3ED1D8EFCFB00FC8EB7 /* LinDevicePlugin.swift */,
+				3EA3B3EF1D8EFD0D00FC8EB7 /* LinHttpDNSPlugin.swift */,
+				3EA3B3F11D8EFD1E00FC8EB7 /* LinStoragePlugin.swift */,
+			);
+			name = plugins;
+			sourceTree = "<group>";
+		};
 		3ECA875A1CFB78E8000CEC60 = {
 			isa = PBXGroup;
 			children = (
@@ -60,13 +85,17 @@
 		3ECA87661CFB78E8000CEC60 /* web */ = {
 			isa = PBXGroup;
 			children = (
+				3EA3B3E81D8E607E00FC8EB7 /* plugins */,
 				3ECA87671CFB78E8000CEC60 /* web.h */,
 				3ECA87691CFB78E8000CEC60 /* Info.plist */,
-				3EC64EAC1D0AD8FE00717357 /* LinWebViewController.swift */,
+				3EC64EAC1D0AD8FE00717357 /* LinWebView.swift */,
 				3EC64EB51D0AF81200717357 /* LinWebPlugin.swift */,
 				3EC64EB71D0AFA7300717357 /* LinConfigParser.swift */,
-				3EC64EB91D0BF0D700717357 /* LinWebView.swift */,
+				3EC64EB91D0BF0D700717357 /* LinWKWebView.swift */,
 				3EC64EBB1D0BF44400717357 /* LinJavaScriptBridge.swift */,
+				3EA3B3E91D8E60AE00FC8EB7 /* AsynResult.swift */,
+				3E1DF47D1D9064DB0041D2AA /*  LinWebURLProtocol.swift */,
+				3E2E759E1D91A410000DCBD3 /* LinUIWebView.swift */,
 			);
 			path = web;
 			sourceTree = "<group>";
@@ -114,6 +143,7 @@
 				TargetAttributes = {
 					3ECA87631CFB78E8000CEC60 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -149,11 +179,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EC64EAD1D0AD8FE00717357 /* LinWebViewController.swift in Sources */,
+				3E2E759F1D91A410000DCBD3 /* LinUIWebView.swift in Sources */,
+				3EC64EAD1D0AD8FE00717357 /* LinWebView.swift in Sources */,
 				3EC64EB81D0AFA7300717357 /* LinConfigParser.swift in Sources */,
+				3EA3B3F01D8EFD0D00FC8EB7 /* LinHttpDNSPlugin.swift in Sources */,
+				3EA3B3EE1D8EFCFB00FC8EB7 /* LinDevicePlugin.swift in Sources */,
 				3EC64EBC1D0BF44400717357 /* LinJavaScriptBridge.swift in Sources */,
 				3EC64EB61D0AF81200717357 /* LinWebPlugin.swift in Sources */,
-				3EC64EBA1D0BF0D700717357 /* LinWebView.swift in Sources */,
+				3EC64EBA1D0BF0D700717357 /* LinWKWebView.swift in Sources */,
+				3E1DF47E1D9064DB0041D2AA /*  LinWebURLProtocol.swift in Sources */,
+				3EA3B3EA1D8E60AE00FC8EB7 /* AsynResult.swift in Sources */,
+				3EA3B3F21D8EFD1E00FC8EB7 /* LinStoragePlugin.swift in Sources */,
+				3EA3B3EC1D8EFCE400FC8EB7 /* LinAppPlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +304,7 @@
 				PRODUCT_NAME = LinWeb;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -285,6 +323,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lin.web;
 				PRODUCT_NAME = LinWeb;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

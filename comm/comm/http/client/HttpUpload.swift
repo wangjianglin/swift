@@ -15,31 +15,31 @@ import Foundation
 
 
 /// Object representation of a HTTP File Upload.
-public class HttpUpload: NSObject {
+open class HttpUpload: NSObject {
     
     
-    public func jsonSkip(name:String?)->Bool{
+    open func jsonSkip(_ name:String?)->Bool{
         return true;
     }
     
-    private var fileUrl: NSURL? {
+    fileprivate var fileUrl: URL? {
     didSet {
         updateMimeType()
         loadData()
     }
     }
-    private var _mimeType: String?
-    private var _data: NSData?
-    private var _fileName: String?
+    fileprivate var _mimeType: String?
+    fileprivate var _data: Data?
+    fileprivate var _fileName: String?
     
     
-    public var mimeType: String?{
+    open var mimeType: String?{
         return self._mimeType;
     }
-    public var data: NSData?{
+    open var data: Data?{
         return self._data;
     }
-    public var fileName: String?{
+    open var fileName: String?{
         return self._fileName;
     }
     
@@ -62,7 +62,7 @@ public class HttpUpload: NSObject {
             self._fileName = url.lastPathComponent
 //            self._data = NSData.dataWithContentsOfMappedFile(url.path!) as? NSData
 //            self._data = NSData(contentsOfMappedFile: url.path!);
-            self._data = try? NSData(contentsOfURL: url, options: NSDataReadingOptions.DataReadingMappedIfSafe);
+            self._data = try? Data(contentsOf: url, options: Data.ReadingOptions.mappedIfSafe);
         }
     }
     
@@ -76,7 +76,7 @@ public class HttpUpload: NSObject {
     
         - parameter fileUrl: The fileUrl is a standard url path to a file.
     */
-    public convenience init(fileUrl: NSURL) {
+    public convenience init(fileUrl: URL) {
         self.init()
         self.fileUrl = fileUrl
         updateMimeType()
@@ -91,7 +91,7 @@ public class HttpUpload: NSObject {
         - parameter mimeType: The mimeType is just that. The mime type you would like the file to uploaded as.
     */
     ///upload a file from a a data blob. Must add a filename and mimeType as that can't be infered from the data
-    public convenience init(data: NSData, fileName: String, mimeType: String) {
+    public convenience init(data: Data, fileName: String, mimeType: String) {
         self.init()
         self._data = data
         self._fileName = fileName

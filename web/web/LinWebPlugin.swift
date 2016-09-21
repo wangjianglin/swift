@@ -9,23 +9,23 @@
 import Foundation
 import WebKit
 
-public protocol LinWebPlugin{
+public protocol LinWebPlugin:NSObjectProtocol{
 //    @property (nonatomic, weak,readonly) UIWebView* webView;
     //@property (readonly) NSString * plugin;
     //@property (nonatomic, weak) UIViewController* viewController;
     //@property (nonatomic, weak) id <CDVCommandDelegate> commandDelegate;
     
     //@property (readonly, assign) BOOL hasPendingOperation;
-    var webView:WKWebView{get}
+    var webView:LinWebView{get}
     
     //- (instancetype)initWithPlugin:(NSString*)plugin;
 //    -(instancetype)initWithWebView:(UIWebView*)webView;
-    init(webView:WKWebView);
+    init(webView:LinWebView);
     //- (void)pluginInitialize;
     //-(Json*)action:(NSString*)action args:(Json*)args;
     
 //    - (void)handleOpenURL:(NSNotification*)notification;
-    func handleOpenURL(notification:NSNotification);
+    func handleOpenURL(_ notification:Notification);
 //    - (void)onAppTerminate;
 //    - (void)onMemoryWarning;
 //    - (void)onReset;
@@ -43,18 +43,19 @@ public protocol LinWebPlugin{
 //    - (id)appDelegate;
 }
 
-public class LinAbstractWebPlugin : LinWebPlugin{
-    private let _webView:WKWebView;
+@objc
+public class LinAbstractWebPlugin : NSObject, LinWebPlugin{
+    private let _webView:LinWebView;
     
-    public required init(webView: WKWebView) {
+    public required init(webView: LinWebView) {
         _webView = webView;
     }
     
-    public var webView: WKWebView{
+    public var webView: LinWebView{
         return _webView;
     }
     
-    public func handleOpenURL(notification: NSNotification) {
+    public func handleOpenURL(_ notification: Notification) {
         
     }
 }

@@ -19,6 +19,6 @@ target :'LinRac' do
 #    pod 'LinUtil.swift', '0.0.3'
 #    pod 'LinComm.swift', '0.0.3'
 #    pod 'LinCore.swift', '0.0.3'
-    pod 'ReactiveCocoa'
-    
+    pod 'ReactiveCocoa',:git=>'https://github.com/ReactiveCocoa/ReactiveCocoa.git'
+
 end

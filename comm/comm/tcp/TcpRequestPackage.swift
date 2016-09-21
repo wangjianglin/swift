@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class TcpRequestPackage : TcpAbstractPackage{
+open class TcpRequestPackage : TcpAbstractPackage{
     
     public final override class var state:TcpPackageState{
-        return TcpPackageState.REQUEST;
+        return TcpPackageState.request;
     }
 
-    public class var resp:TcpResponsePackage.Type{
+    open class var resp:TcpResponsePackage.Type{
         return TcpResponsePackage.self;
     }
 

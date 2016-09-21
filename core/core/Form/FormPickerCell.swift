@@ -8,16 +8,16 @@
 
 import UIKit
 
-public class FormPickerCell: FormBaseCell, UIPickerViewDelegate, UIPickerViewDataSource {
+open class FormPickerCell: FormBaseCell, UIPickerViewDelegate, UIPickerViewDataSource {
     
     /// MARK: Properties
     
-    private let hiddenTextField = UITextField(frame: CGRectZero)
-    private let picker = UIPickerView()
+    fileprivate let hiddenTextField = UITextField(frame: CGRect.zero)
+    fileprivate let picker = UIPickerView()
     
     /// MARK: FormBaseCell
     
-    override public func configure() {
+    override open func configure() {
         super.configure()
         contentView.addSubview(hiddenTextField)
         picker.delegate = self
@@ -25,7 +25,7 @@ public class FormPickerCell: FormBaseCell, UIPickerViewDelegate, UIPickerViewDat
         hiddenTextField.inputView = picker
     }
     
-    override public func update() {
+    override open func update() {
         super.update()
         textLabel?.text = rowDescriptor.title
         
@@ -34,7 +34,7 @@ public class FormPickerCell: FormBaseCell, UIPickerViewDelegate, UIPickerViewDat
         }
     }
     
-    override public class func formViewController(formViewController: FormViewController, didSelectRow selectedRow: FormBaseCell) {
+    override open class func formViewController(_ formViewController: FormViewController, didSelectRow selectedRow: FormBaseCell) {
         
         if selectedRow.rowDescriptor.value == nil {
 //            if let row = selectedRow as? FormPickerCell {
@@ -48,12 +48,12 @@ public class FormPickerCell: FormBaseCell, UIPickerViewDelegate, UIPickerViewDat
     
     /// MARK: UIPickerViewDelegate
     
-    public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    open func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         //return rowDescriptor.titleForOptionAtIndex(row)
         return nil;
     }
     
-    public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    open func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 //        let optionValue = rowDescriptor.options[row]
 //        rowDescriptor.value = optionValue
 //        detailTextLabel?.text = rowDescriptor.titleForOptionValue(optionValue)
@@ -61,11 +61,11 @@ public class FormPickerCell: FormBaseCell, UIPickerViewDelegate, UIPickerViewDat
     
     /// MARK: UIPickerViewDataSource
     
-    public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    open func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    open func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         //return rowDescriptor.options.count
         return 0;
     }

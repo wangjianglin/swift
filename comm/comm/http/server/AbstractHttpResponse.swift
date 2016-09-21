@@ -9,17 +9,17 @@
 import Foundation
 
 
-public class AbstractHttpResponse : HttpResponse{
+open class AbstractHttpResponse : HttpResponse{
     /// The header values in HTTP response.
-    public var headers: Dictionary<String,String>?
+    open var headers: Dictionary<String,String>?
     /// The mime type of the HTTP response.
-    public var mimeType: String?
+    open var mimeType: String?
     /// The suggested filename for a downloaded file.
-    public var suggestedFilename: String?
+    open var suggestedFilename: String?
     /// The body or response data of the HTTP Response.
-    public var responseObject: AnyObject?
+    open var responseObject: AnyObject?
     /// The status code of the HTTP Response.
-    public var statusCode: Int?
+    open var statusCode: Int?
     ///Returns the response as a string
 //    public func text() -> String? {
 //        if let d = self.responseObject as? NSData {
@@ -28,5 +28,5 @@ public class AbstractHttpResponse : HttpResponse{
 //        return nil
 //    }
     /// The URL of the HTTP Response.
-    public var URL: NSURL?
+    open var URL: Foundation.URL?
 }

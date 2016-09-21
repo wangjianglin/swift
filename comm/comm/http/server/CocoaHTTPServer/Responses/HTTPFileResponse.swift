@@ -10,7 +10,7 @@ import Foundation
 
 let NULL_FD:CInt = -1
 
-@objc public class HTTPFileResponse : NSObject,HTTPResponse{
+@objc open class HTTPFileResponse : NSObject,HTTPResponse{
 
 //#define NULL_FD  -1
 
@@ -21,21 +21,21 @@ let NULL_FD:CInt = -1
 //	if((self = [super init]))
 //	{
 //		HTTPLogTrace();
-    private let connection:HTTPConnection;
-    private let _filePath:String;
-    private let _fileLength:UInt64
-    private var _fileOffset:UInt64 = 0;
-    private var _aborted:Bool = false;
-    private var fileFD:CInt = NULL_FD;
-    private var buffer:UnsafeMutablePointer<Void> = UnsafeMutablePointer<Void>.alloc(0);
-    private var bufferSize:UInt = 0;
+    fileprivate let connection:HTTPConnection;
+    fileprivate let _filePath:String;
+    fileprivate let _fileLength:UInt64
+    fileprivate var _fileOffset:UInt64 = 0;
+    fileprivate var _aborted:Bool = false;
+    fileprivate var fileFD:CInt = NULL_FD;
+    fileprivate var buffer:UnsafeMutableRawPointer = UnsafeMutableRawPointer.allocate(bytes: 1024, alignedTo: 1);
+    fileprivate var bufferSize:UInt = 0;
     
     public init(filePath fpath:String,forConnection parent:HTTPConnection){
 		connection = parent; // Parents retain children, children do NOT retain parents
 
 //		fileFD = NULL_FD;
 //		filePath = [[fpath copy] stringByResolvingSymlinksInPath];
-        _filePath = (fpath as NSString).stringByResolvingSymlinksInPath;
+        _filePath = (fpath as NSString).resolvingSymlinksInPath;
 //		if (filePath == nil)
 //		{
 //			HTTPLogWarn(@"%@: Init failed - Nil filePath", THIS_FILE);
@@ -44,7 +44,7 @@ let NULL_FD:CInt = -1
 //		}
 
 //		NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
-        let fileAttributes = try! NSFileManager.defaultManager().attributesOfItemAtPath(_filePath);
+        let fileAttributes = try! FileManager.default.attributesOfItem(atPath: _filePath);
 //		if (fileAttributes == nil)
 //		{
 //			HTTPLogWarn(@"%@: Init failed - Unable to get file attributes. filePath: %@", THIS_FILE, filePath);
@@ -56,7 +56,7 @@ let NULL_FD:CInt = -1
 //		fileOffset = 0;
 //
 //		aborted = NO;
-        _fileLength = fileAttributes[NSFileSize]?.unsignedLongLongValue ?? 0;
+        _fileLength = (fileAttributes[FileAttributeKey.size] as AnyObject).uint64Value ?? 0;
 
 		// We don't bother opening the file here.
 		// If this is a HEAD request we only need to know the fileLength.
@@ -77,7 +77,20 @@ let NULL_FD:CInt = -1
 //	HTTPLogTrace();
 
 //	fileFD = open([filePath UTF8String], O_RDONLY);
-        fileFD = open((filePath as NSString).UTF8String, O_RDONLY);
+//        Darwin.open(UnsafePointer<CChar>, Int32)
+        
+//        fileFD = Darwin.open(UnsafePointer<CChar>, <#T##oflag: Int32##Int32#>)
+        var tmpFilePath = filePath;
+        fileFD = withUnsafePointer(to: &tmpFilePath) { (ptr) -> CInt in
+            return ptr.withMemoryRebound(to: CChar.self, capacity: filePath.lengthOfBytes(using: String.Encoding.utf8), { (bptr) -> CInt in
+                return open(bptr, O_RDONLY);
+            })
+            
+        }
+//        fileFD = filePath.utf8CString.withUnsafeBufferPointer { (ptr) -> CInt in
+//            return Darwin.open(ptr, O_RDONLY);
+//        }
+//        fileFD = Darwin.open(filePath.utf8CString, O_RDONLY);
 	if (fileFD == NULL_FD)
 	{
 //		HTTPLogError(@"%@[%p]: Unable to open file. filePath: %@", THIS_FILE, self, filePath);
@@ -150,7 +163,7 @@ let NULL_FD:CInt = -1
 //}
 
 //    public func readDataOfLength(length:UInt64)->NSData?{
-    public func readDataOfLength(length: UInt) -> NSData!{
+    public func readData(ofLength length: UInt) -> Data!{
 //	HTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", THIS_FILE, self, (unsigned long)length);
 
         if (!self.openFileIfNeeded())
@@ -179,7 +192,8 @@ let NULL_FD:CInt = -1
 //                buffer.dealloc(bufferSize);
                 free(buffer);
                 bufferSize = bytesToRead;
-                buffer = UnsafeMutablePointer<Void>.alloc(Int(bufferSize));
+                //buffer = UnsafeMutableRawPointer(allocatingCapacity: Int(bufferSize));
+                buffer = UnsafeMutableRawPointer.allocate(bytes: Int(bufferSize), alignedTo: 1);
 
     //		if (buffer == NULL)
     //		{
@@ -219,7 +233,8 @@ let NULL_FD:CInt = -1
             _fileOffset += UInt64(result);
 
     //		return [NSData dataWithBytes:buffer length:result];
-            return NSData(bytes: buffer, length: result);
+//            return Data(bytes: UnsafePointer<UInt8>(buffer), count: result);
+            return Data.init(bytes: UnsafeRawPointer.init(buffer), count: result);
         }
     }
 

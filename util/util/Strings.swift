@@ -26,15 +26,16 @@ extension String {
 //        return String(format: hash)
     }
     
-    public static func fromBuffer(var buffer:[UInt8],offset:Int = 0,var count:Int = 0,encoding: UInt = NSUTF8StringEncoding)->String!{
+    public static func fromBuffer(_ buffer:[UInt8],offset:Int = 0,count:Int = 0,encoding: String.Encoding = String.Encoding.utf8)->String!{
+        var buffer = buffer, count = count
         let arrayPtr = UnsafeMutableBufferPointer<UInt8>(start: &buffer, count: buffer.count)
-        let basePtr = arrayPtr.baseAddress.advancedBy(offset) as UnsafeMutablePointer<UInt8>
+        let basePtr = (arrayPtr.baseAddress?.advanced(by: offset))! as UnsafeMutablePointer<UInt8>
         
-        let data = NSData(bytesNoCopy: basePtr, length: count,freeWhenDone:false);
+        let data = Data(bytesNoCopy: UnsafeMutablePointer<UInt8>(basePtr), count: count,deallocator: .none);
         if(count == 0){
             count = buffer.count;
         }
-        let s = NSString(data: data, encoding: encoding) as! String
+        let s = NSString(data: data, encoding: encoding.rawValue) as! String
         return s;
     }
     
@@ -51,7 +52,7 @@ extension String {
 //    }
     //去掉左右空格
     public func trim()->String{
-        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        return self.trimmingCharacters(in: CharacterSet.whitespaces)
     }
     //是否包含字符串
 //    public func has(s:String)->Bool{

@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class FormOptionsSelectorController: UITableViewController, FormSelector {
+open class FormOptionsSelectorController: UITableViewController, FormSelector {
 
     /// MARK: FormSelector
     
-    public var formCell: FormBaseCell!
+    open var formCell: FormBaseCell!
     
     /// MARK: Init 
     
@@ -24,33 +24,33 @@ public class FormOptionsSelectorController: UITableViewController, FormSelector 
         super.init(coder: aDecoder)!
     }
     
-    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = formCell.rowDescriptor.title
     }
     
     /// MARK: UITableViewDataSource
 
-    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override open func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return formCell.rowDescriptor.options.count
         return 0;
     }
     
-    override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let reuseIdentifier = NSStringFromClass(self.dynamicType)
+        let reuseIdentifier = NSStringFromClass(type(of: self))
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as UITableViewCell?
+        var cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as UITableViewCell?
         if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: reuseIdentifier)
+            cell = UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
         }
         
 //        let optionValue = formCell.rowDescriptor.options[indexPath.row]
@@ -75,12 +75,12 @@ public class FormOptionsSelectorController: UITableViewController, FormSelector 
     
     /// MARK: UITableViewDelegate
     
-    override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 //        let cell = tableView.cellForRowAtIndexPath(indexPath)
         
         if formCell.rowDescriptor.value == nil {
-            formCell.rowDescriptor.value = []
+            formCell.rowDescriptor.value = NSArray();
         }
         
 //        if var selectedOptions = formCell.rowDescriptor.value as? [NSObject] {
@@ -106,7 +106,7 @@ public class FormOptionsSelectorController: UITableViewController, FormSelector 
 //            formCell.update()
 //        }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

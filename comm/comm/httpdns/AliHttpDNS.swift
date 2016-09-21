@@ -27,7 +27,7 @@ import LinUtil
 //
 //@end
 class HttpDNSOrigin{
-    private var hostName:String;
+    fileprivate var hostName:String;
     var host:String{
         return hostName;
     }
@@ -42,7 +42,7 @@ class HttpDNSOrigin{
     }
     
     var expired:Bool{
-        return query + ttl * 10000 < Int64(NSDate().timeIntervalSince1970 * 10000);
+        return query + ttl * 10000 < Int64(Date().timeIntervalSince1970 * 10000);
     }
     func getIp() -> String {
         if ips != nil && ips.count > 0 {
@@ -76,50 +76,51 @@ class HttpDNSOrigin{
 //
 //@implementation AliHttpDNS
 //@objc
-public class AliHttpDNS:HttpDNS{
-
+open class AliHttpDNS:HttpDNS{
+   
     
-    private struct StaticData{
+    
+    fileprivate struct StaticData{
         static var SERVER_IP = "203.107.1.1"
     }
     
-    public class var serverIp:String{
+    open class var serverIp:String{
         get{
             return StaticData.SERVER_IP;
         }set{
             StaticData.SERVER_IP = newValue;
         }
     }
-    private var account:String!;
-    private var hostManager = Dictionary<String,HttpDNSOrigin>();
-    private var queue = Queue(count: 1);
-    private var filter:((hostName:String)->Bool)!;
+    fileprivate var account:String!;
+    fileprivate var hostManager = Dictionary<String,HttpDNSOrigin>();
+    fileprivate var queue = Queue(count: 1);
+    fileprivate var filter:((_ hostName:String)->Bool)!;
     
     public init(account:String){
         self.account = account;
     }
     
     
-    public var expiredIpAvailable:Bool = true;
+    open var expiredIpAvailable:Bool = true;
     
     //需要同步操作
-    private func fetch(host:String)->HttpDNSOrigin!{
+    fileprivate func fetch(_ host:String)->HttpDNSOrigin!{
         
-        let resolveUrl = "http://\(StaticData.SERVER_IP)/\(self.account)/d?host=\(host)";
+        let resolveUrl = "http://\(StaticData.SERVER_IP)/\(self.account ?? "")/d?host=\(host)";
 
-        let request = NSMutableURLRequest(URL: NSURL(string:resolveUrl)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 25.0);
+        let request = NSMutableURLRequest(url: URL(string:resolveUrl)!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 25.0);
 
         //兼容ios6.+
-        let responsePoint = AutoreleasingUnsafeMutablePointer<NSURLResponse?>(UnsafeMutablePointer<NSURLResponse?>.alloc(1));
+//        let responsePoint = AutoreleasingUnsafeMutablePointer<URLResponse?>(UnsafeMutablePointer<URLResponse?>(allocatingCapacity: 1));
 //        let responsePoint:AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil;//(UnsafeMutablePointer<NSURLResponse?>.alloc(1));
-        
-        let data = try? NSURLConnection.sendSynchronousRequest(request, returningResponse: responsePoint);
+        let responsePoint:AutoreleasingUnsafeMutablePointer<URLResponse?> = AutoreleasingUnsafeMutablePointer<URLResponse?>.init(UnsafeMutablePointer<URLResponse?>.allocate(capacity: 1));
+        let data = try? NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: responsePoint);
         
         var origin:HttpDNSOrigin!;
-        let r = responsePoint.memory as? NSHTTPURLResponse;
+        let r = responsePoint.pointee as? HTTPURLResponse;
         if r != nil && r!.statusCode == 200 {
             
-            let args = Json.parse(NSString(data: data!, encoding: NSUTF8StringEncoding) as! String);
+            let args = Json.parse(NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as! String);
             
             if args.count > 0{
                 let host = args["host"].asString("");
@@ -136,7 +137,7 @@ public class AliHttpDNS:HttpDNS{
                     }else{
                         origin.ttl = ttl;
                     }
-                    origin.query = Int64(NSDate().timeIntervalSince1970*10000);
+                    origin.query = Int64(Date().timeIntervalSince1970*10000);
                     
                 }
                 
@@ -150,7 +151,7 @@ public class AliHttpDNS:HttpDNS{
         return origin;
     }
 
-    private func query(host:String)->HttpDNSOrigin!{
+    fileprivate func query(_ host:String)->HttpDNSOrigin!{
         
         var origin:HttpDNSOrigin!;
         objc_sync_exit(self);
@@ -173,16 +174,16 @@ public class AliHttpDNS:HttpDNS{
 //    private var preProxy:Bool = false;
 //    private var preProxyTime:Double = 0;
     
-    private func configureProxies(host:String)->Bool
+    fileprivate func configureProxies(_ host:String)->Bool
     {
 //        if preProxyTime + 60 > NSDate().timeIntervalSince1970 {
 //            return preProxy;
 //        }
         let proxySettings = CFNetworkCopySystemProxySettings()?.takeUnretainedValue();
         
-        let url = NSURL(string: "http://\(host)");
+        let url = URL(string: "http://\(host)");
         
-        let proxies = CFNetworkCopyProxiesForURL(url!, proxySettings!).takeUnretainedValue() as NSArray;
+        let proxies = CFNetworkCopyProxiesForURL(url! as CFURL, proxySettings!).takeUnretainedValue() as NSArray;
         
         let settins = proxies[0] as! NSDictionary;
         
@@ -196,15 +197,15 @@ public class AliHttpDNS:HttpDNS{
 //        return preProxy;
         return host != nil || port != nil;
     }
-    public func getIpByHost(host: String) -> String! {
+    open func getIpByHost(_ host: String) -> String! {
        
-        if host.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) <= 0
+        if host.lengthOfBytes(using: String.Encoding.utf8) <= 0
             || configureProxies(host) {
             return nil;
         }
         
         if let filter = filter{
-            if filter(hostName: host)
+            if filter(host)
             {
                 return nil;
             }
@@ -214,11 +215,19 @@ public class AliHttpDNS:HttpDNS{
         return origin?.getIp();
     }
     
-    public func setDelegateForDegradationFilter(filter:((hostName:String)->Bool)){
+//    open func setDelegateForDegradationFilter(_ action: ((String) -> Bool)) {
+//        
+//    }
+//    public func setDelegateForDegradationFilter(_ action: ((String) -> Bool)) {
+//        <#code#>
+//    }
+
+    
+    public func setDelegateForDegradationFilter(_ filter: @escaping ((String)->Bool)){
         self.filter = filter;
     }
     
-    public func setPreResolveHosts(hosts: [String]) {
+    open func setPreResolveHosts(_ hosts: [String]) {
         for host in hosts{
             queue.asynQueue {
                 self.getIpByHost(host);

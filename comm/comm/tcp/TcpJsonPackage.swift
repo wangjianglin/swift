@@ -18,25 +18,25 @@ public protocol TcpJsonPackage : TcpPackage{
     var path:String{get};
     
     
-    func addHeader(header:String,value:String);
+    func addHeader(_ header:String,value:String);
     
-    func remove(header:String);
+    func remove(_ header:String);
     
     subscript(idx:Int) -> Json {get set}
 
 
     subscript(key:String)->Json {get set}
 
-    func setValue(value:AnyObject?,forName name:String);
+    func setValue(_ value:Any?,forName name:String);
     
-    func getValue(name:String)->AnyObject?;
+    func getValue(_ name:String)->Any?;
 
 }
 
 private class TcpJsonPackageImpl{
     
-    private var _path:String!;
-    private var _json:Json!;
+    fileprivate var _path:String!;
+    fileprivate var _json:Json!;
     
     var json:Json!{
         if _json == nil{
@@ -45,9 +45,9 @@ private class TcpJsonPackageImpl{
         return _json;
     }
     
-    private var headers:Dictionary<String,String>;// = [:];
+    fileprivate var headers:Dictionary<String,String>;// = [:];
     
-    func setHeaders(headers:Dictionary<String,String>){
+    func setHeaders(_ headers:Dictionary<String,String>){
         for (key,value) in headers {
             self.headers[key] = value;
         }
@@ -63,49 +63,49 @@ private class TcpJsonPackageImpl{
  
     
     
-    func addHeader(header:String,value:String){
+    func addHeader(_ header:String,value:String){
         self.headers[header] = value;
     }
     
-    func remove(header:String){
-        headers.removeValueForKey(header);
+    func remove(_ header:String){
+        headers.removeValue(forKey: header);
     }
     
     func write() -> [UInt8] {
         let stringBuffer = NSMutableString();
         
-        stringBuffer.appendString("path:");
-        stringBuffer.appendString(self._path);
-        stringBuffer.appendString("\r\n");
+        stringBuffer.append("path:");
+        stringBuffer.append(self._path);
+        stringBuffer.append("\r\n");
         
-        stringBuffer.appendString("encoding:utf-8\r\n");
+        stringBuffer.append("encoding:utf-8\r\n");
         
         for (key,value) in headers{
-            stringBuffer.appendString(key);
-            stringBuffer.appendString(":");
-            stringBuffer.appendString(value);
-            stringBuffer.appendString("\r\n");
+            stringBuffer.append(key);
+            stringBuffer.append(":");
+            stringBuffer.append(value);
+            stringBuffer.append("\r\n");
         }
         
-        stringBuffer.appendString("\r\n");
+        stringBuffer.append("\r\n");
         
-        stringBuffer.appendString(json.toString());
+        stringBuffer.append(json.toString());
         
-        let len = stringBuffer.lengthOfBytesUsingEncoding(NSUTF8StringEncoding);
-        let ptr:UnsafePointer<Int8> = stringBuffer.cStringUsingEncoding(NSUTF8StringEncoding);
+        let len = stringBuffer.lengthOfBytes(using: String.Encoding.utf8.rawValue);
+        let ptr:UnsafePointer<Int8> = stringBuffer.cString(using: String.Encoding.utf8.rawValue)!;
         
-        var r = [UInt8](count: len, repeatedValue: 0);
-        for(var n=0;n<len;n++){
+        var r = [UInt8](repeating: 0, count: len);
+        for n in 0 ..< len {
             r[n] = asUInt8(ptr[n]);
         }
         return r;
     }
     
-    func write(inout buffer: [UInt8]) {
+    func write(_ buffer: inout [UInt8]) {
         
     }
     
-    private subscript(idx:Int) -> Json {
+    fileprivate subscript(idx:Int) -> Json {
         get{
             return json[idx];
         }
@@ -115,7 +115,7 @@ private class TcpJsonPackageImpl{
     }
 
 
-    private subscript(key:String)->Json {
+    fileprivate subscript(key:String)->Json {
         get{
             return json[key];
         }
@@ -124,27 +124,27 @@ private class TcpJsonPackageImpl{
         }
     }
 
-    private func setValue(value:AnyObject?,forName name:String){
+    fileprivate func setValue(_ value:Any?,forName name:String){
         self.json.setValue(value, forName: name);
     }
-    private func getValue(name:String)->AnyObject?{
+    fileprivate func getValue(_ name:String)->Any?{
         return self.json.getValue(name);
     }
 }
 
-public class TcpJsonRequestPackage : TcpRequestPackage,TcpJsonPackage{
+open class TcpJsonRequestPackage : TcpRequestPackage,TcpJsonPackage{
     
     override final public class var type:UInt8{
         return 6;
     }
     
-    private var impl:TcpJsonPackageImpl;
+    fileprivate var impl:TcpJsonPackageImpl;
     
-    public var json:Json{
+    open var json:Json{
         return impl.json;
     }
 
-    public class var path:String{
+    open class var path:String{
         return "/";
     }
     
@@ -152,15 +152,15 @@ public class TcpJsonRequestPackage : TcpRequestPackage,TcpJsonPackage{
         return impl._path;
     }
     
-    func setPath(path:String){
+    func setPath(_ path:String){
         impl._path = path;
     }
     
-    func setJson(json:Json){
+    func setJson(_ json:Json){
         impl._json = json;
     }
     
-    func setHeaders(headers:Dictionary<String,String>){
+    func setHeaders(_ headers:Dictionary<String,String>){
         impl.setHeaders(headers);
     }
 
@@ -182,23 +182,23 @@ public class TcpJsonRequestPackage : TcpRequestPackage,TcpJsonPackage{
         impl = TcpJsonPackageImpl(path: path, json: json, headers: headers);
     }
     
-    public func addHeader(header:String,value:String){
+    open func addHeader(_ header:String,value:String){
         impl.addHeader(header, value: value);
     }
     
-    public func remove(header:String){
+    open func remove(_ header:String){
         impl.remove(header);
     }
     
-    public override func write() -> [UInt8] {
+    open override func write() -> [UInt8] {
         return impl.write();
     }
     
-    public override func write(inout buffer: [UInt8]) {
+    open override func write(_ buffer: inout [UInt8]) {
         impl.write(&buffer);
     }
     
-    public subscript(idx:Int) -> Json {
+    open subscript(idx:Int) -> Json {
         get{
             return impl[idx];
         }
@@ -208,7 +208,7 @@ public class TcpJsonRequestPackage : TcpRequestPackage,TcpJsonPackage{
     }
 
 
-    public subscript(key:String)->Json {
+    open subscript(key:String)->Json {
         get{
             return impl[key];
         }
@@ -217,23 +217,23 @@ public class TcpJsonRequestPackage : TcpRequestPackage,TcpJsonPackage{
         }
     }
 
-    public func setValue(value:AnyObject?,forName name:String){
+    open func setValue(_ value:Any?,forName name:String){
         impl.setValue(value, forName: name);
     }
-    public func getValue(name:String)->AnyObject?{
+    open func getValue(_ name:String)->Any?{
         return impl.getValue(name);
     }
 }
 
-public class TcpJsonResponsePackage : TcpResponsePackage,TcpJsonPackage{
+open class TcpJsonResponsePackage : TcpResponsePackage,TcpJsonPackage{
     
     override final public class var type:UInt8{
         return 6;
     }
     
-    private var impl:TcpJsonPackageImpl;
+    fileprivate var impl:TcpJsonPackageImpl;
     
-    public var json:Json{
+    open var json:Json{
         if impl._json == nil {
             impl._json = Json();
         }
@@ -245,15 +245,15 @@ public class TcpJsonResponsePackage : TcpResponsePackage,TcpJsonPackage{
         return impl._path;
     }
     
-    func setPath(path:String){
+    func setPath(_ path:String){
         impl._path = path;
     }
     
-    func setJson(json:Json){
+    func setJson(_ json:Json){
         impl._json = json;
     }
     
-    func setHeaders(headers:Dictionary<String,String>){
+    func setHeaders(_ headers:Dictionary<String,String>){
         impl.setHeaders(headers);
     }
     
@@ -281,23 +281,23 @@ public class TcpJsonResponsePackage : TcpResponsePackage,TcpJsonPackage{
     }
     
     
-    public func addHeader(header:String,value:String){
+    open func addHeader(_ header:String,value:String){
         impl.addHeader(header, value: value);
     }
     
-    public func remove(header:String){
+    open func remove(_ header:String){
         impl.remove(header);
     }
     
-    public override func write() -> [UInt8] {
+    open override func write() -> [UInt8] {
         return impl.write();
     }
     
-    public override func write(inout buffer: [UInt8]) {
+    open override func write(_ buffer: inout [UInt8]) {
         impl.write(&buffer);
     }
     
-    public subscript(idx:Int) -> Json {
+    open subscript(idx:Int) -> Json {
         get{
             return impl[idx];
         }
@@ -307,7 +307,7 @@ public class TcpJsonResponsePackage : TcpResponsePackage,TcpJsonPackage{
     }
     
     
-    public subscript(key:String)->Json {
+    open subscript(key:String)->Json {
         get{
             return impl[key];
         }
@@ -316,10 +316,10 @@ public class TcpJsonResponsePackage : TcpResponsePackage,TcpJsonPackage{
         }
     }
     
-    public func setValue(value:AnyObject?,forName name:String){
+    open func setValue(_ value:Any?,forName name:String){
         impl.setValue(value, forName: name);
     }
-    public func getValue(name:String)->AnyObject?{
+    open func getValue(_ name:String)->Any?{
         return impl.getValue(name);
     }
 }

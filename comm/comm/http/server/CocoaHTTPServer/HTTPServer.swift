@@ -53,11 +53,23 @@ private let httpLogLevel = 0; // | HTTP_LOG_FLAG_TRACE
 //MARK: -
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-public class HTTPServer:NSObject,NSNetServiceDelegate{
+open class HTTPServer:NSObject,NetServiceDelegate{
     
-    private let serverQueue:dispatch_queue_t!;
-    private let connectionQueue:dispatch_queue_t!;
-    private var asyncSocket:GCDAsyncSocket!;
+    fileprivate static var __once: () = {
+        
+//        HTTPLogVerbose(@"%@: Starting bonjour thread...", THIS_FILE);
+        
+//        BonjourThread.bonjourThread = [[NSThread alloc] initWithTarget:self
+//        selector:@selector(bonjourThread)
+//        object:nil];
+//        [bonjourThread start];
+            BonjourThread.bonjourThread = Thread(target: self, selector:#selector(HTTPServer.bonjourThread), object: nil);
+            BonjourThread.bonjourThread.start();
+        }()
+    
+    fileprivate let serverQueue:DispatchQueue!;
+    fileprivate let connectionQueue:DispatchQueue!;
+    fileprivate var asyncSocket:GCDAsyncSocket!;
     
 
 //    private let connectionClass:AnyClass;
@@ -71,22 +83,22 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
 
 //    private let connections = NSMutableArray()
 //    private let webSockets  = NSMutableArray()
-    private var connections = [HTTPConnection]();
-    private var webSockets  = [WebSocket]();
+    fileprivate var connections = [HTTPConnection]();
+    fileprivate var webSockets  = [WebSocket]();
 
-    private let connectionsLock = NSLock()
-    private let webSocketsLock  = NSLock()
+    fileprivate let connectionsLock = NSLock()
+    fileprivate let webSocketsLock  = NSLock()
     
-    private var _isRunning = false;
+    fileprivate var _isRunning = false;
     
-    private var netService:NSNetService? = nil;
+    fileprivate var netService:NetService? = nil;
     
     public override init(){
 //            HTTPLogTrace();
     
             // Setup underlying dispatch queues
-            serverQueue = dispatch_queue_create("HTTPServer", nil);
-            connectionQueue = dispatch_queue_create("HTTPConnection", nil);
+            serverQueue = DispatchQueue(label: "HTTPServer");
+            connectionQueue = DispatchQueue(label: "HTTPConnection");
             
 //            IsOnServerQueueKey = &IsOnServerQueueKey;
 //            IsOnConnectionQueueKey = &IsOnConnectionQueueKey;
@@ -97,15 +109,19 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         let context = Unmanaged.passRetained(self).toOpaque()
         
         //UnsafeMutablePointer<Void> won't manage any memory
-        let p = UnsafeMutablePointer<Void>(context)
+        let p = UnsafeMutableRawPointer(context)
         
         
 //        let p = UnsafeMutablePointer<AnyObject>.init(form:self);
 //        p.memory = self;
         
-            dispatch_queue_set_specific(serverQueue, "IsOnServerQueueKey", p, nil);
-            dispatch_queue_set_specific(connectionQueue, "IsOnConnectionQueueKey", p, nil);
-            
+//            serverQueue.setSpecific(key: /*Migrator FIXME: Use a variable of type DispatchSpecificKey*/ "IsOnServerQueueKey", value: p);
+//        let k1 = DispatchSpecificKey();
+//        k1.
+        serverQueue.setSpecific(key: DispatchSpecificKey(),value:p);
+//            connectionQueue.setSpecific(key: /*Migrator FIXME: Use a variable of type DispatchSpecificKey*/ "IsOnConnectionQueueKey", value: p);
+        serverQueue.setSpecific(key: DispatchSpecificKey(),value:p);
+        
             // Initialize underlying GCD based tcp socket
             asyncSocket = GCDAsyncSocket(delegate:self,delegateQueue:serverQueue);
             
@@ -115,14 +131,14 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
             // By default bind on all available interfaces, en1, wifi etc
         
             // Register for notifications of closed connections
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:#selector(self.connectionDidDie(_:)),name:"HTTPConnectionDidDieNotification",object:nil);
+        NotificationCenter.default.addObserver(self,selector:#selector(self.connectionDidDie(_:)),name:NSNotification.Name("HTTPConnectionDidDieNotification"),object:nil);
             
             // Register for notifications of closed websocket connections
 //            [[NSNotificationCenter defaultCenter] addObserver:self
 //            selector:@selector(webSocketDidDie:)
 //            name:WebSocketDidDieNotification
 //            object:nil];
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:#selector(self.webSocketDidDie(_:)),name:"WebSocketDidDieNotification",object:nil);
+        NotificationCenter.default.addObserver(self,selector:#selector(self.webSocketDidDie(_:)),name:NSNotification.Name("WebSocketDidDieNotification"),object:nil);
         
         self.netService = nil;
         
@@ -136,7 +152,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
 //            HTTPLogTrace();
         
             // Remove notification observer
-        NSNotificationCenter.defaultCenter().removeObserver(self);
+        NotificationCenter.default.removeObserver(self);
         
         // Stop the server if it's running
         self.stop();
@@ -165,7 +181,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         get {
             var result:String!;
             
-            dispatch_sync(serverQueue, {
+            serverQueue.sync(execute: {
                 result = self._documentRoot;
             });
             
@@ -175,7 +191,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         
 //        NSString *valueCopy = [value copy];
         
-        dispatch_async(serverQueue, {
+        serverQueue.async(execute: {
             self._documentRoot = newValue;
             });
         
@@ -188,11 +204,11 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
          * The default connection class is HTTPConnection.
          * If you use a different connection class, it is assumed that the class extends HTTPConnection
          **/
-    private var _connectionClass:HTTPConnection.Type = HTTPConnection.self;
+    fileprivate var _connectionClass:HTTPConnection.Type = HTTPConnection.self;
     public var connectionClass:HTTPConnection.Type{
         get{
             var result:HTTPConnection.Type!;
-            dispatch_sync(serverQueue, {
+            serverQueue.sync(execute: {
                 result = self._connectionClass;
                 });
             
@@ -201,7 +217,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         set {
             
         
-        dispatch_async(serverQueue, {
+        serverQueue.async(execute: {
             self._connectionClass = newValue;
             });
         }
@@ -210,12 +226,12 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         /**
          * What interface to bind the listening socket to.
          **/
-    private var _interface:String? = nil;
+    fileprivate var _interface:String? = nil;
     public var interface:String?{
             get{
                 var result:String?;
                 
-                dispatch_sync(serverQueue, {
+                serverQueue.sync(execute: {
                     result = self._interface;
                     });
                 
@@ -224,7 +240,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
             
       set{
         
-        dispatch_async(serverQueue, {
+        serverQueue.async(execute: {
             self._interface = newValue;
             });
         
@@ -236,19 +252,19 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
          * By default this port is initially set to zero, which allows the kernel to pick an available port for us.
          * After the HTTP server has started, the port being used may be obtained by this method.
          **/
-    private var _port:UInt16 = 8099;
+    fileprivate var _port:UInt16 = 8099;
     public var port:UInt16{
             get{
                 var result:UInt16 = 0;
                 
-                dispatch_sync(serverQueue, {
+                serverQueue.sync(execute: {
                     result = self._port;
                     });
                 
                 return result;
             }
         set{
-            dispatch_async(serverQueue, {
+            serverQueue.async(execute: {
                 self._port = newValue;
             });
         }
@@ -258,7 +274,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
                 {
             var result:UInt16 = 0;
                     
-                    dispatch_sync(serverQueue, {
+                    serverQueue.sync(execute: {
                         if self.isRunning{
                             result = self.asyncSocket.localPort();
                         }else{
@@ -275,19 +291,19 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
          * Domain on which to broadcast this service via Bonjour.
          * The default domain is @"local".
          **/
-    private var _domain:String = "local";
+    fileprivate var _domain:String = "local";
     public var domain:String{
         get{
             var result:String!;
             
-            dispatch_sync(serverQueue, {
+            serverQueue.sync(execute: {
                 result = self._domain;
             });
             
             return result;
         }
        set{
-            dispatch_async(serverQueue, {
+            serverQueue.async(execute: {
                 self._domain = newValue;
             });
         }
@@ -298,19 +314,19 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
          * The default name is an empty string,
          * which should result in the published name being the host name of the computer.
          **/
-    private var _name:String = "";
+    fileprivate var _name:String = "";
     public var name:String{
         get{
             var result:String!;
             
-            dispatch_sync(serverQueue, {
+            serverQueue.sync(execute: {
                 result = self._name;
             });
             
             return result;
         }
         set{
-            dispatch_async(serverQueue, {
+            serverQueue.async(execute: {
                 self._name = newValue;
             });
         }
@@ -320,7 +336,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
     {
         var result:String!;
         
-        dispatch_sync(serverQueue, {
+        serverQueue.sync(execute: {
             
             if let netService = self.netService {
                 
@@ -341,19 +357,19 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
          * The type of service to publish via Bonjour.
          * No type is set by default, and one must be set in order for the service to be published.
          **/
-    private var _type:String = "";
+    fileprivate var _type:String = "";
     public var type:String{
         get{
             var result:String!;
             
-            dispatch_sync(serverQueue, {
+            serverQueue.sync(execute: {
                 result = self._type;
             });
             
             return result;
         }
         set{
-            dispatch_async(serverQueue, {
+            serverQueue.async(execute: {
                 self._type = newValue;
             });
         }
@@ -362,12 +378,12 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         /**
          * The extra data to use for this service via Bonjour.
          **/
-    private var txtRecordDictionary = Dictionary<String,NSData>();
-    private var TXTRecordDictionary:Dictionary<String,NSData>{
+    fileprivate var txtRecordDictionary = Dictionary<String,Data>();
+    fileprivate var TXTRecordDictionary:Dictionary<String,Data>{
             get{
-                var result:Dictionary<String,NSData>!;
+                var result:Dictionary<String,Data>!;
                 
-                dispatch_sync(serverQueue, {
+                serverQueue.sync(execute: {
                     result = self.txtRecordDictionary;
                 });
                 
@@ -379,7 +395,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         
 //        NSDictionary *valueCopy = [value copy];
         
-        dispatch_async(serverQueue, {
+        serverQueue.async(execute: {
             
 //            txtRecordDictionary = valueCopy;
             
@@ -389,11 +405,11 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
 //                NSData *txtRecordData = nil;
 //                if (txtRecordDictionary)
 //                txtRecordData = [NSNetService dataFromTXTRecordDictionary:txtRecordDictionary];
-                let textRecordData = NSNetService.dataFromTXTRecordDictionary(newValue);
+                let textRecordData = NetService.data(fromTXTRecord: newValue);
                 let bonjourBlock = {
                     self.txtRecordDictionary = newValue;
 //                    [theNetService setTXTRecordData:txtRecordData];
-                    netService.setTXTRecordData(textRecordData);
+                    netService.setTXTRecord(textRecordData);
                 };
                 
                 HTTPServer.performBonjourBlock(bonjourBlock);
@@ -416,13 +432,13 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         var success:Bool = true;
         var error:NSError?;
         
-        dispatch_sync(serverQueue,  {
+        serverQueue.sync(execute: {
             
 //            success = [asyncSocket acceptOnInterface:interface port:port error:&err];
 //            var error:AutoreleasingUnsafeMutablePointer<NSError>?;
 //            success = asyncSocket.acceptOnInterface(interface,port:self._port,error:error);
             do{
-                try self.asyncSocket.acceptOnInterface(self._interface, port: self._port)
+                try self.asyncSocket.accept(onInterface: self._interface, port: self._port)
             }catch let e as NSError{
                 error = e;
                 success = false;
@@ -457,10 +473,10 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         self.stop(false);
     }
 //            - (void)stop:(BOOL)keepExistingConnections
-    public func stop(keepExistingConnections:Bool){
+    public func stop(_ keepExistingConnections:Bool){
 //        HTTPLogTrace();
         
-        dispatch_sync(serverQueue, {
+        serverQueue.sync(execute: {
             
             // First stop publishing the service via bonjour
             self.unpublishBonjour();
@@ -507,14 +523,14 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
     public var isRunning:Bool{
         var result:Bool = false;
     
-        dispatch_sync(serverQueue, {
+        serverQueue.sync(execute: {
             result = self._isRunning;
             });
         
         return result;
     }
     
-    public func addWebSocket(ws:WebSocket){
+    public func addWebSocket(_ ws:WebSocket){
 //        [webSocketsLock lock];
         webSocketsLock.lock();
         
@@ -532,7 +548,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
     /**
      * Returns the number of http client connections that are currently connected to the server.
      **/
-    private var numberOfHTTPConnections:Int
+    fileprivate var numberOfHTTPConnections:Int
     {
         var result:Int = 0;
         
@@ -546,7 +562,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         /**
          * Returns the number of websocket client connections that are currently connected to the server.
          **/
-    private var numberOfWebSocketConnections:Int
+    fileprivate var numberOfWebSocketConnections:Int
             {
         var result:Int = 0;
         
@@ -561,7 +577,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
     //MARK: Incoming Connections
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    private var config:HTTPConfig
+    fileprivate var config:HTTPConfig
     {
         // Override me if you want to provide a custom config to the new connection.
         //
@@ -579,7 +595,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         }
         
         //- (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket
-    public func socket(sock:GCDAsyncSocket,didAcceptNewSocket newSocket:GCDAsyncSocket)
+    public func socket(_ sock:GCDAsyncSocket,didAcceptNewSocket newSocket:GCDAsyncSocket)
     {
 //        HTTPConnection *newConnection = (HTTPConnection *)[[connectionClass alloc] initWithAsyncSocket:newSocket
 //            configuration:[self config]];
@@ -595,7 +611,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
     //MARK: Bonjour
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    private func publishBonjour()
+    fileprivate func publishBonjour()
     {
 //        HTTPLogTrace();
 //        
@@ -605,17 +621,17 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         {
 //            netService = [[NSNetService alloc] initWithDomain:domain type:type name:name port:[asyncSocket localPort]];
 //            [netService setDelegate:self];
-            netService = NSNetService(domain: self._domain, type: self._type, name: self._name, port: Int32(asyncSocket.localPort()));
+            netService = NetService(domain: self._domain, type: self._type, name: self._name, port: Int32(asyncSocket.localPort()));
             
 //            NSNetService *theNetService = netService;
 //            NSData *txtRecordData = nil;
 //            if (txtRecordDictionary)
 //            txtRecordData = [NSNetService dataFromTXTRecordDictionary:txtRecordDictionary];
-            let txtRecordData = NSNetService.dataFromTXTRecordDictionary(txtRecordDictionary);
+            let txtRecordData = NetService.data(fromTXTRecord: txtRecordDictionary);
             let bonjourBlock = {
                 
-                self.netService!.removeFromRunLoop(NSRunLoop.mainRunLoop(), forMode:NSRunLoopCommonModes);
-                self.netService!.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode:NSRunLoopCommonModes);
+                self.netService!.remove(from: RunLoop.main, forMode:RunLoopMode.commonModes);
+                self.netService!.schedule(in: RunLoop.current, forMode:RunLoopMode.commonModes);
                 self.netService!.publish();
                 
                 // Do not set the txtRecordDictionary prior to publishing!!!
@@ -623,7 +639,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
 //                if let txtRecordData = txtRecordData
 //                {
 //                    [theNetService setTXTRecordData:txtRecordData];
-                    self.netService?.setTXTRecordData(txtRecordData);
+                    self.netService?.setTXTRecord(txtRecordData);
 //                }
             };
             
@@ -632,7 +648,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         }
     }
         
-    private func unpublishBonjour()
+    fileprivate func unpublishBonjour()
             {
 //                HTTPLogTrace();
                 
@@ -657,11 +673,11 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
              * Republishes the service via bonjour if the server is running.
              * If the service was not previously published, this method will publish it (if the server is running).
              **/
-    private func republishBonjour()
+    fileprivate func republishBonjour()
     {
 //                    HTTPLogTrace();
         
-        dispatch_async(serverQueue, {
+        serverQueue.async(execute: {
             
             self.unpublishBonjour();
             self.publishBonjour();
@@ -672,7 +688,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
                  * Called when our bonjour service has been successfully published.
                  * This method does nothing but output a log message telling us about the published service.
                  **/
-    @objc public func netServiceDidPublish(ns:NSNetService)
+    @objc public func netServiceDidPublish(_ ns:NetService)
     {
         // Override me to do something here...
         // 
@@ -686,7 +702,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
          * Called if our bonjour service failed to publish itself.
          * This method does nothing but output a log message telling us about the published service.
          **/
-    @objc public func netService(ns: NSNetService, didNotPublish errorDict: [String : NSNumber])
+    @objc public func netService(_ ns: NetService, didNotPublish errorDict: [String : NSNumber])
     {
         // Override me to do something here...
         // 
@@ -705,7 +721,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
      * This method is automatically called when a notification of type HTTPConnectionDidDieNotification is posted.
      * It allows us to remove the connection from our array.
      **/
-    @objc private func connectionDidDie(notification:NSNotification)
+    @objc fileprivate func connectionDidDie(_ notification:Notification)
     {
         // Note: This method is called on the connection queue that posted the notification
         
@@ -713,8 +729,8 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         
 //        HTTPLogTrace();
 //        connections.removeObject(notification.object);
-        if let index = connections.indexOf(notification.object as! HTTPConnection){
-            connections.removeAtIndex(index)
+        if let index = connections.index(of: notification.object as! HTTPConnection){
+            connections.remove(at: index)
         }
         
         connectionsLock.unlock();
@@ -724,7 +740,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
          * This method is automatically called when a notification of type WebSocketDidDieNotification is posted.
          * It allows us to remove the websocket from our array.
          **/
-    @objc private func webSocketDidDie(notification:NSNotification)
+    @objc fileprivate func webSocketDidDie(_ notification:Notification)
     {
         // Note: This method is called on the connection queue that posted the notification
         
@@ -732,8 +748,8 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         
 //        HTTPLogTrace();
 //        webSockets removeObject:[notification object]];
-        if let index = webSockets.indexOf(notification.object as! WebSocket){
-            webSockets.removeAtIndex(index)
+        if let index = webSockets.index(of: notification.object as! WebSocket){
+            webSockets.remove(at: index)
         }
         webSocketsLock.unlock();
     }
@@ -754,30 +770,20 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
      **/
     
     struct BonjourThread {
-        static var bonjourThread:NSThread!;
-        static var predicate:dispatch_once_t = 0;
+        static var bonjourThread:Thread!;
+        static var predicate:Int = 0;
     }
     
     
-    private class func startBonjourThreadIfNeeded()
+    fileprivate class func startBonjourThreadIfNeeded()
     {
 //        HTTPLogTrace();
         
 //        static  ;
-        dispatch_once(&BonjourThread.predicate, {
-        
-//        HTTPLogVerbose(@"%@: Starting bonjour thread...", THIS_FILE);
-        
-//        BonjourThread.bonjourThread = [[NSThread alloc] initWithTarget:self
-//        selector:@selector(bonjourThread)
-//        object:nil];
-//        [bonjourThread start];
-            BonjourThread.bonjourThread = NSThread(target: self, selector:#selector(self.bonjourThread), object: nil);
-            BonjourThread.bonjourThread.start();
-        });
-    }
-        
-    @objc private class func bonjourThread()
+        _ = HTTPServer.__once;
+   }
+       
+    @objc fileprivate class func bonjourThread()
             {
 //                @autoreleasepool {
                 
@@ -793,16 +799,16 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
 //                    userInfo:nil
 //                    repeats:YES];
 //                    #pragma clang diagnostic pop
-                NSTimer.scheduledTimerWithTimeInterval(NSDate.distantFuture().timeIntervalSinceNow, target: self, selector: #selector(self.donothingatall(_:)), userInfo: nil, repeats: true);
+                Timer.scheduledTimer(timeInterval: Date.distantFuture.timeIntervalSinceNow, target: self, selector: #selector(self.donothingatall(_:)), userInfo: nil, repeats: true);
                 
-                    NSRunLoop.currentRunLoop().run();
+                    RunLoop.current.run();
                     
 //                    HTTPLogVerbose(@"%@: BonjourThread: Aborted", THIS_FILE);
                 
 //                }
             }
-    @objc private class func donothingatall(_:AnyObject){}
-    @objc private class func executeBonjourBlock(block:BlockClass)
+    @objc fileprivate class func donothingatall(_:AnyObject){}
+    @objc fileprivate class func executeBonjourBlock(_ block:BlockClass)
     {
 //        HTTPLogTrace();
         
@@ -812,7 +818,7 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
         block.block?();
         }
         
-    private class func performBonjourBlock(block:dispatch_block_t)
+    fileprivate class func performBonjourBlock(_ block:@escaping ()->())
     {
 //        HTTPLogTrace();
         
@@ -825,11 +831,14 @@ public class HTTPServer:NSObject,NSNetServiceDelegate{
 //        self.performSelector(#selector(self.executeBonjourBlock(_:)), onThread: BonjourThread.bonjourThread, withObject: block, waitUntilDone: true);
         let bc = BlockClass();
         bc.block = block;
-        self.performSelector(#selector(HTTPServer.executeBonjourBlock(_:)), onThread: BonjourThread.bonjourThread, withObject: bc, waitUntilDone: true);
+        self.perform(#selector(HTTPServer.executeBonjourBlock(_:)), on: BonjourThread.bonjourThread, with: bc, waitUntilDone: true);
     }
 }
 
-@objc private class BlockClass:NSObject{
-    private var block:dispatch_block_t?;
+@objc fileprivate class BlockClass:NSObject{
+    override init() {
+//        self.block = nil;
+    }
+    fileprivate var block:(()->())?;
 }
 //    @end

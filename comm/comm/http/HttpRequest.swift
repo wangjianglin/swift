@@ -15,14 +15,14 @@ public protocol HttpRequest {
     
     var method:HttpMethod!{get}
     
-    var url:NSURL!{get}
+    var url:URL!{get}
     
     var statusCode:Int{get}
     
-    var headerFields:[NSObject : AnyObject]!{get}
+    var headerFields:[AnyHashable: Any]!{get}
     
-    func header(headerField: String!) -> String!;
+    func header(_ headerField: String!) -> String!;
     
-    var body:NSData!{get}
+    var body:Data!{get}
     
 }

@@ -8,8 +8,22 @@
 
 import Foundation
 
-public class HttpUploadPackage : HttpPackage{
+open class HttpUploadPackage : HttpPackage{
     
+    
+    struct YRSingleton{
+        static var predicate:Int = 0
+        static var instance:FileUploadHttpRequestHandle? = nil
+    }
+  
+    fileprivate static var __once: () = {
+
+            YRSingleton.instance = FileUploadHttpRequestHandle()
+
+        }()
+
+    
+
     public init(url:String){
         _files = Dictionary<String,HttpUpload>();
         super.init(url: url, method: HttpMethod.POST);
@@ -22,40 +36,34 @@ public class HttpUploadPackage : HttpPackage{
 //        self._method = method;
     }
     
-    public class var FILE_UPLOAD_HANDLE:HttpRequestHandle {
+    open class var FILE_UPLOAD_HANDLE:HttpRequestHandle {
         
-        struct YRSingleton{
-            static var predicate:dispatch_once_t = 0
-            static var instance:FileUploadHttpRequestHandle? = nil
-        }
-        dispatch_once(&YRSingleton.predicate,{
-            YRSingleton.instance = FileUploadHttpRequestHandle()
-        })
+        _ = HttpUploadPackage.__once
         return YRSingleton.instance!
     }
     
     
-    public var progress:((send:Int64,total:Int64) -> Void)!;
+    open var progress:((_ send:Int64,_ total:Int64) -> Void)!;
     
-    private var _files:Dictionary<String,HttpUpload>;
+    fileprivate var _files:Dictionary<String,HttpUpload>;
     
     internal var files:Dictionary<String,HttpUpload>{
         return _files;
     }
     
-    public func addFile(name:String,file:String){
-        _files[name] = HttpUpload(fileUrl: NSURL(fileURLWithPath: file));
+    open func addFile(_ name:String,file:String){
+        _files[name] = HttpUpload(fileUrl: URL(fileURLWithPath: file));
     }
     
-    public func addFile(name:String,data: NSData, fileName: String, mimeType: String){
+    open func addFile(_ name:String,data: Data, fileName: String, mimeType: String){
         _files[name] = HttpUpload(data: data, fileName: fileName, mimeType: mimeType);
     }
     
-    public func getFile(name:String)->HttpUpload?{
+    open func getFile(_ name:String)->HttpUpload?{
         return _files[name];
     }
     
-    public func remove(name:String){
-        _files.removeValueForKey(name);
+    open func remove(_ name:String){
+        _files.removeValue(forKey: name);
     }
 }

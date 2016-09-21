@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class HttpTestPackage:HttpPackage{
+open class HttpTestPackage:HttpPackage{
     
     public init(){
         super.init(url:"/core/comm/test.action");

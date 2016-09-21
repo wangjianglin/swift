@@ -11,10 +11,10 @@ import UIKit
 import LinUtil
 
 public enum ImageFill: Int {
-    case Default = 0
-    case Fill = 1
-    case Width = 2
-    case Height = 4
+    case `default` = 0
+    case fill = 1
+    case width = 2
+    case height = 4
 }
 
 //typedef NS_ENUM(NSUInteger, ImageFill) {
@@ -275,22 +275,22 @@ public enum ImageFill: Int {
 
 
 
-public class FillImageView : UIImageView{
-    private var _preImageSize:CGSize = CGSizeMake(0, 0);
-    private var _preVieSize:CGSize = CGSizeMake(0, 0);
-    private var _imageView:CacheImageView;
+open class FillImageView : UIImageView{
+    fileprivate var _preImageSize:CGSize = CGSize(width: 0, height: 0);
+    fileprivate var _preVieSize:CGSize = CGSize(width: 0, height: 0);
+    fileprivate var _imageView:CacheImageView;
 //    private var _image:AnyObject;
 //    private var _fill:ImageFill;
     
 //    void (^_imageChanged)();
 //}
 //@end
-    public var imageChanged:(()->())?
+    open var imageChanged:(()->())?
 
 //@implementation FillImageView
 
 
-    public var imageView:UIImageView{
+    open var imageView:UIImageView{
     return _imageView;
 }
 
@@ -302,7 +302,7 @@ public class FillImageView : UIImageView{
 //    _imageChanged = imageChanged;
 //}
 
-    public var fill:ImageFill = ImageFill.Default{
+    open var fill:ImageFill = ImageFill.default{
         didSet{
     if (oldValue == fill) {
         return;
@@ -317,7 +317,7 @@ public class FillImageView : UIImageView{
 //    if (self) {
         _imageView = CacheImageView();
         
-        super.init(frame: CGRectMake(0, 0, 0, 0));
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0));
 //        __weak FillImageView * wself = self;
         _imageView.imageChanged = {[weak self] (_:CacheImageView)->() in
 //            FillImageView * sself = wself;
@@ -330,7 +330,7 @@ public class FillImageView : UIImageView{
         };
         
         self.addSubview(_imageView);
-        self.backgroundColor = UIColor.clearColor();
+        self.backgroundColor = UIColor.clear;
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -344,7 +344,7 @@ public class FillImageView : UIImageView{
 //    return _image;
 //}
 
-    public func setFillImage(image:AnyObject?){
+    open func setFillImage(_ image:AnyObject?){
 //        didSet{
     
 //        }
@@ -368,7 +368,7 @@ public class FillImageView : UIImageView{
 //}
     }
 
-private func update(){
+fileprivate func update(){
 
     if _imageView.image == nil {
         return;
@@ -376,13 +376,13 @@ private func update(){
     
     var viewRect = self.bounds;
     
-    let imageSize = _imageView.image?.size ?? CGSizeMake(0,0);
+    let imageSize = _imageView.image?.size ?? CGSize(width: 0,height: 0);
     if imageSize.width == 0 || imageSize.height == 0 {
         return;
     }
     
     if viewRect.size.width == 0 || viewRect.size.height == 0 {
-        viewRect = CGRectMake(0, 0, imageSize.width, imageSize.height);
+        viewRect = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height);
         self.frame = viewRect;
 //        [self layoutIfNeeded];
     }
@@ -392,10 +392,10 @@ private func update(){
         _preImageSize = imageSize;
         _preVieSize = contentViewRect.size;
         var s:CGFloat = 1.0;
-        if self.fill != ImageFill.Fill {
+        if self.fill != ImageFill.fill {
             s = (_preImageSize.width/_preImageSize.height)/(contentViewRect.size.width/contentViewRect.size.height);
         }
-        if (ImageFill.Default == self.fill && s > 1) || self.fill == ImageFill.Width {
+        if (ImageFill.default == self.fill && s > 1) || self.fill == ImageFill.width {
             contentViewRect.size.width = contentViewRect.size.width;
             contentViewRect.size.height = contentViewRect.size.height / s;
             contentViewRect.origin.x = 0;
@@ -411,7 +411,7 @@ private func update(){
     }
 }
 
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
        
     self.update();
     super.layoutSubviews();

@@ -10,7 +10,7 @@ import Foundation
 
 public extension Array{
     
-    public mutating func addObjectsFromArray(arr:Array?){
+    public mutating func addObjectsFromArray(_ arr:Array?){
         if let arr = arr {
             for item in arr {
                 self.append(item);
@@ -18,7 +18,7 @@ public extension Array{
         }
     }
     
-    public mutating func addObjectsFromArray(arr:Array?,isEqual:((a:Element,b:Element)->Bool)){
+    public mutating func addObjectsFromArray(_ arr:Array?,isEqual:((_ a:Element,_ b:Element)->Bool)){
         
         if let arr = arr {
             
@@ -32,7 +32,7 @@ public extension Array{
             for item in arr {
                 addFalsg = true;
                 for obj in self {
-                    if isEqual(a: item,b: obj) {
+                    if isEqual(item,obj) {
                         addFalsg = false;
                         break;
                     }

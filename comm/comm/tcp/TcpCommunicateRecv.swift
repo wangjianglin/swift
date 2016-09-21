@@ -10,35 +10,35 @@ import LinUtil
 
 class TcpCommunicateRecv {
     
-    private var comm:TcpCommunicate;
-    private var session:TcpSession;
-    private var listener:TcpCommunicateListener;
+    fileprivate var comm:TcpCommunicate;
+    fileprivate var session:TcpSession;
+    fileprivate var listener:TcpCommunicateListener;
     
-    init(comm:TcpCommunicate,session:TcpSession,listener:TcpCommunicateListener){
+    init(comm:TcpCommunicate,session:TcpSession,listener:@escaping TcpCommunicateListener){
         self.comm = comm;
         self.session = session;
         self.listener = listener;
     }
     
-    private static var bufferSize:Int = 2048;
-    private var dataType:UInt8 = 0;
+    fileprivate static var bufferSize:Int = 2048;
+    fileprivate var dataType:UInt8 = 0;
     
-    private var isDB:Bool = false;
+    fileprivate var isDB:Bool = false;
     
-    private var isFirst:Bool = true;
+    fileprivate var isFirst:Bool = true;
 
 
-    private var sequeueCount:Int = 0;
-    private var sequeue:Int64 = 0;
+    fileprivate var sequeueCount:Int = 0;
+    fileprivate var sequeue:Int64 = 0;
     
-    private var queue:Queue = Queue(count: 10);
+    fileprivate var queue:Queue = Queue(count: 10);
     
     func recvData()
     {
     
-        var ch = [UInt8](count: TcpCommunicateRecv.bufferSize, repeatedValue: 0);
+        var ch = [UInt8](repeating: 0, count: TcpCommunicateRecv.bufferSize);
 
-        var sequeueBytes = [UInt8](count: 9, repeatedValue: 0);
+        var sequeueBytes = [UInt8](repeating: 0, count: 9);
     
     //数据产生异常
 
@@ -56,7 +56,7 @@ class TcpCommunicateRecv {
     
         let socket = session.socket;
         var num = 0;
-        var n = 0;
+        //var n = 0;
         while (true)
         {
             num = socket.read(&ch);
@@ -67,7 +67,8 @@ class TcpCommunicateRecv {
                 break;
             }
             
-            for (n = 0; n < num; n++)
+            //for (n = 0; n < num; n += 1)
+            for n in 0 ..< num
             {
                 if (ch[n] == 0xC0)
                 {//如果isCo0为true，表示数据结束
@@ -75,9 +76,9 @@ class TcpCommunicateRecv {
                     if var parser = parser {
                         
                         if(sequeueBytes[0] == 0){
-                            parser.state = TcpPackageState.REQUEST;
+                            parser.state = TcpPackageState.request;
                         }else{
-                            parser.state = TcpPackageState.RESPONSE;
+                            parser.state = TcpPackageState.response;
                         }
                         let p = parser.parse();
                         if let p = p{
@@ -137,7 +138,8 @@ class TcpCommunicateRecv {
                 }
                 if (sequeueCount < sequeueBytes.count)
                 {
-                    sequeueBytes[sequeueCount++] = ch[n];
+                    sequeueBytes[sequeueCount] = ch[n];
+                    sequeueCount += 1;
                     continue;
                 }
                 
@@ -148,36 +150,36 @@ class TcpCommunicateRecv {
         }
     }
     
-    private func communicateListener(pack:TcpPackage){
+    fileprivate func communicateListener(_ pack:TcpPackage){
         
         queue.asynQueue { () -> () in
             self.communicateListenerImpl(pack);
         }
     }
     
-    private func communicateListenerImpl(pack:TcpPackage){
+    fileprivate func communicateListenerImpl(_ pack:TcpPackage){
 
         var isResponse:Bool = false;
         
-        if pack.state == TcpPackageState.REQUEST {
-            self.listener(session: self.session, pack: pack, response: {p in
+        if pack.state == TcpPackageState.request {
+            self.listener(self.session, pack, {p in
                 isResponse = true;
                 p.setSequeue(pack.sequeue);
                 self.session.response(p);
             });
         }else{
-            self.listener(session: self.session, pack: pack, response: {p in
+            self.listener(self.session, pack, {p in
                 
             });
         }
         
-        if pack.state == TcpPackageState.RESPONSE {
+        if pack.state == TcpPackageState.response {
             if let response = sequeues[pack.sequeue] {
                 response.response(pack);
             }
         }
         
-        if pack.state == TcpPackageState.REQUEST && !isResponse {
+        if pack.state == TcpPackageState.request && !isResponse {
             let p = TcpEmptyPackage();
             p.setSequeue(pack.sequeue);
             session.response(p);
@@ -185,16 +187,16 @@ class TcpCommunicateRecv {
 
     }
     
-    private var sequeues:Dictionary<UInt64,TcpPackageResponse> = [:];
+    fileprivate var sequeues:Dictionary<UInt64,TcpPackageResponse> = [:];
     
-    func addRequest(sequeue:UInt64,response:TcpPackageResponse){
+    func addRequest(_ sequeue:UInt64,response:TcpPackageResponse){
         sequeues[sequeue] = response;
     }
     
     
-    private var parsers:Dictionary<UInt8,TcpProtocolParser> = [:];
+    fileprivate var parsers:Dictionary<UInt8,TcpProtocolParser> = [:];
     
-    private func getProtocolParser(type:UInt8)->TcpProtocolParser!{
+    fileprivate func getProtocolParser(_ type:UInt8)->TcpProtocolParser!{
         
         if let r = parsers[type] {
             return r;

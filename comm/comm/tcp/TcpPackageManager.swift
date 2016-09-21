@@ -26,32 +26,32 @@ import LinUtil
 typealias QVType = TcpRequestPackage.Type;
 
 
-public class TcpPackageManager<K : Hashable,QT ,RT,QV,RV>{
+open class TcpPackageManager<K : Hashable,QT ,RT,QV,RV>{
     
-    private var toKey:((QT)->(K));
+    fileprivate var toKey:((QT)->(K));
     
-    public init(reg:((manager:TcpPackageManager<K,QT ,RT,QV,RV>)->()),toKey:((QT)->(K))){
+    public init(reg:((_ manager:TcpPackageManager<K,QT ,RT,QV,RV>)->()),toKey:@escaping ((QT)->(K))){
         self.toKey = toKey;
         
-        reg(manager: self);
+        reg(self);
     }
     
-    private var requests:Dictionary<K,QT> = [:]
+    fileprivate var requests:Dictionary<K,QT> = [:]
 //
 //    
-    private var responses:Dictionary<K,RT> = [:];
+    fileprivate var responses:Dictionary<K,RT> = [:];
     
-    private var responseKeys:Dictionary<String,K> = [:];
+    fileprivate var responseKeys:Dictionary<String,K> = [:];
 //
 ////    public class var commands:Dictionary<Int32,TcpCommandRequestPackage.Type>{
 ////        return YRSingleton.instance
 ////    }
 //    
-    public func request(resp:RT)->K!{
+    open func request(_ resp:RT)->K!{
         return responseKeys[NSStringFromClass((resp as! AnyClass))];
     }
 
-    public func register(cls:QT){
+    open func register(_ cls:QT){
         //YRSingleton.instance[command.command] = command;
         let k = toKey(cls);
         requests[k] = cls;
@@ -61,31 +61,31 @@ public class TcpPackageManager<K : Hashable,QT ,RT,QV,RV>{
         
     }
     
-    public func remove(cls:QT){
+    open func remove(_ cls:QT){
         //YRSingleton.instance.removeValueForKey(command.command);
         let k = toKey(cls);
-        requests.removeValueForKey(k)
-        let respType = responses.removeValueForKey(k)
-        responseKeys.removeValueForKey(NSStringFromClass(respType as! AnyClass));
+        requests.removeValue(forKey: k)
+        let respType = responses.removeValue(forKey: k)
+        responseKeys.removeValue(forKey: NSStringFromClass(respType as! AnyClass));
     }
     
-    public func remove(key:K){
+    open func remove(_ key:K){
         //YRSingleton.instance.removeValueForKey(command);
         if let v = self.requests[key] {
-            self.requests.removeValueForKey(key);
-            self.responses.removeValueForKey(key)
-            self.responseKeys.removeValueForKey(NSStringFromClass((v as! AnyClass)))
+            self.requests.removeValue(forKey: key);
+            self.responses.removeValue(forKey: key)
+            self.responseKeys.removeValue(forKey: NSStringFromClass((v as! AnyClass)))
         }
     }
     
-    public func newRequestInstance(key:K)->QV!{
+    open func newRequestInstance(_ key:K)->QV!{
         if let cls = requests[key] {
             return (cls as! TcpRequestPackage.Type).init() as! QV;
         }
         return nil;
     }
     
-    public func newResponseInstance(key:K)->RV!{
+    open func newResponseInstance(_ key:K)->RV!{
         if let cls = responses[key] {
             return (cls as! TcpResponsePackage.Type).init() as! RV;
         }
@@ -124,7 +124,7 @@ public class TcpPackageManager<K : Hashable,QT ,RT,QV,RV>{
 
 
 public let TcpCommandPackageManager = TcpPackageManager<Int32,TcpCommandRequestPackage.Type,TcpCommandResponsePackage.Type,TcpCommandRequestPackage,TcpCommandResponsePackage>(reg: { (manager) -> () in
-        manager.register(TcpCommandDetectPackage);
+        manager.register(TcpCommandDetectPackage.self);
     }) { (
         q) -> Int32 in
         return q.command;

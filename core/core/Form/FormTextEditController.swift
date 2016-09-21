@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class FormTextEditController: UITableViewController{
+open class FormTextEditController: UITableViewController{
     
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
     }
@@ -22,42 +22,42 @@ public class FormTextEditController: UITableViewController{
             text.text = value;
         }
     }
-    internal var textType:TextType = TextType.Text{
+    internal var textType:TextType = TextType.text{
         didSet{
             switch( textType ) {
-            case .Text:
-                text.autocorrectionType = .Default
-                text.autocapitalizationType = .Sentences
-                text.keyboardType = .Default
-            case .Name:
-                text.autocorrectionType = .No
-                text.autocapitalizationType = .Words
-                text.keyboardType = .Default
-            case .Phone:
-                text.keyboardType = .PhonePad
-            case .URL:
-                text.autocorrectionType = .No
-                text.autocapitalizationType = .None
+            case .text:
+                text.autocorrectionType = .default
+                text.autocapitalizationType = .sentences
+                text.keyboardType = .default
+            case .name:
+                text.autocorrectionType = .no
+                text.autocapitalizationType = .words
+                text.keyboardType = .default
+            case .phone:
+                text.keyboardType = .phonePad
+            case .url:
+                text.autocorrectionType = .no
+                text.autocapitalizationType = .none
                 text.keyboardType = .URL
-            case .Email:
-                text.autocorrectionType = .No
-                text.autocapitalizationType = .None
-                text.keyboardType = .EmailAddress
-            case .Password:
-                text.autocorrectionType = .No
-                text.autocapitalizationType = .None
-                text.keyboardType = .ASCIICapable
-                text.secureTextEntry = true
+            case .email:
+                text.autocorrectionType = .no
+                text.autocapitalizationType = .none
+                text.keyboardType = .emailAddress
+            case .password:
+                text.autocorrectionType = .no
+                text.autocapitalizationType = .none
+                text.keyboardType = .asciiCapable
+                text.isSecureTextEntry = true
             default:
                 break
             }
 
         }
     }
-    internal var valueChange:((value:String)->())?
+    internal var valueChange:((_ value:String)->())?
     
     public init(){
-        super.init(style: UITableViewStyle.Grouped)
+        super.init(style: UITableViewStyle.grouped)
         print("ok.");
     }
 
@@ -65,19 +65,19 @@ public class FormTextEditController: UITableViewController{
         super.init(coder: aDecoder)!;
         
     }
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad();
         self.navigationItem.title = self.title;
         
         let ok:UIBarButtonItem = UIBarButtonItem();
         ok.title = "确定";
-        ok.action = "okClick:";
+        ok.action = #selector(FormTextEditController.okClick(_:));
         ok.target = self;
         self.navigationItem.rightBarButtonItem = ok;
         
         let cancel:UIBarButtonItem = UIBarButtonItem();
         cancel.title = "取消";
-        cancel.action = "cancelClick:";
+        cancel.action = #selector(FormTextEditController.cancelClick(_:));
         cancel.target = self;
         
         self.navigationItem.leftBarButtonItem = cancel;
@@ -87,34 +87,34 @@ public class FormTextEditController: UITableViewController{
         self.tableView.dataSource = self;
         
         text.translatesAutoresizingMaskIntoConstraints = false;
-        text.returnKeyType = UIReturnKeyType.Done;
-        text.addTarget(self, action: "keyReturn:", forControlEvents: UIControlEvents.EditingDidEndOnExit)
+        text.returnKeyType = UIReturnKeyType.done;
+        text.addTarget(self, action: #selector(FormTextEditController.keyReturn(_:)), for: UIControlEvents.editingDidEndOnExit)
         cell.addSubview(text);
-        cell.addConstraints([NSLayoutConstraint(item: text, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 10),
-            NSLayoutConstraint(item: text, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.Right, multiplier: 1, constant: -10),
-            NSLayoutConstraint(item: text, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: text, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 34)]);
+        cell.addConstraints([NSLayoutConstraint(item: text, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: cell, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 10),
+            NSLayoutConstraint(item: text, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: cell, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -10),
+            NSLayoutConstraint(item: text, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: cell, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: text, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 34)]);
         
     }
     
-    private func backValue(){
-        self.navigationController?.popViewControllerAnimated(true);
+    fileprivate func backValue(){
+        self.navigationController?.popViewController(animated: true);
         if let valueChange = self.valueChange{
-            valueChange(value: text.text!);
+            valueChange(text.text!);
         }
     }
     
-    public func cancelClick(_:AnyObject){
+    open func cancelClick(_:AnyObject){
         print("canecl click.");
-        self.navigationController?.popViewControllerAnimated(true);
+        self.navigationController?.popViewController(animated: true);
     }
     
-    public func okClick(_:AnyObject){
+    open func okClick(_:AnyObject){
         print("ok click.");
         backValue();
     }
     
-    public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return 1;
     }
     
@@ -122,10 +122,10 @@ public class FormTextEditController: UITableViewController{
     // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
     
     
-    private var text:UITextField = UITextField();
+    fileprivate var text:UITextField = UITextField();
     
-    private var cell = UITableViewCell();
-    public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+    fileprivate var cell = UITableViewCell();
+    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
         //text
         print("----------------");
@@ -134,7 +134,7 @@ public class FormTextEditController: UITableViewController{
         return cell;
     }
     
-    public func keyReturn(_:AnyObject){
+    open func keyReturn(_:AnyObject){
         print("key return ok.");
         backValue();
     }

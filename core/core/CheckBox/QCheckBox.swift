@@ -14,10 +14,10 @@ import LinUtil
 //}
 
 private class __QCheckBoxDelegateImpl3 : DelegateAction,QCheckBoxDelegate{
-    private var _didSelectedCheckBoxAction:((checkBox:QCheckBox)->())?;
+    fileprivate var _didSelectedCheckBoxAction:((_ checkBox:QCheckBox)->())?;
     
-    @objc private func didSelectedCheckBox(checkBox: QCheckBox!, checked: Bool) {
-        _didSelectedCheckBoxAction?(checkBox: checkBox)
+    @objc fileprivate func didSelectedCheckBox(_ checkBox: QCheckBox!, checked: Bool) {
+        _didSelectedCheckBoxAction?(checkBox)
     }
     
     
@@ -27,7 +27,7 @@ private class __QCheckBoxDelegateImpl3 : DelegateAction,QCheckBoxDelegate{
 extension QCheckBox{
     
     
-    private var actionDelegate:__QCheckBoxDelegateImpl3{
+    fileprivate var actionDelegate:__QCheckBoxDelegateImpl3{
         
         if self.delegate is __QCheckBoxDelegateImpl3{
             return self.delegate as! __QCheckBoxDelegateImpl3;
@@ -39,7 +39,7 @@ extension QCheckBox{
         return da;
     }
     
-    public var didSelectedCheckBoxAction:((checkBox:QCheckBox)->())?{
+    public var didSelectedCheckBoxAction:((_ checkBox:QCheckBox)->())?{
         get{
             return actionDelegate._didSelectedCheckBoxAction;
         }

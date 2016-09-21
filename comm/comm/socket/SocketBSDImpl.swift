@@ -9,8 +9,8 @@
 import Foundation
 
 class SocketBSDImpl:AbstractSocketImpl{
-    private var fd:Int32;
-    private var addr:SocketAddress;
+    fileprivate var fd:Int32;
+    fileprivate var addr:SocketAddress;
     
     init(fd:Int32,addr:SocketAddress){
         self.fd = fd;
@@ -21,21 +21,25 @@ class SocketBSDImpl:AbstractSocketImpl{
         fd = socket(AF_INET, SOCK_STREAM, 0);
     }
     func connect() -> Bool {
-        let rc = withUnsafePointer(&addr) { ptr -> Int32 in
-            let bptr = UnsafePointer<sockaddr>(ptr) // cast
-            return Darwin.connect(fd, bptr, socklen_t(addr.len)) //only returns block
+        let rc = withUnsafePointer(to: &addr) { ptr -> Int32 in
+//            let bptr = UnsafePointer<sockaddr>(ptr) // cast
+//            return Darwin.connect(fd, bptr, socklen_t(addr.len)) //only returns block
+            return ptr.withMemoryRebound(to: sockaddr.self, capacity: 1, { (bptr) -> Int32 in
+                return Darwin.connect(fd, bptr, socklen_t(addr.len));
+            })
         }
         if(rc == 0){
             return true;
         }
         return false;
     }
-    func write(str:String){
-        var buffer = str.cStringUsingEncoding(NSUTF8StringEncoding)!;
+    func write(_ str:String){
+        var buffer = str.cString(using: String.Encoding.utf8)!;
         let arrayPtr = UnsafeMutableBufferPointer<CChar>(start: &buffer, count: buffer.count)
-        writeImpl(arrayPtr.baseAddress,count: buffer.count);
+        writeImpl(arrayPtr.baseAddress!,count: buffer.count);
     }
-    func write(var buffer:[UInt8],var count:Int = 0){
+    func write(_ buffer:[UInt8],count:Int = 0){
+        var buffer = buffer, count = count
         //Darwin.wri
         //dispatch_write
         let arrayPtr = UnsafeMutableBufferPointer<UInt8>(start: &buffer, count: buffer.count)
@@ -43,13 +47,13 @@ class SocketBSDImpl:AbstractSocketImpl{
         if(count <= 0 ){
             count = buffer.count;
         }
-        writeImpl(arrayPtr.baseAddress,count: count);
+        writeImpl(arrayPtr.baseAddress!,count: count);
     }
     
-    private func writeImpl(buffer:UnsafePointer<Void>,count:Int){
+    fileprivate func writeImpl(_ buffer:UnsafeRawPointer,count:Int){
         Darwin.send(fd, buffer, count, 0);
     }
-    func read(inout buffer:[UInt8])->Int{
+    func read(_ buffer:inout [UInt8])->Int{
     
 
         let arrayPtr = UnsafeMutableBufferPointer<UInt8>(start: &buffer, count: buffer.count)

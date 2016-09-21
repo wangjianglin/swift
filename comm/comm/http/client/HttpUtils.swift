@@ -22,21 +22,21 @@ class HttpUtils {
     }
     
     
-    class func url(impl:HttpCommunicateImpl,pack:HttpPackage)->String {
+    class func url(_ impl:HttpCommunicateImpl,pack:HttpPackage)->String {
     
         var curl = impl.commUrl;
         //var commUriString = "";
         if pack.url.hasPrefix("/"){
-            curl += pack.url.substringFromIndex(pack.url.startIndex.advancedBy(1))
+            curl += pack.url.substring(from: pack.url.characters.index(pack.url.startIndex, offsetBy: 1))
         }else{
             curl += pack.url;
         }
         
         if !pack.enableCache{
-            if curl.rangeOfString("?") != nil {
-                curl += "&_time_stamp_\(NSDate().timeIntervalSince1970 * 100000)=1";
+            if curl.range(of: "?") != nil {
+                curl += "&_time_stamp_\(Date().timeIntervalSince1970 * 100000)=1";
             }else{
-                curl += "?_time_stamp_\(NSDate().timeIntervalSince1970 * 100000)=1";
+                curl += "?_time_stamp_\(Date().timeIntervalSince1970 * 100000)=1";
             }
         }
         

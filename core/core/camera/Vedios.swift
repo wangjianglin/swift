@@ -21,13 +21,13 @@ import LinUtil
 //
 //@end
 
-public class VedioConvert : NSObject, SCAssetExportSessionDelegate{
+open class VedioConvert : NSObject, SCAssetExportSessionDelegate{
 
 //@implementation VedioConvert
-    private var _url:NSURL;
-    public var action:((url:NSURL?)->())?
+    fileprivate var _url:URL;
+    open var action:((_ url:URL?)->())?
 
-    public init(url:NSURL){
+    public init(url:URL){
 //    self = [super init];
 //    if (self) {
 //        _url = url;
@@ -40,10 +40,10 @@ public class VedioConvert : NSObject, SCAssetExportSessionDelegate{
 //    _action = action;
 //}
 
-    public func start(view:UIView){
+    open func start(_ view:UIView){
     
     let progressView = MRProgressOverlayView();
-    progressView.mode = MRProgressOverlayViewMode.IndeterminateSmallDefault;
+    progressView.mode = MRProgressOverlayViewMode.indeterminateSmallDefault;
     //[self addSubview:progressView];
     
     view.addSubview(progressView);
@@ -51,20 +51,20 @@ public class VedioConvert : NSObject, SCAssetExportSessionDelegate{
     progressView.titleLabelText = "正在转换视频...";
     progressView.show(true);
     
-    let path = pathFor(Documents.Cache, path: "vediocache");
+    let path = pathFor(Documents.cache, path: "vediocache");
     
-    let fileManager = NSFileManager.defaultManager();
+    let fileManager = FileManager.default;
     
-        let isDir = UnsafeMutablePointer<ObjCBool>.alloc(1);
-    if !fileManager.fileExistsAtPath(path!, isDirectory:isDir) || isDir.memory.boolValue == false {
-        try! fileManager.createDirectoryAtPath(path!, withIntermediateDirectories:true, attributes:nil);
+        let isDir = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1);
+    if !fileManager.fileExists(atPath: path!, isDirectory:isDir) || isDir.pointee.boolValue == false {
+        try! fileManager.createDirectory(atPath: path!, withIntermediateDirectories:true, attributes:nil);
     }
     
 //    NSURL * outUrl = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@%@",path,@"tmp.mp4"]];
-    let outUrl = NSURL(fileURLWithPath:"\(path)/tmp.mp4");
-    let exportSession = SCAssetExportSession(asset:AVAsset(URL:_url));
+    let outUrl = URL(fileURLWithPath:"\(path)/tmp.mp4");
+    let exportSession = SCAssetExportSession(asset:AVAsset(url:_url));
     //exportSession.videoConfiguration.
-    exportSession.videoConfiguration.filter = SCFilter.emptyFilter();
+    exportSession.videoConfiguration.filter = SCFilter.empty();
     //exportSession.videoConfiguration.preset = SCPresetHighestQuality;
     exportSession.audioConfiguration.preset = SCPresetMediumQuality;
     exportSession.videoConfiguration.maxFrameRate = 30;
@@ -124,8 +124,8 @@ public class VedioConvert : NSObject, SCAssetExportSessionDelegate{
 //    };
     
     
-    exportSession.exportAsynchronouslyWithCompletionHandler(){[weak self] in
-        UIApplication.sharedApplication().endIgnoringInteractionEvents();
+    exportSession.exportAsynchronously(){[weak self] in
+        UIApplication.shared.endIgnoringInteractionEvents();
         
         //        [UIView animateWithDuration:0.3 animations:^{
         //            //self.exportView.alpha = 0;
@@ -138,7 +138,7 @@ public class VedioConvert : NSObject, SCAssetExportSessionDelegate{
 //        if (sself != nil && sself->_action != nil) {
 //            sself->_action(exportSession.outputUrl);
 //        }
-        self?.action?(url: exportSession.outputUrl);
+        self?.action?(exportSession.outputUrl);
         progressView.dismiss(true);
     };
 }

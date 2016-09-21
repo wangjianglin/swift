@@ -9,7 +9,7 @@
 import Foundation
 
 
-public class TcpCommandDetectResponsePackage : TcpCommandResponsePackage{
+open class TcpCommandDetectResponsePackage : TcpCommandResponsePackage{
 //    override public class var command:Int32{
 //        return -0x1;
 //    }

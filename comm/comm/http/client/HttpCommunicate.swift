@@ -11,78 +11,86 @@ import LinUtil
 
 
 //HTTP通信实现类
-public class HttpCommunicate{
+open class HttpCommunicate{
     
+    struct YRSingleton{
+        static var predicate:Int = 0
+        static var instance:HttpCommunicateArgs? = nil
+    }
     
-    public class var commUrl:String{
+    fileprivate static var __once: () = {
+
+                YRSingleton.instance = HttpCommunicateArgs()
+
+            }()
+
+    
+
+    
+
+    open class var commUrl:String{
         get{ return global.commUrl; }
         set{ global.commUrl = newValue; }
     }
     
-    public class var mainThread:Bool{
+    open class var mainThread:Bool{
         get{ return global.mainThread; }
         set{ global.mainThread = newValue; }
     }
     
-    public class var isDebug:Bool{
+    open class var isDebug:Bool{
         get{ return global.isDebug; }
         set{ global.isDebug = newValue; }
     }
     
-    public class var httpDns:HttpDNS?{
+    open class var httpDns:HttpDNS?{
         get{return global.httpDns;}
         set{global.httpDns = newValue;}
     }
     
-    public class var headers:IndexProperty<String,String>{
+    open class var headers:IndexProperty<String,String>{
         return global.headers;
     }
     
-    public class func removeHeader(header:String){
+    open class func removeHeader(_ header:String){
         global.removeHeader(header);
     }
     
-    public class func request(package:HttpPackage,result:((obj:AnyObject!,warning:[HttpError])->())? = nil,fault:((error:HttpError)->())? = nil)->HttpCommunicateResult{
+    open class func request(_ package:HttpPackage,result:((_ obj:AnyObject?,_ warning:[HttpError])->())? = nil,fault:((_ error:HttpError)->())? = nil)->HttpCommunicateResult{
         return global.request(package,result:result,fault:fault);
     }
     
-    public class func upload(package:HttpUploadPackage,result:((obj:AnyObject!,warning:[HttpError])->())! = nil,fault:((error:HttpError)->())! = nil,progress:((send:Int64,total:Int64) -> Void)! = nil)->HttpCommunicateResult{
+    open class func upload(_ package:HttpUploadPackage,result:((_ obj:AnyObject?,_ warning:[HttpError])->())! = nil,fault:((_ error:HttpError)->())! = nil,progress:((_ send:Int64,_ total:Int64) -> Void)! = nil)->HttpCommunicateResult{
         return global.upload(package,result:result,fault:fault,progress:progress);
     }
  
     
-    public class var install:HttpCommunicateArgs{
+    open class var install:HttpCommunicateArgs{
         get{
             //return _install;
-            struct YRSingleton{
-                static var predicate:dispatch_once_t = 0
-                static var instance:HttpCommunicateArgs? = nil
-            }
-            dispatch_once(&YRSingleton.predicate,{
-                YRSingleton.instance = HttpCommunicateArgs()
-            })
+            _ = HttpCommunicate.__once
             return YRSingleton.instance!
         }
     }
     
-    public class var httprequestComplete:((HttpPackage,AnyObject!,[HttpError])->())?{
+    open class var httprequestComplete:((HttpPackage,AnyObject?,[HttpError])->())?{
         get{ return global.httprequestComplete;}
         set{ global.httprequestComplete = newValue;}
     }
     
     
-    public class var httprequestFault:((HttpPackage,HttpError)->())?{
+    open class var httprequestFault:((HttpPackage,HttpError)->())?{
         get{ return global.httprequestFault;}
         set{ global.httprequestFault = newValue;}
     }
     
     
-    public class var httprequest:((HttpPackage)->())?{
+    open class var httprequest:((HttpPackage)->())?{
         get{ return global.httprequest;}
         set{ global.httprequest = newValue;}
     }
     
-    public class var global:HttpCommunicateImpl{
+    open class var global:HttpCommunicateImpl{
         get{
             return HttpCommunicate.install["global"];
         }
@@ -90,31 +98,31 @@ public class HttpCommunicate{
     
 }
 
-public class HttpCommunicateImpl{
+open class HttpCommunicateImpl{
     
-    private init(name:String){
+    fileprivate init(name:String){
         self.name = name;
     }
     
-    public var mainThread:Bool = false;
-    public var isDebug:Bool = false;
+    open var mainThread:Bool = false;
+    open var isDebug:Bool = false;
     
-    private var name:String;
+    fileprivate var name:String;
     
-    public var httpDns:HttpDNS?;
+    open var httpDns:HttpDNS?;
     
-    public var _headers = IndexProperty<String,String>();
-    public var headers:IndexProperty<String,String>{
+    open var _headers = IndexProperty<String,String>();
+    open var headers:IndexProperty<String,String>{
         return _headers;
     }
     
-    public func removeHeader(header:String){
+    open func removeHeader(_ header:String){
         headers.remove(header);
     }
     //private var request:HttpTask;
     
-    private var _commUrl = "http://192.168.1.8:8080/lin.demo/";
-    public var commUrl:String{
+    fileprivate var _commUrl = "http://192.168.1.8:8080/lin.demo/";
+    open var commUrl:String{
         get{ return _commUrl;}
         set{
             self._commUrl=newValue;
@@ -124,7 +132,7 @@ public class HttpCommunicateImpl{
         }
     }
     
-    public func upload(package:HttpUploadPackage,result:((obj:AnyObject!,warning:[HttpError])->())! = nil,fault:((error:HttpError)->())! = nil,progress:((send:Int64,total:Int64) -> Void)! = nil)->HttpCommunicateResult{
+    open func upload(_ package:HttpUploadPackage,result:((_ obj:AnyObject?,_ warning:[HttpError])->())! = nil,fault:((_ error:HttpError)->())! = nil,progress:((_ send:Int64,_ total:Int64) -> Void)! = nil)->HttpCommunicateResult{
         let task = HttpTask(impl:self);
         task.httpDns = self.httpDns;
         
@@ -152,39 +160,42 @@ public class HttpCommunicateImpl{
                 e.cause = "net error.";
                 e.strackTrace = error.description;
                 
-                self.mainThreadFault(httpResult,pack:package,fault:fault)(error:e);
+                self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
                 
         };
 
         return httpResult;
     }
     
-    public var httprequestComplete:((HttpPackage,AnyObject!,[HttpError])->())?
+    open var httprequestComplete:((HttpPackage,AnyObject?,[HttpError])->())?
     
     
-    public var httprequestFault:((HttpPackage,HttpError)->())?
+    open var httprequestFault:((HttpPackage,HttpError)->())?
     
     
-    public var httprequest:((HttpPackage)->())?
+    open var httprequest:((HttpPackage)->())?
     
-    private func mainThreadResult(httpResult:HttpCommunicateResult,pack:HttpPackage,result:((obj:AnyObject!,warning:[HttpError])->())?)->((obj:AnyObject!,warning:[HttpError])->()){
+    fileprivate func mainThreadResult(_ httpResult:HttpCommunicateResult,pack:HttpPackage,result:((_ obj:AnyObject?,_ warning:[HttpError])->())?)->((_ obj:AnyObject?,_ warning:[HttpError])->()){
 
-        let tmpResult = {[weak httpResult](obj:AnyObject!,warning:[HttpError]) ->() in
+        let tmpResult = {[weak httpResult](obj:AnyObject?,warning:[HttpError]) ->() in
             
             httpResult?.setResult(obj,success:true);
             self.httprequestComplete?(pack,obj,warning);
             if let result = result {
-                if self.mainThread == false || NSThread.currentThread().isMainThread || httpResult?.set.canEnterMainThread() ?? false == false {
-                    
-                    result(obj: obj,warning: warning);
-                    httpResult?.set.set();
-                }else{
-                    
-                    dispatch_async(dispatch_get_main_queue(), {() in
-                        result(obj: obj,warning: warning);
-                        httpResult?.set.set();
-                    });
-                }
+//                if self.mainThread == false || Thread.current.isMainThread || httpResult?.set.canEnterMainThread() ?? false == false {
+//                    
+//                    result(obj,warning);
+//                    httpResult?.set.set();
+//                }else{
+//                    
+//                    DispatchQueue.main.async(execute: {() in
+//                        result(obj,warning);
+//                        httpResult?.set.set();
+//                    });
+//                }
+                httpResult?.set.set(mainThreadction: { 
+                    result(obj,warning);
+                })
             }else{
                 httpResult?.set.set();
             }
@@ -192,21 +203,24 @@ public class HttpCommunicateImpl{
         return tmpResult;
 
     }
-    private func mainThreadFault(httpResult:HttpCommunicateResult,pack:HttpPackage,fault:((error:HttpError)->())?)->((error:HttpError)->()){
+    fileprivate func mainThreadFault(_ httpResult:HttpCommunicateResult,pack:HttpPackage,fault:((_ error:HttpError)->())?)->((_ error:HttpError)->()){
     
         let tmpFault = {[weak httpResult](error:HttpError) ->() in
             httpResult?.setError(error);
             self.httprequestFault?(pack,error);
             if let fault = fault {
-                if self.mainThread == false || NSThread.currentThread().isMainThread || httpResult?.set.canEnterMainThread() ?? false == false {
-                    fault(error: error);
-                    httpResult?.set.set();
-                }else{
-                    dispatch_async(dispatch_get_main_queue(), {() in
-                        fault(error: error);
-                        httpResult?.set.set();
-                    });
-                }
+//                if self.mainThread == false || Thread.current.isMainThread || httpResult?.set.canEnterMainThread() ?? false == false {
+//                    fault(error);
+//                    httpResult?.set.set();
+//                }else{
+//                    DispatchQueue.main.async(execute: {() in
+//                        fault(error);
+//                        httpResult?.set.set();
+//                    });
+//                }
+                httpResult?.set.set(mainThreadction: { 
+                    fault(error);
+                })
             }else{
                 httpResult?.set.set();
             }
@@ -214,7 +228,7 @@ public class HttpCommunicateImpl{
         return tmpFault;
     }
 
-    public func request(package:HttpPackage,result:((obj:AnyObject!,warning:[HttpError])->())! = nil,fault:((error:HttpError)->())! = nil)->HttpCommunicateResult{
+    open func request(_ package:HttpPackage,result:((_ obj:AnyObject?,_ warning:[HttpError])->())! = nil,fault:((_ error:HttpError)->())! = nil)->HttpCommunicateResult{
         if let uploadPackage = package as? HttpUploadPackage{
             return self.upload(uploadPackage,result:result,fault:fault,progress:uploadPackage.progress);
         }
@@ -239,13 +253,13 @@ public class HttpCommunicateImpl{
                 e.message = "net error.";
                 e.cause = "net error.";
                 e.strackTrace = error?.description;
-                self.mainThreadFault(httpResult,pack:package,fault:fault)(error:e);
+                self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
         })
         
         return httpResult;
     }
     
-    private func requestImpl(request:HttpTask,package:HttpPackage,url: String, parameters: Dictionary<String,AnyObject>?,isDebug:Bool, success:((HttpResponse) -> Void)!, failure:((NSError, HttpResponse?) -> Void)!) {
+    fileprivate func requestImpl(_ request:HttpTask,package:HttpPackage,url: String, parameters: Dictionary<String,AnyObject>?,isDebug:Bool, success:((HttpResponse) -> Void)!, failure:((NSError, HttpResponse?) -> Void)!) {
         let opt = request.create(url, method:package.method, parameters: parameters,isDebug:isDebug,success:success,failure:failure)
         if opt != nil {
             opt!.start()
@@ -254,17 +268,17 @@ public class HttpCommunicateImpl{
 }
 
     
-public class HttpCommunicateArgs{
+open class HttpCommunicateArgs{
     
     var insts:Dictionary<String,HttpCommunicateImpl>;
     var lock:NSLock;
     
-    private init(){
+    fileprivate init(){
         self.insts = Dictionary<String,HttpCommunicateImpl>();
         self.lock = NSLock();
     }
     
-    public subscript(name:String)->HttpCommunicateImpl {
+    open subscript(name:String)->HttpCommunicateImpl {
         get{
             //线程同步
             //@synchronized(self){

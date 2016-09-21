@@ -5,7 +5,7 @@
 //#endif
 import CFNetwork
 
-public class HTTPMessage {
+open class HTTPMessage {
 
 //- (id)initEmptyRequest
 //{
@@ -15,27 +15,27 @@ public class HTTPMessage {
 //	}
 //	return self;
 //}
-    private let _message:CFHTTPMessage;
+    fileprivate let _message:CFHTTPMessage;
     
     public init(){
         _message = CFHTTPMessageCreateEmpty(nil, true).takeRetainedValue();
     }
 
 
-    public init(method:String, URL url:NSURL, version:String){
+    public init(method:String, URL url:URL, version:String){
         
 		_message = CFHTTPMessageCreateRequest(nil,
-		                                    method,
-		                                    url,
-		                                    version).takeRetainedValue();
+		                                    method as CFString,
+		                                    url as CFURL,
+		                                    version as CFString).takeRetainedValue();
 	
     }
 
     public init(statusCode:Int, description:String?, version:String){
 		_message = CFHTTPMessageCreateResponse(nil,
 		                                      CFIndex(statusCode),
-		                                      description,
-		                                      version).takeRetainedValue();
+		                                      description as CFString?,
+		                                      version as CFString).takeRetainedValue();
     }
 
 //    deinit{
@@ -45,20 +45,44 @@ public class HTTPMessage {
 //	}
 //}
 
-    public func appendData(data:NSData)->Bool{
-//        data.bytes
-        let dp = [UInt8](UnsafeBufferPointer<UInt8>(
-            start: UnsafePointer<UInt8>(data.bytes),
-            count: data.length
-            ))
-        return CFHTTPMessageAppendBytes(_message, dp, CFIndex(data.length));
+    open func appendData(_ data:Data)->Bool{
+        //        data.bytes
+//        let dp = [UInt8](UnsafeBufferPointer<UInt8>(
+//            start: UnsafePointer<UInt8>((data as NSData).bytes),
+//            count: data.count
+//        ))
+        
+        var bs = (data as NSData).bytes;// as UnsafePointer<UInt8>;
+        
+        return withUnsafeMutablePointer(to: &bs) { (ptr) -> Bool in
+            
+            return ptr.withMemoryRebound(to: UInt8.self, capacity: data.count, { uptr -> Bool in
+                //            for n in 0 ..< 2 {
+                //                uptr[1-n] = buffer[n + offset];
+                //            }
+                return CFHTTPMessageAppendBytes(_message, uptr, CFIndex(data.count));
+            })
+        }
+        
+//        bs.withMemoryRebound(to: UInt8.self, capacity: 2, { uptr -> () in
+////            for n in 0 ..< 2 {
+////                uptr[1-n] = buffer[n + offset];
+////            }
+//        })
+//        
+//        let a = UnsafePointer<UInt8>.init(bitPattern: bs);
+//        let dp = [UInt8](UnsafeBufferPointer<UInt8>(
+//            start: a,
+//            count: data.count
+//        ))
+//        return CFHTTPMessageAppendBytes(_message, dp, CFIndex(data.count));
     }
 
-    public var isHeaderComplete:Bool{
+    open var isHeaderComplete:Bool{
         return CFHTTPMessageIsHeaderComplete(_message);
     }
 
-    public var version:String?{
+    open var version:String?{
         let v = CFHTTPMessageCopyVersion(_message)
     
         if v.toOpaque() == nil {
@@ -68,56 +92,56 @@ public class HTTPMessage {
         return v.takeRetainedValue() as String;
     }
 
-    public var method:String?{
+    open var method:String?{
         if let method = CFHTTPMessageCopyRequestMethod(_message)?.takeRetainedValue() {
             return method as String;
         }
         return nil;
     }
 
-    public var url:NSURL? {
+    open var url:URL? {
         if let url = CFHTTPMessageCopyRequestURL(_message)?.takeRetainedValue() {
-            return url;
+            return url as URL;
         }
         return nil;
     }
 
-    public var statusCode:Int{
+    open var statusCode:Int{
         return CFHTTPMessageGetResponseStatusCode(_message);
     }
 
-    public func allHeaderFields()->[NSObject : AnyObject]!{
-        return CFHTTPMessageCopyAllHeaderFields(_message)?.takeRetainedValue() as [NSObject : AnyObject]!;
+    open func allHeaderFields()->[AnyHashable: Any]!{
+        return CFHTTPMessageCopyAllHeaderFields(_message)?.takeRetainedValue() as! [AnyHashable: Any]!;
     }
 
-    public func headerField(header:String)->String?{
-        if let v = CFHTTPMessageCopyHeaderFieldValue(_message, header)?.takeRetainedValue(){
+    open func headerField(_ header:String)->String?{
+        if let v = CFHTTPMessageCopyHeaderFieldValue(_message, header as CFString)?.takeRetainedValue(){
             return v as String;
         }
         return nil;
     }
 
-    public func setHeaderField(header:String, value:String){
+    open func setHeaderField(_ header:String, value:String){
         CFHTTPMessageSetHeaderFieldValue(_message,
-                                         header,
-                                         value);
+                                         header as CFString,
+                                         value as CFString?);
     }
 
-    public var messageData:NSData?{
+    open var messageData:Data?{
         if let v = CFHTTPMessageCopySerializedMessage(_message)?.takeRetainedValue(){
-            return v;
+            return v as Data;
         }
         return nil;
     }
 
-    public var body:NSData?{
+    open var body:Data?{
         if let v = CFHTTPMessageCopyBody(_message)?.takeRetainedValue(){
-            return v;
+            return v as Data;
         }
         return nil;
     }
 
-    public func setBody(body:NSData){
-        CFHTTPMessageSetBody(_message, body);
+    open func setBody(_ body:Data){
+        CFHTTPMessageSetBody(_message, body as CFData);
     }
 }

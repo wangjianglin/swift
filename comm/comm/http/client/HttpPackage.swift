@@ -119,16 +119,16 @@ import LinUtil
 //    }
 //}
 
-public class HttpPackage :JsonModel{
+open class HttpPackage :JsonModel{
     
 //    private var _json:Json;
     
-    public var handle:HttpRequestHandle;
+    open var handle:HttpRequestHandle;
     
 //    internal var json:Json{ return _json; }
     
-    private var _method:HttpMethod;
-    public var method:HttpMethod{ return self._method;}
+    fileprivate var _method:HttpMethod;
+    open var method:HttpMethod{ return self._method;}
     
 //    public init(){
 //        self._json = JSON();
@@ -162,10 +162,10 @@ public class HttpPackage :JsonModel{
     //var v:NSCoder;
     
     //是否启用缓存，默认不启用
-    public var enableCache:Bool = false;
+    open var enableCache:Bool = false;
     
-    private var _url:String = "";
-    public var url:String{return self._url;}
+    fileprivate var _url:String = "";
+    open var url:String{return self._url;}
     
     //版本
     //var version:HTTPVersion;
@@ -176,7 +176,7 @@ public class HttpPackage :JsonModel{
 //    }
     
     //得到返回结果
-    public func getResult(json:Json)->AnyObject!{
+    open func getResult(_ json:Json)->AnyObject!{
         return json;
     }
 
@@ -328,51 +328,50 @@ extension HttpPackage{
 //    }
 }
 extension HttpPackage{
-    public class var NONE_HANDLE:HttpRequestHandle {
+    
+    struct YRSingleton{
+        static var NONE_HANDLE_INSTANCE:HttpRequestHandle! = nil
+        static var STANDARD_HANDLE_INSTANCE:HttpRequestHandle! = nil
+        static var STANDARD_JSON_HANDLE_INSTANCE:HttpRequestHandle! = nil
+        static var ENCRYPT_JSON_HANDLE_INSTANCE:HttpRequestHandle! = nil
+    }
+  
+    fileprivate static var __NONE_HANDLE: () = {
+        YRSingleton.NONE_HANDLE_INSTANCE = NoneHttpRequestHandle()
         
-        struct YRSingleton{
-            static var predicate:dispatch_once_t = 0
-            static var instance:NoneHttpRequestHandle? = nil
-        }
-        dispatch_once(&YRSingleton.predicate,{
-            YRSingleton.instance = NoneHttpRequestHandle()
-        })
-        return YRSingleton.instance!
+    }()
+  
+    public class var NONE_HANDLE:HttpRequestHandle {
+        _ = __NONE_HANDLE;
+        return YRSingleton.NONE_HANDLE_INSTANCE;
     }
     
+    fileprivate static var __STANDARD_HANDLE: () = {
+        YRSingleton.NONE_HANDLE_INSTANCE = StandardHttpRequestHandle()
+        
+    }()
     public class var STANDARD_HANDLE:HttpRequestHandle {
         
-        struct YRSingleton{
-            static var predicate:dispatch_once_t = 0
-            static var instance:StandardHttpRequestHandle? = nil
-        }
-        dispatch_once(&YRSingleton.predicate,{
-            YRSingleton.instance = StandardHttpRequestHandle()
-        })
-        return YRSingleton.instance!
+        _ = __STANDARD_HANDLE;
+        return YRSingleton.STANDARD_HANDLE_INSTANCE;
     }
     
+    fileprivate static var __STANDARD_JSON_HANDLE: () = {
+        YRSingleton.STANDARD_JSON_HANDLE_INSTANCE = StandardJsonHttpRequestHandle()
+        
+    }()
     public class var STANDARD_JSON_HANDLE:HttpRequestHandle {
         
-        struct YRSingleton{
-            static var predicate:dispatch_once_t = 0
-            static var instance:StandardJsonHttpRequestHandle? = nil
-        }
-        dispatch_once(&YRSingleton.predicate,{
-            YRSingleton.instance = StandardJsonHttpRequestHandle()
-        })
-        return YRSingleton.instance!
+        _ = __STANDARD_JSON_HANDLE;
+        return YRSingleton.STANDARD_JSON_HANDLE_INSTANCE;
     }
     
-    public class var ENCRYPT_JSON_HANDLE:HttpRequestHandle {
+    fileprivate static var __ENCRYPT_JSON_HANDLE: () = {
+        YRSingleton.NONE_HANDLE_INSTANCE = EncryptJsonHttpRequestHandle()
         
-        struct YRSingleton{
-            static var predicate:dispatch_once_t = 0
-            static var instance:EncryptJsonHttpRequestHandle? = nil
-        }
-        dispatch_once(&YRSingleton.predicate,{
-            YRSingleton.instance = EncryptJsonHttpRequestHandle()
-        })
-        return YRSingleton.instance!
+    }()
+    public class var ENCRYPT_JSON_HANDLE:HttpRequestHandle {
+        _ = __ENCRYPT_JSON_HANDLE;
+        return YRSingleton.ENCRYPT_JSON_HANDLE_INSTANCE;
     }
 }

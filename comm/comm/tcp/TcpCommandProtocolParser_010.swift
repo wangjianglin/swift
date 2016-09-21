@@ -8,12 +8,12 @@
 
 import LinUtil
 
-public class TcpCommandProtocolParser_010:TcpAbstractProtocolParser{
+open class TcpCommandProtocolParser_010:TcpAbstractProtocolParser{
     required public init(){
         
     }
     
-    public override func parse()->TcpPackage!{
+    open override func parse()->TcpPackage!{
         
         let command = readInt32(buffer, offset: 3);
         //        let cls = YRSingleton.instance[Int32(command)]?.resp;
@@ -28,7 +28,7 @@ public class TcpCommandProtocolParser_010:TcpAbstractProtocolParser{
         //        
         //        return pack;
         var commandPack:TcpCommandPackage! = nil;
-        if state == TcpPackageState.REQUEST {
+        if state == TcpPackageState.request {
             //return TcpCommandPackageManager.requestParse(buffer);
             commandPack = TcpCommandPackageManager.newRequestInstance(command);
         }else{
@@ -37,7 +37,7 @@ public class TcpCommandProtocolParser_010:TcpAbstractProtocolParser{
         return commandPack;
     }
     
-  public override class
+  open override class
     var type:UInt8{
         return 1;
     }

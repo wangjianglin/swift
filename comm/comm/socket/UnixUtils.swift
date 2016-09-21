@@ -11,7 +11,7 @@ import Darwin
 
 /* network utility functions */
 
-func ntohs(value: CUnsignedShort) -> CUnsignedShort {
+func ntohs(_ value: CUnsignedShort) -> CUnsignedShort {
     // hm, htons is not a func in OSX and the macro is not mapped
     return (value << 8) + (value >> 8);
 }
@@ -26,7 +26,7 @@ let IOC_OUT  : CUnsignedLong = 0x40000000
 // hh: not sure this is producing the right value
 let FIONREAD : CUnsignedLong =
 ( IOC_OUT
-    | ((CUnsignedLong(sizeof(Int32)) & CUnsignedLong(IOCPARM_MASK)) << 16)
+    | ((CUnsignedLong(MemoryLayout<Int32>.size) & CUnsignedLong(IOCPARM_MASK)) << 16)
     | (102 /* 'f' */ << 8) | 127)
 
 
@@ -34,12 +34,12 @@ let FIONREAD : CUnsignedLong =
 
 import Dispatch
 
-extension dispatch_source_t {
+extension DispatchSource {
     
-    func onEvent(cb: (dispatch_source_t, CUnsignedLong) -> Void) {
-        dispatch_source_set_event_handler(self) {
-            let data = dispatch_source_get_data(self)
-            cb(self, data)
+    func onEvent(_ cb: @escaping (DispatchSource, CUnsignedLong) -> Void) {
+        self.setEventHandler {
+            //let data = self.data
+            cb(self, self.data)
         }
     }
 }

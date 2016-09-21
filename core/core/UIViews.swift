@@ -70,14 +70,14 @@ extension UIView{
         return UIView.rootViewControllerImpl();
     }
     
-    private class func rootViewControllerImpl()->UIViewController?{
+    fileprivate class func rootViewControllerImpl()->UIViewController?{
         //    UIViewController *result = nil;
         
-        var window = UIApplication.sharedApplication().keyWindow;
+        var window = UIApplication.shared.keyWindow;
         
         if window == nil || window!.windowLevel != UIWindowLevelNormal
         {
-            let windows = UIApplication.sharedApplication().windows;
+            let windows = UIApplication.shared.windows;
             for tmpWin in windows {
                 if tmpWin.windowLevel == UIWindowLevelNormal {
                     window = tmpWin;
@@ -89,7 +89,7 @@ extension UIView{
         if let window = window {
             if window.subviews.count > 0 {
                 let frontView = window.subviews[0];
-                let nextResponder = frontView.nextResponder();
+                let nextResponder = frontView.next;
                 
                 if nextResponder is UIViewController {
                     return nextResponder as? UIViewController;
@@ -112,7 +112,7 @@ extension UIView{
 //    return nil;
         var next = self.superview;
         while next != nil {
-            let resp = next!.nextResponder();
+            let resp = next!.next;
             if resp is UIViewController {
                 return resp as? UIViewController
             }

@@ -9,22 +9,22 @@
 import LinUtil
 
 
-public class TcpServerCommunicate : TcpAbstractCommunicate{
+open class TcpServerCommunicate : TcpAbstractCommunicate{
     
-    private var set:AutoResetEvent = AutoResetEvent(isSet: false);
-    private var serverSocket:ServerSocket;
-    private var isClose:Bool = false;
-    private var listener:TcpCommunicateListener;
+    fileprivate var set:AutoResetEvent = AutoResetEvent(isSet: false);
+    fileprivate var serverSocket:ServerSocket;
+    fileprivate var isClose:Bool = false;
+    fileprivate var listener:TcpCommunicateListener;
     
-    private var queue:Queue = Queue(count: 20);
+    fileprivate var queue:Queue = Queue(count: 20);
     
-    public init(port:Int,listener:TcpCommunicateListener){
+    public init(port:Int,listener:@escaping TcpCommunicateListener){
         
-        serverSocket = ServerSocket(port: port, type: SocketType.BSD);
+        serverSocket = ServerSocket(port: port, type: SocketType.bsd);
         self.listener = listener;
     }
     
-    public override func start() -> Bool {
+    open override func start() -> Bool {
         if serverSocket.listener() {
             
             
@@ -45,7 +45,7 @@ public class TcpServerCommunicate : TcpAbstractCommunicate{
         return false;
     }
     
-    private func listener(client:Socket){
+    fileprivate func listener(_ client:Socket){
         
         
         let session = TcpSession(socket: client);
@@ -57,7 +57,7 @@ public class TcpServerCommunicate : TcpAbstractCommunicate{
     }
     
     
-    public override func close() {
+    open override func close() {
         isClose = true;
         serverSocket.close();
     }

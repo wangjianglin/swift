@@ -12,5 +12,5 @@ import Foundation
 public enum StoragePosition{
     //case Document,Tmp,Cache,Library,Keychain,UserDefaults,Memory
 
-    case Document,Tmp,Cache,Library,Memory
+    case document,tmp,cache,library,memory
 }

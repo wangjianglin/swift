@@ -10,14 +10,14 @@ import Foundation
 
 
 
-public class IndexProperty<Key:Hashable,Value>{
+open class IndexProperty<Key:Hashable,Value>{
     
-    private var values = Dictionary<Key,Value>();
+    fileprivate var values = Dictionary<Key,Value>();
     public init(){
         
     }
     
-    public subscript(key:Key)->Value?{
+    open subscript(key:Key)->Value?{
         get{
             return values[key];
         }
@@ -26,18 +26,25 @@ public class IndexProperty<Key:Hashable,Value>{
         }
     }
     
-    public func remove(key:Key){
-        values.removeValueForKey(key);
+    open func remove(_ key:Key){
+        values.removeValue(forKey: key);
     }
 }
 
 //MARK:SequenceType
-extension IndexProperty : SequenceType {
+extension IndexProperty : Sequence {
     
 //    public typealias Generator = DictionaryGenerator<Key, Value>
     
-    public func generate()->DictionaryGenerator<Key,Value> {
-        return values.generate();
+    //public func makeIterator()->DictionaryGenerator<Key,Value> {
+    //    return values.makeIterator();
+    //}
+    
+    
+    
+    
+    public func makeIterator()->DictionaryIterator<Key, Value> {
+        return values.makeIterator();
     }
 //    public func mutableCopyOfTheObject() -> AnyObject {
 //        return values.mutableCopy()

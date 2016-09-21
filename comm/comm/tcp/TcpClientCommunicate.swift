@@ -8,14 +8,14 @@
 
 import LinUtil
 
-public class TcpClientCommunicate:TcpAbstractCommunicate{
+open class TcpClientCommunicate:TcpAbstractCommunicate{
     
-    private var socket:Socket;
-    private var listener:TcpCommunicateListener;
-    private var session:TcpSession;
-    private var recv:TcpCommunicateRecv!;
+    fileprivate var socket:Socket;
+    fileprivate var listener:TcpCommunicateListener;
+    fileprivate var session:TcpSession;
+    fileprivate var recv:TcpCommunicateRecv!;
     
-    public init(host:String,port:Int,listener:TcpCommunicateListener){
+    public init(host:String,port:Int,listener:@escaping TcpCommunicateListener){
         socket = Socket(host: host, port: port);
         
         self.listener = listener;
@@ -28,7 +28,7 @@ public class TcpClientCommunicate:TcpAbstractCommunicate{
         
     }
     
-    public override func start() -> Bool {
+    open override func start() -> Bool {
         if(socket.connect()){
             Queue.asynThread(recv.recvData);
             return true;
@@ -37,7 +37,7 @@ public class TcpClientCommunicate:TcpAbstractCommunicate{
     }
     
     
-    override public func send(pack: TcpRequestPackage)->TcpPackageResponse {
+    override open func send(_ pack: TcpRequestPackage)->TcpPackageResponse {
         return session.send(pack);
     }
 }

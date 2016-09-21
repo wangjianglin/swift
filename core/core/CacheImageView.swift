@@ -12,21 +12,21 @@ import LinUtil
 
 //class CacheImageView;
 
-public class CacheImageOperation : NSOperation{
+open class CacheImageOperation : Operation{
     
-    private var path:String!;
-    private var imageView:CacheImageView!;
+    fileprivate var path:String!;
+    fileprivate var imageView:CacheImageView!;
     
-    private init(path:String,imageView:CacheImageView){
+    fileprivate init(path:String,imageView:CacheImageView){
         self.path = path;
         self.imageView = imageView;
     }
     
-    public override func main(){
+    open override func main(){
         
         var isCancelled = false;
         //self.imageView.lock.lock();
-        isCancelled = self.cancelled;
+        isCancelled = self.isCancelled;
         //self.imageView.lock.unlock();
         if isCancelled {
             return;
@@ -38,8 +38,8 @@ public class CacheImageOperation : NSOperation{
 //        }
         
         
-        dispatch_async(dispatch_get_main_queue(), {() in
-            if !self.cancelled {
+        DispatchQueue.main.async(execute: {() in
+            if !self.isCancelled {
                 if let image = image {
                     self.imageView.setImage(image);
                 }else{
@@ -85,22 +85,37 @@ public class CacheImageOperation : NSOperation{
 
 private var CacheImageView_Cache_Path_tmpvar:String?;
 
-public class CacheImageView : UIImageView{
+open class CacheImageView : UIImageView{
     
+    struct YRSingleton{
+        static var instance:OperationQueue? = nil
+    }
     
+    fileprivate static var __once: () = {
+
+            YRSingleton.instance = OperationQueue();
+
+            YRSingleton.instance!.maxConcurrentOperationCount = 10;
+
+        }()
+
+    
+
+    
+
 //    public class func cachedataForUrl(url:NSURL)->NSData!{
-    public class func cachedataForUrl(url urlStr:String?)->UIImage!{
+    open class func cachedataForUrl(url urlStr:String?)->UIImage!{
         if urlStr == nil {
             return nil;
         }
-        let lowerUrlStr = urlStr!.lowercaseString;
+        let lowerUrlStr = urlStr!.lowercased();
         if !(lowerUrlStr.hasPrefix("http://")
             || lowerUrlStr.hasPrefix("https://")
             || lowerUrlStr.hasPrefix("ftp://")) {
             return UIImage(named: urlStr!);
         }
         
-        let urlOpt = NSURL(string: urlStr!);
+        let urlOpt = URL(string: urlStr!);
         
         if urlOpt == nil {
             return nil;
@@ -118,11 +133,12 @@ public class CacheImageView : UIImageView{
         }
         
         
-        var data = NSData(contentsOfFile: filename);
+        var data = try? Data(contentsOf: URL(fileURLWithPath: filename));
         if data == nil {
-            data = NSData(contentsOfURL:url);
+            data = try? Data(contentsOf: url);
             if let data = data {
-                data.writeToFile(filename, atomically: true);
+//                try? data.write(to: URL(fileURLWithPath: filename), options: [.dataWritingAtomic]);
+                try? data.write(to: URL(fileURLWithPath: filename), options: Data.WritingOptions.atomic);
             }
         }
         if let data = data {
@@ -131,10 +147,10 @@ public class CacheImageView : UIImageView{
         return nil;
     }
     
-    public class var cachePath:String{
+    open class var cachePath:String{
         get{
             if CacheImageView_Cache_Path_tmpvar == nil {
-                CacheImageView_Cache_Path_tmpvar = pathFor(Documents.Cache, path: "imagecache");
+                CacheImageView_Cache_Path_tmpvar = pathFor(Documents.cache, path: "imagecache");
             }
             createCachePath()
             return CacheImageView_Cache_Path_tmpvar!
@@ -142,35 +158,28 @@ public class CacheImageView : UIImageView{
         set{CacheImageView_Cache_Path_tmpvar = newValue;createCachePath();}
     }
     
-    private class func createCachePath(){
-        let fileManager = NSFileManager.defaultManager();
+    fileprivate class func createCachePath(){
+        let fileManager = FileManager.default;
         //        isDirectory: UnsafeMutablePointer<ObjCBool>
-        let isDir = UnsafeMutablePointer<ObjCBool>.alloc(1);
-        isDir.initialize(ObjCBool(false));
-        if !fileManager.fileExistsAtPath(CacheImageView_Cache_Path_tmpvar!,isDirectory:isDir) ||
+        let isDir = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1);
+        isDir.initialize(to: ObjCBool(false));
+        if !fileManager.fileExists(atPath: CacheImageView_Cache_Path_tmpvar!,isDirectory:isDir) ||
             isDir.move().boolValue == false{
             do {
                 //            func createDirectoryAtPath(path: String, withIntermediateDirectories createIntermediates: Bool, attributes: [NSObject : AnyObject]?, error: NSErrorPointer)
-                try fileManager.createDirectoryAtPath(CacheImageView_Cache_Path_tmpvar!,withIntermediateDirectories:true,attributes:nil)
+                try fileManager.createDirectory(atPath: CacheImageView_Cache_Path_tmpvar!,withIntermediateDirectories:true,attributes:nil)
             } catch _ {
             };
         }
     }
     
-    private class var imageCacheQueue:NSOperationQueue{
-        struct YRSingleton{
-            static var predicate:dispatch_once_t = 0
-            static var instance:NSOperationQueue? = nil
-        }
-        dispatch_once(&YRSingleton.predicate,{
-            YRSingleton.instance = NSOperationQueue();
-            YRSingleton.instance!.maxConcurrentOperationCount = 10;
-        })
+    private class var imageCacheQueue:OperationQueue{
+        _ = CacheImageView.__once
         return YRSingleton.instance!
     }
     
     
-    private var operation:CacheImageOperation?;
+    fileprivate var operation:CacheImageOperation?;
     
     public var path:String?{
         didSet{
@@ -189,14 +198,14 @@ public class CacheImageView : UIImageView{
     //    }
     
     public init(){
-        super.init(frame:CGRectMake(0, 0, 0, 0));
+        super.init(frame:CGRect(x: 0, y: 0, width: 0, height: 0));
     }
     
     public override init(frame: CGRect) {
         super.init(frame:frame);
     }
     
-    private func loadImage(){
+    fileprivate func loadImage(){
         lock.lock();
         if let operation = self.operation {
             operation.cancel();
@@ -210,11 +219,11 @@ public class CacheImageView : UIImageView{
         lock.unlock();
     }
     
-    public var imageChanged:((imageView:CacheImageView)->())?
+    public var imageChanged:((_ imageView:CacheImageView)->())?
     
-    private var isImage:Bool = false;
-    private var lock:NSRecursiveLock = NSRecursiveLock();
-    public override var image: UIImage?{
+    fileprivate var isImage:Bool = false;
+    fileprivate var lock:NSRecursiveLock = NSRecursiveLock();
+    open override var image: UIImage?{
         get{
             return super.image;
         }
@@ -227,19 +236,19 @@ public class CacheImageView : UIImageView{
             super.image = newValue;
             lock.unlock();
             if let imageChanged = self.imageChanged {
-                imageChanged(imageView: self);
+                imageChanged(self);
             }
         }
     }
     
-    private func setImage(image:UIImage?){
+    fileprivate func setImage(_ image:UIImage?){
         lock.lock();
         if self.isImage == false {
             super.image = image;
         }
         lock.unlock();
         if let imageChanged = self.imageChanged {
-            imageChanged(imageView: self);
+            imageChanged(self);
         }
     }
     
@@ -248,7 +257,7 @@ public class CacheImageView : UIImageView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func removeFromSuperview() {
+    open override func removeFromSuperview() {
         if let operation = self.operation {
             operation.cancel();
         }

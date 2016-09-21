@@ -15,7 +15,7 @@ extension UIViewController{
     //@implementation UIViewController (UIViewControllers)
     
     
-    public func performUnwindSegueWithAction(action:String, sender:AnyObject!){
+    public func performUnwindSegueWithAction(_ action:String, sender:AnyObject!){
         //    - (UIViewController *)viewControllerForUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender
         
         
@@ -23,13 +23,13 @@ extension UIViewController{
                 let selector = NSSelectorFromString(action);
 //        let selector = #selector(self.viewControllerForUnwindSegueAction(_:fromViewController:withSender:));
         
-        var parent = self.parentViewController;
+        var parent = self.parent;
         while parent != nil {
 //            if parent!.respondsToSelector(selector) {
             if parent! is UIViewController {
                 
                 let vc = parent! as UIViewController;
-                let obj = vc.viewControllerForUnwindSegueAction(selector, fromViewController: self, withSender: nil);
+                let obj = vc.forUnwindSegueAction(selector, from: self, withSender: nil);
                 //            NSLog(@"ok.");
                 //            NSMutableArray * objs = @[action,self,sender];
                 //            NSMutableArray * objs = [[NSMutableArray alloc] init];
@@ -51,12 +51,12 @@ extension UIViewController{
 //                let obj = parent!.performSelector(selector,withObjects:objs);
                 
                 if let obj = obj {
-                    self.navigationController?.presentViewController(obj, animated:true, completion:nil);
+                    self.navigationController?.present(obj, animated:true, completion:nil);
                     
                     break;
                 }
             }
-            parent = parent!.parentViewController;
+            parent = parent!.parent;
         }
         //    self performSelector:(SEL) withObject:(id) withObject:(id)
         //    self per

@@ -8,12 +8,12 @@
 
 import LinUtil
 
-public class TcpSession{
+open class TcpSession{
     
     
-    private var _socket:Socket;
+    fileprivate var _socket:Socket;
     var recv:TcpCommunicateRecv!;
-    public var socket:Socket{
+    open var socket:Socket{
         return _socket;
     }
     
@@ -21,7 +21,7 @@ public class TcpSession{
         self._socket = socket;
     }
     
-    public func send(pack:TcpRequestPackage)->TcpPackageResponse{
+    open func send(_ pack:TcpRequestPackage)->TcpPackageResponse{
 
         let response = TcpPackageResponse();
         recv.addRequest(pack.sequeue, response: response)
@@ -29,14 +29,14 @@ public class TcpSession{
         return response;
     }
     
-    func response(pack:TcpResponsePackage){
+    func response(_ pack:TcpResponsePackage){
         sendImpl(pack);
     }
     
-    private func sendImpl(pack:TcpPackage){
+    fileprivate func sendImpl(_ pack:TcpPackage){
 
         let bs = pack.write();
-        var tmpBs = [UInt8](count: 2 * bs.count + 3 + 18, repeatedValue: 0);
+        var tmpBs = [UInt8](repeating: 0, count: 2 * bs.count + 3 + 18);
 
 //    //将包中的数据写入数组
         tmpBs[0] = 0xC0;
@@ -51,7 +51,7 @@ public class TcpSession{
 
         var pos = 11;
         
-        for(var n = 0;n<bs.count;n++)
+        for n in 0 ..< bs.count 
         {
             if(bs[n] == 0xC0){
                 tmpBs[pos] = 0xDB;
@@ -66,7 +66,7 @@ public class TcpSession{
                 continue;
             }
             tmpBs[pos] = bs[n];
-            pos++;
+            pos += 1;
         }
 
         tmpBs[pos] = 0xC0;

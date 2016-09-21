@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E2E75A51D92EF15000DCBD3 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2E75A41D92EF15000DCBD3 /* ReactiveSwift.framework */; };
 		3E8AA1521D2A55D8006E4922 /* rac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8AA1511D2A55D8006E4922 /* rac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E8AA15A1D2A5904006E4922 /* RACCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA1591D2A5904006E4922 /* RACCommand.swift */; };
 		3E8AA15C1D2A628F006E4922 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA15B1D2A628F006E4922 /* RACSignal.swift */; };
 		3E8AA1601D2A64F8006E4922 /* RACSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA15F1D2A64F8006E4922 /* RACSubscriber.swift */; };
-		8526918FFC362C5C099FD0F1 /* Pods_LinRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF4A7D206427ED9655063152 /* Pods_LinRac.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E2E75A01D92E9D6000DCBD3 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = ../Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		3E2E75A11D92E9D6000DCBD3 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		3E2E75A41D92EF15000DCBD3 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = ../Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		3E8AA14E1D2A55D8006E4922 /* LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8AA1511D2A55D8006E4922 /* rac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rac.h; sourceTree = "<group>"; };
 		3E8AA1531D2A55D8006E4922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8526918FFC362C5C099FD0F1 /* Pods_LinRac.framework in Frameworks */,
+				3E2E75A51D92EF15000DCBD3 /* ReactiveSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +44,9 @@
 		36AF5D4F6B267654B30A4733 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E2E75A41D92EF15000DCBD3 /* ReactiveSwift.framework */,
+				3E2E75A01D92E9D6000DCBD3 /* ReactiveCocoa.framework */,
+				3E2E75A11D92E9D6000DCBD3 /* Result.framework */,
 				BF4A7D206427ED9655063152 /* Pods_LinRac.framework */,
 			);
 			name = Frameworks;
@@ -103,12 +109,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E8AA1561D2A55D8006E4922 /* Build configuration list for PBXNativeTarget "LinRac" */;
 			buildPhases = (
-				A2479CBF0A08459305C8FB93 /* 📦 Check Pods Manifest.lock */,
+				A2479CBF0A08459305C8FB93 /* [CP] Check Pods Manifest.lock */,
 				3E8AA1491D2A55D8006E4922 /* Sources */,
 				3E8AA14A1D2A55D8006E4922 /* Frameworks */,
 				3E8AA14B1D2A55D8006E4922 /* Headers */,
 				3E8AA14C1D2A55D8006E4922 /* Resources */,
-				1552ECE3818686EB8E532A61 /* 📦 Copy Pods Resources */,
+				1552ECE3818686EB8E532A61 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +136,7 @@
 				TargetAttributes = {
 					3E8AA14D1D2A55D8006E4922 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -161,14 +168,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1552ECE3818686EB8E532A61 /* 📦 Copy Pods Resources */ = {
+		1552ECE3818686EB8E532A61 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,14 +183,14 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-LinRac/Pods-LinRac-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A2479CBF0A08459305C8FB93 /* 📦 Check Pods Manifest.lock */ = {
+		A2479CBF0A08459305C8FB93 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +321,7 @@
 				PRODUCT_NAME = LinRac;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -332,6 +340,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lin.rac;
 				PRODUCT_NAME = LinRac;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

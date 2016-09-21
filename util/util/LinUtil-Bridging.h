@@ -27,6 +27,7 @@
 #ifndef LinUtil_Bridging_Header_h
 #define LinUtil_Bridging_Header_h
 
+
 //#import <sqlite3.h>
 //#import "SQLite-Bridging.h"
 #import "ObjCSynchronized.h"

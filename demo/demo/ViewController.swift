@@ -93,7 +93,7 @@ class ViewController: UIViewController {
     }
     
     func testServer(){
-        let serverSocket = ServerSocket(port: 456,type: .BSD);
+        let serverSocket = ServerSocket(port: 456,type: .bsd);
         
         
 //        serverSocket.listener { (client) -> () in
@@ -108,10 +108,10 @@ class ViewController: UIViewController {
 //        }
     }
     
-    private var server:HttpServer!;
+    fileprivate var server:HttpServer!;
     @IBAction func serverAction(){
         
-        server = HttpServer(documentRoot: pathFor(Documents.Bundle, path: "web")!,port:8099);
+        server = HttpServer(documentRoot: pathFor(Documents.bundle, path: "web")!,port:8099);
         
         server.register("/test.action") { (request) -> HttpResponse! in
             return nil;
@@ -123,7 +123,7 @@ class ViewController: UIViewController {
     func tcp(){
     
         let socket = Socket(host: "192.168.1.66",port: 1337);
-        var buffer = [UInt8](count: 1024, repeatedValue: 0);
+        var buffer = [UInt8](repeating: 0, count: 1024);
         socket.connect();
         let count = socket.read(&buffer)
         
@@ -174,7 +174,7 @@ class TestPackage: HttpPackage {
     
     var data:String{
         get{return self["data"].asString("");}
-        set{self.setValue(newValue, forName: "data");}
+        set{self.setValue(newValue as AnyObject?, forName: "data");}
     }
 }
 

@@ -10,34 +10,34 @@ import UIKit
 
 
 
-public typealias TitleFormatter = (NSObject) -> String!
+public typealias TitleFormatter = (Any) -> String!
 
-public class FormRowDescriptor: NSObject {
+open class FormRowDescriptor: NSObject {
     
     /// MARK: Properties
     
-    public var title: String!
-    public var name: String!
+    open var title: String!
+    open var name: String!
     
-    private var _value:NSObject?;
-    public var value: NSObject? {
+    fileprivate var _value:Any?;
+    open var value: Any? {
         set {
             if let vc = self.valueChange{
                 let oldValue = self._value;
                 self._value = newValue;
-                vc(newValue: newValue, oldValue: oldValue);
+                vc(newValue, oldValue);
             }else{
                 self._value = newValue;
             }
         }
         get {return _value;}
     }
-    public var valueChange:((newValue:NSObject?,oldValue:NSObject?)->())?;
+    open var valueChange:((_ newValue:Any?,_ oldValue:Any?)->())?;
     //public var options: [NSObject]!
     
-    public var titleFormatter: TitleFormatter!
+    open var titleFormatter: TitleFormatter!
     
-    public var cellStyle: UITableViewCellStyle = .Value1
+    open var cellStyle: UITableViewCellStyle = .value1
     //public var cellClass: AnyClass!
     //public var cellConfiguration: Dictionary<String, NSObject> = [:]
     //public var cellAccessoryView: UIView!
@@ -46,10 +46,10 @@ public class FormRowDescriptor: NSObject {
     //public var selectorControllerClass: AnyClass!
     
     //表示是否允许编辑
-    public var enabled:Bool = false;
+    open var enabled:Bool = false;
     
     //背影颜色
-    public var backgroundColor:UIColor?;
+    open var backgroundColor:UIColor?;
     
     /// MARK: Init
     
@@ -67,7 +67,7 @@ public class FormRowDescriptor: NSObject {
     //        return titleForOptionValue(options[index])
     //    }
     
-    public func titleForOptionValue(optionValue: NSObject) -> String! {
+    open func titleForOptionValue(_ optionValue: Any) -> String! {
         if titleFormatter != nil {
             return titleFormatter(optionValue)
         }
@@ -81,7 +81,7 @@ public class FormRowDescriptor: NSObject {
     
     
     //public func formBaseCellClassFromRowDescriptor(rowDescriptor: FormRowDescriptor) -> FormBaseCell.Type! {
-    public func formBaseCellClassFromRowDescriptor() -> FormBaseCell.Type! {
+    open func formBaseCellClassFromRowDescriptor() -> FormBaseCell.Type! {
         
         return FormBaseCell.self;
     }

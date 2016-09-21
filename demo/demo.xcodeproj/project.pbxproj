@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E1DF47C1D903B250041D2AA /* buyers in Resources */ = {isa = PBXBuildFile; fileRef = 3E1DF47B1D903B250041D2AA /* buyers */; };
 		3E200EA81C4D5FB000A00A10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */; };
 		3E200EAA1C4D5FB000A00A10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EA91C4D5FB000A00A10 /* ViewController.swift */; };
 		3E200EAD1C4D5FB000A00A10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E200EAB1C4D5FB000A00A10 /* Main.storyboard */; };
@@ -62,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E1DF47B1D903B250041D2AA /* buyers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = buyers; path = ../../../../../work/code/buyers; sourceTree = "<group>"; };
 		3E200EA41C4D5FB000A00A10 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E200EA91C4D5FB000A00A10 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		3E200E9B1C4D5FB000A00A10 = {
 			isa = PBXGroup;
 			children = (
+				3E1DF47B1D903B250041D2AA /* buyers */,
 				3EC64EB21D0AF02200717357 /* LinWeb.framework */,
 				3EC64EB01D0AF00100717357 /* WebKit.framework */,
 				3ECD41191CEE1F3E00D57372 /* LinCore.framework */,
@@ -251,13 +254,16 @@
 					3E200EA31C4D5FB000A00A10 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = XJ6M2P7374;
+						LastSwiftMigration = 0800;
 					};
 					3E200EB71C4D5FB000A00A10 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 						TestTargetID = 3E200EA31C4D5FB000A00A10;
 					};
 					3E200EC21C4D5FB000A00A10 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 						TestTargetID = 3E200EA31C4D5FB000A00A10;
 					};
 				};
@@ -287,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E1DF47C1D903B250041D2AA /* buyers in Resources */,
 				3E200EB21C4D5FB000A00A10 /* LaunchScreen.storyboard in Resources */,
 				3EE51EE31CE8C9B90032729F /* web in Resources */,
 				3E200EAF1C4D5FB000A00A10 /* Assets.xcassets in Resources */,
@@ -468,6 +475,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -483,6 +491,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -494,6 +503,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/demo.app/demo";
 			};
 			name = Debug;
@@ -506,6 +516,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/demo.app/demo";
 			};
 			name = Release;
@@ -517,6 +528,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = demo;
 				USES_XCTRUNNER = YES;
 			};
@@ -529,6 +541,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = demo;
 				USES_XCTRUNNER = YES;
 			};

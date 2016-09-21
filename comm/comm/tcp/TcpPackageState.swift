@@ -10,6 +10,6 @@ import Foundation
 
 public enum TcpPackageState{
 //    case NONE
-    case REQUEST
-    case RESPONSE
+    case request
+    case response
 }

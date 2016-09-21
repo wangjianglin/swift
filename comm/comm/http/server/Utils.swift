@@ -9,7 +9,7 @@
 import Foundation
 
 
-public class Utils{
+open class Utils{
     
 //    public class func getIfAddress(){
 //        var addresses = [String]()

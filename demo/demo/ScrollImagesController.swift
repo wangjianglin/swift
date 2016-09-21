@@ -10,18 +10,18 @@ import UIKit
 import LinCore
 
 
-public class ScrollImagesController : UIViewController{
+open class ScrollImagesController : UIViewController{
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         initView();
     }
     
-    private var scrollView:UIScrollView!
-    private func initView(){
+    fileprivate var scrollView:UIScrollView!
+    fileprivate func initView(){
         scrollView = UIScrollView();
         self.view.addSubview(scrollView);
-        scrollView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.FlexibleHeight.rawValue | UIViewAutoresizing.FlexibleWidth.rawValue);
-        scrollView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+        scrollView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleHeight.rawValue | UIViewAutoresizing.flexibleWidth.rawValue);
+        scrollView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height);
         scrollView.showsHorizontalScrollIndicator = false;
         scrollView.showsVerticalScrollIndicator = false;
         
@@ -29,10 +29,10 @@ public class ScrollImagesController : UIViewController{
         //        let _imagesView = ImagesView();
         let _imagesView = ScrollImagesView();
         
-        _imagesView.backgroundColor = UIColor.grayColor();
+        _imagesView.backgroundColor = UIColor.gray;
         
         _imagesView.edited = true;
-        _imagesView.hidden = false;
+        _imagesView.isHidden = false;
         
         
         scrollView.addSubview(_imagesView);
@@ -40,11 +40,11 @@ public class ScrollImagesController : UIViewController{
         _imagesView.translatesAutoresizingMaskIntoConstraints = false;
         
         self.view.addConstraints([
-            NSLayoutConstraint(item:_imagesView, attribute:NSLayoutAttribute.Top, relatedBy:NSLayoutRelation.Equal, toItem:scrollView, attribute:NSLayoutAttribute.Top, multiplier:1.0, constant:60.0),
-            NSLayoutConstraint(item:_imagesView, attribute:NSLayoutAttribute.Left, relatedBy:NSLayoutRelation.Equal, toItem:self.view, attribute:NSLayoutAttribute.Left, multiplier:1.0, constant:10.0),
-            NSLayoutConstraint(item:_imagesView, attribute:NSLayoutAttribute.Right, relatedBy:NSLayoutRelation.Equal, toItem:self.view, attribute:NSLayoutAttribute.Right, multiplier:1.0, constant:-10.0)
+            NSLayoutConstraint(item:_imagesView, attribute:NSLayoutAttribute.top, relatedBy:NSLayoutRelation.equal, toItem:scrollView, attribute:NSLayoutAttribute.top, multiplier:1.0, constant:60.0),
+            NSLayoutConstraint(item:_imagesView, attribute:NSLayoutAttribute.left, relatedBy:NSLayoutRelation.equal, toItem:self.view, attribute:NSLayoutAttribute.left, multiplier:1.0, constant:10.0),
+            NSLayoutConstraint(item:_imagesView, attribute:NSLayoutAttribute.right, relatedBy:NSLayoutRelation.equal, toItem:self.view, attribute:NSLayoutAttribute.right, multiplier:1.0, constant:-10.0)
             ,
-            NSLayoutConstraint(item:_imagesView, attribute:NSLayoutAttribute.Height, relatedBy:NSLayoutRelation.Equal, toItem:nil, attribute:NSLayoutAttribute.NotAnAttribute, multiplier:1.0, constant:200.0)
+            NSLayoutConstraint(item:_imagesView, attribute:NSLayoutAttribute.height, relatedBy:NSLayoutRelation.equal, toItem:nil, attribute:NSLayoutAttribute.notAnAttribute, multiplier:1.0, constant:200.0)
             ]);
         
         

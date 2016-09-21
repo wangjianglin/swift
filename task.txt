@@ -1,1 +1,6 @@
 1、支持Carthage
+
+
+for index in array.count-1 ... 0 {
+delegateActionItems.remove(at: array[index]);
+}

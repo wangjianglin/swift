@@ -9,7 +9,7 @@
 import Foundation
 import LinUtil
 
-public class HttpModel : JsonModel{
+open class HttpModel : JsonModel{
     
     required public override init(json: Json){
         super.init(json: json);

@@ -10,14 +10,14 @@ import Foundation
 
 
 //@objc
-public class TcpCommandDetectPackage : TcpCommandRequestPackage{
+open class TcpCommandDetectPackage : TcpCommandRequestPackage{
     
-    override public class var command:Int32{
+    override open class var command:Int32{
         return 0x1;
     }
     
     
-    public override class var resp:TcpResponsePackage.Type{
+    open override class var resp:TcpResponsePackage.Type{
         return TcpCommandDetectResponsePackage.self;
     }
     

@@ -19,13 +19,13 @@ import LinUtil
 
 private class __CameraViewControllerDelegateAction : DelegateAction,CameraViewDelegate {
     
-    private var result:((url:NSURL?)->());
+    fileprivate var result:((_ url:URL?)->());
     
-    private init(action:((url:NSURL?)->())){
+    fileprivate init(action:@escaping ((_ url:URL?)->())){
         self.result = action;
     }
     
-    @objc private func cameraViewResponse(file: NSURL!) {
+    @objc fileprivate func cameraViewResponse(_ file: URL!) {
         //
         //
         //    - (void)cameraViewResponse:(NSURL*)file{
@@ -37,7 +37,7 @@ private class __CameraViewControllerDelegateAction : DelegateAction,CameraViewDe
         //            result(file);
         //            }];
         self.actionForObjectExist {[weak self] in
-            self?.result(url: file);
+            self?.result(file);
         }
     }
     
@@ -51,7 +51,7 @@ private class __CameraViewControllerDelegateAction : DelegateAction,CameraViewDe
 
 extension CameraViewController{
     
-    public func setResult(action:((url:NSURL?)->())){
+    public func setResult(_ action:@escaping ((_ url:URL?)->())){
         
         let delegateAction = __CameraViewControllerDelegateAction(action:action);
         

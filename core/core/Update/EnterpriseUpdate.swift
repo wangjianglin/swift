@@ -9,13 +9,13 @@
 import UIKit
 import LinUtil
 
-public class EnterpriseUpdate{
+open class EnterpriseUpdate{
     
     struct YRSignal{
         static var TIME_INTERVAL = 600.0;
     }
     
-    public class var interval:Double{
+    open class var interval:Double{
         get{
             return YRSignal.TIME_INTERVAL;
         }
@@ -27,22 +27,22 @@ public class EnterpriseUpdate{
         }
     }
     
-    public class func update(appUrl:String, versionUrl:String){
+    open class func update(_ appUrl:String, versionUrl:String){
         Queue.asynThread {
             while(true){
                 updateImpl(appUrl,versionUrl:versionUrl);
-                NSThread.sleepForTimeInterval(YRSignal.TIME_INTERVAL);
+                Thread.sleep(forTimeInterval: YRSignal.TIME_INTERVAL);
             }
         }
     }
-    private class func updateImpl(appUrl:String, versionUrl:String){
+    fileprivate class func updateImpl(_ appUrl:String, versionUrl:String){
         
-        let url = NSURL(string:versionUrl);
+        let url = URL(string:versionUrl);
         let request = NSMutableURLRequest();
-        request.URL = url;
-        let data = try? NSURLConnection.sendSynchronousRequest(request, returningResponse:nil);
+        request.url = url;
+        let data = try? NSURLConnection.sendSynchronousRequest(request as URLRequest, returning:nil);
         if let data = data {
-            let updateVerString = String(data:data, encoding:NSUTF8StringEncoding);
+            let updateVerString = String(data:data, encoding:String.Encoding.utf8);
             
             if updateVerString == nil {
                 return;
@@ -54,7 +54,7 @@ public class EnterpriseUpdate{
                 return;
             }
             
-            let appVersions = parserVersion(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String);
+            let appVersions = parserVersion(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String);
             if appVersions == nil {
                 return;
             }
@@ -62,13 +62,13 @@ public class EnterpriseUpdate{
             var flag = 0;//0不需要更新，1、必须更新，2、非必须更新
             
             
-            if updateVersions[0] > appVersions[0] {
+            if (updateVersions?[0])! > (appVersions?[0])! {
                 flag = 1;
-            }else if updateVersions[0] == appVersions[0] {
-                if updateVersions[1] > appVersions[1] {
+            }else if updateVersions?[0] == appVersions?[0] {
+                if (updateVersions?[1])! > (appVersions?[1])! {
                     flag = 1;
-                }else if updateVersions[1] == appVersions[1] {
-                    if updateVersions[2] > appVersions[2] {
+                }else if updateVersions?[1] == appVersions?[1] {
+                    if (updateVersions?[2])! > (appVersions?[2])! {
                         flag = 2;
                     }
                 }
@@ -91,8 +91,8 @@ public class EnterpriseUpdate{
                     alert = UIAlertView(title:"", message:updateString, delegate:nil, cancelButtonTitle:"确定");
                     alert.clickedButtonAtIndexAction = {(alertView:UIAlertView, buttonIndex:Int) in
                         
-                        if let url = NSURL(string:appUrl) {
-                            UIApplication.sharedApplication().openURL(url);
+                        if let url = URL(string:appUrl) {
+                            UIApplication.shared.openURL(url);
                         }
                         
                     };
@@ -101,8 +101,8 @@ public class EnterpriseUpdate{
                     alert.clickedButtonAtIndexAction = {(alertView:UIAlertView, buttonIndex:Int) in
                         if buttonIndex == 1 {
                             
-                            if let url = NSURL(string:appUrl) {
-                                UIApplication.sharedApplication().openURL(url);
+                            if let url = URL(string:appUrl) {
+                                UIApplication.shared.openURL(url);
                             }
                             
                         }
@@ -114,13 +114,13 @@ public class EnterpriseUpdate{
             
         }
     }
-    private class func parserVersion(version:String!)->[Int]!{
+    fileprivate class func parserVersion(_ version:String!)->[Int]!{
         if version == nil || version == "" {
             return nil;
         }
-        let vs = version.componentsSeparatedByString(".");
+        let vs = version.components(separatedBy: ".");
         
-        var arr = [Int](count:3,repeatedValue:0);
+        var arr = [Int](repeating: 0,count: 3);
         for n in 0 ..< 3 {
             if n < vs.count {
                 arr[n] = (vs[n] as NSString).integerValue;

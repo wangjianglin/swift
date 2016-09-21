@@ -9,10 +9,10 @@
 import Foundation
 
 
-public class TcpAbstractCommunicate: TcpCommunicate{
-    public var mainThread:Bool = false;
+open class TcpAbstractCommunicate: TcpCommunicate{
+    open var mainThread:Bool = false;
     
-    public func send(pack: TcpRequestPackage)->TcpPackageResponse {
+    open func send(_ pack: TcpRequestPackage)->TcpPackageResponse {
         return TcpPackageResponse();
     }
     
@@ -20,11 +20,11 @@ public class TcpAbstractCommunicate: TcpCommunicate{
         //fatalError("init() has not been implemented")
     }
     
-    public func close() {
+    open func close() {
         
     }
     
-    public func start() -> Bool {
+    open func start() -> Bool {
         return false;
     }
     

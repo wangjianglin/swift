@@ -8,15 +8,15 @@
 
 import UIKit
 
-public class FormSelectorCell: FormBaseCell {
+open class FormSelectorCell: FormBaseCell {
 
     
-    override public func configure() {
+    override open func configure() {
         super.configure()
-        accessoryType = .DisclosureIndicator
+        accessoryType = .disclosureIndicator
     }
     
-    override public func update() {
+    override open func update() {
         super.update()
         textLabel?.text = rowDescriptor.title
 
@@ -40,7 +40,7 @@ public class FormSelectorCell: FormBaseCell {
         }
     }
     
-    override public class func formViewController(formViewController: FormViewController, didSelectRow selectedRow: FormBaseCell) {
+    override open class func formViewController(_ formViewController: FormViewController, didSelectRow selectedRow: FormBaseCell) {
         if let row = selectedRow as? FormSelectorCell {
             
             formViewController.view.endEditing(true)

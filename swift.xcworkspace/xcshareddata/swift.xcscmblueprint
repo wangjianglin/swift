@@ -1,22 +1,26 @@
 {
   "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8EDD4DDCAEF39CFC5BB7764D2DD620EA68B19B22",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "64bfdf20-a972-4181-ba69-00ede5fd8fba++6156" : {
 
+    }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "4C35117AD50E6ADE78FF254ADD4F6248F2372DB0" : 0,
     "8EDD4DDCAEF39CFC5BB7764D2DD620EA68B19B22" : 0,
     "25F90B273C83210684F6019F6AD9584F41C5FDFF" : 0,
+    "64bfdf20-a972-4181-ba69-00ede5fd8fba++6156" : 9223372036854775807,
     "FE0270CB287C409738ADF937FDFF8F3FD9B3169D" : 0,
-    "C1E6018A44C2771D7C06C978783B168F29AD1DAD" : 0,
-    "4C35117AD50E6ADE78FF254ADD4F6248F2372DB0" : 0
+    "C1E6018A44C2771D7C06C978783B168F29AD1DAD" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3DF4AA5B-F4D7-47B2-AC97-1A049F11E75D",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "4C35117AD50E6ADE78FF254ADD4F6248F2372DB0" : "swift\/server\/",
     "8EDD4DDCAEF39CFC5BB7764D2DD620EA68B19B22" : "swift\/",
     "25F90B273C83210684F6019F6AD9584F41C5FDFF" : "swift\/util\/",
+    "64bfdf20-a972-4181-ba69-00ede5fd8fba++6156" : "..\/..\/..\/work\/code\/buyers",
     "FE0270CB287C409738ADF937FDFF8F3FD9B3169D" : "swift\/client\/",
-    "C1E6018A44C2771D7C06C978783B168F29AD1DAD" : "swift\/core\/",
-    "4C35117AD50E6ADE78FF254ADD4F6248F2372DB0" : "swift\/server\/"
+    "C1E6018A44C2771D7C06C978783B168F29AD1DAD" : "swift\/core\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "swift",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -31,6 +35,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wangjianglin\/swift-server.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4C35117AD50E6ADE78FF254ADD4F6248F2372DB0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/src.feicuibaba.com",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "64bfdf20-a972-4181-ba69-00ede5fd8fba++6156"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wangjianglin\/swift.git",

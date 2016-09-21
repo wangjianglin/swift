@@ -11,12 +11,12 @@ import LinUtil
 
 extension UIControl{
     
-    public func addActionForEvent(event:UIControlEvents,action:((AnyObject)->())){
+    public func addActionForEvent(_ event:UIControlEvents,action:@escaping ((AnyObject)->())){
         
         let delegateAction = EventDelegateAction(action:action);
         delegateAction.withObjectSameLifecycle = self;
         
-        self.addTarget(delegateAction,action: "action:", forControlEvents: event);
+        self.addTarget(delegateAction,action: #selector(EventDelegateAction.action(_:)), for: event);
     }
     
 }

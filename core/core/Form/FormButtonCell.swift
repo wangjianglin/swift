@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FormButtonCell: FormBaseCell {
+open class FormButtonCell: FormBaseCell {
 
     /// MARK: Properties
     
@@ -16,7 +16,7 @@ public class FormButtonCell: FormBaseCell {
     
     /// MARK: FormBaseCell
     
-    override public func configure() {
+    override open func configure() {
         super.configure()
 //        titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
 //        titleLabel.textAlignment = .Center
@@ -25,23 +25,23 @@ public class FormButtonCell: FormBaseCell {
 //        contentView.addConstraints(layoutConstraints())
     }
     
-    override public func update() {
+    override open func update() {
         super.update()
         titleLabel.text = rowDescriptor.title as String
     }
     
     /// MARK: Constraints
     
-    private func layoutConstraints() -> [AnyObject] {
+    fileprivate func layoutConstraints() -> [AnyObject] {
         var result: [AnyObject] = []
-        titleLabel.setContentHuggingPriority(500, forAxis: .Horizontal)
-        result.append(NSLayoutConstraint(item: titleLabel, attribute: .Height, relatedBy: .Equal, toItem: contentView, attribute: .Height, multiplier: 1.0, constant: 0.0))
-        result.append(NSLayoutConstraint(item: titleLabel, attribute: .Width, relatedBy: .Equal, toItem: contentView, attribute: .Width, multiplier: 1.0, constant: 0.0))
-        result.append(NSLayoutConstraint(item: titleLabel, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
-        result.append(NSLayoutConstraint(item: titleLabel, attribute: .CenterX, relatedBy: .Equal, toItem: contentView, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
+        titleLabel.setContentHuggingPriority(500, for: .horizontal)
+        result.append(NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: contentView, attribute: .height, multiplier: 1.0, constant: 0.0))
+        result.append(NSLayoutConstraint(item: titleLabel, attribute: .width, relatedBy: .equal, toItem: contentView, attribute: .width, multiplier: 1.0, constant: 0.0))
+        result.append(NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1.0, constant: 0.0))
+        result.append(NSLayoutConstraint(item: titleLabel, attribute: .centerX, relatedBy: .equal, toItem: contentView, attribute: .centerX, multiplier: 1.0, constant: 0.0))
         return result
     }
-    public override class func formViewController(formViewController: FormViewController, didSelectRow: FormBaseCell) {
+    open override class func formViewController(_ formViewController: FormViewController, didSelectRow: FormBaseCell) {
         let cell = didSelectRow.rowDescriptor as! FormButtonDescriptor;
         if let click = cell.click {
             click();

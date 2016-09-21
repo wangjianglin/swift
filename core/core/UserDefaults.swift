@@ -9,14 +9,14 @@
 import Foundation
 
 
-public class UserDefaultsImpl{
+open class UserDefaultsImpl{
     
-    private var defaults:NSUserDefaults;
-    private init(){
-        defaults = NSUserDefaults.standardUserDefaults();
+    fileprivate var defaults:Foundation.UserDefaults;
+    fileprivate init(){
+        defaults = Foundation.UserDefaults.standard;
     }
     
-    public subscript(key:String)->String?{
+    open subscript(key:String)->String?{
         get{
             //            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             //            [defaults setValue:[CDVAppPlugin getUUID] forKey:@"uuid_preference"];
@@ -24,70 +24,70 @@ public class UserDefaultsImpl{
             //var defaults:NSUserDefaults? = NSUserDefaults(suiteName:"");//.standardUserDefaults();
             //defaults?.addSuiteNamed(<#suiteName: String#>)
             
-            return defaults.stringForKey(key);
+            return defaults.string(forKey: key);
         }
         set{
-            defaults.setObject(newValue, forKey: key);
+            defaults.set(newValue, forKey: key);
         }
     }
     
-    public func objectForKey(defaultName: String) -> AnyObject?{
-        return self.defaults.objectForKey(defaultName);
+    open func objectForKey(_ defaultName: String) -> Any?{
+        return self.defaults.object(forKey: defaultName);
     }
-    public func setObject(value: AnyObject?, forKey defaultName: String){
-        self.defaults.setObject(value, forKey: defaultName);
+    open func setObject(_ value: AnyObject?, forKey defaultName: String){
+        self.defaults.set(value, forKey: defaultName);
     }
-    public func removeObjectForKey(defaultName: String){
-        self.defaults.removeObjectForKey(defaultName);
-    }
-    
-    public func stringForKey(defaultName: String) -> String?{
-        return self.defaults.stringForKey(defaultName);
-    }
-    public func arrayForKey(defaultName: String) -> [AnyObject]?{
-        return self.defaults.arrayForKey(defaultName);
-    }
-    public func dictionaryForKey(defaultName: String) -> [NSObject : AnyObject]?{
-        return self.defaults.dictionaryForKey(defaultName);
-    }
-    public func dataForKey(defaultName: String) -> NSData?{
-        return self.defaults.dataForKey(defaultName);
-    }
-    public func stringArrayForKey(defaultName: String) -> [AnyObject]?{
-        return self.defaults.stringArrayForKey(defaultName);
-    }
-    public func integerForKey(defaultName: String) -> Int{
-        return self.defaults.integerForKey(defaultName);
-    }
-    public func floatForKey(defaultName: String) -> Float{
-        return self.defaults.floatForKey(defaultName);
-    }
-    public func doubleForKey(defaultName: String) -> Double{
-        return self.defaults.doubleForKey(defaultName);
-    }
-    public func boolForKey(defaultName: String) -> Bool{
-        return self.defaults.boolForKey(defaultName);
-    }
-    @available(iOS, introduced=4.0)
-    public func URLForKey(defaultName: String) -> NSURL?{
-        return self.defaults.URLForKey(defaultName);
+    open func removeObjectForKey(_ defaultName: String){
+        self.defaults.removeObject(forKey: defaultName);
     }
     
-    public func setInteger(value: Int, forKey defaultName: String){
-        self.defaults.setObject(value, forKey: defaultName);
+    open func stringForKey(_ defaultName: String) -> String?{
+        return self.defaults.string(forKey: defaultName);
     }
-    public func setFloat(value: Float, forKey defaultName: String){
-        self.defaults.setFloat(value, forKey: defaultName);
+    open func arrayForKey(_ defaultName: String) -> [Any]?{
+        return self.defaults.array(forKey: defaultName);
     }
-    public func setDouble(value: Double, forKey defaultName: String){
-        self.defaults.setDouble(value, forKey: defaultName);
+    open func dictionaryForKey(_ defaultName: String) -> [String : Any]?{
+        return self.defaults.dictionary(forKey: defaultName);
     }
-    public func setBool(value: Bool, forKey defaultName: String){
-        self.defaults.setBool(value, forKey: defaultName);
+    open func dataForKey(_ defaultName: String) -> Data?{
+        return self.defaults.data(forKey: defaultName);
     }
-    @available(iOS, introduced=4.0)
-    public func setURL(url: NSURL, forKey defaultName: String){
-        self.defaults.setURL(url, forKey: defaultName);
+    open func stringArrayForKey(_ defaultName: String) -> [Any]?{
+        return self.defaults.stringArray(forKey: defaultName);
+    }
+    open func integerForKey(_ defaultName: String) -> Int{
+        return self.defaults.integer(forKey: defaultName);
+    }
+    open func floatForKey(_ defaultName: String) -> Float{
+        return self.defaults.float(forKey: defaultName);
+    }
+    open func doubleForKey(_ defaultName: String) -> Double{
+        return self.defaults.double(forKey: defaultName);
+    }
+    open func boolForKey(_ defaultName: String) -> Bool{
+        return self.defaults.bool(forKey: defaultName);
+    }
+    @available(iOS, introduced: 4.0)
+    open func URLForKey(_ defaultName: String) -> URL?{
+        return self.defaults.url(forKey: defaultName);
+    }
+    
+    open func setInteger(_ value: Int, forKey defaultName: String){
+        self.defaults.set(value, forKey: defaultName);
+    }
+    open func setFloat(_ value: Float, forKey defaultName: String){
+        self.defaults.set(value, forKey: defaultName);
+    }
+    open func setDouble(_ value: Double, forKey defaultName: String){
+        self.defaults.set(value, forKey: defaultName);
+    }
+    open func setBool(_ value: Bool, forKey defaultName: String){
+        self.defaults.set(value, forKey: defaultName);
+    }
+    @available(iOS, introduced: 4.0)
+    open func setURL(_ url: URL, forKey defaultName: String){
+        self.defaults.set(url, forKey: defaultName);
     }
     
 //    func registerDefaults(registrationDictionary: [NSObject : AnyObject])
@@ -106,33 +106,35 @@ public class UserDefaultsImpl{
 //    func setPersistentDomain(domain: [NSObject : AnyObject], forName domainName: String)
 //    func removePersistentDomainForName(domainName: String)
     
-    public func synchronize() -> Bool{
+    open func synchronize() -> Bool{
         return self.defaults.synchronize();
     }
     
-    public func objectIsForcedForKey(key: String) -> Bool{
-        return self.defaults.objectIsForcedForKey(key);
+    open func objectIsForcedForKey(_ key: String) -> Bool{
+        return self.defaults.objectIsForced(forKey: key);
     }
-    public func objectIsForcedForKey(key: String, inDomain domain: String) -> Bool{
-        return self.defaults.objectIsForcedForKey(key, inDomain: domain);
+    open func objectIsForcedForKey(_ key: String, inDomain domain: String) -> Bool{
+        return self.defaults.objectIsForced(forKey: key, inDomain: domain);
     }
     
 }
 
-public class UserDefaultsArgs{
+open class UserDefaultsArgs{
 
-    private init(){}
+    fileprivate init(){}
 }
 
+private struct YRSingleton{
+    static var instance:UserDefaultsImpl? = nil
+}
+
+private var __once:() = {
+    YRSingleton.instance = UserDefaultsImpl()
+}();
 
 public var UserDefaults:UserDefaultsImpl{
-    struct YRSingleton{
-        static var predicate:dispatch_once_t = 0
-        static var instance:UserDefaultsImpl? = nil
-    }
-    dispatch_once(&YRSingleton.predicate,{
-        YRSingleton.instance = UserDefaultsImpl()
-    })
+    
+    _ = __once;
     return YRSingleton.instance!
 }
 

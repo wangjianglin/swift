@@ -8,7 +8,7 @@
 
 import LinUtil
 
-public class HttpJsonResponse : HttpTextResponse{
+open class HttpJsonResponse : HttpTextResponse{
     
     public init(json:Json){
         super.init(text:json.toString())

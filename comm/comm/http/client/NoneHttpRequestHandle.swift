@@ -9,13 +9,13 @@
 import Foundation
 
 
-public class NoneHttpRequestHandle:HttpRequestHandle{
+open class NoneHttpRequestHandle:HttpRequestHandle{
     
-    public func getParams(request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
+    open func getParams(_ request:HttpTask,package:HttpPackage)->Dictionary<String,AnyObject>?{
         return nil;
     }
     
-    public func response(package:HttpPackage,response:AnyObject!,result:((obj:AnyObject!,warning:[HttpError])->()),fault:((error:HttpError)->())){
+    open func response(_ package:HttpPackage,response:AnyObject!,result:((_ obj:AnyObject?,_ warning:[HttpError])->()),fault:((_ error:HttpError)->())){
         
     }
 }

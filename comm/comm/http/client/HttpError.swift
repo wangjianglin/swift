@@ -8,25 +8,25 @@
 
 import Foundation
 
-public class HttpError :NSObject{
+open class HttpError :NSObject{
     
     public init(code:Int){
         super.init();
         self._code = code;
     }
-    private var _code:Int = -1;
-    public var code:Int{
+    fileprivate var _code:Int = -1;
+    open var code:Int{
         return _code;
     }
     
-    public var message:String?;
+    open var message:String?;
     
-    public var strackTrace:String?;
+    open var strackTrace:String?;
     
-    public var cause:String?;
+    open var cause:String?;
 
     
-    public override var description:String{
+    open override var description:String{
 //        NSNumberFormatter
 //        kCFNumberFormatter;//.PercentStyle
         var desc:String!;
@@ -35,9 +35,9 @@ public class HttpError :NSObject{
         }else{
             desc = String(format: "0x%0x", -self.code);
         }
-        desc = (desc as NSString).uppercaseString;
+        desc = (desc as NSString).uppercased;
         if desc.characters.count > (self.code>0 ? 4 : 5) {
-            desc.insert("_", atIndex: desc.startIndex.advancedBy(desc.characters.count - 4));
+            desc.insert("_", at: desc.index(desc.startIndex, offsetBy: desc.characters.count - 4));
         }
         //        println("message:\(message)");
         if let msg = self.message {
@@ -68,9 +68,9 @@ public extension NSError{
         }else{
             desc = String(format: "0x%0x", -self.code);
         }
-        desc = (desc as NSString).uppercaseString;
+        desc = (desc as NSString).uppercased;
         if desc.characters.count > (self.code>0 ? 4 : 5) {
-            desc.insert("_", atIndex: desc.startIndex.advancedBy(desc.characters.count - 4));
+            desc.insert("_", at: desc.index(desc.startIndex, offsetBy: desc.characters.count - 4));
         }
         //        println("message:\(message)");
         if self.domain == "" {

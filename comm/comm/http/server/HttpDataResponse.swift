@@ -9,10 +9,10 @@
 import Foundation
 
 
-public class HttpDataResponse : AbstractHttpResponse{
+open class HttpDataResponse : AbstractHttpResponse{
     
-    public init(data:NSData) {
+    public init(data:Data) {
         super.init();
-        self.responseObject = data;
+        self.responseObject = data as AnyObject?;
     }
 }

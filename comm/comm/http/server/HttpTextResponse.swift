@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class HttpTextResponse : AbstractHttpResponse{
+open class HttpTextResponse : AbstractHttpResponse{
     
     public init(text:String){
         super.init();
-        self.responseObject = text.dataUsingEncoding(NSUTF8StringEncoding);
+        self.responseObject = text.data(using: String.Encoding.utf8) as AnyObject?;
     }
 }

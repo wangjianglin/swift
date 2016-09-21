@@ -9,4 +9,4 @@
 import Foundation
 
 
-public typealias TcpCommunicateListener = ((session:TcpSession,pack:TcpPackage,response:TcpResponse)->()) ;
+public typealias TcpCommunicateListener = ((_ session:TcpSession,_ pack:TcpPackage,_ response:TcpResponse)->()) ;

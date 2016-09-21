@@ -10,12 +10,12 @@ import Foundation
 
 
 public extension NSException{
- public func toString(method:String? = __FUNCTION__, file:String? = __FILE__, line:Int = __LINE__)->String{
+ public func toString(_ method:String? = #function, file:String? = #file, line:Int = #line)->String{
         
         var str = "";
         let message = "\(self.name): \(self.reason!)"
         str = str + message;
-        str = str + "\n" + "type:" + self.name;
+        str = str + "\n" + "type:\(self.name)";// + self.name;
         str = str + "\n" + "value:" + (self.reason ?? "");
         
         if (method != nil && file != nil && line > 0) {

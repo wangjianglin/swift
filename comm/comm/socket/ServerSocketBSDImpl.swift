@@ -10,8 +10,8 @@ import Foundation
 
 
 class ServerSocketBSDImpl: AbstractServerSocketImpl {
-    private var fd:Int32;
-    private var port:Int;
+    fileprivate var fd:Int32;
+    fileprivate var port:Int;
     required init(port:Int){
         print(AF_INET)
         fd = Darwin.socket(AF_INET, SOCK_STREAM, 0);
@@ -33,9 +33,14 @@ class ServerSocketBSDImpl: AbstractServerSocketImpl {
         // Note: must be 'var' for ptr stuff, can't use let
         var addr = sockaddr_in(port: 567)
         
-        let rc = withUnsafePointer(&addr) { ptr -> Int32 in
-            let bptr = UnsafePointer<sockaddr>(ptr) // cast
-            return Darwin.bind(fd, bptr, socklen_t(addr.len))
+        let rc = withUnsafePointer(to: &addr) { ptr -> Int32 in
+//            let bptr = UnsafePointer<sockaddr>(ptr) // cast
+            let bptr = UnsafeRawPointer(ptr).bindMemory(to: sockaddr.self, capacity: 1);
+//            return ptr.withMemoryRebound(to: sockaddr.self, capacity: 1, { (bptr) -> Int in
+//                Darwin.bind(<#T##Int32#>, <#T##UnsafePointer<sockaddr>!#>, <#T##socklen_t#>)
+                return Darwin.bind(fd, bptr, socklen_t(addr.len))
+//            })
+//            return Darwin.bind(fd, bptr, socklen_t(addr.len))
         }
         
 //        if rc == 0 {
@@ -72,10 +77,17 @@ class ServerSocketBSDImpl: AbstractServerSocketImpl {
         var baddr    = sockaddr_in()
         var baddrlen = socklen_t(baddr.len)
         
-        let newFD = withUnsafeMutablePointer(&baddr) {
+        let newFD = withUnsafeMutablePointer(to: &baddr) {
             ptr -> Int32 in
-            let bptr = UnsafeMutablePointer<sockaddr>(ptr) // cast
-            return Darwin.accept(fd, bptr, &baddrlen);// buflenptr)
+//            let bptr = UnsafeMutablePointer<sockaddr>(ptr) // cast
+//            let bptr = UnsafeRawPointer(ptr).bindMemory(to: sockaddr.self, capacity: 1);
+            
+//            let a = UnsafeMutablePointer<sockaddr>.init(ptr);
+            return ptr.withMemoryRebound(to: sockaddr.self, capacity: 1, { (bptr) -> Int32 in
+                
+                return Darwin.accept(fd, bptr, &baddrlen);// buflenptr)
+            })
+//            return Darwin.accept(fd, bptr, &baddrlen);// buflenptr)
         }
         
         print(baddr.address.asString)

@@ -9,23 +9,23 @@
 import Foundation
 
 public enum TextType{
-case Text
-case Name
-case Phone
-case URL
-case Email
-case Password
+case text
+case name
+case phone
+case url
+case email
+case password
 }
-public class FormTextDescriptor:FormRowDescriptor{
+open class FormTextDescriptor:FormRowDescriptor{
     
-    public let textType:TextType;
+    open let textType:TextType;
     
     public init(title: String,name: String,textType:TextType,value:NSObject! = nil){
         self.textType = textType;
         super.init(title: title, name: name, value: value);
     }
     
-    public override func formBaseCellClassFromRowDescriptor() -> FormBaseCell.Type! {
+    open override func formBaseCellClassFromRowDescriptor() -> FormBaseCell.Type! {
         
         return FormTextCell.self;
     }

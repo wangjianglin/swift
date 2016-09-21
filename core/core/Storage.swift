@@ -14,32 +14,32 @@ import LinUtil
 *  把数据存储到本地
 *
 */
-public class StorageImpl{
+open class StorageImpl{
 
-    private var path:String;
-    private var position:StoragePosition;
-    private var filePath:String;
+    fileprivate var path:String;
+    fileprivate var position:StoragePosition;
+    fileprivate var filePath:String;
 //    private var database:Database;
     
-    private init(position:StoragePosition,path:String){
+    fileprivate init(position:StoragePosition,path:String){
         self.path = path;
         self.position = position;
         self.lock = NSLock();
         switch position{
-        case .Document:
-            filePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,NSSearchPathDomainMask.UserDomainMask,true)[0] as! String;
+        case .document:
+            filePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory,FileManager.SearchPathDomainMask.userDomainMask,true)[0] ;
             filePath = "\(filePath)\\(path).storage";
             
-        case .Cache:
-            filePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory,NSSearchPathDomainMask.UserDomainMask,true)[0] as! String;
+        case .cache:
+            filePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory,FileManager.SearchPathDomainMask.userDomainMask,true)[0] ;
             filePath = "\(filePath)\\(path).storage";
             
-        case .Tmp:
+        case .tmp:
             filePath = NSTemporaryDirectory();
             filePath = "\(filePath)\\(path).storage";
             
-        case .Library:
-            filePath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.LibraryDirectory,NSSearchPathDomainMask.UserDomainMask,true)[0] as! String;
+        case .library:
+            filePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory,FileManager.SearchPathDomainMask.userDomainMask,true)[0] ;
             filePath = "\(filePath)\\(path).storage";
             
         default:
@@ -50,9 +50,9 @@ public class StorageImpl{
 //        database = Database(filePath);
         
 //        table = database["storage"]
-        let id = Expression<Int>(literal: "id")
-        key = Expression<String>(literal: "key")
-        value = Expression<String>(literal: "value")
+//        let id = NSExpression(literal: "id")
+//        key = NSExpression(literal: "key")
+//        value = NSExpression(literal: "value")
         
         
 //        database.create(table: table,temporary:false,ifNotExists: true) { t in
@@ -62,10 +62,10 @@ public class StorageImpl{
 //        }
     }
 //    private var table:Query;
-    private var key:Expression<String>;
-    private var value:Expression<String>;
+//    private var key:NSExpression;
+//    private var value:NSExpression;
     
-    private var lock:NSLock;
+    fileprivate var lock:NSLock;
     
 //    public subscript(key:String)->AnyObject!{
 //        get{
@@ -106,17 +106,17 @@ public class StorageImpl{
 
 }
 
-public class StorageArgs{
+open class StorageArgs{
     
     var insts:Dictionary<String,StorageImpl>;
-    private var lock:NSLock;
+    fileprivate var lock:NSLock;
     
-    private init(){
+    fileprivate init(){
         self.insts = Dictionary<String,StorageImpl>();
         self.lock = NSLock();
     }
     
-    public subscript(position:StoragePosition,path:String)->StorageImpl {
+    open subscript(position:StoragePosition,path:String)->StorageImpl {
         get{
             //线程同步
             //@synchronized(self){
@@ -141,33 +141,37 @@ public class StorageArgs{
         //            }
     }
     
-    public var document:StorageImpl{
-        return self[StoragePosition.Document,"document.storage"];
+    open var document:StorageImpl{
+        return self[StoragePosition.document,"document.storage"];
     }
     
-    public var tmp:StorageImpl{
-        return self[StoragePosition.Tmp,"tmp.storage"];
+    open var tmp:StorageImpl{
+        return self[StoragePosition.tmp,"tmp.storage"];
     }
     
-    public var library:StorageImpl{
-        return self[StoragePosition.Library,"library.storage"];
+    open var library:StorageImpl{
+        return self[StoragePosition.library,"library.storage"];
     }
     
-    public var cache:StorageImpl{
-        return self[StoragePosition.Cache,"cache.storage"];
+    open var cache:StorageImpl{
+        return self[StoragePosition.cache,"cache.storage"];
     }
     
-    public var memory:StorageImpl{
-        return self[StoragePosition.Memory,""];
+    open var memory:StorageImpl{
+        return self[StoragePosition.memory,""];
     }
 }
+
+private struct YRSingleton{
+    
+    static var instance:StorageArgs? = nil
+}
+
+private var __once:() = {
+    YRSingleton.instance = StorageArgs();
+}();
+
 public var Storage:StorageArgs{
-    struct YRSingleton{
-        static var predicate:dispatch_once_t = 0
-        static var instance:StorageArgs? = nil
-    }
-    dispatch_once(&YRSingleton.predicate,{
-        YRSingleton.instance = StorageArgs()
-    })
+    _ = __once;
     return YRSingleton.instance!
 }

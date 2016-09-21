@@ -9,7 +9,7 @@
 import Foundation
 
 
-public class HttpSessionIdPackage:HttpPackage{
+open class HttpSessionIdPackage:HttpPackage{
     
     public init(){
         super.init(url:"/core/comm/sessionId.action");

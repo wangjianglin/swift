@@ -8,23 +8,34 @@
 
 import UIKit
 
-public class FormTextCell: FormBaseCell {
+open class FormTextCell: FormBaseCell {
+
+    struct YRSingleton{
+        static var instance:FormTextEditController? = nil
+    }
+    fileprivate static var __once: () = {
+
+            YRSingleton.instance = FormTextEditController()
+
+        }()
+
+
 
     /// MARK: Properties
     
     //let titleLabel = UILabel()
     //let textField = UITextField()
-    private let valueLabel = UILabel();
+    fileprivate let valueLabel = UILabel();
     
-    private var customConstraints: [AnyObject]!
-    private var rightLayoutConstraint:NSLayoutConstraint?;
+    fileprivate var customConstraints: [AnyObject]!
+    fileprivate var rightLayoutConstraint:NSLayoutConstraint?;
     
     /// MARK: FormBaseCell
     
-    override public func configure() {
+    override open func configure() {
         //super.configure()
         
-        selectionStyle = .None
+        selectionStyle = .none
         
         //titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         //textField.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -38,34 +49,28 @@ public class FormTextCell: FormBaseCell {
         //contentView.addConstraints(layoutConstraints())
         
         //textField.addTarget(self, action: "editingChanged:", forControlEvents: .EditingChanged)
-        valueLabel.textAlignment = NSTextAlignment.Right;
+        valueLabel.textAlignment = NSTextAlignment.right;
         valueLabel.translatesAutoresizingMaskIntoConstraints = false;
         contentView.addSubview(valueLabel);
         
         contentView.addConstraints([
-            NSLayoutConstraint(item: valueLabel, attribute: .Left, relatedBy: .Equal, toItem: self.textLabel, attribute: .Left, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: valueLabel, attribute: .left, relatedBy: .equal, toItem: self.textLabel, attribute: .left, multiplier: 1.0, constant: 0.0),
 //            NSLayoutConstraint(item: valueLabel, attribute: .Right, relatedBy: .Equal, toItem: contentView, attribute: .Right, multiplier: 1.0, constant: 0.0),
-            NSLayoutConstraint(item: valueLabel, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1.0, constant: 0.0),NSLayoutConstraint(item: valueLabel, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1.0, constant: 0.0)]);
+            NSLayoutConstraint(item: valueLabel, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1.0, constant: 0.0),NSLayoutConstraint(item: valueLabel, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1.0, constant: 0.0)]);
             
-        rightLayoutConstraint = NSLayoutConstraint(item: valueLabel, attribute: .Right, relatedBy: .Equal, toItem: contentView, attribute: .Right, multiplier: 1.0, constant: 0.0);
+        rightLayoutConstraint = NSLayoutConstraint(item: valueLabel, attribute: .right, relatedBy: .equal, toItem: contentView, attribute: .right, multiplier: 1.0, constant: 0.0);
         contentView.addConstraint(rightLayoutConstraint!);
-        accessoryType = .DisclosureIndicator
+        accessoryType = .disclosureIndicator
     }
     
     //private let editController:FormTextEditController!;
-    private class var editController:FormTextEditController{
-        struct YRSingleton{
-            static var predicate:dispatch_once_t = 0
-            static var instance:FormTextEditController? = nil
-        }
-        dispatch_once(&YRSingleton.predicate,{
-            YRSingleton.instance = FormTextEditController()
-        })
+    fileprivate class var editController:FormTextEditController{
+        _ = FormTextCell.__once
         return YRSingleton.instance!
     }
     
     
-    public override class func formViewController(formViewController: FormViewController, didSelectRow: FormBaseCell) {
+    open override class func formViewController(_ formViewController: FormViewController, didSelectRow: FormBaseCell) {
        
         let rowDescriptor:FormTextDescriptor = didSelectRow.rowDescriptor as! FormTextDescriptor;
         if !rowDescriptor.enabled {
@@ -81,20 +86,20 @@ public class FormTextCell: FormBaseCell {
     }
     
     
-    private func valueChange(value:String){
+    fileprivate func valueChange(_ value:String){
         valueLabel.text = "\(value)";
         self.rowDescriptor.value = value;
     }
     
-    public override func update() {
+    open override func update() {
         contentView.removeConstraint(rightLayoutConstraint!);
         
         if rowDescriptor.enabled {
-            accessoryType = .DisclosureIndicator;
-            rightLayoutConstraint = NSLayoutConstraint(item: valueLabel, attribute: .Right, relatedBy: .Equal, toItem: contentView, attribute: .Right, multiplier: 1.0, constant: 0.0);
+            accessoryType = .disclosureIndicator;
+            rightLayoutConstraint = NSLayoutConstraint(item: valueLabel, attribute: .right, relatedBy: .equal, toItem: contentView, attribute: .right, multiplier: 1.0, constant: 0.0);
         }else{
-            accessoryType = .None
-            rightLayoutConstraint = NSLayoutConstraint(item: valueLabel, attribute: .Right, relatedBy: .Equal, toItem: contentView, attribute: .Right, multiplier: 1.0, constant: -20.0);
+            accessoryType = .none
+            rightLayoutConstraint = NSLayoutConstraint(item: valueLabel, attribute: .right, relatedBy: .equal, toItem: contentView, attribute: .right, multiplier: 1.0, constant: -20.0);
         }
         contentView.addConstraint(rightLayoutConstraint!);
         

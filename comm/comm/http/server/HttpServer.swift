@@ -9,12 +9,12 @@
 import Foundation
 
 //static var httpServer:HTTPServer;
-public class HttpServer{
+open class HttpServer{
     
-    private var webPath:String;
-    private var port:UInt16;
+    fileprivate var webPath:String;
+    fileprivate var port:UInt16;
     
-    private var httpServer = HTTPServer();
+    fileprivate var httpServer = HTTPServer();
     
     public init(documentRoot webPath:String,port:UInt16 = 80){
         
@@ -35,7 +35,7 @@ public class HttpServer{
         httpServer.connectionClass = LinHTTPConnection.self;
     }
     
-    public func start()->Bool{
+    open func start()->Bool{
         do {
             //        isDir.initialize(NSError(false));
             try httpServer.start()
@@ -45,30 +45,30 @@ public class HttpServer{
         return false;
     }
     
-    public func stop(){
+    open func stop(){
         httpServer.stop(true)
     }
     
-    public func shutdown(){
+    open func shutdown(){
         httpServer.stop(false);
     }
     
-    public func registerForPost(path:String,action:(request:HttpRequest)->HttpResponse!){
+    open func registerForPost(_ path:String,action:@escaping (_ request:HttpRequest)->HttpResponse!){
         self.registerImpl(HttpMethod.POST, path: path, action: action);
     }
-    public func registerForGet(path:String,action:(request:HttpRequest)->HttpResponse!){
+    open func registerForGet(_ path:String,action:@escaping (_ request:HttpRequest)->HttpResponse!){
         self.registerImpl(HttpMethod.GET, path: path, action: action);
     }
     
-    public func register(path:String,action:(request:HttpRequest)->HttpResponse!){
+    open func register(_ path:String,action:@escaping (_ request:HttpRequest)->HttpResponse!){
         self.registerImpl(nil, path: path, action: action);
     }
-    private func registerImpl(method:HttpMethod!,path:String,action:(request:HttpRequest)->HttpResponse!){
-        HTTPConnection.register(method, path: path) { (connection, method, path) -> protocol<HTTPResponse, NSObjectProtocol>! in
+    fileprivate func registerImpl(_ method:HttpMethod!,path:String,action:@escaping (_ request:HttpRequest)->HttpResponse!){
+        HTTPConnection.register(method, path: path) { (connection, method, path) -> (HTTPResponse & NSObjectProtocol)! in
             
-            let response = action(request: CocoaHttpServerRequest(message: connection.request));
+            let response = action(CocoaHttpServerRequest(message: connection.request));
             if response == nil {
-                return HTTPDataResponse(data:"==".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true));
+                return HTTPDataResponse(data:"==".data(using: String.Encoding.utf8, allowLossyConversion: true));
             }
             return nil;
         }

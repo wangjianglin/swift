@@ -16,23 +16,23 @@ protocol AbstractSocketImpl{
     
     init(host:String,port:Int);
     func connect()->Bool;
-    func write(buffer:[UInt8],count:Int);
-    func write(str:String);
+    func write(_ buffer:[UInt8],count:Int);
+    func write(_ str:String);
     
-    func read(inout buffer:[UInt8])->Int;
+    func read(_ buffer:inout [UInt8])->Int;
     
     
     func close();
 }
 
 //public class Socket<T:SocketAddress>{
-public class Socket{
+open class Socket{
     
 //    private var host:String!;
 //    private var port:Int32!;
 //    private var type:SocketType!;
     
-    private var impl:AbstractSocketImpl;
+    fileprivate var impl:AbstractSocketImpl;
     
     init(impl:AbstractSocketImpl){
         self.impl = impl;
@@ -40,7 +40,7 @@ public class Socket{
     
     //public init(){}
     
-    public init(host:String,port:Int,type:SocketType = SocketType.CFNetwork){
+    public init(host:String,port:Int,type:SocketType = SocketType.cfNetwork){
         
 //        switch(type){
 //        case .BSD:
@@ -53,7 +53,7 @@ public class Socket{
         
     }
     
-    public func connect()->Bool{
+    open func connect()->Bool{
         return impl.connect();
     }
     
@@ -65,18 +65,18 @@ public class Socket{
 //        
 //    }
     
-    public func write(buffer:[UInt8],count:Int = 0){
+    open func write(_ buffer:[UInt8],count:Int = 0){
         impl.write(buffer, count: count);
     }
-    public func write(str:String){
+    open func write(_ str:String){
         impl.write(str);
     }
     
-    public func read(inout buffer:[UInt8])->Int{
+    open func read(_ buffer:inout [UInt8])->Int{
         return impl.read(&buffer);
     }
     
-    public func close(){
+    open func close(){
         impl.close();
     }
     

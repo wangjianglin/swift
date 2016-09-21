@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class JsonModel : NSObject{
+open class JsonModel : NSObject{
     
-    private var _json:Json;
-    public var json:Json{
+    fileprivate var _json:Json;
+    open var json:Json{
         return _json;
     }
     
@@ -23,7 +23,7 @@ public class JsonModel : NSObject{
         self._json = Json();
     }
     
-    public func assign(mode:JsonModel){
+    open func assign(_ mode:JsonModel){
         self._json = mode._json;
     }
     
@@ -32,7 +32,7 @@ public class JsonModel : NSObject{
 //        println("Json Model deinit.");
 //    }
     
-    public override var description:String { return self._json.description; }
+    open override var description:String { return self._json.description; }
     
 }
 
@@ -63,7 +63,7 @@ extension JsonModel{
     }
     
 //    public func setValue(name:String,value:AnyObject?){
-    public func setValue(value:AnyObject?,forName name:String){
+    public func setValue(_ value:AnyObject?,forName name:String){
         if value is JsonModel {
             self._json.setValue((value as! JsonModel)._json, forName: name);
         }else{
@@ -71,18 +71,18 @@ extension JsonModel{
         }
     }
     
-    public func setIntValue(value:Int,forName name:String){
+    public func setIntValue(_ value:Int,forName name:String){
         self._json.setIntValue(value, forName: name);
     }
     
-    public func setBoolValue(value:Bool,forName name:String){
+    public func setBoolValue(_ value:Bool,forName name:String){
         self._json.setBoolValue(value, forName: name);
     }
     
-    public func setDoubleValue(value:Double,forName name:String){
+    public func setDoubleValue(_ value:Double,forName name:String){
         self._json.setDoubleValue(value, forName:name);
     }
-    public func getValue(name:String)->AnyObject?{
+    public func getValue(_ name:String)->Any?{
         return self._json.getValue(name);
     }
     

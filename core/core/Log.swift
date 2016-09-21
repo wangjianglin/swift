@@ -11,70 +11,89 @@ import UIKit
 import LinUtil
 
 public enum LogLevel:Int{
-    case Off = 0
+    case off = 0
 //    case Fatal = 0
-    case Error = 3
-    case Warn = 4
-    case Info = 6
-    case Debug = 7
-    case Trace = 8
+    case error = 3
+    case warn = 4
+    case info = 6
+    case debug = 7
+    case trace = 8
 //    case All = 8
 
     public var description:String{
         switch self{
-        case Off:
+        case .off:
             return "Off";
-        case Error:
+        case .error:
             return "Error";
-        case Warn:
+        case .warn:
             return "Warn";
-        case Info:
+        case .info:
             return "Info";
-        case Debug:
+        case .debug:
             return "Debug";
-        case Trace:
+        case .trace:
             return "Trace";
         }
     }
 }
-public class Log{
+open class Log{
     
-    private var name:String;
-    public var level:LogLevel = LogLevel.Info;
+    struct NSLockStruct{
+        static var install:Log!;
+    }
+    
+    struct NSLockStruct1{
+        static var install:NSLock!;
+    }
+    
+    fileprivate static var __once1: () = {
+
+            NSLockStruct1.install = NSLock();
+
+        }()
+
+    
+
+    fileprivate static var __once: () = {
+
+            NSLockStruct.install = Log(name:"log");
+
+        }()
+
+    
+
+    fileprivate var name:String;
+    open var level:LogLevel = LogLevel.info;
     
     public init(name:String){
         self.name = name;
 //        self.level = level;
     }
     
-    public func info(info infoStr:String){
-        Log.logStr(name,str:infoStr,level:LogLevel.Info,log:self);
+    open func info(info infoStr:String){
+        Log.logStr(name,str:infoStr,level:LogLevel.info,log:self);
     }
     
-    public func error(error erroStr:String){
-        Log.logStr(name,str:erroStr,level:LogLevel.Error,log:self);
+    open func error(error erroStr:String){
+        Log.logStr(name,str:erroStr,level:LogLevel.error,log:self);
     }
     
-    public func warn(warn warnStr:String){
-        Log.logStr(name,str:warnStr,level:LogLevel.Warn,log:self);
+    open func warn(warn warnStr:String){
+        Log.logStr(name,str:warnStr,level:LogLevel.warn,log:self);
     }
     
-    public func debug(debug debugStr:String){
-        Log.logStr(name,str:debugStr,level:LogLevel.Debug,log:self);
+    open func debug(debug debugStr:String){
+        Log.logStr(name,str:debugStr,level:LogLevel.debug,log:self);
     }
     
-    public func trace(trace traceStr:String){
-        Log.logStr(name,str:traceStr,level:LogLevel.Trace,log:self);
+    open func trace(trace traceStr:String){
+        Log.logStr(name,str:traceStr,level:LogLevel.trace,log:self);
     }
     
-    public class var log:Log{
-        struct NSLockStruct{
-            static var one:dispatch_once_t = 0;
-            static var install:Log!;
-        }
-        dispatch_once(&NSLockStruct.one,{
-            NSLockStruct.install = Log(name:"log");
-        });
+    open class var log:Log{
+        
+        _ = Log.__once;
         return NSLockStruct.install;
     }
     
@@ -114,70 +133,65 @@ public class Log{
     
  
     
-    private class var lock:NSLock{
-        struct NSLockStruct{
-            static var one:dispatch_once_t = 0;
-            static var install:NSLock!;
-        }
-        dispatch_once(&NSLockStruct.one,{
-            NSLockStruct.install = NSLock();
-        });
-        return NSLockStruct.install;
+    fileprivate class var lock:NSLock{
+        _ = Log.__once1;
+        return NSLockStruct1.install;
     }
-    private class func logStr(name:String,str:String,level:LogLevel,log:Log){
+    fileprivate class func logStr(_ name:String,str:String,level:LogLevel,log:Log){
         
         if level.rawValue > log.level.rawValue {
             return;
         }
-        let newstr = (str as NSString).stringByReplacingOccurrencesOfString("\n", withString:"\n\t");
-        let date = NSDate();
+        let newstr = (str as NSString).replacingOccurrences(of: "\n", with:"\n\t");
+        let date = Date();
         let filename = Log.getFilename(name,date:date);
-        let format = NSDateFormatter();
+        let format = DateFormatter();
         format.dateFormat = "yyyy-MM-dd HH:mm:ss";
         Log.lock.lock();
-        Log.logStrImpl("[\(level.description)]\(format.stringFromDate(date)) \(newstr)\n",filename:filename);
+        Log.logStrImpl("[\(level.description)]\(format.string(from: date)) \(newstr)\n",filename:filename);
         Log.lock.unlock();
     }
-    private class func getFilename(name:String,date:NSDate)->String{
-        var fileManager = NSFileManager.defaultManager();
+    fileprivate class func getFilename(_ name:String,date:Date)->String{
+        let fileManager = FileManager.default;
         
-        var format = NSDateFormatter();
+        let format = DateFormatter();
         format.dateFormat = "yyyy-MM-dd";
-        #if iOS7
-            var path = seller.pathFor(Documents.Document,"log")!;
-            #else
-            var path = LinUtil.pathFor(Documents.Document,path: "log")!;
-        #endif
+       
+        let path = LinUtil.pathFor(Documents.document,path: "log")!;
         
-        var isDir = UnsafeMutablePointer<ObjCBool>.alloc(1);
-        isDir.initialize(ObjCBool(false));
-        fileManager.fileExistsAtPath(path, isDirectory: isDir);
+        
+//        var isDir = UnsafeMutablePointer<ObjCBool>(allocatingCapacity: 1);
+        let isDir = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1);
+        isDir.initialize(to: ObjCBool(false));
+        fileManager.fileExists(atPath: path, isDirectory: isDir);
         
         if !isDir.move().boolValue {
             do {
-                try fileManager.createDirectoryAtPath(path,withIntermediateDirectories:true,attributes:nil)
+                try fileManager.createDirectory(atPath: path,withIntermediateDirectories:true,attributes:nil)
             } catch _ {
             };
         }
-        var filename = "\(path)/\(name)-\(format.stringFromDate(date)).txt";
+        var filename = "\(path)/\(name)-\(format.string(from: date)).txt";
         
         
 //        if filesize > 600 * 1024 {
-        for var n=1 ; ; n++ {
-            if fileManager.fileExistsAtPath(filename) {
-                var filesize = ((try? fileManager.attributesOfItemAtPath(filename))?["NSFileSize"] as? Int) ?? 0;
-                if filesize > 600 * 1024 {
-                    filename = "\(path)/\(name)-\(format.stringFromDate(date))-\(n).txt";
+        //for var n=1 ; ; n += 1 {
+        for n in 1 ... 100000 {
+            if fileManager.fileExists(atPath: filename) {
+                let filesize = (try? fileManager.attributesOfItem(atPath: filename)[FileAttributeKey("NSFileSize")] as? Int) ?? 0;
+//                var filesize = ((try? fileManager.attributesOfItem(atPath: filename))?["NSFileSize"] as? Int) ?? 0;
+                if filesize! > 600 * 1024 {
+                    filename = "\(path)/\(name)-\(format.string(from: date))-\(n).txt";
                     continue;
                 }
             }
             break;
         }
         
-        if !fileManager.fileExistsAtPath(filename) {
+        if !fileManager.fileExists(atPath: filename) {
             //写设备信息
-            var str:NSString = UIDevice.currentDevice().toString() + "\n\n";
-            fileManager.createFileAtPath(filename, contents: str.dataUsingEncoding(0), attributes: nil);
+            let str = UIDevice.current.toString() + "\n\n";
+            fileManager.createFile(atPath: filename, contents: (str as NSString).data(using: 0), attributes: nil);
         }
 //        else{
 //            //fileManager.[manager attributesOfItemAtPath:filePath error:nil] fileSize
@@ -197,10 +211,10 @@ public class Log{
         
         return filename;
     }
-    private class func logStrImpl(str:String,filename:String){
+    private class func logStrImpl(_ str:String,filename:String){
         
 
-        let outFile = NSFileHandle(forWritingAtPath:filename);
+        let outFile = FileHandle(forWritingAtPath:filename);
         
         if outFile == nil
         {
@@ -209,17 +223,17 @@ public class Log{
         
         //找到并定位到outFile的末尾位置(在此后追加文件)
         //[outFile seekToEndOfFile];
-        if outFile?.seekToEndOfFile() > 500 * 1024 {
-            
-        }
+//        if (outFile?.seekToEndOfFile())! > 500 * 1024 {
+//            
+//        }
         
         //读取inFile并且将其内容写到outFile中
         
-        let buffer = (str as NSString).dataUsingEncoding(NSUTF8StringEncoding);
+        let buffer = (str as NSString).data(using: String.Encoding.utf8.rawValue);
         
         
         if let buffer = buffer {
-            outFile?.writeData(buffer);
+            outFile?.write(buffer);
         }
         
         //关闭读写文件

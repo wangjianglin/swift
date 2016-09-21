@@ -10,20 +10,20 @@ import UIKit
 
 @objc
 public protocol FormViewControllerDelegate: NSObjectProtocol {
-    optional
-    func formViewController(controller: FormViewController, didSelectRowDescriptor: FormRowDescriptor)
+    @objc optional
+    func formViewController(_ controller: FormViewController, didSelectRowDescriptor: FormRowDescriptor)
 }
 
-public class FormViewController : UITableViewController {
+open class FormViewController : UITableViewController {
 
     /// MARK: Types
 
     
     /// MARK: Properties
     
-    public var form: FormDescriptor!
+    open var form: FormDescriptor!
     
-    public weak var delegate: FormViewControllerDelegate?
+    open weak var delegate: FormViewControllerDelegate?
     
     /// MARK: Init
     
@@ -40,7 +40,7 @@ public class FormViewController : UITableViewController {
         super.init(style: style)
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         baseInit()
     }
@@ -50,38 +50,38 @@ public class FormViewController : UITableViewController {
         baseInit()
     }
     
-    private func baseInit() {
+    fileprivate func baseInit() {
     }
     
     /// MARK: View life cycle
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         //navigationItem.title = form.title
     }
     
     /// MARK: UITableViewDataSource
     
-    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override open func numberOfSections(in tableView: UITableView) -> Int {
         return form.sections.count
     }
     
-    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return form.sections[section].rows.count
     }
     
-    override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let rowDescriptor = formRowDescriptorAtIndexPath(indexPath)
         
         let formBaseCellClass = rowDescriptor.formBaseCellClassFromRowDescriptor()
         
-        let reuseIdentifier = NSStringFromClass(formBaseCellClass)
+        let reuseIdentifier = NSStringFromClass(formBaseCellClass!)
         
-        var cell: FormBaseCell? = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as? FormBaseCell
+        var cell: FormBaseCell? = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? FormBaseCell
         if cell == nil {
             
-            cell = formBaseCellClass.init(style: rowDescriptor.cellStyle, reuseIdentifier: reuseIdentifier)
+            cell = formBaseCellClass?.init(style: rowDescriptor.cellStyle, reuseIdentifier: reuseIdentifier)
             cell?.configure()
         }
         
@@ -95,31 +95,31 @@ public class FormViewController : UITableViewController {
         return cell!
     }
     
-    override public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return form.sections[section].headerTitle
     }
     
-    override public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return form.sections[section].footerTitle
     }
     
     /// MARK: UITableViewDelegate
     
-    override public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         let rowDescriptor = formRowDescriptorAtIndexPath(indexPath)
         
         if let formBaseCellClass = rowDescriptor.formBaseCellClassFromRowDescriptor() {
             return formBaseCellClass.formRowCellHeight()
         }
-        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
-    override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let rowDescriptor = formRowDescriptorAtIndexPath(indexPath)
         
-        if let selectedRow = tableView.cellForRowAtIndexPath(indexPath) as? FormBaseCell {
+        if let selectedRow = tableView.cellForRow(at: indexPath) as? FormBaseCell {
             if let formBaseCellClass = rowDescriptor.formBaseCellClassFromRowDescriptor() {
                 formBaseCellClass.formViewController(self, didSelectRow: selectedRow)
             }
@@ -127,14 +127,14 @@ public class FormViewController : UITableViewController {
         
         delegate?.formViewController?(self, didSelectRowDescriptor: rowDescriptor)
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     /// MARK: Private interface
     
-    private class func isSelectionableRowDescriptor(rowType: FormRowType) -> Bool {
+    fileprivate class func isSelectionableRowDescriptor(_ rowType: FormRowType) -> Bool {
         switch( rowType ) {
-        case .Button, .BooleanCheck, .Picker, .Date, .Time, .DateAndTime:
+        case .button, .booleanCheck, .picker, .date, .time, .dateAndTime:
             return true
         default:
             return false
@@ -143,7 +143,7 @@ public class FormViewController : UITableViewController {
     
     
     
-    private func formRowDescriptorAtIndexPath(indexPath: NSIndexPath!) -> FormRowDescriptor {
+    fileprivate func formRowDescriptorAtIndexPath(_ indexPath: IndexPath!) -> FormRowDescriptor {
         let section = form.sections[indexPath.section]
         let rowDescriptor = section.rows[indexPath.row]
         return rowDescriptor

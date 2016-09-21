@@ -14,14 +14,14 @@ import LinUtil
 public extension ALAssetsLibrary{
     
     
-    public func writeImageToSavedPhotosAlbums(images:[CGImage],albumName:NSString, metadata: [NSObject : AnyObject]!,completion:(([NSURL!]!,[NSError!]!)->())!){
+    public func writeImageToSavedPhotosAlbums(_ images:[CGImage],albumName:NSString, metadata: [AnyHashable: Any]!,completion:(([URL?]?,[Error?]?)->())!){
         
         let set = AutoResetEvent();
         
         Queue.asynQueue(){() in
             for image in images {
                 set.reset();
-                self.writeImageToSavedPhotosAlbum(image,albumName:albumName,metadata:metadata,completion:{(url:NSURL!,error:NSError!) in                    set.set();
+                self.writeImageToSavedPhotosAlbum(image,albumName:albumName,metadata:metadata,completion:{(url:URL?,error:Error?) in                    set.set();
                 });
                 set.waitOne();
             }
@@ -33,45 +33,58 @@ public extension ALAssetsLibrary{
     
     
     
-    public func writeImageToSavedPhotosAlbum(image:CGImage,albumName:NSString, metadata: [NSObject : AnyObject]!,completion:((NSURL!,NSError!)->())!){
-    self.writeImageToSavedPhotosAlbum(image, metadata: nil, completionBlock: {(url:NSURL!, error:NSError!) in
+    public func writeImageToSavedPhotosAlbum(_ image:CGImage,albumName:NSString, metadata: [AnyHashable: Any]!,completion:((URL?,Error?)->())!){
+        
+        
+//        self.writeImage(toSavedPhotosAlbum: CGImage!, metadata: [AnyHashable : Any]!) { (URL?, <#Error?#>) in
+//            <#code#>
+//        }
+        
+    self.writeImage(toSavedPhotosAlbum: image, metadata: nil, completionBlock: {(url:URL?, error:Error?) in
 
         if let error = error {
             completion?(url,error);
             return;
         }
         var albumWasFound = false;
-        self.enumerateGroupsWithTypes(ALAssetsGroupAlbum , usingBlock:{(group:ALAssetsGroup!, stop:UnsafeMutablePointer<ObjCBool>) in
+        
+//        self.enumerateGroupsWithTypes(ALAssetsGroupAlbum, usingBlock: { (<#ALAssetsGroup?#>, <#UnsafeMutablePointer<ObjCBool>?#>) in
+//            code
+//            }, failureBlock: { (<#Error?#>) in
+//                <#code#>
+//        })
+        
+        self.enumerateGroupsWithTypes(ALAssetsGroupAlbum , usingBlock:{(group:ALAssetsGroup?, stop:UnsafeMutablePointer<ObjCBool>?) in
    
             if group != nil {
-                let r = albumName.compare(group.valueForProperty(ALAssetsGroupPropertyName) as! String);
-                if  r == NSComparisonResult.OrderedSame {
+                let r = albumName.compare(group?.value(forProperty: ALAssetsGroupPropertyName) as! String);
+                if  r == ComparisonResult.orderedSame {
                     albumWasFound = true;
-                    self.assetForURL(url,resultBlock:{(asset:ALAsset!) in
-                        group.addAsset(asset);
+                    self.asset(for: url,resultBlock:{(asset:ALAsset?) in
+                        group?.add(asset);
                         completion(url,nil);
-                        },failureBlock:{(error:NSError!) in
+                        },failureBlock:{(error:Error?) in
                             completion(nil,error);
                     });
                 }
                 return;
             }
             if group == nil && albumWasFound == false {
-                self.addAssetsGroupAlbumWithName(albumName as String,resultBlock:{(group:ALAssetsGroup!) in
+                self.addAssetsGroupAlbum(withName: albumName as String,resultBlock:{(group:ALAssetsGroup?) in
                 
                     
-                    self.assetForURL(url,resultBlock:{(asset:ALAsset!) in
-                        group?.addAsset(asset);
+                    self.asset(for: url,resultBlock:{(asset:ALAsset?) in
+                        group?.add(asset);
                         completion(url,nil);
-                    },failureBlock:{(error:NSError!) in
+                    },failureBlock:{(error:Error?) in
                         completion(nil,error);
                     });
-                },failureBlock:{(error:NSError!) in
+                },failureBlock:{(error:Error?) in
                     completion(nil,error);
                 });
             }
 
-        }, failureBlock: {(error:NSError!) in
+        }, failureBlock: {(error:Error?) in
                 completion(nil,error);
         })
     });

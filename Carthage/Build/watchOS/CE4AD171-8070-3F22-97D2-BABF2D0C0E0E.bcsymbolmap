@@ -1,0 +1,2283 @@
+BCSymbolMap Version: 2.0
+Apple LLVM version 8.0.0 (clang-800.0.38)
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/extobjc/EXTRuntimeExtensions.m
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc
+rac_getImmediateInstanceMethod
+rac_copyPropertyAttributes
+-[NSArray(RACSequenceAdditions) rac_sequence]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSArray+RACSequenceAdditions.m
++[NSData(RACSupport) rac_readContentsOfURL:options:scheduler:]
+___62+[NSData(RACSupport) rac_readContentsOfURL:options:scheduler:]_block_invoke
+___copy_helper_block_
+___destroy_helper_block_
+___block_descriptor_tmp
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSData+RACSupport.m
+__destroy_helper_block_
+__copy_helper_block_
+__62+[NSData(RACSupport) rac_readContentsOfURL:options:scheduler:]_block_invoke
+-[NSDictionary(RACSequenceAdditions) rac_sequence]
+___50-[NSDictionary(RACSequenceAdditions) rac_sequence]_block_invoke
+-[NSDictionary(RACSequenceAdditions) rac_keySequence]
+-[NSDictionary(RACSequenceAdditions) rac_valueSequence]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSDictionary+RACSequenceAdditions.m
+__50-[NSDictionary(RACSequenceAdditions) rac_sequence]_block_invoke
+-[NSEnumerator(RACSequenceAdditions) rac_sequence]
+___50-[NSEnumerator(RACSequenceAdditions) rac_sequence]_block_invoke
+___50-[NSEnumerator(RACSequenceAdditions) rac_sequence]_block_invoke.1
+___copy_helper_block_.4
+___destroy_helper_block_.5
+___block_descriptor_tmp.7
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSEnumerator+RACSequenceAdditions.m
+__50-[NSEnumerator(RACSequenceAdditions) rac_sequence]_block_invoke.1
+__50-[NSEnumerator(RACSequenceAdditions) rac_sequence]_block_invoke
+-[NSFileHandle(RACSupport) rac_readInBackground]
+___48-[NSFileHandle(RACSupport) rac_readInBackground]_block_invoke
+___Block_byref_object_copy_
+___Block_byref_object_dispose_
+___48-[NSFileHandle(RACSupport) rac_readInBackground]_block_invoke.15
+___block_literal_global
+___block_descriptor_tmp.27
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSFileHandle+RACSupport.m
+__48-[NSFileHandle(RACSupport) rac_readInBackground]_block_invoke.15
+__Block_byref_object_dispose_
+__Block_byref_object_copy_
+__48-[NSFileHandle(RACSupport) rac_readInBackground]_block_invoke
+-[NSIndexSet(RACSequenceAdditions) rac_sequence]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSIndexSet+RACSequenceAdditions.m
+-[NSInvocation(RACTypeParsing) rac_setArgument:atIndex:]
+-[NSInvocation(RACTypeParsing) rac_argumentAtIndex:]
+-[NSInvocation(RACTypeParsing) rac_argumentsTuple]
+-[NSInvocation(RACTypeParsing) setRac_argumentsTuple:]
+-[NSInvocation(RACTypeParsing) rac_returnValue]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSInvocation+RACTypeParsing.m
+-[NSNotificationCenter(RACSupport) rac_addObserverForName:object:]
+_objc_begin_catch
+_objc_end_catch
+_objc_exception_rethrow
+___66-[NSNotificationCenter(RACSupport) rac_addObserverForName:object:]_block_invoke
+___66-[NSNotificationCenter(RACSupport) rac_addObserverForName:object:]_block_invoke_2
+___66-[NSNotificationCenter(RACSupport) rac_addObserverForName:object:]_block_invoke.4
+___copy_helper_block_.7
+___destroy_helper_block_.8
+___copy_helper_block_.13
+___destroy_helper_block_.14
+___block_descriptor_tmp.10
+___block_descriptor_tmp.16
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSNotificationCenter+RACSupport.m
+__66-[NSNotificationCenter(RACSupport) rac_addObserverForName:object:]_block_invoke.4
+__66-[NSNotificationCenter(RACSupport) rac_addObserverForName:object:]_block_invoke_2
+__66-[NSNotificationCenter(RACSupport) rac_addObserverForName:object:]_block_invoke
+-[NSObject(RACDeallocating) rac_willDeallocSignal]
+___50-[NSObject(RACDeallocating) rac_willDeallocSignal]_block_invoke
+-[NSObject(RACDeallocating) rac_deallocDisposable]
+_swizzleDeallocIfNeeded
+___swizzleDeallocIfNeeded_block_invoke
+___copy_helper_block_.22
+___destroy_helper_block_.23
+_swizzledClasses
+___swizzledClasses_block_invoke
+_RACObjectCompoundDisposable
+___block_descriptor_tmp.26
+_swizzledClasses.onceToken
+_swizzledClasses.swizzledClasses
+___block_descriptor_tmp.35
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSObject+RACDeallocating.m
+__swizzledClasses_block_invoke
+swizzledClasses
+_dispatch_once
+/Applications/Xcode.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.0.sdk/usr/include/dispatch/once.h
+__swizzleDeallocIfNeeded_block_invoke
+swizzleDeallocIfNeeded
+__50-[NSObject(RACDeallocating) rac_willDeallocSignal]_block_invoke
+-[NSValue(RACDescription) rac_description]
+-[NSString(RACDescription) rac_description]
+-[RACTuple(RACDescription) rac_description]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSObject+RACDescription.m
+RACDescription
+-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]
+___69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke
+___69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke.38
+_rac_executeCleanupBlock
+___69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke_2
+___69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke_3
+___copy_helper_block_.57
+___destroy_helper_block_.58
+___69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke.62
+___copy_helper_block_.65
+___destroy_helper_block_.66
+___copy_helper_block_.68
+___destroy_helper_block_.69
+___69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke.72
+___copy_helper_block_.75
+___destroy_helper_block_.76
+___69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke.81
+___copy_helper_block_.94
+___destroy_helper_block_.95
+___69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke.100
+___copy_helper_block_.101
+___destroy_helper_block_.102
+___block_descriptor_tmp.40
+___block_descriptor_tmp.59
+___block_descriptor_tmp.67
+___block_descriptor_tmp.71
+___block_descriptor_tmp.77
+___block_descriptor_tmp.97
+___block_descriptor_tmp.103
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSObject+RACKVOWrapper.m
+__69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke.100
+__69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke.81
+__69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke.72
+__69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke.62
+__69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke_3
+__69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke_2
+rac_executeCleanupBlock
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/extobjc/EXTScope.h
+__69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke.38
+__69-[NSObject(RACKVOWrapper) rac_observeKeyPath:options:observer:block:]_block_invoke
+-[NSObject(RACLifting) rac_liftSelector:withSignalOfArguments:]
+___63-[NSObject(RACLifting) rac_liftSelector:withSignalOfArguments:]_block_invoke
+-[NSObject(RACLifting) rac_liftSelector:withSignalsFromArray:]
+-[NSObject(RACLifting) rac_liftSelector:withSignals:]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSObject+RACLifting.m
+__63-[NSObject(RACLifting) rac_liftSelector:withSignalOfArguments:]_block_invoke
+-[NSObject(RACPropertySubscribing) rac_valuesForKeyPath:observer:]
+___66-[NSObject(RACPropertySubscribing) rac_valuesForKeyPath:observer:]_block_invoke
+-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]
+___84-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]_block_invoke
+___84-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]_block_invoke_2
+___copy_helper_block_.34
+___destroy_helper_block_.35
+___84-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]_block_invoke.39
+___84-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]_block_invoke_2.40
+___copy_helper_block_.41
+___destroy_helper_block_.42
+___84-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]_block_invoke.46
+___copy_helper_block_.55
+___destroy_helper_block_.56
+___copy_helper_block_.61
+___destroy_helper_block_.62
+___block_descriptor_tmp.33
+___block_descriptor_tmp.36
+___block_descriptor_tmp.43
+___block_descriptor_tmp.58
+___block_descriptor_tmp.64
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSObject+RACPropertySubscribing.m
+__84-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]_block_invoke.46
+__84-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]_block_invoke_2.40
+__84-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]_block_invoke.39
+__84-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]_block_invoke_2
+__84-[NSObject(RACPropertySubscribing) rac_valuesAndChangesForKeyPath:options:observer:]_block_invoke
+__66-[NSObject(RACPropertySubscribing) rac_valuesForKeyPath:observer:]_block_invoke
+-[NSObject(RACSelectorSignal) rac_signalForSelector:]
+_NSObjectRACSignalForSelector
+-[NSObject(RACSelectorSignal) rac_signalForSelector:fromProtocol:]
+_RACAliasForSelector
+_RACSwizzleClass
+___NSObjectRACSignalForSelector_block_invoke
+_RACSignatureForUndefinedSelector
+_RACCheckTypeEncoding
+_RACSwizzleForwardInvocation
+_RACSwizzleRespondsToSelector
+_RACSwizzleGetClass
+_RACSwizzleMethodSignatureForSelector
+___RACSwizzleForwardInvocation_block_invoke
+_RACForwardInvocation
+___RACSwizzleRespondsToSelector_block_invoke
+___RACSwizzleGetClass_block_invoke
+___RACSwizzleMethodSignatureForSelector_block_invoke
+_RACSignalForSelectorAliasPrefix
+_RACSubclassSuffix
+_RACSubclassAssociationKey
+_swizzledClasses.set
+_swizzledClasses.pred
+___block_descriptor_tmp.84
+___block_descriptor_tmp.93
+___block_descriptor_tmp.111
+___block_descriptor_tmp.114
+___block_descriptor_tmp.122
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSObject+RACSelectorSignal.m
+__RACSwizzleMethodSignatureForSelector_block_invoke
+__RACSwizzleGetClass_block_invoke
+__RACSwizzleRespondsToSelector_block_invoke
+RACForwardInvocation
+__RACSwizzleForwardInvocation_block_invoke
+RACSwizzleMethodSignatureForSelector
+RACSwizzleGetClass
+RACSwizzleRespondsToSelector
+RACSwizzleForwardInvocation
+RACCheckTypeEncoding
+RACSignatureForUndefinedSelector
+__NSObjectRACSignalForSelector_block_invoke
+RACSwizzleClass
+RACAliasForSelector
+NSObjectRACSignalForSelector
+-[NSOrderedSet(RACSequenceAdditions) rac_sequence]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSOrderedSet+RACSequenceAdditions.m
+-[NSSet(RACSequenceAdditions) rac_sequence]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSSet+RACSequenceAdditions.m
+-[NSString(RACKeyPathUtilities) rac_keyPathComponents]
+-[NSString(RACKeyPathUtilities) rac_keyPathByDeletingLastKeyPathComponent]
+-[NSString(RACKeyPathUtilities) rac_keyPathByDeletingFirstKeyPathComponent]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSString+RACKeyPathUtilities.m
+-[NSString(RACSequenceAdditions) rac_sequence]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSString+RACSequenceAdditions.m
++[NSString(RACSupport) rac_readContentsOfURL:usedEncoding:scheduler:]
+___69+[NSString(RACSupport) rac_readContentsOfURL:usedEncoding:scheduler:]_block_invoke
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSString+RACSupport.m
+__69+[NSString(RACSupport) rac_readContentsOfURL:usedEncoding:scheduler:]_block_invoke
+-[NSUserDefaults(RACSupport) rac_channelTerminalForKey:]
+___56-[NSUserDefaults(RACSupport) rac_channelTerminalForKey:]_block_invoke
+___56-[NSUserDefaults(RACSupport) rac_channelTerminalForKey:]_block_invoke.15
+___copy_helper_block_.18
+___destroy_helper_block_.19
+___56-[NSUserDefaults(RACSupport) rac_channelTerminalForKey:]_block_invoke.36
+___copy_helper_block_.39
+___destroy_helper_block_.40
+___block_descriptor_tmp.21
+___block_descriptor_tmp.42
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/NSUserDefaults+RACSupport.m
+__56-[NSUserDefaults(RACSupport) rac_channelTerminalForKey:]_block_invoke.36
+__56-[NSUserDefaults(RACSupport) rac_channelTerminalForKey:]_block_invoke.15
+__56-[NSUserDefaults(RACSupport) rac_channelTerminalForKey:]_block_invoke
++[RACArraySequence sequenceWithArray:offset:]
+-[RACArraySequence head]
+-[RACArraySequence tail]
+-[RACArraySequence countByEnumeratingWithState:objects:count:]
+-[RACArraySequence array]
+-[RACArraySequence initWithCoder:]
+-[RACArraySequence encodeWithCoder:]
+-[RACArraySequence description]
+-[RACArraySequence backingArray]
+-[RACArraySequence offset]
+-[RACArraySequence .cxx_destruct]
+_OBJC_IVAR_$_RACArraySequence._backingArray
+_OBJC_IVAR_$_RACArraySequence._offset
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACArraySequence.m
+NSMakeRange
+/Applications/Xcode.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
++[RACBehaviorSubject behaviorSubjectWithDefaultValue:]
+-[RACBehaviorSubject subscribe:]
+___32-[RACBehaviorSubject subscribe:]_block_invoke
+___32-[RACBehaviorSubject subscribe:]_block_invoke.14
+___copy_helper_block_.17
+___destroy_helper_block_.18
+-[RACBehaviorSubject sendNext:]
+-[RACBehaviorSubject currentValue]
+-[RACBehaviorSubject setCurrentValue:]
+-[RACBehaviorSubject .cxx_destruct]
+___block_descriptor_tmp.19
+_OBJC_IVAR_$_RACBehaviorSubject._currentValue
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACBehaviorSubject.m
+__32-[RACBehaviorSubject subscribe:]_block_invoke.14
+__32-[RACBehaviorSubject subscribe:]_block_invoke
+-[RACBlockTrampoline initWithBlock:]
++[RACBlockTrampoline invokeBlock:withArguments:]
+-[RACBlockTrampoline invokeWithArguments:]
+-[RACBlockTrampoline selectorForArgumentCount:]
+-[RACBlockTrampoline performWith:]
+-[RACBlockTrampoline performWith::]
+-[RACBlockTrampoline performWith:::]
+-[RACBlockTrampoline performWith::::]
+-[RACBlockTrampoline performWith:::::]
+-[RACBlockTrampoline performWith::::::]
+-[RACBlockTrampoline performWith:::::::]
+-[RACBlockTrampoline performWith::::::::]
+-[RACBlockTrampoline performWith:::::::::]
+-[RACBlockTrampoline performWith::::::::::]
+-[RACBlockTrampoline performWith:::::::::::]
+-[RACBlockTrampoline performWith::::::::::::]
+-[RACBlockTrampoline performWith:::::::::::::]
+-[RACBlockTrampoline performWith::::::::::::::]
+-[RACBlockTrampoline performWith:::::::::::::::]
+-[RACBlockTrampoline block]
+-[RACBlockTrampoline .cxx_destruct]
+_OBJC_IVAR_$_RACBlockTrampoline._block
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACBlockTrampoline.m
+-[RACChannel init]
+-[RACChannel leadingTerminal]
+-[RACChannel followingTerminal]
+-[RACChannel .cxx_destruct]
+-[RACChannelTerminal initWithValues:otherTerminal:]
+-[RACChannelTerminal subscribe:]
+-[RACChannelTerminal sendNext:]
+-[RACChannelTerminal sendError:]
+-[RACChannelTerminal sendCompleted]
+-[RACChannelTerminal didSubscribeWithDisposable:]
+-[RACChannelTerminal values]
+-[RACChannelTerminal otherTerminal]
+-[RACChannelTerminal .cxx_destruct]
+_OBJC_IVAR_$_RACChannel._leadingTerminal
+_OBJC_IVAR_$_RACChannel._followingTerminal
+_OBJC_IVAR_$_RACChannelTerminal._values
+_OBJC_IVAR_$_RACChannelTerminal._otherTerminal
+l_OBJC_PROTOCOL_$_NSObject
+l_OBJC_LABEL_PROTOCOL_$_NSObject
+l_OBJC_PROTOCOL_$_RACSubscriber
+l_OBJC_LABEL_PROTOCOL_$_RACSubscriber
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACChannel.m
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACChannel.h
+-[RACCommand allowsConcurrentExecution]
+-[RACCommand setAllowsConcurrentExecution:]
+-[RACCommand init]
+-[RACCommand initWithSignalBlock:]
+-[RACCommand dealloc]
+-[RACCommand initWithEnabled:signalBlock:]
+___42-[RACCommand initWithEnabled:signalBlock:]_block_invoke
+___42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_2
+___42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_3
+___42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_4
+___42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_5
+___42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_6
+___42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_7
+-[RACCommand execute:]
+-[RACCommand executionSignals]
+-[RACCommand executing]
+-[RACCommand enabled]
+-[RACCommand errors]
+-[RACCommand addedExecutionSignalsSubject]
+-[RACCommand allowsConcurrentExecutionSubject]
+-[RACCommand immediateEnabled]
+-[RACCommand signalBlock]
+-[RACCommand .cxx_destruct]
+_OBJC_IVAR_$_RACCommand._allowsConcurrentExecution
+_OBJC_IVAR_$_RACCommand._addedExecutionSignalsSubject
+_OBJC_IVAR_$_RACCommand._allowsConcurrentExecutionSubject
+_OBJC_IVAR_$_RACCommand._signalBlock
+_OBJC_IVAR_$_RACCommand._executionSignals
+___block_descriptor_tmp.63
+___block_literal_global.64
+___block_literal_global.68
+_OBJC_IVAR_$_RACCommand._errors
+___block_descriptor_tmp.82
+___block_literal_global.83
+___block_descriptor_tmp.88
+___block_literal_global.89
+___block_literal_global.94
+___block_descriptor_tmp.98
+___block_literal_global.99
+_OBJC_IVAR_$_RACCommand._executing
+_OBJC_IVAR_$_RACCommand._immediateEnabled
+_OBJC_IVAR_$_RACCommand._enabled
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACCommand.m
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACCommand.h
+__42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_7
+__42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_6
+__42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_5
+__42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_4
+__42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_3
+__42-[RACCommand initWithEnabled:signalBlock:]_block_invoke_2
+__42-[RACCommand initWithEnabled:signalBlock:]_block_invoke
+-[RACCompoundDisposable isDisposed]
++[RACCompoundDisposable compoundDisposable]
++[RACCompoundDisposable compoundDisposableWithDisposables:]
+-[RACCompoundDisposable init]
+-[RACCompoundDisposable initWithDisposables:]
+___45-[RACCompoundDisposable initWithDisposables:]_block_invoke
+_RACCreateDisposablesArray
+-[RACCompoundDisposable initWithBlock:]
+-[RACCompoundDisposable dealloc]
+-[RACCompoundDisposable addDisposable:]
+-[RACCompoundDisposable removeDisposable:]
+-[RACCompoundDisposable dispose]
+_disposeEach
+-[RACCompoundDisposable .cxx_destruct]
+_OBJC_IVAR_$_RACCompoundDisposable._mutex
+_OBJC_IVAR_$_RACCompoundDisposable._disposed
+_OBJC_IVAR_$_RACCompoundDisposable._inlineDisposables
+_OBJC_IVAR_$_RACCompoundDisposable._disposables
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACCompoundDisposable.m
+disposeEach
+CFRangeMake
+/Applications/Xcode.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.0.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFBase.h
+RACCreateDisposablesArray
+__45-[RACCompoundDisposable initWithDisposables:]_block_invoke
+-[RACDelegateProxy initWithProtocol:]
+-[RACDelegateProxy signalForSelector:]
+-[RACDelegateProxy isProxy]
+-[RACDelegateProxy forwardInvocation:]
+-[RACDelegateProxy methodSignatureForSelector:]
+-[RACDelegateProxy respondsToSelector:]
+-[RACDelegateProxy rac_proxiedDelegate]
+-[RACDelegateProxy setRac_proxiedDelegate:]
+-[RACDelegateProxy .cxx_destruct]
+_OBJC_IVAR_$_RACDelegateProxy._protocol
+_OBJC_IVAR_$_RACDelegateProxy._rac_proxiedDelegate
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACDelegateProxy.m
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACDelegateProxy.h
+-[RACDisposable isDisposed]
+-[RACDisposable init]
+-[RACDisposable initWithBlock:]
++[RACDisposable disposableWithBlock:]
+-[RACDisposable dealloc]
+-[RACDisposable dispose]
+-[RACDisposable asScopedDisposable]
+_OBJC_IVAR_$_RACDisposable._disposeBlock
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACDisposable.m
+CFBridgingRelease
+/Applications/Xcode.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObject.h
+CFBridgingRetain
++[RACDynamicSequence sequenceWithHeadBlock:tailBlock:]
++[RACDynamicSequence sequenceWithLazyDependency:headBlock:tailBlock:]
+-[RACDynamicSequence dealloc]
+-[RACDynamicSequence head]
+-[RACDynamicSequence tail]
+-[RACDynamicSequence description]
+-[RACDynamicSequence headBlock]
+-[RACDynamicSequence setHeadBlock:]
+-[RACDynamicSequence tailBlock]
+-[RACDynamicSequence setTailBlock:]
+-[RACDynamicSequence hasDependency]
+-[RACDynamicSequence setHasDependency:]
+-[RACDynamicSequence dependencyBlock]
+-[RACDynamicSequence setDependencyBlock:]
+-[RACDynamicSequence .cxx_destruct]
+_dealloc.directDeallocCount
+_OBJC_IVAR_$_RACDynamicSequence._tail
+_OBJC_IVAR_$_RACDynamicSequence._head
+_OBJC_IVAR_$_RACDynamicSequence._dependency
+_OBJC_IVAR_$_RACDynamicSequence._headBlock
+_OBJC_IVAR_$_RACDynamicSequence._tailBlock
+_OBJC_IVAR_$_RACDynamicSequence._hasDependency
+_OBJC_IVAR_$_RACDynamicSequence._dependencyBlock
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACDynamicSequence.m
++[RACDynamicSignal createSignal:]
+-[RACDynamicSignal subscribe:]
+___30-[RACDynamicSignal subscribe:]_block_invoke
+-[RACDynamicSignal didSubscribe]
+-[RACDynamicSignal .cxx_destruct]
+_OBJC_IVAR_$_RACDynamicSignal._didSubscribe
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACDynamicSignal.m
+__30-[RACDynamicSignal subscribe:]_block_invoke
++[RACEagerSequence return:]
+-[RACEagerSequence bind:]
+-[RACEagerSequence concat:]
+-[RACEagerSequence eagerSequence]
+-[RACEagerSequence lazySequence]
+-[RACEagerSequence foldRightWithStart:reduce:]
+___46-[RACEagerSequence foldRightWithStart:reduce:]_block_invoke
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACEagerSequence.m
+__46-[RACEagerSequence foldRightWithStart:reduce:]_block_invoke
++[RACEmptySequence empty]
+___25+[RACEmptySequence empty]_block_invoke
+-[RACEmptySequence head]
+-[RACEmptySequence tail]
+-[RACEmptySequence bind:passingThroughValuesFromSequence:]
+-[RACEmptySequence classForCoder]
+-[RACEmptySequence initWithCoder:]
+-[RACEmptySequence encodeWithCoder:]
+-[RACEmptySequence description]
+-[RACEmptySequence hash]
+-[RACEmptySequence isEqual:]
+_empty.singleton
+_empty.pred
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACEmptySequence.m
+__25+[RACEmptySequence empty]_block_invoke
+-[RACEmptySignal setName:]
+-[RACEmptySignal name]
++[RACEmptySignal empty]
+___23+[RACEmptySignal empty]_block_invoke
+-[RACEmptySignal subscribe:]
+___28-[RACEmptySignal subscribe:]_block_invoke
+___copy_helper_block_.25
+___destroy_helper_block_.26
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACEmptySignal.m
+__28-[RACEmptySignal subscribe:]_block_invoke
+__23+[RACEmptySignal empty]_block_invoke
++[RACErrorSignal error:]
+-[RACErrorSignal subscribe:]
+___28-[RACErrorSignal subscribe:]_block_invoke
+-[RACErrorSignal error]
+-[RACErrorSignal .cxx_destruct]
+_OBJC_IVAR_$_RACErrorSignal._error
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACErrorSignal.m
+__28-[RACErrorSignal subscribe:]_block_invoke
+-[RACEvent isFinished]
+-[RACEvent error]
+-[RACEvent value]
++[RACEvent completedEvent]
+___26+[RACEvent completedEvent]_block_invoke
++[RACEvent eventWithError:]
++[RACEvent eventWithValue:]
+-[RACEvent initWithEventType:object:]
+-[RACEvent copyWithZone:]
+-[RACEvent description]
+-[RACEvent hash]
+-[RACEvent isEqual:]
+-[RACEvent eventType]
+-[RACEvent object]
+-[RACEvent .cxx_destruct]
+_completedEvent.pred
+_completedEvent.singleton
+_OBJC_IVAR_$_RACEvent._eventType
+_OBJC_IVAR_$_RACEvent._object
+l_OBJC_PROTOCOL_$_NSCopying
+l_OBJC_LABEL_PROTOCOL_$_NSCopying
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACEvent.m
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACEvent.h
+__26+[RACEvent completedEvent]_block_invoke
++[RACGroupedSignal signalWithKey:]
+-[RACGroupedSignal key]
+-[RACGroupedSignal setKey:]
+-[RACGroupedSignal .cxx_destruct]
+_OBJC_IVAR_$_RACGroupedSignal._key
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACGroupedSignal.m
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACGroupedSignal.h
+-[RACImmediateScheduler init]
+-[RACImmediateScheduler schedule:]
+-[RACImmediateScheduler after:schedule:]
+-[RACImmediateScheduler after:repeatingEvery:withLeeway:schedule:]
+-[RACImmediateScheduler scheduleRecursiveBlock:]
+___48-[RACImmediateScheduler scheduleRecursiveBlock:]_block_invoke
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACImmediateScheduler.m
+__48-[RACImmediateScheduler scheduleRecursiveBlock:]_block_invoke
++[RACIndexSetSequence sequenceWithIndexSet:]
++[RACIndexSetSequence sequenceWithIndexSetSequence:offset:]
+-[RACIndexSetSequence head]
+-[RACIndexSetSequence tail]
+-[RACIndexSetSequence countByEnumeratingWithState:objects:count:]
+-[RACIndexSetSequence description]
+-[RACIndexSetSequence data]
+-[RACIndexSetSequence indexes]
+-[RACIndexSetSequence count]
+-[RACIndexSetSequence .cxx_destruct]
+_OBJC_IVAR_$_RACIndexSetSequence._data
+_OBJC_IVAR_$_RACIndexSetSequence._indexes
+_OBJC_IVAR_$_RACIndexSetSequence._count
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACIndexSetSequence.m
+-[RACKVOChannel currentThreadData]
+-[RACKVOChannel initWithTarget:keyPath:nilValue:]
+___49-[RACKVOChannel initWithTarget:keyPath:nilValue:]_block_invoke
+___49-[RACKVOChannel initWithTarget:keyPath:nilValue:]_block_invoke.61
+___copy_helper_block_.64
+___destroy_helper_block_.65
+___49-[RACKVOChannel initWithTarget:keyPath:nilValue:]_block_invoke.70
+___copy_helper_block_.81
+___destroy_helper_block_.82
+___49-[RACKVOChannel initWithTarget:keyPath:nilValue:]_block_invoke.85
+___copy_helper_block_.88
+___destroy_helper_block_.89
+___49-[RACKVOChannel initWithTarget:keyPath:nilValue:]_block_invoke.97
+___copy_helper_block_.100
+___destroy_helper_block_.101
+-[RACKVOChannel createCurrentThreadData]
+-[RACKVOChannel destroyCurrentThreadData]
+___41-[RACKVOChannel destroyCurrentThreadData]_block_invoke
+___copy_helper_block_.117
+___destroy_helper_block_.118
+-[RACKVOChannel target]
+-[RACKVOChannel setTarget:]
+-[RACKVOChannel keyPath]
+-[RACKVOChannel .cxx_destruct]
+-[RACKVOChannel(RACChannelTo) objectForKeyedSubscript:]
+-[RACKVOChannel(RACChannelTo) setObject:forKeyedSubscript:]
++[RACKVOChannelData dataForChannel:]
+-[RACKVOChannelData ignoreNextUpdate]
+-[RACKVOChannelData setIgnoreNextUpdate:]
+-[RACKVOChannelData owner]
+-[RACKVOChannelData setOwner:]
+_RACKVOChannelDataDictionaryKey
+_OBJC_IVAR_$_RACKVOChannel._target
+_OBJC_IVAR_$_RACKVOChannel._keyPath
+___block_descriptor_tmp.91
+___block_descriptor_tmp.102
+___block_descriptor_tmp.120
+_OBJC_IVAR_$_RACKVOChannelData._owner
+_OBJC_IVAR_$_RACKVOChannelData._ignoreNextUpdate
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACKVOChannel.m
+__41-[RACKVOChannel destroyCurrentThreadData]_block_invoke
+__49-[RACKVOChannel initWithTarget:keyPath:nilValue:]_block_invoke.97
+__49-[RACKVOChannel initWithTarget:keyPath:nilValue:]_block_invoke.85
+__49-[RACKVOChannel initWithTarget:keyPath:nilValue:]_block_invoke.70
+__49-[RACKVOChannel initWithTarget:keyPath:nilValue:]_block_invoke.61
+__49-[RACKVOChannel initWithTarget:keyPath:nilValue:]_block_invoke
++[RACKVOProxy sharedProxy]
+___26+[RACKVOProxy sharedProxy]_block_invoke
+-[RACKVOProxy init]
+-[RACKVOProxy addObserver:forContext:]
+___38-[RACKVOProxy addObserver:forContext:]_block_invoke
+___copy_helper_block_.15
+___destroy_helper_block_.16
+-[RACKVOProxy removeObserver:forContext:]
+___41-[RACKVOProxy removeObserver:forContext:]_block_invoke
+___copy_helper_block_.20
+___destroy_helper_block_.21
+-[RACKVOProxy observeValueForKeyPath:ofObject:change:context:]
+___62-[RACKVOProxy observeValueForKeyPath:ofObject:change:context:]_block_invoke
+-[RACKVOProxy trampolines]
+-[RACKVOProxy queue]
+-[RACKVOProxy .cxx_destruct]
+_sharedProxy.proxy
+_sharedProxy.onceToken
+_OBJC_IVAR_$_RACKVOProxy._queue
+_OBJC_IVAR_$_RACKVOProxy._trampolines
+___block_descriptor_tmp.17
+___block_descriptor_tmp.22
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACKVOProxy.m
+__62-[RACKVOProxy observeValueForKeyPath:ofObject:change:context:]_block_invoke
+__41-[RACKVOProxy removeObserver:forContext:]_block_invoke
+__38-[RACKVOProxy addObserver:forContext:]_block_invoke
+__26+[RACKVOProxy sharedProxy]_block_invoke
+-[RACKVOTrampoline initWithTarget:observer:keyPath:options:block:]
+-[RACKVOTrampoline dealloc]
+-[RACKVOTrampoline dispose]
+-[RACKVOTrampoline observeValueForKeyPath:ofObject:change:context:]
+-[RACKVOTrampoline keyPath]
+-[RACKVOTrampoline block]
+-[RACKVOTrampoline unsafeTarget]
+-[RACKVOTrampoline weakTarget]
+-[RACKVOTrampoline observer]
+-[RACKVOTrampoline .cxx_destruct]
+_OBJC_IVAR_$_RACKVOTrampoline._keyPath
+_OBJC_IVAR_$_RACKVOTrampoline._block
+_OBJC_IVAR_$_RACKVOTrampoline._weakTarget
+_OBJC_IVAR_$_RACKVOTrampoline._unsafeTarget
+_OBJC_IVAR_$_RACKVOTrampoline._observer
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACKVOTrampoline.m
+-[RACMulticastConnection initWithSourceSignal:subject:]
+-[RACMulticastConnection connect]
+-[RACMulticastConnection autoconnect]
+___37-[RACMulticastConnection autoconnect]_block_invoke
+___37-[RACMulticastConnection autoconnect]_block_invoke_2
+-[RACMulticastConnection signal]
+-[RACMulticastConnection sourceSignal]
+-[RACMulticastConnection serialDisposable]
+-[RACMulticastConnection setSerialDisposable:]
+-[RACMulticastConnection .cxx_destruct]
+_OBJC_IVAR_$_RACMulticastConnection._sourceSignal
+_OBJC_IVAR_$_RACMulticastConnection._serialDisposable
+_OBJC_IVAR_$_RACMulticastConnection._signal
+_OBJC_IVAR_$_RACMulticastConnection._hasConnected
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACMulticastConnection.m
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACMulticastConnection.h
+__37-[RACMulticastConnection autoconnect]_block_invoke_2
+__37-[RACMulticastConnection autoconnect]_block_invoke
+-[RACPassthroughSubscriber initWithSubscriber:signal:disposable:]
+-[RACPassthroughSubscriber sendNext:]
+-[RACPassthroughSubscriber sendError:]
+-[RACPassthroughSubscriber sendCompleted]
+-[RACPassthroughSubscriber didSubscribeWithDisposable:]
+-[RACPassthroughSubscriber innerSubscriber]
+-[RACPassthroughSubscriber signal]
+-[RACPassthroughSubscriber disposable]
+-[RACPassthroughSubscriber .cxx_destruct]
+_OBJC_IVAR_$_RACPassthroughSubscriber._innerSubscriber
+_OBJC_IVAR_$_RACPassthroughSubscriber._signal
+_OBJC_IVAR_$_RACPassthroughSubscriber._disposable
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACPassthroughSubscriber.m
+-[RACQueueScheduler initWithName:queue:]
++[RACQueueScheduler wallTimeWithDate:]
+-[RACQueueScheduler schedule:]
+___30-[RACQueueScheduler schedule:]_block_invoke
+-[RACQueueScheduler after:schedule:]
+___36-[RACQueueScheduler after:schedule:]_block_invoke
+___copy_helper_block_.37
+___destroy_helper_block_.38
+-[RACQueueScheduler after:repeatingEvery:withLeeway:schedule:]
+___62-[RACQueueScheduler after:repeatingEvery:withLeeway:schedule:]_block_invoke
+___copy_helper_block_.44
+___destroy_helper_block_.45
+-[RACQueueScheduler queue]
+-[RACQueueScheduler .cxx_destruct]
+_OBJC_IVAR_$_RACQueueScheduler._queue
+___block_descriptor_tmp.39
+___block_descriptor_tmp.46
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACQueueScheduler.m
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACQueueScheduler+Subclass.h
+__62-[RACQueueScheduler after:repeatingEvery:withLeeway:schedule:]_block_invoke
+__36-[RACQueueScheduler after:schedule:]_block_invoke
+__30-[RACQueueScheduler schedule:]_block_invoke
++[RACReplaySubject replaySubjectWithCapacity:]
+-[RACReplaySubject init]
+-[RACReplaySubject initWithCapacity:]
+-[RACReplaySubject subscribe:]
+___30-[RACReplaySubject subscribe:]_block_invoke
+-[RACReplaySubject sendNext:]
+-[RACReplaySubject sendCompleted]
+-[RACReplaySubject sendError:]
+-[RACReplaySubject capacity]
+-[RACReplaySubject valuesReceived]
+-[RACReplaySubject hasCompleted]
+-[RACReplaySubject setHasCompleted:]
+-[RACReplaySubject hasError]
+-[RACReplaySubject setHasError:]
+-[RACReplaySubject error]
+-[RACReplaySubject setError:]
+-[RACReplaySubject .cxx_destruct]
+_OBJC_IVAR_$_RACReplaySubject._capacity
+_OBJC_IVAR_$_RACReplaySubject._valuesReceived
+_OBJC_IVAR_$_RACReplaySubject._hasCompleted
+_OBJC_IVAR_$_RACReplaySubject._hasError
+_OBJC_IVAR_$_RACReplaySubject._error
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACReplaySubject.m
+__30-[RACReplaySubject subscribe:]_block_invoke
+-[RACReturnSignal setName:]
+-[RACReturnSignal name]
++[RACReturnSignal return:]
+___26+[RACReturnSignal return:]_block_invoke
+___26+[RACReturnSignal return:]_block_invoke.6
+-[RACReturnSignal subscribe:]
+___29-[RACReturnSignal subscribe:]_block_invoke
+-[RACReturnSignal value]
+-[RACReturnSignal .cxx_destruct]
+_return:.unitSingleton
+_return:.unitPred
+_OBJC_IVAR_$_RACReturnSignal._value
+_return:.nilSingleton
+_return:.nilPred
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACReturnSignal.m
+__29-[RACReturnSignal subscribe:]_block_invoke
+__26+[RACReturnSignal return:]_block_invoke.6
+__26+[RACReturnSignal return:]_block_invoke
+-[RACScheduler description]
+-[RACScheduler initWithName:]
++[RACScheduler immediateScheduler]
+___34+[RACScheduler immediateScheduler]_block_invoke
++[RACScheduler mainThreadScheduler]
+___35+[RACScheduler mainThreadScheduler]_block_invoke
++[RACScheduler schedulerWithPriority:name:]
++[RACScheduler schedulerWithPriority:]
++[RACScheduler scheduler]
++[RACScheduler subscriptionScheduler]
+___37+[RACScheduler subscriptionScheduler]_block_invoke
++[RACScheduler isOnMainThread]
++[RACScheduler currentScheduler]
+-[RACScheduler schedule:]
+-[RACScheduler after:schedule:]
+-[RACScheduler afterDelay:schedule:]
+-[RACScheduler after:repeatingEvery:withLeeway:schedule:]
+-[RACScheduler scheduleRecursiveBlock:]
+-[RACScheduler scheduleRecursiveBlock:addingToDisposable:]
+___58-[RACScheduler scheduleRecursiveBlock:addingToDisposable:]_block_invoke
+___58-[RACScheduler scheduleRecursiveBlock:addingToDisposable:]_block_invoke_2
+___58-[RACScheduler scheduleRecursiveBlock:addingToDisposable:]_block_invoke.90
+___copy_helper_block_.95
+___destroy_helper_block_.96
+___copy_helper_block_.98
+___destroy_helper_block_.99
+-[RACScheduler performAsCurrentScheduler:]
+-[RACScheduler name]
+-[RACScheduler .cxx_destruct]
+_OBJC_IVAR_$_RACScheduler._name
+_immediateScheduler.onceToken
+_immediateScheduler.immediateScheduler
+_mainThreadScheduler.onceToken
+_mainThreadScheduler.mainThreadScheduler
+___block_literal_global.23
+_subscriptionScheduler.onceToken
+_subscriptionScheduler.subscriptionScheduler
+___block_descriptor_tmp.31
+___block_literal_global.32
+___block_descriptor_tmp.100
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACScheduler.m
+__58-[RACScheduler scheduleRecursiveBlock:addingToDisposable:]_block_invoke.90
+__58-[RACScheduler scheduleRecursiveBlock:addingToDisposable:]_block_invoke_2
+__58-[RACScheduler scheduleRecursiveBlock:addingToDisposable:]_block_invoke
+__37+[RACScheduler subscriptionScheduler]_block_invoke
+__35+[RACScheduler mainThreadScheduler]_block_invoke
+dispatch_get_main_queue
+/Applications/Xcode.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.0.sdk/usr/include/dispatch/queue.h
+__34+[RACScheduler immediateScheduler]_block_invoke
++[RACScopedDisposable scopedDisposableWithDisposable:]
+___54+[RACScopedDisposable scopedDisposableWithDisposable:]_block_invoke
+-[RACScopedDisposable dealloc]
+-[RACScopedDisposable asScopedDisposable]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACScopedDisposable.m
+__54+[RACScopedDisposable scopedDisposableWithDisposable:]_block_invoke
+-[RACSequenceEnumerator nextObject]
+-[RACSequenceEnumerator sequence]
+-[RACSequenceEnumerator setSequence:]
+-[RACSequenceEnumerator .cxx_destruct]
++[RACSequence sequenceWithHeadBlock:tailBlock:]
+-[RACSequence head]
+-[RACSequence tail]
++[RACSequence empty]
++[RACSequence return:]
+-[RACSequence bind:]
+-[RACSequence bind:passingThroughValuesFromSequence:]
+___53-[RACSequence bind:passingThroughValuesFromSequence:]_block_invoke
+___53-[RACSequence bind:passingThroughValuesFromSequence:]_block_invoke.54
+___53-[RACSequence bind:passingThroughValuesFromSequence:]_block_invoke.59
+___copy_helper_block_.60
+___destroy_helper_block_.61
+-[RACSequence concat:]
+-[RACSequence zipWith:]
+___23-[RACSequence zipWith:]_block_invoke
+___copy_helper_block_.89
+___destroy_helper_block_.90
+___23-[RACSequence zipWith:]_block_invoke.92
+___copy_helper_block_.97
+___destroy_helper_block_.98
+-[RACSequence array]
+-[RACSequence objectEnumerator]
+-[RACSequence signal]
+-[RACSequence signalWithScheduler:]
+___35-[RACSequence signalWithScheduler:]_block_invoke
+___35-[RACSequence signalWithScheduler:]_block_invoke_2
+___copy_helper_block_.128
+___destroy_helper_block_.129
+___copy_helper_block_.134
+___destroy_helper_block_.135
+-[RACSequence foldLeftWithStart:reduce:]
+-[RACSequence foldRightWithStart:reduce:]
+___41-[RACSequence foldRightWithStart:reduce:]_block_invoke
+___copy_helper_block_.146
+___destroy_helper_block_.147
+-[RACSequence any:]
+-[RACSequence all:]
+___19-[RACSequence all:]_block_invoke
+___copy_helper_block_.160
+___destroy_helper_block_.161
+-[RACSequence objectPassingTest:]
+-[RACSequence eagerSequence]
+-[RACSequence lazySequence]
+-[RACSequence copyWithZone:]
+-[RACSequence classForCoder]
+-[RACSequence initWithCoder:]
+-[RACSequence encodeWithCoder:]
+-[RACSequence countByEnumeratingWithState:objects:count:]
+___57-[RACSequence countByEnumeratingWithState:objects:count:]_block_invoke
+___57-[RACSequence countByEnumeratingWithState:objects:count:]_block_invoke_2
+___57-[RACSequence countByEnumeratingWithState:objects:count:]_block_invoke_3
+___copy_helper_block_.181
+___destroy_helper_block_.182
+-[RACSequence hash]
+-[RACSequence isEqual:]
+_OBJC_IVAR_$_RACSequenceEnumerator._sequence
+___block_descriptor_tmp.62
+___block_descriptor_tmp.99
+___block_descriptor_tmp.131
+___block_descriptor_tmp.137
+___block_descriptor_tmp.148
+___block_descriptor_tmp.163
+___block_descriptor_tmp.177
+___block_descriptor_tmp.180
+___block_descriptor_tmp.184
+l_OBJC_PROTOCOL_$_NSCoding
+l_OBJC_LABEL_PROTOCOL_$_NSCoding
+l_OBJC_PROTOCOL_$_NSFastEnumeration
+l_OBJC_LABEL_PROTOCOL_$_NSFastEnumeration
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACSequence.m
+__57-[RACSequence countByEnumeratingWithState:objects:count:]_block_invoke_3
+__57-[RACSequence countByEnumeratingWithState:objects:count:]_block_invoke_2
+__57-[RACSequence countByEnumeratingWithState:objects:count:]_block_invoke
+__19-[RACSequence all:]_block_invoke
+__41-[RACSequence foldRightWithStart:reduce:]_block_invoke
+__35-[RACSequence signalWithScheduler:]_block_invoke_2
+__35-[RACSequence signalWithScheduler:]_block_invoke
+__23-[RACSequence zipWith:]_block_invoke.92
+__23-[RACSequence zipWith:]_block_invoke
+__53-[RACSequence bind:passingThroughValuesFromSequence:]_block_invoke.59
+__53-[RACSequence bind:passingThroughValuesFromSequence:]_block_invoke.54
+__53-[RACSequence bind:passingThroughValuesFromSequence:]_block_invoke
+-[RACSerialDisposable isDisposed]
+-[RACSerialDisposable disposable]
+-[RACSerialDisposable setDisposable:]
++[RACSerialDisposable serialDisposableWithDisposable:]
+-[RACSerialDisposable init]
+-[RACSerialDisposable initWithBlock:]
+-[RACSerialDisposable dealloc]
+-[RACSerialDisposable swapInDisposable:]
+-[RACSerialDisposable dispose]
+-[RACSerialDisposable .cxx_destruct]
+_OBJC_IVAR_$_RACSerialDisposable._mutex
+_OBJC_IVAR_$_RACSerialDisposable._disposed
+_OBJC_IVAR_$_RACSerialDisposable._disposable
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACSerialDisposable.m
++[RACSignal createSignal:]
++[RACSignal error:]
++[RACSignal never]
+___18+[RACSignal never]_block_invoke
++[RACSignal startEagerlyWithScheduler:block:]
++[RACSignal startLazilyWithScheduler:block:]
+___44+[RACSignal startLazilyWithScheduler:block:]_block_invoke
+___44+[RACSignal startLazilyWithScheduler:block:]_block_invoke.42
+___copy_helper_block_.47
+___destroy_helper_block_.48
+-[RACSignal description]
++[RACSignal(RACStream) empty]
++[RACSignal(RACStream) return:]
+-[RACSignal(RACStream) bind:]
+___29-[RACSignal(RACStream) bind:]_block_invoke
+___29-[RACSignal(RACStream) bind:]_block_invoke_2
+___copy_helper_block_.83
+___destroy_helper_block_.84
+___29-[RACSignal(RACStream) bind:]_block_invoke.87
+___29-[RACSignal(RACStream) bind:]_block_invoke_2.95
+___29-[RACSignal(RACStream) bind:]_block_invoke.102
+___copy_helper_block_.105
+___destroy_helper_block_.106
+___29-[RACSignal(RACStream) bind:]_block_invoke.109
+___copy_helper_block_.110
+___destroy_helper_block_.111
+___copy_helper_block_.118
+___destroy_helper_block_.119
+___29-[RACSignal(RACStream) bind:]_block_invoke.122
+___copy_helper_block_.125
+___destroy_helper_block_.126
+___29-[RACSignal(RACStream) bind:]_block_invoke.128
+___copy_helper_block_.129
+___destroy_helper_block_.130
+___29-[RACSignal(RACStream) bind:]_block_invoke.132
+___copy_helper_block_.133
+___destroy_helper_block_.134
+___copy_helper_block_.136
+___destroy_helper_block_.137
+-[RACSignal(RACStream) concat:]
+___31-[RACSignal(RACStream) concat:]_block_invoke
+___31-[RACSignal(RACStream) concat:]_block_invoke_2
+___copy_helper_block_.142
+___destroy_helper_block_.143
+___31-[RACSignal(RACStream) concat:]_block_invoke.145
+___31-[RACSignal(RACStream) concat:]_block_invoke.149
+___copy_helper_block_.150
+___destroy_helper_block_.151
+___copy_helper_block_.153
+___destroy_helper_block_.154
+-[RACSignal(RACStream) zipWith:]
+___32-[RACSignal(RACStream) zipWith:]_block_invoke
+___32-[RACSignal(RACStream) zipWith:]_block_invoke_2
+___copy_helper_block_.165
+___destroy_helper_block_.166
+___32-[RACSignal(RACStream) zipWith:]_block_invoke.168
+___copy_helper_block_.182
+___destroy_helper_block_.183
+___32-[RACSignal(RACStream) zipWith:]_block_invoke.185
+___copy_helper_block_.188
+___destroy_helper_block_.189
+___32-[RACSignal(RACStream) zipWith:]_block_invoke.191
+___copy_helper_block_.192
+___destroy_helper_block_.193
+___32-[RACSignal(RACStream) zipWith:]_block_invoke.195
+___copy_helper_block_.196
+___destroy_helper_block_.197
+___32-[RACSignal(RACStream) zipWith:]_block_invoke.199
+___copy_helper_block_.200
+___destroy_helper_block_.201
+___32-[RACSignal(RACStream) zipWith:]_block_invoke.203
+___copy_helper_block_.204
+___destroy_helper_block_.205
+___32-[RACSignal(RACStream) zipWith:]_block_invoke.207
+___copy_helper_block_.208
+___destroy_helper_block_.209
+___32-[RACSignal(RACStream) zipWith:]_block_invoke.212
+___copy_helper_block_.213
+___destroy_helper_block_.214
+___copy_helper_block_.218
+___destroy_helper_block_.219
+-[RACSignal(Subscription) subscribe:]
+-[RACSignal(Subscription) subscribeNext:]
+-[RACSignal(Subscription) subscribeNext:completed:]
+-[RACSignal(Subscription) subscribeNext:error:completed:]
+-[RACSignal(Subscription) subscribeError:]
+-[RACSignal(Subscription) subscribeCompleted:]
+-[RACSignal(Subscription) subscribeNext:error:]
+-[RACSignal(Subscription) subscribeError:completed:]
+-[RACSignal(Debugging) logAll]
+-[RACSignal(Debugging) logNext]
+___31-[RACSignal(Debugging) logNext]_block_invoke
+___copy_helper_block_.255
+___destroy_helper_block_.256
+-[RACSignal(Debugging) logError]
+___32-[RACSignal(Debugging) logError]_block_invoke
+___copy_helper_block_.264
+___destroy_helper_block_.265
+-[RACSignal(Debugging) logCompleted]
+___36-[RACSignal(Debugging) logCompleted]_block_invoke
+___copy_helper_block_.271
+___destroy_helper_block_.272
+-[RACSignal(Testing) asynchronousFirstOrDefault:success:error:]
+___63-[RACSignal(Testing) asynchronousFirstOrDefault:success:error:]_block_invoke
+___copy_helper_block_.294
+___destroy_helper_block_.295
+___63-[RACSignal(Testing) asynchronousFirstOrDefault:success:error:]_block_invoke.297
+___copy_helper_block_.298
+___destroy_helper_block_.299
+___63-[RACSignal(Testing) asynchronousFirstOrDefault:success:error:]_block_invoke.301
+___copy_helper_block_.302
+___destroy_helper_block_.303
+-[RACSignal(Testing) asynchronouslyWaitUntilCompleted:]
+___block_descriptor_tmp.49
+___block_descriptor_tmp.86
+___block_descriptor_tmp.101
+___block_descriptor_tmp.108
+___block_descriptor_tmp.113
+___block_descriptor_tmp.121
+___block_descriptor_tmp.127
+___block_descriptor_tmp.135
+___block_descriptor_tmp.139
+___block_descriptor_tmp.144
+___block_descriptor_tmp.152
+___block_descriptor_tmp.155
+___block_descriptor_tmp.167
+___block_descriptor_tmp.190
+___block_descriptor_tmp.194
+___block_descriptor_tmp.198
+___block_descriptor_tmp.202
+___block_descriptor_tmp.206
+___block_descriptor_tmp.210
+___block_descriptor_tmp.215
+___block_descriptor_tmp.220
+___block_descriptor_tmp.257
+___block_descriptor_tmp.266
+___block_descriptor_tmp.273
+___block_descriptor_tmp.296
+___block_descriptor_tmp.300
+___block_descriptor_tmp.304
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACSignal.m
+__63-[RACSignal(Testing) asynchronousFirstOrDefault:success:error:]_block_invoke.301
+__63-[RACSignal(Testing) asynchronousFirstOrDefault:success:error:]_block_invoke.297
+__63-[RACSignal(Testing) asynchronousFirstOrDefault:success:error:]_block_invoke
+__36-[RACSignal(Debugging) logCompleted]_block_invoke
+__32-[RACSignal(Debugging) logError]_block_invoke
+__31-[RACSignal(Debugging) logNext]_block_invoke
+__32-[RACSignal(RACStream) zipWith:]_block_invoke.212
+__32-[RACSignal(RACStream) zipWith:]_block_invoke.207
+__32-[RACSignal(RACStream) zipWith:]_block_invoke.203
+__32-[RACSignal(RACStream) zipWith:]_block_invoke.199
+__32-[RACSignal(RACStream) zipWith:]_block_invoke.195
+__32-[RACSignal(RACStream) zipWith:]_block_invoke.191
+__32-[RACSignal(RACStream) zipWith:]_block_invoke.185
+__32-[RACSignal(RACStream) zipWith:]_block_invoke.168
+__32-[RACSignal(RACStream) zipWith:]_block_invoke_2
+__32-[RACSignal(RACStream) zipWith:]_block_invoke
+__31-[RACSignal(RACStream) concat:]_block_invoke.149
+__31-[RACSignal(RACStream) concat:]_block_invoke.145
+__31-[RACSignal(RACStream) concat:]_block_invoke_2
+__31-[RACSignal(RACStream) concat:]_block_invoke
+__29-[RACSignal(RACStream) bind:]_block_invoke.132
+__29-[RACSignal(RACStream) bind:]_block_invoke.128
+__29-[RACSignal(RACStream) bind:]_block_invoke.122
+__29-[RACSignal(RACStream) bind:]_block_invoke.109
+__29-[RACSignal(RACStream) bind:]_block_invoke.102
+__29-[RACSignal(RACStream) bind:]_block_invoke_2.95
+__29-[RACSignal(RACStream) bind:]_block_invoke.87
+__29-[RACSignal(RACStream) bind:]_block_invoke_2
+__29-[RACSignal(RACStream) bind:]_block_invoke
+__44+[RACSignal startLazilyWithScheduler:block:]_block_invoke.42
+__44+[RACSignal startLazilyWithScheduler:block:]_block_invoke
+__18+[RACSignal never]_block_invoke
+-[RACSignal(Operations) doNext:]
+___32-[RACSignal(Operations) doNext:]_block_invoke
+___32-[RACSignal(Operations) doNext:]_block_invoke_2
+___32-[RACSignal(Operations) doNext:]_block_invoke.19
+___32-[RACSignal(Operations) doNext:]_block_invoke.26
+___copy_helper_block_.29
+___destroy_helper_block_.30
+___copy_helper_block_.35
+___destroy_helper_block_.36
+-[RACSignal(Operations) doError:]
+___33-[RACSignal(Operations) doError:]_block_invoke
+___33-[RACSignal(Operations) doError:]_block_invoke_2
+___33-[RACSignal(Operations) doError:]_block_invoke.50
+___copy_helper_block_.51
+___destroy_helper_block_.52
+___33-[RACSignal(Operations) doError:]_block_invoke.54
+___copy_helper_block_.58
+___destroy_helper_block_.59
+-[RACSignal(Operations) doCompleted:]
+___37-[RACSignal(Operations) doCompleted:]_block_invoke
+___37-[RACSignal(Operations) doCompleted:]_block_invoke_2
+___copy_helper_block_.63
+___destroy_helper_block_.64
+___37-[RACSignal(Operations) doCompleted:]_block_invoke.66
+___copy_helper_block_.67
+___destroy_helper_block_.68
+___37-[RACSignal(Operations) doCompleted:]_block_invoke.70
+___copy_helper_block_.71
+___destroy_helper_block_.72
+___copy_helper_block_.74
+___destroy_helper_block_.75
+-[RACSignal(Operations) throttle:]
+___34-[RACSignal(Operations) throttle:]_block_invoke
+-[RACSignal(Operations) throttle:valuesPassingTest:]
+___52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke
+___52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke.100
+___52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke.109
+___52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke_2
+___copy_helper_block_.112
+___destroy_helper_block_.113
+___copy_helper_block_.119
+___destroy_helper_block_.120
+___52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke.122
+___copy_helper_block_.123
+___destroy_helper_block_.124
+___52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke.126
+___copy_helper_block_.127
+___destroy_helper_block_.128
+___copy_helper_block_.132
+___destroy_helper_block_.133
+-[RACSignal(Operations) delay:]
+___31-[RACSignal(Operations) delay:]_block_invoke
+___31-[RACSignal(Operations) delay:]_block_invoke_2
+___copy_helper_block_.139
+___destroy_helper_block_.140
+___31-[RACSignal(Operations) delay:]_block_invoke.144
+___31-[RACSignal(Operations) delay:]_block_invoke_2.145
+___copy_helper_block_.149
+___destroy_helper_block_.150
+___31-[RACSignal(Operations) delay:]_block_invoke.152
+___31-[RACSignal(Operations) delay:]_block_invoke.156
+___31-[RACSignal(Operations) delay:]_block_invoke_2.157
+___copy_helper_block_.158
+___destroy_helper_block_.159
+___copy_helper_block_.161
+___destroy_helper_block_.162
+___copy_helper_block_.164
+___destroy_helper_block_.165
+-[RACSignal(Operations) repeat]
+___31-[RACSignal(Operations) repeat]_block_invoke
+_subscribeForever
+___31-[RACSignal(Operations) repeat]_block_invoke_2
+___copy_helper_block_.169
+___destroy_helper_block_.170
+___31-[RACSignal(Operations) repeat]_block_invoke.172
+___copy_helper_block_.173
+___destroy_helper_block_.174
+___31-[RACSignal(Operations) repeat]_block_invoke.177
+-[RACSignal(Operations) catch:]
+___31-[RACSignal(Operations) catch:]_block_invoke
+___31-[RACSignal(Operations) catch:]_block_invoke_2
+___31-[RACSignal(Operations) catch:]_block_invoke.191
+___31-[RACSignal(Operations) catch:]_block_invoke.199
+___31-[RACSignal(Operations) catch:]_block_invoke.204
+___copy_helper_block_.205
+___destroy_helper_block_.206
+___copy_helper_block_.210
+___destroy_helper_block_.211
+-[RACSignal(Operations) catchTo:]
+___33-[RACSignal(Operations) catchTo:]_block_invoke
+___copy_helper_block_.215
+___destroy_helper_block_.216
++[RACSignal(Operations) try:]
+___29+[RACSignal(Operations) try:]_block_invoke
+___copy_helper_block_.229
+___destroy_helper_block_.230
+-[RACSignal(Operations) try:]
+___29-[RACSignal(Operations) try:]_block_invoke
+___copy_helper_block_.234
+___destroy_helper_block_.235
+-[RACSignal(Operations) tryMap:]
+___32-[RACSignal(Operations) tryMap:]_block_invoke
+___copy_helper_block_.244
+___destroy_helper_block_.245
+-[RACSignal(Operations) initially:]
+___35-[RACSignal(Operations) initially:]_block_invoke
+___copy_helper_block_.249
+___destroy_helper_block_.250
+-[RACSignal(Operations) finally:]
+___33-[RACSignal(Operations) finally:]_block_invoke
+___copy_helper_block_.257
+___destroy_helper_block_.258
+___33-[RACSignal(Operations) finally:]_block_invoke.262
+___copy_helper_block_.263
+___destroy_helper_block_.264
+-[RACSignal(Operations) bufferWithTime:onScheduler:]
+___52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke
+___52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke_2
+___copy_helper_block_.286
+___destroy_helper_block_.287
+___52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke.289
+___copy_helper_block_.295
+___destroy_helper_block_.296
+___52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke.299
+___copy_helper_block_.300
+___destroy_helper_block_.301
+___52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke.303
+___copy_helper_block_.304
+___destroy_helper_block_.305
+___52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke.307
+___copy_helper_block_.308
+___destroy_helper_block_.309
+___copy_helper_block_.311
+___destroy_helper_block_.312
+-[RACSignal(Operations) collect]
+___32-[RACSignal(Operations) collect]_block_invoke
+___32-[RACSignal(Operations) collect]_block_invoke_2
+-[RACSignal(Operations) takeLast:]
+___34-[RACSignal(Operations) takeLast:]_block_invoke
+___34-[RACSignal(Operations) takeLast:]_block_invoke_2
+___copy_helper_block_.334
+___destroy_helper_block_.335
+___34-[RACSignal(Operations) takeLast:]_block_invoke.337
+___copy_helper_block_.338
+___destroy_helper_block_.339
+___34-[RACSignal(Operations) takeLast:]_block_invoke.341
+___copy_helper_block_.344
+___destroy_helper_block_.345
+___copy_helper_block_.347
+___destroy_helper_block_.348
+-[RACSignal(Operations) combineLatestWith:]
+___43-[RACSignal(Operations) combineLatestWith:]_block_invoke
+___43-[RACSignal(Operations) combineLatestWith:]_block_invoke_2
+___copy_helper_block_.357
+___destroy_helper_block_.358
+___43-[RACSignal(Operations) combineLatestWith:]_block_invoke.360
+___copy_helper_block_.361
+___destroy_helper_block_.362
+___43-[RACSignal(Operations) combineLatestWith:]_block_invoke.364
+___copy_helper_block_.365
+___destroy_helper_block_.366
+___43-[RACSignal(Operations) combineLatestWith:]_block_invoke.368
+___copy_helper_block_.369
+___destroy_helper_block_.370
+___43-[RACSignal(Operations) combineLatestWith:]_block_invoke.372
+___copy_helper_block_.373
+___destroy_helper_block_.374
+___43-[RACSignal(Operations) combineLatestWith:]_block_invoke.376
+___copy_helper_block_.377
+___destroy_helper_block_.378
+___43-[RACSignal(Operations) combineLatestWith:]_block_invoke.380
+___copy_helper_block_.381
+___destroy_helper_block_.382
+___copy_helper_block_.384
+___destroy_helper_block_.385
++[RACSignal(Operations) combineLatest:]
+___39+[RACSignal(Operations) combineLatest:]_block_invoke
++[RACSignal(Operations) combineLatest:reduce:]
+-[RACSignal(Operations) merge:]
++[RACSignal(Operations) merge:]
+___31+[RACSignal(Operations) merge:]_block_invoke
+___copy_helper_block_.410
+___destroy_helper_block_.411
+-[RACSignal(Operations) flatten:]
+___33-[RACSignal(Operations) flatten:]_block_invoke
+___Block_byref_object_copy_.419
+___Block_byref_object_dispose_.420
+___Block_byref_object_copy_.421
+___Block_byref_object_dispose_.422
+___33-[RACSignal(Operations) flatten:]_block_invoke.423
+___copy_helper_block_.424
+___destroy_helper_block_.425
+___33-[RACSignal(Operations) flatten:]_block_invoke.427
+___33-[RACSignal(Operations) flatten:]_block_invoke_2
+___copy_helper_block_.428
+___destroy_helper_block_.429
+___33-[RACSignal(Operations) flatten:]_block_invoke.431
+___copy_helper_block_.432
+___destroy_helper_block_.433
+___33-[RACSignal(Operations) flatten:]_block_invoke.435
+___copy_helper_block_.442
+___destroy_helper_block_.443
+___copy_helper_block_.445
+___destroy_helper_block_.446
+___33-[RACSignal(Operations) flatten:]_block_invoke.449
+___copy_helper_block_.456
+___destroy_helper_block_.457
+___33-[RACSignal(Operations) flatten:]_block_invoke.459
+___copy_helper_block_.460
+___destroy_helper_block_.461
+___33-[RACSignal(Operations) flatten:]_block_invoke.463
+___copy_helper_block_.464
+___destroy_helper_block_.465
+___33-[RACSignal(Operations) flatten:]_block_invoke.467
+___copy_helper_block_.468
+___destroy_helper_block_.469
+___copy_helper_block_.471
+___destroy_helper_block_.472
+-[RACSignal(Operations) then:]
+-[RACSignal(Operations) concat]
+-[RACSignal(Operations) aggregateWithStartFactory:reduce:]
+___58-[RACSignal(Operations) aggregateWithStartFactory:reduce:]_block_invoke
+___copy_helper_block_.494
+___destroy_helper_block_.495
+-[RACSignal(Operations) aggregateWithStart:reduce:]
+___51-[RACSignal(Operations) aggregateWithStart:reduce:]_block_invoke
+___copy_helper_block_.499
+___destroy_helper_block_.500
+-[RACSignal(Operations) aggregateWithStart:reduceWithIndex:]
+-[RACSignal(Operations) setKeyPath:onObject:]
+-[RACSignal(Operations) setKeyPath:onObject:nilValue:]
+___54-[RACSignal(Operations) setKeyPath:onObject:nilValue:]_block_invoke
+___copy_helper_block_.525
+___destroy_helper_block_.526
+___54-[RACSignal(Operations) setKeyPath:onObject:nilValue:]_block_invoke.528
+___copy_helper_block_.531
+___destroy_helper_block_.532
+___54-[RACSignal(Operations) setKeyPath:onObject:nilValue:]_block_invoke.534
+___copy_helper_block_.535
+___destroy_helper_block_.536
+___54-[RACSignal(Operations) setKeyPath:onObject:nilValue:]_block_invoke.538
+___copy_helper_block_.539
+___destroy_helper_block_.540
+___54-[RACSignal(Operations) setKeyPath:onObject:nilValue:]_block_invoke.544
+___copy_helper_block_.545
+___destroy_helper_block_.546
++[RACSignal(Operations) interval:onScheduler:]
++[RACSignal(Operations) interval:onScheduler:withLeeway:]
+___57+[RACSignal(Operations) interval:onScheduler:withLeeway:]_block_invoke
+___57+[RACSignal(Operations) interval:onScheduler:withLeeway:]_block_invoke_2
+___copy_helper_block_.557
+___destroy_helper_block_.558
+___copy_helper_block_.562
+___destroy_helper_block_.563
+-[RACSignal(Operations) takeUntil:]
+___35-[RACSignal(Operations) takeUntil:]_block_invoke
+___35-[RACSignal(Operations) takeUntil:]_block_invoke_2
+___copy_helper_block_.567
+___destroy_helper_block_.568
+___35-[RACSignal(Operations) takeUntil:]_block_invoke.570
+___copy_helper_block_.571
+___destroy_helper_block_.572
+___35-[RACSignal(Operations) takeUntil:]_block_invoke.574
+___copy_helper_block_.575
+___destroy_helper_block_.576
+___35-[RACSignal(Operations) takeUntil:]_block_invoke.582
+___copy_helper_block_.583
+___destroy_helper_block_.584
+___35-[RACSignal(Operations) takeUntil:]_block_invoke.586
+___copy_helper_block_.587
+___destroy_helper_block_.588
+___35-[RACSignal(Operations) takeUntil:]_block_invoke.590
+___copy_helper_block_.591
+___destroy_helper_block_.592
+___copy_helper_block_.594
+___destroy_helper_block_.595
+-[RACSignal(Operations) takeUntilReplacement:]
+___46-[RACSignal(Operations) takeUntilReplacement:]_block_invoke
+___46-[RACSignal(Operations) takeUntilReplacement:]_block_invoke_2
+___copy_helper_block_.599
+___destroy_helper_block_.600
+___46-[RACSignal(Operations) takeUntilReplacement:]_block_invoke.602
+___copy_helper_block_.603
+___destroy_helper_block_.604
+___46-[RACSignal(Operations) takeUntilReplacement:]_block_invoke.606
+___copy_helper_block_.607
+___destroy_helper_block_.608
+___46-[RACSignal(Operations) takeUntilReplacement:]_block_invoke.612
+___copy_helper_block_.613
+___destroy_helper_block_.614
+___copy_helper_block_.616
+___destroy_helper_block_.617
+-[RACSignal(Operations) switchToLatest]
+___39-[RACSignal(Operations) switchToLatest]_block_invoke
+___39-[RACSignal(Operations) switchToLatest]_block_invoke_2
+___copy_helper_block_.627
+___destroy_helper_block_.628
+___39-[RACSignal(Operations) switchToLatest]_block_invoke.633
+___copy_helper_block_.634
+___destroy_helper_block_.635
+___copy_helper_block_.637
+___destroy_helper_block_.638
++[RACSignal(Operations) switch:cases:default:]
+___46+[RACSignal(Operations) switch:cases:default:]_block_invoke
+___copy_helper_block_.665
+___destroy_helper_block_.666
++[RACSignal(Operations) if:then:else:]
+___38+[RACSignal(Operations) if:then:else:]_block_invoke
+___copy_helper_block_.685
+___destroy_helper_block_.686
+-[RACSignal(Operations) first]
+-[RACSignal(Operations) firstOrDefault:]
+-[RACSignal(Operations) firstOrDefault:success:error:]
+___54-[RACSignal(Operations) firstOrDefault:success:error:]_block_invoke
+___copy_helper_block_.708
+___destroy_helper_block_.709
+___54-[RACSignal(Operations) firstOrDefault:success:error:]_block_invoke.711
+___copy_helper_block_.712
+___destroy_helper_block_.713
+___54-[RACSignal(Operations) firstOrDefault:success:error:]_block_invoke.715
+___copy_helper_block_.716
+___destroy_helper_block_.717
+-[RACSignal(Operations) waitUntilCompleted:]
++[RACSignal(Operations) defer:]
+___31+[RACSignal(Operations) defer:]_block_invoke
+___copy_helper_block_.723
+___destroy_helper_block_.724
+-[RACSignal(Operations) toArray]
+-[RACSignal(Operations) sequence]
+-[RACSignal(Operations) publish]
+-[RACSignal(Operations) multicast:]
+-[RACSignal(Operations) replay]
+-[RACSignal(Operations) replayLast]
+-[RACSignal(Operations) replayLazily]
+___37-[RACSignal(Operations) replayLazily]_block_invoke
+___copy_helper_block_.756
+___destroy_helper_block_.757
+-[RACSignal(Operations) timeout:onScheduler:]
+___45-[RACSignal(Operations) timeout:onScheduler:]_block_invoke
+___45-[RACSignal(Operations) timeout:onScheduler:]_block_invoke_2
+___copy_helper_block_.761
+___destroy_helper_block_.762
+___45-[RACSignal(Operations) timeout:onScheduler:]_block_invoke.764
+___copy_helper_block_.765
+___destroy_helper_block_.766
+___45-[RACSignal(Operations) timeout:onScheduler:]_block_invoke.768
+___copy_helper_block_.769
+___destroy_helper_block_.770
+___45-[RACSignal(Operations) timeout:onScheduler:]_block_invoke.772
+___copy_helper_block_.773
+___destroy_helper_block_.774
+___copy_helper_block_.776
+___destroy_helper_block_.777
+-[RACSignal(Operations) deliverOn:]
+___35-[RACSignal(Operations) deliverOn:]_block_invoke
+___35-[RACSignal(Operations) deliverOn:]_block_invoke_2
+___35-[RACSignal(Operations) deliverOn:]_block_invoke_3
+___copy_helper_block_.782
+___destroy_helper_block_.783
+___copy_helper_block_.787
+___destroy_helper_block_.788
+___35-[RACSignal(Operations) deliverOn:]_block_invoke.790
+___35-[RACSignal(Operations) deliverOn:]_block_invoke_2.791
+___copy_helper_block_.792
+___destroy_helper_block_.793
+___copy_helper_block_.795
+___destroy_helper_block_.796
+___35-[RACSignal(Operations) deliverOn:]_block_invoke.798
+___35-[RACSignal(Operations) deliverOn:]_block_invoke_2.799
+___copy_helper_block_.800
+___destroy_helper_block_.801
+___copy_helper_block_.803
+___destroy_helper_block_.804
+___copy_helper_block_.806
+___destroy_helper_block_.807
+-[RACSignal(Operations) subscribeOn:]
+___37-[RACSignal(Operations) subscribeOn:]_block_invoke
+___37-[RACSignal(Operations) subscribeOn:]_block_invoke_2
+___copy_helper_block_.811
+___destroy_helper_block_.812
+___copy_helper_block_.814
+___destroy_helper_block_.815
+-[RACSignal(Operations) deliverOnMainThread]
+___44-[RACSignal(Operations) deliverOnMainThread]_block_invoke
+___44-[RACSignal(Operations) deliverOnMainThread]_block_invoke_2
+___44-[RACSignal(Operations) deliverOnMainThread]_block_invoke_3
+___copy_helper_block_.822
+___destroy_helper_block_.823
+___copy_helper_block_.825
+___destroy_helper_block_.826
+___44-[RACSignal(Operations) deliverOnMainThread]_block_invoke.828
+___44-[RACSignal(Operations) deliverOnMainThread]_block_invoke_2.829
+___copy_helper_block_.830
+___destroy_helper_block_.831
+___copy_helper_block_.833
+___destroy_helper_block_.834
+___44-[RACSignal(Operations) deliverOnMainThread]_block_invoke.836
+___44-[RACSignal(Operations) deliverOnMainThread]_block_invoke_2.837
+___copy_helper_block_.838
+___destroy_helper_block_.839
+___copy_helper_block_.841
+___destroy_helper_block_.842
+___44-[RACSignal(Operations) deliverOnMainThread]_block_invoke.844
+___44-[RACSignal(Operations) deliverOnMainThread]_block_invoke_2.845
+___copy_helper_block_.846
+___destroy_helper_block_.847
+___copy_helper_block_.849
+___destroy_helper_block_.850
+___copy_helper_block_.852
+___destroy_helper_block_.853
+-[RACSignal(Operations) groupBy:transform:]
+___43-[RACSignal(Operations) groupBy:transform:]_block_invoke
+___43-[RACSignal(Operations) groupBy:transform:]_block_invoke_2
+___copy_helper_block_.867
+___destroy_helper_block_.868
+___43-[RACSignal(Operations) groupBy:transform:]_block_invoke.870
+___copy_helper_block_.873
+___destroy_helper_block_.874
+___43-[RACSignal(Operations) groupBy:transform:]_block_invoke.876
+___copy_helper_block_.879
+___destroy_helper_block_.880
+___copy_helper_block_.882
+___destroy_helper_block_.883
+-[RACSignal(Operations) groupBy:]
+-[RACSignal(Operations) any]
+___28-[RACSignal(Operations) any]_block_invoke
+-[RACSignal(Operations) any:]
+___29-[RACSignal(Operations) any:]_block_invoke
+___29-[RACSignal(Operations) any:]_block_invoke_2
+___copy_helper_block_.909
+___destroy_helper_block_.910
+___copy_helper_block_.913
+___destroy_helper_block_.914
+-[RACSignal(Operations) all:]
+___29-[RACSignal(Operations) all:]_block_invoke
+___29-[RACSignal(Operations) all:]_block_invoke_2
+___copy_helper_block_.923
+___destroy_helper_block_.924
+___copy_helper_block_.926
+___destroy_helper_block_.927
+-[RACSignal(Operations) retry:]
+___31-[RACSignal(Operations) retry:]_block_invoke
+___31-[RACSignal(Operations) retry:]_block_invoke_2
+___copy_helper_block_.931
+___destroy_helper_block_.932
+___31-[RACSignal(Operations) retry:]_block_invoke.934
+___copy_helper_block_.935
+___destroy_helper_block_.936
+___31-[RACSignal(Operations) retry:]_block_invoke.938
+___copy_helper_block_.939
+___destroy_helper_block_.940
+___copy_helper_block_.942
+___destroy_helper_block_.943
+-[RACSignal(Operations) retry]
+-[RACSignal(Operations) sample:]
+___32-[RACSignal(Operations) sample:]_block_invoke
+___32-[RACSignal(Operations) sample:]_block_invoke_2
+___copy_helper_block_.954
+___destroy_helper_block_.955
+___32-[RACSignal(Operations) sample:]_block_invoke.957
+___copy_helper_block_.958
+___destroy_helper_block_.959
+___32-[RACSignal(Operations) sample:]_block_invoke.961
+___copy_helper_block_.962
+___destroy_helper_block_.963
+___32-[RACSignal(Operations) sample:]_block_invoke.965
+___copy_helper_block_.966
+___destroy_helper_block_.967
+___32-[RACSignal(Operations) sample:]_block_invoke.969
+___copy_helper_block_.970
+___destroy_helper_block_.971
+___32-[RACSignal(Operations) sample:]_block_invoke.973
+___copy_helper_block_.974
+___destroy_helper_block_.975
+___32-[RACSignal(Operations) sample:]_block_invoke.977
+___copy_helper_block_.978
+___destroy_helper_block_.979
+___copy_helper_block_.981
+___destroy_helper_block_.982
+-[RACSignal(Operations) ignoreValues]
+___37-[RACSignal(Operations) ignoreValues]_block_invoke
+-[RACSignal(Operations) materialize]
+___36-[RACSignal(Operations) materialize]_block_invoke
+___36-[RACSignal(Operations) materialize]_block_invoke_2
+___copy_helper_block_.995
+___destroy_helper_block_.996
+___36-[RACSignal(Operations) materialize]_block_invoke.998
+___copy_helper_block_.1001
+___destroy_helper_block_.1002
+___36-[RACSignal(Operations) materialize]_block_invoke.1004
+___copy_helper_block_.1007
+___destroy_helper_block_.1008
+___copy_helper_block_.1010
+___destroy_helper_block_.1011
+-[RACSignal(Operations) dematerialize]
+___38-[RACSignal(Operations) dematerialize]_block_invoke
+___38-[RACSignal(Operations) dematerialize]_block_invoke_2
+-[RACSignal(Operations) not]
+___28-[RACSignal(Operations) not]_block_invoke
+-[RACSignal(Operations) and]
+___28-[RACSignal(Operations) and]_block_invoke
+___28-[RACSignal(Operations) and]_block_invoke_2
+___copy_helper_block_.1040
+___destroy_helper_block_.1041
+-[RACSignal(Operations) or]
+___27-[RACSignal(Operations) or]_block_invoke
+___27-[RACSignal(Operations) or]_block_invoke_2
+___copy_helper_block_.1057
+___destroy_helper_block_.1058
+-[RACSignal(Operations) reduceApply]
+___36-[RACSignal(Operations) reduceApply]_block_invoke
+___subscribeForever_block_invoke
+___subscribeForever_block_invoke_2
+___copy_helper_block_.1131
+___destroy_helper_block_.1132
+___subscribeForever_block_invoke.1134
+___copy_helper_block_.1135
+___destroy_helper_block_.1136
+___copy_helper_block_.1138
+___destroy_helper_block_.1139
+___subscribeForever_block_invoke.1141
+___copy_helper_block_.1144
+___destroy_helper_block_.1145
+___block_descriptor_tmp.25
+___block_descriptor_tmp.32
+___block_descriptor_tmp.38
+___block_descriptor_tmp.53
+___block_descriptor_tmp.57
+___block_descriptor_tmp.60
+___block_descriptor_tmp.65
+___block_descriptor_tmp.69
+___block_descriptor_tmp.73
+___block_descriptor_tmp.76
+___block_descriptor_tmp.80
+___block_descriptor_tmp.125
+___block_descriptor_tmp.129
+___block_descriptor_tmp.136
+___block_descriptor_tmp.143
+___block_descriptor_tmp.151
+___block_descriptor_tmp.160
+___block_descriptor_tmp.166
+___block_descriptor_tmp.171
+___block_descriptor_tmp.176
+___block_descriptor_tmp.179
+___block_literal_global.180
+___block_descriptor_tmp.183
+___block_descriptor_tmp.207
+___block_descriptor_tmp.212
+___block_descriptor_tmp.218
+___block_descriptor_tmp.231
+___block_descriptor_tmp.237
+___block_descriptor_tmp.246
+___block_descriptor_tmp.252
+___block_descriptor_tmp.259
+___block_descriptor_tmp.265
+___block_descriptor_tmp.288
+___block_descriptor_tmp.298
+___block_descriptor_tmp.302
+___block_descriptor_tmp.306
+___block_descriptor_tmp.310
+___block_descriptor_tmp.314
+___block_descriptor_tmp.318
+___block_literal_global.319
+___block_descriptor_tmp.324
+___block_literal_global.325
+___block_descriptor_tmp.336
+___block_descriptor_tmp.340
+___block_descriptor_tmp.346
+___block_descriptor_tmp.349
+___block_descriptor_tmp.359
+___block_descriptor_tmp.363
+___block_descriptor_tmp.367
+___block_descriptor_tmp.371
+___block_descriptor_tmp.375
+___block_descriptor_tmp.379
+___block_descriptor_tmp.383
+___block_descriptor_tmp.386
+___block_descriptor_tmp.392
+___block_literal_global.393
+___block_descriptor_tmp.412
+___block_descriptor_tmp.426
+___block_descriptor_tmp.430
+___block_descriptor_tmp.434
+___block_descriptor_tmp.444
+___block_descriptor_tmp.448
+___block_descriptor_tmp.458
+___block_descriptor_tmp.462
+___block_descriptor_tmp.466
+___block_descriptor_tmp.470
+___block_descriptor_tmp.473
+___block_descriptor_tmp.496
+___block_descriptor_tmp.502
+___block_descriptor_tmp.527
+___block_descriptor_tmp.533
+___block_descriptor_tmp.537
+___block_descriptor_tmp.541
+___block_descriptor_tmp.547
+___block_descriptor_tmp.559
+___block_descriptor_tmp.564
+___block_descriptor_tmp.569
+___block_descriptor_tmp.573
+___block_descriptor_tmp.577
+___block_descriptor_tmp.585
+___block_descriptor_tmp.589
+___block_descriptor_tmp.593
+___block_descriptor_tmp.596
+___block_descriptor_tmp.601
+___block_descriptor_tmp.605
+___block_descriptor_tmp.609
+___block_descriptor_tmp.615
+___block_descriptor_tmp.618
+___block_descriptor_tmp.630
+___block_descriptor_tmp.636
+___block_descriptor_tmp.639
+___block_descriptor_tmp.667
+___block_descriptor_tmp.688
+___block_descriptor_tmp.710
+___block_descriptor_tmp.714
+___block_descriptor_tmp.718
+___block_descriptor_tmp.725
+___block_descriptor_tmp.758
+___block_descriptor_tmp.763
+___block_descriptor_tmp.767
+___block_descriptor_tmp.771
+___block_descriptor_tmp.775
+___block_descriptor_tmp.779
+___block_descriptor_tmp.784
+___block_descriptor_tmp.789
+___block_descriptor_tmp.794
+___block_descriptor_tmp.797
+___block_descriptor_tmp.802
+___block_descriptor_tmp.805
+___block_descriptor_tmp.808
+___block_descriptor_tmp.813
+___block_descriptor_tmp.816
+___block_descriptor_tmp.824
+___block_descriptor_tmp.827
+___block_descriptor_tmp.832
+___block_descriptor_tmp.835
+___block_descriptor_tmp.840
+___block_descriptor_tmp.843
+___block_descriptor_tmp.848
+___block_descriptor_tmp.851
+___block_descriptor_tmp.854
+___block_descriptor_tmp.869
+___block_descriptor_tmp.875
+___block_descriptor_tmp.881
+___block_descriptor_tmp.884
+___block_descriptor_tmp.891
+___block_literal_global.892
+___block_descriptor_tmp.912
+___block_descriptor_tmp.916
+___block_descriptor_tmp.925
+___block_descriptor_tmp.928
+___block_descriptor_tmp.933
+___block_descriptor_tmp.937
+___block_descriptor_tmp.941
+___block_descriptor_tmp.944
+___block_descriptor_tmp.956
+___block_descriptor_tmp.960
+___block_descriptor_tmp.964
+___block_descriptor_tmp.968
+___block_descriptor_tmp.972
+___block_descriptor_tmp.976
+___block_descriptor_tmp.980
+___block_descriptor_tmp.983
+___block_descriptor_tmp.986
+___block_literal_global.987
+___block_descriptor_tmp.997
+___block_descriptor_tmp.1003
+___block_descriptor_tmp.1009
+___block_descriptor_tmp.1012
+___block_descriptor_tmp.1017
+___block_literal_global.1018
+___block_descriptor_tmp.1019
+___block_literal_global.1020
+___block_descriptor_tmp.1028
+___block_literal_global.1029
+___block_descriptor_tmp.1043
+___block_descriptor_tmp.1047
+___block_literal_global.1048
+___block_descriptor_tmp.1059
+___block_descriptor_tmp.1060
+___block_literal_global.1061
+___block_descriptor_tmp.1074
+___block_literal_global.1075
+___block_descriptor_tmp.1133
+___block_descriptor_tmp.1137
+___block_descriptor_tmp.1140
+___block_descriptor_tmp.1146
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACSignal+Operations.m
+__subscribeForever_block_invoke.1141
+__subscribeForever_block_invoke.1134
+__subscribeForever_block_invoke_2
+__subscribeForever_block_invoke
+__36-[RACSignal(Operations) reduceApply]_block_invoke
+__27-[RACSignal(Operations) or]_block_invoke_2
+__27-[RACSignal(Operations) or]_block_invoke
+__28-[RACSignal(Operations) and]_block_invoke_2
+__28-[RACSignal(Operations) and]_block_invoke
+__28-[RACSignal(Operations) not]_block_invoke
+__38-[RACSignal(Operations) dematerialize]_block_invoke_2
+__38-[RACSignal(Operations) dematerialize]_block_invoke
+__36-[RACSignal(Operations) materialize]_block_invoke.1004
+__36-[RACSignal(Operations) materialize]_block_invoke.998
+__36-[RACSignal(Operations) materialize]_block_invoke_2
+__36-[RACSignal(Operations) materialize]_block_invoke
+__37-[RACSignal(Operations) ignoreValues]_block_invoke
+__32-[RACSignal(Operations) sample:]_block_invoke.977
+__32-[RACSignal(Operations) sample:]_block_invoke.973
+__32-[RACSignal(Operations) sample:]_block_invoke.969
+__32-[RACSignal(Operations) sample:]_block_invoke.965
+__32-[RACSignal(Operations) sample:]_block_invoke.961
+__32-[RACSignal(Operations) sample:]_block_invoke.957
+__32-[RACSignal(Operations) sample:]_block_invoke_2
+__32-[RACSignal(Operations) sample:]_block_invoke
+__31-[RACSignal(Operations) retry:]_block_invoke.938
+__31-[RACSignal(Operations) retry:]_block_invoke.934
+__31-[RACSignal(Operations) retry:]_block_invoke_2
+__31-[RACSignal(Operations) retry:]_block_invoke
+__29-[RACSignal(Operations) all:]_block_invoke_2
+__29-[RACSignal(Operations) all:]_block_invoke
+__29-[RACSignal(Operations) any:]_block_invoke_2
+__29-[RACSignal(Operations) any:]_block_invoke
+__28-[RACSignal(Operations) any]_block_invoke
+__43-[RACSignal(Operations) groupBy:transform:]_block_invoke.876
+__43-[RACSignal(Operations) groupBy:transform:]_block_invoke.870
+__43-[RACSignal(Operations) groupBy:transform:]_block_invoke_2
+__43-[RACSignal(Operations) groupBy:transform:]_block_invoke
+__44-[RACSignal(Operations) deliverOnMainThread]_block_invoke_2.845
+__44-[RACSignal(Operations) deliverOnMainThread]_block_invoke.844
+__44-[RACSignal(Operations) deliverOnMainThread]_block_invoke_2.837
+__44-[RACSignal(Operations) deliverOnMainThread]_block_invoke.836
+__44-[RACSignal(Operations) deliverOnMainThread]_block_invoke_2.829
+__44-[RACSignal(Operations) deliverOnMainThread]_block_invoke.828
+__44-[RACSignal(Operations) deliverOnMainThread]_block_invoke_3
+__44-[RACSignal(Operations) deliverOnMainThread]_block_invoke_2
+__44-[RACSignal(Operations) deliverOnMainThread]_block_invoke
+__37-[RACSignal(Operations) subscribeOn:]_block_invoke_2
+__37-[RACSignal(Operations) subscribeOn:]_block_invoke
+__35-[RACSignal(Operations) deliverOn:]_block_invoke_2.799
+__35-[RACSignal(Operations) deliverOn:]_block_invoke.798
+__35-[RACSignal(Operations) deliverOn:]_block_invoke_2.791
+__35-[RACSignal(Operations) deliverOn:]_block_invoke.790
+__35-[RACSignal(Operations) deliverOn:]_block_invoke_3
+__35-[RACSignal(Operations) deliverOn:]_block_invoke_2
+__35-[RACSignal(Operations) deliverOn:]_block_invoke
+__45-[RACSignal(Operations) timeout:onScheduler:]_block_invoke.772
+__45-[RACSignal(Operations) timeout:onScheduler:]_block_invoke.768
+__45-[RACSignal(Operations) timeout:onScheduler:]_block_invoke.764
+__45-[RACSignal(Operations) timeout:onScheduler:]_block_invoke_2
+__45-[RACSignal(Operations) timeout:onScheduler:]_block_invoke
+__37-[RACSignal(Operations) replayLazily]_block_invoke
+__31+[RACSignal(Operations) defer:]_block_invoke
+__54-[RACSignal(Operations) firstOrDefault:success:error:]_block_invoke.715
+__54-[RACSignal(Operations) firstOrDefault:success:error:]_block_invoke.711
+__54-[RACSignal(Operations) firstOrDefault:success:error:]_block_invoke
+__38+[RACSignal(Operations) if:then:else:]_block_invoke
+__46+[RACSignal(Operations) switch:cases:default:]_block_invoke
+__39-[RACSignal(Operations) switchToLatest]_block_invoke.633
+__39-[RACSignal(Operations) switchToLatest]_block_invoke_2
+__39-[RACSignal(Operations) switchToLatest]_block_invoke
+__46-[RACSignal(Operations) takeUntilReplacement:]_block_invoke.612
+__46-[RACSignal(Operations) takeUntilReplacement:]_block_invoke.606
+__46-[RACSignal(Operations) takeUntilReplacement:]_block_invoke.602
+__46-[RACSignal(Operations) takeUntilReplacement:]_block_invoke_2
+__46-[RACSignal(Operations) takeUntilReplacement:]_block_invoke
+__35-[RACSignal(Operations) takeUntil:]_block_invoke.590
+__35-[RACSignal(Operations) takeUntil:]_block_invoke.586
+__35-[RACSignal(Operations) takeUntil:]_block_invoke.582
+__35-[RACSignal(Operations) takeUntil:]_block_invoke.574
+__35-[RACSignal(Operations) takeUntil:]_block_invoke.570
+__35-[RACSignal(Operations) takeUntil:]_block_invoke_2
+__35-[RACSignal(Operations) takeUntil:]_block_invoke
+__57+[RACSignal(Operations) interval:onScheduler:withLeeway:]_block_invoke_2
+__57+[RACSignal(Operations) interval:onScheduler:withLeeway:]_block_invoke
+__54-[RACSignal(Operations) setKeyPath:onObject:nilValue:]_block_invoke.544
+__54-[RACSignal(Operations) setKeyPath:onObject:nilValue:]_block_invoke.538
+__54-[RACSignal(Operations) setKeyPath:onObject:nilValue:]_block_invoke.534
+__54-[RACSignal(Operations) setKeyPath:onObject:nilValue:]_block_invoke.528
+__54-[RACSignal(Operations) setKeyPath:onObject:nilValue:]_block_invoke
+__51-[RACSignal(Operations) aggregateWithStart:reduce:]_block_invoke
+__58-[RACSignal(Operations) aggregateWithStartFactory:reduce:]_block_invoke
+__33-[RACSignal(Operations) flatten:]_block_invoke.467
+__33-[RACSignal(Operations) flatten:]_block_invoke.463
+__33-[RACSignal(Operations) flatten:]_block_invoke.459
+__33-[RACSignal(Operations) flatten:]_block_invoke.449
+__33-[RACSignal(Operations) flatten:]_block_invoke.435
+__33-[RACSignal(Operations) flatten:]_block_invoke.431
+__33-[RACSignal(Operations) flatten:]_block_invoke_2
+__33-[RACSignal(Operations) flatten:]_block_invoke.427
+__33-[RACSignal(Operations) flatten:]_block_invoke.423
+__33-[RACSignal(Operations) flatten:]_block_invoke
+__31+[RACSignal(Operations) merge:]_block_invoke
+__39+[RACSignal(Operations) combineLatest:]_block_invoke
+__43-[RACSignal(Operations) combineLatestWith:]_block_invoke.380
+__43-[RACSignal(Operations) combineLatestWith:]_block_invoke.376
+__43-[RACSignal(Operations) combineLatestWith:]_block_invoke.372
+__43-[RACSignal(Operations) combineLatestWith:]_block_invoke.368
+__43-[RACSignal(Operations) combineLatestWith:]_block_invoke.364
+__43-[RACSignal(Operations) combineLatestWith:]_block_invoke.360
+__43-[RACSignal(Operations) combineLatestWith:]_block_invoke_2
+__43-[RACSignal(Operations) combineLatestWith:]_block_invoke
+__34-[RACSignal(Operations) takeLast:]_block_invoke.341
+__34-[RACSignal(Operations) takeLast:]_block_invoke.337
+__34-[RACSignal(Operations) takeLast:]_block_invoke_2
+__34-[RACSignal(Operations) takeLast:]_block_invoke
+__32-[RACSignal(Operations) collect]_block_invoke_2
+__32-[RACSignal(Operations) collect]_block_invoke
+__52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke.307
+__52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke.303
+__52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke.299
+__52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke.289
+__52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke_2
+__52-[RACSignal(Operations) bufferWithTime:onScheduler:]_block_invoke
+__33-[RACSignal(Operations) finally:]_block_invoke.262
+__33-[RACSignal(Operations) finally:]_block_invoke
+__35-[RACSignal(Operations) initially:]_block_invoke
+__32-[RACSignal(Operations) tryMap:]_block_invoke
+__29-[RACSignal(Operations) try:]_block_invoke
+__29+[RACSignal(Operations) try:]_block_invoke
+__33-[RACSignal(Operations) catchTo:]_block_invoke
+__31-[RACSignal(Operations) catch:]_block_invoke.204
+__31-[RACSignal(Operations) catch:]_block_invoke.199
+__31-[RACSignal(Operations) catch:]_block_invoke.191
+__31-[RACSignal(Operations) catch:]_block_invoke_2
+__31-[RACSignal(Operations) catch:]_block_invoke
+__31-[RACSignal(Operations) repeat]_block_invoke.177
+__31-[RACSignal(Operations) repeat]_block_invoke.172
+__31-[RACSignal(Operations) repeat]_block_invoke_2
+subscribeForever
+__31-[RACSignal(Operations) repeat]_block_invoke
+__31-[RACSignal(Operations) delay:]_block_invoke_2.157
+__31-[RACSignal(Operations) delay:]_block_invoke.156
+__31-[RACSignal(Operations) delay:]_block_invoke.152
+__31-[RACSignal(Operations) delay:]_block_invoke_2.145
+__31-[RACSignal(Operations) delay:]_block_invoke.144
+__31-[RACSignal(Operations) delay:]_block_invoke_2
+__31-[RACSignal(Operations) delay:]_block_invoke
+__52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke.126
+__52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke.122
+__52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke_2
+__52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke.109
+__52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke.100
+__52-[RACSignal(Operations) throttle:valuesPassingTest:]_block_invoke
+__34-[RACSignal(Operations) throttle:]_block_invoke
+__37-[RACSignal(Operations) doCompleted:]_block_invoke.70
+__37-[RACSignal(Operations) doCompleted:]_block_invoke.66
+__37-[RACSignal(Operations) doCompleted:]_block_invoke_2
+__37-[RACSignal(Operations) doCompleted:]_block_invoke
+__33-[RACSignal(Operations) doError:]_block_invoke.54
+__33-[RACSignal(Operations) doError:]_block_invoke.50
+__33-[RACSignal(Operations) doError:]_block_invoke_2
+__33-[RACSignal(Operations) doError:]_block_invoke
+__32-[RACSignal(Operations) doNext:]_block_invoke.26
+__32-[RACSignal(Operations) doNext:]_block_invoke.19
+__32-[RACSignal(Operations) doNext:]_block_invoke_2
+__32-[RACSignal(Operations) doNext:]_block_invoke
++[RACSignalSequence sequenceWithSignal:]
+___40+[RACSignalSequence sequenceWithSignal:]_block_invoke
+___40+[RACSignalSequence sequenceWithSignal:]_block_invoke.7
+___copy_helper_block_.10
+___destroy_helper_block_.11
+___40+[RACSignalSequence sequenceWithSignal:]_block_invoke.14
+-[RACSignalSequence head]
+-[RACSignalSequence tail]
+-[RACSignalSequence array]
+-[RACSignalSequence description]
+___32-[RACSignalSequence description]_block_invoke
+___copy_helper_block_.45
+___destroy_helper_block_.46
+-[RACSignalSequence subject]
+-[RACSignalSequence .cxx_destruct]
+___block_descriptor_tmp.13
+___block_descriptor_tmp.20
+_OBJC_IVAR_$_RACSignalSequence._subject
+___block_descriptor_tmp.47
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACSignalSequence.m
+__32-[RACSignalSequence description]_block_invoke
+__40+[RACSignalSequence sequenceWithSignal:]_block_invoke.14
+__40+[RACSignalSequence sequenceWithSignal:]_block_invoke.7
+__40+[RACSignalSequence sequenceWithSignal:]_block_invoke
+-[RACStream init]
++[RACStream empty]
+-[RACStream bind:]
++[RACStream return:]
+-[RACStream concat:]
+-[RACStream zipWith:]
+-[RACStream setNameWithFormat:]
+-[RACStream name]
+-[RACStream setName:]
+-[RACStream .cxx_destruct]
+-[RACStream(Operations) flattenMap:]
+___36-[RACStream(Operations) flattenMap:]_block_invoke
+___36-[RACStream(Operations) flattenMap:]_block_invoke_2
+___copy_helper_block_.50
+___destroy_helper_block_.51
+-[RACStream(Operations) flatten]
+___32-[RACStream(Operations) flatten]_block_invoke
+-[RACStream(Operations) map:]
+___29-[RACStream(Operations) map:]_block_invoke
+___copy_helper_block_.69
+___destroy_helper_block_.70
+-[RACStream(Operations) mapReplace:]
+___36-[RACStream(Operations) mapReplace:]_block_invoke
+-[RACStream(Operations) combinePreviousWithStart:reduce:]
+___57-[RACStream(Operations) combinePreviousWithStart:reduce:]_block_invoke
+___57-[RACStream(Operations) combinePreviousWithStart:reduce:]_block_invoke.101
+-[RACStream(Operations) filter:]
+___32-[RACStream(Operations) filter:]_block_invoke
+___copy_helper_block_.107
+___destroy_helper_block_.108
+-[RACStream(Operations) ignore:]
+___32-[RACStream(Operations) ignore:]_block_invoke
+___copy_helper_block_.115
+___destroy_helper_block_.116
+-[RACStream(Operations) reduceEach:]
+___36-[RACStream(Operations) reduceEach:]_block_invoke
+___copy_helper_block_.130
+___destroy_helper_block_.131
+-[RACStream(Operations) startWith:]
+-[RACStream(Operations) skip:]
+___30-[RACStream(Operations) skip:]_block_invoke
+___30-[RACStream(Operations) skip:]_block_invoke_2
+___copy_helper_block_.138
+___destroy_helper_block_.139
+-[RACStream(Operations) take:]
+___30-[RACStream(Operations) take:]_block_invoke
+___30-[RACStream(Operations) take:]_block_invoke_2
++[RACStream(Operations) join:block:]
+___36+[RACStream(Operations) join:block:]_block_invoke
+___36+[RACStream(Operations) join:block:]_block_invoke_2
++[RACStream(Operations) zip:]
+___29+[RACStream(Operations) zip:]_block_invoke
++[RACStream(Operations) zip:reduce:]
++[RACStream(Operations) concat:]
+-[RACStream(Operations) scanWithStart:reduce:]
+___46-[RACStream(Operations) scanWithStart:reduce:]_block_invoke
+___copy_helper_block_.187
+___destroy_helper_block_.188
+-[RACStream(Operations) scanWithStart:reduceWithIndex:]
+___55-[RACStream(Operations) scanWithStart:reduceWithIndex:]_block_invoke
+___55-[RACStream(Operations) scanWithStart:reduceWithIndex:]_block_invoke.195
+-[RACStream(Operations) takeUntilBlock:]
+___40-[RACStream(Operations) takeUntilBlock:]_block_invoke
+___40-[RACStream(Operations) takeUntilBlock:]_block_invoke_2
+___copy_helper_block_.212
+___destroy_helper_block_.213
+-[RACStream(Operations) takeWhileBlock:]
+___40-[RACStream(Operations) takeWhileBlock:]_block_invoke
+-[RACStream(Operations) skipUntilBlock:]
+___40-[RACStream(Operations) skipUntilBlock:]_block_invoke
+___40-[RACStream(Operations) skipUntilBlock:]_block_invoke_2
+___copy_helper_block_.225
+___destroy_helper_block_.226
+-[RACStream(Operations) skipWhileBlock:]
+___40-[RACStream(Operations) skipWhileBlock:]_block_invoke
+___copy_helper_block_.235
+___destroy_helper_block_.236
+-[RACStream(Operations) distinctUntilChanged]
+___45-[RACStream(Operations) distinctUntilChanged]_block_invoke
+___45-[RACStream(Operations) distinctUntilChanged]_block_invoke_2
+___copy_helper_block_.242
+___destroy_helper_block_.243
+_OBJC_IVAR_$_RACStream._name
+___block_descriptor_tmp.54
+___block_descriptor_tmp.61
+___block_descriptor_tmp.72
+___block_literal_global.104
+___block_descriptor_tmp.110
+___block_descriptor_tmp.118
+___block_descriptor_tmp.132
+___block_descriptor_tmp.141
+___block_descriptor_tmp.149
+___block_descriptor_tmp.157
+___block_literal_global.158
+___block_descriptor_tmp.169
+___block_literal_global.170
+___block_descriptor_tmp.173
+___block_literal_global.174
+___block_descriptor_tmp.199
+___block_descriptor_tmp.203
+___block_descriptor_tmp.211
+___block_descriptor_tmp.228
+___block_descriptor_tmp.232
+___block_descriptor_tmp.245
+___block_descriptor_tmp.247
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACStream.m
+__45-[RACStream(Operations) distinctUntilChanged]_block_invoke_2
+__45-[RACStream(Operations) distinctUntilChanged]_block_invoke
+__40-[RACStream(Operations) skipWhileBlock:]_block_invoke
+__40-[RACStream(Operations) skipUntilBlock:]_block_invoke_2
+__40-[RACStream(Operations) skipUntilBlock:]_block_invoke
+__40-[RACStream(Operations) takeWhileBlock:]_block_invoke
+__40-[RACStream(Operations) takeUntilBlock:]_block_invoke_2
+__40-[RACStream(Operations) takeUntilBlock:]_block_invoke
+__55-[RACStream(Operations) scanWithStart:reduceWithIndex:]_block_invoke.195
+__55-[RACStream(Operations) scanWithStart:reduceWithIndex:]_block_invoke
+__46-[RACStream(Operations) scanWithStart:reduce:]_block_invoke
+__29+[RACStream(Operations) zip:]_block_invoke
+__36+[RACStream(Operations) join:block:]_block_invoke_2
+__36+[RACStream(Operations) join:block:]_block_invoke
+__30-[RACStream(Operations) take:]_block_invoke_2
+__30-[RACStream(Operations) take:]_block_invoke
+__30-[RACStream(Operations) skip:]_block_invoke_2
+__30-[RACStream(Operations) skip:]_block_invoke
+__36-[RACStream(Operations) reduceEach:]_block_invoke
+__32-[RACStream(Operations) ignore:]_block_invoke
+__32-[RACStream(Operations) filter:]_block_invoke
+__57-[RACStream(Operations) combinePreviousWithStart:reduce:]_block_invoke.101
+__57-[RACStream(Operations) combinePreviousWithStart:reduce:]_block_invoke
+__36-[RACStream(Operations) mapReplace:]_block_invoke
+__29-[RACStream(Operations) map:]_block_invoke
+__32-[RACStream(Operations) flatten]_block_invoke
+__36-[RACStream(Operations) flattenMap:]_block_invoke_2
+__36-[RACStream(Operations) flattenMap:]_block_invoke
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACStream.h
++[RACStringSequence sequenceWithString:offset:]
+-[RACStringSequence head]
+-[RACStringSequence tail]
+-[RACStringSequence array]
+___26-[RACStringSequence array]_block_invoke
+-[RACStringSequence description]
+-[RACStringSequence string]
+-[RACStringSequence offset]
+-[RACStringSequence .cxx_destruct]
+_OBJC_IVAR_$_RACStringSequence._string
+_OBJC_IVAR_$_RACStringSequence._offset
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACStringSequence.m
+__26-[RACStringSequence array]_block_invoke
++[RACSubject subject]
+-[RACSubject init]
+-[RACSubject dealloc]
+-[RACSubject subscribe:]
+___24-[RACSubject subscribe:]_block_invoke
+___24-[RACSubject subscribe:]_block_invoke_2
+___copy_helper_block_.42
+___destroy_helper_block_.43
+-[RACSubject enumerateSubscribersUsingBlock:]
+-[RACSubject sendNext:]
+___23-[RACSubject sendNext:]_block_invoke
+___copy_helper_block_.56
+___destroy_helper_block_.57
+-[RACSubject sendError:]
+___24-[RACSubject sendError:]_block_invoke
+-[RACSubject sendCompleted]
+___27-[RACSubject sendCompleted]_block_invoke
+-[RACSubject didSubscribeWithDisposable:]
+___41-[RACSubject didSubscribeWithDisposable:]_block_invoke
+-[RACSubject subscribers]
+-[RACSubject disposable]
+-[RACSubject .cxx_destruct]
+_OBJC_IVAR_$_RACSubject._disposable
+_OBJC_IVAR_$_RACSubject._subscribers
+___block_descriptor_tmp.45
+___block_descriptor_tmp.66
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACSubject.m
+__41-[RACSubject didSubscribeWithDisposable:]_block_invoke
+__27-[RACSubject sendCompleted]_block_invoke
+__24-[RACSubject sendError:]_block_invoke
+__23-[RACSubject sendNext:]_block_invoke
+__24-[RACSubject subscribe:]_block_invoke_2
+__24-[RACSubject subscribe:]_block_invoke
++[RACSubscriber subscriberWithNext:error:completed:]
+-[RACSubscriber init]
+___21-[RACSubscriber init]_block_invoke
+-[RACSubscriber dealloc]
+-[RACSubscriber sendNext:]
+-[RACSubscriber sendError:]
+-[RACSubscriber sendCompleted]
+-[RACSubscriber didSubscribeWithDisposable:]
+___44-[RACSubscriber didSubscribeWithDisposable:]_block_invoke
+-[RACSubscriber next]
+-[RACSubscriber setNext:]
+-[RACSubscriber error]
+-[RACSubscriber setError:]
+-[RACSubscriber completed]
+-[RACSubscriber setCompleted:]
+-[RACSubscriber disposable]
+-[RACSubscriber .cxx_destruct]
+_OBJC_IVAR_$_RACSubscriber._next
+_OBJC_IVAR_$_RACSubscriber._error
+_OBJC_IVAR_$_RACSubscriber._completed
+_OBJC_IVAR_$_RACSubscriber._disposable
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACSubscriber.m
+__44-[RACSubscriber didSubscribeWithDisposable:]_block_invoke
+__21-[RACSubscriber init]_block_invoke
+-[RACSubscriptingAssignmentTrampoline initWithTarget:nilValue:]
+-[RACSubscriptingAssignmentTrampoline setObject:forKeyedSubscript:]
+-[RACSubscriptingAssignmentTrampoline target]
+-[RACSubscriptingAssignmentTrampoline nilValue]
+-[RACSubscriptingAssignmentTrampoline .cxx_destruct]
+_OBJC_IVAR_$_RACSubscriptingAssignmentTrampoline._target
+_OBJC_IVAR_$_RACSubscriptingAssignmentTrampoline._nilValue
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACSubscriptingAssignmentTrampoline.m
+-[RACSubscriptionScheduler init]
+-[RACSubscriptionScheduler schedule:]
+-[RACSubscriptionScheduler after:schedule:]
+-[RACSubscriptionScheduler after:repeatingEvery:withLeeway:schedule:]
+-[RACSubscriptionScheduler backgroundScheduler]
+-[RACSubscriptionScheduler .cxx_destruct]
+_OBJC_IVAR_$_RACSubscriptionScheduler._backgroundScheduler
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACSubscriptionScheduler.m
+-[RACTargetQueueScheduler initWithName:targetQueue:]
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACTargetQueueScheduler.m
+-[RACTestScheduler init]
+_RACRetainScheduledAction
+_RACReleaseScheduledAction
+_RACCompareScheduledActions
+-[RACTestScheduler dealloc]
+-[RACTestScheduler step]
+-[RACTestScheduler step:]
+-[RACTestScheduler stepAll]
+-[RACTestScheduler schedule:]
+-[RACTestScheduler after:schedule:]
+-[RACTestScheduler after:repeatingEvery:withLeeway:schedule:]
+___61-[RACTestScheduler after:repeatingEvery:withLeeway:schedule:]_block_invoke
+-[RACTestScheduler scheduledActions]
+-[RACTestScheduler numberOfDirectlyScheduledBlocks]
+-[RACTestScheduler setNumberOfDirectlyScheduledBlocks:]
+-[RACTestSchedulerAction initWithDate:block:]
+-[RACTestSchedulerAction description]
+-[RACTestSchedulerAction date]
+-[RACTestSchedulerAction block]
+-[RACTestSchedulerAction disposable]
+-[RACTestSchedulerAction .cxx_destruct]
+_OBJC_IVAR_$_RACTestScheduler._scheduledActions
+_OBJC_IVAR_$_RACTestScheduler._numberOfDirectlyScheduledBlocks
+_OBJC_IVAR_$_RACTestSchedulerAction._date
+_OBJC_IVAR_$_RACTestSchedulerAction._block
+_OBJC_IVAR_$_RACTestSchedulerAction._disposable
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACTestScheduler.m
+__61-[RACTestScheduler after:repeatingEvery:withLeeway:schedule:]_block_invoke
+RACCompareScheduledActions
+RACReleaseScheduledAction
+RACRetainScheduledAction
++[RACTupleNil tupleNil]
+___23+[RACTupleNil tupleNil]_block_invoke
+-[RACTupleNil copyWithZone:]
+-[RACTupleNil initWithCoder:]
+-[RACTupleNil encodeWithCoder:]
+-[RACTuple init]
+-[RACTuple description]
+-[RACTuple isEqual:]
+-[RACTuple hash]
+-[RACTuple countByEnumeratingWithState:objects:count:]
+-[RACTuple copyWithZone:]
+-[RACTuple initWithCoder:]
+-[RACTuple encodeWithCoder:]
++[RACTuple tupleWithObjectsFromArray:]
++[RACTuple tupleWithObjectsFromArray:convertNullsToNils:]
++[RACTuple tupleWithObjects:]
+-[RACTuple objectAtIndex:]
+-[RACTuple allObjects]
+-[RACTuple tupleByAddingObject:]
+-[RACTuple count]
+-[RACTuple first]
+-[RACTuple second]
+-[RACTuple third]
+-[RACTuple fourth]
+-[RACTuple fifth]
+-[RACTuple last]
+-[RACTuple backingArray]
+-[RACTuple setBackingArray:]
+-[RACTuple .cxx_destruct]
+-[RACTuple(RACSequenceAdditions) rac_sequence]
+-[RACTuple(ObjectSubscripting) objectAtIndexedSubscript:]
++[RACTupleUnpackingTrampoline trampoline]
+___41+[RACTupleUnpackingTrampoline trampoline]_block_invoke
+___copy_helper_block_.109
+___destroy_helper_block_.110
+-[RACTupleUnpackingTrampoline setObject:forKeyedSubscript:]
+___59-[RACTupleUnpackingTrampoline setObject:forKeyedSubscript:]_block_invoke
+_tupleNil.onceToken
+_tupleNil.tupleNil
+_OBJC_IVAR_$_RACTuple._backingArray
+_trampoline.onceToken
+_trampoline.trampoline
+___block_descriptor_tmp.112
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACTuple.m
+__59-[RACTupleUnpackingTrampoline setObject:forKeyedSubscript:]_block_invoke
+__41+[RACTupleUnpackingTrampoline trampoline]_block_invoke
+__23+[RACTupleNil tupleNil]_block_invoke
++[RACTupleSequence sequenceWithTupleBackingArray:offset:]
+-[RACTupleSequence head]
+-[RACTupleSequence tail]
+-[RACTupleSequence array]
+___25-[RACTupleSequence array]_block_invoke
+-[RACTupleSequence description]
+-[RACTupleSequence tupleBackingArray]
+-[RACTupleSequence offset]
+-[RACTupleSequence .cxx_destruct]
+_OBJC_IVAR_$_RACTupleSequence._tupleBackingArray
+_OBJC_IVAR_$_RACTupleSequence._offset
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACTupleSequence.m
+__25-[RACTupleSequence array]_block_invoke
++[RACUnarySequence return:]
+-[RACUnarySequence tail]
+-[RACUnarySequence bind:]
+-[RACUnarySequence classForCoder]
+-[RACUnarySequence initWithCoder:]
+-[RACUnarySequence encodeWithCoder:]
+-[RACUnarySequence description]
+-[RACUnarySequence hash]
+-[RACUnarySequence isEqual:]
+-[RACUnarySequence head]
+-[RACUnarySequence setHead:]
+-[RACUnarySequence .cxx_destruct]
+_OBJC_IVAR_$_RACUnarySequence._head
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACUnarySequence.m
++[RACUnit defaultUnit]
+___22+[RACUnit defaultUnit]_block_invoke
+_defaultUnit.onceToken
+_defaultUnit.defaultUnit
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACUnit.m
+__22+[RACUnit defaultUnit]_block_invoke
++[RACValueTransformer allowsReverseTransformation]
+-[RACValueTransformer transformedValue:]
++[RACValueTransformer transformerWithBlock:]
+-[RACValueTransformer transformBlock]
+-[RACValueTransformer setTransformBlock:]
+-[RACValueTransformer .cxx_destruct]
+_OBJC_IVAR_$_RACValueTransformer.transformBlock
+/lin/code/lib/swift/Carthage/Checkouts/ReactiveObjc/ReactiveObjC/RACValueTransformer.m
+/Users/lin/Library/Developer/Xcode/DerivedData/ReactiveObjC-aebuvlmjdcccauctcaucnbnzllst/Build/Intermediates/ReactiveObjC.build/Release-watchos/ReactiveObjC-watchOS.build/DerivedSources/ReactiveObjC_vers.c

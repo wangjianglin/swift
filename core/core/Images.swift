@@ -12,23 +12,23 @@ import UIKit
 extension UIImage{
     
     public class func initImage(size imageSize:CGSize,color:UIColor)->UIImage{
-        UIGraphicsBeginImageContextWithOptions(imageSize,false, UIScreen.mainScreen().scale);
+        UIGraphicsBeginImageContextWithOptions(imageSize,false, UIScreen.main.scale);
         color.set();
-        UIRectFill(CGRectMake(0,0, imageSize.width, imageSize.height));
-        var image = UIGraphicsGetImageFromCurrentImageContext();
+        UIRectFill(CGRect(x: 0,y: 0, width: imageSize.width, height: imageSize.height));
+        let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return image;
+        return image!;
     }
     
     public func scaledToSize(size newSize:CGSize)->UIImage{
     
         UIGraphicsBeginImageContext(newSize);
-        self.drawInRect(CGRectMake(0,0,newSize.width,newSize.height));
+        self.draw(in: CGRect(x: 0,y: 0,width: newSize.width,height: newSize.height));
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        return newImage;
+        return newImage!;
     }
     
     
@@ -53,7 +53,7 @@ extension UIImage{
 //    }
 //    
 //    -(UIImage *)scaledToSize:(CGSize)size fill:(BOOL)fill{
-    public func scaledToSize(size:CGSize,fill:Bool)->UIImage{
+    public func scaledToSize(_ size:CGSize,fill:Bool)->UIImage{
 //    
         var s:CGFloat = 1.0;
     //    CGFloat offsetX = 0.0;
@@ -73,10 +73,10 @@ extension UIImage{
 //
     UIGraphicsBeginImageContext(newSize);
 //    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
-        self.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height));
+        self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height));
     let newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return newImage;
+    return newImage!;
     }
 //
 //    +(UIImage*)imageWithURLString:(NSString*)url{
@@ -91,7 +91,7 @@ extension UIImage{
 //        return UIImage(data: data!)!;
 //    }
      public convenience init?(urlString: String){
-        var url = NSURL(string: urlString);
+        let url = URL(string: urlString);
         if let url = url {
             self.init(url:url);
         }else{
@@ -99,8 +99,8 @@ extension UIImage{
         }
     }
 //    convenience
-    public convenience init?(url: NSURL){
-        var data = NSData(contentsOfURL: url);
+    public convenience init?(url: URL){
+        let data = try? Data(contentsOf: url);
         if let data = data{
             self.init(data: data);
         }else{

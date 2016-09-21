@@ -8,32 +8,32 @@
 
 import UIKit
 
-public class FormSegmentedControlCell: FormBaseCell {
+open class FormSegmentedControlCell: FormBaseCell {
 
     /// MARK: Properties
     
     let titleLabel = UILabel()
     let segmentedControl = UISegmentedControl()
     
-    private var customConstraints: [NSLayoutConstraint]!
+    fileprivate var customConstraints: [NSLayoutConstraint]!
     
     /// MARK: FormBaseCell
     
-    override public func configure() {
+    override open func configure() {
         super.configure()
-        selectionStyle = .None
+        selectionStyle = .none
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.setContentCompressionResistancePriority(500, forAxis: .Horizontal)
-        segmentedControl.setContentCompressionResistancePriority(500, forAxis: .Horizontal)
-        titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        titleLabel.setContentCompressionResistancePriority(500, for: .horizontal)
+        segmentedControl.setContentCompressionResistancePriority(500, for: .horizontal)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         contentView.addSubview(titleLabel)
         contentView.addSubview(segmentedControl)
         contentView.addConstraints(layoutConstraints());
-        segmentedControl.addTarget(self, action: "valueChanged:", forControlEvents: .ValueChanged)
+        segmentedControl.addTarget(self, action: #selector(FormSegmentedControlCell.valueChanged(_:)), for: .valueChanged)
     }
     
-    override public func update() {
+    override open func update() {
         super.update()
         titleLabel.text = rowDescriptor.title
         updateSegmentedControl()
@@ -52,15 +52,15 @@ public class FormSegmentedControlCell: FormBaseCell {
     
     /// MARK: Constraints
     
-    private func layoutConstraints() -> [NSLayoutConstraint] {
+    fileprivate func layoutConstraints() -> [NSLayoutConstraint] {
         var result: [NSLayoutConstraint] = []
-        titleLabel.setContentHuggingPriority(500, forAxis: .Horizontal)
-        result.append(NSLayoutConstraint(item: titleLabel, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
-        result.append(NSLayoutConstraint(item: segmentedControl, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
+        titleLabel.setContentHuggingPriority(500, for: .horizontal)
+        result.append(NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1.0, constant: 0.0))
+        result.append(NSLayoutConstraint(item: segmentedControl, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1.0, constant: 0.0))
         return result
     }
     
-    override public func updateConstraints() {
+    override open func updateConstraints() {
         
         if customConstraints != nil {
             contentView.removeConstraints(customConstraints)
@@ -69,10 +69,10 @@ public class FormSegmentedControlCell: FormBaseCell {
         let views = ["titleLabel" : titleLabel, "segmentedControl" : segmentedControl]
         
         if titleLabel.text != nil && (titleLabel.text!).characters.count > 0 {
-            customConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-16-[titleLabel]-16-[segmentedControl]-16-|", options: NSLayoutFormatOptions(rawValue: 0), metrics:nil, views: views)
+            customConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[titleLabel]-16-[segmentedControl]-16-|", options: NSLayoutFormatOptions(rawValue: 0), metrics:nil, views: views)
         }
         else {
-            customConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-16-[segmentedControl]-16-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+            customConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[segmentedControl]-16-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
         }
         
         contentView.addConstraints(customConstraints)
@@ -81,14 +81,14 @@ public class FormSegmentedControlCell: FormBaseCell {
     
     /// MARK: Actions
     
-    func valueChanged(sender: UISegmentedControl) {
+    func valueChanged(_ sender: UISegmentedControl) {
 //        let optionValue = rowDescriptor.options[sender.selectedSegmentIndex]
 //        rowDescriptor.value = optionValue
     }
     
     /// MARK: Private
     
-    private func updateSegmentedControl() {
+    fileprivate func updateSegmentedControl() {
         segmentedControl.removeAllSegments()
 //        var idx = 0
 //        for optionValue in rowDescriptor.options {

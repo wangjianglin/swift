@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class TcpResponsePackage : TcpAbstractPackage{
+open class TcpResponsePackage : TcpAbstractPackage{
     
     public final override class var state:TcpPackageState{
-        return TcpPackageState.RESPONSE;
+        return TcpPackageState.response;
     }
     
     

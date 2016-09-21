@@ -9,27 +9,27 @@
 import Foundation
 
 
-public class CocoaHttpServerRequest : HttpRequest{
+open class CocoaHttpServerRequest : HttpRequest{
     
-    private var message:HTTPMessage;
+    fileprivate var message:HTTPMessage;
     init(message:HTTPMessage) {
         self.message = message;
     }
     
-    public var isHeaderComplete:Bool{
+    open var isHeaderComplete:Bool{
         return message.isHeaderComplete;
     }
     
-    public var version:String!{
+    open var version:String!{
         return message.version;
     }
     
-    public var method:HttpMethod!{
+    open var method:HttpMethod!{
         let methodString = message.method;
         if methodString == nil {
             return nil;
         }
-        switch methodString!.lowercaseString {
+        switch methodString!.lowercased() {
             case "post":
                 return HttpMethod.POST
             case "head":
@@ -40,18 +40,18 @@ public class CocoaHttpServerRequest : HttpRequest{
                 return HttpMethod.GET;
         }
     }
-    public var url:NSURL!{
+    open var url:URL!{
         return message.url;
     }
     
-    public var statusCode:Int{
+    open var statusCode:Int{
         return message.statusCode;
     }
     
-    public var headerFields:[NSObject : AnyObject]!{
+    open var headerFields:[AnyHashable: Any]!{
         return message.allHeaderFields();
     }
-    public func header(headerField: String!) -> String!{
+    open func header(_ headerField: String!) -> String!{
         return message.headerField(headerField);
     }
     
@@ -60,7 +60,7 @@ public class CocoaHttpServerRequest : HttpRequest{
 //        return message.messageData();
 //    }
     
-    public var body:NSData!{
+    open var body:Data!{
         return message.body;
     }
 }

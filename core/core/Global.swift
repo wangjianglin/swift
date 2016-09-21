@@ -9,15 +9,15 @@
 import Foundation
 
 
-public class GlobalArgs{
+open class GlobalArgs{
     
-    private var datas:Dictionary<String,AnyObject!>;
-    private init(){
+    fileprivate var datas:Dictionary<String,AnyObject?>;
+    fileprivate init(){
         self.datas = Dictionary<String,AnyObject!>();
     }
     
-    public subscript(name:String)->AnyObject?{
-        get{ return datas[name];}
+    open subscript(name:String)->AnyObject?{
+        get{ return datas[name]!;}
         set{ self.datas[name] = newValue;}
     }
 }
