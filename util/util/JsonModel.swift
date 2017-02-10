@@ -74,6 +74,10 @@ extension JsonModel{
     public func setIntValue(_ value:Int,forName name:String){
         self._json.setIntValue(value, forName: name);
     }
+
+    public func setStrValue(_ value:String,forName name:String){
+        self._json.setStrValue(value, forName: name);
+    }
     
     public func setBoolValue(_ value:Bool,forName name:String){
         self._json.setBoolValue(value, forName: name);

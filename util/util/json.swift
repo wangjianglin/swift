@@ -257,6 +257,10 @@ extension Json {
         }
     }
     
+    public func setStrValue(_ value:String,forName name:String){
+        self.setValue(value as NSString, forName: name);
+    }
+    
     public func setIntValue(_ value:Int,forName name:String){
         self.setValue(value as NSNumber, forName: name);
     }
