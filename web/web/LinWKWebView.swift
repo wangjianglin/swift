@@ -17,7 +17,7 @@ private class __LinWKWebView_UIAlertView : UIAlertView,UIAlertViewDelegate{
     
     fileprivate var type:Int = 0;
     
-    public func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int){
+    open func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int){
 //        let alert = alertView as! __LineWKWebView_UIAlertView;
         if self.type == 0 {
             self.alertCompletionHandler();
@@ -43,12 +43,12 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
     
     fileprivate var bridge:LinJavaScriptBridge!;
     
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage){
+    open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage){
         print(message.body)
     }
     
     // MARK: - WKUIDelegate
-    public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Swift.Void){
+    open func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Swift.Void){
         
         let alert = __LinWKWebView_UIAlertView(title: "", message: message, delegate: nil, cancelButtonTitle: "确定");
         
@@ -60,7 +60,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
         
     }
     
-    public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+    open func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
 
         let alert = __LinWKWebView_UIAlertView(title: "", message: message, delegate: nil, cancelButtonTitle: "取消", otherButtonTitles: "确定");
         alert.delegate = alert;
@@ -69,7 +69,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
         alert.show();
     }
     
-    public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
+    open func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
 
         let json = Json.init(string: defaultText ?? "");
         if json.isError {
@@ -85,7 +85,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
         }
     }
     
-    public func webViewDidClose(_ webView: WKWebView) {
+    open func webViewDidClose(_ webView: WKWebView) {
         print(#function)
     }
     
@@ -116,7 +116,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
 ////        }
 //    }
     
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void){
+    open func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void){
         print("=================================")
         decisionHandler(.allow)
     }
@@ -131,7 +131,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
      navigation. The argument is one of the constants of the enumerated type WKNavigationResponsePolicy.
      @discussion If you do not implement this method, the web view will allow the response, if the web view can show it.
      */
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Swift.Void){
+    open func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Swift.Void){
         print("decidePolicyFor navigationResponse:=================================")
         decisionHandler(.allow);
     }
@@ -141,7 +141,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
      @param webView The web view invoking the delegate method.
      @param navigation The navigation.
      */
-    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
+    open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
         print("didStartProvisionalNavigation:=================================")
     }
     
@@ -151,7 +151,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
      @param webView The web view invoking the delegate method.
      @param navigation The navigation.
      */
-    public func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!){
+    open func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!){
         print("didReceiveServerRedirectForProvisionalNavigation:=================================")
     }
     
@@ -162,7 +162,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
      @param navigation The navigation.
      @param error The error that occurred.
      */
-    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error){
+    open func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error){
         print("didFailProvisionalNavigation:=================================")
     }
     
@@ -171,7 +171,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
      @param webView The web view invoking the delegate method.
      @param navigation The navigation.
      */
-    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!){
+    open func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!){
         print("didCommit:=================================")
     }
     
@@ -180,7 +180,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
      @param webView The web view invoking the delegate method.
      @param navigation The navigation.
      */
-    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
+    open func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         print("didFinish:=================================")
     }
     
@@ -191,7 +191,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
      @param navigation The navigation.
      @param error The error that occurred.
      */
-    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error){
+    open func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error){
         print("didFail:=================================")
     }
     
@@ -206,7 +206,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
      credential.
      @discussion If you do not implement this method, the web view will respond to the authentication challenge with the NSURLSessionAuthChallengeRejectProtectionSpace disposition.
      */
-    public func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void){
+    open func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void){
         print("=================================")
     }
     
@@ -214,7 +214,7 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
     /*! @abstract Invoked when the web view's web content process is terminated.
      @param webView The web view whose underlying web content process was terminated.
      */
-    public func webViewWebContentProcessDidTerminate(_ webView: WKWebView){
+    open func webViewWebContentProcessDidTerminate(_ webView: WKWebView){
         print("=================================")
     }
 
@@ -224,16 +224,16 @@ private class __LineWKWebView_LinWebViewDelegate :NSObject, WKScriptMessageHandl
 
 
 
-public class LinWKWebView : WKWebView{
+open class LinWKWebView : WKWebView{
     
     static var __once:() = {
         URLProtocol.registerClass(LinWebURLProtocol.self);
     }()
 
     
-    private var handler = __LineWKWebView_LinWebViewDelegate();
+    fileprivate var handler = __LineWKWebView_LinWebViewDelegate();
     
-    private var bridge:LinJavaScriptBridge!;
+    fileprivate var bridge:LinJavaScriptBridge!;
     
     internal init(webView:LinWebView){
         
@@ -294,7 +294,7 @@ public class LinWKWebView : WKWebView{
     }
     
     
-    public func loadUrl(_ url:String!){
+    open func loadUrl(_ url:String!){
         self.uiDelegate = self.handler;
         if url == nil {
             self.loadHTMLString("error.", baseURL:nil);
@@ -303,7 +303,7 @@ public class LinWKWebView : WKWebView{
         var appReq:URLRequest! = nil;
         if url.lowercased().hasPrefix("http://") || url.lowercased().hasPrefix("https://") || url.lowercased().hasPrefix("web://") {
             if let nsurl = URL(string:url) {
-                appReq = URLRequest(url:nsurl, cachePolicy:NSURLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval:20.0);
+                appReq = URLRequest(url:nsurl, cachePolicy:URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval:20.0);
             }
         }else{
             
@@ -329,7 +329,7 @@ public class LinWKWebView : WKWebView{
 //                        } else {
 //                            // Fallback on earlier versions
 //                        };
-                        appReq = URLRequest(url: appURL, cachePolicy: NSURLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: 15.0);
+                        appReq = URLRequest(url: appURL, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: 15.0);
                     }
                 }
             }
@@ -349,7 +349,7 @@ public class LinWKWebView : WKWebView{
     }
     
     // MARK: - WKScriptMessageHandler
-    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+    func userContentController(_ userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
         print(message.body)
         if message.name == "AppModel" {
             print("message name is AppModel")

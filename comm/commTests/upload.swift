@@ -7,10 +7,8 @@
 //
 
 import XCTest
-import LinClient
-import LinUtil
 
-class upload : XCTestCase {
+class Upload : XCTestCase {
 
     override func setUp() {
         super.setUp()
@@ -45,34 +43,35 @@ class upload : XCTestCase {
 //        
 //    }
 
-    func testExample() {
-//    
+//    func testExample() {
+////    
+////        
+////        var task = HttpTask();
+////        
+////        
+////        HttpCommunicate.commUrl = "http://localhost:8080/test";
 //        
-//        var task = HttpTask();
-//        
-//        
-//        HttpCommunicate.commUrl = "http://localhost:8080/test";
-        HttpCommunicate.commUrl = "http://localhost:8080/fcbb_b2b2c/";
-//        //"http://localhost:8080/test/upload.action"
-        var uploadPackage = HttpUploadPackage(url: "/upload.action");
-
-        uploadPackage["name"] = Json("value");
-        uploadPackage["user_id"] = Json("中文ok.");
-        uploadPackage["filename"] = Json("test.png");
-//        uploadPackage["upload"] = Json(HttpUpload(fileUrl: NSURL(fileURLWithPath: "/work/1.png")!));
-        uploadPackage.addFile("upload",file:"/work/1.png");
-//        uploadPackage["date"] = NSDate();
-//        
-        HttpCommunicate.upload(uploadPackage, result: { (obj, warning) -> () in
-            print("ok.");
-        }, fault: { (error) -> () in
-            print("error.")
-        }) { (send, total) -> Void in
-            print("\(send)/\(total)");
-            }.waitForEnd();
-        print("---end---");
+//        HttpCommunicate.commUrl = "http://localhost:8080/fcbb_b2b2c/";
+////        //"http://localhost:8080/test/upload.action"
+//        var uploadPackage = HttpUploadPackage(url: "/upload.action");
 //
-    }
+//        uploadPackage["name"] = Json("value");
+//        uploadPackage["user_id"] = Json("中文ok.");
+//        uploadPackage["filename"] = Json("test.png");
+////        uploadPackage["upload"] = Json(HttpUpload(fileUrl: NSURL(fileURLWithPath: "/work/1.png")!));
+//        uploadPackage.addFile("upload",file:"/work/1.png");
+////        uploadPackage["date"] = NSDate();
+////        
+//        HttpCommunicate.upload(uploadPackage, result: { (obj, warning) -> () in
+//            print("ok.");
+//        }, fault: { (error) -> () in
+//            print("error.")
+//        }) { (send, total) -> Void in
+//            print("\(send)/\(total)");
+//            }.waitForEnd();
+//        print("---end---");
+////
+//    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

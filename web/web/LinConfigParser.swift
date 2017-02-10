@@ -81,28 +81,28 @@ class LinConfigParser:NSObject,XMLParserDelegate {
 //}
 //-(instancetype)initWithXML:(NSString*)xml
 //{
-    private var _pluginName:String?
+    fileprivate var _pluginName:String?
     
-    private var _plugins = Dictionary<String,AnyClass>();
+    fileprivate var _plugins = Dictionary<String,AnyClass>();
     var plugins:Dictionary<String,AnyClass>{
         return _plugins;
     }
     
-    private var _startPlugins = [String]();
+    fileprivate var _startPlugins = [String]();
     var startPlugins:[String]{
         return _startPlugins;
     }
-    private var _settings = Dictionary<String,String>();
+    fileprivate var _settings = Dictionary<String,String>();
     var settings:Dictionary<String,String>{
         return _settings;
     }
     
-    private var _whitelist = [String]();
+    fileprivate var _whitelist = [String]();
     var whitelist:[String]{
         return _whitelist;
     }
     
-    private var _startPage:String!;
+    fileprivate var _startPage:String!;
     var startPage:String{
         return _startPage;
     }

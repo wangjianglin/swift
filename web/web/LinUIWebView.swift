@@ -76,16 +76,16 @@ import LinUtil
 //
 //@end
 
-public class __LinUIWebViewURLResponse : HTTPURLResponse{
-    public override var statusCode:Int {
+open class __LinUIWebViewURLResponse : HTTPURLResponse{
+    open override var statusCode:Int {
         return 200;
     };
 }
 
-public class __LinUIWebViewURLProtocol : URLProtocol{
+open class __LinUIWebViewURLProtocol : URLProtocol{
 //    private var webView:UIWebView;
 
-    private struct YRInstance{
+    fileprivate struct YRInstance{
         static var webs:[LinUIWebView] = [LinUIWebView]();
         static var configParser:LinConfigParser = LinConfigParser();
     }
@@ -178,7 +178,7 @@ public class __LinUIWebViewURLProtocol : URLProtocol{
     
     
 //    - (void)sendResponseText:(NSString*)result
-    private func sendResponseText(_ result:String)
+    fileprivate func sendResponseText(_ result:String)
     {
         let data = result.data(using: String.Encoding.utf8);
         let response = __LinUIWebViewURLResponse(url: self.request.url!, mimeType: "application/json", expectedContentLength: data?.count ?? 0, textEncodingName: "utf-8");
@@ -196,7 +196,7 @@ public class __LinUIWebViewURLProtocol : URLProtocol{
 //    [[self client] URLProtocolDidFinishLoading:self];
     }
     
-    override public func stopLoading() {
+    override open func stopLoading() {
         
     }
 }
@@ -244,11 +244,11 @@ private class __LinUIWebView_UIWebViewDelegate : NSObject, UIWebViewDelegate{
     fileprivate var origin:UIWebViewDelegate?;
 
     
-    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool{
+    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool{
         return origin?.webView?(webView, shouldStartLoadWith: request, navigationType: navigationType) ?? true;
     }
     
-    public func webViewDidStartLoad(_ webView: UIWebView){
+    open func webViewDidStartLoad(_ webView: UIWebView){
     
         let view = webView as! LinUIWebView;
         var js = "window.sessionStorage.setItem(\"__ios-web-flag\",\"\(view.webFlag)\");";
@@ -263,34 +263,34 @@ private class __LinUIWebView_UIWebViewDelegate : NSObject, UIWebViewDelegate{
     
     }
     
-    public func webViewDidFinishLoad(_ webView: UIWebView){
+    open func webViewDidFinishLoad(_ webView: UIWebView){
         origin?.webViewDidFinishLoad?(webView);
     }
     
-    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
+    open func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
         origin?.webView?(webView, didFailLoadWithError: error);
     }
 
 }
 
-public class LinUIWebView : UIWebView{
+open class LinUIWebView : UIWebView{
     
     
     fileprivate let bridge:LinJavaScriptBridge;
     
-    private static var __once:() = {
+    fileprivate static var __once:() = {
         URLProtocol.registerClass(__LinUIWebViewURLProtocol.self);
     }()
     
-    public override var delegate: UIWebViewDelegate?{
+    open override var delegate: UIWebViewDelegate?{
         didSet{
             self.handler.origin = self.delegate;
         }
     }
     
-    lazy private var handler:__LinUIWebView_UIWebViewDelegate = __LinUIWebView_UIWebViewDelegate.init();
+    lazy fileprivate var handler:__LinUIWebView_UIWebViewDelegate = __LinUIWebView_UIWebViewDelegate.init();
     
-    private struct YSInstance{
+    fileprivate struct YSInstance{
         static var webFlag = 0;
         static var lock:NSLock = NSLock();
     }
@@ -340,7 +340,7 @@ public class LinUIWebView : UIWebView{
         
     }
     
-    public func load(url:String){
+    open func load(_ url:String){
         
         
         var appReq:URLRequest?;

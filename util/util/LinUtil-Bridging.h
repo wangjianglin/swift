@@ -27,11 +27,12 @@
 #ifndef LinUtil_Bridging_Header_h
 #define LinUtil_Bridging_Header_h
 
+//#import "CommonCrypto/CommonHMAC.h"
 
 //#import <sqlite3.h>
 //#import "SQLite-Bridging.h"
 #import "ObjCSynchronized.h"
-#import "md5.h"
+#import "cryptos.h"
 #import "NSObjects.h"
 
 #endif

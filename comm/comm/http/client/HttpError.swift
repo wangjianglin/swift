@@ -8,22 +8,34 @@
 
 import Foundation
 
-open class HttpError :NSObject{
+open class HttpError :NSObject,Error{
     
-    public init(code:Int){
+    public init(code:Int,message:String? = nil,cause:String? = nil,strackTrace:String? = nil){
         super.init();
-        self._code = code;
+        self.__code = code;
+        self._message = message;
+        self._cause = cause;
+        self._strackTrace = strackTrace;
     }
-    fileprivate var _code:Int = -1;
+    private var __code:Int = -1;
     open var code:Int{
-        return _code;
+        return __code;
     }
     
-    open var message:String?;
+    private var _message:String?;
+    open var message:String?{
+        return _message;
+    }
     
-    open var strackTrace:String?;
+    private var _strackTrace:String?;
+    open var strackTrace:String?{
+        return _strackTrace;
+    }
     
-    open var cause:String?;
+    private var _cause:String?;
+    open var cause:String?{
+        return _cause;
+    }
 
     
     open override var description:String{
@@ -33,7 +45,7 @@ open class HttpError :NSObject{
         if self.code < 0 {
             desc = String(format: "-0x%0x", -self.code);
         }else{
-            desc = String(format: "0x%0x", -self.code);
+            desc = String(format: "0x%0x", self.code);
         }
         desc = (desc as NSString).uppercased;
         if desc.characters.count > (self.code>0 ? 4 : 5) {
@@ -41,9 +53,9 @@ open class HttpError :NSObject{
         }
         //        println("message:\(message)");
         if let msg = self.message {
-            desc = "错误码：\(desc)\n错误消息：\(msg)！";
+            desc = "错误码：\(desc!)\n错误消息：\(msg)！";
         }else{
-            desc = "错误码：\(desc)\n错误消息：无";
+            desc = "错误码：\(desc!)\n错误消息：无";
         }
         return desc;
     }

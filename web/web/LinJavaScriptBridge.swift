@@ -165,6 +165,9 @@ class LinJavaScriptBridge {
                 }
             }
         }
+        rString = rString.replacingOccurrences(of: "\n", with: "\\n", options: String.CompareOptions.caseInsensitive, range: nil);
+        rString = rString.replacingOccurrences(of: "\r", with: "\\r", options: String.CompareOptions.caseInsensitive, range: nil);
+        rString = rString.replacingOccurrences(of: "\t", with: "\\t", options: String.CompareOptions.caseInsensitive, range: nil);
         completion(rString);
     }
     

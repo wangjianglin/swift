@@ -21,6 +21,9 @@ import LinComm
 ////    }
 //}
 
+public var flag:Bool = false;
+public var identifier1:String! = nil;
+public var identifier2:String! = nil;
 
 class ViewController: UIViewController {
 
@@ -30,16 +33,6 @@ class ViewController: UIViewController {
         
         
         
-        HttpCommunicate.commUrl = "http://s.feicuibaba.com";
-        HttpCommunicate.httpDns = AliHttpDNS(account: "172280");
-        HttpCommunicate.httpDns?.setDelegateForDegradationFilter({ (hostName) -> Bool in
-            if hostName.hasSuffix("feicuibaba.com"){
-                return false;
-            }
-            return true;
-        })
-        
-        HttpCommunicate.httpDns?.setPreResolveHosts(["s.feicuibaba.com"]);
         
 //        for n in 0...100{
 //            
@@ -62,6 +55,10 @@ class ViewController: UIViewController {
         //basePtr.dealloc(count);
 //        let socket = SocketIP4();
         //socket.test();
+    }
+    
+    @IBAction func show(){
+    UIAlertView.show("flag:\(flag)\t identifier1:\(identifier1)\tidentifier2:\(identifier2)");
     }
     
     func testCommClient(){
@@ -103,7 +100,7 @@ class ViewController: UIViewController {
 //            print("s:\(s)")
 //            print("ok.");
 //            client.write("resp!");
-//            
+//
 //            print(" ok.");
 //        }
     }
@@ -149,20 +146,77 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
     @IBAction func http(){
-        
+        LinComm.HttpCommunicate.commUrl = "http://s.feicuibaba.com";
         
         let pack = TestPackage();
         pack.data = "测试数据！";
         
-        HttpCommunicate.request(pack, result: { (obj, warning) in
+        _ = HttpCommunicate.request(pack, result: { (obj, warning) in
             print("obj:\(obj)");
-            }) { (error) in
-                print("error:\(error)");
+        }) { (error) in
+            print("error:\(error)");
+        };
+    }
+    
+    
+    @IBAction func down1(){
+        
+        //        HttpCommunicate.download(url: "http://www.feicuibaba.com/data2.zip").waitForEnd();
+        let pack = HttpDownloadPackage(url: "http://www.feicuibaba.com/data3.zip");
+        pack.identifier = "identifier1";
+//        HttpCommunicate.download(url: "http://www.feicuibaba.com/data2.zip", result: { (fileInfo, erros) in
+        _ = HttpCommunicate.download(package:pack, result: { (fileInfo, erros) in
+            print(fileInfo?.location);
+            print(fileInfo?.fileName);
+            
+            Queue.mainQueue {
+                UIAlertView(title: "", message: "\(fileInfo?.location)", delegate: nil, cancelButtonTitle: "ok").show();
+            }
+            }, fault: { (error) in
+                print(error)
+        }) { (_ down: Int64, _ expected: Int64, _ bytes: Int64) in
+            print("down:\(down)\texpected:\(expected)\tbytes:\(bytes)");
         }
         
+    }
+    
+    @IBAction func down2(){
+        
+        let pack = HttpDownloadPackage(url: "http://www.feicuibaba.com/data2.zip");
+        pack.identifier = "identifier2";
+        //        HttpCommunicate.download(url: "http://www.feicuibaba.com/data2.zip", result: { (fileInfo, erros) in
+        _ = HttpCommunicate.download(package:pack, result: { (fileInfo, erros) in
+            print(fileInfo?.location ?? "");
+            print(fileInfo?.fileName ?? "");
+            
+            Queue.mainQueue {
+                UIAlertView(title: "", message: "\(fileInfo?.location)", delegate: nil, cancelButtonTitle: "ok").show();
+            }
+            }, fault: { (error) in
+                print(error)
+        }) { (_ down: Int64, _ expected: Int64, _ bytes: Int64) in
+            print("down:\(down)\texpected:\(expected)\tbytes:\(bytes)");
+        }
+        
+    }
+    
+    @IBAction func upload(){
+        
+        LinComm.HttpCommunicate.commUrl = "http://192.168.1.66:8080";
+        
+        let uploadPackage = HttpUploadPackage(url: "upload.action");
+        uploadPackage.addFile("file", file: "data2.zip");
+        
+        HttpCommunicate.upload(uploadPackage, result: { (result, warning) in
+            print(result ?? "")
+            }, fault: { (error) in
+                print(error)
+            }) { (send, total,bytes) in
+                print("send:\(send)\ttotal:\(total)\tbytes:\(bytes)");
+        }
     }
 }
 

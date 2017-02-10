@@ -15,7 +15,7 @@ import LinUtil
 //
 //@end
 
-public class AsynResult:NSObject {
+open class AsynResult:NSObject {
     
 //    public var result:Any?{
 //        didSet{
@@ -30,8 +30,8 @@ public class AsynResult:NSObject {
 //    AutoResetEvent * set;
 //    }
     
-    private var set:AutoResetEvent = AutoResetEvent();
-    private var _result:Any?;
+    fileprivate var set:AutoResetEvent = AutoResetEvent();
+    fileprivate var _result:Any?;
     
 //    -(void)setWeb:(LinWebURLProtocol*)web;
 //    -(NSString*)waitResult;
@@ -69,7 +69,7 @@ public class AsynResult:NSObject {
 //    _result = result;
 //    [set set];
 //    }
-    public func setResult(_ result:Any? = nil){
+    open func setResult(_ result:Any? = nil){
         _result = result;
         set.set();
     }

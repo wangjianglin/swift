@@ -9,7 +9,7 @@
 import Foundation
 
 
-public class LinWebURLProtocol : URLProtocol{
+open class LinWebURLProtocol : URLProtocol{
     
     open override class func canInit(with request: URLRequest) -> Bool{
         
@@ -33,11 +33,11 @@ public class LinWebURLProtocol : URLProtocol{
         return super.requestIsCacheEquivalent(a, to: b);
     }
     
-    public override func startLoading() {
+    open override func startLoading() {
         print("ok..");
     }
     
-    public override func stopLoading(){
+    open override func stopLoading(){
         print("....................");
     }
     

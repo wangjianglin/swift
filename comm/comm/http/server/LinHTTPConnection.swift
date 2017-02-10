@@ -19,7 +19,7 @@ extension HTTPConnection{
     }
     
     struct actions{
-        static var instance = Dictionary<String, ((_ connection:HTTPConnection,_ method:String,_ path:String)->(NSObjectProtocol & HTTPResponse)?)>();
+        static var instance = Dictionary<String, ((_ connection:HTTPConnection,_ method:String,_ path:String)->( NSObjectProtocol & ServerHttpResponse)?)>();
     }
     
 //    private class var pathsAction:Dictionary<String,((connection:HTTPConnection,method:String,path:String)->protocol<NSObjectProtocol, HTTPResponse>!)>{
@@ -35,7 +35,7 @@ extension HTTPConnection{
 //        return YRSingleton.instance!;
 //    }
     
-    public class func register(_ method:HttpMethod!,path:String,action:@escaping ((_ connection:HTTPConnection,_ method:String,_ path:String)->(NSObjectProtocol & HTTPResponse)?)){
+    public class func register(_ method:HttpMethod!,path:String,action:@escaping ((_ connection:HTTPConnection,_ method:String,_ path:String)->(NSObjectProtocol & ServerHttpResponse)?)){
         lock.lock();
 //        var tmp = LinHTTPConnection.pathsAction;
         if(method == nil){
@@ -70,7 +70,7 @@ extension HTTPConnection{
 open class LinHTTPConnection : HTTPConnection{
     
 //    override public func httpResponseForMethod(method: String!, URI path: String!) -> protocol<NSObjectProtocol, HTTPResponse>! {
-    open override func httpResponseForMethod(_ method:String, URI path:String)->HTTPResponse? {
+    open override func httpResponseForMethod(_ method:String, URI path:String)->ServerHttpResponse? {
 //    <#code#>
 //    }
 //        <#code#>

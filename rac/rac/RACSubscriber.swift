@@ -6,11 +6,17 @@
 //  Copyright © 2016 lin. All rights reserved.
 //
 
-import ReactiveCocoa
+import Foundation
+import ReactiveSwift
 
-public extension RACSubscriber{
-    
-    public func sendError(_ error:String,code:Int = 0,userInfo info:[AnyHashable: Any]? = nil){
-        self.sendError(NSError(domain: error, code: code, userInfo: info));
-    }
-}
+//public class RACError : Swift.Error{
+//    
+//}
+//public extension Observer{
+//    
+//    public func sendError(_ error:String,code:Int = 0,userInfo info:[AnyHashable: Any]? = nil){
+//////        self.sendError(NSError(domain: error, code: code, userInfo: info)); 
+////        let e = Error();
+//        self.send(error: RACError() as! Error)
+//    }
+//}

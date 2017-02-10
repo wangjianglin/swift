@@ -7,20 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E1D831E1A63D16C006217A3 /* DateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D831D1A63D16C006217A3 /* DateTest.swift */; };
 		3E1DF4761D9033BB0041D2AA /* SQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1DF4751D9033BB0041D2AA /* SQLite.swift */; };
 		3E1DF4791D9033CF0041D2AA /* SQLite.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E1DF4771D9033CF0041D2AA /* SQLite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E1DF47A1D9033CF0041D2AA /* SQLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1DF4781D9033CF0041D2AA /* SQLite.m */; };
 		3E3746731A26368100B980E9 /* LinUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E3746721A26368100B980E9 /* LinUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E3746791A26368100B980E9 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E37466D1A26368100B980E9 /* LinUtil.framework */; };
-		3E3746801A26368100B980E9 /* utilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37467F1A26368100B980E9 /* utilTests.swift */; };
 		3E37468E1A264C1700B980E9 /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37468D1A264C1700B980E9 /* json.swift */; };
 		3E3746DF1A2DED5300B980E9 /* AutoResetEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3746DE1A2DED5300B980E9 /* AutoResetEvent.swift */; };
+		3E519A151DE1F97500B60C0E /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A141DE1F97500B60C0E /* NSObject.swift */; };
 		3E5917BD1CF8B9FA00CCFBC2 /* NSObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E5917BB1CF8B9FA00CCFBC2 /* NSObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E5917BE1CF8B9FA00CCFBC2 /* NSObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5917BC1CF8B9FA00CCFBC2 /* NSObjects.m */; };
 		3E64C1E11A6BF612007185E2 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E64C1E01A6BF612007185E2 /* Strings.swift */; };
-		3E64C1E61A6BF685007185E2 /* md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E64C1E41A6BF685007185E2 /* md5.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E64C1E71A6BF685007185E2 /* md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64C1E51A6BF685007185E2 /* md5.m */; };
+		3E64C1E61A6BF685007185E2 /* cryptos.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E64C1E41A6BF685007185E2 /* cryptos.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E64C1E71A6BF685007185E2 /* cryptos.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64C1E51A6BF685007185E2 /* cryptos.m */; };
 		3E64C1E91A6BFB6A007185E2 /* Documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E64C1E81A6BFB6A007185E2 /* Documents.swift */; };
 		3E6E84791A4E48EE00618EE6 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6E84781A4E48EE00618EE6 /* Util.swift */; };
 		3E76ADAB1A41CD5C00B0C2BB /* LinUtil-Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E76ADAA1A41CD5C00B0C2BB /* LinUtil-Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +29,7 @@
 		3E9927BB1A8BC0DE00D9246A /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9927B91A8BC0DE00D9246A /* Queue.swift */; };
 		3EA3B3F41D8F962200FC8EB7 /* KeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3B3F31D8F962200FC8EB7 /* KeyValueStorage.swift */; };
 		3EA3B3F81D8FA0E600FC8EB7 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA3B3F71D8FA0E600FC8EB7 /* libsqlite3.tbd */; };
+		3EB352411E44CAA100CF83FA /* Lifetime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB352401E44CAA100CF83FA /* Lifetime.swift */; };
 		3ECB95CB1C48115300E5E67C /* tasks.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB95CA1C48115300E5E67C /* tasks.txt */; };
 		3ECD3FE31CEB839900D57372 /* swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD3FE21CEB839900D57372 /* swift.swift */; };
 		3ECE27C61C47A01B0094F9D1 /* LinUtil.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 3ECE27C51C47A01B0094F9D1 /* LinUtil.podspec */; };
@@ -40,16 +39,6 @@
 		3EF90C781A5E7211004F2E85 /* ObjCSynchronized.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF90C761A5E7211004F2E85 /* ObjCSynchronized.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		3E37467A1A26368100B980E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E3746641A26368100B980E9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E37466C1A26368100B980E9;
-			remoteInfo = util;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		3E1D831D1A63D16C006217A3 /* DateTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTest.swift; sourceTree = "<group>"; };
 		3E1DF4751D9033BB0041D2AA /* SQLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLite.swift; path = SQLite/SQLite.swift; sourceTree = "<group>"; };
@@ -58,16 +47,16 @@
 		3E37466D1A26368100B980E9 /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E3746711A26368100B980E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E3746721A26368100B980E9 /* LinUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinUtil.h; sourceTree = "<group>"; };
-		3E3746781A26368100B980E9 /* LinUtilTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinUtilTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E37467E1A26368100B980E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E37467F1A26368100B980E9 /* utilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utilTests.swift; sourceTree = "<group>"; };
 		3E37468D1A264C1700B980E9 /* json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
 		3E3746DE1A2DED5300B980E9 /* AutoResetEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoResetEvent.swift; sourceTree = "<group>"; };
+		3E519A141DE1F97500B60C0E /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		3E5917BB1CF8B9FA00CCFBC2 /* NSObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjects.h; sourceTree = "<group>"; };
 		3E5917BC1CF8B9FA00CCFBC2 /* NSObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjects.m; sourceTree = "<group>"; };
 		3E64C1E01A6BF612007185E2 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		3E64C1E41A6BF685007185E2 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
-		3E64C1E51A6BF685007185E2 /* md5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = md5.m; sourceTree = "<group>"; };
+		3E64C1E41A6BF685007185E2 /* cryptos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cryptos.h; sourceTree = "<group>"; };
+		3E64C1E51A6BF685007185E2 /* cryptos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cryptos.m; sourceTree = "<group>"; };
 		3E64C1E81A6BFB6A007185E2 /* Documents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Documents.swift; sourceTree = "<group>"; };
 		3E6E84781A4E48EE00618EE6 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		3E76ADAA1A41CD5C00B0C2BB /* LinUtil-Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LinUtil-Bridging.h"; sourceTree = "<group>"; };
@@ -78,6 +67,7 @@
 		3E9927B91A8BC0DE00D9246A /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		3EA3B3F31D8F962200FC8EB7 /* KeyValueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueStorage.swift; sourceTree = "<group>"; };
 		3EA3B3F71D8FA0E600FC8EB7 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		3EB352401E44CAA100CF83FA /* Lifetime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lifetime.swift; sourceTree = "<group>"; };
 		3ECB95CA1C48115300E5E67C /* tasks.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tasks.txt; sourceTree = "<group>"; };
 		3ECD3FE21CEB839900D57372 /* swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = swift.swift; sourceTree = "<group>"; };
 		3ECE27C31C479C560094F9D1 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -94,14 +84,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EA3B3F81D8FA0E600FC8EB7 /* libsqlite3.tbd in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3E3746751A26368100B980E9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3E3746791A26368100B980E9 /* LinUtil.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				3E37466D1A26368100B980E9 /* LinUtil.framework */,
-				3E3746781A26368100B980E9 /* LinUtilTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,8 +130,8 @@
 				3E5917BC1CF8B9FA00CCFBC2 /* NSObjects.m */,
 				3E9927B81A8BC0DE00D9246A /* DelegateAction.swift */,
 				3E9927B91A8BC0DE00D9246A /* Queue.swift */,
-				3E64C1E41A6BF685007185E2 /* md5.h */,
-				3E64C1E51A6BF685007185E2 /* md5.m */,
+				3E64C1E41A6BF685007185E2 /* cryptos.h */,
+				3E64C1E51A6BF685007185E2 /* cryptos.m */,
 				3EF90C751A5E7211004F2E85 /* ObjCSynchronized.h */,
 				3EF90C761A5E7211004F2E85 /* ObjCSynchronized.m */,
 				3E76ADAA1A41CD5C00B0C2BB /* LinUtil-Bridging.h */,
@@ -167,6 +148,8 @@
 				3E8AA1421D2A51E8006E4922 /* Arrays.swift */,
 				3E8AA1611D2A66D0006E4922 /* NSError.swift */,
 				3EA3B3F31D8F962200FC8EB7 /* KeyValueStorage.swift */,
+				3E519A141DE1F97500B60C0E /* NSObject.swift */,
+				3EB352401E44CAA100CF83FA /* Lifetime.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -214,7 +197,7 @@
 			files = (
 				3E1DF4791D9033CF0041D2AA /* SQLite.h in Headers */,
 				3E5917BD1CF8B9FA00CCFBC2 /* NSObjects.h in Headers */,
-				3E64C1E61A6BF685007185E2 /* md5.h in Headers */,
+				3E64C1E61A6BF685007185E2 /* cryptos.h in Headers */,
 				3EF90C771A5E7211004F2E85 /* ObjCSynchronized.h in Headers */,
 				3E76ADAB1A41CD5C00B0C2BB /* LinUtil-Bridging.h in Headers */,
 				3E3746731A26368100B980E9 /* LinUtil.h in Headers */,
@@ -242,24 +225,6 @@
 			productReference = 3E37466D1A26368100B980E9 /* LinUtil.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		3E3746771A26368100B980E9 /* LinUtilTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3E3746861A26368100B980E9 /* Build configuration list for PBXNativeTarget "LinUtilTests" */;
-			buildPhases = (
-				3E3746741A26368100B980E9 /* Sources */,
-				3E3746751A26368100B980E9 /* Frameworks */,
-				3E3746761A26368100B980E9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3E37467B1A26368100B980E9 /* PBXTargetDependency */,
-			);
-			name = LinUtilTests;
-			productName = utilTests;
-			productReference = 3E3746781A26368100B980E9 /* LinUtilTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -274,11 +239,7 @@
 					3E37466C1A26368100B980E9 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 52EW4R7GEM;
-						LastSwiftMigration = 0800;
-					};
-					3E3746771A26368100B980E9 = {
-						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -295,7 +256,6 @@
 			projectRoot = "";
 			targets = (
 				3E37466C1A26368100B980E9 /* LinUtil */,
-				3E3746771A26368100B980E9 /* LinUtilTests */,
 			);
 		};
 /* End PBXProject section */
@@ -307,13 +267,6 @@
 			files = (
 				3ECE27C61C47A01B0094F9D1 /* LinUtil.podspec in Resources */,
 				3ECB95CB1C48115300E5E67C /* tasks.txt in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3E3746761A26368100B980E9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,36 +287,21 @@
 				3E3746DF1A2DED5300B980E9 /* AutoResetEvent.swift in Sources */,
 				3E1DF47A1D9033CF0041D2AA /* SQLite.m in Sources */,
 				3E9927BB1A8BC0DE00D9246A /* Queue.swift in Sources */,
-				3E64C1E71A6BF685007185E2 /* md5.m in Sources */,
+				3EB352411E44CAA100CF83FA /* Lifetime.swift in Sources */,
+				3E64C1E71A6BF685007185E2 /* cryptos.m in Sources */,
 				3E64C1E11A6BF612007185E2 /* Strings.swift in Sources */,
 				3E9842F11CF8EF36003FD60B /* JsonModel.swift in Sources */,
 				3E6E84791A4E48EE00618EE6 /* Util.swift in Sources */,
 				3E1DF4761D9033BB0041D2AA /* SQLite.swift in Sources */,
 				3E5917BE1CF8B9FA00CCFBC2 /* NSObjects.m in Sources */,
 				3EA3B3F41D8F962200FC8EB7 /* KeyValueStorage.swift in Sources */,
+				3E519A151DE1F97500B60C0E /* NSObject.swift in Sources */,
 				3E64C1E91A6BFB6A007185E2 /* Documents.swift in Sources */,
 				3EF90C701A5E71A3004F2E85 /* Synchronized.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3E3746741A26368100B980E9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3E3746801A26368100B980E9 /* utilTests.swift in Sources */,
-				3E1D831E1A63D16C006217A3 /* DateTest.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3E37467B1A26368100B980E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3E37466C1A26368100B980E9 /* LinUtil */;
-			targetProxy = 3E37467A1A26368100B980E9 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3E3746811A26368100B980E9 /* Debug */ = {
@@ -407,6 +345,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -446,6 +385,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -472,6 +412,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = lin.util;
 				PRODUCT_NAME = LinUtil;
 				PROVISIONING_PROFILE = "";
@@ -500,45 +441,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = lin.util;
 				PRODUCT_NAME = LinUtil;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		3E3746871A26368100B980E9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = utilTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = LinUtilTests;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		3E3746881A26368100B980E9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = utilTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = LinUtilTests;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -560,15 +468,6 @@
 			buildConfigurations = (
 				3E3746841A26368100B980E9 /* Debug */,
 				3E3746851A26368100B980E9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3E3746861A26368100B980E9 /* Build configuration list for PBXNativeTarget "LinUtilTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3E3746871A26368100B980E9 /* Debug */,
-				3E3746881A26368100B980E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -23,6 +23,6 @@
       location = "group:comm/LinComm.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:rac/LinRac.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

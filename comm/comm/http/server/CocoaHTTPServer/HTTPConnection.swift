@@ -240,7 +240,7 @@ fileprivate static var __once: () = {
     fileprivate var _nonce:String?;
     fileprivate var _lastNC:Int64 = 0;
     //
-    fileprivate var _httpResponse:HTTPResponse?;
+    fileprivate var _httpResponse:ServerHttpResponse?;
     //
     fileprivate var _ranges = [NSValue]();
     fileprivate var _ranges_headers = [Data]();
@@ -385,7 +385,7 @@ fileprivate static var __once: () = {
 //        {
 //            [httpResponse connectionDidClose];
 //        }
-        _httpResponse?.connectionDidClose?();
+        _httpResponse?.connectionDidClose();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1321,7 +1321,7 @@ fileprivate static var __once: () = {
 //                return;
 //            }
 //        }
-        if ((_httpResponse?.delayHeaders?()) != nil) {
+        if ((_httpResponse?.delayResponseHeaders) == true) {
             return;
         }
         
@@ -1331,7 +1331,7 @@ fileprivate static var __once: () = {
 //        {
 //            isChunked = [httpResponse isChunked];
 //        }
-        let isChunked = _httpResponse?.isChunked?() ?? false;
+        let isChunked = _httpResponse?.isChunked ?? false;
         
         // If a response is "chunked", this simply means the HTTPResponse object
         // doesn't know the content-length in advance.
@@ -1368,7 +1368,7 @@ fileprivate static var __once: () = {
 //            {
 //                status = [httpResponse status];
 //            }
-            let status = _httpResponse?.status?() ?? 200;
+            let status = _httpResponse?.statusCode ?? 200;
             response = HTTPMessage(statusCode:status, description:nil, version:kCFHTTPVersion1_1 as String);
             
             if isChunked{
@@ -1543,7 +1543,7 @@ fileprivate static var __once: () = {
 //            {
 //                isChunked = [httpResponse isChunked];
 //            }
-            let isChunked = _httpResponse?.isChunked?() ?? false;
+            let isChunked = _httpResponse?.isChunked ?? false;
             
             if isChunked {
                 let chunkSize = self.chunkedTransferSizeLineForLength(UInt64((data?.count)!));
@@ -1817,7 +1817,7 @@ fileprivate static var __once: () = {
      * HTTPFileResponse is a wrapper for an NSFileHandle object, and is the preferred way to send a file response.
      * HTTPDataResponse is a wrapper for an NSData object, and may be used to send a custom response.
     **/
-    public func httpResponseForMethod(_ method:String, URI path:String)->HTTPResponse?{
+    public func httpResponseForMethod(_ method:String, URI path:String)->ServerHttpResponse?{
 //        HTTPLogTrace();
         
         // Override me to provide custom responses.
@@ -2062,8 +2062,8 @@ fileprivate static var __once: () = {
         
         // Add optional response headers
 //        if _httpResponse.respondsToSelector(#selector(httpHeaders))
-        if _httpResponse?.httpHeaders != nil {
-            let responseHeaders = _httpResponse!.httpHeaders!();
+        if _httpResponse?.headers != nil {
+            let responseHeaders = _httpResponse!.headers!;
             
 //            NSEnumerator *keyEnumerator = [responseHeaders keyEnumerator];
 //            NSString *key;
@@ -2074,8 +2074,8 @@ fileprivate static var __once: () = {
 //                
 //                [response setHeaderField:key value:value];
 //            }
-            for (key,value) in responseHeaders! {
-                response.setHeaderField(key as! String, value: value as! String);
+            for (key,value) in responseHeaders {
+                response.setHeaderField(key , value: value );
             }
         }
         
@@ -2130,8 +2130,8 @@ fileprivate static var __once: () = {
 //                [response setHeaderField:key value:value];
 //            }
 //        }
-        if _httpResponse?.httpHeaders != nil {
-            let responseHeaders = _httpResponse!.httpHeaders!();
+        if _httpResponse?.headers != nil {
+            let responseHeaders = _httpResponse!.headers!;
             
             //            NSEnumerator *keyEnumerator = [responseHeaders keyEnumerator];
             //            NSString *key;
@@ -2142,8 +2142,8 @@ fileprivate static var __once: () = {
             //
             //                [response setHeaderField:key value:value];
             //            }
-            for (key,value) in responseHeaders! {
-                response.setHeaderField(key as! String, value: value as! String);
+            for (key,value) in responseHeaders {
+                response.setHeaderField(key, value: value);
             }
         }
         
@@ -2537,7 +2537,7 @@ fileprivate static var __once: () = {
 //            {
 //                [httpResponse connectionDidClose];
 //            }
-            _httpResponse?.connectionDidClose?();
+            _httpResponse?.connectionDidClose();
             
             
             if Int(tag) == HTTP_FINAL_RESPONSE {
@@ -2605,7 +2605,7 @@ fileprivate static var __once: () = {
      * 
      * This informs us that the response object has generated more data that we may be able to send.
     **/
-    public func responseHasAvailableData(_ sender:HTTPResponse){
+    public func responseHasAvailableData(_ sender:HttpResponse){
 //        HTTPLogTrace();
         
         // We always dispatch this asynchronously onto our connectionQueue,
@@ -2644,7 +2644,7 @@ fileprivate static var __once: () = {
      * This method is called if the response encounters some critical error,
      * and it will be unable to fullfill the request.
     **/
-    public func responseDidAbort(_ sender:HTTPResponse){
+    public func responseDidAbort(_ sender:HttpResponse){
 //        HTTPLogTrace();
         
         // We always dispatch this asynchronously onto our connectionQueue,
@@ -2748,7 +2748,7 @@ fileprivate static var __once: () = {
 //        {
 //            [httpResponse connectionDidClose];
 //        }
-        _httpResponse?.connectionDidClose?();
+        _httpResponse?.connectionDidClose();
         
         // Release the http response so we don't call it's connectionDidClose method again in our dealloc method
         _httpResponse = nil;

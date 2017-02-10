@@ -119,6 +119,7 @@ import LinUtil
 //    }
 //}
 
+//添加 http 头
 open class HttpPackage :JsonModel{
     
 //    private var _json:Json;
@@ -129,6 +130,8 @@ open class HttpPackage :JsonModel{
     
     fileprivate var _method:HttpMethod;
     open var method:HttpMethod{ return self._method;}
+    
+    open var commParams:HttpCommunicate.Params!;
     
 //    public init(){
 //        self._json = JSON();

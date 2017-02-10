@@ -8,23 +8,6 @@
 import Foundation
 
 extension String {
-    public var md5 : String{
-        return md5WithString(self);
-//        let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
-//        let strLen = CC_LONG(self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-//        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
-//        let result = UnsafeMutablePointer<CUnsignedChar>.alloc(digestLen);
-//        
-//        CC_MD5(str!, strLen, result);
-//        
-//        var hash = NSMutableString();
-//        for i in 0 ..< digestLen {
-//            hash.appendFormat("%02x", result[i]);
-//        }
-//        result.destroy();
-//        
-//        return String(format: hash)
-    }
     
     public static func fromBuffer(_ buffer:[UInt8],offset:Int = 0,count:Int = 0,encoding: String.Encoding = String.Encoding.utf8)->String!{
         var buffer = buffer, count = count
@@ -107,4 +90,70 @@ extension String {
 //        }
 //        return x
 //    }
+}
+
+public enum CryptoAlgorithm:String {
+    case MD5, SHA1, SHA224, SHA256, SHA384, SHA512
+    
+//    var str: String {
+//        var result: String = "";
+//        switch self {
+//        case .MD5:      result = "MD5";
+//        case .SHA1:     result = "SHA1";
+//        case .SHA224:   result = "SHA224";
+//        case .SHA256:   result = "SHA256";
+//        case .SHA384:   result = "SHA384";
+//        case .SHA512:   result = "SHA512";
+//        }
+//        return result;
+//    }
+}
+extension String {
+    
+    public func hmac(key:String,algorithm:CryptoAlgorithm = CryptoAlgorithm.MD5)->String{
+        return cryptosHmac(self, key, algorithm.rawValue);
+    }
+    
+    public var md2 : String{
+        return cryptosDigestWithString(self,"MD2");
+    }
+    
+    public var md4 : String{
+        return cryptosDigestWithString(self,"MD4");
+    }
+    
+    public var md5 : String{
+        return cryptosDigestWithString(self,"MD5");
+        //        let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
+        //        let strLen = CC_LONG(self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+        //        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+        //        let result = UnsafeMutablePointer<CUnsignedChar>.alloc(digestLen);
+        //
+        //        CC_MD5(str!, strLen, result);
+        //
+        //        var hash = NSMutableString();
+        //        for i in 0 ..< digestLen {
+        //            hash.appendFormat("%02x", result[i]);
+        //        }
+        //        result.destroy();
+        //
+        //        return String(format: hash)
+    }
+    
+    
+    public var sha1:String{
+        return cryptosDigestWithString(self, "SHA1");
+    }
+    public var sha224:String{
+        return cryptosDigestWithString(self, "SHA224");
+    }
+    public var sha256:String{
+        return cryptosDigestWithString(self, "SHA256");
+    }
+    public var sha384:String{
+        return cryptosDigestWithString(self, "SHA384");
+    }
+    public var sha512:String{
+        return cryptosDigestWithString(self, "SHA512");
+    }
 }

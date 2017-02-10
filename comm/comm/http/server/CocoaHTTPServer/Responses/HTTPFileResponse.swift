@@ -10,7 +10,7 @@ import Foundation
 
 let NULL_FD:CInt = -1
 
-@objc open class HTTPFileResponse : NSObject,HTTPResponse{
+open class HTTPFileResponse : AbstractServerHttpResponse{
 
 //#define NULL_FD  -1
 
@@ -125,13 +125,15 @@ let NULL_FD:CInt = -1
         return self.openFile();
     }
 
-    public var contentLength:UInt64{
+    open override var contentLength:UInt64{
 //	HTTPLogTrace();
-
+        get{
         return _fileLength;
+        }
+        set{}
     }
 
-    public var offset:UInt64{
+    open override var offset:UInt64{
 //	HTTPLogTrace();
         get{
             return _fileOffset;
@@ -163,7 +165,7 @@ let NULL_FD:CInt = -1
 //}
 
 //    public func readDataOfLength(length:UInt64)->NSData?{
-    public func readData(ofLength length: UInt) -> Data!{
+    open override func readData(ofLength length: UInt) -> Data?{
 //	HTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", THIS_FILE, self, (unsigned long)length);
 
         if (!self.openFileIfNeeded())
@@ -238,12 +240,15 @@ let NULL_FD:CInt = -1
         }
     }
 
-    public var isDone:Bool{
+    open override var isDone:Bool{
+        get{
         let result = _fileOffset == _fileLength;
 
     //	HTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
 
         return result;
+        }
+        set{}
     }
 
     public var filePath:String{

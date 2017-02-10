@@ -44,18 +44,18 @@ public protocol LinWebPlugin:NSObjectProtocol{
 }
 
 @objc
-public class LinAbstractWebPlugin : NSObject, LinWebPlugin{
-    private let _webView:LinWebView;
+open class LinAbstractWebPlugin : NSObject, LinWebPlugin{
+    fileprivate let _webView:LinWebView;
     
     public required init(webView: LinWebView) {
         _webView = webView;
     }
     
-    public var webView: LinWebView{
+    open var webView: LinWebView{
         return _webView;
     }
     
-    public func handleOpenURL(_ notification: Notification) {
+    open func handleOpenURL(_ notification: Notification) {
         
     }
 }

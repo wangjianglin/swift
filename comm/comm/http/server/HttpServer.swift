@@ -64,14 +64,36 @@ open class HttpServer{
         self.registerImpl(nil, path: path, action: action);
     }
     fileprivate func registerImpl(_ method:HttpMethod!,path:String,action:@escaping (_ request:HttpRequest)->HttpResponse!){
-        HTTPConnection.register(method, path: path) { (connection, method, path) -> (HTTPResponse & NSObjectProtocol)! in
-            
+//        HTTPConnection.register(method, path: path) { (connection, method, path) -> (HttpResponse & NSObjectProtocol)? in
+//            
+//            let response = action(CocoaHttpServerRequest(message: connection.request));
+//            if response == nil {
+////                return HTTPDataResponse(data:"==".data(using: String.Encoding.utf8, allowLossyConversion: true));
+//                let data = "==".data(using: String.Encoding.utf8, allowLossyConversion: true)
+//                return HttpDataResponse(data:data);
+//            }
+//            return nil;
+//        }
+        
+        HTTPConnection.register(method, path: path) { (connection, method, path) -> (ServerHttpResponse & NSObjectProtocol)? in
             let response = action(CocoaHttpServerRequest(message: connection.request));
             if response == nil {
-                return HTTPDataResponse(data:"==".data(using: String.Encoding.utf8, allowLossyConversion: true));
+//                return HTTPDataResponse(data:"==".data(using: String.Encoding.utf8, allowLossyConversion: true));
+                let data = "==".data(using: String.Encoding.utf8, allowLossyConversion: true)
+                return HttpDataResponse(data:data);
             }
             return nil;
         }
+        
+//        HTTPConnection.register(method,path:path,action:{(connection, method, path)->(HttpResponse & NSObjectProtocol)? in
+//                let response = action(CocoaHttpServerRequest(message: connection.request));
+//                if response == nil {
+//    //                return HTTPDataResponse(data:"==".data(using: String.Encoding.utf8, allowLossyConversion: true));
+//                    let data = "==".data(using: String.Encoding.utf8, allowLossyConversion: true)
+//                    return HttpDataResponse(data:data);
+//                }
+//                return nil;
+//        })
     }
 //    public func test(){
 ////        httpServer = [[HTTPServer alloc] init];

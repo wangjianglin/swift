@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C6E4C9CA47250D281F85C0D /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */; };
 		3E1DF47C1D903B250041D2AA /* buyers in Resources */ = {isa = PBXBuildFile; fileRef = 3E1DF47B1D903B250041D2AA /* buyers */; };
 		3E200EA81C4D5FB000A00A10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */; };
 		3E200EAA1C4D5FB000A00A10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EA91C4D5FB000A00A10 /* ViewController.swift */; };
@@ -15,17 +16,25 @@
 		3E200EB21C4D5FB000A00A10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E200EB01C4D5FB000A00A10 /* LaunchScreen.storyboard */; };
 		3E200EBD1C4D5FB000A00A10 /* demoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EBC1C4D5FB000A00A10 /* demoTests.swift */; };
 		3E200EC81C4D5FB000A00A10 /* demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EC71C4D5FB000A00A10 /* demoUITests.swift */; };
+		3E519A111DDEED7200B60C0E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A101DDEED7200B60C0E /* MainViewController.swift */; };
+		3E519A131DDEEF4900B60C0E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A121DDEEF4900B60C0E /* MainViewModel.swift */; };
+		3E519A1B1DE1FA2F00B60C0E /* LinRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E519A1A1DE1FA2F00B60C0E /* LinRac.framework */; };
+		3E53F8851DC6405F00E79390 /* data2.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E53F8841DC6405F00E79390 /* data2.zip */; };
+		3E66A7201DC79177005628AC /* LinWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A71F1DC79177005628AC /* LinWeb.framework */; };
+		3E66A7211DC79177005628AC /* LinWeb.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A71F1DC79177005628AC /* LinWeb.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E66A7231DC79177005628AC /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7221DC79177005628AC /* LinCore.framework */; };
+		3E66A7241DC79177005628AC /* LinCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7221DC79177005628AC /* LinCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E66A7261DC79177005628AC /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7251DC79177005628AC /* LinUtil.framework */; };
+		3E66A7271DC79177005628AC /* LinUtil.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7251DC79177005628AC /* LinUtil.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E66A7291DC79177005628AC /* LinComm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7281DC79177005628AC /* LinComm.framework */; };
+		3E66A72A1DC79177005628AC /* LinComm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7281DC79177005628AC /* LinComm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E66A72D1DC9CE95005628AC /* data1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E66A72C1DC9CE95005628AC /* data1.zip */; };
 		3E98399B1D21023D00CF3049 /* ScrollImagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E98399A1D21023D00CF3049 /* ScrollImagesController.swift */; };
+		3EA79C4C1DDC0D4900972A8A /* MVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA79C4B1DDC0D4900972A8A /* MVVM.swift */; };
+		3EB565AF1DD368F400828FF7 /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565AE1DD368F400828FF7 /* RAC.swift */; };
+		3EB565C01DD435D300828FF7 /* RACVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565BF1DD435D300828FF7 /* RACVM.swift */; };
 		3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EAE1D0AEF2500717357 /* WebViewController.swift */; };
-		3EC64EB31D0AF02200717357 /* LinWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC64EB21D0AF02200717357 /* LinWeb.framework */; };
-		3EC64EB41D0AF02200717357 /* LinWeb.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC64EB21D0AF02200717357 /* LinWeb.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3ECD41171CEE1F3900D57372 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD41161CEE1F3900D57372 /* LinUtil.framework */; };
-		3ECD41181CEE1F3900D57372 /* LinUtil.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD41161CEE1F3900D57372 /* LinUtil.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3ECD411A1CEE1F3E00D57372 /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD41191CEE1F3E00D57372 /* LinCore.framework */; };
-		3ECD411B1CEE1F3E00D57372 /* LinCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD41191CEE1F3E00D57372 /* LinCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3EE51EE31CE8C9B90032729F /* web in Resources */ = {isa = PBXBuildFile; fileRef = 3EE51EE21CE8C9B90032729F /* web */; };
-		3EE51EE61CE8CC570032729F /* LinComm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE51EE41CE8CA3E0032729F /* LinComm.framework */; };
-		3EE51EE71CE8CC570032729F /* LinComm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE51EE41CE8CA3E0032729F /* LinComm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,16 +55,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3ED1EC821C57E14700E2AC3B /* Embed Frameworks */ = {
+		3E66A72B1DC79177005628AC /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3ECD41181CEE1F3900D57372 /* LinUtil.framework in Embed Frameworks */,
-				3EC64EB41D0AF02200717357 /* LinWeb.framework in Embed Frameworks */,
-				3ECD411B1CEE1F3E00D57372 /* LinCore.framework in Embed Frameworks */,
-				3EE51EE71CE8CC570032729F /* LinComm.framework in Embed Frameworks */,
+				3E66A72A1DC79177005628AC /* LinComm.framework in Embed Frameworks */,
+				3E66A7271DC79177005628AC /* LinUtil.framework in Embed Frameworks */,
+				3E66A7211DC79177005628AC /* LinWeb.framework in Embed Frameworks */,
+				3E66A7241DC79177005628AC /* LinCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,18 +86,25 @@
 		3E200EC31C4D5FB000A00A10 /* demoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = demoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E200EC71C4D5FB000A00A10 /* demoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoUITests.swift; sourceTree = "<group>"; };
 		3E200EC91C4D5FB000A00A10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E519A101DDEED7200B60C0E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3E519A121DDEEF4900B60C0E /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		3E519A1A1DE1FA2F00B60C0E /* LinRac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinRac.framework; path = "../rac/build/Debug-iphoneos/LinRac.framework"; sourceTree = "<group>"; };
+		3E53F8841DC6405F00E79390 /* data2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = data2.zip; sourceTree = "<group>"; };
+		3E66A71F1DC79177005628AC /* LinWeb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinWeb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E66A7221DC79177005628AC /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E66A7251DC79177005628AC /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E66A7281DC79177005628AC /* LinComm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinComm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E66A72C1DC9CE95005628AC /* data1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = data1.zip; sourceTree = "<group>"; };
 		3E98399A1D21023D00CF3049 /* ScrollImagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollImagesController.swift; sourceTree = "<group>"; };
+		3EA79C4B1DDC0D4900972A8A /* MVVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVVM.swift; sourceTree = "<group>"; };
+		3EB565AE1DD368F400828FF7 /* RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAC.swift; sourceTree = "<group>"; };
+		3EB565BF1DD435D300828FF7 /* RACVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACVM.swift; sourceTree = "<group>"; };
 		3EC64EAE1D0AEF2500717357 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3EC64EB01D0AF00100717357 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		3EC64EB21D0AF02200717357 /* LinWeb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinWeb.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphonesimulator/LinWeb.framework"; sourceTree = "<absolute>"; };
-		3ECD41161CEE1F3900D57372 /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinUtil.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphonesimulator/LinUtil.framework"; sourceTree = "<absolute>"; };
-		3ECD41191CEE1F3E00D57372 /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinCore.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphonesimulator/LinCore.framework"; sourceTree = "<absolute>"; };
-		3ED1EC761C57E14700E2AC3B /* LinServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinServer.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinServer.framework"; sourceTree = "<absolute>"; };
-		3ED1EC791C57E14700E2AC3B /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinCore.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinCore.framework"; sourceTree = "<absolute>"; };
-		3ED1EC7C1C57E14700E2AC3B /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinUtil.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinUtil.framework"; sourceTree = "<absolute>"; };
-		3ED1EC7F1C57E14700E2AC3B /* LinClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = LinClient.framework; path = "/Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinClient.framework"; sourceTree = "<absolute>"; };
 		3EE51EE21CE8C9B90032729F /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
-		3EE51EE41CE8CA3E0032729F /* LinComm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinComm.framework; path = "../../../../../Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphonesimulator/LinComm.framework"; sourceTree = "<group>"; };
+		6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC0BAD3412467BC34B233B21 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
+		DDBED86DD6B8B51E312AE66A /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +112,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ECD41171CEE1F3900D57372 /* LinUtil.framework in Frameworks */,
-				3ECD411A1CEE1F3E00D57372 /* LinCore.framework in Frameworks */,
-				3EE51EE61CE8CC570032729F /* LinComm.framework in Frameworks */,
-				3EC64EB31D0AF02200717357 /* LinWeb.framework in Frameworks */,
+				3E519A1B1DE1FA2F00B60C0E /* LinRac.framework in Frameworks */,
+				3E66A7291DC79177005628AC /* LinComm.framework in Frameworks */,
+				3E66A7261DC79177005628AC /* LinUtil.framework in Frameworks */,
+				3E66A7201DC79177005628AC /* LinWeb.framework in Frameworks */,
+				3E66A7231DC79177005628AC /* LinCore.framework in Frameworks */,
+				3C6E4C9CA47250D281F85C0D /* Pods_demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,24 +138,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E1974551DB4C97000C5A6EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3E519A1A1DE1FA2F00B60C0E /* LinRac.framework */,
+				6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3E200E9B1C4D5FB000A00A10 = {
 			isa = PBXGroup;
 			children = (
+				3E66A7281DC79177005628AC /* LinComm.framework */,
+				3E66A7251DC79177005628AC /* LinUtil.framework */,
+				3E66A7221DC79177005628AC /* LinCore.framework */,
+				3E66A71F1DC79177005628AC /* LinWeb.framework */,
 				3E1DF47B1D903B250041D2AA /* buyers */,
-				3EC64EB21D0AF02200717357 /* LinWeb.framework */,
 				3EC64EB01D0AF00100717357 /* WebKit.framework */,
-				3ECD41191CEE1F3E00D57372 /* LinCore.framework */,
-				3ECD41161CEE1F3900D57372 /* LinUtil.framework */,
-				3EE51EE41CE8CA3E0032729F /* LinComm.framework */,
 				3EE51EE21CE8C9B90032729F /* web */,
-				3ED1EC7F1C57E14700E2AC3B /* LinClient.framework */,
-				3ED1EC7C1C57E14700E2AC3B /* LinUtil.framework */,
-				3ED1EC791C57E14700E2AC3B /* LinCore.framework */,
-				3ED1EC761C57E14700E2AC3B /* LinServer.framework */,
 				3E200EA61C4D5FB000A00A10 /* demo */,
 				3E200EBB1C4D5FB000A00A10 /* demoTests */,
 				3E200EC61C4D5FB000A00A10 /* demoUITests */,
 				3E200EA51C4D5FB000A00A10 /* Products */,
+				3E1974551DB4C97000C5A6EC /* Frameworks */,
+				84DADA814AB189F426B6990C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +179,8 @@
 		3E200EA61C4D5FB000A00A10 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				3E66A72C1DC9CE95005628AC /* data1.zip */,
+				3E53F8841DC6405F00E79390 /* data2.zip */,
 				3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */,
 				3E200EA91C4D5FB000A00A10 /* ViewController.swift */,
 				3E200EAB1C4D5FB000A00A10 /* Main.storyboard */,
@@ -162,6 +189,11 @@
 				3E200EB31C4D5FB000A00A10 /* Info.plist */,
 				3EC64EAE1D0AEF2500717357 /* WebViewController.swift */,
 				3E98399A1D21023D00CF3049 /* ScrollImagesController.swift */,
+				3EB565AE1DD368F400828FF7 /* RAC.swift */,
+				3EB565BF1DD435D300828FF7 /* RACVM.swift */,
+				3EA79C4B1DDC0D4900972A8A /* MVVM.swift */,
+				3E519A101DDEED7200B60C0E /* MainViewController.swift */,
+				3E519A121DDEEF4900B60C0E /* MainViewModel.swift */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -184,6 +216,15 @@
 			path = demoUITests;
 			sourceTree = "<group>";
 		};
+		84DADA814AB189F426B6990C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DC0BAD3412467BC34B233B21 /* Pods-demo.debug.xcconfig */,
+				DDBED86DD6B8B51E312AE66A /* Pods-demo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -191,10 +232,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E200ECC1C4D5FB000A00A10 /* Build configuration list for PBXNativeTarget "demo" */;
 			buildPhases = (
+				7C53099EEE174A3F712B0B1F /* [CP] Check Pods Manifest.lock */,
 				3E200EA01C4D5FB000A00A10 /* Sources */,
 				3E200EA11C4D5FB000A00A10 /* Frameworks */,
 				3E200EA21C4D5FB000A00A10 /* Resources */,
-				3ED1EC821C57E14700E2AC3B /* Embed Frameworks */,
+				3E66A72B1DC79177005628AC /* Embed Frameworks */,
+				0212C0213A7A34F82FA3A1DD /* [CP] Embed Pods Frameworks */,
+				0FCE91EDCE0F0781456F4CA4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -255,6 +299,11 @@
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = XJ6M2P7374;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					3E200EB71C4D5FB000A00A10 = {
 						CreatedOnToolsVersion = 7.2;
@@ -293,10 +342,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E66A72D1DC9CE95005628AC /* data1.zip in Resources */,
 				3E1DF47C1D903B250041D2AA /* buyers in Resources */,
 				3E200EB21C4D5FB000A00A10 /* LaunchScreen.storyboard in Resources */,
 				3EE51EE31CE8C9B90032729F /* web in Resources */,
 				3E200EAF1C4D5FB000A00A10 /* Assets.xcassets in Resources */,
+				3E53F8851DC6405F00E79390 /* data2.zip in Resources */,
 				3E200EAD1C4D5FB000A00A10 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,15 +368,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0212C0213A7A34F82FA3A1DD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-demo/Pods-demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0FCE91EDCE0F0781456F4CA4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-demo/Pods-demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C53099EEE174A3F712B0B1F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3E200EA01C4D5FB000A00A10 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EB565AF1DD368F400828FF7 /* RAC.swift in Sources */,
+				3EA79C4C1DDC0D4900972A8A /* MVVM.swift in Sources */,
+				3EB565C01DD435D300828FF7 /* RACVM.swift in Sources */,
 				3E98399B1D21023D00CF3049 /* ScrollImagesController.swift in Sources */,
 				3E200EAA1C4D5FB000A00A10 /* ViewController.swift in Sources */,
 				3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */,
 				3E200EA81C4D5FB000A00A10 /* AppDelegate.swift in Sources */,
+				3E519A131DDEEF4900B60C0E /* MainViewModel.swift in Sources */,
+				3E519A111DDEED7200B60C0E /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,33 +569,37 @@
 		};
 		3E200ECD1C4D5FB000A00A10 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC0BAD3412467BC34B233B21 /* Pods-demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
 		3E200ECE1C4D5FB000A00A10 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDBED86DD6B8B51E312AE66A /* Pods-demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};

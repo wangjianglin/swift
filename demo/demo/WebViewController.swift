@@ -81,7 +81,7 @@ open class WebViewController : UIViewController{
 //        self.loadUrl("/temp/www/index.html)
 //            self.loadUrl("web://buyers/index.html?debug=false&debugJs=true&url=http://s.feicuibaba.com&isUpdate=false&channel=own#/login")
         //        self.loadUrl("web/test.html")
-        _webView?.load(url:"buyers/index.html?debug=false&debugJs=true&url=http://s.feicuibaba.com&isUpdate=false&channel=own#/login")
+        _webView?.load("buyers/index.html?debug=false&debugJs=true&url=http://s.feicuibaba.com&isUpdate=false&channel=own#/login")
 //        self.loadUrl("http://wx.feicuibaba.com/index.html?debug=false&debugJs=true&isUpdate=false&channel=own#/login")
     }
 }

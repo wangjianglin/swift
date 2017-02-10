@@ -22,7 +22,7 @@
 #import "HTTPConnection.h"
 #import "HTTPMessage.h"
 #import "HTTPResponse.h"
-#import "HTTPDataResponse.h"
+//#import "HTTPDataResponse.h"
 #import "GCDAsyncSocket.h"
 #import "WebSocket.h"
 #import "HTTPAuthenticationRequest.h"

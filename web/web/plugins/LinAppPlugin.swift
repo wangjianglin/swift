@@ -17,7 +17,7 @@ private class __LinAppPlugin_UIAlertView : UIAlertView,UIAlertViewDelegate{
     
     fileprivate var type:Int = 0;
     
-    public func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int){
+    open func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int){
 //        let alert = alertView as! __LineWKWebView_UIAlertView;
         if self.type == 0 {
             self.alertCompletionHandler();
@@ -34,17 +34,17 @@ private class __LinAppPlugin_UIAlertView : UIAlertView,UIAlertViewDelegate{
     }
 }
 
-public class LinAppPlugin : LinAbstractWebPlugin {
+open class LinAppPlugin : LinAbstractWebPlugin {
    
     
-    public func copy(_ args:Json){
+    open func copy(_ args:Json){
         let pasateboard = UIPasteboard.general;
         pasateboard.setPersistent(true);
         pasateboard.string = args["content"].asString;
     }
     
 
-    private func drawInfo(logoView:UIView,text:String?){
+    fileprivate func drawInfo(_ logoView:UIView,text:String?){
         
         let logo_size:CGFloat = 35.0;
         let marginLeft:CGFloat = 10.0;
@@ -96,7 +96,7 @@ public class LinAppPlugin : LinAbstractWebPlugin {
         }
     }
     
-    public func info(_ args:Json){
+    open func info(_ args:Json){
         
         Queue.mainQueue {
             self.infoImpl(args);
@@ -104,7 +104,7 @@ public class LinAppPlugin : LinAbstractWebPlugin {
     }
     
     
-    private func infoImpl(_ args:Json){
+    fileprivate func infoImpl(_ args:Json){
     //    UIApplication * app =[UIApplication sharedApplication];
     //    UIWindow * window = app.windows[0];
         let app = UIApplication.shared;
@@ -120,7 +120,7 @@ public class LinAppPlugin : LinAbstractWebPlugin {
         
         
         
-        self.drawInfo(logoView: view, text: args["text"].asString);
+        self.drawInfo(view, text: args["text"].asString);
         
         Queue.asynQueue {
             Thread.sleep(forTimeInterval: 1);
@@ -133,20 +133,20 @@ public class LinAppPlugin : LinAbstractWebPlugin {
     }
 
     
-    public func version()->String{
+    open func version()->String{
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String;
     }
     
-    public func identifier()->String{
+    open func identifier()->String{
         return Bundle.main.object(forInfoDictionaryKey: kCFBundleIdentifierKey as String) as! String;
     }
     
-    public func build()->String{
+    open func build()->String{
         return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String;
     }
     
     
-    public func saveImage(_ args:Json){
+    open func saveImage(_ args:Json){
         
         let imageString = args["image"].asString;
         
@@ -178,7 +178,7 @@ public class LinAppPlugin : LinAbstractWebPlugin {
     }
     
     
-    public func alert(_ args:Json)->AsynResult{
+    open func alert(_ args:Json)->AsynResult{
         let result = AsynResult();
         Queue.mainQueue {
             let alertView = __LinAppPlugin_UIAlertView.init(title: args["title"].asString, message: args["message"].asString, delegate: nil, cancelButtonTitle: args["ok"].asString("确认"));
@@ -192,7 +192,7 @@ public class LinAppPlugin : LinAbstractWebPlugin {
         return result;
     }
     
-    public func confirm(_ args:Json)->AsynResult{
+    open func confirm(_ args:Json)->AsynResult{
         let result = AsynResult();
         Queue.mainQueue {
             let alertView = __LinAppPlugin_UIAlertView.init(title: args["title"].asString(""), message: args["message"].asString(""), delegate: nil, cancelButtonTitle: args["cancel"].asString("取消"), otherButtonTitles: args["ok"].asString("确认"));
@@ -206,7 +206,7 @@ public class LinAppPlugin : LinAbstractWebPlugin {
         return result;
     }
     
-    public func openUrl(_ args:Json){
+    open func openUrl(_ args:Json){
         if let url = URL.init(string: args["url"].asString("")){
             UIApplication.shared.openURL(url)
         }

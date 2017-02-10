@@ -7,22 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E2E75A51D92EF15000DCBD3 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2E75A41D92EF15000DCBD3 /* ReactiveSwift.framework */; };
+		3E519A171DE1F9D100B60C0E /* UIControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A161DE1F9D100B60C0E /* UIControls.swift */; };
+		3E519A191DE1FA0000B60C0E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A181DE1FA0000B60C0E /* ViewModel.swift */; };
 		3E8AA1521D2A55D8006E4922 /* rac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8AA1511D2A55D8006E4922 /* rac.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E8AA15A1D2A5904006E4922 /* RACCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA1591D2A5904006E4922 /* RACCommand.swift */; };
-		3E8AA15C1D2A628F006E4922 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA15B1D2A628F006E4922 /* RACSignal.swift */; };
+		3E8AA15A1D2A5904006E4922 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA1591D2A5904006E4922 /* Action.swift */; };
+		3E8AA15C1D2A628F006E4922 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA15B1D2A628F006E4922 /* Signal.swift */; };
 		3E8AA1601D2A64F8006E4922 /* RACSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA15F1D2A64F8006E4922 /* RACSubscriber.swift */; };
+		BC779778E5EA0E1496E719D7 /* Pods_LinRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF4A7D206427ED9655063152 /* Pods_LinRac.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3E2E75A01D92E9D6000DCBD3 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = ../Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		3E2E75A11D92E9D6000DCBD3 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		3E2E75A41D92EF15000DCBD3 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = ../Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
+		3E519A161DE1F9D100B60C0E /* UIControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControls.swift; sourceTree = "<group>"; };
+		3E519A181DE1FA0000B60C0E /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		3E8AA14E1D2A55D8006E4922 /* LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8AA1511D2A55D8006E4922 /* rac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rac.h; sourceTree = "<group>"; };
 		3E8AA1531D2A55D8006E4922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E8AA1591D2A5904006E4922 /* RACCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACCommand.swift; sourceTree = "<group>"; };
-		3E8AA15B1D2A628F006E4922 /* RACSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACSignal.swift; sourceTree = "<group>"; };
+		3E8AA1591D2A5904006E4922 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		3E8AA15B1D2A628F006E4922 /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
 		3E8AA15F1D2A64F8006E4922 /* RACSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACSubscriber.swift; sourceTree = "<group>"; };
 		7E4CDAF2B3E38BCABE01224F /* Pods-LinRac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinRac.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LinRac/Pods-LinRac.release.xcconfig"; sourceTree = "<group>"; };
 		9ADAE0B38D9AE84342F293A9 /* Pods-LinRac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinRac.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LinRac/Pods-LinRac.debug.xcconfig"; sourceTree = "<group>"; };
@@ -34,7 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E2E75A51D92EF15000DCBD3 /* ReactiveSwift.framework in Frameworks */,
+				BC779778E5EA0E1496E719D7 /* Pods_LinRac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,9 +79,11 @@
 			children = (
 				3E8AA1511D2A55D8006E4922 /* rac.h */,
 				3E8AA1531D2A55D8006E4922 /* Info.plist */,
-				3E8AA1591D2A5904006E4922 /* RACCommand.swift */,
-				3E8AA15B1D2A628F006E4922 /* RACSignal.swift */,
+				3E8AA1591D2A5904006E4922 /* Action.swift */,
+				3E8AA15B1D2A628F006E4922 /* Signal.swift */,
 				3E8AA15F1D2A64F8006E4922 /* RACSubscriber.swift */,
+				3E519A161DE1F9D100B60C0E /* UIControls.swift */,
+				3E519A181DE1FA0000B60C0E /* ViewModel.swift */,
 			);
 			path = rac;
 			sourceTree = "<group>";
@@ -136,7 +142,7 @@
 				TargetAttributes = {
 					3E8AA14D1D2A55D8006E4922 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -205,9 +211,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E519A191DE1FA0000B60C0E /* ViewModel.swift in Sources */,
 				3E8AA1601D2A64F8006E4922 /* RACSubscriber.swift in Sources */,
-				3E8AA15C1D2A628F006E4922 /* RACSignal.swift in Sources */,
-				3E8AA15A1D2A5904006E4922 /* RACCommand.swift in Sources */,
+				3E519A171DE1F9D100B60C0E /* UIControls.swift in Sources */,
+				3E8AA15C1D2A628F006E4922 /* Signal.swift in Sources */,
+				3E8AA15A1D2A5904006E4922 /* Action.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +324,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = rac/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.rac;
 				PRODUCT_NAME = LinRac;
@@ -336,6 +345,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = rac/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lin.rac;
 				PRODUCT_NAME = LinRac;

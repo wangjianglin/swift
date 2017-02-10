@@ -215,27 +215,16 @@ public func readDouble(_ buffer:[UInt8],offset:Int = 0)->Float64{
 //
 //=============================================================================================
 
-public func asInt8(_ value:UInt8)->Int8{
+public func asInt8(value:UInt8)->Int8{
     var value = value
     
     var r:Int8 = 0;
     
-    withUnsafePointer(to: &r) { (dest) -> () in
-        withUnsafePointer(to: &value, { (src) -> () in
-            
-            dest.withMemoryRebound(to: UInt8.self, capacity: 1, { (destPtr) -> () in
-                src.withMemoryRebound(to: UInt8.self, capacity: 1, { (srcPtr) -> () in
-                    destPtr[0] = srcPtr[0];
-                })
-            })
+    withUnsafeMutableBytes(of: &r, {(dest) -> () in
+        withUnsafeMutableBytes(of: &value, { (src) -> () in
+            dest[0] = src[0];
         })
-    }
-    
-//    withUnsafeMutablePointers(&r, &value) { (dest, src) -> () in
-//        let destPtr = UnsafeMutablePointer<UInt8>(dest);
-//        let srcPtr = UnsafeMutablePointer<UInt8>(src);
-//        destPtr[0] = srcPtr[0];
-//    }
+    });
     
     return r;
 }
@@ -245,23 +234,11 @@ public func asUInt8(_ value:Int8)->UInt8{
     
     var r:UInt8 = 0;
     
-//    withUnsafeMutablePointers(&r, &value) { (dest, src) -> () in
-//        let destPtr = UnsafeMutablePointer<UInt8>(dest);
-//        let srcPtr = UnsafeMutablePointer<UInt8>(src);
-//        
-//        destPtr[0] = srcPtr[0];
-//        
-//    }
-    withUnsafePointer(to: &r) { (dest) -> () in
-        withUnsafePointer(to: &value, { (src) -> () in
-            
-            dest.withMemoryRebound(to: UInt8.self, capacity: 1, { (destPtr) -> () in
-                src.withMemoryRebound(to: UInt8.self, capacity: 1, { (srcPtr) -> () in
-                    destPtr[0] = srcPtr[0];
-                })
-            })
+    withUnsafeMutableBytes(of: &r, {(dest) -> () in
+        withUnsafeMutableBytes(of: &value, { (src) -> () in
+            dest[0] = src[0];
         })
-    }
+    });
     
     return r;
 }
@@ -278,19 +255,13 @@ public func asInt32(_ value:UInt32)->Int32{
 //            destPtr[n] = srcPtr[n];
 //        }
 //    }
-    
-    withUnsafePointer(to: &r) { (dest) -> () in
-        withUnsafePointer(to: &value, { (src) -> () in
-            
-            dest.withMemoryRebound(to: UInt8.self, capacity: 4, { (destPtr) -> () in
-                src.withMemoryRebound(to: UInt8.self, capacity: 4, { (srcPtr) -> () in
-                    for n in 0 ..< 4 {
-                        destPtr[0] = srcPtr[0];
-                    }
-                })
-            })
+    withUnsafeMutableBytes(of: &r, {(dest) -> () in
+        withUnsafeMutableBytes(of: &value, { (src) -> () in
+            for n in 0 ..< 4 {
+                dest[n] = src[n];
+            }
         })
-    }
+    });
     return r;
 }
 
@@ -299,23 +270,12 @@ public func asUInt32(_ value:Int32)->UInt32{
     
     var r:UInt32 = 0;
     
-//    withUnsafeMutablePointers(&r, &value) { (dest, src) -> () in
-//        let destPtr = UnsafeMutablePointer<UInt8>(dest);
-//        let srcPtr = UnsafeMutablePointer<UInt8>(src);
-//        for n in 0 ..< 4 {
-//            destPtr[n] = srcPtr[n];
-//        }
-//    }
-    withUnsafePointer(to: &r) { (dest) -> () in
-        withUnsafePointer(to: &value, { (src) -> () in
+    withUnsafeMutableBytes(of: &r) { (dest) -> () in
+        withUnsafeMutableBytes(of: &value, { (src) -> () in
             
-            dest.withMemoryRebound(to: UInt8.self, capacity: 4, { (destPtr) -> () in
-                src.withMemoryRebound(to: UInt8.self, capacity: 4, { (srcPtr) -> () in
-                    for n in 0 ..< 4 {
-                        destPtr[0] = srcPtr[0];
-                    }
-                })
-            })
+            for n in 0 ..< 4 {
+                dest[n] = src[n];
+            }
         })
     }
     
@@ -335,16 +295,12 @@ public func asInt64(_ value:UInt64)->Int64{
 //        }
 //    }
     
-    withUnsafePointer(to: &r) { (dest) -> () in
-        withUnsafePointer(to: &value, { (src) -> () in
+    withUnsafeMutableBytes(of: &r) { (dest) -> () in
+        withUnsafeMutableBytes(of: &value, { (src) -> () in
             
-            dest.withMemoryRebound(to: UInt8.self, capacity: 8, { (destPtr) -> () in
-                src.withMemoryRebound(to: UInt8.self, capacity: 8, { (srcPtr) -> () in
-                    for n in 0 ..< 8 {
-                        destPtr[0] = srcPtr[0];
-                    }
-                })
-            })
+            for n in 0 ..< 8 {
+                dest[n] = src[n];
+            }
         })
     }
     
@@ -364,16 +320,12 @@ public func asUInt64(_ value:Int64)->UInt64{
 //        }
 //    }
     
-    withUnsafePointer(to: &r) { (dest) -> () in
-        withUnsafePointer(to: &value, { (src) -> () in
+    withUnsafeMutableBytes(of: &r) { (dest) -> () in
+        withUnsafeMutableBytes(of: &value, { (src) -> () in
             
-            dest.withMemoryRebound(to: UInt8.self, capacity: 8, { (destPtr) -> () in
-                src.withMemoryRebound(to: UInt8.self, capacity: 8, { (srcPtr) -> () in
-                    for n in 0 ..< 8 {
-                        destPtr[0] = srcPtr[0];
-                    }
-                })
-            })
+            for n in 0 ..< 8 {
+                dest[n] = src[n];
+            }
         })
     }
     

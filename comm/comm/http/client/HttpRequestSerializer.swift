@@ -22,7 +22,7 @@ extension String {
 }
 
 /// Default Serializer for serializing an object to an HTTP request. This applies to form serialization, parameter encoding, etc.
-open class HttpRequestSerializer: NSObject {
+internal class HttpRequestSerializer: NSObject {
     let contentTypeKey = "Content-Type"
     
     /// headers for the request.
@@ -55,8 +55,8 @@ open class HttpRequestSerializer: NSObject {
     
         - returns: A new NSMutableURLRequest with said options.
     */
-    func newRequest(_ url: URL, method: HttpMethod) -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
+    func newRequest(_ url: URL, method: HttpMethod) -> URLRequest {
+        var request = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
         request.httpMethod = method.rawValue
         request.cachePolicy = self.cachePolicy
         request.timeoutInterval = self.timeoutInterval
@@ -79,9 +79,9 @@ open class HttpRequestSerializer: NSObject {
         
         - returns: A new NSMutableURLRequest with said options or an error.
     */
-    func createRequest(_ url: URL, method: HttpMethod, parameters: Dictionary<String,AnyObject>?,isMulti isDefMulti:Bool? = nil) -> (request: NSMutableURLRequest, error: NSError?) {
+    func createRequest(_ url: URL, method: HttpMethod, parameters: Dictionary<String,AnyObject>?,isMulti isDefMulti:Bool? = nil) -> (request: URLRequest, error: NSError?) {
         
-        let request = newRequest(url, method: method)
+        var request = newRequest(url, method: method)
         var isMulti = isDefMulti;
         //do a check for upload objects to see if we are multi form
         if let params = parameters {
@@ -89,7 +89,7 @@ open class HttpRequestSerializer: NSObject {
                 isMulti = isMultiForm(params)
             }
         }
-        if isMulti! {
+        if isMulti == true {
             if(method != .POST && method != .PUT) {
                 request.httpMethod = HttpMethod.POST.rawValue // you probably wanted a post
             }
@@ -261,7 +261,7 @@ open class HttpRequestSerializer: NSObject {
 }
 
 /// JSON Serializer for serializing an object to an HTTP request. Same as HTTPRequestSerializer, expect instead of HTTP form encoding it does JSON.
-open class JSONRequestSerializer: HttpRequestSerializer {
+internal class JSONRequestSerializer: HttpRequestSerializer {
     
     /**
         Creates a new NSMutableURLRequest object with configured options.
@@ -272,11 +272,11 @@ open class JSONRequestSerializer: HttpRequestSerializer {
         
         - returns: A new NSMutableURLRequest with said options or an error.
     */
-    open override func createRequest(_ url: URL, method: HttpMethod, parameters: Dictionary<String,AnyObject>?,isMulti isDefMutil:Bool? = nil) -> (request: NSMutableURLRequest, error: NSError?) {
+    open override func createRequest(_ url: URL, method: HttpMethod, parameters: Dictionary<String,AnyObject>?,isMulti isDefMutil:Bool? = nil) -> (request: URLRequest, error: NSError?) {
         if self.isURIParam(method) {
             return super.createRequest(url, method: method, parameters: parameters)
         }
-        let request = newRequest(url, method: method)
+        var request = newRequest(url, method: method)
         var error: NSError?
         if parameters != nil {
             let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue));

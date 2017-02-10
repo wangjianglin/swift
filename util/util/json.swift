@@ -681,18 +681,18 @@ extension Json {
 //        }
     }
     
-    fileprivate func toStringJson(_ v:Any)->String?{
+    fileprivate func toStringJson(_ value:Any)->String?{
         ///var dic = Dictionary<String,String>();
         var string:String = "";
         //var dic2 = dic;
         var t:Int = 0;
-        var tmpv: Any = v;
-        if let tmpv = tmpv as AnyObject? {
-            if tmpv.responds(to: Selector(("jsonSkip:"))) {
+        var realValue: Any = value;
+        if let realValue = realValue as AnyObject? {
+            if realValue.responds(to: Selector(("jsonSkip:"))) {
                 return nil;
             }
         }
-        switch v{
+        switch value{
         case is NSNull:
             t = -1;
         case let json as Json:
@@ -707,15 +707,15 @@ extension Json {
             }else if json.isDate{
                 t = 4;
             }
-            tmpv = json.originalValue;
+            realValue = json.originalValue;
         default:
-            if v is NSArray{
+            if value is NSArray{
                 t = 1;
-            }else if v is NSDictionary{
+            }else if value is NSDictionary{
                 t = 2;
-            }else if v is String{
+            }else if value is String{
                 t = 3;
-            }else if v is Date{
+            }else if value is Date{
                 t = 4;
             }
         }
@@ -724,16 +724,16 @@ extension Json {
         case -1:
             string = "null";
         case 0:
-            string = "\(v)";
+            string = "\(realValue)";
         case 4:
             let dateFormatter = DateFormatter();
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss";
-            string = dateFormatter.string(from: v as! Date);
+            string = dateFormatter.string(from: realValue as! Date);
         case 1:
-            string = toArrayString(tmpv as! [AnyObject]);
+            string = toArrayString(realValue as! [AnyObject]);
         case 2:
 //            if pre.lengthOfBytesUsingEncoding(1) != 0{
-                string = toDicString(tmpv as! Dictionary<String,AnyObject>)
+                string = toDicString(realValue as! Dictionary<String,AnyObject>)
 //                for (name,item) in d{
 //                    dic[name] = item;
 //                }
@@ -744,16 +744,16 @@ extension Json {
 //                }
 //            }
         case 3:
-            string = "\"\(tmpv)\"";
+            string = "\"\(realValue)\"";
         default:
-            string = "\(tmpv)";
+            string = "\(realValue)";
         }
         return string;
     }
     
-    fileprivate func toArrayString(_ v:[AnyObject])->String{
+    fileprivate func toArrayString(_ value:[AnyObject])->String{
         var string:String = "[";
-        for (index,item) in v.enumerated(){
+        for (index,item) in value.enumerated(){
             if let s = toStringJson(item){
                 if index != 0 {
                     string += ",";
@@ -767,11 +767,11 @@ extension Json {
         return string;
     }
     
-    fileprivate func toDicString(_ v:Dictionary<String,AnyObject>)->String{
+    fileprivate func toDicString(_ value:Dictionary<String,AnyObject>)->String{
         
         var string:String = "{";
         var n:Int = 0;
-        for (name,item) in v{
+        for (name,item) in value{
             if let s = toStringJson(item) {
                 if n != 0 {
                     string += ",";
@@ -798,14 +798,14 @@ extension Json{
         
 //        var dic = Dictionary<String,String>();
         
-        return self.toParamsJson("", v: self);
+        return self.toParamsJson("", value: self);
         
         
 //        return dic;
         
     }
     
-    fileprivate func toParamsJson(_ pre:String,v:AnyObject)->Dictionary<String,String>{
+    fileprivate func toParamsJson(_ pre:String,value:AnyObject)->Dictionary<String,String>{
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // superset of OP's format
@@ -817,15 +817,15 @@ extension Json{
         
         //-1、nil，1、数据，2：字典，4：日期
         var t:Int = 0;
-        var tmpv: Any = v;
+        var realValue: Any = value;
         
-        if let tmpv = tmpv as AnyObject? {
-            if tmpv.responds(to: Selector(("jsonSkip:"))) {
+        if let realValue = realValue as AnyObject? {
+            if realValue.responds(to: Selector(("jsonSkip:"))) {
                 return dic;
             }
         }
         
-        switch v{
+        switch value{
         case is NSNull:
             t = -1;
         case let jsonModel as JsonModel:
@@ -838,7 +838,7 @@ extension Json{
             }else if jsonModel.json.isDate {
                 t = 4;
             }
-            tmpv = jsonModel.json.originalValue;
+            realValue = jsonModel.json.originalValue;
             break;
         case let json as Json:
             if json.isError{
@@ -850,13 +850,13 @@ extension Json{
             }else if json.isDate {
                 t = 4;
             }
-            tmpv = json.originalValue;
+            realValue = json.originalValue;
         default:
-            if v is NSArray{
+            if value is NSArray{
                 t = 1;
-            }else if v is NSDictionary{
+            }else if value is NSDictionary{
                 t = 2;
-            }else if v is Date {
+            }else if value is Date {
                 t = 4;
             }
         }
@@ -865,36 +865,36 @@ extension Json{
         case -1:
             dic[pre] = "null";
         case 0:
-            dic[pre] = "\(v)";
+            dic[pre] = "\(realValue)";
         case 4:
-            dic[pre] = dateFormatter.string(from: v as! Date);
+            dic[pre] = dateFormatter.string(from: realValue as! Date);
         case 1:
-            let d = toArrayParams(pre,v:tmpv as! [AnyObject]);
+            let d = toArrayParams(pre,value:realValue as! [AnyObject]);
             for (name,item) in d{
                 dic[name] = item;
             }
         case 2:
             if pre.lengthOfBytes(using: String.Encoding(rawValue: UInt(1))) != 0{
-                let d = toDicParams("\(pre).", v: tmpv as! Dictionary<String,AnyObject>)
+                let d = toDicParams("\(pre).", value: realValue as! Dictionary<String,AnyObject>)
                 for (name,item) in d{
                     dic[name] = item;
                 }
             }else{
-                let d = toDicParams("", v: tmpv as! Dictionary<String,AnyObject>)
+                let d = toDicParams("", value: realValue as! Dictionary<String,AnyObject>)
                 for (name,item) in d{
                     dic[name] = item;
                 }
             }
         default:
-            dic[pre] = "\(tmpv)";
+            dic[pre] = "\(realValue)";
         }
         return dic;
     }
     
-    fileprivate func toArrayParams(_ pre:String,v:[AnyObject])->Dictionary<String,String>{
+    fileprivate func toArrayParams(_ pre:String,value:[AnyObject])->Dictionary<String,String>{
         var dic = Dictionary<String,String>();
-        for (index,item) in v.enumerated(){
-            let d = toParamsJson("\(pre)[\(index)]",v:item);
+        for (index,item) in value.enumerated(){
+            let d = toParamsJson("\(pre)[\(index)]",value:item);
             for (name,item) in d{
                 dic[name] = item;
             }
@@ -902,11 +902,11 @@ extension Json{
         return dic;
     }
     
-    fileprivate func toDicParams(_ pre:String,v:Dictionary<String,AnyObject>)->Dictionary<String,String>{
+    fileprivate func toDicParams(_ pre:String,value:Dictionary<String,AnyObject>)->Dictionary<String,String>{
         
         var dic = Dictionary<String,String>();
-        for (name,item) in v{
-            let d = toParamsJson("\(pre)\(name)",v:item);
+        for (name,item) in value{
+            let d = toParamsJson("\(pre)\(name)",value:item);
             for (name,item) in d{
                 dic[name] = item;
             }

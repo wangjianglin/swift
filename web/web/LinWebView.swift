@@ -10,24 +10,24 @@ import WebKit
 import LinUtil
 import JavaScriptCore
 
-public class LinWebView : UIView {
+open class LinWebView : UIView {
     
     public enum WebType{
         case uiWebView
         case wkWebView
     }
     
-    private var uiWebView:LinUIWebView?;
-    private var wkWebView:LinWKWebView?;
+    fileprivate var uiWebView:LinUIWebView?;
+    fileprivate var wkWebView:LinWKWebView?;
     
-    public var origin:UIView{
+    open var origin:UIView{
         if let uiWebView = uiWebView {
             return uiWebView;
         }
         return wkWebView!;
     }
     
-    private let type:LinWebView.WebType;// = LinWebView.WebType.uiWebView;
+    fileprivate let type:LinWebView.WebType;// = LinWebView.WebType.uiWebView;
     
     public init(type:LinWebView.WebType){
         self.type = type;
@@ -35,7 +35,7 @@ public class LinWebView : UIView {
         self.initView();
     }
     
-    private func initView(){
+    fileprivate func initView(){
         if type == LinWebView.WebType.uiWebView {
             self.uiWebView = LinUIWebView.init(webView: self);
             
@@ -66,9 +66,9 @@ public class LinWebView : UIView {
         self.initView();
     }
     
-    private var completionHandler:((Any?)->())? = nil;
+    fileprivate var completionHandler:((Any?)->())? = nil;
     
-    public func evaluateJavaScript(js:String,completionHandler:((Any?)->())? = nil){
+    open func evaluateJavaScript(_ js:String,completionHandler:((Any?)->())? = nil){
         if let uiWebView = self.uiWebView {
             let value = uiWebView.stringByEvaluatingJavaScript(from: js);
             completionHandler?(value);
@@ -85,12 +85,12 @@ public class LinWebView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override public func addSubview(_ view: UIView) {
+    override open func addSubview(_ view: UIView) {
         super.addSubview(view);
         self.bringWebView();
     }
     
-    private func bringWebView(){
+    fileprivate func bringWebView(){
         if let uiWebView = self.uiWebView {
             super.bringSubview(toFront: uiWebView);
         }
@@ -105,7 +105,7 @@ public class LinWebView : UIView {
         self.bringWebView();
     }
     
-    public func load(url:String){
-        self.uiWebView?.load(url: url);
+    open func load(_ url:String){
+        self.uiWebView?.load(url);
     }
 }

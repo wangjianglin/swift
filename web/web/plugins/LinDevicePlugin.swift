@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class LinDevicePlugin : LinAbstractWebPlugin{
+open class LinDevicePlugin : LinAbstractWebPlugin{
 //-(Json*)productName:(Json*)args{
 //    return [[Json alloc] initWithObject:@"iPhone"];
-    public func productName()->String{
+    open func productName()->String{
         return "iPhone";
     }
 //}

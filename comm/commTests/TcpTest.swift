@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import LinClient
 
 class TcpTest: XCTestCase {
 
@@ -33,26 +32,26 @@ class TcpTest: XCTestCase {
 //        }
 //    }
     
-    func testComm(){
-        let comm:TcpCommunicate = TcpClientCommunicate(host: "192.168.1.66", port: 7890) { (session, pack, response) -> () in
-            print("pack:\(pack)");
-        };
-        
-        let commandPack = TcpCommandDetectPackage();
-        
-        print(commandPack.command)
-        //print((Mirror(reflecting: commandPack).subjectType as! TcpCommandDetectPackage.Type).command)
-        //        print("\(LinClient.TcpCommandDetectPackage.command)");
-        //        commandPack.test()
-        comm.start();
-//        let jsonPack:TcpJsonPackage = TcpJsonPackage();
+//    func testComm(){
+//        let comm:TcpCommunicate = TcpClientCommunicate(host: "192.168.1.66", port: 7890) { (session, pack, response) -> () in
+//            print("pack:\(pack)");
+//        };
 //        
-//        print(jsonPack.path)
-//        //        jsonPack.test();
+//        let commandPack = TcpCommandDetectPackage();
 //        
-//        let rpack = comm.send(jsonPack).response as! TcpJsonPackage;
-//        //        rpack.header("name", value:"value");
-//        print(rpack);
-    }
+//        print(commandPack.command)
+//        //print((Mirror(reflecting: commandPack).subjectType as! TcpCommandDetectPackage.Type).command)
+//        //        print("\(LinClient.TcpCommandDetectPackage.command)");
+//        //        commandPack.test()
+//        comm.start();
+////        let jsonPack:TcpJsonPackage = TcpJsonPackage();
+////        
+////        print(jsonPack.path)
+////        //        jsonPack.test();
+////        
+////        let rpack = comm.send(jsonPack).response as! TcpJsonPackage;
+////        //        rpack.header("name", value:"value");
+////        print(rpack);
+//    }
 
 }

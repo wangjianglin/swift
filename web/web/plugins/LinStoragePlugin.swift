@@ -10,9 +10,9 @@ import Foundation
 import WebKit
 import LinUtil
 
-public class LinStoragePlugin : LinAbstractWebPlugin{
+open class LinStoragePlugin : LinAbstractWebPlugin{
 
-    private let storage:KeyValueStorage = {
+    fileprivate let storage:KeyValueStorage = {
         return KeyValueStorage.init(name: "web_storage");
     }()
     
@@ -21,13 +21,13 @@ public class LinStoragePlugin : LinAbstractWebPlugin{
     }
     
     
-    public func setItem(_ args:Json){
+    open func setItem(_ args:Json){
         let item = args["item"].asString("");
         let value = args["value"].asString("");
         storage.setItem(key: item, value: value);
     }
     
-    public func getItem(_ args:Json)->Json?{
+    open func getItem(_ args:Json)->Json?{
         let item = args["item"].asString("");
         let value = storage.getItem(key: item);
         if let value = value {

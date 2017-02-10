@@ -14,10 +14,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3E37466C1A26368100B980E9"
+               BuildableName = "LinUtil.framework"
+               BlueprintName = "LinUtil"
+               ReferencedContainer = "container:../util/LinUtil.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "3E3746A51A27757B00B980E9"
                BuildableName = "LinComm.framework"
                BlueprintName = "LinComm"
-               ReferencedContainer = "container:../client/LinComm.xcodeproj">
+               ReferencedContainer = "container:../comm/LinComm.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -42,24 +56,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3E8982601B1E1D9100DE0AC8"
-               BuildableName = "LinServer.framework"
-               BlueprintName = "LinServer"
-               ReferencedContainer = "container:../server/LinServer.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3E37466C1A26368100B980E9"
-               BuildableName = "LinUtil.framework"
-               BlueprintName = "LinUtil"
-               ReferencedContainer = "container:../util/LinUtil.xcodeproj">
+               BlueprintIdentifier = "3E8AA14D1D2A55D8006E4922"
+               BuildableName = "LinRac.framework"
+               BlueprintName = "LinRac"
+               ReferencedContainer = "container:../rac/LinRac.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -84,26 +84,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3E200EB71C4D5FB000A00A10"
-               BuildableName = "demoTests.xctest"
-               BlueprintName = "demoTests"
-               ReferencedContainer = "container:demo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3E200EC21C4D5FB000A00A10"
-               BuildableName = "demoUITests.xctest"
-               BlueprintName = "demoUITests"
-               ReferencedContainer = "container:demo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -137,6 +117,16 @@
             ReferencedContainer = "container:demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-com.apple.CoreData.SQLDebug"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "1"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

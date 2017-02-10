@@ -18,7 +18,9 @@ public protocol HttpResponse {
     /// The body or response data of the HTTP Response.
     var responseObject: AnyObject?{get}
     /// The status code of the HTTP Response.
-    var statusCode: Int?{get}
+    var statusCode: Int{get}
+    
+    var contentLength:UInt64{get}
     ///Returns the response as a string
 //    public func text() -> String? {
 //        if let d = self.responseObject as? NSData {

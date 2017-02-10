@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import LinComm
+import Foundation
+import LinUtil
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        LinComm.HttpCommunicate.commUrl = "http://s.feicuibaba.com";
+        HttpCommunicate.httpDns = AliHttpDNS(account: "172280");
+        HttpCommunicate.httpDns?.setDelegateForDegradationFilter({ (hostName) -> Bool in
+            if hostName.hasSuffix("feicuibaba.com"){
+                return false;
+            }
+            return true;
+        })
+        
+        HttpCommunicate.httpDns?.setPreResolveHosts("s.feicuibaba.com","s.feicuibaba.com");
         return true
     }
 
@@ -41,6 +54,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    public func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Swift.Void){
+////        print("ok.....");
+////        
+//////        UIAlertView.show(<#T##UIAlertView#>)
+//        Queue.mainQueue {
+//            UIAlertView.show("ok.");
+//        }
+        
+        flag = true;
+        if identifier1 == nil {
+            identifier1 = identifier;
+        }else{
+            identifier2 = identifier;
+        }
+        
+//        HttpCommunicate.addHandleEventsForBackgroundURLSession(identifier:identifier,completionHandler:completionHandler);
+    
+//        URLSession().getTasksWithCompletionHandler { (task, upload, down) in
+//            print("task:\(task)\tupload:\(upload)\t\(down)")
+//        }
+////        completionHandler();
+    }
 
 }
 

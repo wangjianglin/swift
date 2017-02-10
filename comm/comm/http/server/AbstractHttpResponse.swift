@@ -9,7 +9,7 @@
 import Foundation
 
 
-open class AbstractHttpResponse : HttpResponse{
+open class AbstractHttpResponse :NSObject, HttpResponse{
     /// The header values in HTTP response.
     open var headers: Dictionary<String,String>?
     /// The mime type of the HTTP response.
@@ -19,7 +19,8 @@ open class AbstractHttpResponse : HttpResponse{
     /// The body or response data of the HTTP Response.
     open var responseObject: AnyObject?
     /// The status code of the HTTP Response.
-    open var statusCode: Int?
+    open var statusCode: Int = 0
+    open var contentLength: UInt64 = 0;
     ///Returns the response as a string
 //    public func text() -> String? {
 //        if let d = self.responseObject as? NSData {

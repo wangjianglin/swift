@@ -14,6 +14,7 @@ open class AutoResetEvent {
     fileprivate var lock:NSCondition;
     //var  timeToDoWork:Int = 0;
     fileprivate var isSet:Bool;
+    
     private var mainThreadction:(()->())?;
     
     public init(isSet:Bool = false){
@@ -52,7 +53,7 @@ open class AutoResetEvent {
     }
     
 
-    private var canEnterMainThread = false;
+    private var canEnterMainThread = true;//只有当在主线程上调用的 waitOne 之后，
     
     open func waitOne(){
         
@@ -67,6 +68,8 @@ open class AutoResetEvent {
             mainThreadction();
             self.mainThreadction = nil;
         }
+        canEnterMainThread = true;
+        
         lock.unlock();
     }
     

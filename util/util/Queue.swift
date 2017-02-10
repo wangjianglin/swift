@@ -9,7 +9,7 @@
 import Foundation
 
 
-open class AsynOperation : Operation{
+fileprivate class AsynOperation : Operation{
  
     fileprivate var action:(()->());
     fileprivate init(action:@escaping (()->())){
@@ -21,20 +21,24 @@ open class AsynOperation : Operation{
 }
 open class Queue{
     
-    struct YRSingleton{
-        static var predicate:Int = 0
-        static var instance:OperationQueue? = nil
+    private struct YRSingleton{
+        static var instance:OperationQueue = OperationQueue()
     }
  
     fileprivate static var __once: () = {
 
-            YRSingleton.instance = OperationQueue();
-
-            YRSingleton.instance!.maxConcurrentOperationCount = 10;
+            YRSingleton.instance.maxConcurrentOperationCount = 10;
 
         }()
 
-    
+    public class var maxConcurrentOperationCount:Int{
+        get{
+            return YRSingleton.instance.maxConcurrentOperationCount;
+        }
+        set{
+            return YRSingleton.instance.maxConcurrentOperationCount = newValue;
+        }
+    }
 
     fileprivate var _queue:OperationQueue;
     public init(count:Int = 5){
@@ -50,32 +54,25 @@ open class Queue{
     fileprivate class var asynQueue:OperationQueue{
         
         _ = Queue.__once
-        //dispatch_once(&YRSingleton.predicate,{
-        //    YRSingleton.instance = NSOperationQueue();
-        //    YRSingleton.instance!.maxConcurrentOperationCount = 10;
-        //})
-        return YRSingleton.instance!
+        return YRSingleton.instance;
     }
-    
     
     open class func mainQueue(_ action:@escaping (()->())){
         DispatchQueue.main.async(execute: {() in
             action();
         });
     }
+    
     open class func asynQueue(_ action:@escaping (()->())){
         let operation = AsynOperation(action: action);
         Queue.asynQueue.addOperation(operation);
     }
+    
     open class func asynThread(_ action:@escaping (()->())){
-//        var operation = AsynOperation(action: action);
-//        Queue.asynQueue.addOperation(operation);
-//        init(target: AnyObject, selector: Selector, object argument: AnyObject?)
         let delegate = EventDelegateAction(action:{(_:AnyObject) in
             action();
         });
-        let thread = Thread(target:delegate,selector:Selector("action:"),object:nil);
-//        thread.name = "upload log thread";
+        let thread = Thread(target:delegate,selector:Selector(("action:")),object:nil);
         thread.start();
     }
 }

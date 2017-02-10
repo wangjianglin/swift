@@ -8,3 +8,12 @@ TCP实现异步响应
 3、Handle 实现对 debug 参数的处理
 
 3、每次http请求，可以单独传一些个性化参数（timeout、mainThread、debug）
+
+//添加 http 头
+open class HttpPackage
+
+
+测试 session id，特别是后台任务
+
+
+加入https httpdns 认证

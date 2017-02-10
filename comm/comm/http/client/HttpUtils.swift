@@ -24,19 +24,21 @@ class HttpUtils {
     
     class func url(_ impl:HttpCommunicateImpl,pack:HttpPackage)->String {
     
-        var curl = impl.commUrl;
-        //var commUriString = "";
-        if pack.url.hasPrefix("/"){
-            curl += pack.url.substring(from: pack.url.characters.index(pack.url.startIndex, offsetBy: 1))
-        }else{
-            curl += pack.url;
+        var curl = pack.url;
+        if !curl.hasPrefix("http://") && !curl.hasPrefix("https://") {
+            curl = impl.commUrl;
+            if pack.url.hasPrefix("/"){
+                curl += pack.url.substring(from: pack.url.characters.index(pack.url.startIndex, offsetBy: 1))
+            }else{
+                curl += pack.url;
+            }
         }
         
-        if !pack.enableCache{
+        if pack.enableCache{
             if curl.range(of: "?") != nil {
-                curl += "&_time_stamp_\(Date().timeIntervalSince1970 * 100000)=1";
+                curl += "&_time_stamp_\(Date().timeIntervalSince1970 * 100000)=\(arc4random())";
             }else{
-                curl += "?_time_stamp_\(Date().timeIntervalSince1970 * 100000)=1";
+                curl += "?_time_stamp_\(Date().timeIntervalSince1970 * 100000)=\(arc4random())";
             }
         }
         

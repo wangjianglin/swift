@@ -7,22 +7,47 @@
 //
 
 import Foundation
+import LinUtil
 
 open class HttpUploadPackage : HttpPackage{
     
     
-    struct YRSingleton{
-        static var predicate:Int = 0
-        static var instance:FileUploadHttpRequestHandle? = nil
+//    struct YRSingleton{
+//        static var predicate:Int = 0
+//        static var instance:FileUploadHttpRequestHandle? = nil
+//    }
+//  
+//    fileprivate static var __once: () = {
+//
+//            YRSingleton.instance = FileUploadHttpRequestHandle()
+//
+//        }()
+    public enum UpMode{
+        case Background
+        case Normal
     }
-  
-    fileprivate static var __once: () = {
-
-            YRSingleton.instance = FileUploadHttpRequestHandle()
-
-        }()
-
     
+    private struct UpModeValue{
+        static var value:UpMode = UpMode.Background;
+    }
+    
+    open class var defaultUpMode:UpMode{
+        get { return UpModeValue.value;}
+        set { UpModeValue.value = newValue;}
+    }
+    
+    private var _upMode:UpMode?;
+    open var upMode:UpMode{
+        get{
+            if let v = _upMode {
+                return v;
+            }
+            return UpModeValue.value;
+        }
+        set { _upMode = newValue; }
+    }
+
+    public var identifier:String?;
 
     public init(url:String){
         _files = Dictionary<String,HttpUpload>();
@@ -36,14 +61,14 @@ open class HttpUploadPackage : HttpPackage{
 //        self._method = method;
     }
     
-    open class var FILE_UPLOAD_HANDLE:HttpRequestHandle {
-        
-        _ = HttpUploadPackage.__once
-        return YRSingleton.instance!
-    }
+//    open class var FILE_UPLOAD_HANDLE:HttpRequestHandle {
+//        
+//        _ = HttpUploadPackage.__once
+//        return YRSingleton.instance!
+//    }
     
     
-    open var progress:((_ send:Int64,_ total:Int64) -> Void)!;
+//    open var progress:((_ send:Int64,_ total:Int64,_ bytes:Int64) -> Void)!;
     
     fileprivate var _files:Dictionary<String,HttpUpload>;
     
@@ -52,7 +77,16 @@ open class HttpUploadPackage : HttpPackage{
     }
     
     open func addFile(_ name:String,file:String){
-        _files[name] = HttpUpload(fileUrl: URL(fileURLWithPath: file));
+//        pathFor(Documents.bundle, path: file)
+        if let file = pathFor(Documents.bundle, path: file) {
+            _files[name] = HttpUpload(fileUrl: URL(fileURLWithPath: file));
+        }else{
+            _files.removeValue(forKey: name);
+        }
+    }
+    
+    open func addFile(_ name:String,fileUrl file:URL){
+        _files[name] = HttpUpload(fileUrl: file);
     }
     
     open func addFile(_ name:String,data: Data, fileName: String, mimeType: String){

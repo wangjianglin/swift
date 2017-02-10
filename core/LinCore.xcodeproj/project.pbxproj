@@ -188,7 +188,7 @@
 		3E5917CA1CF8C62300CCFBC2 /* IOS7ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5917C81CF8C62300CCFBC2 /* IOS7ScrollView.m */; };
 		3E5917CB1CF8C62300CCFBC2 /* IOS7ScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E5917C91CF8C62300CCFBC2 /* IOS7ScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E64C1DF1A6AD158007185E2 /* UIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E64C1DE1A6AD158007185E2 /* UIViews.swift */; };
-		3E73DA981A8795A30052C16A /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73DA4A1A8795A20052C16A /* AlertView.swift */; };
+		3E73DA981A8795A30052C16A /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73DA4A1A8795A20052C16A /* UIAlertController.swift */; };
 		3E73DA991A8795A30052C16A /* CacheImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73DA4B1A8795A20052C16A /* CacheImageView.swift */; };
 		3E73DA9A1A8795A30052C16A /* QCheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E73DA4D1A8795A20052C16A /* QCheckBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E73DA9B1A8795A30052C16A /* QCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73DA4E1A8795A20052C16A /* QCheckBox.m */; };
@@ -501,7 +501,7 @@
 		3E5917C81CF8C62300CCFBC2 /* IOS7ScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOS7ScrollView.m; sourceTree = "<group>"; };
 		3E5917C91CF8C62300CCFBC2 /* IOS7ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOS7ScrollView.h; sourceTree = "<group>"; };
 		3E64C1DE1A6AD158007185E2 /* UIViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViews.swift; sourceTree = "<group>"; };
-		3E73DA4A1A8795A20052C16A /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		3E73DA4A1A8795A20052C16A /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		3E73DA4B1A8795A20052C16A /* CacheImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheImageView.swift; sourceTree = "<group>"; };
 		3E73DA4D1A8795A20052C16A /* QCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCheckBox.h; sourceTree = "<group>"; };
 		3E73DA4E1A8795A20052C16A /* QCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCheckBox.m; sourceTree = "<group>"; };
@@ -816,7 +816,7 @@
 				3E1219911CF8312500D43267 /* UILabels.h */,
 				3ECD404E1CEDC1E300D57372 /* MRProgress */,
 				3E0854531A8A5F470052DCEE /* Table */,
-				3E73DA4A1A8795A20052C16A /* AlertView.swift */,
+				3E73DA4A1A8795A20052C16A /* UIAlertController.swift */,
 				3E73DA4B1A8795A20052C16A /* CacheImageView.swift */,
 				3E73DA4C1A8795A20052C16A /* CheckBox */,
 				3E73DA4F1A8795A20052C16A /* Form */,
@@ -1293,7 +1293,7 @@
 				TargetAttributes = {
 					3E3746461A26365A00B980E9 = {
 						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0810;
 					};
 					3E3746511A26365A00B980E9 = {
 						CreatedOnToolsVersion = 6.1;
@@ -1468,7 +1468,7 @@
 				3E1219E01CF845A400D43267 /* CameraViewController.m in Sources */,
 				3E73DADE1A8795A30052C16A /* ZHPickView.m in Sources */,
 				3E121A031CF845A400D43267 /* SCRecorderFocusTargetView.m in Sources */,
-				3E73DA981A8795A30052C16A /* AlertView.swift in Sources */,
+				3E73DA981A8795A30052C16A /* UIAlertController.swift in Sources */,
 				3E121A1B1CF845A400D43267 /* SCWatermarkOverlayView.m in Sources */,
 				3E73DAA71A8795A30052C16A /* FormSegmentedControlCell.swift in Sources */,
 				3E73DAB21A8795A30052C16A /* QBAssetCollectionViewController.m in Sources */,
@@ -1608,12 +1608,13 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
+				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = LinCore;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
@@ -1637,11 +1638,12 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
+				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = LinCore;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};

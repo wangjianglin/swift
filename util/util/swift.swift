@@ -29,6 +29,10 @@ open class IndexProperty<Key:Hashable,Value>{
     open func remove(_ key:Key){
         values.removeValue(forKey: key);
     }
+    
+    open func toDict()->Dictionary<Key,Value>{
+        return values;
+    }
 }
 
 //MARK:SequenceType

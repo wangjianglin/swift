@@ -8,17 +8,17 @@
 
 import Foundation
 
-open class HttpClientResponse : HttpResponse {
+open class HttpClientResponse : AbstractHttpResponse {
     /// The header values in HTTP response.
-    open var headers: Dictionary<String,String>?
-    /// The mime type of the HTTP response.
-    open var mimeType: String?
-    /// The suggested filename for a downloaded file.
-    open var suggestedFilename: String?
-    /// The body or response data of the HTTP Response.
-    open var responseObject: AnyObject?
-    /// The status code of the HTTP Response.
-    open var statusCode: Int?
+//    open var headers: Dictionary<String,String>?
+//    /// The mime type of the HTTP response.
+//    open var mimeType: String?
+//    /// The suggested filename for a downloaded file.
+//    open var suggestedFilename: String?
+//    /// The body or response data of the HTTP Response.
+//    open var responseObject: AnyObject?
+//    /// The status code of the HTTP Response.
+//    open var statusCode: Int?
     ///Returns the response as a string
     open func text() -> String? {
         if let d = self.responseObject as? Data {
@@ -27,5 +27,5 @@ open class HttpClientResponse : HttpResponse {
         return nil
     }
     /// The URL of the HTTP Response.
-    open var URL: Foundation.URL?
+//    open var URL: Foundation.URL?
 }

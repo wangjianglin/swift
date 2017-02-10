@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>10</integer>
 		</dict>
+		<key>LinCommTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>comm.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>3E1974491DB4C77000C5A6EC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3E3746A51A27757B00B980E9</key>
 		<dict>
 			<key>primary</key>

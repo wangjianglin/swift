@@ -36,9 +36,9 @@ private class __CameraViewControllerDelegateAction : DelegateAction,CameraViewDe
         //        [self actionForObjectExist:^{
         //            result(file);
         //            }];
-        self.actionForObjectExist {[weak self] in
-            self?.result(file);
-        }
+//        self.actionForObjectExist {[weak self] in
+            self.result(file);
+//        }
     }
     
     //-(void)dealloc{
