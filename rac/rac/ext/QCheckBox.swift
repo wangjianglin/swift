@@ -13,9 +13,13 @@ import ReactiveCocoa
 import Result
 
 extension Reactive where Base: QCheckBox{
-
-    public var checked: Signal<Bool, NoError> {
+    
+    public var checkedValue: Signal<Bool, NoError> {
         return controlEvents(UIControlEvents.valueChanged).map{$0.checked};
     }
-
+    
+    public var checked: BindingTarget<Bool?> {
+        return makeBindingTarget { $0.checked = $1 == true }
+    }
+    
 }
