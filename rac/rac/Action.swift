@@ -74,16 +74,11 @@ public prefix func ~ <Value>(action: @escaping (@escaping(Any!)->())->())->Cocoa
         
         let vc:UIViewController? = cocoaAction.getAssociatedValue(forKey: "_view_controller");
         var progressView:MRProgressOverlayView? = nil;
-        if let vc = vc {
-            progressView = MRProgressOverlayView();
-            progressView?.mode = MRProgressOverlayViewMode.indeterminateSmallDefault;
-            progressView?.titleLabelText = cocoaAction.getAssociatedValue(forKey: "_message");
-            vc.view.addSubview(progressView!);
-            progressView?.show(true);
-        }
         
         enabledIf.value = false;
+        var complete = false;
         action({ obj in
+            complete = true;
             Queue.mainQueue {
                 enabledIf.value = isEnable;
                 progressView?.dismiss(true);
@@ -111,6 +106,15 @@ public prefix func ~ <Value>(action: @escaping (@escaping(Any!)->())->())->Cocoa
                 }
             }
         })
+        
+        if !complete, let vc = vc {
+            progressView = MRProgressOverlayView();
+            progressView?.mode = MRProgressOverlayViewMode.indeterminateSmallDefault;
+            progressView?.titleLabelText = cocoaAction.getAssociatedValue(forKey: "_message");
+            vc.view.addSubview(progressView!);
+            progressView?.show(true);
+        }
+        
         return SignalProducer.init(value: ());
     }
     
@@ -166,7 +170,7 @@ public func <~ <Value>(action: @escaping ((Value!)->()),signal: Signal<Value, No
 public func <~ (action: @escaping (()->()),signal: Signal<(), NoError>?) {
     if let signal = signal {
         signal.observe({ event in
-        switch event{
+            switch event{
             case .value(_):
                 action();
                 break;

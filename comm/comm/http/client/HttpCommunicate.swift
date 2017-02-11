@@ -55,25 +55,25 @@ public class HttpCommunicate{
     }
     
     fileprivate static var __once: () = {
-
-                YRSingleton.instance = HttpCommunicateArgs()
-
-            }()
-
+        
+        YRSingleton.instance = HttpCommunicateArgs()
+        
+    }()
     
-
     
-
+    
+    
+    
     open class var commUrl:String{
         get{ return global.commUrl; }
         set{ global.commUrl = newValue; }
     }
- 
+    
     open class var timeout:TimeInterval{
         get{ return global.timeout; }
         set{ global.timeout = newValue; }
     }
- 
+    
     open class var mainThread:Bool{
         get{ return global.mainThread; }
         set{ global.mainThread = newValue; }
@@ -105,15 +105,15 @@ public class HttpCommunicate{
         return global.upload(package,result:result,fault:fault,progress:progress);
     }
     
-//    public class func download(url:String)->HttpCommunicateResult{
+    //    public class func download(url:String)->HttpCommunicateResult{
     public class func download(url:String,result:((_ fileInfo:FileInfo?,_ warning:[HttpError])->())! = nil,fault:((_ error:HttpError)->())! = nil,progress:((_ down: Int64, _ expected: Int64, _ bytes: Int64)->Void)? = nil)->HttpCommunicateResult{
         return global.download(url: url,result: result,fault: fault,progress: progress);
     }
-
+    
     public class func download(package:HttpDownloadPackage,result:((_ fileInfo:FileInfo?,_ warning:[HttpError])->())! = nil,fault:((_ error:HttpError)->())! = nil,progress:((_ down: Int64, _ expected: Int64, _ bytes: Int64)->Void)? = nil)->HttpCommunicateResult{
         return global.download(package: package,result: result,fault: fault,progress: progress);
     }
-
+    
     public class func addHandleEventsForBackgroundURLSession(identifier: String, completionHandler: @escaping () -> Swift.Void){
         global.addHandleEventsForBackgroundURLSession(identifier: identifier, completionHandler: completionHandler);
         
@@ -159,9 +159,9 @@ public class HttpCommunicateImpl{
     private var httpTask:HttpTask!;
     fileprivate init(name:String){
         self.name = name;
-//        super();
+        //        super();
         httpTask = HttpTask(impl: self);
-//        URLSessionConfiguration.init()
+        //        URLSessionConfiguration.init()
         //        var c = config.HTTPCookieStorage;
         //        config.HTTPCookieStorage = NSHTTPCookieStorage()
         //        println("cookies:\(c)");
@@ -175,7 +175,7 @@ public class HttpCommunicateImpl{
         //        var c2 = c?.cookies;
         //        config.HTTPCookieStorage.cookies = c2;
         //config.
-//        self.session = Foundation.URLSession(configuration: config, delegate: self, delegateQueue: nil)
+        //        self.session = Foundation.URLSession(configuration: config, delegate: self, delegateQueue: nil)
     }
     
     open var mainThread:Bool = true;
@@ -213,21 +213,21 @@ public class HttpCommunicateImpl{
     open var timeout:TimeInterval = 10;
     
     private func getIsDebug(_ package:HttpPackage)->Bool{
-        if let isDebug = package.commParams?.isDebug {
+        if let isDebug = package.commParams.isDebug {
             return isDebug;
         }
         return self.isDebug;
     }
     
     private func getMainThread(_ package:HttpPackage)->Bool{
-        if let mainThread = package.commParams?.mainThread {
+        if let mainThread = package.commParams.mainThread {
             return mainThread;
         }
         return self.mainThread;
     }
     
     private func getTimeout(_ package:HttpPackage)->TimeInterval{
-        if let timeout = package.commParams?.timeout {
+        if let timeout = package.commParams.timeout {
             return timeout;
         }
         return timeout;
@@ -242,11 +242,11 @@ public class HttpCommunicateImpl{
     open var httprequest:((HttpPackage)->())?
     
     fileprivate func mainThreadResult(_ httpResult:HttpCommunicateResult,pack:HttpPackage,result:((_ obj:AnyObject?,_ warning:[HttpError])->())?)->((_ obj:AnyObject?,_ warning:[HttpError])->()){
-
+        
         return {[weak self](obj:AnyObject?,warning:[HttpError]) ->() in
             self?.fireResult(httpResult: httpResult, obj: obj, warning: warning, pack: pack, result: result);
         }
-
+        
     }
     
     private func fireResult<T:AnyObject>(httpResult:HttpCommunicateResult,obj:T?,warning:[HttpError],pack:HttpPackage,result:((_ obj:T?,_ warning:[HttpError])->())?){
@@ -263,7 +263,7 @@ public class HttpCommunicateImpl{
     }
     
     fileprivate func mainThreadFault(_ httpResult:HttpCommunicateResult,pack:HttpPackage,fault:((_ error:HttpError)->())?)->((_ error:HttpError)->()){
-    
+        
         return {[weak self](error:HttpError) ->() in
             self?.fireFault(httpResult: httpResult, pack: pack, error: error, fault: fault);
         }
@@ -298,7 +298,7 @@ public class HttpCommunicateImpl{
         
         return (packParams,headers);
     }
-
+    
     open func request(_ package:HttpPackage,result:((_ obj:AnyObject?,_ warning:[HttpError])->())! = nil,fault:((_ error:HttpError)->())! = nil)->HttpCommunicateResult{
         if let uploadPackage = package as? HttpUploadPackage{
             return self.upload(uploadPackage,result:result,fault:fault,progress:nil);
@@ -335,42 +335,42 @@ public class HttpCommunicateImpl{
                 ,cause:"net error."
                 ,strackTrace:error?.description
             );
-//            e.message = "net error.";
-//            e.cause = "net error.";
-//            e.strackTrace = error?.description;
+            //            e.message = "net error.";
+            //            e.cause = "net error.";
+            //            e.strackTrace = error?.description;
             self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
         };
         self.httpTask.create(params: params)?.start();
-//        self.httpTask.create(url,method: package.method,parameters: p.params,headers:p.headers.toDict(), success: {(response: HttpResponse) in
-//            
-//            package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,result:result), fault: self.mainThreadFault(httpResult,pack:package,fault:fault));
-//            },failure: {(error: NSError?,response: HttpResponse?) in
-//                
-//                //println("error: \(error)")
-//                
-//                //-1004 端口不对
-//                //-1003 域名不对
-//                //-1001
-//                //-1005  NSURLErrorDomain
-//                let e:HttpError = HttpError(code:-2);
-//                e.message = "net error.";
-//                e.cause = "net error.";
-//                e.strackTrace = error?.description;
-//                self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
-//        })?.start()
+        //        self.httpTask.create(url,method: package.method,parameters: p.params,headers:p.headers.toDict(), success: {(response: HttpResponse) in
+        //
+        //            package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,result:result), fault: self.mainThreadFault(httpResult,pack:package,fault:fault));
+        //            },failure: {(error: NSError?,response: HttpResponse?) in
+        //
+        //                //println("error: \(error)")
+        //
+        //                //-1004 端口不对
+        //                //-1003 域名不对
+        //                //-1001
+        //                //-1005  NSURLErrorDomain
+        //                let e:HttpError = HttpError(code:-2);
+        //                e.message = "net error.";
+        //                e.cause = "net error.";
+        //                e.strackTrace = error?.description;
+        //                self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
+        //        })?.start()
         
         return httpResult;
     }
     
-//    fileprivate func requestImpl(_ package:HttpPackage, success:((HttpResponse) -> Void)!, failure:((NSError, HttpResponse?) -> Void)!) {
-//        
-//        
-//        
-//        let opt = self.httpTask.create(url, method:package.method, parameters: parameters,headers:headers,success:success,failure:failure)
-//        if opt != nil {
-//            opt!.start()
-//        }
-//    }
+    //    fileprivate func requestImpl(_ package:HttpPackage, success:((HttpResponse) -> Void)!, failure:((NSError, HttpResponse?) -> Void)!) {
+    //
+    //
+    //
+    //        let opt = self.httpTask.create(url, method:package.method, parameters: parameters,headers:headers,success:success,failure:failure)
+    //        if opt != nil {
+    //            opt!.start()
+    //        }
+    //    }
     
     
     open func upload(_ package:HttpUploadPackage,result:((_ obj:AnyObject?,_ warning:[HttpError])->())! = nil,fault:((_ error:HttpError)->())! = nil,progress:((_ send:Int64,_ total:Int64,_ bytes:Int64) -> Void)! = nil)->HttpCommunicateResult{
@@ -387,7 +387,7 @@ public class HttpCommunicateImpl{
         //        }
         
         self.httprequest?(package);
-//        let params = package.handle.getParams(package);
+        //        let params = package.handle.getParams(package);
         let p = self.generParams(package: package);
         
         let url = HttpUtils.url(self, pack: package);
@@ -441,28 +441,28 @@ public class HttpCommunicateImpl{
                 ,cause:"net error."
                 ,strackTrace:error.description
             );
-//            e.message = "net error.";
-//            e.cause = "net error.";
-//            e.strackTrace = error.description;
+            //            e.message = "net error.";
+            //            e.cause = "net error.";
+            //            e.strackTrace = error.description;
             
             self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
             
         };
         self.httpTask.uploadFile(params: params);
         
-//        self.httpTask.uploadFile(HttpUtils.url(self, pack: package),identifier: nil, parameters: p.params,headers:p.headers.toDict(),progress: progress, success: { (response) -> Void in
-//            package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,result:result), fault: self.mainThreadFault(httpResult,pack:package,fault:fault));
-//            
-//        }) { (error,response) -> Void in
-//            
-//            let e:HttpError = HttpError(code:-1);
-//            e.message = "net error.";
-//            e.cause = "net error.";
-//            e.strackTrace = error.description;
-//            
-//            self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
-//            
-//        };
+        //        self.httpTask.uploadFile(HttpUtils.url(self, pack: package),identifier: nil, parameters: p.params,headers:p.headers.toDict(),progress: progress, success: { (response) -> Void in
+        //            package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,result:result), fault: self.mainThreadFault(httpResult,pack:package,fault:fault));
+        //
+        //        }) { (error,response) -> Void in
+        //
+        //            let e:HttpError = HttpError(code:-1);
+        //            e.message = "net error.";
+        //            e.cause = "net error.";
+        //            e.strackTrace = error.description;
+        //
+        //            self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
+        //
+        //        };
         
         return httpResult;
     }
@@ -545,29 +545,29 @@ public class HttpCommunicateImpl{
         
         self.httpTask.download(params: params);
         
-//        self.httpTask.download(url,identifier: backgroundIdentifier,method: package.method, parameters: p.params,headers: p.headers.toDict(), success: { (response) in
-//            
-//            let fileInfo = HttpCommunicate.FileInfo();
-//            fileInfo.setLocation(response.responseObject as! NSURL?);
-//            fileInfo.setFileSize(UInt64.init(response.headers?["Content-Length"] ?? "0") ?? 0);
-//            fileInfo.setFileName(response.URL?.lastPathComponent);
-//            
-//            if let disposition = response.headers?["Content-Disposition"]{
-//                if let r = disposition.range(of: "filename=") {
-//                    fileInfo.setFileName(disposition.substring(from: r.upperBound));
-//                }
-//            }
-//            
-//            self.fireResult(httpResult: httpResult, obj: fileInfo, warning: [HttpError](), pack: package, result: result);
-//            //            httpResult.setResult(fileInfo);
-//            //            httpResult.set.set();
-//            },failure: { (error, response) in
-//            //                print("error.")
-//            //
-//            //                httpResult.setError(HttpError(code: -1));
-//            //                httpResult.set.set();
-//            self.fireFault(httpResult: httpResult, pack: package, error: HttpError(code: -1), fault: fault);
-//        }, progress: progress);
+        //        self.httpTask.download(url,identifier: backgroundIdentifier,method: package.method, parameters: p.params,headers: p.headers.toDict(), success: { (response) in
+        //
+        //            let fileInfo = HttpCommunicate.FileInfo();
+        //            fileInfo.setLocation(response.responseObject as! NSURL?);
+        //            fileInfo.setFileSize(UInt64.init(response.headers?["Content-Length"] ?? "0") ?? 0);
+        //            fileInfo.setFileName(response.URL?.lastPathComponent);
+        //
+        //            if let disposition = response.headers?["Content-Disposition"]{
+        //                if let r = disposition.range(of: "filename=") {
+        //                    fileInfo.setFileName(disposition.substring(from: r.upperBound));
+        //                }
+        //            }
+        //
+        //            self.fireResult(httpResult: httpResult, obj: fileInfo, warning: [HttpError](), pack: package, result: result);
+        //            //            httpResult.setResult(fileInfo);
+        //            //            httpResult.set.set();
+        //            },failure: { (error, response) in
+        //            //                print("error.")
+        //            //
+        //            //                httpResult.setError(HttpError(code: -1));
+        //            //                httpResult.set.set();
+        //            self.fireFault(httpResult: httpResult, pack: package, error: HttpError(code: -1), fault: fault);
+        //        }, progress: progress);
         return httpResult;
     }
 }
@@ -599,15 +599,15 @@ public class HttpCommunicateArgs{
             }
             lock.unlock();
             return impl!;
-             //   return HttpCommunicate(name:name);
+            //   return HttpCommunicate(name:name);
             //}
         }
-//            set{
-//                
-//            }
+        //            set{
+        //                
+        //            }
     }
 }
-    //class var test:Dictionary<String,String> = Dictionary<String,String>();
+//class var test:Dictionary<String,String> = Dictionary<String,String>();
 
 
 

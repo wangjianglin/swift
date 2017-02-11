@@ -17,3 +17,5 @@ open class HttpPackage
 
 
 加入https httpdns 认证
+
+httptask upload download 对 委托的处理，是不是要在完成的回调中调用完成监听

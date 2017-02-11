@@ -11,8 +11,6 @@ import Foundation
 import LinUtil
 import CoreData
 
-
-
 /// Object representation of a HTTP Response.
 
 internal class HttpTaskParams{
@@ -30,6 +28,8 @@ internal class HttpTaskParams{
     public var progress:((_ down: Int64, _ expected: Int64, _ bytes: Int64)->Void)?;
     fileprivate var isMulti:Bool?;
     public var timeout:TimeInterval?;
+    
+    fileprivate var data = Data();
 }
 
 /// Subclass of NSOperation for handling and scheduling HTTPTask on a NSOperationQueue.
@@ -109,40 +109,40 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     
     private static let __init:() = {
         // 从应用程序包中加载模型文件
-//        NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
+        //        NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
         
         // 传入模型对象，初始化NSPersistentStoreCoordinator
-//        NSPersistentStoreCoordinator *psc = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model] autorelease];
+        //        NSPersistentStoreCoordinator *psc = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model] autorelease];
         let model = NSManagedObjectModel.mergedModel(from: nil);
         let psc = NSPersistentStoreCoordinator.init(managedObjectModel: model!);
         // 构建SQLite数据库文件的路径
-//        NSString *docs = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        //        NSString *docs = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         let docs = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).last as NSString?;
-//        NSURL *url = [NSURL fileURLWithPath:[docs stringByAppendingPathComponent:@"person.data"]];
+        //        NSURL *url = [NSURL fileURLWithPath:[docs stringByAppendingPathComponent:@"person.data"]];
         let url = NSURL.fileURL(withPath: docs?.appendingPathComponent("coredata.data") ?? "");
         // 添加持久化存储库，这里使用SQLite作为存储库
-//        NSError *error = nil;
-//        NSPersistentStore *store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error];
-//        let store = try? psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil);
-////        if (store == nil) { // 直接抛异常
-////            [NSException raise:@"添加数据库错误" format:@"%@", [error localizedDescription]];
-////        }
-////        // 初始化上下文，设置persistentStoreCoordinator属性
-////        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
-////        context.persistentStoreCoordinator = psc;
-//        YSInstance.coreDataContext = NSManagedObjectContext();
-//        YSInstance.coreDataContext.persistentStoreCoordinator = psc;
+        //        NSError *error = nil;
+        //        NSPersistentStore *store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error];
+        //        let store = try? psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil);
+        ////        if (store == nil) { // 直接抛异常
+        ////            [NSException raise:@"添加数据库错误" format:@"%@", [error localizedDescription]];
+        ////        }
+        ////        // 初始化上下文，设置persistentStoreCoordinator属性
+        ////        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+        ////        context.persistentStoreCoordinator = psc;
+        //        YSInstance.coreDataContext = NSManagedObjectContext();
+        //        YSInstance.coreDataContext.persistentStoreCoordinator = psc;
     }()
     
     public func addHandleEventsForBackgroundURLSession(identifier: String, completionHandler: @escaping () -> Swift.Void){
         YSInstance.completionHandlerDictionary[identifier] = completionHandler;
-//        let config = URLSessionConfiguration.background(withIdentifier: identifier);
-//        _ = Foundation.URLSession(configuration: config, delegate: self, delegateQueue: nil);
+        //        let config = URLSessionConfiguration.background(withIdentifier: identifier);
+        //        _ = Foundation.URLSession(configuration: config, delegate: self, delegateQueue: nil);
         
         let data = BackgroundDown();
         
         _ = HttpTask.__init;
-//        NSEntityDescription.i
+        //        NSEntityDescription.i
     }
     
     
@@ -159,10 +159,10 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         super.init()
         
         _ = HttpTask.__init;
-//        
+        //
         let config:URLSessionConfiguration = URLSessionConfiguration.default;
         self.session = Foundation.URLSession(configuration: config, delegate: self, delegateQueue: nil)
-
+        
     }
     
     public func create(params:HttpTaskParams)->HttpOperation?{
@@ -174,17 +174,17 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         }
         let opt = HttpOperation()
         
-//        let task = session.dataTask(with: serialReq.request,
-//                                    completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
-//                                        opt.finish()
-//                                        self.processResponse(params.success,failure:params.failure,data:data,response:response,error:error as NSError!);
-//                                        
-//        });
+        //        let task = session.dataTask(with: serialReq.request,
+        //                                    completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
+        //                                        opt.finish()
+        //                                        self.processResponse(params.success,failure:params.failure,data:data,response:response,error:error as NSError!);
+        //
+        //        });
         
-//        let config:URLSessionConfiguration = URLSessionConfiguration.default;
-//        let session = Foundation.URLSession(configuration: config, delegate: self, delegateQueue: nil)
+        //        let config:URLSessionConfiguration = URLSessionConfiguration.default;
+        //        let session = Foundation.URLSession(configuration: config, delegate: self, delegateQueue: nil)
         let task = session.dataTask(with: serialReq.request);
-        print(session.configuration.identifier)
+        //print(session.configuration.identifier)
         YSInstance.backgroundTaskMap["\(session.configuration.identifier)\(task.hash)"] = params;
         opt.task = task
         return opt
@@ -223,8 +223,6 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
             if extraResponse.statusCode > 299 {
                 if failure != nil {
                     failure(self.createError(extraResponse.statusCode), extraResponse)
-                    //                    let error = self.createError(extraResponse.statusCode)
-                    //                    failure(error,extraResponse);
                 }
             } else if success != nil {
                 success(extraResponse)
@@ -251,9 +249,9 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         
         let config = URLSessionConfiguration.background(withIdentifier: ident);
         let session = Foundation.URLSession(configuration: config, delegate: self, delegateQueue: nil);
- 
+        
         let task = session.downloadTask(with: serialReq.request)
-
+        
         YSInstance.backgroundTaskMap["\(ident)\(task.hash)"] = params;
         task.resume()
         return task
@@ -316,9 +314,11 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         }
         
         let result = self.requestSerializer.createRequest(URL(string: urlVal)!,
-        method: params.method, parameters: params.parameters,isMulti : params.isMulti);
+                                                          method: params.method, parameters: params.parameters,isMulti : params.isMulti);
         
         var request = result.request;
+        
+        
         if let headers = params.headers {
             for (key,value) in headers {
                 request.addValue(value,forHTTPHeaderField:key);
@@ -331,7 +331,8 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         if let timeout = params.timeout {
             request.timeoutInterval = timeout;
         }
-        return result;
+        
+        return (request,result.error);
     }
     
     fileprivate func createBackgroundIdent() -> String {
@@ -372,17 +373,37 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         
-        if let error = error as? NSError? {
-            if let resumeData = error?.userInfo[NSURLSessionDownloadTaskResumeData]{
-                
+        //        if let error = error as? NSError? {
+        //            if let resumeData = error?.userInfo[NSURLSessionDownloadTaskResumeData]{
+        //
+        //            }
+        //        }
+        let blocks = YSInstance.backgroundTaskMap["\(session.configuration.identifier)\(task.hash)"]
+        
+        if let blocks = blocks, blocks.success != nil {
+            
+            let resp = HttpClientResponse()
+            if let hresponse = task.response as? HTTPURLResponse {
+                resp.headers = hresponse.allHeaderFields as? Dictionary<String,String>
+                resp.mimeType = hresponse.mimeType
+                resp.suggestedFilename = hresponse.suggestedFilename
+                resp.statusCode = hresponse.statusCode
+                resp.URL = hresponse.url
             }
+            resp.responseObject = blocks.data as NSData?;
+            if resp.statusCode > 299 {
+                blocks.failure?(self.createError(resp.statusCode), resp);
+            }else{
+                blocks.success?(resp)
+            }
+            cleanupBackground("\(session.configuration.identifier)\(task.hash)")
         }
         //session.finishTasksAndInvalidate();
     }
     
     func URLSession(_ session: Foundation.URLSession!, downloadTask: URLSessionDownloadTask!, didFinishDownloadingToURL location: URL!) {
-
-
+        
+        
         let blocks = YSInstance.backgroundTaskMap["\(session.configuration.identifier)\(downloadTask.hash)"]
         if blocks?.success != nil {
             let resp = HttpClientResponse()
@@ -396,9 +417,9 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
             resp.responseObject = location as AnyObject?
             if resp.statusCode > 299 {
                 blocks?.failure?(self.createError(resp.statusCode), resp)
-                return
+            }else{
+                blocks?.success?(resp)
             }
-            blocks?.success?(resp)
             cleanupBackground("\(session.configuration.identifier)\(downloadTask.hash)")
         }
     }
@@ -415,7 +436,7 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     //private var forBackgroundURLSession:Bool = false;
     /// The background download finished, don't have to really do anything.
     public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
-      
+        
         if let identifier = session.configuration.identifier {
             YSInstance.completionHandlerDictionary[identifier]?();
         }
@@ -426,25 +447,9 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     /// not implemented yet. The background upload finished and reports the response data (if any).
     func URLSession(_ session: Foundation.URLSession!, dataTask: URLSessionDataTask!, didReceiveData data: Data!) {
         let blocks = YSInstance.backgroundTaskMap["\(session.configuration.identifier)\(dataTask.hash)"]
-        if blocks?.success != nil {
-            let resp = HttpClientResponse()
-            if let hresponse = dataTask.response as? HTTPURLResponse {
-                resp.headers = hresponse.allHeaderFields as? Dictionary<String,String>
-                resp.mimeType = hresponse.mimeType
-                resp.suggestedFilename = hresponse.suggestedFilename
-                resp.statusCode = hresponse.statusCode
-                resp.URL = hresponse.url
-            }
-            resp.responseObject = data as NSData?;
-            if resp.statusCode > 299 {
-                //                if blocks?.failure != nil {
-                blocks?.failure?(self.createError(resp.statusCode), resp)
-                //                }
-                return
-            }
-            blocks?.success?(resp)
-            //            cleanupBackground(session.configuration.identifier!)
-            cleanupBackground("\(session.configuration.identifier)\(dataTask.hash)")
+        
+        if let blocks = blocks {
+            blocks.data.append(data);
         }
     }
     
@@ -458,10 +463,6 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     //TODO: not implemented yet.
     /// not implemented yet.
     func URLSession(_ session: Foundation.URLSession!, downloadTask: URLSessionDownloadTask!, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
-        print("ok.");
-    }
-    
-    deinit{
-        print("http task deinit.");
+        //print("ok.");
     }
 }
