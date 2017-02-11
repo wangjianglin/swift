@@ -77,6 +77,8 @@
     if (_delegate && [_delegate respondsToSelector:@selector(didSelectedCheckBox:checked:)]) {
         [_delegate didSelectedCheckBox:self checked:self.selected];
     }
+    
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 - (void)checkboxBtnChecked {

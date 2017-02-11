@@ -50,7 +50,7 @@ extension ViewModelStruct where Base: ReactiveExtensionsProvider {
     //    public func producer<Value>(keyPath:String)->SignalProducer<Value?, NoError>{
     //        return DynamicProperty.init(object: base, keyPath: keyPath).producer;
     //    }
-    public func changed(keyPath:String)->SignalProducer<(), NoError>{
+    public func changed(keyPath:String)->Signal<(), NoError>{
         
         let p = DynamicProperty<Any?>.init(object: base, keyPath: keyPath);
         let (signal,observer) = Signal<(),NoError>.pipe();
@@ -72,7 +72,8 @@ extension ViewModelStruct where Base: ReactiveExtensionsProvider {
             
         });
         
-        return SignalProducer<(),NoError>(signal);
+        return signal;
+        //        return SignalProducer<(),NoError>(signal);
     }
     public func property<Value>(keyPath:String)->DynamicProperty<Value>{
         return DynamicProperty.init(object: base, keyPath: keyPath);
@@ -109,3 +110,4 @@ public func <~ (target: @escaping (Any!)->(), result: HttpCommunicateResult) {
         target(error);
     }
 }
+
