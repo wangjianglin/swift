@@ -12,6 +12,9 @@ import ReactiveSwift
 import Result
 import LinComm
 
+public protocol BaseView : class{
+    
+}
 
 public struct ViewModelStruct<Base : NSObject> {
     public let base: Base
@@ -20,8 +23,9 @@ public struct ViewModelStruct<Base : NSObject> {
         self.base = base
     }
 }
-
-public protocol ViewModel: class {
+//
+public protocol ViewModel : class {
+    associatedtype ViewType:BaseView
     func start();
 }
 
@@ -29,6 +33,14 @@ extension ViewModel where Self : NSObject  {
     /// A proxy which hosts reactive extensions for `self`.
     public var bind: ViewModelStruct<Self> {
         return ViewModelStruct(self)
+    }
+    
+    public func setView(view:ViewType){
+        self.setAssociatedValue(value: view, forKey: "_view_model_view_obj_");
+    }
+    
+    public func getView()->ViewType{
+        return self.getAssociatedValue(forKey: "_view_model_view_obj_");
     }
 }
 

@@ -12,6 +12,8 @@ import LinComm
 import LinRac
 
 public class MainViewModel : NSObject,ViewModel{
+    public typealias ViewType = MainViewController;
+
     
     public dynamic var datas:[VMData]?;
     

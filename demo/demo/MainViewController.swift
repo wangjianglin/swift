@@ -82,9 +82,14 @@ public class MoreBarButtonItem : UIBarButtonItem{
         print("======================")
     }
 }
-public class MainViewController : UIViewController,UITableViewDataSource,UITableViewDelegate{
+public class MainViewController : UIViewController,UITableViewDataSource,UITableViewDelegate,BaseView{
     
-    private let vm = MainViewModel();
+    private lazy var vm:MainViewModel = {
+        var _vm = MainViewModel();
+        _vm.setView(view: self);
+        return _vm;
+    }();
+    
     private var table:UITableView!;
     
     

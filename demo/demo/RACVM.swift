@@ -22,6 +22,12 @@ import LinRac
 
 public class RACVM :NSObject,ViewModel {
     
+    public typealias ViewType = RACViewController;
+    
+    public override init() {
+        
+    }
+    
     public func start() {
     }
 

@@ -47,9 +47,13 @@ import LinRac
 //}
 
 
-public class RACViewController : UIViewController{
+public class RACViewController : UIViewController,BaseView{
     
-    private let vm = RACVM();
+    private lazy var vm:RACVM = {
+        var _vm = RACVM();
+        _vm.setView(view: self);
+        return _vm;
+    }();
     
     @IBOutlet var button:UIButton?;
     @IBOutlet var label:UILabel?;
