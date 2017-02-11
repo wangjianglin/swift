@@ -35,13 +35,15 @@ extension ViewModel where Self : NSObject  {
         return ViewModelStruct(self)
     }
     
-    public func setView(view:ViewType){
-        self.setAssociatedValue(value: view, forKey: "_view_model_view_obj_");
+    public var view:ViewType{
+        set{
+            self.setAssociatedValue(value: newValue, forKey: "_view_model_view_obj_");
+        }
+        get{
+            return self.getAssociatedValue(forKey: "_view_model_view_obj_");
+        }
     }
     
-    public func getView()->ViewType{
-        return self.getAssociatedValue(forKey: "_view_model_view_obj_");
-    }
 }
 
 extension ViewModelStruct where Base: ReactiveExtensionsProvider {

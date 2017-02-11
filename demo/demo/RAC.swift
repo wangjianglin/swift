@@ -51,7 +51,7 @@ public class RACViewController : UIViewController,BaseView{
     
     private lazy var vm:RACVM = {
         var _vm = RACVM();
-        _vm.setView(view: self);
+        _vm.view = self;
         return _vm;
     }();
     

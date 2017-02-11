@@ -86,7 +86,7 @@ public class MainViewController : UIViewController,UITableViewDataSource,UITable
     
     private lazy var vm:MainViewModel = {
         var _vm = MainViewModel();
-        _vm.setView(view: self);
+        _vm.view = self;
         return _vm;
     }();
     
