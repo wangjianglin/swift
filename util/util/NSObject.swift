@@ -15,8 +15,8 @@ extension NSObject {
         return try execute()
     }
     
-//    @objc(class)
-//    var objcClass: AnyClass! { get }
+    //    @objc(class)
+    //    var objcClass: AnyClass! { get }
 }
 
 @objc internal protocol ObjCClassReporting {
@@ -31,13 +31,21 @@ internal func sync<Result>(_ token: AnyObject, execute: () throws -> Result) ret
     return try execute()
 }
 
+public typealias KeyAddr = UnsafeRawPointer!;
+
 extension NSObject{
     public func setAssociatedValue(value:Any!,forKey key: StaticString) {
-        objc_setAssociatedObject(self, key.utf8Start, value, .OBJC_ASSOCIATION_RETAIN)
+        setAssociatedValue(value: value, forAddress: key.utf8Start);
+    }
+    public func setAssociatedValue(value:Any!,forAddress key: KeyAddr) {
+        objc_setAssociatedObject(self, key, value, .OBJC_ASSOCIATION_RETAIN)
     }
     public func getAssociatedValue<T>(forKey key: StaticString)->T! {
-        let value = objc_getAssociatedObject(self, key.utf8Start) as! T?
-        objc_setAssociatedObject(self, key.utf8Start, value, .OBJC_ASSOCIATION_RETAIN)
+        return getAssociatedValue(forAddress:key.utf8Start);
+    }
+    public func getAssociatedValue<T>(forAddress key: KeyAddr)->T! {
+        let value = objc_getAssociatedObject(self, key) as! T?
+        //        objc_setAssociatedObject(self, key, value, .OBJC_ASSOCIATION_RETAIN)
         if let value = value {
             return value;
         }
@@ -79,7 +87,7 @@ fileprivate let lifetimeKey = "AssociationKey<Lifetime?>(default: nil)";
 
 //extension Reactive where Base: NSObject {
 extension Ext where Base: NSObject {
-//    /// Returns a lifetime that ends when the object is deallocated.
+    //    /// Returns a lifetime that ends when the object is deallocated.
     @nonobjc public var lifetime: Lifetime {
         objc_sync_enter(self);
         
@@ -87,35 +95,35 @@ extension Ext where Base: NSObject {
             if let lifetime:Lifetime = base.getAssociatedValue(forKey: "lifetimeKey") {
                 return lifetime
             }
-//
+            //
             let token = Lifetime.Token()
             let lifetime = Lifetime(token)
-//            
+            //
             let objcClass: AnyClass = (base as AnyObject).objClass
             let obj = objcClass as AnyObject;
-//            let objcClassAssociations = Associations(objcClass as AnyObject)
-//
+            //            let objcClassAssociations = Associations(objcClass as AnyObject)
+            //
             let deallocSelector = sel_registerName("dealloc")!
-//
-//            // Swizzle `-dealloc` so that the lifetime token is released at the
-//            // beginning of the deallocation chain, and only after the KVO `-dealloc`.
+            //
+            //            // Swizzle `-dealloc` so that the lifetime token is released at the
+            //            // beginning of the deallocation chain, and only after the KVO `-dealloc`.
             sync(objcClass) {
-//                // Swizzle the class only if it has not been swizzled before.
+                //                // Swizzle the class only if it has not been swizzled before.
                 if objc_getAssociatedObject(obj,"isSwizzledKey") as? Bool != true{
                     objc_setAssociatedObject(obj,"isSwizzledKey",true,objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC);
                     
                     var existingImpl: IMP? = nil
-
+                    
                     let newImplBlock: @convention(block) (UnsafeRawPointer) -> Void = { objectRef in
                         // A custom trampoline of `objc_setAssociatedObject` is used, since
                         // the imported version has been inserted with ARC calls that would
                         // mess with the object deallocation chain.
-
-
+                        
+                        
                         rac_objc_setAssociatedObject(objectRef, "lifetimeTokenKey", nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-
+                        
                         let impl: IMP
-
+                        
                         // Call the existing implementation if one has been caught. Otherwise,
                         // call the one first available in the superclass hierarchy.
                         if let existingImpl = existingImpl {
@@ -124,17 +132,17 @@ extension Ext where Base: NSObject {
                             let superclass: AnyClass = class_getSuperclass(objcClass)
                             impl = class_getMethodImplementation(superclass, deallocSelector)
                         }
-
+                        
                         typealias Impl = @convention(c) (UnsafeRawPointer, Selector) -> Void
                         unsafeBitCast(impl, to: Impl.self)(objectRef, deallocSelector)
                     }
-
+                    
                     let newImpl =  imp_implementationWithBlock(newImplBlock as Any)
-
+                    
                     if !class_addMethod(objcClass, deallocSelector, newImpl, "v@:") {
                         // The class has an existing `dealloc`. Preserve that as `existingImpl`.
                         let deallocMethod = class_getInstanceMethod(objcClass, deallocSelector)
-
+                        
                         // Store the existing implementation to `existingImpl` to ensure it is
                         // available before our version is swapped in.
                         existingImpl = method_getImplementation(deallocMethod)
@@ -145,12 +153,12 @@ extension Ext where Base: NSObject {
                     }
                     
                 }
-
+                
             }
-//
+            //
             base.setAssociatedValue(value: token, forKey: "lifetimeTokenKey");
             base.setAssociatedValue(value: lifetime, forKey: "lifetimeKey")
-//
+            //
             return lifetime
         }
     }

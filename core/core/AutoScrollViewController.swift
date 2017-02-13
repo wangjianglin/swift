@@ -8,95 +8,95 @@
 
 import UIKit
 
-open class ScrollViewController : UIViewController{
+open class AutoScrollViewController : UIViewController{
     
-    fileprivate var scrollView:ScrollView!;
+    fileprivate var scrollView:AutoScrollView!;
     
     open override func loadView() {
-        self.scrollView = ScrollView();
+        self.scrollView = AutoScrollView();
         self.scrollView.showsVerticalScrollIndicator = true;
         self.scrollView.showsHorizontalScrollIndicator = false;
         self.view = scrollView;
     }
     
-    open override func viewDidLayoutSubviews() {
-        
-        var rect = scrollView.size();
-        
-        var navHeight:CGFloat = 0;
-        if !UIApplication.shared.isStatusBarHidden {
-            navHeight += 20;
-        }
-        if let height = self.navigationController?.navigationBar.bounds.height {
-            navHeight += height;
-        }
-        if rect.height <= self.view.bounds.height - navHeight + 1 {
-            rect.size.height = self.view.bounds.height - navHeight + 1;
-        }
-        
-        rect.size.width = self.view.bounds.width;
-        
-        scrollView.contentSize = CGSize(width: 320, height: self.view.bounds.height - 63);
-        
-    }
+//    open override func viewDidLayoutSubviews() {
+//        
+//        var rect = scrollView.size();
+//        
+//        var navHeight:CGFloat = 0;
+//        if !UIApplication.shared.isStatusBarHidden {
+//            navHeight += 20;
+//        }
+//        if let height = self.navigationController?.navigationBar.bounds.height {
+//            navHeight += height;
+//        }
+//        if rect.height <= self.view.bounds.height - navHeight + 1 {
+//            rect.size.height = self.view.bounds.height - navHeight + 1;
+//        }
+//        
+//        rect.size.width = self.view.bounds.width;
+//        
+//        scrollView.contentSize = CGSize(width: 320, height: self.view.bounds.height - 63);
+//        
+//    }
     
-    fileprivate class ScrollView : IOS7ScrollView{
-        
-        fileprivate var views = [UIView]();
-        
-        override func addSubview(_ view: UIView) {
-            super.addSubview(view);
-            views.append(view);
-        }
-        
-        func size()-> CGRect {
-            var rect:CGRect!;
-            var scount = 0;
-            if self.showsHorizontalScrollIndicator {
-                scount += 2;
-            }
-            if self.showsVerticalScrollIndicator {
-                scount += 2;
-            }
-            for n in 0 ..< self.views.count - scount {
-                let view = self.views[n];
-                let srect = view.convert(view.bounds, to: self);
-                
-                if rect == nil {
-                    rect = srect;
-                }else{
-                    rect = mergeRect(srect,rect2: rect);
-                }
-            }
-            if rect == nil {
-                return CGRect(x: 0, y: 0, width: 0, height: 0);
-            }
-            return rect;
-        }
-        
-        fileprivate func mergeRect(_ rect1:CGRect,rect2:CGRect)->CGRect{
-            var result = CGRect(x: 0, y: 0, width: 0, height: 0);
-            result.origin.x = rect1.origin.x > rect2.origin.x ? rect2.origin.x : rect1.origin.x;
-            
-            result.origin.y = rect1.origin.y > rect2.origin.y ? rect2.origin.y : rect1.origin.y;
-            
-            var maxX = rect2.width + rect2.origin.x;
-            if maxX < rect1.width + rect1.origin.x {
-                maxX = rect1.width + rect1.origin.x
-            }
-            
-            result.size.width = maxX - result.origin.x;
-            
-            var maxY = rect2.height + rect2.origin.y;
-            if maxY < rect1.height + rect1.origin.y {
-                maxY = rect1.height + rect1.origin.y
-            }
-            
-            result.size.height = maxY - result.origin.y;
-            
-            return result;
-        }
-    }
+//    fileprivate class ScrollView : IOS7ScrollView{
+//        
+//        fileprivate var views = [UIView]();
+//        
+//        override func addSubview(_ view: UIView) {
+//            super.addSubview(view);
+//            views.append(view);
+//        }
+//        
+//        func size()-> CGRect {
+//            var rect:CGRect!;
+//            var scount = 0;
+//            if self.showsHorizontalScrollIndicator {
+//                scount += 2;
+//            }
+//            if self.showsVerticalScrollIndicator {
+//                scount += 2;
+//            }
+//            for n in 0 ..< self.views.count - scount {
+//                let view = self.views[n];
+//                let srect = view.convert(view.bounds, to: self);
+//                
+//                if rect == nil {
+//                    rect = srect;
+//                }else{
+//                    rect = mergeRect(srect,rect2: rect);
+//                }
+//            }
+//            if rect == nil {
+//                return CGRect(x: 0, y: 0, width: 0, height: 0);
+//            }
+//            return rect;
+//        }
+//        
+//        fileprivate func mergeRect(_ rect1:CGRect,rect2:CGRect)->CGRect{
+//            var result = CGRect(x: 0, y: 0, width: 0, height: 0);
+//            result.origin.x = rect1.origin.x > rect2.origin.x ? rect2.origin.x : rect1.origin.x;
+//            
+//            result.origin.y = rect1.origin.y > rect2.origin.y ? rect2.origin.y : rect1.origin.y;
+//            
+//            var maxX = rect2.width + rect2.origin.x;
+//            if maxX < rect1.width + rect1.origin.x {
+//                maxX = rect1.width + rect1.origin.x
+//            }
+//            
+//            result.size.width = maxX - result.origin.x;
+//            
+//            var maxY = rect2.height + rect2.origin.y;
+//            if maxY < rect1.height + rect1.origin.y {
+//                maxY = rect1.height + rect1.origin.y
+//            }
+//            
+//            result.size.height = maxY - result.origin.y;
+//            
+//            return result;
+//        }
+//    }
 }
 //public class ScrollViewController : UIViewController{
 //

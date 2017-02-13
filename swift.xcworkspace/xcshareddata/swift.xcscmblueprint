@@ -1,12 +1,12 @@
 {
   "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8EDD4DDCAEF39CFC5BB7764D2DD620EA68B19B22",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
-    "64bfdf20-a972-4181-ba69-00ede5fd8fba++9117" : {
+    "64bfdf20-a972-4181-ba69-00ede5fd8fba++1790" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "64bfdf20-a972-4181-ba69-00ede5fd8fba++9117" : 9223372036854775807,
+    "64bfdf20-a972-4181-ba69-00ede5fd8fba++1790" : 9223372036854775807,
     "8EDD4DDCAEF39CFC5BB7764D2DD620EA68B19B22" : 0,
     "25F90B273C83210684F6019F6AD9584F41C5FDFF" : 0,
     "FE0270CB287C409738ADF937FDFF8F3FD9B3169D" : 0,
@@ -15,7 +15,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3DF4AA5B-F4D7-47B2-AC97-1A049F11E75D",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "64bfdf20-a972-4181-ba69-00ede5fd8fba++9117" : "..\/..\/..\/work\/code\/buyers",
+    "64bfdf20-a972-4181-ba69-00ede5fd8fba++1790" : "..\/..\/..\/work\/code\/buyers",
     "8EDD4DDCAEF39CFC5BB7764D2DD620EA68B19B22" : "swift\/",
     "25F90B273C83210684F6019F6AD9584F41C5FDFF" : "swift\/util\/",
     "FE0270CB287C409738ADF937FDFF8F3FD9B3169D" : "swift\/client\/",
@@ -39,7 +39,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/src.feicuibaba.com",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "64bfdf20-a972-4181-ba69-00ede5fd8fba++9117"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "64bfdf20-a972-4181-ba69-00ede5fd8fba++1790"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wangjianglin\/swift.git",

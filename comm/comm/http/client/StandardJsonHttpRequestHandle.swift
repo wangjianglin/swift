@@ -16,7 +16,7 @@ open class StandardJsonHttpRequestHandle:HttpRequestHandle{
     
     open func preprocess(_ package:HttpPackage,params:HttpCommunicate.Params)->HttpRequestPreprocessResult!{
         
-//        package.commParams
+        //        package.commParams
         let result = HttpRequestPreprocessResult();
         result.headers[HttpConstants.HTTP_COMM_PROTOCOL] = HttpConstants.HTTP_VERSION;
         if params.isDebug == true {
@@ -49,20 +49,20 @@ open class StandardJsonHttpRequestHandle:HttpRequestHandle{
             resp = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String;
             //println("response: \(resp)") //prints the HTML of the page
         }
-        if let resp = resp{
+        if let resp = resp,resp.lengthOfBytes(using: String.Encoding.utf8) > 0 {
             let json = Json(string:resp);
             if json.isError{
                 //println("resp:"+resp);
-//                if let fault = fault{
+                //                if let fault = fault{
                 let error = HttpError(code:-0x11
                     ,message:"json parser error."
                     ,cause:""
                     ,strackTrace : resp);
-//                error.message = "json parser error.";
-//                error.cause = "json parser error.";
-//                error.strackTrace = resp;
-                    fault(error);
-//                }
+                //                error.message = "json parser error.";
+                //                error.cause = "json parser error.";
+                //                error.strackTrace = resp;
+                fault(error);
+                //                }
                 return;
             }else{
                 let code:Int = json["code"].asInt(-0x12);
@@ -72,26 +72,26 @@ open class StandardJsonHttpRequestHandle:HttpRequestHandle{
                         ,cause:json["cause"].asString
                         ,strackTrace:json["strackTrace"].asString
                     )
-//                    error.message = json["message"].asString;
-//                    error.strackTrace = json["stackTrace"].asString;
-//                    error.cause = json["cause"].asString;
+                    //                    error.message = json["message"].asString;
+                    //                    error.strackTrace = json["stackTrace"].asString;
+                    //                    error.cause = json["cause"].asString;
                     
                     fault(error);
                 }else{
-//                    result(obj:package.getResult(json["result"]),warning:[HttpError]());
+                    //                    result(obj:package.getResult(json["result"]),warning:[HttpError]());
                     result(package.getResult(json["result"]),[HttpError]());
                 }
             }
         }else{
-            let error = HttpError(code:-1
+            let error = HttpError(code:-11
                 ,message:"not data."
                 ,cause:"not data."
             );
-//            error.message = "not data.";
-//            error.cause = "not data.";
-//            error.strackTrace = "";
+            //            error.message = "not data.";
+            //            error.cause = "not data.";
+            //            error.strackTrace = "";
             fault(error);
-//            fault(error:error);
+            //            fault(error:error);
         }
         
     }

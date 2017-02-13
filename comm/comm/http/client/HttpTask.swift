@@ -378,9 +378,17 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         //
         //            }
         //        }
-        let blocks = YSInstance.backgroundTaskMap["\(session.configuration.identifier)\(task.hash)"]
         
-        if let blocks = blocks, blocks.success != nil {
+        let blocks = YSInstance.backgroundTaskMap["\(session.configuration.identifier)\(task.hash)"]
+        if let error = error {
+            let resp = HttpClientResponse()
+            if let nerror = error as? NSError {
+                blocks?.failure?(error as NSError,resp);
+            }else{
+                let nerror = NSError.init(domain: "net error.", code: -1, userInfo: [:])
+                blocks?.failure?(nerror,resp);
+            }
+        }else if let blocks = blocks, blocks.success != nil {
             
             let resp = HttpClientResponse()
             if let hresponse = task.response as? HTTPURLResponse {
@@ -396,8 +404,8 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
             }else{
                 blocks.success?(resp)
             }
-            cleanupBackground("\(session.configuration.identifier)\(task.hash)")
         }
+        cleanupBackground("\(session.configuration.identifier)\(task.hash)")
         //session.finishTasksAndInvalidate();
     }
     
