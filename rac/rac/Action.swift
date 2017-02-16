@@ -37,6 +37,16 @@ extension CocoaAction{
         })
     }
     
+    public var progress:BindingTarget<Float?>{
+        //        self.getAssociatedValue(forKey: "_cocoa_action_progress_view_")
+        self.setAssociatedValue(value: true, forKey: "_is_cocoa_action_progress_view_");
+        return BindingTarget<Float?>(on: UIScheduler(), lifetime: self.reactive.lifetime, setter: { (value) in
+            if let view:MRProgressOverlayView = self.getAssociatedValue(forKey: "_cocoa_action_progress_view_"){
+                view.progress = value ?? 0;
+            }
+        })
+    }
+    
     public func addComplete(_ action:@escaping ((Any!)->())){
         let a = ActionObj();
         a.action = action;
@@ -122,8 +132,13 @@ public prefix func ~ <Value>(action: @escaping (@escaping(Any!)->())->())->Cocoa
         
         if !complete, let vc = vc {
             progressView = MRProgressOverlayView();
-            progressView?.mode = MRProgressOverlayViewMode.indeterminateSmallDefault;
-            progressView?.titleLabelText = cocoaAction.getAssociatedValue(forKey: "_message");
+            let isBar:Bool? = cocoaAction.getAssociatedValue(forKey: "_is_cocoa_action_progress_view_");
+            if isBar == true{
+                progressView?.mode = MRProgressOverlayViewMode.determinateHorizontalBar;
+            }else{
+                progressView?.mode = MRProgressOverlayViewMode.indeterminateSmallDefault;
+                progressView?.titleLabelText = cocoaAction.getAssociatedValue(forKey: "_message");
+            }
             vc.view.addSubview(progressView!);
             vc.view.bringSubview(toFront: progressView!);
             progressView?.show(true);

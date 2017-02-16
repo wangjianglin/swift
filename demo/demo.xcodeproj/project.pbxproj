@@ -33,6 +33,7 @@
 		3EA79C4C1DDC0D4900972A8A /* MVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA79C4B1DDC0D4900972A8A /* MVVM.swift */; };
 		3EB565AF1DD368F400828FF7 /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565AE1DD368F400828FF7 /* RAC.swift */; };
 		3EB565C01DD435D300828FF7 /* RACVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565BF1DD435D300828FF7 /* RACVM.swift */; };
+		3EC3B9501E549E1600EED4B5 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC3B94F1E549E1600EED4B5 /* add.png */; };
 		3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EAE1D0AEF2500717357 /* WebViewController.swift */; };
 		3EE51EE31CE8C9B90032729F /* web in Resources */ = {isa = PBXBuildFile; fileRef = 3EE51EE21CE8C9B90032729F /* web */; };
 /* End PBXBuildFile section */
@@ -99,6 +100,7 @@
 		3EA79C4B1DDC0D4900972A8A /* MVVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVVM.swift; sourceTree = "<group>"; };
 		3EB565AE1DD368F400828FF7 /* RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAC.swift; sourceTree = "<group>"; };
 		3EB565BF1DD435D300828FF7 /* RACVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACVM.swift; sourceTree = "<group>"; };
+		3EC3B94F1E549E1600EED4B5 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		3EC64EAE1D0AEF2500717357 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3EC64EB01D0AF00100717357 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3EE51EE21CE8C9B90032729F /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		3E200EA61C4D5FB000A00A10 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				3EC3B94F1E549E1600EED4B5 /* add.png */,
 				3E66A72C1DC9CE95005628AC /* data1.zip */,
 				3E53F8841DC6405F00E79390 /* data2.zip */,
 				3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */,
@@ -345,6 +348,7 @@
 				3E66A72D1DC9CE95005628AC /* data1.zip in Resources */,
 				3E1DF47C1D903B250041D2AA /* buyers in Resources */,
 				3E200EB21C4D5FB000A00A10 /* LaunchScreen.storyboard in Resources */,
+				3EC3B9501E549E1600EED4B5 /* add.png in Resources */,
 				3EE51EE31CE8C9B90032729F /* web in Resources */,
 				3E200EAF1C4D5FB000A00A10 /* Assets.xcassets in Resources */,
 				3E53F8851DC6405F00E79390 /* data2.zip in Resources */,

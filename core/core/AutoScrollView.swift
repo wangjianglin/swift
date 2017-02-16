@@ -20,6 +20,8 @@ public class AutoScrollView : UIScrollView{
     }
     public var dir = Dir.Vertical;
     
+    public var offset = CGSize.init(width: 0, height: 0);
+    
     override init(frame: CGRect) {
         super.init(frame: frame);
         
@@ -89,13 +91,18 @@ public class AutoScrollView : UIScrollView{
     
     private var run = true;
     private func thread(){
+        var interval:TimeInterval = 0.2;
         while(run){
-            Thread.sleep(forTimeInterval: 0.6);
+            Thread.sleep(forTimeInterval: interval);
             if(isHidden){
+                interval = 1.2;
                 continue;
             }
-            self.resetContentSize();
-            //            Queue.mainQueue(self.resetContentSize);
+            if self.resetContentSize() {
+                interval = 1.2;
+            }else{
+                interval = 0.6;
+            }
         }
     }
     
@@ -103,23 +110,38 @@ public class AutoScrollView : UIScrollView{
         run = false;
     }
     
-    private func resetContentSize(){
+    private func resetContentSize()->Bool{
         var rect = self.size();
         
         let bounds = self.bounds;
         
         if dir == Dir.Vertical{
-            if rect.height <= self.bounds.height + 1 {
-                rect.size.height = bounds.height + 1;
+            if rect.height <= self.bounds.height + offset.height + 1 {
+                rect.size.height = bounds.height + offset.height + 1;
             }
-            rect.size.width = bounds.width;
+            rect.size.width = bounds.width + offset.width;
         }else{
-            if rect.width <= self.bounds.width + 1 {
-                rect.size.width = bounds.width + 1;
+            if rect.width <= self.bounds.width + offset.width + 1 {
+                rect.size.width = bounds.width + offset.width + 1;
             }
-            rect.size.height = bounds.height;
+            rect.size.height = bounds.height + offset.height;
         }
-        
-        self.contentSize = rect.size;
+        if rect.size.width == self.contentSize.width
+            && rect.size.height == self.contentSize.height {
+            return false;
+        }
+        Queue.mainQueue{
+            self.contentSize = rect.size;
+        }
+        return true;
+    }
+    
+    public override var contentSize: CGSize{
+        get{
+            return super.contentSize;
+        }
+        set{
+            super.contentSize = newValue;
+        }
     }
 }

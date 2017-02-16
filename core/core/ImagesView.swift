@@ -9,7 +9,6 @@
 import MediaPlayer
 import UIKit
 
-//@class ImagesViewAddVedioCollectionViewCell;
 
 open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSource,QBImagePickerControllerDelegate,UIActionSheetDelegate{
     fileprivate var _collectionView:UICollectionView!
@@ -29,18 +28,6 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         _collectionView.reloadData();
     }
     
-//    public var vedioUrl:NSURL?{
-//        return _vedioUrl;
-//    }
-//    
-//    public var vedioImage:UIImage{
-//        return _vedioImage;
-//    }
-//    
-//    private func setVedioImage(vedioImage:UIImage){
-//        _vedioImage = vedioImage;
-//        _cellVideo.setVedioImage(_vedioImage);
-//    }
     open var vedioImage:UIImage?{
         get{
             return _vedioImage;
@@ -48,6 +35,28 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         set{
             _vedioImage = newValue;
             _cellVideo.setVedioImage(_vedioImage)
+        }
+    }
+    
+    open var hasVedio = true{
+        didSet{
+            _collectionView.reloadData();
+        }
+    }
+    
+    open var maxSelection = 9 {
+        didSet{
+            _collectionView.reloadData();
+            if maxSelection != oldValue {
+                var tmpImages = [AnyObject]();
+                for n in 0 ..< _imagePaths.count {
+                    if n >= maxSelection {
+                        break;
+                    }
+                    tmpImages.append(_imagePaths[n]);
+                }
+                _imagePaths = tmpImages;
+            }
         }
     }
     
@@ -63,22 +72,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             self.setVedioImage();
         }
     }
-//    private func setVedioUrl(vedioUrl:NSURL){
-//        if (_vedioUrl == vedioUrl) {
-//            return;
-//        }
-//        _vedioUrl = vedioUrl;
-//        self.setVedioImage();
-//    }
     
-    //    public var images:[String]{
-    //    return _imagePaths;
-    //}
-    //
-    //    public func setImages(imagePaths:NSArray *){
-    //    _imagePaths = [[NSMutableArray alloc] initWithArray:imagePaths];
-    //    [_collectionView reloadData];
-    //}
     open var images:[AnyObject]{
         get{
             return _imagePaths;
@@ -91,9 +85,6 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     
     public init(){
         
-        //        super.init();
-        
-        //    if (self) {
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0));
         //层声明实列化
         _flowLayout = UICollectionViewFlowLayout();
@@ -111,9 +102,6 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         _collectionView.register(ImagesViewAddVedioCollectionViewCell.self, forCellWithReuseIdentifier:"_ImagesViewAddVedioCollectionViewCell_");
         
         
-        //collectionView = [[UICollectionView alloc] init];
-        
-        
         self.addSubview(_collectionView);
         
         _collectionView.translatesAutoresizingMaskIntoConstraints = false;
@@ -121,9 +109,9 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         
         self.addConstraints(
             [NSLayoutConstraint(item:_collectionView, attribute:NSLayoutAttribute.top, relatedBy:NSLayoutRelation.equal, toItem:self, attribute:NSLayoutAttribute.top, multiplier:1.0, constant:0.0),
-                NSLayoutConstraint(item:_collectionView, attribute:NSLayoutAttribute.left, relatedBy:NSLayoutRelation.equal, toItem:self, attribute:NSLayoutAttribute.left, multiplier:1.0, constant:0.0),
-                NSLayoutConstraint(item:_collectionView, attribute:NSLayoutAttribute.right, relatedBy:NSLayoutRelation.equal, toItem:self, attribute:NSLayoutAttribute.right, multiplier:1.0, constant:0.0),
-                NSLayoutConstraint(item:_collectionView, attribute:NSLayoutAttribute.bottom, relatedBy:NSLayoutRelation.equal, toItem:self, attribute:NSLayoutAttribute.bottom, multiplier:1.0, constant:0.0)
+             NSLayoutConstraint(item:_collectionView, attribute:NSLayoutAttribute.left, relatedBy:NSLayoutRelation.equal, toItem:self, attribute:NSLayoutAttribute.left, multiplier:1.0, constant:0.0),
+             NSLayoutConstraint(item:_collectionView, attribute:NSLayoutAttribute.right, relatedBy:NSLayoutRelation.equal, toItem:self, attribute:NSLayoutAttribute.right, multiplier:1.0, constant:0.0),
+             NSLayoutConstraint(item:_collectionView, attribute:NSLayoutAttribute.bottom, relatedBy:NSLayoutRelation.equal, toItem:self, attribute:NSLayoutAttribute.bottom, multiplier:1.0, constant:0.0)
             ]);
         
         _collectionView.delegate = self;
@@ -134,34 +122,14 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         fatalError("init(coder:) has not been implemented")
     }
     
-    //    return self;
-    //}
     
     fileprivate func vedioPacker(){
         
         let imagePickerController = QBImagePickerController();
         imagePickerController.delegate = self;
-        //    imagePickerController.filterType = QBImagePickerFilterTypeAllPhotos;
         imagePickerController.filterType = QBImagePickerFilterTypeAllVideos;
         imagePickerController.allowsMultipleSelection = false;
-        //    uint maxSelection = 0;
-        //        for (NSObject * item in self.imagePaths) {
-        //    NSObject * item = nil;
-        //    for (int n=0; n<self.imagePaths.count; n++) {
-        //        item = self.imagePaths[n];
-        //        if ((item == nil || [item isKindOfClass:[NSNull class]]) && [views[n+videoCount] isKindOfClass:[LinImagesContentView class]] &&
-        //            ((LinImagesContentView*)views[n+videoCount]).image == nil
-        //            //&&
-        //            //(((LinImagesContentView*)views[n])->_imagePath == nil || [((LinImagesContentView*)views[n])->_imagePath isKindOfClass:[NSNull class]])
-        //            ) {
-        //            maxSelection++;
-        //        }
-        //    }
-        //    if ((self.imagePaths[index] != nil && ![self.imagePaths[index] isKindOfClass:[NSNull class]])
-        //        || ((LinImagesContentView*)views[_currentItem]).image != nil)
-        //    {
-        //        maxSelection++;
-        //    }
+        
         imagePickerController.maximumNumberOfSelection = (10 - UInt(_imagePaths.count));
         imagePickerController.limitsMaximumNumberOfSelection = true;
         let navigationController = UINavigationController(rootViewController:imagePickerController);
@@ -175,27 +143,10 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         let imagePickerController = QBImagePickerController();
         imagePickerController.delegate = self;
         imagePickerController.filterType = QBImagePickerFilterTypeAllPhotos;
-        //    imagePickerController.filterType = QBImagePickerFilterTypeAllVideos;
+        
         imagePickerController.allowsMultipleSelection = true;
-        //    uint maxSelection = 0;
-        //        for (NSObject * item in self.imagePaths) {
-        //    NSObject * item = nil;
-        //    for (int n=0; n<self.imagePaths.count; n++) {
-        //        item = self.imagePaths[n];
-        //        if ((item == nil || [item isKindOfClass:[NSNull class]]) && [views[n+videoCount] isKindOfClass:[LinImagesContentView class]] &&
-        //            ((LinImagesContentView*)views[n+videoCount]).image == nil
-        //            //&&
-        //            //(((LinImagesContentView*)views[n])->_imagePath == nil || [((LinImagesContentView*)views[n])->_imagePath isKindOfClass:[NSNull class]])
-        //            ) {
-        //            maxSelection++;
-        //        }
-        //    }
-        //    if ((self.imagePaths[index] != nil && ![self.imagePaths[index] isKindOfClass:[NSNull class]])
-        //        || ((LinImagesContentView*)views[_currentItem]).image != nil)
-        //    {
-        //        maxSelection++;
-        //    }
-        imagePickerController.maximumNumberOfSelection = 10 - UInt(_imagePaths.count);
+        
+        imagePickerController.maximumNumberOfSelection = UInt(maxSelection - _imagePaths.count);
         imagePickerController.limitsMaximumNumberOfSelection = true;
         let navigationController = UINavigationController(rootViewController:imagePickerController);
         self.viewController?.present(navigationController, animated:true, completion:nil);
@@ -206,7 +157,6 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         
         if (imagePickerController.filterType == QBImagePickerFilterTypeAllVideos) {
             
-            //        NSLog(@"===============");
             
             let dict = info as! NSDictionary;
             let image = dict["UIImagePickerControllerOriginalImage"] as! UIImage;
@@ -214,38 +164,21 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             
             _vc = VedioConvert(url:url);
             
-            //        __weak ImagesView * wself = self;
             
             _vc.action = {[weak self](url:URL?) in
-                //            ImagesView * sself = wself;
                 self?._vedioUrl = url;
                 self?._vedioImage = image;
                 self?._cellVideo.setVedioImage(image);
-                //            NSLog(@"url:%@",url);
             };
             _vc.start(self.viewController!.view);
-            //        _vedioUrl = url;
         }
         else if imagePickerController.allowsMultipleSelection {
             let mediaInfoArray = info as! NSArray;
-//            if (_imagePaths == nil) {
-//                _imagePaths = [String]();
-//            }
-            //        [_imagePaths addObjectsFromArray:mediaInfoArray];
-            //        int start = [self currentItem];
+            
             for fitem in mediaInfoArray {
-                //            while (!([views[start % views.count] isKindOfClass:[LinImagesContentView class]]) || (
-                //                                                                                                  ((LinImagesContentView*)views[start % views.count]).image != nil &&
-                //                                                                                                  ![((LinImagesContentView*)views[start % views.count]).image isKindOfClass:[NSNull class]] && start != [self currentItem]))
-                //            {
-                //                start++;
-                //            }
                 let item = fitem as! NSDictionary;
                 let image = item["UIImagePickerControllerOriginalImage"] as! UIImage;
                 _imagePaths.append(image);
-                //            ((LinImagesContentView*)views[start%views.count]).image = image;
-                //            ((LinImagesContentView*)views[start%views.count]).tag = 2;
-                //            start++;
             }
             _collectionView.reloadData();
         }
@@ -286,21 +219,16 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     
     open func movieFinishedCallback(_ sender:AnyObject){
         let playerViewController = (sender as! Notification).object;
-        //    playerViewController view
-        //    [playerViewController removeFromParentViewController];
         (playerViewController as AnyObject).view.removeFromSuperview();
         
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object:nil);
         
-        //    self.navigationController.navigationBar.hidden = FALSE;
     }
     
     @objc public func actionSheet(_ actionSheet:UIActionSheet, clickedButtonAt buttonIndex:Int){
-        //    NSLog(@"index:%ld",buttonIndex);
         
         let title = actionSheet.buttonTitle(at: buttonIndex);
         
-        //if (buttonIndex == 0 && _vedioUrl != nil) {
         if "播放" == title {
             
             //播放
@@ -311,23 +239,16 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             self.rootViewController?.addChildViewController(playerViewController!);
             
             NotificationCenter.default.addObserver(self, selector:#selector(self.movieFinishedCallback),
-                                                             name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                                                             object:playerViewController?.moviePlayer);
+                                                   name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+                                                   object:playerViewController?.moviePlayer);
             //-- add to view---
             self.rootViewController?.view.addSubview((playerViewController?.view)!);
             
-            //playerViewController.view.frame = CGRectMake(20, 20, 200, 300);
-            
-            //playerViewController.
             
             //---play movie---
             let player = playerViewController?.moviePlayer;
             
-            //player.contentURL = [NSURL URLWithString:@"http://i.feicuibaba.com/test.mp4"];
-            
             player?.prepareToPlay();
-            //self.navigationController.navigationBar.hidden = TRUE;
-            //}else if((buttonIndex == 0 && _vedioUrl == nil) || (buttonIndex == 1 && _vedioUrl != nil)){
         }else if "重新拍摄" == title {
             self.recordVedio();
             //}else if((buttonIndex == 1 && _vedioUrl == nil) || (buttonIndex == 2 && _vedioUrl != nil)){
@@ -348,29 +269,18 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             actionSheet.actionSheetStyle = UIActionSheetStyle.blackOpaque;
             actionSheet.show(in: self);
         }else{
-            //        UIActionSheet *actionSheet = [[UIActionSheet alloc]
-            //                                      initWithTitle:nil
-            //                                      delegate:self
-            //                                      cancelButtonTitle:@"取消"
-            //                                      destructiveButtonTitle:nil
-            //                                      otherButtonTitles:@"拍摄",@"选取一个视频", nil];
-            //        actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-            //        [actionSheet showInView:self];
             self.recordVedio();
         }
         
     }
     
     private func recordVedio(){
-        //    __weak ImagesView * wself = self;
         let camera = CameraViewController();
         
         camera.setResult({[weak self](file:URL?) in
             if (file == nil) {
                 return ;
             }
-            
-            //        ImagesView * sself = wself;
             self?.vedioUrl = file;
         });
         self.viewController?.present(camera, animated:true, completion:nil);
@@ -379,30 +289,16 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     
     private func setVedioImage(){
         
-        
-        
-        //    let opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
-        //    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:_vedioUrl options:opts];
         let opts:[String : AnyObject]? = nil;
         
         let urlAsset = AVURLAsset(url: _vedioUrl!, options: opts);
         
-        //    AVAssetImageGenerator *generator = [AVAssetImageGenerator assetImageGeneratorWithAsset:urlAsset];
         let generator = AVAssetImageGenerator(asset: urlAsset);
         generator.appliesPreferredTrackTransform = true;
         generator.maximumSize = CGSize(width: 480, height: 480);
-        //    NSError *error = nil;
-        //    //CMTime * actualTime = [[CMTime alloc] init];
-        //    CGImageRef img = [generator copyCGImageAtTime:CMTimeMake(0, 1) actualTime:NULL error:&error];
         let img = try? generator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil);
         if let img = img {
             _vedioImage = UIImage(cgImage:img);
-            //use "img" to ooxx........
-            //            w->vedioImage.frame = dashImageView.frame;
-            //            w->vedioImage.image = [UIImage imageWithCGImage:img];
-            //            [datas addObject:UIImageJPEGRepresentation([UIImage imageWithCGImage:img], 0.6)];
-            //            goods.goods_video_img = [[NSString alloc] initWithFormat:@"%@/%@.jpg",path,[self uuidString]];
-            //            [keys addObject:goods.goods_video_img];
         }else{
             _vedioImage = nil;
         }
@@ -410,32 +306,15 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         _cellVideo.setVedioImage(_vedioImage);
     }
     
-    //-(void)imageVideo:(id)_{
-    //    __weak ImagesView * wself = self;
-    //    CameraViewController * camera = [[CameraViewController alloc] init];
-    //    //CameraViewController
-    //    //self dismissViewControllerAnimated:<#(BOOL)#> completion:<#^(void)completion#>
-    //    //[self presentViewController:]
-    //    [camera setResult:^(NSURL *file) {
-    //        NSLog(@"file:%@",file);
-    ////        player.contentURL = file;
-    ////        [player play];
-    ////        LinImagesView * w = wself;
-    ////        w->_vedioUrl = file;
-    //    }];
-    //    [[self viewController] presentViewController:camera animated:TRUE completion:nil];
-    //    return;
-    //}
-    
     
     //MARK: data source
     
     public func collectionView(_ collectionView:UICollectionView, numberOfItemsInSection section:Int)->Int{
         var row = _imagePaths.count;
-        if (row == 10) {
-            row += 1;
+        if (row == maxSelection) {
+            row += (hasVedio ? 1 : 0);
         }else{
-            row += 2;
+            row += (hasVedio ? 2 : 1);
         }
         self.resetLayout();
         
@@ -444,8 +323,8 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     public func collectionView(_ collectionView:UICollectionView, cellForItemAt indexPath:IndexPath)->UICollectionViewCell{
-        //    return [[ImagesViewUICollectionViewCell alloc] init];
-        if ((indexPath as NSIndexPath).row == 0) {
+        
+        if ((indexPath as NSIndexPath).row == 0 && hasVedio) {
             
             if (_cellVideo == nil) {
                 _cellVideo = collectionView.dequeueReusableCell(withReuseIdentifier: "_ImagesViewAddVedioCollectionViewCell_", for:indexPath) as! ImagesViewAddVedioCollectionViewCell;
@@ -456,9 +335,8 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             return _cellVideo;
         }
         
-        if ((indexPath as NSIndexPath).row == _imagePaths.count + 1) {
+        if ((indexPath as NSIndexPath).row == _imagePaths.count + (hasVedio ? 1 : 0)) {
             
-            //        if (_cellImage == nil) {
             _cellImage = collectionView.dequeueReusableCell(withReuseIdentifier: "_ImagesViewAddImageCollectionViewCell_", for:indexPath);
             
             _cellImage.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.imagePacker)));
@@ -469,10 +347,8 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         let CellIdentifier = "_ImagesViewUICollectionViewCell_";
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for:indexPath) as! ImagesViewUICollectionViewCell;
         
-        //    int r = indexPath.row + 5;
-        //    cell.backgroundColor = [UIColor colorWithRed:((10 * r) / 255.0) green:((20 * r)/255.0) blue:((30 * r)/255.0) alpha:1.0f];
         
-        cell.image = _imagePaths[Int((indexPath as NSIndexPath).row - 1)];
+        cell.image = _imagePaths[Int((indexPath as NSIndexPath).row - (hasVedio ? 1 : 0))];
         cell.pos = Int((indexPath as NSIndexPath).row - 1);
         cell.imagesView = self;
         return cell;
@@ -492,7 +368,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         
         let h = self.bounds.size.width / 4 + 10;
         
-        let row = _imagePaths.count + 2;
+        let row = _imagePaths.count + (hasVedio ? 2 : 1);
         if _heightConstraint != nil {
             self.removeConstraint(_heightConstraint);
         }
@@ -528,7 +404,6 @@ public class ImagesViewAddImageCollectionViewCell : UICollectionViewCell{
         
         let iconImage = FillImageView();
         
-//        iconImage.setFillImage("LinCore.bundle/camera/camera_icon_image.png");
         iconImage.setFillImage(UIImage(named: "LinCore.bundle/camera/camera_icon_image.png", in: Bundle(for:self.classForCoder), compatibleWith: nil));
         
         iconImage.frame = CGRect(x: 15, y: 10, width: _dashImageView.frame.size.width - 10, height: _dashImageView.frame.size.width - 10);
@@ -573,9 +448,7 @@ public class ImagesViewAddImageCollectionViewCell : UICollectionViewCell{
         
         line?.setLineDash(phase: 0, lengths: lengths);  //画虚线
         
-//        line?.moveTo(x: 0.0, y: 0.0);    //开始画线
         line?.move(to: CGPoint(x: 0.0, y: 0.0));
-//        line?.addLineTo(x: size.width, y: 0.0);
         line?.addLine(to: CGPoint(x: size.width, y: 0.0));
         line?.addLine(to: CGPoint(x: size.width, y: size.height));
         line?.addLine(to: CGPoint(x: 0.0, y: size.height));
@@ -704,41 +577,10 @@ open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
 class ImagesViewUICollectionViewCell : UICollectionViewCell{
     fileprivate var _imageView:FillImageView!;
     
-    //@property NSObject * imagePath;
-    
-    //    private var image:AnyObject?;
-    
-//    private var fill:ImageFill = ImageFill.Fill;
-    
     fileprivate var pos = 0;
     
     fileprivate var imagesView:ImagesView?;
     
-    //
-    //
-    //@implementation ImagesViewUICollectionViewCell
-    
-    //-(NSObject *)imagePath{
-    //    return _imagePath;
-    //}
-    
-    //-(void)setImagePath:(NSObject *)imagePath{
-    //    if (_imagePath == imagePath) {
-    //        return;
-    //    }
-    //    _imageView.image = imagePath;
-    //}
-    
-    //-(NSObject *)image{
-    //    return _imageView.image;
-    //}
-    //
-    //-(void)setImage:(NSObject *)image{
-    //    if (_imageView.image == image) {
-    //        return;
-    //    }
-    //    _imageView.image = image;
-    //}
     var image:AnyObject?{
         didSet{
             if let image = image {
@@ -747,13 +589,6 @@ class ImagesViewUICollectionViewCell : UICollectionViewCell{
         }
     }
     
-    //-(ImageFill)fill{
-    //    return _imageView.fill;
-    //}
-    //
-    //-(void)setFill:(ImageFill)fill{
-    //    _imageView.fill = fill;
-    //}
     var fill:ImageFill = ImageFill.fill{
         didSet{
             _imageView.fill = fill;
@@ -765,17 +600,10 @@ class ImagesViewUICollectionViewCell : UICollectionViewCell{
     override init(frame:CGRect){
         super.init(frame:frame);
         
-        //    if (self) {
         self.contentView.backgroundColor = UIColor.clear;
         
         _imageView = FillImageView();
         
-        //        __weak ImagesViewUICollectionViewCell * wself = self;
-        
-        //        _imageView.imageChanged = ^{
-        //            [wself update];
-        //        };
-        //        _imageView.backgroundColor = [UIColor greenColor];
         _imageView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height);
         _imageView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
         
@@ -791,7 +619,7 @@ class ImagesViewUICollectionViewCell : UICollectionViewCell{
         minusImageView.translatesAutoresizingMaskIntoConstraints = false;
         
         self.addConstraints([NSLayoutConstraint(item:minusImageView, attribute:NSLayoutAttribute.centerX, relatedBy:NSLayoutRelation.equal, toItem:self, attribute:NSLayoutAttribute.left, multiplier:1.0, constant:10.0),
-            NSLayoutConstraint(item:minusImageView, attribute:NSLayoutAttribute.centerY, relatedBy:NSLayoutRelation.equal, toItem:self, attribute:NSLayoutAttribute.top, multiplier:1.0, constant:10.0)]);
+                             NSLayoutConstraint(item:minusImageView, attribute:NSLayoutAttribute.centerY, relatedBy:NSLayoutRelation.equal, toItem:self, attribute:NSLayoutAttribute.top, multiplier:1.0, constant:10.0)]);
     }
     
     required init?(coder aDecoder: NSCoder) {

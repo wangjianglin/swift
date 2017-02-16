@@ -34,11 +34,17 @@ internal func sync<Result>(_ token: AnyObject, execute: () throws -> Result) ret
 public typealias KeyAddr = UnsafeRawPointer!;
 
 extension NSObject{
+    public func setAssociatedValue(value:Any!,forKey key: StaticString, _ policy: objc_AssociationPolicy) {
+        setAssociatedValue(value: value, forAddress: key.utf8Start, policy);
+    }
     public func setAssociatedValue(value:Any!,forKey key: StaticString) {
         setAssociatedValue(value: value, forAddress: key.utf8Start);
     }
     public func setAssociatedValue(value:Any!,forAddress key: KeyAddr) {
         objc_setAssociatedObject(self, key, value, .OBJC_ASSOCIATION_RETAIN)
+    }
+    public func setAssociatedValue(value:Any!,forAddress key: KeyAddr, _ policy: objc_AssociationPolicy) {
+        objc_setAssociatedObject(self, key, value, policy);
     }
     public func getAssociatedValue<T>(forKey key: StaticString)->T! {
         return getAssociatedValue(forAddress:key.utf8Start);

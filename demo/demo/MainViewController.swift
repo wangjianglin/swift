@@ -11,77 +11,9 @@ import UIKit
 import ReactiveSwift
 import Result
 import LinRac
+import LinCore
 
 
-public extension UIBarButtonItem{
-    public convenience init(barButtonSystemItem systemItem: UIBarButtonSystemItem){
-        self.init(barButtonSystemItem:systemItem, target: nil, action: nil);
-        
-//        UIImage
-    }
-}
-public class MoreBarButtonItem : UIBarButtonItem{
-    public override init(){
-        super.init();
-        self.target = self;
-        self.action = "action:"
-    }
-    
-//    override public var target: AnyObject?{
-//        get{return nil;}
-//        set{}
-//    }
-//    
-//    override public var action: Selector?{
-//        get{return nil;}
-//        set{}
-//    }
-    
-    public convenience init(image: UIImage?, style: UIBarButtonItemStyle){
-        self.init();
-        self.image = image;
-        self.style = style;
-//        super.init(image: image, style: style, target: self, action: Selector(("action")));
-    }
-    
-    public convenience init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItemStyle) {
-        self.init();
-        self.image = image;
-        self.landscapeImagePhone = landscapeImagePhone;
-        self.style = style;
-    }
-    
-    public convenience init(title: String?, style: UIBarButtonItemStyle){
-        self.init();
-        self.title = title;
-        self.style = style;
-    }
-    
-//    public convenience init(barButtonSystemItem systemItem: UIBarButtonSystemItem, target: Any?, action: Selector?){
-////        super.init(barButtonSystemItem: systemItem, target: nil, action: nil);
-//    }
-//    public init(barButtonSystemItem systemItem: UIBarButtonSystemItem){
-//        super.init(barButtonSystemItem: systemItem, target: nil, action: nil);
-////        self.init();
-////        self.image = UIBarButtonItem.init(barButtonSystemItem: systemItem, target: nil, action: nil).image;
-////        self.
-////        super.init(barButtonSystemItem: systemItem, target: nil, action: nil);
-//    }
-    
-    public convenience init(customView: UIView){
-        self.init();
-        self.customView = customView;
-//        super.init(customView: customView);
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    public func action(sender:AnyObject){
-        print("======================")
-    }
-}
 public class MainViewController : UIViewController,UITableViewDataSource,UITableViewDelegate,BaseView{
     
     private lazy var vm:MainViewModel = {
@@ -105,14 +37,24 @@ public class MainViewController : UIViewController,UITableViewDataSource,UITable
     
     public override func viewDidLoad() {
         
-        let refresh = MoreBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add);
-        
-        refresh.target = refresh;
-        refresh.action = "action:"
+        let moreButton = MoreBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add);
+        moreButton.vc = self;
+//        refresh.target = refresh;
+//        refresh.action = "action2:"
 //        let refresh = MoreBarButtonItem.init(title: "加载", style: UIBarButtonItemStyle.plain, target: nil, action: nil);
         
 //        self.navigationController?.navigationItem.rightBarButtonItem = refresh;
-        self.navigationItem.rightBarButtonItem = refresh;
+        self.navigationItem.rightBarButtonItem = moreButton;
+        
+        let add = UIBarButtonItem.init(title: "checkbox1_", style: UIBarButtonItemStyle.plain, target: nil, action: nil);
+        add.image = UIImage.init(named: "add.png");
+        moreButton.add(button: add);
+        moreButton.add(button: add);
+        moreButton.add(button: add);
+        moreButton.add(button: add);
+        moreButton.add(button: add);
+        
+        moreButton.backgroundColor = UIColor.gray;
         
 //        refresh.reactive.pressed = ~vm.refresh2;
 //        refresh <~ vm.refresh;
@@ -164,4 +106,98 @@ public class MainViewController : UIViewController,UITableViewDataSource,UITable
         }
     }
     
+}
+
+
+
+
+private func g(style:UIBarButtonSystemItem)->UIImage?{
+    switch style {
+        
+    case .done:
+        
+        break
+        
+    case .cancel:
+        
+        break
+        
+    case .edit:
+        
+        break
+        
+    case .save:
+        
+        break
+        
+    case .add: break;
+        //return self.image(name: "<UIBarButtonSystemItem> add.png", leftCapWidth: 0, topCapHeight: 0)
+        
+    case .flexibleSpace:
+        
+        break
+        
+    case .fixedSpace:
+        
+        break
+        
+    case .compose:
+        
+        break
+        
+    case .reply:
+        
+        break
+        
+    case .action:
+        
+        break
+        
+    case .organize:
+        
+        break
+        
+    case .bookmarks:
+        
+        break
+        
+    case .search:
+        
+        break
+        
+    case .refresh:
+        
+        break
+        
+    case .stop:
+        
+        break
+        
+    case .camera:
+        
+        break
+        
+    case .trash:
+        
+        break
+        
+    case .play:
+        
+        break
+        
+    case .pause:
+        
+        break
+        
+    case .rewind:
+        
+        break
+        
+    case .fastForward:
+        
+        break
+    default: break
+    }
+    
+    return nil;
 }

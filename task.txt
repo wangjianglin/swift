@@ -4,3 +4,6 @@
 for index in array.count-1 ... 0 {
 delegateActionItems.remove(at: array[index]);
 }
+
+
+QCheckBox 单选组

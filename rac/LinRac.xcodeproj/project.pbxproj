@@ -10,6 +10,7 @@
 		3E20C73C1E4EC287000C9698 /* QCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C73B1E4EC287000C9698 /* QCheckBox.swift */; };
 		3E20C7421E5027E7000C9698 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7411E5027E7000C9698 /* UITableView.swift */; };
 		3E20C7471E50C4E2000C9698 /* UISearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7461E50C4E2000C9698 /* UISearchController.swift */; };
+		3E20C7581E52C7C1000C9698 /* AbsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7571E52C7C1000C9698 /* AbsViewModel.swift */; };
 		3E519A171DE1F9D100B60C0E /* UIControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A161DE1F9D100B60C0E /* UIControls.swift */; };
 		3E519A191DE1FA0000B60C0E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A181DE1FA0000B60C0E /* ViewModel.swift */; };
 		3E8AA1521D2A55D8006E4922 /* rac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8AA1511D2A55D8006E4922 /* rac.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,6 +24,7 @@
 		3E20C73B1E4EC287000C9698 /* QCheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QCheckBox.swift; path = ext/QCheckBox.swift; sourceTree = "<group>"; };
 		3E20C7411E5027E7000C9698 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableView.swift; path = ext/UITableView.swift; sourceTree = "<group>"; };
 		3E20C7461E50C4E2000C9698 /* UISearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UISearchController.swift; path = ext/UISearchController.swift; sourceTree = "<group>"; };
+		3E20C7571E52C7C1000C9698 /* AbsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbsViewModel.swift; sourceTree = "<group>"; };
 		3E2E75A01D92E9D6000DCBD3 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = ../Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		3E2E75A11D92E9D6000DCBD3 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		3E2E75A41D92EF15000DCBD3 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = ../Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				3E8AA15F1D2A64F8006E4922 /* RACSubscriber.swift */,
 				3E519A161DE1F9D100B60C0E /* UIControls.swift */,
 				3E519A181DE1FA0000B60C0E /* ViewModel.swift */,
+				3E20C7571E52C7C1000C9698 /* AbsViewModel.swift */,
 			);
 			path = rac;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				3E20C7471E50C4E2000C9698 /* UISearchController.swift in Sources */,
 				3E519A171DE1F9D100B60C0E /* UIControls.swift in Sources */,
 				3E8AA15C1D2A628F006E4922 /* Signal.swift in Sources */,
+				3E20C7581E52C7C1000C9698 /* AbsViewModel.swift in Sources */,
 				3E8AA15A1D2A5904006E4922 /* Action.swift in Sources */,
 				3E20C7421E5027E7000C9698 /* UITableView.swift in Sources */,
 			);

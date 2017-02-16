@@ -19,7 +19,7 @@ extension Reactive where Base: UISearchController{
         get{
             return base.getAssociatedValue(forAddress: &searchAddress);
         }
-        set{
+        nonmutating set{
             let a = newValue;
             if let delegate = base.searchBar.delegate as? NSObject{
                 delegate.reactive.trigger(for: #selector(UISearchBarDelegate.searchBarTextDidEndEditing)).observe({[weak base] observe in

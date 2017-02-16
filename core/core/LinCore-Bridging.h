@@ -56,6 +56,7 @@
 
 #import "IOS7ScrollView.h"
 
+#import "MyLayout.h"
 
 extern NSString* CTSettingCopyMyPhoneNumber();
 

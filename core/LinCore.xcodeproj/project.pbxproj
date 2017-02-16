@@ -159,6 +159,37 @@
 		3E1D83181A629A0E006217A3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D83171A629A0E006217A3 /* Global.swift */; };
 		3E202C6F1A806EC1006D5C14 /* NSExceptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E202C6E1A806EC1006D5C14 /* NSExceptions.swift */; };
 		3E20C74E1E51B018000C9698 /* AutoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C74D1E51B017000C9698 /* AutoScrollView.swift */; };
+		3E20C7B81E53682A000C9698 /* MyBaseLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7991E53682A000C9698 /* MyBaseLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7B91E53682A000C9698 /* MyBaseLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C79A1E53682A000C9698 /* MyBaseLayout.m */; };
+		3E20C7BA1E53682A000C9698 /* MyDimeScale.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C79B1E53682A000C9698 /* MyDimeScale.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7BB1E53682A000C9698 /* MyDimeScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C79C1E53682A000C9698 /* MyDimeScale.m */; };
+		3E20C7BC1E53682A000C9698 /* MyFloatLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C79D1E53682A000C9698 /* MyFloatLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7BD1E53682A000C9698 /* MyFloatLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C79E1E53682A000C9698 /* MyFloatLayout.m */; };
+		3E20C7BE1E53682A000C9698 /* MyFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C79F1E53682A000C9698 /* MyFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7BF1E53682A000C9698 /* MyFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7A01E53682A000C9698 /* MyFlowLayout.m */; };
+		3E20C7C01E53682A000C9698 /* MyFrameLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7A11E53682A000C9698 /* MyFrameLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7C11E53682A000C9698 /* MyFrameLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7A21E53682A000C9698 /* MyFrameLayout.m */; };
+		3E20C7C21E53682A000C9698 /* MyLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7A31E53682A000C9698 /* MyLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7C31E53682A000C9698 /* MyLayoutDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7A41E53682A000C9698 /* MyLayoutDef.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7C41E53682A000C9698 /* MyLayoutInner.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7A51E53682A000C9698 /* MyLayoutInner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7C51E53682A000C9698 /* MyLayoutPos.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7A61E53682A000C9698 /* MyLayoutPos.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7C61E53682A000C9698 /* MyLayoutPos.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7A71E53682A000C9698 /* MyLayoutPos.m */; };
+		3E20C7C71E53682A000C9698 /* MyLayoutPosInner.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7A81E53682A000C9698 /* MyLayoutPosInner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7C81E53682A000C9698 /* MyLayoutSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7A91E53682A000C9698 /* MyLayoutSize.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7C91E53682A000C9698 /* MyLayoutSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7AA1E53682A000C9698 /* MyLayoutSize.m */; };
+		3E20C7CA1E53682A000C9698 /* MyLayoutSizeClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7AB1E53682A000C9698 /* MyLayoutSizeClass.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7CB1E53682A000C9698 /* MyLayoutSizeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7AC1E53682A000C9698 /* MyLayoutSizeClass.m */; };
+		3E20C7CC1E53682A000C9698 /* MyLayoutSizeInner.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7AD1E53682A000C9698 /* MyLayoutSizeInner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7CD1E53682A000C9698 /* MyLinearLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7AE1E53682A000C9698 /* MyLinearLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7CE1E53682A000C9698 /* MyLinearLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7AF1E53682A000C9698 /* MyLinearLayout.m */; };
+		3E20C7CF1E53682A000C9698 /* MyMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7B01E53682A000C9698 /* MyMaker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7D01E53682A000C9698 /* MyMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7B11E53682A000C9698 /* MyMaker.m */; };
+		3E20C7D11E53682A000C9698 /* MyPathLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7B21E53682A000C9698 /* MyPathLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7D21E53682A000C9698 /* MyPathLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7B31E53682A000C9698 /* MyPathLayout.m */; };
+		3E20C7D31E53682A000C9698 /* MyRelativeLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7B41E53682A000C9698 /* MyRelativeLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7D41E53682A000C9698 /* MyRelativeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7B51E53682A000C9698 /* MyRelativeLayout.m */; };
+		3E20C7D51E53682A000C9698 /* MyTableLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7B61E53682A000C9698 /* MyTableLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E20C7D61E53682A000C9698 /* MyTableLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7B71E53682A000C9698 /* MyTableLayout.m */; };
 		3E21FB2C1A810BC5009CF738 /* UIDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21FB2B1A810BC5009CF738 /* UIDevices.swift */; };
 		3E37464D1A26365A00B980E9 /* LinCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E37464C1A26365A00B980E9 /* LinCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E3746531A26365A00B980E9 /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3746471A26365A00B980E9 /* LinCore.framework */; };
@@ -255,6 +286,7 @@
 		3EB8A2CB1BBB110D00871123 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB8A2CA1BBB110D00871123 /* SystemConfiguration.framework */; };
 		3EBEC2381CFD4C21005ABB52 /* AppStoreUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEC2361CFD4C21005ABB52 /* AppStoreUpdate.swift */; };
 		3EBEC2391CFD4C21005ABB52 /* EnterpriseUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEC2371CFD4C21005ABB52 /* EnterpriseUpdate.swift */; };
+		3EC3B9521E55A04300EED4B5 /* MoreBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC3B9511E55A04300EED4B5 /* MoreBarButtonItem.swift */; };
 		3EC4FE221A55D97300E05771 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC4FE211A55D97300E05771 /* LinUtil.framework */; };
 		3ECB95CE1C48EA4800E5E67C /* Tables.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0854841A8A6E5C0052DCEE /* Tables.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ECD40751CEDC1E300D57372 /* MRBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECD40501CEDC1E300D57372 /* MRBlurView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -471,6 +503,37 @@
 		3E1D83171A629A0E006217A3 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		3E202C6E1A806EC1006D5C14 /* NSExceptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSExceptions.swift; sourceTree = "<group>"; };
 		3E20C74D1E51B017000C9698 /* AutoScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollView.swift; sourceTree = "<group>"; };
+		3E20C7991E53682A000C9698 /* MyBaseLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseLayout.h; sourceTree = "<group>"; };
+		3E20C79A1E53682A000C9698 /* MyBaseLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseLayout.m; sourceTree = "<group>"; };
+		3E20C79B1E53682A000C9698 /* MyDimeScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDimeScale.h; sourceTree = "<group>"; };
+		3E20C79C1E53682A000C9698 /* MyDimeScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDimeScale.m; sourceTree = "<group>"; };
+		3E20C79D1E53682A000C9698 /* MyFloatLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFloatLayout.h; sourceTree = "<group>"; };
+		3E20C79E1E53682A000C9698 /* MyFloatLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFloatLayout.m; sourceTree = "<group>"; };
+		3E20C79F1E53682A000C9698 /* MyFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFlowLayout.h; sourceTree = "<group>"; };
+		3E20C7A01E53682A000C9698 /* MyFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFlowLayout.m; sourceTree = "<group>"; };
+		3E20C7A11E53682A000C9698 /* MyFrameLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFrameLayout.h; sourceTree = "<group>"; };
+		3E20C7A21E53682A000C9698 /* MyFrameLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFrameLayout.m; sourceTree = "<group>"; };
+		3E20C7A31E53682A000C9698 /* MyLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayout.h; sourceTree = "<group>"; };
+		3E20C7A41E53682A000C9698 /* MyLayoutDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutDef.h; sourceTree = "<group>"; };
+		3E20C7A51E53682A000C9698 /* MyLayoutInner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutInner.h; sourceTree = "<group>"; };
+		3E20C7A61E53682A000C9698 /* MyLayoutPos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutPos.h; sourceTree = "<group>"; };
+		3E20C7A71E53682A000C9698 /* MyLayoutPos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLayoutPos.m; sourceTree = "<group>"; };
+		3E20C7A81E53682A000C9698 /* MyLayoutPosInner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutPosInner.h; sourceTree = "<group>"; };
+		3E20C7A91E53682A000C9698 /* MyLayoutSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutSize.h; sourceTree = "<group>"; };
+		3E20C7AA1E53682A000C9698 /* MyLayoutSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLayoutSize.m; sourceTree = "<group>"; };
+		3E20C7AB1E53682A000C9698 /* MyLayoutSizeClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutSizeClass.h; sourceTree = "<group>"; };
+		3E20C7AC1E53682A000C9698 /* MyLayoutSizeClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLayoutSizeClass.m; sourceTree = "<group>"; };
+		3E20C7AD1E53682A000C9698 /* MyLayoutSizeInner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayoutSizeInner.h; sourceTree = "<group>"; };
+		3E20C7AE1E53682A000C9698 /* MyLinearLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLinearLayout.h; sourceTree = "<group>"; };
+		3E20C7AF1E53682A000C9698 /* MyLinearLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLinearLayout.m; sourceTree = "<group>"; };
+		3E20C7B01E53682A000C9698 /* MyMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMaker.h; sourceTree = "<group>"; };
+		3E20C7B11E53682A000C9698 /* MyMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMaker.m; sourceTree = "<group>"; };
+		3E20C7B21E53682A000C9698 /* MyPathLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPathLayout.h; sourceTree = "<group>"; };
+		3E20C7B31E53682A000C9698 /* MyPathLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPathLayout.m; sourceTree = "<group>"; };
+		3E20C7B41E53682A000C9698 /* MyRelativeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRelativeLayout.h; sourceTree = "<group>"; };
+		3E20C7B51E53682A000C9698 /* MyRelativeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRelativeLayout.m; sourceTree = "<group>"; };
+		3E20C7B61E53682A000C9698 /* MyTableLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableLayout.h; sourceTree = "<group>"; };
+		3E20C7B71E53682A000C9698 /* MyTableLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableLayout.m; sourceTree = "<group>"; };
 		3E21FB2B1A810BC5009CF738 /* UIDevices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDevices.swift; sourceTree = "<group>"; };
 		3E3746471A26365A00B980E9 /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E37464B1A26365A00B980E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -572,6 +635,7 @@
 		3EB8A2CA1BBB110D00871123 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3EBEC2361CFD4C21005ABB52 /* AppStoreUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreUpdate.swift; sourceTree = "<group>"; };
 		3EBEC2371CFD4C21005ABB52 /* EnterpriseUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterpriseUpdate.swift; sourceTree = "<group>"; };
+		3EC3B9511E55A04300EED4B5 /* MoreBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreBarButtonItem.swift; sourceTree = "<group>"; };
 		3EC4FE211A55D97300E05771 /* LinUtil.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinUtil.framework; path = "../../../../Users/lin/Library/Developer/Xcode/DerivedData/lin-gxczwykgogkdagbgjamhtdcqlhnr/Build/Products/Debug-iphoneos/LinUtil.framework"; sourceTree = "<group>"; };
 		3ECD40501CEDC1E300D57372 /* MRBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRBlurView.h; sourceTree = "<group>"; };
 		3ECD40511CEDC1E300D57372 /* MRBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRBlurView.m; sourceTree = "<group>"; };
@@ -775,6 +839,44 @@
 			path = SCRecorder;
 			sourceTree = "<group>";
 		};
+		3E20C7981E53682A000C9698 /* MyLayout */ = {
+			isa = PBXGroup;
+			children = (
+				3E20C7991E53682A000C9698 /* MyBaseLayout.h */,
+				3E20C79A1E53682A000C9698 /* MyBaseLayout.m */,
+				3E20C79B1E53682A000C9698 /* MyDimeScale.h */,
+				3E20C79C1E53682A000C9698 /* MyDimeScale.m */,
+				3E20C79D1E53682A000C9698 /* MyFloatLayout.h */,
+				3E20C79E1E53682A000C9698 /* MyFloatLayout.m */,
+				3E20C79F1E53682A000C9698 /* MyFlowLayout.h */,
+				3E20C7A01E53682A000C9698 /* MyFlowLayout.m */,
+				3E20C7A11E53682A000C9698 /* MyFrameLayout.h */,
+				3E20C7A21E53682A000C9698 /* MyFrameLayout.m */,
+				3E20C7A31E53682A000C9698 /* MyLayout.h */,
+				3E20C7A41E53682A000C9698 /* MyLayoutDef.h */,
+				3E20C7A51E53682A000C9698 /* MyLayoutInner.h */,
+				3E20C7A61E53682A000C9698 /* MyLayoutPos.h */,
+				3E20C7A71E53682A000C9698 /* MyLayoutPos.m */,
+				3E20C7A81E53682A000C9698 /* MyLayoutPosInner.h */,
+				3E20C7A91E53682A000C9698 /* MyLayoutSize.h */,
+				3E20C7AA1E53682A000C9698 /* MyLayoutSize.m */,
+				3E20C7AB1E53682A000C9698 /* MyLayoutSizeClass.h */,
+				3E20C7AC1E53682A000C9698 /* MyLayoutSizeClass.m */,
+				3E20C7AD1E53682A000C9698 /* MyLayoutSizeInner.h */,
+				3E20C7AE1E53682A000C9698 /* MyLinearLayout.h */,
+				3E20C7AF1E53682A000C9698 /* MyLinearLayout.m */,
+				3E20C7B01E53682A000C9698 /* MyMaker.h */,
+				3E20C7B11E53682A000C9698 /* MyMaker.m */,
+				3E20C7B21E53682A000C9698 /* MyPathLayout.h */,
+				3E20C7B31E53682A000C9698 /* MyPathLayout.m */,
+				3E20C7B41E53682A000C9698 /* MyRelativeLayout.h */,
+				3E20C7B51E53682A000C9698 /* MyRelativeLayout.m */,
+				3E20C7B61E53682A000C9698 /* MyTableLayout.h */,
+				3E20C7B71E53682A000C9698 /* MyTableLayout.m */,
+			);
+			path = MyLayout;
+			sourceTree = "<group>";
+		};
 		3E37463D1A26365A00B980E9 = {
 			isa = PBXGroup;
 			children = (
@@ -803,6 +905,7 @@
 		3E3746491A26365A00B980E9 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				3E20C7981E53682A000C9698 /* MyLayout */,
 				3EBEC22D1CFD4B6D005ABB52 /* Update */,
 				3E5917C81CF8C62300CCFBC2 /* IOS7ScrollView.m */,
 				3E5917C91CF8C62300CCFBC2 /* IOS7ScrollView.h */,
@@ -855,6 +958,7 @@
 				3E5917B91CF8B7C900CCFBC2 /* UIViewControllers.swift */,
 				3E8AA13E1D238323006E4922 /* AutoScrollViewController.swift */,
 				3E20C74D1E51B017000C9698 /* AutoScrollView.swift */,
+				3EC3B9511E55A04300EED4B5 /* MoreBarButtonItem.swift */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1136,6 +1240,24 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E20C7BA1E53682A000C9698 /* MyDimeScale.h in Headers */,
+				3E20C7D31E53682A000C9698 /* MyRelativeLayout.h in Headers */,
+				3E20C7C41E53682A000C9698 /* MyLayoutInner.h in Headers */,
+				3E20C7CD1E53682A000C9698 /* MyLinearLayout.h in Headers */,
+				3E20C7CA1E53682A000C9698 /* MyLayoutSizeClass.h in Headers */,
+				3E20C7BC1E53682A000C9698 /* MyFloatLayout.h in Headers */,
+				3E20C7CF1E53682A000C9698 /* MyMaker.h in Headers */,
+				3E20C7C01E53682A000C9698 /* MyFrameLayout.h in Headers */,
+				3E20C7C81E53682A000C9698 /* MyLayoutSize.h in Headers */,
+				3E20C7C21E53682A000C9698 /* MyLayout.h in Headers */,
+				3E20C7D51E53682A000C9698 /* MyTableLayout.h in Headers */,
+				3E20C7BE1E53682A000C9698 /* MyFlowLayout.h in Headers */,
+				3E20C7C71E53682A000C9698 /* MyLayoutPosInner.h in Headers */,
+				3E20C7C51E53682A000C9698 /* MyLayoutPos.h in Headers */,
+				3E20C7B81E53682A000C9698 /* MyBaseLayout.h in Headers */,
+				3E20C7CC1E53682A000C9698 /* MyLayoutSizeInner.h in Headers */,
+				3E20C7D11E53682A000C9698 /* MyPathLayout.h in Headers */,
+				3E20C7C31E53682A000C9698 /* MyLayoutDef.h in Headers */,
 				3E5917CB1CF8C62300CCFBC2 /* IOS7ScrollView.h in Headers */,
 				3E1219E71CF845A400D43267 /* SCAssetExportSession.h in Headers */,
 				3E1219EB1CF845A400D43267 /* SCAudioTools.h in Headers */,
@@ -1348,6 +1470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E121A001CF845A400D43267 /* SCRecorder.m in Sources */,
+				3E20C7BB1E53682A000C9698 /* MyDimeScale.m in Sources */,
 				3E73DA9F1A8795A30052C16A /* FormCheckCell.swift in Sources */,
 				3E73DAD81A8795A30052C16A /* HZAreaPickerView.m in Sources */,
 				3EF997FD1A7229930030C4D3 /* UIBarButtonItems.swift in Sources */,
@@ -1376,6 +1499,7 @@
 				3E078A421A7A22B90087A3CC /* ALAssetsLibrarys.swift in Sources */,
 				3E121A0E1CF845A400D43267 /* SCSampleBufferHolder.m in Sources */,
 				3E121A071CF845A400D43267 /* SCRecorderToolsView.m in Sources */,
+				3E20C7CE1E53682A000C9698 /* MyLinearLayout.m in Sources */,
 				3E121A091CF845A400D43267 /* SCRecordSession.m in Sources */,
 				3E08547E1A8A6DE30052DCEE /* NSArray+PureLayout.m in Sources */,
 				3E73DAA01A8795A30052C16A /* FormDateCell.swift in Sources */,
@@ -1389,6 +1513,7 @@
 				3E73DAAC1A8795A30052C16A /* FormSwitchCell.swift in Sources */,
 				3E1219F51CF845A400D43267 /* SCFilterSelectorView.m in Sources */,
 				3EF998031A728CE90030C4D3 /* TextViews.swift in Sources */,
+				3E20C7CB1E53682A000C9698 /* MyLayoutSizeClass.m in Sources */,
 				3ECD407C1CEDC1E300D57372 /* MRCircularProgressView.m in Sources */,
 				3ECD40901CEDC1E300D57372 /* MRMessageInterceptor.m in Sources */,
 				3E73DAC01A8795A30052C16A /* QBImagePickerGroupCell.m in Sources */,
@@ -1402,6 +1527,8 @@
 				3E73DA9D1A8795A30052C16A /* FormButtonCell.swift in Sources */,
 				3E0854701A8A6DE30052DCEE /* AppDelegate.m in Sources */,
 				3ECD408A1CEDC1E300D57372 /* MRActivityIndicatorView+AFNetworking.m in Sources */,
+				3E20C7D61E53682A000C9698 /* MyTableLayout.m in Sources */,
+				3E20C7D01E53682A000C9698 /* MyMaker.m in Sources */,
 				3ECD40841CEDC1E300D57372 /* MRProgressView.m in Sources */,
 				3ECD40801CEDC1E300D57372 /* MRNavigationBarProgressView.m in Sources */,
 				3E73DAA51A8795A30052C16A /* FormRowDescriptor.swift in Sources */,
@@ -1410,12 +1537,15 @@
 				3E73DAC61A8795A30052C16A /* MHTextField.m in Sources */,
 				3E1219E61CF845A400D43267 /* CIImageRendererUtils.m in Sources */,
 				3E73DA9B1A8795A30052C16A /* QCheckBox.m in Sources */,
+				3E20C7D21E53682A000C9698 /* MyPathLayout.m in Sources */,
 				3E08549B1A8A6EEA0052DCEE /* MJRefreshConst.m in Sources */,
 				3E121A101CF845A400D43267 /* SCSwipeableFilterView.m in Sources */,
+				3E20C7C91E53682A000C9698 /* MyLayoutSize.m in Sources */,
 				3ECD407A1CEDC1E300D57372 /* MRActivityIndicatorView.m in Sources */,
 				3E3AA2D31A7F6304008FBD7F /* UncaughtExceptionHandlers.m in Sources */,
 				3E0854751A8A6DE30052DCEE /* JAActionButton.m in Sources */,
 				3E76AE111A41DC5000B0C2BB /* UserDefaults.swift in Sources */,
+				3E20C7C11E53682A000C9698 /* MyFrameLayout.m in Sources */,
 				3ECD408C1CEDC1E300D57372 /* MRProgressOverlayView+AFNetworking.m in Sources */,
 				3EBEC2391CFD4C21005ABB52 /* EnterpriseUpdate.swift in Sources */,
 				3E0789561A7943650087A3CC /* Log.swift in Sources */,
@@ -1437,7 +1567,9 @@
 				3E73DADA1A8795A30052C16A /* HZAreaPickerViews.swift in Sources */,
 				3E73DAA91A8795A30052C16A /* FormSegueDescriptor.swift in Sources */,
 				3E76AD831A4135D800B0C2BB /* StoragePosition.swift in Sources */,
+				3E20C7BD1E53682A000C9698 /* MyFloatLayout.m in Sources */,
 				3E20C74E1E51B018000C9698 /* AutoScrollView.swift in Sources */,
+				3E20C7C61E53682A000C9698 /* MyLayoutPos.m in Sources */,
 				3E73DAAD1A8795A30052C16A /* FormTextCell.swift in Sources */,
 				3E0854A71A8A76F80052DCEE /* QCheckBox.swift in Sources */,
 				3EB8A2C71BBB0E3500871123 /* Network.swift in Sources */,
@@ -1446,6 +1578,7 @@
 				3E121A051CF845A400D43267 /* SCRecorderTools.m in Sources */,
 				3E03B7E21A6D805E00882F6B /* Controls.swift in Sources */,
 				3E5917CA1CF8C62300CCFBC2 /* IOS7ScrollView.m in Sources */,
+				3EC3B9521E55A04300EED4B5 /* MoreBarButtonItem.swift in Sources */,
 				3E4242661B2F424C004DF7C5 /* MGSwipeTableCell.m in Sources */,
 				3E121A1A1CF845A400D43267 /* SCTouchDetector.m in Sources */,
 				3E121A1F1CF845E700D43267 /* ImagesView.swift in Sources */,
@@ -1454,6 +1587,7 @@
 				3E0854771A8A6DE30052DCEE /* JASwipeCell.m in Sources */,
 				3E73DAA41A8795A30052C16A /* FormPickerCell.swift in Sources */,
 				3E1219EC1CF845A400D43267 /* SCAudioTools.m in Sources */,
+				3E20C7BF1E53682A000C9698 /* MyFlowLayout.m in Sources */,
 				3E1219FE1CF845A400D43267 /* SCPlayer.m in Sources */,
 				3E1D83181A629A0E006217A3 /* Global.swift in Sources */,
 				3E0854A11A8A6EEA0052DCEE /* UIScrollView+MJExtension.m in Sources */,
@@ -1470,6 +1604,7 @@
 				3E76AD811A412FB400B0C2BB /* Storage.swift in Sources */,
 				3E121A1D1CF845A400D43267 /* Vedios.m in Sources */,
 				3E1219E01CF845A400D43267 /* CameraViewController.m in Sources */,
+				3E20C7D41E53682A000C9698 /* MyRelativeLayout.m in Sources */,
 				3E73DADE1A8795A30052C16A /* ZHPickView.m in Sources */,
 				3E121A031CF845A400D43267 /* SCRecorderFocusTargetView.m in Sources */,
 				3E73DA981A8795A30052C16A /* UIAlertController.swift in Sources */,
@@ -1480,6 +1615,7 @@
 				3E76AE0D1A41DC0F00B0C2BB /* Keychain.swift in Sources */,
 				3E73DAAF1A8795A30052C16A /* FormTextEditController.swift in Sources */,
 				3EA768691A70230D00FF8C57 /* UIGestureRecognizers.swift in Sources */,
+				3E20C7B91E53682A000C9698 /* MyBaseLayout.m in Sources */,
 				3E73DA991A8795A30052C16A /* CacheImageView.swift in Sources */,
 				3E73DAAA1A8795A30052C16A /* FormSelector.swift in Sources */,
 				3E426D241A4A988E00A1C815 /* RBStoryboardPopoverSegue.m in Sources */,

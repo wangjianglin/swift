@@ -890,7 +890,7 @@
                   moduleName = "LinWeb"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///lin/code/lib/swift/web/web/%20LinWebURLProtocol.swift"
-                  timestampString = "508470974.688412"
+                  timestampString = "508871511.477171"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "46"
@@ -905,7 +905,7 @@
                   moduleName = "LinWeb"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///lin/code/lib/swift/web/web/%20LinWebURLProtocol.swift"
-                  timestampString = "508470974.68954"
+                  timestampString = "508871511.48039"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "46"
@@ -1324,22 +1324,6 @@
             startingLineNumber = "218"
             endingLineNumber = "218"
             landmarkName = "upload()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "demo/demo/MainViewController.swift"
-            timestampString = "507830082.967426"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
