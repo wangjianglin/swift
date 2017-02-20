@@ -402,9 +402,9 @@ public class ImagesViewAddImageCollectionViewCell : UICollectionViewCell{
         _dashImageView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
         
         
-        let iconImage = FillImageView();
+        let iconImage = CacheImageView();
         
-        iconImage.setFillImage(UIImage(named: "LinCore.bundle/camera/camera_icon_image.png", in: Bundle(for:self.classForCoder), compatibleWith: nil));
+        iconImage.setImageObj(UIImage(named: "LinCore.bundle/camera/camera_icon_image.png", in: Bundle(for:self.classForCoder), compatibleWith: nil));
         
         iconImage.frame = CGRect(x: 15, y: 10, width: _dashImageView.frame.size.width - 10, height: _dashImageView.frame.size.width - 10);
         iconImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
@@ -466,7 +466,7 @@ public class ImagesViewAddImageCollectionViewCell : UICollectionViewCell{
 open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
     fileprivate var _dashImageView:UIImageView!;
     fileprivate var _label:LinUILabel!;
-    fileprivate var _imageView:FillImageView!;
+    fileprivate var _imageView:CacheImageView!;
     
     
     fileprivate func setVedioImage(_ image:UIImage?){
@@ -507,10 +507,10 @@ open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
         
         
         
-        let iconImage = FillImageView();
+        let iconImage = CacheImageView();
         
         //iconImage.setFillImage("LinCore.bundle/camera/camera_icon_camera.png");
-        iconImage.setFillImage(UIImage(named: "LinCore.bundle/camera/camera_icon_camera.png", in: Bundle(for:self.classForCoder), compatibleWith: nil));
+        iconImage.setImageObj(UIImage(named: "LinCore.bundle/camera/camera_icon_camera.png", in: Bundle(for:self.classForCoder), compatibleWith: nil));
         
         iconImage.frame = CGRect(x: 15, y: 10, width: _dashImageView.frame.size.width - 10, height: _dashImageView.frame.size.width - 10);
         iconImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
@@ -532,7 +532,7 @@ open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
         
         self.addSubview(_label);
         
-        _imageView = FillImageView();
+        _imageView = CacheImageView();
         
         self.addSubview(_imageView);
         
@@ -575,7 +575,7 @@ open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
 }
 
 class ImagesViewUICollectionViewCell : UICollectionViewCell{
-    fileprivate var _imageView:FillImageView!;
+    fileprivate var _imageView:CacheImageView!;
     
     fileprivate var pos = 0;
     
@@ -584,14 +584,8 @@ class ImagesViewUICollectionViewCell : UICollectionViewCell{
     var image:AnyObject?{
         didSet{
             if let image = image {
-                _imageView.setFillImage(image)
+                _imageView.setImageObj(image)
             }
-        }
-    }
-    
-    var fill:ImageFill = ImageFill.fill{
-        didSet{
-            _imageView.fill = fill;
         }
     }
     
@@ -602,7 +596,7 @@ class ImagesViewUICollectionViewCell : UICollectionViewCell{
         
         self.contentView.backgroundColor = UIColor.clear;
         
-        _imageView = FillImageView();
+        _imageView = CacheImageView();
         
         _imageView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height);
         _imageView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);

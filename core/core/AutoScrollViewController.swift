@@ -13,23 +13,24 @@ open class AutoScrollViewController : UIViewController{
     fileprivate var _scrollView:AutoScrollView!;
     
     open override func loadView() {
-        //super.loadView();
-        //        self.view.addSubview(self.view);
-        let _view = SView();
+        
+        let _view = SView.init(frame: UIScreen.main.applicationFrame)
         _view._scrollView.showsVerticalScrollIndicator = true;
         _view._scrollView.showsHorizontalScrollIndicator = false;
         _view.setView();
         
         _scrollView = _view._scrollView;
         
-        //        _scrollView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.flexibleHeight.rawValue | UIViewAutoresizing.flexibleWidth.rawValue);
+        _scrollView.frame = _view.bounds;
+        
+        _scrollView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.flexibleHeight.rawValue | UIViewAutoresizing.flexibleWidth.rawValue);
         
         
         //        self.contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-3-[title]-4-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:views));
         
-        _view._scrollView.translatesAutoresizingMaskIntoConstraints = false;
-        _view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[scroll]-(0)-|", options: NSLayoutFormatOptions.init(rawValue: 0), metrics: nil, views: ["scroll":_scrollView]));
-        _view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[scroll]-(0)-|", options: NSLayoutFormatOptions.init(rawValue: 0), metrics: nil, views: ["scroll":_scrollView]));
+        //        _view._scrollView.translatesAutoresizingMaskIntoConstraints = false;
+        //        _view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[scroll]-(0)-|", options: NSLayoutFormatOptions.init(rawValue: 0), metrics: nil, views: ["scroll":_scrollView]));
+        //        _view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[scroll]-(0)-|", options: NSLayoutFormatOptions.init(rawValue: 0), metrics: nil, views: ["scroll":_scrollView]));
         
         self.view = _view;
     }

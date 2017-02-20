@@ -14,7 +14,8 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
 
     fileprivate var _imagePath:String?;
     fileprivate var _imageView:CacheImageView!;
-    fileprivate var fill:ImageFill = ImageFill.default;
+//    fileprivate var fill:ImageFill = ImageFill.default;
+//    private var contentMode = UIViewContentMode.scaleAspectFit;
     
     fileprivate var _contentView:UIView!;
     fileprivate var _preImageSize = CGSize(width: 0, height: 0);
@@ -22,12 +23,12 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
     fileprivate var _linImagesView:ScrollImagesView!;
     
     
-    fileprivate init(imagePath:String, fill:ImageFill, zoom:Bool, linImagesView:ScrollImagesView){
+    fileprivate init(imagePath:String, contentMode:UIViewContentMode, zoom:Bool, linImagesView:ScrollImagesView){
         
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0));
         
         self._imagePath = imagePath;
-        self.fill = fill;
+        self.contentMode = contentMode;
         self.zoom = zoom;
         self._linImagesView = linImagesView;
         self.initView();
@@ -79,6 +80,7 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
             self?.update();
         };
         _imageView?.path = self._imagePath;
+        _imageView?.contentMode = self.contentMode;
         
         _contentView.addSubview(_imageView);
         self.delegate = self;
@@ -117,23 +119,23 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
         {
             _preImageSize = imageSize;
             _preViewSize = self.bounds.size;
-            contentViewRect = _contentView.bounds;
-            var s:CGFloat = 1.0;
-            if self.fill != ImageFill.fill {
-                s = (_preImageSize.width * 1.0 / _preImageSize.height)/(self.bounds.size.width * 1.0 / self.bounds.size.height);
-            }
-            if (ImageFill.default == self.fill && s > 1) || self.fill == ImageFill.width {
-                contentViewRect.size.width = self.bounds.size.width;
-                contentViewRect.size.height = self.bounds.size.height / s;
-                contentViewRect.origin.x = 0;
-                contentViewRect.origin.y = (self.bounds.size.height - contentViewRect.size.height) / 2;
-            }else{
-                contentViewRect.size.width = self.bounds.size.width * s;
-                contentViewRect.size.height = self.bounds.size.height;
-                contentViewRect.origin.y = 0;
-                contentViewRect.origin.x = (self.bounds.size.width - contentViewRect.size.width) / 2;
-            }
-            _imageView.frame = contentViewRect;
+//            contentViewRect = _contentView.bounds;
+//            var s:CGFloat = 1.0;
+//            if self.fill != ImageFill.fill {
+//                s = (_preImageSize.width * 1.0 / _preImageSize.height)/(self.bounds.size.width * 1.0 / self.bounds.size.height);
+//            }
+//            if (ImageFill.default == self.fill && s > 1) || self.fill == ImageFill.width {
+//                contentViewRect.size.width = self.bounds.size.width;
+//                contentViewRect.size.height = self.bounds.size.height / s;
+//                contentViewRect.origin.x = 0;
+//                contentViewRect.origin.y = (self.bounds.size.height - contentViewRect.size.height) / 2;
+//            }else{
+//                contentViewRect.size.width = self.bounds.size.width * s;
+//                contentViewRect.size.height = self.bounds.size.height;
+//                contentViewRect.origin.y = 0;
+//                contentViewRect.origin.x = (self.bounds.size.width - contentViewRect.size.width) / 2;
+//            }
+//            _imageView.frame = contentViewRect;
             self.zoomScale = 1;
         }
     }
@@ -149,7 +151,7 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
     fileprivate var _isFullScreen = false;
     fileprivate var _fullScreenItem = 0;
     
-    fileprivate var _fill = ImageFill.default;
+//    fileprivate var _contentMode = UIViewContentMode.scaleAspectFit;
     fileprivate var _addImages = [UIImageView]();
     fileprivate var _views = [UIView]();
     fileprivate var _positionLabelView:UIView!;
@@ -158,13 +160,14 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
     fileprivate var _scrollView:UIScrollView!;
     fileprivate var _currentItem = 0;
     fileprivate var _positionLabel:UILabel!;
-    fileprivate var _playImageView:FillImageView?;
+    fileprivate var _playImageView:CacheImageView?;
     
     
     public init() {
         //    self = [super init];
         //    if (self) {
         super.init(frame:CGRect(x: 0, y: 0, width: 0, height: 0));
+        super.contentMode = UIViewContentMode.scaleAspectFit;
         self.initView();
         _resetImagePaths = true;
         self.showPositionLabel = true;
@@ -196,11 +199,15 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
     
     
     ////使图像填满
-    open var fill = ImageFill.default{
-        didSet{
+    open override var contentMode:UIViewContentMode{
+        get{
+            return super.contentMode;
+        }
+        set{
+            super.contentMode = newValue;
             for item in _views {
                 if item is LinImagesContentView {
-                    (item as! LinImagesContentView).fill = self.fill;
+                    (item as! LinImagesContentView).contentMode = self.contentMode;
                 }
             }
         }
@@ -307,14 +314,15 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
             //        //[views addObject:player.view];
             //        player.view.backgroundColor = [UIColor clearColor];
             
-            _playImageView = FillImageView();
+            _playImageView = CacheImageView();
             _playImageView?.frame = CGRect(x: 0, y: 0, width: 100, height: 100);
             //        [views insertObject:player.view atIndex:0];
             //        [scrollView addSubview:player.view];
             _views.insert(_playImageView!, at:0);
             _scrollView.addSubview(_playImageView!);
             //        _playImageView?.image = self.vedioImage;
-            _playImageView?.setFillImage(self.vedioImage);
+//            _playImageView?.setFillImage(self.vedioImage);
+            _playImageView?.setImageObj(self.vedioImage);
             //        _playImageView.image = [UIImage imageNamed:@"LinCore.bundle/camera/camera_icon_camera_add.png"];;
             
             _playImageView?.isUserInteractionEnabled = true;
@@ -434,7 +442,7 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
             
             var itemView:LinImagesContentView!;
             for n in 0 ..< imagePaths.count {
-                itemView = LinImagesContentView(imagePath:imagePaths[n], fill:self.fill, zoom:self.zoom, linImagesView:self);
+                itemView = LinImagesContentView(imagePath:imagePaths[n], contentMode:self.contentMode, zoom:self.zoom, linImagesView:self);
                 //        itemView.backgroundColor = [[UIColor alloc] initWithRed:0.72 green:0.72 blue:0.72 alpha:1.0];
                 itemView.backgroundColor = UIColor.clear;
                 _scrollView.addSubview(itemView);
@@ -652,7 +660,7 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
                 let fullScreenView = ScrollImagesView();
                 
                 fullScreenView.edited = false;
-                fullScreenView.fill = ImageFill.default;
+                fullScreenView.contentMode = .scaleAspectFit;
                 fullScreenView.zoom = true;
                 fullScreenView.fullScreen = false;
                 fullScreenView.imagePaths = self.imagePaths;

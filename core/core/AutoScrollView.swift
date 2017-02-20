@@ -41,12 +41,12 @@ public class AutoScrollView : UIScrollView{
     private func size()-> CGRect {
         var rect:CGRect!;
         var scount = 0;
-        //        if self.showsHorizontalScrollIndicator {
-        //            scount += 2;
-        //        }
-        //        if self.showsVerticalScrollIndicator {
-        //            scount += 2;
-        //        }
+        if self.showsHorizontalScrollIndicator {
+            scount += 2;
+        }
+        if self.showsVerticalScrollIndicator {
+            scount += 2;
+        }
         for n in 0 ..< self.views.count - scount {
             let view = self.views[n];
             if view.isHidden {
@@ -63,6 +63,7 @@ public class AutoScrollView : UIScrollView{
         if rect == nil {
             return CGRect(x: 0, y: 0, width: 0, height: 0);
         }
+        
         return rect;
     }
     
@@ -116,20 +117,25 @@ public class AutoScrollView : UIScrollView{
         let bounds = self.bounds;
         
         if dir == Dir.Vertical{
-            if rect.height <= self.bounds.height + offset.height + 1 {
-                rect.size.height = bounds.height + offset.height + 1;
+            let h = self.bounds.height + 1;
+            if rect.height + rect.origin.y <= h {
+                rect.size.height = h;
             }
             rect.size.width = bounds.width + offset.width;
         }else{
-            if rect.width <= self.bounds.width + offset.width + 1 {
-                rect.size.width = bounds.width + offset.width + 1;
+            let w = self.bounds.width + 1;
+            if rect.width + rect.origin.x <= w {
+                rect.size.width = w;
             }
             rect.size.height = bounds.height + offset.height;
         }
+        rect.size.width += offset.width;
+        rect.size.height += offset.height;
         if rect.size.width == self.contentSize.width
             && rect.size.height == self.contentSize.height {
             return false;
         }
+        
         Queue.mainQueue{
             self.contentSize = rect.size;
         }

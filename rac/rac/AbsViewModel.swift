@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class AbsViewModel<T:BaseView>: NSObject,ViewModel {
+open class AbsViewModel<T:BaseView>: NSObject,ViewModel {
     public typealias ViewType = T
     
-    public func start() {
+    open func start() {
         
     }
 }

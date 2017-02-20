@@ -48,6 +48,11 @@ public class MainViewController : UIViewController,UITableViewDataSource,UITable
         
         let add = UIBarButtonItem.init(title: "checkbox1_", style: UIBarButtonItemStyle.plain, target: nil, action: nil);
         add.image = UIImage.init(named: "add.png");
+        add.setDelegateAction { (obj) in
+            print("\n--------------------------------------------")
+            print(obj);
+            print("--------------------------------------------\n")
+        }
         moreButton.add(button: add);
         moreButton.add(button: add);
         moreButton.add(button: add);
@@ -110,94 +115,3 @@ public class MainViewController : UIViewController,UITableViewDataSource,UITable
 
 
 
-
-private func g(style:UIBarButtonSystemItem)->UIImage?{
-    switch style {
-        
-    case .done:
-        
-        break
-        
-    case .cancel:
-        
-        break
-        
-    case .edit:
-        
-        break
-        
-    case .save:
-        
-        break
-        
-    case .add: break;
-        //return self.image(name: "<UIBarButtonSystemItem> add.png", leftCapWidth: 0, topCapHeight: 0)
-        
-    case .flexibleSpace:
-        
-        break
-        
-    case .fixedSpace:
-        
-        break
-        
-    case .compose:
-        
-        break
-        
-    case .reply:
-        
-        break
-        
-    case .action:
-        
-        break
-        
-    case .organize:
-        
-        break
-        
-    case .bookmarks:
-        
-        break
-        
-    case .search:
-        
-        break
-        
-    case .refresh:
-        
-        break
-        
-    case .stop:
-        
-        break
-        
-    case .camera:
-        
-        break
-        
-    case .trash:
-        
-        break
-        
-    case .play:
-        
-        break
-        
-    case .pause:
-        
-        break
-        
-    case .rewind:
-        
-        break
-        
-    case .fastForward:
-        
-        break
-    default: break
-    }
-    
-    return nil;
-}

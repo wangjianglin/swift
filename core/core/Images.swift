@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import LinUtil
 
+private var CacheImageView_Cache_Path_tmpvar:String?;
 
 extension UIImage{
     
@@ -31,65 +33,25 @@ extension UIImage{
         return newImage!;
     }
     
-    
-    //
-    //  Images.m
-    //  LinCore
-    //
-    //  Created by lin on 1/14/15.
-    //  Copyright (c) 2015 lin. All rights reserved.
-    //
-    
-//    #import "Images.h"
-//    
-//    @implementation UIImage(LinCore)
-//    
-//    -(UIImage *)scaledToSize:(CGSize)size{
-//    UIGraphicsBeginImageContext(size);
-//    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
-//    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    return newImage;
-//    }
-//    
-//    -(UIImage *)scaledToSize:(CGSize)size fill:(BOOL)fill{
     public func scaledToSize(_ size:CGSize,fill:Bool)->UIImage{
-//    
+   
         var s:CGFloat = 1.0;
-    //    CGFloat offsetX = 0.0;
-    //    CGFloat offsetY = 0.0;
-    if (!fill) {
-        s = (self.size.width/self.size.height)/(size.width/size.height);
-    }
-//
+        if (!fill) {
+            s = (self.size.width/self.size.height)/(size.width/size.height);
+        }
         var newSize = size;
-    if (s > 1) {
-        newSize.height = size.height / s;
-    //        offsetY = (self.size.height - size.height) / 2;
-    }else{
-        newSize.width = size.width * s;
-    //        offsetX = (self.size.width - size.width) / 2;
-    }
-//
-    UIGraphicsBeginImageContext(newSize);
-//    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        if (s > 1) {
+            newSize.height = size.height / s;
+        }else{
+            newSize.width = size.width * s;
+        }
+        UIGraphicsBeginImageContext(newSize);
         self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height));
-    let newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage!;
+        let newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return newImage!;
     }
-//
-//    +(UIImage*)imageWithURLString:(NSString*)url{
-//    return [UIImage imageWithURL:[NSURL URLWithString:url]];
-//    }
-//    public class func imageWithURLString(url:String)->UIImage{
-//        return UIImage.im
-//    }
-    
-//    public class func imageWithURL(url:NSURL)->UIImage{
-//        var data = NSData(contentsOfURL: url);
-//        return UIImage(data: data!)!;
-//    }
+
      public convenience init?(urlString: String){
         let url = URL(string: urlString);
         if let url = url {
@@ -98,21 +60,79 @@ extension UIImage{
             self.init();
         }
     }
-//    convenience
+    
     public convenience init?(url: URL){
         let data = try? Data(contentsOf: url);
         if let data = data{
             self.init(data: data);
         }else{
-//            self.init(CGImage: nil);
             self.init();
-//            return nil;
         }
     }
-//    +(UIImage*)imageWithURL:(NSURL*)url{
-//    NSData * data = [NSData dataWithContentsOfURL:url];
-//    return [UIImage imageWithData:data];
-//    }
-//    @end
 
+    public class func cache(url urlStr:String?)->UIImage!{
+        if urlStr == nil {
+            return nil;
+        }
+        let lowerUrlStr = urlStr!.lowercased();
+        if !(lowerUrlStr.hasPrefix("http://")
+            || lowerUrlStr.hasPrefix("https://")
+            || lowerUrlStr.hasPrefix("ftp://")) {
+            return UIImage(named: urlStr!);
+        }
+        
+        let urlOpt = URL(string: urlStr!);
+        
+        if urlOpt == nil {
+            return nil;
+        }
+        
+        let url = urlOpt!;
+        
+        let md5 = "\(url)".md5 + ".imagecache";
+        
+        var filename:String!;
+        if UIImage.cachePath.hasSuffix("/") {
+            filename = UIImage.cachePath + md5;
+        }else{
+            filename = UIImage.cachePath + "/" + md5;
+        }
+        
+        
+        var data = try? Data(contentsOf: URL(fileURLWithPath: filename));
+        if data == nil {
+            data = try? Data(contentsOf: url);
+            if let data = data {
+                try? data.write(to: URL(fileURLWithPath: filename), options: Data.WritingOptions.atomic);
+            }
+        }
+        if let data = data {
+            return UIImage(data: data);
+        }
+        return nil;
+    }
+    
+    public class var cachePath:String{
+        get{
+            if CacheImageView_Cache_Path_tmpvar == nil {
+                CacheImageView_Cache_Path_tmpvar = pathFor(Documents.cache, path: "imagecache");
+            }
+            createCachePath()
+            return CacheImageView_Cache_Path_tmpvar!
+        }
+        set{CacheImageView_Cache_Path_tmpvar = newValue;createCachePath();}
+    }
+    
+    private class func createCachePath(){
+        let fileManager = FileManager.default;
+        let isDir = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1);
+        isDir.initialize(to: ObjCBool(false));
+        if !fileManager.fileExists(atPath: CacheImageView_Cache_Path_tmpvar!,isDirectory:isDir) ||
+            isDir.move().boolValue == false{
+            do {
+                try fileManager.createDirectory(atPath: CacheImageView_Cache_Path_tmpvar!,withIntermediateDirectories:true,attributes:nil)
+            } catch _ {
+            };
+        }
+    }
 }

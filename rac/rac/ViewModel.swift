@@ -35,9 +35,9 @@ extension ViewModel where Self : NSObject  {
         return ViewModelStruct(self)
     }
     
-    public var view:ViewType{
+    public weak var view:ViewType?{
         set{
-            self.setAssociatedValue(value: newValue, forKey: "_view_model_view_obj_");
+            self.setAssociatedValue(value: newValue, forKey: "_view_model_view_obj_",.OBJC_ASSOCIATION_ASSIGN);
         }
         get{
             return self.getAssociatedValue(forKey: "_view_model_view_obj_");

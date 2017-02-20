@@ -25,17 +25,12 @@ open class CacheImageOperation : Operation{
     open override func main(){
         
         var isCancelled = false;
-        //self.imageView.lock.lock();
         isCancelled = self.isCancelled;
-        //self.imageView.lock.unlock();
         if isCancelled {
             return;
         }
-        //        var url = NSURL(string:self.path);
-//        var data:NSData? = nil;
-//        if let url = NSURL(string:self.path){
-        let image = CacheImageView.cachedataForUrl(url: self.path)
-//        }
+        
+        let image = UIImage.cache(url: self.path)
         
         
         DispatchQueue.main.async(execute: {() in
@@ -48,42 +43,8 @@ open class CacheImageOperation : Operation{
             }
         });
         
-        //        let md5 = self.path.md5 + ".imagecache";
-        //        //var urlString = HTTP_COMM_URL + photo.path + "/" + photo.name;// + "." + photo.ext;
-        //        var filename:String!;
-        //        if CacheImageView.cachePath.hasSuffix("/") {
-        //            filename = CacheImageView.cachePath + md5;
-        //        }else{
-        //            filename = CacheImageView.cachePath + "/" + md5;
-        //        }
-        //
-        //
-        //        var data = NSData(contentsOfFile: filename);
-        //        if data == nil {
-        //            var url = NSURL(string:self.path);
-        //            data = NSData(contentsOfURL:url!);
-        //            if let data = data {
-        //                dispatch_async(dispatch_get_main_queue(), {() in
-        //                    if !self.cancelled {
-        //                        self.imageView.setImage(UIImage(data:data));
-        //                    }
-        //                });
-        //                data.writeToFile(filename, atomically: true);
-        //            }
-        //        }else{
-        //            dispatch_async(dispatch_get_main_queue(), {() in
-        //                //self.imageView.lock.lock();
-        //                if !self.cancelled {
-        //                    self.imageView.setImage(UIImage(data:data!));
-        //                }
-        //                ///self.imageView.lock.unlock();
-        //
-        //            });
-        //        }
     }
 }
-
-private var CacheImageView_Cache_Path_tmpvar:String?;
 
 open class CacheImageView : UIImageView{
     
@@ -104,74 +65,72 @@ open class CacheImageView : UIImageView{
     
 
 //    public class func cachedataForUrl(url:NSURL)->NSData!{
-    open class func cachedataForUrl(url urlStr:String?)->UIImage!{
-        if urlStr == nil {
-            return nil;
-        }
-        let lowerUrlStr = urlStr!.lowercased();
-        if !(lowerUrlStr.hasPrefix("http://")
-            || lowerUrlStr.hasPrefix("https://")
-            || lowerUrlStr.hasPrefix("ftp://")) {
-            return UIImage(named: urlStr!);
-        }
-        
-        let urlOpt = URL(string: urlStr!);
-        
-        if urlOpt == nil {
-            return nil;
-        }
-        
-        let url = urlOpt!;
-        
-        let md5 = "\(url)".md5 + ".imagecache";
-        
-        var filename:String!;
-        if CacheImageView.cachePath.hasSuffix("/") {
-            filename = CacheImageView.cachePath + md5;
-        }else{
-            filename = CacheImageView.cachePath + "/" + md5;
-        }
-        
-        
-        var data = try? Data(contentsOf: URL(fileURLWithPath: filename));
-        if data == nil {
-            data = try? Data(contentsOf: url);
-            if let data = data {
-//                try? data.write(to: URL(fileURLWithPath: filename), options: [.dataWritingAtomic]);
-                try? data.write(to: URL(fileURLWithPath: filename), options: Data.WritingOptions.atomic);
-            }
-        }
-        if let data = data {
-            return UIImage(data: data);
-        }
-        return nil;
-    }
+//    open class func cachedataForUrl(url urlStr:String?)->UIImage!{
+//        if urlStr == nil {
+//            return nil;
+//        }
+//        let lowerUrlStr = urlStr!.lowercased();
+//        if !(lowerUrlStr.hasPrefix("http://")
+//            || lowerUrlStr.hasPrefix("https://")
+//            || lowerUrlStr.hasPrefix("ftp://")) {
+//            return UIImage(named: urlStr!);
+//        }
+//        
+//        let urlOpt = URL(string: urlStr!);
+//        
+//        if urlOpt == nil {
+//            return nil;
+//        }
+//        
+//        let url = urlOpt!;
+//        
+//        let md5 = "\(url)".md5 + ".imagecache";
+//        
+//        var filename:String!;
+//        if CacheImageView.cachePath.hasSuffix("/") {
+//            filename = CacheImageView.cachePath + md5;
+//        }else{
+//            filename = CacheImageView.cachePath + "/" + md5;
+//        }
+//        
+//        
+//        var data = try? Data(contentsOf: URL(fileURLWithPath: filename));
+//        if data == nil {
+//            data = try? Data(contentsOf: url);
+//            if let data = data {
+////                try? data.write(to: URL(fileURLWithPath: filename), options: [.dataWritingAtomic]);
+//                try? data.write(to: URL(fileURLWithPath: filename), options: Data.WritingOptions.atomic);
+//            }
+//        }
+//        if let data = data {
+//            return UIImage(data: data);
+//        }
+//        return nil;
+//    }
     
-    open class var cachePath:String{
-        get{
-            if CacheImageView_Cache_Path_tmpvar == nil {
-                CacheImageView_Cache_Path_tmpvar = pathFor(Documents.cache, path: "imagecache");
-            }
-            createCachePath()
-            return CacheImageView_Cache_Path_tmpvar!
-        }
-        set{CacheImageView_Cache_Path_tmpvar = newValue;createCachePath();}
-    }
-    
-    fileprivate class func createCachePath(){
-        let fileManager = FileManager.default;
-        //        isDirectory: UnsafeMutablePointer<ObjCBool>
-        let isDir = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1);
-        isDir.initialize(to: ObjCBool(false));
-        if !fileManager.fileExists(atPath: CacheImageView_Cache_Path_tmpvar!,isDirectory:isDir) ||
-            isDir.move().boolValue == false{
-            do {
-                //            func createDirectoryAtPath(path: String, withIntermediateDirectories createIntermediates: Bool, attributes: [NSObject : AnyObject]?, error: NSErrorPointer)
-                try fileManager.createDirectory(atPath: CacheImageView_Cache_Path_tmpvar!,withIntermediateDirectories:true,attributes:nil)
-            } catch _ {
-            };
-        }
-    }
+//    open class var cachePath:String{
+//        get{
+//            if CacheImageView_Cache_Path_tmpvar == nil {
+//                CacheImageView_Cache_Path_tmpvar = pathFor(Documents.cache, path: "imagecache");
+//            }
+//            createCachePath()
+//            return CacheImageView_Cache_Path_tmpvar!
+//        }
+//        set{CacheImageView_Cache_Path_tmpvar = newValue;createCachePath();}
+//    }
+//    
+//    fileprivate class func createCachePath(){
+//        let fileManager = FileManager.default;
+//        let isDir = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1);
+//        isDir.initialize(to: ObjCBool(false));
+//        if !fileManager.fileExists(atPath: CacheImageView_Cache_Path_tmpvar!,isDirectory:isDir) ||
+//            isDir.move().boolValue == false{
+//            do {
+//                try fileManager.createDirectory(atPath: CacheImageView_Cache_Path_tmpvar!,withIntermediateDirectories:true,attributes:nil)
+//            } catch _ {
+//            };
+//        }
+//    }
     
     private class var imageCacheQueue:OperationQueue{
         _ = CacheImageView.__once
@@ -189,13 +148,6 @@ open class CacheImageView : UIImageView{
             self.loadImage();
         }
     }
-    //
-    
-    //    public init(path:String){
-    //        super.init();
-    //        self.path = path;
-    ////        super.init();
-    //    }
     
     public init(){
         super.init(frame:CGRect(x: 0, y: 0, width: 0, height: 0));
@@ -249,6 +201,21 @@ open class CacheImageView : UIImageView{
         lock.unlock();
         if let imageChanged = self.imageChanged {
             imageChanged(self);
+        }
+    }
+    
+    public func setImageObj(_ image:AnyObject?){
+
+        if image == nil {
+            return;
+        }
+        
+        if image is String {
+            self.path = image as? String;
+        }else if image is UIImage {
+            self.image = image as? UIImage;
+        }else{
+            self.image = nil;
         }
     }
     

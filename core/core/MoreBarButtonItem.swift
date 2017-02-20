@@ -26,7 +26,7 @@ public class MoreBarButtonCell : UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var _image: FillImageView?;
+    private var _image: CacheImageView?;
     private var _titleView: UILabel?;
     
     fileprivate var item:UIBarButtonItem?{
@@ -53,8 +53,7 @@ public class MoreBarButtonCell : UITableViewCell{
     
     private func initView(){
         
-        _image = FillImageView();
-        _image?.fill = ImageFill.default;
+        _image = CacheImageView();
         _image?.translatesAutoresizingMaskIntoConstraints = false;
         self.addSubview(_image!);
         
@@ -75,6 +74,7 @@ public class MoreBarButtonCell : UITableViewCell{
 }
 public class MoreBarButtonPopoverView : UITableView,UITableViewDataSource,UITableViewDelegate,UIPopoverPresentationControllerDelegate{
     
+    fileprivate weak var pvc:UIViewController?;
     fileprivate var moreButton:MoreBarButtonItem!;
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,6 +99,14 @@ public class MoreBarButtonPopoverView : UITableView,UITableViewDataSource,UITabl
         return .none;
     }
     
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        pvc?.dismiss(animated: true, completion: nil);
+        if let target = moreButton.buttons[indexPath.row].target,
+            let action = moreButton.buttons[indexPath.row].action {
+            target.perform(action, with: moreButton.buttons[indexPath.row]);
+        }
+    }
+    
 }
 
 public class PUIViewController : UIViewController{
@@ -108,6 +116,12 @@ public class PUIViewController : UIViewController{
     }
 }
 public class MoreBarButtonItem : UIBarButtonItem{
+    
+    public class func newButton()->MoreBarButtonItem{
+        return MoreBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add);
+    }
+    
+    
     private var setDelegate = false;
     public override init(){
         super.init();
@@ -120,11 +134,7 @@ public class MoreBarButtonItem : UIBarButtonItem{
     
     public var backgroundColor = UIColor.white;
     public var separatorColor = UIColor.clear;
-    public weak var vc:UIViewController?{
-        didSet{
-            //vc?.setAssociatedValue(value: self, forKey: "_more_bar_button_item_vc_")
-        }
-    }
+    public weak var vc:UIViewController?;
     
     deinit {
         print("======= deinit ========");
@@ -224,8 +234,103 @@ public class MoreBarButtonItem : UIBarButtonItem{
         popover.backgroundColor = backgroundColor;
         popover.barButtonItem = self;
         popover.delegate = pview;
+        pview.pvc = pvc;
         
         vc?.present(pvc, animated: true, completion: nil);
         
     }
 }
+
+
+
+private func g(style:UIBarButtonSystemItem)->UIImage?{
+    switch style {
+        
+    case .done:
+        
+        break
+        
+    case .cancel:
+        
+        break
+        
+    case .edit:
+        
+        break
+        
+    case .save:
+        
+        break
+        
+    case .add: break;
+        //return self.image(name: "<UIBarButtonSystemItem> add.png", leftCapWidth: 0, topCapHeight: 0)
+        
+    case .flexibleSpace:
+        
+        break
+        
+    case .fixedSpace:
+        
+        break
+        
+    case .compose:
+        
+        break
+        
+    case .reply:
+        
+        break
+        
+    case .action:
+        
+        break
+        
+    case .organize:
+        
+        break
+        
+    case .bookmarks:
+        
+        break
+        
+    case .search:
+        
+        break
+        
+    case .refresh:
+        
+        break
+        
+    case .stop:
+        
+        break
+        
+    case .camera:
+        
+        break
+        
+    case .trash:
+        
+        break
+        
+    case .play:
+        
+        break
+        
+    case .pause:
+        
+        break
+        
+    case .rewind:
+        
+        break
+        
+    case .fastForward:
+        
+        break
+    default: break
+    }
+    
+    return nil;
+}
+
