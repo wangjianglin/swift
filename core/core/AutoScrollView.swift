@@ -11,7 +11,7 @@ import LinCore
 import LinUtil
 
 
-public class AutoScrollView : UIScrollView{
+open class AutoScrollView : UIScrollView{
     fileprivate var views = [UIView]();
     
     public enum Dir{
@@ -22,7 +22,7 @@ public class AutoScrollView : UIScrollView{
     
     public var offset = CGSize.init(width: 0, height: 0);
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame);
         
         Queue.asynThread(self.thread);
@@ -33,7 +33,7 @@ public class AutoScrollView : UIScrollView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    override public func addSubview(_ view: UIView) {
+    override open func addSubview(_ view: UIView) {
         super.addSubview(view);
         views.append(view);
     }
@@ -142,7 +142,7 @@ public class AutoScrollView : UIScrollView{
         return true;
     }
     
-    public override var contentSize: CGSize{
+    open override var contentSize: CGSize{
         get{
             return super.contentSize;
         }

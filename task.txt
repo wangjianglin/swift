@@ -7,3 +7,6 @@ delegateActionItems.remove(at: array[index]);
 
 
 QCheckBox 单选组
+
+
+FormBaseCell 加泛型

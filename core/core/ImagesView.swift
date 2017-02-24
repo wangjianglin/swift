@@ -405,7 +405,7 @@ public class ImagesViewAddImageCollectionViewCell : UICollectionViewCell{
         let iconImage = CacheImageView();
         
         iconImage.setImageObj(UIImage(named: "LinCore.bundle/camera/camera_icon_image.png", in: Bundle(for:self.classForCoder), compatibleWith: nil));
-        
+        iconImage.contentMode = .scaleAspectFit;
         iconImage.frame = CGRect(x: 15, y: 10, width: _dashImageView.frame.size.width - 10, height: _dashImageView.frame.size.width - 10);
         iconImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
         
@@ -511,7 +511,7 @@ open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
         
         //iconImage.setFillImage("LinCore.bundle/camera/camera_icon_camera.png");
         iconImage.setImageObj(UIImage(named: "LinCore.bundle/camera/camera_icon_camera.png", in: Bundle(for:self.classForCoder), compatibleWith: nil));
-        
+        iconImage.contentMode = .scaleAspectFit;
         iconImage.frame = CGRect(x: 15, y: 10, width: _dashImageView.frame.size.width - 10, height: _dashImageView.frame.size.width - 10);
         iconImage.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
         
@@ -537,7 +537,7 @@ open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
         self.addSubview(_imageView);
         
         _imageView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height);
-        
+        _imageView.contentMode = .scaleAspectFit;
         _imageView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
         
         _imageView.isHidden = true;
@@ -606,6 +606,7 @@ class ImagesViewUICollectionViewCell : UICollectionViewCell{
         let minusImageView = UIImageView();
         
         minusImageView.image = UIImage(named:"LinCore.bundle/QBImagePickerController/minus.png", in: Bundle(for: self.classForCoder),compatibleWith: nil);
+        minusImageView.contentMode = .scaleAspectFit;
         minusImageView.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(self.deleteImage)));
         minusImageView.isUserInteractionEnabled = true;
         self.addSubview(minusImageView);
