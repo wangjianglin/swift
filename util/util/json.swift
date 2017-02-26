@@ -546,8 +546,8 @@ extension Json {
     public var asDate:Date? {
         if let dateString = _value as? NSString {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
-            //dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             return dateFormatter.date(from: dateString as String)
         }
         return nil
