@@ -9,7 +9,6 @@
 import UIKit
 import LinUtil
 
-private var CacheImageView_Cache_Path_tmpvar:String?;
 
 extension UIImage{
     
@@ -23,7 +22,7 @@ extension UIImage{
     }
     
     public func scaledToSize(size newSize:CGSize)->UIImage{
-    
+        
         UIGraphicsBeginImageContext(newSize);
         self.draw(in: CGRect(x: 0,y: 0,width: newSize.width,height: newSize.height));
         
@@ -34,7 +33,7 @@ extension UIImage{
     }
     
     public func scaledToSize(_ size:CGSize,fill:Bool)->UIImage{
-   
+        
         var s:CGFloat = 1.0;
         if (!fill) {
             s = (self.size.width/self.size.height)/(size.width/size.height);
@@ -51,8 +50,8 @@ extension UIImage{
         UIGraphicsEndImageContext();
         return newImage!;
     }
-
-     public convenience init?(urlString: String){
+    
+    public convenience init?(urlString: String){
         let url = URL(string: urlString);
         if let url = url {
             self.init(url:url);
@@ -69,19 +68,40 @@ extension UIImage{
             self.init();
         }
     }
-
+    
     public class func cache(url urlStr:String?)->UIImage!{
         if urlStr == nil {
             return nil;
         }
         let lowerUrlStr = urlStr!.lowercased();
-        if !(lowerUrlStr.hasPrefix("http://")
+        if lowerUrlStr.hasPrefix("http://")
             || lowerUrlStr.hasPrefix("https://")
-            || lowerUrlStr.hasPrefix("ftp://")) {
-            return UIImage(named: urlStr!);
+            || lowerUrlStr.hasPrefix("ftp://") {
+            return cacheImpl(url: urlStr!);
         }
         
-        let urlOpt = URL(string: urlStr!);
+        var image:UIImage? = nil;
+        if urlStr!.hasPrefix("/") {
+            image = cacheImpl(url: "\(_image_path_value)\(urlStr!)");
+        }else{
+            image = cacheImpl(url: "\(_image_path_value)/\(urlStr!)");
+        }
+        
+        if image != nil {
+            return image;
+        }
+        
+        if urlStr!.hasPrefix("/") {
+            image = cacheImpl(url: "\(_image_backup_path_value)\(urlStr!)");
+        }else{
+            image = cacheImpl(url: "\(_image_backup_path_value)/\(urlStr!)");
+        }
+        
+        return image;
+    }
+    
+    public class func cacheImpl(url urlStr:String)->UIImage!{
+        let urlOpt = URL(string: urlStr);
         
         if urlOpt == nil {
             return nil;
@@ -112,6 +132,42 @@ extension UIImage{
         return nil;
     }
     
+    public class var imagePath:String?{
+        get{
+            return _image_path;
+        }
+        set{
+            _image_path = newValue;
+            if let path = newValue {
+                if path.hasSuffix("/") {
+                    _image_path_value = path.substring(to: path.index(path.endIndex, offsetBy: -1))
+                }else{
+                    _image_path_value = path;
+                }
+            }else{
+                _image_path_value = "";
+            }
+        }
+    }
+    
+    public class var imageBackupPath:String?{
+        get{
+            return _image_backup_path;
+        }
+        set{
+            _image_backup_path = newValue;
+            if let path = newValue {
+                if path.hasSuffix("/") {
+                    _image_backup_path_value = path.substring(to: path.index(path.endIndex, offsetBy: -1))
+                }else{
+                    _image_backup_path_value = path;
+                }
+            }else{
+                _image_backup_path_value = "";
+            }
+        }
+    }
+    
     public class var cachePath:String{
         get{
             if CacheImageView_Cache_Path_tmpvar == nil {
@@ -136,3 +192,11 @@ extension UIImage{
         }
     }
 }
+
+
+private var CacheImageView_Cache_Path_tmpvar:String?;
+
+private var _image_path:String? = nil;
+private var _image_backup_path:String? = nil;
+private var _image_path_value = "";
+private var _image_backup_path_value = "";
