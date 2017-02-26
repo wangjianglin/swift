@@ -349,7 +349,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         
         
         cell.image = _imagePaths[Int((indexPath as NSIndexPath).row - (hasVedio ? 1 : 0))];
-        cell.pos = Int((indexPath as NSIndexPath).row - 1);
+        cell.pos = Int((indexPath as NSIndexPath).row - (hasVedio ? 1 : 0));
         cell.imagesView = self;
         return cell;
         
