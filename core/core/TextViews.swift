@@ -184,8 +184,8 @@ extension UITextView{
         let aRect = self.window!.bounds;
         
         
-        if aRect.origin.y + aRect.size.height - rect.origin.y < keyboardSize.height + 40 {
-            frame.origin.y = aRect.origin.y + aRect.size.height - rect.origin.y - keyboardSize.height - 40 - 40;
+        if aRect.origin.y + aRect.size.height - rect.origin.y - rect.height < keyboardSize.height - 10 {
+            frame.origin.y = aRect.origin.y + aRect.size.height - rect.origin.y - keyboardSize.height - rect.height - 5;
         }
         self.window?.frame = frame;
     }
