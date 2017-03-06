@@ -32,7 +32,7 @@ extension UITextField{
     //MARK: - UITextView notifications
     
     private func getToolbar()->UIToolbar{
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.window!.frame.size.width, height: 44));
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.window!.frame.size.width, height: 40));
         
         toolbar.barStyle = UIBarStyle.default;
         
@@ -149,7 +149,7 @@ extension UITextField{
         
         
         if aRect.origin.y + aRect.size.height - rect.origin.y - rect.height < keyboardSize.height - 10 {
-            frame.origin.y = aRect.origin.y + aRect.size.height - rect.origin.y - keyboardSize.height - rect.height - 5;
+            frame.origin.y = aRect.origin.y + aRect.size.height - rect.origin.y - keyboardSize.height - rect.height - 40;
         }
         self.window?.frame = frame;
     }

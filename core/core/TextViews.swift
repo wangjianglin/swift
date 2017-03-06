@@ -54,7 +54,7 @@ extension UITextView{
 //            })
 //            
 //        }else{
-            let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 44));
+            let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 40));
             
             toolbar.barStyle = UIBarStyle.default;
             
@@ -185,7 +185,7 @@ extension UITextView{
         
         
         if aRect.origin.y + aRect.size.height - rect.origin.y - rect.height < keyboardSize.height - 10 {
-            frame.origin.y = aRect.origin.y + aRect.size.height - rect.origin.y - keyboardSize.height - rect.height - 5;
+            frame.origin.y = aRect.origin.y + aRect.size.height - rect.origin.y - keyboardSize.height - rect.height - 40;
         }
         self.window?.frame = frame;
     }
