@@ -32,11 +32,11 @@ open class AliHttpDNS:AbstractHttpDNS{
     
     
     //需要同步操作
-    open override func fetch(host:String)->AbstractHttpDNS.HttpDNSOrigin!{
+    open override func fetch(host:String,timeout:TimeInterval)->AbstractHttpDNS.HttpDNSOrigin!{
         
         let resolveUrl = "http://\(StaticData.SERVER_IP)/\(self.account ?? "")/d?host=\(host)";
         
-        let request = NSMutableURLRequest(url: URL(string:resolveUrl)!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 25.0);
+        let request = NSMutableURLRequest(url: URL(string:resolveUrl)!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: timeout);
         
         //兼容ios6.+
         //        let responsePoint = AutoreleasingUnsafeMutablePointer<URLResponse?>(UnsafeMutablePointer<URLResponse?>(allocatingCapacity: 1));
@@ -44,28 +44,30 @@ open class AliHttpDNS:AbstractHttpDNS{
         let responsePoint:AutoreleasingUnsafeMutablePointer<URLResponse?> = AutoreleasingUnsafeMutablePointer<URLResponse?>.init(UnsafeMutablePointer<URLResponse?>.allocate(capacity: 1));
         let data = try? NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: responsePoint);
         
-        var origin:AbstractHttpDNS.HttpDNSOrigin!;
+        let origin = AbstractHttpDNS.HttpDNSOrigin(host: host);
         let r = responsePoint.pointee as? HTTPURLResponse;
         if r != nil && r!.statusCode == 200 {
             
             let args = Json.parse(NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as! String);
             
             if args.count > 0{
-                let host = args["host"].asString("");
-                let ttl = args["ttl"].asInt64(120);
-                let ips = args["ips"].asObjectArray(item: { (json) -> String in
-                    return json.asString("");
-                })
-                
-                if ips.count > 0{
-                    origin = AbstractHttpDNS.HttpDNSOrigin(host: host);
-                    origin.ips = ips;
-                    if ttl <= 0 {
-                        origin.ttl = 120;
-                    }else{
-                        origin.ttl = ttl;
-                    }
+                let rhost = args["host"].asString("");
+                if rhost == host {
+                    let ttl = args["ttl"].asInt64(120);
+                    let ips = args["ips"].asObjectArray(item: { (json) -> String in
+                        return json.asString("");
+                    })
                     
+                    if ips.count > 0{
+                        //origin = AbstractHttpDNS.HttpDNSOrigin(host: host);
+                        origin.ips = ips;
+                        if ttl <= 3 {
+                            origin.ttl = 120;
+                        }else{
+                            origin.ttl = ttl;
+                        }
+                        
+                    }
                 }
                 
             }

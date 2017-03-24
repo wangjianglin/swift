@@ -57,16 +57,9 @@ open class AbstractHttpDNS:HttpDNS{
         case Random
     }
     public class HttpDNSOrigin{
-        fileprivate var hostName:String;
-        fileprivate var sessionMode:SessionMode = SessionMode.Sticky{
-            didSet{
-                if let ips = ips {
-                    if ips.count > 1 {
-                        ipIndex = Int(arc4random()) % ips.count;
-                    }
-                }
-            }
-        }
+        private var hostName:String;
+        fileprivate var sessionMode:SessionMode = SessionMode.Sticky;
+        
         private var ipIndex:Int = 0;
         
         public var host:String{
@@ -84,14 +77,15 @@ open class AbstractHttpDNS:HttpDNS{
         }
         
         fileprivate func status(_ origin:HttpDNSOrigin?){
-            if let o_ips = origin?.ips {
-                if let ips = self.ips {
-                    if o_ips.count > 0 && ips.count > 1 {
-                        for n in 0 ..< ips.count {
-                            if ips[n] == origin!.ips[origin!.ipIndex] {
-                                self.ipIndex = n;
-                                break;
-                            }
+            if sessionMode == SessionMode.Random {
+                return;
+            }
+            if let o_ips = origin?.ips,let ips = self.ips,let ipIndex = origin?.ipIndex {
+                if o_ips.count > 0 && ips.count > 1 {
+                    for n in 0 ..< ips.count {
+                        if ips[n] == o_ips[ipIndex] {
+                            self.ipIndex = n;
+                            break;
                         }
                     }
                 }
@@ -99,16 +93,23 @@ open class AbstractHttpDNS:HttpDNS{
         }
         
         
-        var ttl:Int64 = 120;
-        fileprivate var query:Int64 = 120;
+        public var ttl:Int64 = 120;
+        fileprivate var query:Int64 = 0;
+        
+        fileprivate var expiredRequestTime:Int64 = 0;
         
         init(host:String){
             self.hostName = host;
         }
         
-        var expired:Bool{
+        fileprivate var expired:Bool{
             return query + ttl * 10000 < Int64(Date().timeIntervalSince1970 * 10000);
         }
+        
+        fileprivate var request:Bool{
+            return expiredRequestTime + ttl * 10000 < Int64(Date().timeIntervalSince1970 * 10000);
+        }
+        
         fileprivate func getIp() -> String! {
             if ips != nil && ips.count > 0 {
                 if ips.count == 1 {
@@ -123,7 +124,7 @@ open class AbstractHttpDNS:HttpDNS{
         }
     }
     
-    var sessionMode:SessionMode = SessionMode.Sticky;
+    public var sessionMode:SessionMode = SessionMode.Sticky;
     
     fileprivate var hostManager = Dictionary<String,HttpDNSOrigin>();
     fileprivate var queue = Queue(count: 1);
@@ -134,68 +135,36 @@ open class AbstractHttpDNS:HttpDNS{
     open var expiredIpAvailable:Bool = true;
     
     //需要同步操作
-    open func fetch(host:String)->HttpDNSOrigin!{
+    open func fetch(host:String,timeout:TimeInterval)->HttpDNSOrigin!{
         return nil;
     }
-//    fileprivate func fetch(_ host:String)->HttpDNSOrigin!{
-//        
-//        let resolveUrl = "http://\(StaticData.SERVER_IP)/\(self.account ?? "")/d?host=\(host)";
-//        
-//        let request = NSMutableURLRequest(url: URL(string:resolveUrl)!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 25.0);
-//        
-//        //兼容ios6.+
-//        //        let responsePoint = AutoreleasingUnsafeMutablePointer<URLResponse?>(UnsafeMutablePointer<URLResponse?>(allocatingCapacity: 1));
-//        //        let responsePoint:AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil;//(UnsafeMutablePointer<NSURLResponse?>.alloc(1));
-//        let responsePoint:AutoreleasingUnsafeMutablePointer<URLResponse?> = AutoreleasingUnsafeMutablePointer<URLResponse?>.init(UnsafeMutablePointer<URLResponse?>.allocate(capacity: 1));
-//        let data = try? NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: responsePoint);
-//        
-//        var origin:HttpDNSOrigin!;
-//        let r = responsePoint.pointee as? HTTPURLResponse;
-//        if r != nil && r!.statusCode == 200 {
-//            
-//            let args = Json.parse(NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as! String);
-//            
-//            if args.count > 0{
-//                let host = args["host"].asString("");
-//                let ttl = args["ttl"].asInt64(120);
-//                let ips = args["ips"].asObjectArray(item: { (json) -> String in
-//                    return json.asString("");
-//                })
-//                
-//                if ips.count > 0{
-//                    origin = HttpDNSOrigin(host: host);
-//                    origin.ips = ips;
-//                    if ttl <= 0 {
-//                        origin.ttl = 120;
-//                    }else{
-//                        origin.ttl = ttl;
-//                    }
-//                    origin.query = Int64(Date().timeIntervalSince1970*10000);
-//                    
-//                }
-//                
-//            }
-//        }
-//        if origin != nil{
-//            objc_sync_enter(self)
-//            hostManager[host] = origin;
-//            objc_sync_exit(self)
-//        }
-//        return origin;
-//    }
-    
-    fileprivate func setOrigin(host:String){
-        if let origin = self.fetch(host:host) {
-            objc_sync_enter(self)
-            origin.sessionMode = self.sessionMode;
-            origin.status(hostManager[host]);
-            origin.query = Int64(Date().timeIntervalSince1970*10000);
-            hostManager[host] = origin;
-            objc_sync_exit(self)
+
+    private func fetchInternal(host:String,timeout:TimeInterval)->HttpDNSOrigin{
+        if let origin = self.fetch(host:host,timeout:timeout) {
+            return origin;
         }
+        if let origin = hostManager[host] {
+            return origin;
+        }
+        let origin = HttpDNSOrigin(host:host);
+        return origin;
+    }
+    
+    fileprivate func setOrigin(host:String,timeout:TimeInterval){
+        let origin = self.fetchInternal(host:host,timeout:timeout);
+        objc_sync_enter(self)
+        if origin.ttl < 3 {
+            origin.ttl = 120;
+        }
+        origin.sessionMode = self.sessionMode;
+        origin.status(hostManager[host]);
+        origin.query = Int64(Date().timeIntervalSince1970*10000);
+        hostManager[host] = origin;
+        objc_sync_exit(self)
         
     }
-    fileprivate func query(_ host:String)->HttpDNSOrigin!{
+    
+    private func query(_ host:String,timeout:TimeInterval)->HttpDNSOrigin!{
         
         var origin:HttpDNSOrigin!;
         objc_sync_exit(self);
@@ -203,26 +172,22 @@ open class AbstractHttpDNS:HttpDNS{
         objc_sync_exit(self);
         
         if origin == nil || (origin.expired && !expiredIpAvailable) {
-            self.setOrigin(host:host);
+            self.setOrigin(host:host,timeout: timeout);
             return hostManager[host];
         }
         
-        if origin.expired {
+        if origin.expired && origin.request {
+            origin.expiredRequestTime = Int64(Date().timeIntervalSince1970*10000);
             queue.asynQueue({[weak self] in
-                self?.setOrigin(host:host);
+                self?.setOrigin(host:host,timeout:20.0);
             });
         }
         return origin;
     }
     
-    //    private var preProxy:Bool = false;
-    //    private var preProxyTime:Double = 0;
     
     fileprivate func configureProxies(_ host:String)->Bool
     {
-        //        if preProxyTime + 60 > NSDate().timeIntervalSince1970 {
-        //            return preProxy;
-        //        }
         let proxySettings = CFNetworkCopySystemProxySettings()?.takeUnretainedValue();
         
         let url = URL(string: "http://\(host)");
@@ -242,30 +207,30 @@ open class AbstractHttpDNS:HttpDNS{
         return host != nil || port != nil;
     }
     open func getIpByHost(_ host: String) -> String! {
+        return getIpByHost(host, timeout: 3.0);
+    }
+    
+    private func getIpByHost(_ host: String,timeout:TimeInterval) -> String! {
         
-        if host.lengthOfBytes(using: String.Encoding.utf8) <= 0
-            || configureProxies(host) {
+//        if host.lengthOfBytes(using: String.Encoding.utf8) <= 0
+//            || configureProxies(host) {
+//            return nil;
+//        }
+        if host.characters.count <= 0 {
             return nil;
         }
         
-        if let filter = filter{
-            if filter(host)
-            {
-                return nil;
-            }
+        if filter?(host) == true{
+            return nil;
         }
         
-        let origin = self.query(host);
-        return origin?.getIp();
+        let origin = self.query(host,timeout: timeout);
+        let ip = origin?.getIp();
+        if ip == "" {
+            return nil;
+        }
+        return ip;
     }
-    
-    //    open func setDelegateForDegradationFilter(_ action: ((String) -> Bool)) {
-    //
-    //    }
-    //    public func setDelegateForDegradationFilter(_ action: ((String) -> Bool)) {
-    //        <#code#>
-    //    }
-    
     
     public func setDelegateForDegradationFilter(_ filter: @escaping ((String)->Bool)){
         self.filter = filter;
@@ -274,7 +239,7 @@ open class AbstractHttpDNS:HttpDNS{
     open func setPreResolveHosts(_ hosts: String ...) {
         for host in hosts{
             queue.asynQueue {
-                self.getIpByHost(host);
+                self.getIpByHost(host, timeout: 20.0);
             }
         }
     }
