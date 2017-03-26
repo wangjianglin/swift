@@ -21,7 +21,11 @@ open class FormViewController : UITableViewController {
     
     /// MARK: Properties
     
-    open var form: FormDescriptor!
+    open var form: FormDescriptor!{
+        didSet{
+            self.tableView?.reloadData();
+        }
+    }
     
     open weak var delegate: FormViewControllerDelegate?
     
