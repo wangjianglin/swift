@@ -122,7 +122,7 @@ extension Json {
         var obj:Any?
         do {
             obj = try JSONSerialization.jsonObject(
-                with: data, options:[.allowFragments,.mutableLeaves])
+                with: data, options:[.allowFragments,.mutableLeaves,.mutableContainers])
         } catch let error as NSError {
             err = error
             obj = nil
