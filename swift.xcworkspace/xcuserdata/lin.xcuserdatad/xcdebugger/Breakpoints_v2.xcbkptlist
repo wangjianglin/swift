@@ -874,12 +874,12 @@
                   moduleName = "LinWeb"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///lin/code/lib/swift/web/web/%20LinWebURLProtocol.swift"
-                  timestampString = "512058848.902527"
+                  timestampString = "512275118.845991"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "46"
                   endingLineNumber = "46"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "28">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -889,12 +889,12 @@
                   moduleName = "LinWeb"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///lin/code/lib/swift/web/web/%20LinWebURLProtocol.swift"
-                  timestampString = "512058848.904838"
+                  timestampString = "512275118.84711"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "46"
                   endingLineNumber = "46"
-                  offsetFromSymbolStart = "322">
+                  offsetFromSymbolStart = "296">
                </Location>
             </Locations>
          </BreakpointContent>

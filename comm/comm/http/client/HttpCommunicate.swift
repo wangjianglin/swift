@@ -313,6 +313,12 @@ public class HttpCommunicateImpl{
         let url = HttpUtils.url(self, pack: package);
         let p = self.generParams(package: package);
         
+        if !NetWorkTool.isEnable3G() && !NetWorkTool.isEnableWIFI() {
+            let error = HttpError(code:-2,message:"无网络，请检查系统设置");
+            self.mainThreadFault(httpResult,pack:package,fault:fault)(error);
+            return httpResult;
+        }
+        
         let params = HttpTaskParams(url:url);
         params.method = package.method;
         params.parameters = p.params;

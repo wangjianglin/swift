@@ -17,6 +17,8 @@
 		3E1974601DB5214900C5A6EC /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3B40171C58892600F4E519 /* LinUtil.framework */; };
 		3E19747C1DB7BB5600C5A6EC /* HttpDownloadPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19747B1DB7BB5600C5A6EC /* HttpDownloadPackage.swift */; };
 		3E20C6611E4DC385000C9698 /* AbstractHttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C6601E4DC385000C9698 /* AbstractHttpResponse.swift */; };
+		3E34A7101E88A18F001E0E4E /* NetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E34A70F1E88A18F001E0E4E /* NetWorkTool.swift */; };
+		3E34A7121E88A4C1001E0E4E /* Readchability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E34A7111E88A4C1001E0E4E /* Readchability.swift */; };
 		3E3B40181C58892600F4E519 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3B40171C58892600F4E519 /* LinUtil.framework */; };
 		3E53F8811DBE06DE00E79390 /* httpclient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E53F87F1DBE06DE00E79390 /* httpclient.xcdatamodeld */; };
 		3E53F8831DBE0A1100E79390 /* HttpClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E53F8821DBE0A1100E79390 /* HttpClientModel.swift */; };
@@ -188,6 +190,8 @@
 		3E19745E1DB516A000C5A6EC /* AbstractServerHttpResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractServerHttpResponse.swift; sourceTree = "<group>"; };
 		3E19747B1DB7BB5600C5A6EC /* HttpDownloadPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpDownloadPackage.swift; sourceTree = "<group>"; };
 		3E20C6601E4DC385000C9698 /* AbstractHttpResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractHttpResponse.swift; sourceTree = "<group>"; };
+		3E34A70F1E88A18F001E0E4E /* NetWorkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkTool.swift; sourceTree = "<group>"; };
+		3E34A7111E88A4C1001E0E4E /* Readchability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Readchability.swift; sourceTree = "<group>"; };
 		3E3746A61A27757B00B980E9 /* LinComm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinComm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E3746B11A27757C00B980E9 /* LinComm.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinComm.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E3B40171C58892600F4E519 /* LinUtil.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinUtil.framework; path = "../../../../../Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinUtil.framework"; sourceTree = "<group>"; };
@@ -524,6 +528,8 @@
 				3EE51D2C1CE7BB920032729F /* LinComm.h */,
 				3EE51D331CE7BB920032729F /* socket */,
 				3EE51D3F1CE7BB920032729F /* tcp */,
+				3E34A70F1E88A18F001E0E4E /* NetWorkTool.swift */,
+				3E34A7111E88A4C1001E0E4E /* Readchability.swift */,
 			);
 			path = comm;
 			sourceTree = "<group>";
@@ -848,6 +854,7 @@
 				3EE51D911CE7BB920032729F /* TcpCommunicateRecv.swift in Sources */,
 				3E19745B1DB50B9400C5A6EC /* HttpDataResponse.swift in Sources */,
 				3EE51E921CE7C17A0032729F /* HttpTask.swift in Sources */,
+				3E34A7101E88A18F001E0E4E /* NetWorkTool.swift in Sources */,
 				3ECD40F61CEE1E8000D57372 /* DispatchQueueLogFormatter.m in Sources */,
 				3E19745F1DB516A000C5A6EC /* AbstractServerHttpResponse.swift in Sources */,
 				3EE51D901CE7BB920032729F /* TcpCommunicateListener.swift in Sources */,
@@ -908,6 +915,7 @@
 				3ECD40F91CEE1E8000D57372 /* HTTPAuthenticationRequest.m in Sources */,
 				3EE51D961CE7BB920032729F /* TcpJsonProtocolParser.swift in Sources */,
 				3EE51D9A1CE7BB920032729F /* TcpPackageState.swift in Sources */,
+				3E34A7121E88A4C1001E0E4E /* Readchability.swift in Sources */,
 				3EE51ED61CE7C17A0032729F /* MongooseDaemon.m in Sources */,
 				3EE51EF11CE8ED970032729F /* HttpJsonResponse.swift in Sources */,
 				3EE51EDF1CE848E10032729F /* HttpRequest.swift in Sources */,

@@ -16,9 +16,10 @@
 		3E200EB21C4D5FB000A00A10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E200EB01C4D5FB000A00A10 /* LaunchScreen.storyboard */; };
 		3E200EBD1C4D5FB000A00A10 /* demoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EBC1C4D5FB000A00A10 /* demoTests.swift */; };
 		3E200EC81C4D5FB000A00A10 /* demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EC71C4D5FB000A00A10 /* demoUITests.swift */; };
+		3E34A7141E88AAA1001E0E4E /* LinRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E34A7131E88AAA1001E0E4E /* LinRac.framework */; };
+		3E34A7151E88AAA1001E0E4E /* LinRac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E34A7131E88AAA1001E0E4E /* LinRac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E519A111DDEED7200B60C0E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A101DDEED7200B60C0E /* MainViewController.swift */; };
 		3E519A131DDEEF4900B60C0E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A121DDEEF4900B60C0E /* MainViewModel.swift */; };
-		3E519A1B1DE1FA2F00B60C0E /* LinRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E519A1A1DE1FA2F00B60C0E /* LinRac.framework */; };
 		3E53F8851DC6405F00E79390 /* data2.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E53F8841DC6405F00E79390 /* data2.zip */; };
 		3E66A7201DC79177005628AC /* LinWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A71F1DC79177005628AC /* LinWeb.framework */; };
 		3E66A7211DC79177005628AC /* LinWeb.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A71F1DC79177005628AC /* LinWeb.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -62,6 +63,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3E34A7151E88AAA1001E0E4E /* LinRac.framework in Embed Frameworks */,
 				3E66A72A1DC79177005628AC /* LinComm.framework in Embed Frameworks */,
 				3E66A7271DC79177005628AC /* LinUtil.framework in Embed Frameworks */,
 				3E66A7211DC79177005628AC /* LinWeb.framework in Embed Frameworks */,
@@ -87,6 +89,7 @@
 		3E200EC31C4D5FB000A00A10 /* demoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = demoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E200EC71C4D5FB000A00A10 /* demoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoUITests.swift; sourceTree = "<group>"; };
 		3E200EC91C4D5FB000A00A10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E34A7131E88AAA1001E0E4E /* LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E519A101DDEED7200B60C0E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3E519A121DDEEF4900B60C0E /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		3E519A1A1DE1FA2F00B60C0E /* LinRac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinRac.framework; path = "../rac/build/Debug-iphoneos/LinRac.framework"; sourceTree = "<group>"; };
@@ -114,8 +117,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E519A1B1DE1FA2F00B60C0E /* LinRac.framework in Frameworks */,
 				3E66A7291DC79177005628AC /* LinComm.framework in Frameworks */,
+				3E34A7141E88AAA1001E0E4E /* LinRac.framework in Frameworks */,
 				3E66A7261DC79177005628AC /* LinUtil.framework in Frameworks */,
 				3E66A7201DC79177005628AC /* LinWeb.framework in Frameworks */,
 				3E66A7231DC79177005628AC /* LinCore.framework in Frameworks */,
@@ -152,6 +155,7 @@
 		3E200E9B1C4D5FB000A00A10 = {
 			isa = PBXGroup;
 			children = (
+				3E34A7131E88AAA1001E0E4E /* LinRac.framework */,
 				3E66A7281DC79177005628AC /* LinComm.framework */,
 				3E66A7251DC79177005628AC /* LinUtil.framework */,
 				3E66A7221DC79177005628AC /* LinCore.framework */,

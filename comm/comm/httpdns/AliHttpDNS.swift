@@ -34,7 +34,7 @@ open class AliHttpDNS:AbstractHttpDNS{
     //需要同步操作
     open override func fetch(host:String,timeout:TimeInterval)->AbstractHttpDNS.HttpDNSOrigin!{
         
-        let resolveUrl = "http://\(StaticData.SERVER_IP)/\(self.account ?? "")/d?host=\(host)";
+        let resolveUrl = "https://\(StaticData.SERVER_IP)/\(self.account ?? "")/d?host=\(host)";
         
         let request = NSMutableURLRequest(url: URL(string:resolveUrl)!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: timeout);
         
