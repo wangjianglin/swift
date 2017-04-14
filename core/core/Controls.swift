@@ -14,7 +14,7 @@ extension UIControl{
     public func addActionForEvent(_ event:UIControlEvents,action:@escaping ((AnyObject)->())){
         
         let delegateAction = EventDelegateAction(action:action);
-        delegateAction.withObjectSameLifecycle = self;
+        delegateAction.ext.withObjectSameLifecycle = self;
         
         self.addTarget(delegateAction,action: #selector(EventDelegateAction.action(_:)), for: event);
     }

@@ -170,3 +170,20 @@ extension Ext where Base: NSObject {
     }
 }
 
+extension Ext where Base: NSObject{
+    public weak var withObjectSameLifecycle:NSObject? {
+        nonmutating set{
+            if let withObjectSameLifecycle = newValue {
+                var w:[String:NSObject]? = withObjectSameLifecycle.getAssociatedValue(forKey: "__delegate_action_dict_value__");
+                if w == nil {
+                    w = [:];
+                }
+                w?["__delegate_action\(base.hashValue)"] = base;
+                withObjectSameLifecycle.setAssociatedValue(value: w, forKey: "__delegate_action_dict_value__");
+            }
+        }
+        get{
+            return nil;
+        }
+    }
+}

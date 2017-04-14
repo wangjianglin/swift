@@ -96,7 +96,7 @@ open class AbstractHttpDNS:HttpDNS{
         public var ttl:Int64 = 120;
         fileprivate var query:Int64 = 0;
         
-        fileprivate var expiredRequestTime:Int64 = 0;
+//        fileprivate var expiredRequestTime:Int64 = 0;
         
         init(host:String){
             self.hostName = host;
@@ -106,9 +106,9 @@ open class AbstractHttpDNS:HttpDNS{
             return query + ttl * 10000 < Int64(Date().timeIntervalSince1970 * 10000);
         }
         
-        fileprivate var request:Bool{
-            return expiredRequestTime + ttl * 10000 < Int64(Date().timeIntervalSince1970 * 10000);
-        }
+//        fileprivate var request:Bool{
+//            return expiredRequestTime + ttl * 10000 < Int64(Date().timeIntervalSince1970 * 10000);
+//        }
         
         fileprivate func getIp() -> String! {
             if ips != nil && ips.count > 0 {
@@ -176,8 +176,8 @@ open class AbstractHttpDNS:HttpDNS{
             return hostManager[host];
         }
         
-        if origin.expired && origin.request {
-            origin.expiredRequestTime = Int64(Date().timeIntervalSince1970*10000);
+        if origin.expired {
+            origin.query = Int64(Date().timeIntervalSince1970*10000);
             queue.asynQueue({[weak self] in
                 self?.setOrigin(host:host,timeout:20.0);
             });

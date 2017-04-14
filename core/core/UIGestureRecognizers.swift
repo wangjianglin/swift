@@ -16,6 +16,6 @@ extension UIGestureRecognizer {
     public init(action:@escaping ((AnyObject)->())){
         let delegateAction = EventDelegateAction(action: action);
         self.init(target:delegateAction,action:#selector(EventDelegateAction.action(_:)));
-        delegateAction.withObjectSameLifecycle = self;
+        delegateAction.ext.withObjectSameLifecycle = self;
     }
 }

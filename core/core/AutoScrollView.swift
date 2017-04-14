@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import LinCore
 import LinUtil
 
 

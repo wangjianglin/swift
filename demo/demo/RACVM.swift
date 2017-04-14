@@ -39,9 +39,9 @@ public class RACVM :NSObject,ViewModel {
 //        return nil;
 //    }
     
-    public func test(_ complete:@escaping (Any!)->()){
+    public func test(_ v:Int,_ complete:@escaping (Any?)->()){
         
-        print("************");
+        print("************\(v)");
         print(self.text)
         HttpCommunicate.mainThread = false;
 //        Queue.asynThread {

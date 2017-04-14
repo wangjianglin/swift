@@ -5,7 +5,7 @@ use_frameworks!
 
 workspace 'swift.xcworkspace'
 
-xcodeproj 'rac/LinRac.xcodeproj'
+project 'rac/LinRac.xcodeproj'
 
 platform:ios,'8.0'
 
@@ -25,17 +25,36 @@ target :'LinRac' do
 #    pod 'ReactiveCocoa','5.0.0'
     pod 'ReactiveCocoa', '~> 5.0.0'
     #pod 'ReactiveCocoa',:git=>'https://github.com/ReactiveCocoa/ReactiveCocoa.git'
-    
+    project 'rac/LinRac.xcodeproj'
 end
 
 #workspace 'swift.xcworkspace'
 #xcodeproj 'demo/demo.xcodeproj'
-platform:ios,'8.0'
+#platform:ios,'8.0'
 #
 target :'demo' do
 #    pod 'ReactiveCocoa','5.0.0'
     pod 'ReactiveCocoa', '~> 5.0.0'
 
 #    pod 'ReactiveCocoa',:git=>'https://github.com/ReactiveCocoa/ReactiveCocoa.git'
-    xcodeproj 'demo/demo.xcodeproj'
+    project 'demo/demo.xcodeproj'
+end
+
+
+post_install do |installer|
+    
+    puts installer.pods_project.targets.class
+    puts installer.pods_project.targets[1]
+
+    installer.pods_project.targets.each do |target|
+        
+        if "#{target}" != 'ReactiveCocoa' and
+            "#{target}" != 'ReactiveSwift'
+            next;
+        end
+        
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0.1'
+        end
+    end
 end

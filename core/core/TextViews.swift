@@ -278,7 +278,7 @@ extension UITextView{
         
         let da = __UITextViewLinCoreDelegateAction();
         self.delegate = da;
-        da.withObjectSameLifecycle = self;
+        da.ext.withObjectSameLifecycle = self;
         return da;
     }
 

@@ -25,4 +25,7 @@
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:rac/LinRac.xcodeproj">
+   </FileRef>
 </Workspace>

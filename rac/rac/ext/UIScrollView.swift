@@ -14,7 +14,7 @@ import LinUtil
 
 private var refreshKey = 0;
 private var loadmoreKey = 0;
-extension Reactive where Base: UITableView{
+extension Reactive where Base: UIScrollView{
     
     public var refresh:CocoaAction<Base>?{
         get{

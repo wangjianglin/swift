@@ -13,17 +13,25 @@ import Foundation
 @objc
 open class DelegateAction :NSObject {
     
-    
-    open weak var withObjectSameLifecycle:NSObject? {
-        didSet{
-            if let value = oldValue {
-                value.setAssociatedValue(value: nil, forKey: "__delegate_action");
-            }
-            if let withObjectSameLifecycle = withObjectSameLifecycle {
-                withObjectSameLifecycle.setAssociatedValue(value: self, forKey: "__delegate_action");
-            }
-        }
-    }
+//    open weak var withObjectSameLifecycle:NSObject? {
+//        didSet{
+//            if let withObjectSameLifecycle = withObjectSameLifecycle {
+//                var w:[String:NSObject]? = withObjectSameLifecycle.getAssociatedValue(forKey: "__delegate_action_dict_value__");
+//                if w == nil {
+//                    w = [:];
+//                }
+//                w?["__delegate_action\(self.hashValue)"] = self;
+//                withObjectSameLifecycle.setAssociatedValue(value: w, forKey: "__delegate_action_dict_value__");
+//            }else if let old = oldValue {
+//                let w:[String:NSObject]? = old.getAssociatedValue(forKey: "__delegate_action_dict_value__");
+//                if var w = w {
+//                    w.removeValue(forKey: "__delegate_action\(self.hashValue)");
+//                    old.setAssociatedValue(value: w, forKey: "__delegate_action_dict_value__");
+//                }
+//                
+//            }
+//        }
+//    }
     
     fileprivate init(threadAction:@escaping((AnyObject)->())){
         super.init();

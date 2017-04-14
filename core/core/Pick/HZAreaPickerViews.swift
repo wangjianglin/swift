@@ -18,7 +18,7 @@ import LinUtil
 extension HZAreaPickerView{
     public func setDelegateAction(_ action:@escaping (AnyObject)->()){
         let delegateAction = EventDelegateAction(action: action);
-        delegateAction.withObjectSameLifecycle = self;
+        delegateAction.ext.withObjectSameLifecycle = self;
         self.target = delegateAction;
         self.action = #selector(EventDelegateAction.action(_:));
     }

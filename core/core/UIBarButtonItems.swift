@@ -16,7 +16,8 @@ extension UIBarButtonItem{
         
         
         let delegateAction = EventDelegateAction(action:action);
-        delegateAction.withObjectSameLifecycle = self;
+        delegateAction.ext.withObjectSameLifecycle = self;
+//        delegateAction.ext.withObjectSameLifecycle = self;
         
         self.target = delegateAction;
         self.action = #selector(EventDelegateAction.action(_:));

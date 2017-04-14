@@ -559,8 +559,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "579"
             endingLineNumber = "579"
-            landmarkName = "HTTPConnection"
-            landmarkType = "3">
+            landmarkName = "isAuthenticated"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -874,12 +874,12 @@
                   moduleName = "LinWeb"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///lin/code/lib/swift/web/web/%20LinWebURLProtocol.swift"
-                  timestampString = "512275118.845991"
+                  timestampString = "513881304.62721"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "46"
                   endingLineNumber = "46"
-                  offsetFromSymbolStart = "28">
+                  offsetFromSymbolStart = "19">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -889,12 +889,12 @@
                   moduleName = "LinWeb"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///lin/code/lib/swift/web/web/%20LinWebURLProtocol.swift"
-                  timestampString = "512275118.84711"
+                  timestampString = "513881304.629415"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "46"
                   endingLineNumber = "46"
-                  offsetFromSymbolStart = "296">
+                  offsetFromSymbolStart = "322">
                </Location>
             </Locations>
          </BreakpointContent>

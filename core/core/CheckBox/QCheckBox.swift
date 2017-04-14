@@ -35,7 +35,7 @@ extension QCheckBox{
         
         let da = __QCheckBoxDelegateImpl3();
         self.delegate = da;
-        da.withObjectSameLifecycle = self;
+        da.ext.withObjectSameLifecycle = self;
         return da;
     }
     

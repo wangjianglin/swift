@@ -216,7 +216,7 @@ extension UITextField{
             }
         }
         let da = _UITextFieldLinCoreDelegateAction();
-        da.withObjectSameLifecycle = self;
+        da.ext.withObjectSameLifecycle = self;
         self.delegate = da;
         return da;
     }

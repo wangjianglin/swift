@@ -100,7 +100,16 @@ public class RACViewController : UIViewController,BaseView{
 //        observer.send(value: false);
         
         
-        button <~ vm.test;
+//        button <~ vm.test;
+        
+//        button?.reactive.pressed = CocoaAction.(action: { (v, action) in
+//            
+//        }, inputTransform: { (base) -> Int in
+//            return 1;
+//        })
+        button?.reactive.pressed = CocoaAction<UIButton>.from(action: vm.test, inputTransform: { (button) -> Int in
+            return 1;
+        })
 //        button <~ vm.test3
         button?.reactive.pressed?.addOverlay(self.navigationController);
 //        button?.reactive.pressed?.isEnabled2

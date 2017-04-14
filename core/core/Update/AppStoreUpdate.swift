@@ -53,6 +53,9 @@ open class AppStoreUpdate{
             }
             let json = Json.parse(updateVersion!);
             
+            if json.isError {
+                return;
+            }
             
             let updateVersionsOption = parserVersion(json["results"][0]["version"].asString(""));
             if updateVersionsOption == nil {

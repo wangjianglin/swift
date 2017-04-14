@@ -49,6 +49,11 @@ open class EnterpriseUpdate{
             }
             
             let versionJson = Json.parse(updateVerString!)
+            
+            if versionJson.isError {
+                return;
+            }
+            
             let updateVersions = parserVersion(versionJson["version"].asString(""));
             if updateVersions == nil {
                 return;

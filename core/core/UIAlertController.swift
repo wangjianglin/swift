@@ -59,7 +59,7 @@ public extension UIAlertView{
         
         _ = UIAlertView.__once;
         
-        YSignal.install?.withObjectSameLifecycle = self;
+        YSignal.install?.ext.withObjectSameLifecycle = self;
         
         self.delegate = YSignal.install;
         return YSignal.install!;

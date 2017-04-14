@@ -56,7 +56,7 @@ extension CameraViewController{
         let delegateAction = __CameraViewControllerDelegateAction(action:action);
         
         self.delegate = delegateAction;
-        delegateAction.withObjectSameLifecycle = self;
+        delegateAction.ext.withObjectSameLifecycle = self;
     }
     
 }

@@ -230,7 +230,7 @@ fileprivate static var __once: () = {
     fileprivate var _asyncSocket:GCDAsyncSocket?;
     fileprivate var _config:HTTPConfig;
     //
-    fileprivate var _started:Bool = false;;
+    fileprivate var _started:Bool = false;
     //
 //        HTTPMessage * request;
     fileprivate var _numHeaderLines:UInt = 0;
