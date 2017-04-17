@@ -82,20 +82,20 @@ extension ViewModelStruct where Base: ReactiveExtensionsProvider {
     public func target<Value>(keyPath:String)->BindingTarget<Value>{
         return BindingTarget<Value>(on:UIScheduler(),lifetime:base.reactive.lifetime){[weak base] value in
             let oldValue = base?.value(forKey: keyPath);
-            if(oldValue == nil && value == nil){
+            if(oldValue == nil){
                 return;
             }
             
-            if value != nil {
-                let _v:_OptionalNilComparisonType? = value as?  _OptionalNilComparisonType;
-                if(_v != nil && oldValue == _v!){
-                    return;
-                }
-                let ov:NSObjectProtocol? = value as? NSObjectProtocol;
-                if(ov?.isEqual(oldValue) == true){
-                    return;
-                }
+            
+            let _v:_OptionalNilComparisonType? = value as?  _OptionalNilComparisonType;
+            if(_v != nil && oldValue == _v!){
+                return;
             }
+            let ov:NSObjectProtocol? = value as? NSObjectProtocol;
+            if(ov?.isEqual(oldValue) == true){
+                return;
+            }
+            
             base?.setValue(value, forKey: keyPath);
         }
     }

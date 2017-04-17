@@ -18,6 +18,7 @@ import Result
 
 
 extension CocoaAction{
+    
     public func addOverlay(_ vc:UIViewController!,message:String = "正在加载数据..."){
         self.setAssociatedValue(value: vc,forKey: "_view_controller");
         self.setAssociatedValue(value: message,forKey: "_message");

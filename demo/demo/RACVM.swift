@@ -25,7 +25,7 @@ public class RACVM :NSObject,ViewModel {
     public typealias ViewType = RACViewController;
     
     public override init() {
-        
+        print("vm init..")
     }
     
     public func start() {
@@ -44,16 +44,33 @@ public class RACVM :NSObject,ViewModel {
         print("************\(v)");
         print(self.text)
         HttpCommunicate.mainThread = false;
-//        Queue.asynThread {
-//            Thread.sleep(forTimeInterval: 2);
-//            comple(nil);
-            let pack = TestPackage();
-            pack.data = "test,data";
-            complete <~ HttpCommunicate.request(pack, result: { (obj, warning) in
-                self.text = "\(obj!)";
-                print(self.text)
-            })
-//        }
+        //        Queue.asynThread {
+        //            Thread.sleep(forTimeInterval: 2);
+        //            comple(nil);
+        let pack = TestPackage();
+        pack.data = "test,data";
+        complete <~ HttpCommunicate.request(pack, result: { (obj, warning) in
+//            self.text = "\(obj!)";
+//            print(self.text)
+        })
+        //        }
+    }
+    
+    public func test(_ complete:@escaping (Any?)->()){
+        
+        print("************");
+        print(self.text)
+        HttpCommunicate.mainThread = false;
+        //        Queue.asynThread {
+        //            Thread.sleep(forTimeInterval: 2);
+        //            comple(nil);
+        let pack = TestPackage();
+        pack.data = "test,data";
+        complete <~ HttpCommunicate.request(pack, result: { (obj, warning) in
+//            self.text = "\(obj!)";
+//            print(self.text)
+        })
+        //        }
     }
     
     
@@ -69,4 +86,7 @@ public class RACVM :NSObject,ViewModel {
         print(self.text)
     }
     
+    deinit {
+        print("deinit vm...");
+    }
 }
