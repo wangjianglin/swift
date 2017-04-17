@@ -13,6 +13,7 @@
 		3E20C7581E52C7C1000C9698 /* AbsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7571E52C7C1000C9698 /* AbsViewModel.swift */; };
 		3E519A171DE1F9D100B60C0E /* UIControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A161DE1F9D100B60C0E /* UIControls.swift */; };
 		3E519A191DE1FA0000B60C0E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A181DE1FA0000B60C0E /* ViewModel.swift */; };
+		3E86ABD31EA4A4000063786B /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E86ABD21EA4A4000063786B /* LinCore.framework */; };
 		3E8AA1521D2A55D8006E4922 /* rac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8AA1511D2A55D8006E4922 /* rac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E8AA15A1D2A5904006E4922 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA1591D2A5904006E4922 /* Action.swift */; };
 		3E8AA15C1D2A628F006E4922 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA15B1D2A628F006E4922 /* Signal.swift */; };
@@ -30,6 +31,7 @@
 		3E2E75A41D92EF15000DCBD3 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = ../Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		3E519A161DE1F9D100B60C0E /* UIControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControls.swift; sourceTree = "<group>"; };
 		3E519A181DE1FA0000B60C0E /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		3E86ABD21EA4A4000063786B /* LinCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinCore.framework; path = "../../../../../Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphonesimulator/LinCore.framework"; sourceTree = "<group>"; };
 		3E8AA14E1D2A55D8006E4922 /* LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8AA1511D2A55D8006E4922 /* rac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rac.h; sourceTree = "<group>"; };
 		3E8AA1531D2A55D8006E4922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E86ABD31EA4A4000063786B /* LinCore.framework in Frameworks */,
 				BC779778E5EA0E1496E719D7 /* Pods_LinRac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +59,7 @@
 		36AF5D4F6B267654B30A4733 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E86ABD21EA4A4000063786B /* LinCore.framework */,
 				3E2E75A41D92EF15000DCBD3 /* ReactiveSwift.framework */,
 				3E2E75A01D92E9D6000DCBD3 /* ReactiveCocoa.framework */,
 				3E2E75A11D92E9D6000DCBD3 /* Result.framework */,
