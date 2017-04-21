@@ -38,4 +38,28 @@ extension Reactive where Base: UISearchController{
             base.setAssociatedValue(value: newValue, forAddress: &searchAddress);
         }
     }
+    
+    public var searchButtonClicked:CocoaAction<Base>?{
+        get{
+            return base.getAssociatedValue(forAddress: &searchAddress);
+        }
+        nonmutating set{
+            let a = newValue;
+            if let delegate = base.searchBar.delegate as? NSObject{
+                delegate.reactive.trigger(for: #selector(UISearchBarDelegate.searchBarSearchButtonClicked)).observe({[weak base] observe in
+                    
+                    switch observe {
+                    case .value(_):
+                        base?.dismiss(animated: true, completion: nil);
+                        a?.execute(base!);
+                        break;
+                    default: break
+                        
+                    }
+                })
+                
+            }
+            base.setAssociatedValue(value: newValue, forAddress: &searchAddress);
+        }
+    }
 }

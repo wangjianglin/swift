@@ -19,7 +19,7 @@ open class StorageImpl{
     fileprivate var path:String;
     fileprivate var position:StoragePosition;
     fileprivate var filePath:String;
-//    private var database:Database;
+    private var database:KeyValueDatabase;
     
     fileprivate init(position:StoragePosition,path:String){
         self.path = path;
@@ -47,7 +47,7 @@ open class StorageImpl{
             break;
         }
         //database = Database("path/to/db.sqlite3")
-//        database = Database(filePath);
+        database = KeyValueDatabase.open(filePath);
         
 //        table = database["storage"]
 //        let id = NSExpression(literal: "id")
@@ -67,39 +67,54 @@ open class StorageImpl{
     
     fileprivate var lock:NSLock;
     
-//    public subscript(key:String)->AnyObject!{
-//        get{
-//            lock.lock();
-//            var r:AnyObject! = nil;
-//            if let query = getItem(key) {
-//                var valueString = query.first?.get(self.value);
-////                let decodedData = NSData(base64EncodedString: resp!, options: NSDataBase64DecodingOptions(0))
-//                var data = NSData(base64EncodedString: valueString!,options: NSDataBase64DecodingOptions(0));
-//                r = NSKeyedUnarchiver.unarchiveObjectWithData(data!)
-//            }
-//            lock.unlock();
-//            return r;
-//        }
-//        set{
-//            lock.lock();
-//            var data:NSData=NSKeyedArchiver.archivedDataWithRootObject(newValue);
-//            var base64String = data.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0));
-//            
-//            if let query = getItem(key) {
-//                query.update(self.value <- base64String)?;
-//            }else{
-//                self.table.insert(self.key <- key, self.value <- base64String)?
-//                //self.table.update(<#values: Setter#>...)
-////                if let insertedID = self.table.insert(self.key <- key, self.value <- base64String) {
-////                    //println("inserted id: \(insertedID)")
-////                    // inserted id: 1
-////                    //alice = users.filter(id == insertedID)
-////                }
-//            }
-//            lock.unlock();
-//        }
-//    }
-//    
+    public subscript(key:String)->Any!{
+        get{
+            return getItem(key);
+        }
+        set{
+            setItem(newValue, forKey: key);
+        }
+    }
+    
+    public func getItem(_ key:String)->Any!{
+        lock.lock();
+        var r:Any! = nil;
+        if let valueString = self.database.getItem(key) {
+        //                var valueString = query.first?.get(self.value);
+        //                let decodedData = NSData(base64EncodedString: resp!, options: NSDataBase64DecodingOptions(0))
+        let data = NSData(base64Encoded: valueString,options: NSData.Base64DecodingOptions.init(rawValue: 0));
+        r = NSKeyedUnarchiver.unarchiveObject(with:data! as Data)
+        }
+        lock.unlock();
+        return r;
+    }
+    
+    public func setItem(_ value:Any!,forKey key:String){
+        lock.lock();
+        let data:NSData=NSKeyedArchiver.archivedData(withRootObject: value) as NSData;
+        let base64String = data.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0));
+        
+        database.setItem(key, value: base64String);
+        //            if let query = getItem(key) {
+        //                query.
+        ////                self.value = base64String;
+        ////                query.update(self.value <- base64String)?;
+        //            }else{
+        //                self.table.insert(self.key <- key, self.value <- base64String)?
+        //                //self.table.update(<#values: Setter#>...)
+        ////                if let insertedID = self.table.insert(self.key <- key, self.value <- base64String) {
+        ////                    //println("inserted id: \(insertedID)")
+        ////                    // inserted id: 1
+        ////                    //alice = users.filter(id == insertedID)
+        ////                }
+        //            }
+        lock.unlock();
+    }
+    
+    public func removeItem(_ key : String){
+        database.removeItem(key);
+    }
+    
 //    private func getItem(key:String)->Query?{
 //        return self.table.filter(self.key == key);
 //    }
@@ -174,4 +189,19 @@ private var __once:() = {
 public var Storage:StorageArgs{
     _ = __once;
     return YRSingleton.instance!
+}
+
+private struct LocalStorageYRSingleton{
+    
+    static var instance:StorageImpl? = nil
+}
+
+private var __localStorage_once:() = {
+    _ = __once;
+    LocalStorageYRSingleton.instance = YRSingleton.instance?[StoragePosition.cache,"local_storage.storage"];
+}();
+
+public var LocalStorage:StorageImpl{
+    _ = __localStorage_once;
+    return LocalStorageYRSingleton.instance!
 }

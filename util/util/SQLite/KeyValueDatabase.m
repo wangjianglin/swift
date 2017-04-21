@@ -7,10 +7,10 @@
 //
 
 #import <sqlite3.h>
-#import "SQLite.h"
+#import "KeyValueDatabase.h"
 
 
-@interface Database(){
+@interface KeyValueDatabase(){
     @private
     sqlite3 * database;
 }
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation Database
+@implementation KeyValueDatabase
 
 -(id)initWithSqlite:(sqlite3*)sqlite{
     self = [super init];
@@ -29,7 +29,7 @@
     return self;
 }
 
-+(Database*)open: (NSString *)path{
++(KeyValueDatabase*)open: (NSString *)path{
     
     NSString * ceateSQL = @"CREATE TABLE IF NOT EXISTS DATA_STRORAGE(ID INTEGER PRIMARY KEY AUTOINCREMENT, KEY TEXT, VALUE TEXT)";
     
@@ -42,7 +42,7 @@
         }
         sqlite3_exec(database, [ceateSQL UTF8String],NULL,NULL,NULL);
     
-    return [[Database alloc] initWithSqlite:database];
+    return [[KeyValueDatabase alloc] initWithSqlite:database];
 }
 
 

@@ -38,16 +38,16 @@ public class KeyValueStorage{
     //}
     private let tablename:String!;
 //    private let database:UnsafeMutablePointer<sqlite3>!;
-    private let database:Database!;
+    private let database:KeyValueDatabase!;
     
     public init(){
         tablename = DEFAULT_TABLENAME;
-        database = Database.open(dataFilePath(tablename:tablename));
+        database = KeyValueDatabase.open(dataFilePath(tablename:tablename));
     }
     
     public init(name:String){
         tablename = "keyvalue_storage_" + name + ".sqlite";
-        database = Database.open(dataFilePath(tablename:tablename));
+        database = KeyValueDatabase.open(dataFilePath(tablename:tablename));
     }
     
     //+(void)openDatabase{

@@ -10,6 +10,7 @@ import UIKit
 import LinComm
 import Foundation
 import LinUtil
+import LinCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         HttpCommunicate.httpDns?.setPreResolveHosts("s.feicuibaba.com","s.feicuibaba.com");
+        
+        
+        LocalStorage["v"] = "name";
+        print(LocalStorage["v"])
+        
+        LocalStorage["v"] = 5.0;
+        print(LocalStorage["v"])
+        
         return true
     }
 

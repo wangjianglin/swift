@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3E1DF4761D9033BB0041D2AA /* SQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1DF4751D9033BB0041D2AA /* SQLite.swift */; };
-		3E1DF4791D9033CF0041D2AA /* SQLite.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E1DF4771D9033CF0041D2AA /* SQLite.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E1DF47A1D9033CF0041D2AA /* SQLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1DF4781D9033CF0041D2AA /* SQLite.m */; };
+		3E1DF4791D9033CF0041D2AA /* KeyValueDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E1DF4771D9033CF0041D2AA /* KeyValueDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E1DF47A1D9033CF0041D2AA /* KeyValueDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1DF4781D9033CF0041D2AA /* KeyValueDatabase.m */; };
 		3E3746731A26368100B980E9 /* LinUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E3746721A26368100B980E9 /* LinUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E37468E1A264C1700B980E9 /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37468D1A264C1700B980E9 /* json.swift */; };
 		3E3746DF1A2DED5300B980E9 /* AutoResetEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3746DE1A2DED5300B980E9 /* AutoResetEvent.swift */; };
@@ -42,8 +42,8 @@
 /* Begin PBXFileReference section */
 		3E1D831D1A63D16C006217A3 /* DateTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTest.swift; sourceTree = "<group>"; };
 		3E1DF4751D9033BB0041D2AA /* SQLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLite.swift; path = SQLite/SQLite.swift; sourceTree = "<group>"; };
-		3E1DF4771D9033CF0041D2AA /* SQLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLite.h; path = SQLite/SQLite.h; sourceTree = "<group>"; };
-		3E1DF4781D9033CF0041D2AA /* SQLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLite.m; path = SQLite/SQLite.m; sourceTree = "<group>"; };
+		3E1DF4771D9033CF0041D2AA /* KeyValueDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyValueDatabase.h; path = SQLite/KeyValueDatabase.h; sourceTree = "<group>"; };
+		3E1DF4781D9033CF0041D2AA /* KeyValueDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyValueDatabase.m; path = SQLite/KeyValueDatabase.m; sourceTree = "<group>"; };
 		3E37466D1A26368100B980E9 /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E3746711A26368100B980E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E3746721A26368100B980E9 /* LinUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinUtil.h; sourceTree = "<group>"; };
@@ -94,8 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				3E1DF4751D9033BB0041D2AA /* SQLite.swift */,
-				3E1DF4771D9033CF0041D2AA /* SQLite.h */,
-				3E1DF4781D9033CF0041D2AA /* SQLite.m */,
+				3E1DF4771D9033CF0041D2AA /* KeyValueDatabase.h */,
+				3E1DF4781D9033CF0041D2AA /* KeyValueDatabase.m */,
 			);
 			name = SQLite;
 			sourceTree = "<group>";
@@ -195,7 +195,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E1DF4791D9033CF0041D2AA /* SQLite.h in Headers */,
+				3E1DF4791D9033CF0041D2AA /* KeyValueDatabase.h in Headers */,
 				3E5917BD1CF8B9FA00CCFBC2 /* NSObjects.h in Headers */,
 				3E64C1E61A6BF685007185E2 /* cryptos.h in Headers */,
 				3EF90C771A5E7211004F2E85 /* ObjCSynchronized.h in Headers */,
@@ -285,7 +285,7 @@
 				3E37468E1A264C1700B980E9 /* json.swift in Sources */,
 				3ECD3FE31CEB839900D57372 /* swift.swift in Sources */,
 				3E3746DF1A2DED5300B980E9 /* AutoResetEvent.swift in Sources */,
-				3E1DF47A1D9033CF0041D2AA /* SQLite.m in Sources */,
+				3E1DF47A1D9033CF0041D2AA /* KeyValueDatabase.m in Sources */,
 				3E9927BB1A8BC0DE00D9246A /* Queue.swift in Sources */,
 				3EB352411E44CAA100CF83FA /* Lifetime.swift in Sources */,
 				3E64C1E71A6BF685007185E2 /* cryptos.m in Sources */,

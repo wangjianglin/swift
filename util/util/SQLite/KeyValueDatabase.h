@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 
-@interface Database : NSObject
+@interface KeyValueDatabase : NSObject
 
-+(Database*)open: (NSString *)path;
++(KeyValueDatabase*)open: (NSString *)path;
 
 
 
