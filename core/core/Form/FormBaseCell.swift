@@ -51,9 +51,9 @@ open class FormBaseCell: UITableViewCell {
         /// override
         self.textLabel?.text=self.rowDescriptor.title;
         if let value = self.rowDescriptor.value as? String{
-            valueLabel!.text = value;
+            valueLabel?.text = value;
         }else{
-            valueLabel!.text = "";
+            valueLabel?.text = "";
         }
     }
     

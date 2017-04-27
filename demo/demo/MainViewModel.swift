@@ -35,7 +35,8 @@ public class MainViewModel : NSObject,ViewModel{
     private let tables:[Any] = [
         ["RAC","bind","rac",RACViewController.self],
         ["RAC","bind","",RACViewController.self],
-        ["RAC","bind","rac",nil]
+        ["RAC","bind","rac",nil],
+        ["RAC","bind","table",nil]
     ];
     
     private func genDatas(){

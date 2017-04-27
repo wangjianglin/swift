@@ -30,6 +30,8 @@
 		3E66A7291DC79177005628AC /* LinComm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7281DC79177005628AC /* LinComm.framework */; };
 		3E66A72A1DC79177005628AC /* LinComm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7281DC79177005628AC /* LinComm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E66A72D1DC9CE95005628AC /* data1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E66A72C1DC9CE95005628AC /* data1.zip */; };
+		3E6AF3031EB21F3000B5DB1F /* TableTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6AF3021EB21F3000B5DB1F /* TableTestController.swift */; };
+		3E6AF3051EB21F4000B5DB1F /* TableTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6AF3041EB21F4000B5DB1F /* TableTestViewModel.swift */; };
 		3E98399B1D21023D00CF3049 /* ScrollImagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E98399A1D21023D00CF3049 /* ScrollImagesController.swift */; };
 		3EA79C4C1DDC0D4900972A8A /* MVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA79C4B1DDC0D4900972A8A /* MVVM.swift */; };
 		3EB565AF1DD368F400828FF7 /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565AE1DD368F400828FF7 /* RAC.swift */; };
@@ -99,6 +101,8 @@
 		3E66A7251DC79177005628AC /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E66A7281DC79177005628AC /* LinComm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinComm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E66A72C1DC9CE95005628AC /* data1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = data1.zip; sourceTree = "<group>"; };
+		3E6AF3021EB21F3000B5DB1F /* TableTestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableTestController.swift; sourceTree = "<group>"; };
+		3E6AF3041EB21F4000B5DB1F /* TableTestViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableTestViewModel.swift; sourceTree = "<group>"; };
 		3E98399A1D21023D00CF3049 /* ScrollImagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollImagesController.swift; sourceTree = "<group>"; };
 		3EA79C4B1DDC0D4900972A8A /* MVVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVVM.swift; sourceTree = "<group>"; };
 		3EB565AE1DD368F400828FF7 /* RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAC.swift; sourceTree = "<group>"; };
@@ -201,6 +205,8 @@
 				3EA79C4B1DDC0D4900972A8A /* MVVM.swift */,
 				3E519A101DDEED7200B60C0E /* MainViewController.swift */,
 				3E519A121DDEEF4900B60C0E /* MainViewModel.swift */,
+				3E6AF3021EB21F3000B5DB1F /* TableTestController.swift */,
+				3E6AF3041EB21F4000B5DB1F /* TableTestViewModel.swift */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -433,9 +439,11 @@
 				3EA79C4C1DDC0D4900972A8A /* MVVM.swift in Sources */,
 				3EB565C01DD435D300828FF7 /* RACVM.swift in Sources */,
 				3E98399B1D21023D00CF3049 /* ScrollImagesController.swift in Sources */,
+				3E6AF3031EB21F3000B5DB1F /* TableTestController.swift in Sources */,
 				3E200EAA1C4D5FB000A00A10 /* ViewController.swift in Sources */,
 				3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */,
 				3E200EA81C4D5FB000A00A10 /* AppDelegate.swift in Sources */,
+				3E6AF3051EB21F4000B5DB1F /* TableTestViewModel.swift in Sources */,
 				3E519A131DDEEF4900B60C0E /* MainViewModel.swift in Sources */,
 				3E519A111DDEED7200B60C0E /* MainViewController.swift in Sources */,
 			);

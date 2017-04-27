@@ -15,17 +15,47 @@ import ReactiveSwift
 import Result
 
 
+private class CocoaActionData<Value>{
+    weak var cocoaAction:CocoaAction<Value>?;
+}
 
+private func alertMessage(_ vc:UIViewController?,message:String?,title:String?,ok:@escaping ()->(),cancel:@escaping ()->()){
+    
+    if message == nil {
+        ok();
+        return;
+    }
+    
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert);
+    
+    let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel){ _ in
+        cancel();
+    }
+    
+    let okAction = UIAlertAction(title: "好的", style: UIAlertActionStyle.default){ _ in
+        ok();
+    }
+    
+    alertController.addAction(cancelAction)
+    alertController.addAction(okAction)
+    
+    UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+}
 
 extension CocoaAction{
     
     public func addOverlay(_ vc:UIViewController!,message:String = "正在加载数据..."){
-        self.setAssociatedValue(value: vc,forKey: "_view_controller");
+        self.setAssociatedValue(value: vc, forKey: "_view_controller", objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         self.setAssociatedValue(value: message,forKey: "_message");
     }
     
     public func show(_ error:Bool){
         self.setAssociatedValue(value: error,forKey: "_show_message_");
+    }
+    
+    public func confirm(_ message:String = "是否确认！",title:String=""){
+        self.setAssociatedValue(value: message,forKey: "_confirm_message_");
+        self.setAssociatedValue(value: title,forKey: "_confirm_message_title_");
     }
     
     fileprivate convenience init<Output, Error>(_ action: Action<(), Output, Error>,observer:Observer<Bool, NoError>) {
@@ -72,17 +102,42 @@ extension CocoaAction{
 
 
 extension CocoaAction{
-    public class func from<Value>(action: @escaping ()->())->CocoaAction<Value> {
+    public class func from<Base>(action: @escaping ()->())->CocoaAction<Base> {
         
-        var cocoaAction:CocoaAction<Value>! = nil;
+        let data = CocoaActionData<Base>();
         
-        let _action = Action<(), (), NSError>.init {[weak cocoaAction] () -> SignalProducer<(), NSError> in
-            action();
-            cocoaAction?.fireComplete(nil);
+        let enabledIf = MutableProperty<Bool>(true);
+        var isEnable = true;
+        let (signal,observer) = Signal<Bool,NoError>.pipe();
+        
+        signal.observe({observer in
+            if let value = observer.value {
+                isEnable = value;
+                enabledIf.value = isEnable && enabledIf.value;
+            }
+        })
+        
+        let _action = Action<(),(),NSError>(enabledIf: enabledIf){[weak data] () -> SignalProducer<(), NSError> in
+            
+            let cocoaAction = data?.cocoaAction;
+            let vc:UIViewController? = cocoaAction?.getAssociatedValue(forKey: "_view_controller");
+            let confirmMessage:String? = cocoaAction?.getAssociatedValue(forKey: "_confirm_message_");
+            let confirmMessageTitle:String? = cocoaAction?.getAssociatedValue(forKey: "_confirm_message_title_");
+            
+            alertMessage(vc,message:confirmMessage,title:confirmMessageTitle,ok:{
+                action();
+                cocoaAction?.fireComplete(nil);
+            },cancel: {
+                cocoaAction?.fireComplete(nil);
+            });
+            
             return SignalProducer.init(value: ());
         }
         
-        cocoaAction = CocoaAction<Value>.init(_action);
+        
+        let cocoaAction = CocoaAction<Base>.init(_action,observer:observer);
+        data.cocoaAction = cocoaAction;
+        cocoaAction.setAssociatedValue(value: data, forKey: "__cocoa_action_from_data__)")
         return cocoaAction;
     }
 }
@@ -90,20 +145,10 @@ prefix operator ~
 prefix public func ~ <Value>(action: @escaping ()->())->CocoaAction<Value> {
     
     return CocoaAction<Value>.from(action: action);
-//    var cocoaAction:CocoaAction<Value>! = nil;
-//    
-//    let _action = Action<(), (), NSError>.init { () -> SignalProducer<(), NSError> in
-//        action();
-//        cocoaAction.fireComplete(nil);
-//        return SignalProducer.init(value: ());
-//    }
-//    
-//    cocoaAction = CocoaAction<Value>.init(_action);
-//    return cocoaAction;
 }
 
-private func showMessage<Value>(cocoaAction:CocoaAction<Value>,obj:Any?,vc:UIViewController?){
-    if cocoaAction.getAssociatedValue(forKey: "_show_message_") != false{
+private func showMessage<Value>(cocoaAction:CocoaAction<Value>?,obj:Any?,vc:UIViewController?){
+    if cocoaAction?.getAssociatedValue(forKey: "_show_message_") != false{
         switch obj {
         case let error as HttpError:
             if let vc = vc {
@@ -126,16 +171,16 @@ private func showMessage<Value>(cocoaAction:CocoaAction<Value>,obj:Any?,vc:UIVie
     }
 }
 
-private func showOverlayView<Value>(cocoaAction:CocoaAction<Value>,vc:UIViewController)->MRProgressOverlayView{
+private func showOverlayView<Value>(cocoaAction:CocoaAction<Value>?,vc:UIViewController)->MRProgressOverlayView{
     let progressView = MRProgressOverlayView();
-    cocoaAction.setAssociatedValue(value:progressView,forKey: "_cocoa_action_progress_view_");
-    let isBar:Bool? = cocoaAction.getAssociatedValue(forKey: "_is_cocoa_action_progress_view_");
+    cocoaAction?.setAssociatedValue(value:progressView,forKey: "_cocoa_action_progress_view_");
+    let isBar:Bool? = cocoaAction?.getAssociatedValue(forKey: "_is_cocoa_action_progress_view_");
     if isBar == true{
         progressView.mode = MRProgressOverlayViewMode.determinateHorizontalBar;
     }else{
         progressView.mode = MRProgressOverlayViewMode.indeterminateSmallDefault;
     }
-    progressView.titleLabelText = cocoaAction.getAssociatedValue(forKey: "_message");
+    progressView.titleLabelText = cocoaAction?.getAssociatedValue(forKey: "_message");
     vc.view.addSubview(progressView);
     vc.view.bringSubview(toFront: progressView);
     progressView.show(true);
@@ -146,8 +191,8 @@ extension CocoaAction{
     
     public class func from<Base,Value>(action: @escaping (Value,@escaping((Any?)->()))->(),inputTransform: @escaping (Base) -> Value)->CocoaAction<Base>{
         
-        var cocoaAction:CocoaAction<Base>! = nil;
         
+        let data = CocoaActionData<Base>();
         
         let enabledIf = MutableProperty<Bool>(true);
         var isEnable = true;
@@ -159,44 +204,54 @@ extension CocoaAction{
                 enabledIf.value = isEnable && enabledIf.value;
             }
         })
-        let _action = Action<Value,(),NSError>(enabledIf: enabledIf) { v -> SignalProducer<(), NSError> in
+        let _action = Action<Value,(),NSError>(enabledIf: enabledIf) {[weak data] v -> SignalProducer<(), NSError> in
             
-            let vc:UIViewController? = cocoaAction.getAssociatedValue(forKey: "_view_controller");
-            var progressView:MRProgressOverlayView? = nil;
+            let cocoaAction = data?.cocoaAction;
+            let vc:UIViewController? = cocoaAction?.getAssociatedValue(forKey: "_view_controller");
+            let confirmMessage:String? = cocoaAction?.getAssociatedValue(forKey: "_confirm_message_");
+            let confirmMessageTitle:String? = cocoaAction?.getAssociatedValue(forKey: "_confirm_message_title_");
             
-            enabledIf.value = false;
-            var complete = false;
-            action(v,{ (obj) in
-                complete = true;
-                Queue.mainQueue {
-                    enabledIf.value = isEnable;
-                    progressView?.dismiss(true);
-                    progressView?.removeFromSuperview();
-                    
-                    showMessage(cocoaAction: cocoaAction, obj: obj, vc:vc);
-                    cocoaAction.fireComplete(obj);
+            alertMessage(vc,message:confirmMessage,title:confirmMessageTitle,ok:{
+            
+                var progressView:MRProgressOverlayView? = nil;
+                
+                enabledIf.value = false;
+                var complete = false;
+                action(v,{ (obj) in
+                    complete = true;
+                    Queue.mainQueue {
+                        enabledIf.value = isEnable;
+                        progressView?.dismiss(true);
+                        progressView?.removeFromSuperview();
+                        
+                        showMessage(cocoaAction: cocoaAction, obj: obj, vc:vc);
+                        cocoaAction?.fireComplete(obj);
+                    }
+                });
+                
+                if !complete, let vc = vc {
+                    progressView = showOverlayView(cocoaAction: cocoaAction, vc: vc);
                 }
+            },cancel: {
+               cocoaAction?.fireComplete(nil);
             });
-            
-            if !complete, let vc = vc {
-                progressView = showOverlayView(cocoaAction: cocoaAction, vc: vc);
-            }
             
             return SignalProducer.init(value: ());
         }
         
-        cocoaAction = CocoaAction<Base>.init(_action,observer:observer,inputTransform: inputTransform);
-        
+        let cocoaAction = CocoaAction<Base>.init(_action,observer:observer,inputTransform: inputTransform);
+        data.cocoaAction = cocoaAction;
+        cocoaAction.setAssociatedValue(value: data, forKey: "__cocoa_action_from2_data__)")
         return cocoaAction;
     }
 }
 
+
 extension CocoaAction{
     
-    public class func from<Value>(action: @escaping (@escaping(Any!)->())->())->CocoaAction<Value> {
+    public class func from<Base>(action: @escaping (@escaping(Any!)->())->())->CocoaAction<Base> {
         
-        //var data = [String:CocoaAction<Value>]();
-        var cocoaAction:CocoaAction<Value>! = nil;
+        let data = CocoaActionData<Base>();
         
         let enabledIf = MutableProperty<Bool>(true);
         var isEnable = true;
@@ -208,35 +263,44 @@ extension CocoaAction{
                 enabledIf.value = isEnable && enabledIf.value;
             }
         })
-        let _action = Action<(),(),NSError>(enabledIf: enabledIf) { () -> SignalProducer<(), NSError> in
+        let _action = Action<(),(),NSError>(enabledIf: enabledIf) {[weak data]() -> SignalProducer<(), NSError> in
             
-            let vc:UIViewController? = cocoaAction.getAssociatedValue(forKey: "_view_controller");
-            var progressView:MRProgressOverlayView? = nil;
+            let cocoaAction:CocoaAction<Base>? = data?.cocoaAction;
+            let vc:UIViewController? = cocoaAction?.getAssociatedValue(forKey: "_view_controller");
+            let confirmMessage:String? = cocoaAction?.getAssociatedValue(forKey: "_confirm_message_");
+            let confirmMessageTitle:String? = cocoaAction?.getAssociatedValue(forKey: "_confirm_message_title_");
             
-            enabledIf.value = false;
-            var complete = false;
-            action({ obj in
-                complete = true;
-                Queue.mainQueue {
-                    enabledIf.value = isEnable;
-                    progressView?.dismiss(true);
-                    progressView?.removeFromSuperview();
-                    
-                    showMessage(cocoaAction: cocoaAction, obj: obj,vc:vc);
-                    
-                    cocoaAction.fireComplete(obj);
+            alertMessage(vc,message:confirmMessage,title:confirmMessageTitle,ok:{
+                var progressView:MRProgressOverlayView? = nil;
+                
+                enabledIf.value = false;
+                var complete = false;
+                action({ obj in
+                    complete = true;
+                    Queue.mainQueue {
+                        enabledIf.value = isEnable;
+                        progressView?.dismiss(true);
+                        progressView?.removeFromSuperview();
+                        
+                        showMessage(cocoaAction: cocoaAction, obj: obj,vc:vc);
+                        
+                        cocoaAction?.fireComplete(obj);
+                    }
+                })
+                
+                if !complete, let vc = vc {
+                    progressView = showOverlayView(cocoaAction: cocoaAction, vc: vc);
                 }
-            })
-            
-            if !complete, let vc = vc {
-                progressView = showOverlayView(cocoaAction: cocoaAction, vc: vc);
-            }
+            },cancel: {
+               cocoaAction?.fireComplete(nil);
+            });
             
             return SignalProducer.init(value: ());
         }
         
-        cocoaAction = CocoaAction<Value>.init(_action,observer:observer);
-        
+        let cocoaAction = CocoaAction<Base>.init(_action,observer:observer);
+        data.cocoaAction = cocoaAction;
+        cocoaAction.setAssociatedValue(value: data, forKey: "__cocoa_action_from_data__)")
         return cocoaAction;
     }
 }
@@ -298,3 +362,4 @@ public func <~ (action: @escaping (()->()),signal: Signal<(), NoError>?) {
 fileprivate class ActionObj{
     fileprivate var action:((Any?)->())?;
 }
+

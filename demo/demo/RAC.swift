@@ -51,7 +51,7 @@ public class RACViewController : UIViewController,BaseView{
     
     private lazy var vm:RACVM = {
         var _vm = RACVM();
-//        _vm.view = self;
+        _vm.view = self;
         return _vm;
     }();
     
@@ -108,11 +108,11 @@ public class RACViewController : UIViewController,BaseView{
 //            return 1;
 //        })
 //        button?.tag = Int(arc4random());
-//        button?.reactive.pressed = CocoaAction<UIButton>.from(action: vm.test){ (button) -> Int in
-//            return Int(arc4random());
-//        }
-//        button <~ vm.test3
-//        button?.reactive.pressed?.addOverlay(self.navigationController);
+        button?.reactive.pressed = CocoaAction<UIButton>.from(action: vm.test){ (button) -> Int in
+            return Int(arc4random());
+        }
+//        button <~ vm.test
+        button?.reactive.pressed?.addOverlay(self);
 //        button?.reactive.pressed?.isEnabled2
         
 //        button?.reactive.trigger(for: UIControlEvents.touchUpOutside).signal.observe({value in
@@ -122,7 +122,7 @@ public class RACViewController : UIViewController,BaseView{
         //        button?.reactive.trigger(for: UIControlEvents.touchUpOutside) <~ vm.test2
         
 //        button!.reactive.touchUpOutside = vm.bind.action(action: vm.test2);
-//        button!.reactive.touchUpOutside = ~vm.test2;
+        button!.reactive.touchUpOutside = ~vm.test2;
         
 //        button!.reactive.touchUpOutside = vm.bind.action(action: vm.test2);
         
@@ -131,11 +131,11 @@ public class RACViewController : UIViewController,BaseView{
 //        self.bind();
         
 //        text!.reactive.text <~ vm.bind.producer(keyPath: "text");
-//        text!.reactive.text <~ vm.bind.property(keyPath: "text");
+        text!.reactive.text <~ vm.bind.property(keyPath: "text");
 //        label!.reactive.text <~ vm.bind.property(keyPath: "text");
         
 //        vm.bind.target(keyPath: "text") <~ text!.reactive.textValues;
-//        vm.bind.target(keyPath: "text") <~ text!.reactive.continuousTextValues;
+        vm.bind.target(keyPath: "text") <~ text!.reactive.continuousTextValues;
 //        vm.bind.bind(signal: text!.reactive.textValues, keyPath: "text");
 //        vm.bind.set(keyPath: "text", ofSignal: text?.reactive.textValues);
     }

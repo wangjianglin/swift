@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(LocalStorage["v"])
         
         LocalStorage["v"] = 5.0;
-        print(LocalStorage["v"])
+        print(LocalStorage["v"] as! Double)
         
         return true
     }

@@ -11,6 +11,7 @@ import UIKit
 import ReactiveCocoa
 import ReactiveSwift
 import LinUtil
+import LinCore
 
 private var refreshKey = 0;
 private var loadmoreKey = 0;
@@ -37,46 +38,48 @@ extension Reactive where Base: UIScrollView{
     }
     
     fileprivate func getActionForKey(key:KeyAddr)->CocoaAction<Base>?{
-        let a:(action:CocoaAction<Base>,scope:ScopedDisposable<CompositeDisposable>)? = base.getAssociatedValue(forAddress: key);
-        return a?.action;
+        let action:CocoaAction<Base>? = base.getAssociatedValue(forAddress: key);
+        return action;
     }
-    
+
+
     fileprivate func setHeaderEvent(_ action:CocoaAction<Base>?){
         if let action = action {
-            base.addHeader(withTarget: action, action: CocoaAction<Base>.selector)
             
-            let disposable = CompositeDisposable()
-            disposable += { [weak base = self.base] in
-                base?.removeHeader();
-            }
+            base.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak base = self.base] in
+                if let base = base {
+                    action.execute(base);
+                }
+            });
             
             action.addComplete({[weak base] (_) in
-                base?.headerEndRefreshing();
+                base?.mj_header?.endRefreshing();
             })
             
-            base.setAssociatedValue(value: (action, ScopedDisposable(disposable)), forAddress: &refreshKey)
         }else{
-            base.setAssociatedValue(value: nil, forAddress: &refreshKey)
+            base.mj_header = nil;
         }
+        
+        base.setAssociatedValue(value: (action), forAddress: &refreshKey)
     }
     
     fileprivate func setFooterEvent(_ action:CocoaAction<Base>?){
         if let action = action {
-            base.addFooter(withTarget: action, action: CocoaAction<Base>.selector)
-            
-            let disposable = CompositeDisposable()
-            disposable += { [weak base = self.base] in
-                base?.removeFooter();
-            }
-            
+            base.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: { [weak base = self.base] in
+                if let base = base {
+                    action.execute(base);
+                }
+            });
             action.addComplete({[weak base] (_) in
-                base?.footerEndRefreshing();
+                base?.mj_footer?.endRefreshing();
             })
             
-            base.setAssociatedValue(value: (action, ScopedDisposable(disposable)), forAddress: &loadmoreKey)
         }else{
-            base.setAssociatedValue(value: nil, forAddress: &loadmoreKey)
+            base.mj_footer = nil;
         }
+
+        base.setAssociatedValue(value: action, forAddress: &loadmoreKey)
+
     }
     
     
