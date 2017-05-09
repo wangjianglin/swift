@@ -33,7 +33,7 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder);
     }
     
     fileprivate var image:UIImage?{
@@ -137,6 +137,14 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
     fileprivate var _positionLabel:UILabel!;
     fileprivate var _playImageView:CacheImageView?;
     
+    public var currentPos:Int{
+        get{
+            return _currentItem;
+        }
+        set{
+            self.setCurrentItem(newValue);
+        }
+    }
     
     public init() {
         super.init(frame:CGRect(x: 0, y: 0, width: 0, height: 0));
@@ -147,7 +155,7 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder);
     }
     
     
