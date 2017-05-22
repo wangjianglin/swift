@@ -14,7 +14,7 @@
                 <navigationController id="6PR-CZ-iih" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="175" height="167"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qvg-Hz-7Dn">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qvg-Hz-7Dn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -41,8 +41,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Main" id="Wq5-q1-qIY"/>
                     <connections>
-                        <segue destination="b4y-UQ-cx5" kind="push" identifier="rac" id="gTX-as-1Be"/>
                         <segue destination="dpo-i5-uBj" kind="push" identifier="table" id="zbf-OP-Wr4"/>
+                        <segue destination="tF1-UX-thH" kind="push" identifier="rac" id="8dh-77-7Km"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vWn-gA-uWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -204,7 +204,7 @@
                         <viewControllerLayoutGuide type="bottom" id="qhf-Zm-Zla"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nVu-VR-dD2">
-                        <rect key="frame" x="0.0" y="0.0" width="175" height="167"/>
+                        <rect key="frame" x="0.0" y="0.0" width="225" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6r-zF-pkK">
@@ -290,8 +290,24 @@
             </objects>
             <point key="canvasLocation" x="100" y="-29"/>
         </scene>
+        <!--View Controller2-->
+        <scene sceneID="l4D-Dl-LNV">
+            <objects>
+                <viewController id="tF1-UX-thH" customClass="RACViewController2" customModule="demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sI7-Nz-RMN"/>
+                        <viewControllerLayoutGuide type="bottom" id="hyl-wX-h04"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eHU-Wu-ae2">
+                        <rect key="frame" x="0.0" y="0.0" width="175" height="167"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="BYX-52-saA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tb7-48-8z0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="746" y="-7"/>
+        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="gTX-as-1Be"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -22,7 +22,7 @@ import LinRac
 
 public class RACVM :NSObject,ViewModel {
     
-    public typealias ViewType = RACViewController;
+    public typealias ViewType = RACViewController2;
     
     public override init() {
         print("vm init..")

@@ -9,14 +9,15 @@
 import UIKit
 import LinUtil
 
-extension UIControl{
+
+extension Ext where Base : UIControl{
     
     public func addActionForEvent(_ event:UIControlEvents,action:@escaping ((AnyObject)->())){
         
         let delegateAction = EventDelegateAction(action:action);
-        delegateAction.ext.withObjectSameLifecycle = self;
+        delegateAction.ext.withObjectSameLifecycle = base;
         
-        self.addTarget(delegateAction,action: #selector(EventDelegateAction.action(_:)), for: event);
+        base.addTarget(delegateAction,action: #selector(EventDelegateAction.action(_:)), for: event);
     }
     
 }

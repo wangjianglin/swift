@@ -10,55 +10,45 @@ import Foundation
 import LinUtil
 
 
-extension UIViewController{
-    
-    //@implementation UIViewController (UIViewControllers)
-    
+extension Ext where Base : UIViewController {
     
     public func performUnwindSegueWithAction(_ action:String, sender:AnyObject!){
-        //    - (UIViewController *)viewControllerForUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender
         
-        
-        //    SEL select = @selector(viewControllerForUnwindAction:fromViewController:withSender:);
-                let selector = NSSelectorFromString(action);
-//        let selector = #selector(self.viewControllerForUnwindSegueAction(_:fromViewController:withSender:));
-        
-        var parent = self.parent;
+        let selector = NSSelectorFromString(action);
+
+        var parent = base.parent;
         while parent != nil {
-//            if parent!.respondsToSelector(selector) {
-            if parent! is UIViewController {
+        
+            let vc = parent! as UIViewController;
+            let obj = vc.forUnwindSegueAction(selector, from: base, withSender: nil);
+            
+            if let obj = obj {
+                base.navigationController?.present(obj, animated:true, completion:nil);
                 
-                let vc = parent! as UIViewController;
-                let obj = vc.forUnwindSegueAction(selector, from: self, withSender: nil);
-                //            NSLog(@"ok.");
-                //            NSMutableArray * objs = @[action,self,sender];
-                //            NSMutableArray * objs = [[NSMutableArray alloc] init];
-//                let objs = [action,self,sender];
-//                //            if action == nil {
-//                //                objs addObject:@""];
-//                //            }else{
-//                //                [objs addObject:action];
-//                //            }
-//                //            [objs addObject:self];
-//                //            if (sender == nil) {
-//                //                [objs addObject:[NSNull null]];
-//                //            }else{
-//                //                [objs addObject:sender];
-//                //            }
-//                
-//                //            id obj = parent performSelector:select withObjects:objs];
-//                
-//                let obj = parent!.performSelector(selector,withObjects:objs);
-                
-                if let obj = obj {
-                    self.navigationController?.present(obj, animated:true, completion:nil);
-                    
-                    break;
-                }
+                break;
             }
+            
             parent = parent!.parent;
         }
-        //    self performSelector:(SEL) withObject:(id) withObject:(id)
-        //    self per
+        
+    }
+    
+    
+    public func initFromXIB(_ nibName:String? = nil) {
+
+        let bundle = Bundle(for: base.classForCoder)
+
+        let nib:UINib!;
+        if let nibName = nibName {
+            nib = UINib(nibName: nibName, bundle: bundle)
+        }else{
+            var nibName = NSStringFromClass(self.base.classForCoder)
+            if let className = nibName.components(separatedBy: ".").last {
+                nibName = className
+            }
+
+            nib = UINib(nibName: nibName, bundle: bundle)
+        }
+        nib.instantiate(withOwner: base, options: nil)
     }
 }

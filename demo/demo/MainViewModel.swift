@@ -33,8 +33,8 @@ public class MainViewModel : NSObject,ViewModel{
     }
     
     private let tables:[Any] = [
-        ["RAC","bind","rac",RACViewController.self],
-        ["RAC","bind","",RACViewController.self],
+        ["RAC","bind","rac",RACViewController2.self],
+        ["RAC","bind","",RACViewController2.self],
         ["RAC","bind","rac",nil],
         ["RAC","bind","table",nil]
     ];

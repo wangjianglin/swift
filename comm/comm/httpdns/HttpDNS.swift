@@ -147,13 +147,14 @@ open class AbstractHttpDNS:HttpDNS{
             return origin;
         }
         let origin = HttpDNSOrigin(host:host);
+        origin.ttl = 1;
         return origin;
     }
     
     fileprivate func setOrigin(host:String,timeout:TimeInterval){
         let origin = self.fetchInternal(host:host,timeout:timeout);
         objc_sync_enter(self)
-        if origin.ttl < 3 {
+        if origin.ttl <= 0 {
             origin.ttl = 120;
         }
         origin.sessionMode = self.sessionMode;
@@ -164,7 +165,7 @@ open class AbstractHttpDNS:HttpDNS{
         
     }
     
-    private func query(_ host:String,timeout:TimeInterval)->HttpDNSOrigin!{
+    private func query(_ host:String)->HttpDNSOrigin!{
         
         var origin:HttpDNSOrigin!;
         objc_sync_exit(self);
@@ -172,7 +173,7 @@ open class AbstractHttpDNS:HttpDNS{
         objc_sync_exit(self);
         
         if origin == nil || (origin.expired && !expiredIpAvailable) {
-            self.setOrigin(host:host,timeout: timeout);
+            self.setOrigin(host:host,timeout: 2.0);
             return hostManager[host];
         }
         
@@ -207,10 +208,10 @@ open class AbstractHttpDNS:HttpDNS{
         return host != nil || port != nil;
     }
     open func getIpByHost(_ host: String) -> String! {
-        return getIpByHost(host, timeout: 3.0);
-    }
-    
-    private func getIpByHost(_ host: String,timeout:TimeInterval) -> String! {
+//        return getIpByHost(host);
+//    }
+//    
+//    private func getIpByHost(_ host: String) -> String! {
         
 //        if host.lengthOfBytes(using: String.Encoding.utf8) <= 0
 //            || configureProxies(host) {
@@ -224,7 +225,7 @@ open class AbstractHttpDNS:HttpDNS{
             return nil;
         }
         
-        let origin = self.query(host,timeout: timeout);
+        let origin = self.query(host);
         let ip = origin?.getIp();
         if ip == "" {
             return nil;
@@ -239,7 +240,7 @@ open class AbstractHttpDNS:HttpDNS{
     open func setPreResolveHosts(_ hosts: String ...) {
         for host in hosts{
             queue.asynQueue {
-                self.getIpByHost(host, timeout: 20.0);
+                self.getIpByHost(host);
             }
         }
     }

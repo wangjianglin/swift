@@ -46,8 +46,12 @@ import LinRac
 ////    }
 //}
 
-
-public class RACViewController : UIViewController,BaseView{
+//extension NSString : Equatable{
+//    public static func ==(lhs: NSString, rhs: NSString) -> Bool{
+//        return lhs.isEqual(to: rhs as String)
+//    }
+//}
+public class RACViewController2 : UIViewController,BaseView{
     
     private lazy var vm:RACVM = {
         var _vm = RACVM();
@@ -59,9 +63,52 @@ public class RACViewController : UIViewController,BaseView{
     @IBOutlet var label:UILabel?;
     @IBOutlet var text:UITextField?;
     
+//    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//    }
+//    public required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        self.initFromXIB();
+//    }
+    
+//    public override func loadView() {
+//        let bundle = Bundle(for: RACViewController2.self)
+//        
+//        let nib = UINib(nibName: "RACViewController2", bundle: bundle)
+//        
+//        let contView = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
+//        
+////        contView.frame = self.view.bounds
+//        
+//        self.view = contView;
+//    }
+//    func initFromXIB() {
+////        
+//        let bundle = Bundle(for: self.classForCoder)
+////
+//        let nib = UINib(nibName: "RACViewController2", bundle: bundle)
+////
+//        let contView = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
+////
+////        contView.frame = self.view.bounds
+//        
+////        self.view.addSubview(contView)
+//        
+//    }
    
     public override func viewDidLoad() {
-
+        
+        var arr:[NSString] = ["a","b","c"]
+        print(arr);
+        
+        var ext = arr.ext.remove("b")
+        print(arr)
+        
+        
+//        let s:NSString
+        //arr.ext.
+//        self.initFromXIB();
+        self.ext.initFromXIB();
         vm.start();
 //        let a = Action.init { (a) -> SignalProducer<_;, _> in
 //            return SignalProducer<(),NSError>.init(value: ());
@@ -122,7 +169,7 @@ public class RACViewController : UIViewController,BaseView{
         //        button?.reactive.trigger(for: UIControlEvents.touchUpOutside) <~ vm.test2
         
 //        button!.reactive.touchUpOutside = vm.bind.action(action: vm.test2);
-        button!.reactive.touchUpOutside = ~vm.test2;
+        //button!.reactive.touchUpOutside = ~vm.test2;
         
 //        button!.reactive.touchUpOutside = vm.bind.action(action: vm.test2);
         
@@ -131,11 +178,11 @@ public class RACViewController : UIViewController,BaseView{
 //        self.bind();
         
 //        text!.reactive.text <~ vm.bind.producer(keyPath: "text");
-        text!.reactive.text <~ vm.bind.property(keyPath: "text");
+        //text!.reactive.text <~ vm.bind.property(keyPath: "text");
 //        label!.reactive.text <~ vm.bind.property(keyPath: "text");
         
 //        vm.bind.target(keyPath: "text") <~ text!.reactive.textValues;
-        vm.bind.target(keyPath: "text") <~ text!.reactive.continuousTextValues;
+        //vm.bind.target(keyPath: "text") <~ text!.reactive.continuousTextValues;
 //        vm.bind.bind(signal: text!.reactive.textValues, keyPath: "text");
 //        vm.bind.set(keyPath: "text", ofSignal: text?.reactive.textValues);
     }

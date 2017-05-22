@@ -109,6 +109,9 @@ public class MainViewController : UIViewController,UITableViewDataSource,UITable
                 self.navigationController?.pushViewController(vc.init(), animated: true);
             }
         }
+//        let vc = RACViewController2();
+//        self.navigationController?.pushViewController(vc, animated: true);
+//        self.present(vc, animated: true, completion: nil)
     }
     
 }
