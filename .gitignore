@@ -2,3 +2,11 @@
 /Carthage
 /demo/demo/data1.zip
 /demo/demo/data2.zip
+/swift.xcworkspace/xcuserdata
+/comm/LinComm.xcodeproj/xcuserdata
+/core/LinCore.xcodeproj/xcuserdata
+/demo/demo.xcodeproj/xcuserdata
+/rac/LinRac.xcodeproj/xcuserdata
+/server/LinServer.xcodeproj/xcuserdata
+/util/LinUtil.xcodeproj/xcuserdata
+/web/LinWeb.xcodeproj/xcuserdata
