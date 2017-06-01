@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		189B79451EDFEF62004D1AA3 /* CommodityDetialEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B79441EDFEF62004D1AA3 /* CommodityDetialEditController.swift */; };
 		3C6E4C9CA47250D281F85C0D /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */; };
 		3E1DF47C1D903B250041D2AA /* buyers in Resources */ = {isa = PBXBuildFile; fileRef = 3E1DF47B1D903B250041D2AA /* buyers */; };
 		3E200EA81C4D5FB000A00A10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */; };
@@ -79,6 +80,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		189B79441EDFEF62004D1AA3 /* CommodityDetialEditController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommodityDetialEditController.swift; sourceTree = "<group>"; };
 		3E1DF47B1D903B250041D2AA /* buyers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = buyers; path = ../../../../../work/code/buyers; sourceTree = "<group>"; };
 		3E200EA41C4D5FB000A00A10 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				3EA79C4B1DDC0D4900972A8A /* MVVM.swift */,
 				3E519A101DDEED7200B60C0E /* MainViewController.swift */,
 				3E519A121DDEEF4900B60C0E /* MainViewModel.swift */,
+				189B79441EDFEF62004D1AA3 /* CommodityDetialEditController.swift */,
 				3E6AF3021EB21F3000B5DB1F /* TableTestController.swift */,
 				3E6AF3041EB21F4000B5DB1F /* TableTestViewModel.swift */,
 				3E2EC8A91ECDEF4500239032 /* RACViewController2.xib */,
@@ -432,7 +435,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -454,6 +457,7 @@
 				3E6AF3051EB21F4000B5DB1F /* TableTestViewModel.swift in Sources */,
 				3E519A131DDEEF4900B60C0E /* MainViewModel.swift in Sources */,
 				3E519A111DDEED7200B60C0E /* MainViewController.swift in Sources */,
+				189B79451EDFEF62004D1AA3 /* CommodityDetialEditController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
