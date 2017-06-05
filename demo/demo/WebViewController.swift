@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LinWeb
+//import LinWeb
 import LinCore
 import LinUtil
 
@@ -41,47 +41,47 @@ open class WebViewController : UIViewController{
 //        return (dstURL as NSURL) as URL
 //    }
     
-    private var _webView:LinWebView?;
-    
-    open override func loadView() {
-        _webView = LinWebView();
-        self.view = _webView!;
-        
-        self.view.backgroundColor = UIColor.init(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.6);
-        
-        let label = UILabel();
-        label.frame = CGRect.init(x: 0, y: 18, width: self.view.frame.size.width, height: 40.0);
-        label.textColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8);
-        label.textAlignment = NSTextAlignment.center;
-        label.autoresizingMask = UIViewAutoresizing.flexibleWidth;
-        label.text = "翡翠吧吧";
-        label.backgroundColor = UIColor.clear;
-        self.view.addSubview(label);
-        
-        let copyInfo = UILabel();
-        copyInfo.frame = CGRect.init(x: 0, y: self.view.bounds.size.height + self.view.bounds.origin.y - 45, width: self.view.bounds.size.width, height: 40);
-        copyInfo.textColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8);
-        copyInfo.textAlignment = NSTextAlignment.center;
-        copyInfo.autoresizingMask = UIViewAutoresizing.init(rawValue: UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleTopMargin.rawValue);
-        copyInfo.text = "Copyright 2014-2015 翡翠吧吧 All rights reserved";
-        copyInfo.font = UIFont.init(name: "STHeitiSC-Light", size: 12.0);
-        copyInfo.backgroundColor = UIColor.clear;
-        
-        self.view.addSubview(copyInfo);
-        
-        //        _webView.backgroundColor = UIColor.blue;
-    }
-    
-    open override func viewDidLoad() {
-        
-//        fileURLForBuggyWKWebView8();
-        UncaughtExceptionHandler.setExceptionHandler { (e:NSException?) in
-            print(e);
-        }
-//        self.loadUrl("/temp/www/index.html)
-//            self.loadUrl("web://buyers/index.html?debug=false&debugJs=true&url=http://s.feicuibaba.com&isUpdate=false&channel=own#/login")
-        //        self.loadUrl("web/test.html")
-        _webView?.load("buyers/index.html?debug=false&debugJs=true&url=http://s.feicuibaba.com&isUpdate=false&channel=own#/login")
-//        self.loadUrl("http://wx.feicuibaba.com/index.html?debug=false&debugJs=true&isUpdate=false&channel=own#/login")
-    }
+//    private var _webView:LinWebView?;
+//    
+//    open override func loadView() {
+//        _webView = LinWebView();
+//        self.view = _webView!;
+//        
+//        self.view.backgroundColor = UIColor.init(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.6);
+//        
+//        let label = UILabel();
+//        label.frame = CGRect.init(x: 0, y: 18, width: self.view.frame.size.width, height: 40.0);
+//        label.textColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8);
+//        label.textAlignment = NSTextAlignment.center;
+//        label.autoresizingMask = UIViewAutoresizing.flexibleWidth;
+//        label.text = "翡翠吧吧";
+//        label.backgroundColor = UIColor.clear;
+//        self.view.addSubview(label);
+//        
+//        let copyInfo = UILabel();
+//        copyInfo.frame = CGRect.init(x: 0, y: self.view.bounds.size.height + self.view.bounds.origin.y - 45, width: self.view.bounds.size.width, height: 40);
+//        copyInfo.textColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8);
+//        copyInfo.textAlignment = NSTextAlignment.center;
+//        copyInfo.autoresizingMask = UIViewAutoresizing.init(rawValue: UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleTopMargin.rawValue);
+//        copyInfo.text = "Copyright 2014-2015 翡翠吧吧 All rights reserved";
+//        copyInfo.font = UIFont.init(name: "STHeitiSC-Light", size: 12.0);
+//        copyInfo.backgroundColor = UIColor.clear;
+//        
+//        self.view.addSubview(copyInfo);
+//        
+//        //        _webView.backgroundColor = UIColor.blue;
+//    }
+//    
+//    open override func viewDidLoad() {
+//        
+////        fileURLForBuggyWKWebView8();
+//        UncaughtExceptionHandler.setExceptionHandler { (e:NSException?) in
+//            print(e);
+//        }
+////        self.loadUrl("/temp/www/index.html)
+////            self.loadUrl("web://buyers/index.html?debug=false&debugJs=true&url=http://s.feicuibaba.com&isUpdate=false&channel=own#/login")
+//        //        self.loadUrl("web/test.html")
+//        _webView?.load("buyers/index.html?debug=false&debugJs=true&url=http://s.feicuibaba.com&isUpdate=false&channel=own#/login")
+////        self.loadUrl("http://wx.feicuibaba.com/index.html?debug=false&debugJs=true&isUpdate=false&channel=own#/login")
+//    }
 }

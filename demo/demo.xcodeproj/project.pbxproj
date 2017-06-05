@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		189B79451EDFEF62004D1AA3 /* CommodityDetialEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B79441EDFEF62004D1AA3 /* CommodityDetialEditController.swift */; };
 		3C6E4C9CA47250D281F85C0D /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */; };
-		3E1DF47C1D903B250041D2AA /* buyers in Resources */ = {isa = PBXBuildFile; fileRef = 3E1DF47B1D903B250041D2AA /* buyers */; };
 		3E200EA81C4D5FB000A00A10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */; };
 		3E200EAA1C4D5FB000A00A10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EA91C4D5FB000A00A10 /* ViewController.swift */; };
 		3E200EAD1C4D5FB000A00A10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E200EAB1C4D5FB000A00A10 /* Main.storyboard */; };
@@ -19,29 +18,26 @@
 		3E200EC81C4D5FB000A00A10 /* demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EC71C4D5FB000A00A10 /* demoUITests.swift */; };
 		3E2EC8AA1ECDEF4500239032 /* RACViewController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EC8A91ECDEF4500239032 /* RACViewController2.xib */; };
 		3E2EC8AC1ECE82C100239032 /* Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EC8AB1ECE82C100239032 /* Exts.swift */; };
-		3E34A7141E88AAA1001E0E4E /* LinRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E34A7131E88AAA1001E0E4E /* LinRac.framework */; };
-		3E34A7151E88AAA1001E0E4E /* LinRac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E34A7131E88AAA1001E0E4E /* LinRac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E519A111DDEED7200B60C0E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A101DDEED7200B60C0E /* MainViewController.swift */; };
 		3E519A131DDEEF4900B60C0E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E519A121DDEEF4900B60C0E /* MainViewModel.swift */; };
-		3E53F8851DC6405F00E79390 /* data2.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E53F8841DC6405F00E79390 /* data2.zip */; };
-		3E66A7201DC79177005628AC /* LinWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A71F1DC79177005628AC /* LinWeb.framework */; };
-		3E66A7211DC79177005628AC /* LinWeb.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A71F1DC79177005628AC /* LinWeb.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3E66A7231DC79177005628AC /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7221DC79177005628AC /* LinCore.framework */; };
-		3E66A7241DC79177005628AC /* LinCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7221DC79177005628AC /* LinCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3E66A7261DC79177005628AC /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7251DC79177005628AC /* LinUtil.framework */; };
-		3E66A7271DC79177005628AC /* LinUtil.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7251DC79177005628AC /* LinUtil.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3E66A7291DC79177005628AC /* LinComm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7281DC79177005628AC /* LinComm.framework */; };
-		3E66A72A1DC79177005628AC /* LinComm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E66A7281DC79177005628AC /* LinComm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3E66A72D1DC9CE95005628AC /* data1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E66A72C1DC9CE95005628AC /* data1.zip */; };
 		3E6AF3031EB21F3000B5DB1F /* TableTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6AF3021EB21F3000B5DB1F /* TableTestController.swift */; };
 		3E6AF3051EB21F4000B5DB1F /* TableTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6AF3041EB21F4000B5DB1F /* TableTestViewModel.swift */; };
 		3E98399B1D21023D00CF3049 /* ScrollImagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E98399A1D21023D00CF3049 /* ScrollImagesController.swift */; };
 		3EA79C4C1DDC0D4900972A8A /* MVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA79C4B1DDC0D4900972A8A /* MVVM.swift */; };
 		3EB565AF1DD368F400828FF7 /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565AE1DD368F400828FF7 /* RAC.swift */; };
 		3EB565C01DD435D300828FF7 /* RACVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565BF1DD435D300828FF7 /* RACVM.swift */; };
-		3EC3B9501E549E1600EED4B5 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC3B94F1E549E1600EED4B5 /* add.png */; };
 		3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EAE1D0AEF2500717357 /* WebViewController.swift */; };
 		3EE51EE31CE8C9B90032729F /* web in Resources */ = {isa = PBXBuildFile; fileRef = 3EE51EE21CE8C9B90032729F /* web */; };
+		FE7DDA5A1EE1162B00D86B35 /* LinComm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA591EE1162B00D86B35 /* LinComm.framework */; };
+		FE7DDA5B1EE1162B00D86B35 /* LinComm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA591EE1162B00D86B35 /* LinComm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE7DDA5D1EE1163200D86B35 /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA5C1EE1163200D86B35 /* LinCore.framework */; };
+		FE7DDA5E1EE1163200D86B35 /* LinCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA5C1EE1163200D86B35 /* LinCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE7DDA601EE1163900D86B35 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA5F1EE1163900D86B35 /* LinUtil.framework */; };
+		FE7DDA611EE1163900D86B35 /* LinUtil.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA5F1EE1163900D86B35 /* LinUtil.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE7DDA631EE1164500D86B35 /* LinRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA621EE1164500D86B35 /* LinRac.framework */; };
+		FE7DDA641EE1164500D86B35 /* LinRac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA621EE1164500D86B35 /* LinRac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FECE839F1EE4F91C0072BC55 /* FromController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECE839E1EE4F91C0072BC55 /* FromController.swift */; };
+		FECE83A11EE4FCAA0072BC55 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECE83A01EE4FCAA0072BC55 /* TestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,11 +64,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3E34A7151E88AAA1001E0E4E /* LinRac.framework in Embed Frameworks */,
-				3E66A72A1DC79177005628AC /* LinComm.framework in Embed Frameworks */,
-				3E66A7271DC79177005628AC /* LinUtil.framework in Embed Frameworks */,
-				3E66A7211DC79177005628AC /* LinWeb.framework in Embed Frameworks */,
-				3E66A7241DC79177005628AC /* LinCore.framework in Embed Frameworks */,
+				FE7DDA611EE1163900D86B35 /* LinUtil.framework in Embed Frameworks */,
+				FE7DDA641EE1164500D86B35 /* LinRac.framework in Embed Frameworks */,
+				FE7DDA5B1EE1162B00D86B35 /* LinComm.framework in Embed Frameworks */,
+				FE7DDA5E1EE1163200D86B35 /* LinCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,7 +76,6 @@
 
 /* Begin PBXFileReference section */
 		189B79441EDFEF62004D1AA3 /* CommodityDetialEditController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommodityDetialEditController.swift; sourceTree = "<group>"; };
-		3E1DF47B1D903B250041D2AA /* buyers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = buyers; path = ../../../../../work/code/buyers; sourceTree = "<group>"; };
 		3E200EA41C4D5FB000A00A10 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E200EA91C4D5FB000A00A10 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,29 +91,27 @@
 		3E200EC91C4D5FB000A00A10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E2EC8A91ECDEF4500239032 /* RACViewController2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACViewController2.xib; sourceTree = "<group>"; };
 		3E2EC8AB1ECE82C100239032 /* Exts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exts.swift; sourceTree = "<group>"; };
-		3E34A7131E88AAA1001E0E4E /* LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E519A101DDEED7200B60C0E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3E519A121DDEEF4900B60C0E /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		3E519A1A1DE1FA2F00B60C0E /* LinRac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinRac.framework; path = "../rac/build/Debug-iphoneos/LinRac.framework"; sourceTree = "<group>"; };
-		3E53F8841DC6405F00E79390 /* data2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = data2.zip; sourceTree = "<group>"; };
-		3E66A71F1DC79177005628AC /* LinWeb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinWeb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E66A7221DC79177005628AC /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E66A7251DC79177005628AC /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E66A7281DC79177005628AC /* LinComm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinComm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E66A72C1DC9CE95005628AC /* data1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = data1.zip; sourceTree = "<group>"; };
 		3E6AF3021EB21F3000B5DB1F /* TableTestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableTestController.swift; sourceTree = "<group>"; };
 		3E6AF3041EB21F4000B5DB1F /* TableTestViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableTestViewModel.swift; sourceTree = "<group>"; };
 		3E98399A1D21023D00CF3049 /* ScrollImagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollImagesController.swift; sourceTree = "<group>"; };
 		3EA79C4B1DDC0D4900972A8A /* MVVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVVM.swift; sourceTree = "<group>"; };
 		3EB565AE1DD368F400828FF7 /* RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAC.swift; sourceTree = "<group>"; };
 		3EB565BF1DD435D300828FF7 /* RACVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACVM.swift; sourceTree = "<group>"; };
-		3EC3B94F1E549E1600EED4B5 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		3EC64EAE1D0AEF2500717357 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3EC64EB01D0AF00100717357 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3EE51EE21CE8C9B90032729F /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
 		6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0BAD3412467BC34B233B21 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		DDBED86DD6B8B51E312AE66A /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
+		FE7DDA591EE1162B00D86B35 /* LinComm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinComm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE7DDA5C1EE1163200D86B35 /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE7DDA5F1EE1163900D86B35 /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE7DDA621EE1164500D86B35 /* LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FECE839E1EE4F91C0072BC55 /* FromController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromController.swift; sourceTree = "<group>"; };
+		FECE83A01EE4FCAA0072BC55 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,11 +119,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E66A7291DC79177005628AC /* LinComm.framework in Frameworks */,
-				3E34A7141E88AAA1001E0E4E /* LinRac.framework in Frameworks */,
-				3E66A7261DC79177005628AC /* LinUtil.framework in Frameworks */,
-				3E66A7201DC79177005628AC /* LinWeb.framework in Frameworks */,
-				3E66A7231DC79177005628AC /* LinCore.framework in Frameworks */,
+				FE7DDA631EE1164500D86B35 /* LinRac.framework in Frameworks */,
+				FE7DDA5A1EE1162B00D86B35 /* LinComm.framework in Frameworks */,
+				FE7DDA5D1EE1163200D86B35 /* LinCore.framework in Frameworks */,
+				FE7DDA601EE1163900D86B35 /* LinUtil.framework in Frameworks */,
 				3C6E4C9CA47250D281F85C0D /* Pods_demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,12 +156,10 @@
 		3E200E9B1C4D5FB000A00A10 = {
 			isa = PBXGroup;
 			children = (
-				3E34A7131E88AAA1001E0E4E /* LinRac.framework */,
-				3E66A7281DC79177005628AC /* LinComm.framework */,
-				3E66A7251DC79177005628AC /* LinUtil.framework */,
-				3E66A7221DC79177005628AC /* LinCore.framework */,
-				3E66A71F1DC79177005628AC /* LinWeb.framework */,
-				3E1DF47B1D903B250041D2AA /* buyers */,
+				FE7DDA621EE1164500D86B35 /* LinRac.framework */,
+				FE7DDA5F1EE1163900D86B35 /* LinUtil.framework */,
+				FE7DDA5C1EE1163200D86B35 /* LinCore.framework */,
+				FE7DDA591EE1162B00D86B35 /* LinComm.framework */,
 				3EC64EB01D0AF00100717357 /* WebKit.framework */,
 				3EE51EE21CE8C9B90032729F /* web */,
 				3E200EA61C4D5FB000A00A10 /* demo */,
@@ -195,9 +184,6 @@
 		3E200EA61C4D5FB000A00A10 /* demo */ = {
 			isa = PBXGroup;
 			children = (
-				3EC3B94F1E549E1600EED4B5 /* add.png */,
-				3E66A72C1DC9CE95005628AC /* data1.zip */,
-				3E53F8841DC6405F00E79390 /* data2.zip */,
 				3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */,
 				3E200EA91C4D5FB000A00A10 /* ViewController.swift */,
 				3E200EAB1C4D5FB000A00A10 /* Main.storyboard */,
@@ -216,6 +202,8 @@
 				3E6AF3041EB21F4000B5DB1F /* TableTestViewModel.swift */,
 				3E2EC8A91ECDEF4500239032 /* RACViewController2.xib */,
 				3E2EC8AB1ECE82C100239032 /* Exts.swift */,
+				FECE839E1EE4F91C0072BC55 /* FromController.swift */,
+				FECE83A01EE4FCAA0072BC55 /* TestViewController.swift */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -364,14 +352,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E66A72D1DC9CE95005628AC /* data1.zip in Resources */,
-				3E1DF47C1D903B250041D2AA /* buyers in Resources */,
 				3E200EB21C4D5FB000A00A10 /* LaunchScreen.storyboard in Resources */,
 				3E2EC8AA1ECDEF4500239032 /* RACViewController2.xib in Resources */,
-				3EC3B9501E549E1600EED4B5 /* add.png in Resources */,
 				3EE51EE31CE8C9B90032729F /* web in Resources */,
 				3E200EAF1C4D5FB000A00A10 /* Assets.xcassets in Resources */,
-				3E53F8851DC6405F00E79390 /* data2.zip in Resources */,
 				3E200EAD1C4D5FB000A00A10 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,7 +419,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -450,10 +434,12 @@
 				3EA79C4C1DDC0D4900972A8A /* MVVM.swift in Sources */,
 				3EB565C01DD435D300828FF7 /* RACVM.swift in Sources */,
 				3E98399B1D21023D00CF3049 /* ScrollImagesController.swift in Sources */,
+				FECE839F1EE4F91C0072BC55 /* FromController.swift in Sources */,
 				3E6AF3031EB21F3000B5DB1F /* TableTestController.swift in Sources */,
 				3E200EAA1C4D5FB000A00A10 /* ViewController.swift in Sources */,
 				3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */,
 				3E200EA81C4D5FB000A00A10 /* AppDelegate.swift in Sources */,
+				FECE83A11EE4FCAA0072BC55 /* TestViewController.swift in Sources */,
 				3E6AF3051EB21F4000B5DB1F /* TableTestViewModel.swift in Sources */,
 				3E519A131DDEEF4900B60C0E /* MainViewModel.swift in Sources */,
 				3E519A111DDEED7200B60C0E /* MainViewController.swift in Sources */,

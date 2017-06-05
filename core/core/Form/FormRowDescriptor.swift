@@ -18,6 +18,7 @@ open class FormRowDescriptor: NSObject {
     
     open var title: String!
     open var name: String!
+    open var imageName: String!
     
     fileprivate var _value:Any?;
     open var value: Any? {
@@ -56,9 +57,16 @@ open class FormRowDescriptor: NSObject {
     public init(title: String,name: String,value:NSObject! = nil) {
         self.name = name
         self.title = title
-        self._value = value;
+//        self.imageName = ""
+        self._value = value
     }
     
+    public init(title: String,imageName: String,name: String,value:NSObject! = nil) {
+        self.name = name
+        self.title = title
+        self.imageName = imageName
+        self._value = value
+    }
     
     
     /// MARK: Public interface

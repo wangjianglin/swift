@@ -28,7 +28,7 @@ open class FormSegueCell:FormBaseCell{
         super.update()
         
         titleLabel.text = rowDescriptor.title
-        //self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0);
+//        imgView.image = UIImage(named:rowDescriptor.imageName)
     }
 
     open override class func formViewController(_ formViewController: FormViewController, didSelectRow: FormBaseCell) {

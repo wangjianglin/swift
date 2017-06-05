@@ -37,7 +37,9 @@ public class MainViewModel : NSObject,ViewModel{
         ["RAC","bind","",RACViewController2.self],
         ["RAC","carmer","",CommodityDetialEditController.self],
         ["RAC","bind","rac",nil],
-        ["RAC","bind","table",nil]
+        ["RAC","bind","table",nil],
+        ["Form","个人中心表格设置","tableVC",nil]
+        
         
     ];
     

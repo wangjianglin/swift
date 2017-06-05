@@ -64,16 +64,24 @@ open class FormGeneralRowDescriptor:FormRowDescriptor{
     }
 
     
-
+    //初始化 没有图标样式
     public init(title: String,name: String,rowType:FormRowType,value:NSObject? = nil) {
 
-        self._rowType = rowType;
+        self._rowType = rowType
 
         super.init(title: title, name: name,value:value);
 
     }
-
     
+    //初始化带图标名字
+    public init(title: String, imageName:String,name: String,rowType:FormRowType,value:NSObject? = nil) {
+        
+        self._rowType = rowType
+        
+        super.init(title: title, imageName: imageName, name: name, value: value)
+        
+    }
+
 
     fileprivate class func defaultCellClassForRowType(_ rowType: FormRowType) -> FormBaseCell.Type {
 
@@ -94,6 +102,7 @@ open class FormGeneralRowDescriptor:FormRowDescriptor{
         }
         
         assert(formBaseCellClass != nil, "cellClass must be a FormBaseCell derived class value.")
+        
         
         return formBaseCellClass
     }

@@ -2,15 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/lin/code/lib/swift/rac/LinRac.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:task.txt">
-   </FileRef>
-   <FileRef
-      location = "group:/lin/code/lib/swift/web/LinWeb.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:demo/demo.xcodeproj">
    </FileRef>
    <FileRef
