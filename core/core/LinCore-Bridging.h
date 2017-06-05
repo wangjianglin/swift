@@ -46,8 +46,9 @@
 #import "Tables.h"
 
 #import "UILabels.h"
+//#import "ZLCameraViewController.h"
 
-#import "ImagesView.h"
+
 #import "Vedios.h"
 
 #import "QBImagePickerController.h"

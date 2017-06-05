@@ -10,6 +10,7 @@ import MediaPlayer
 import UIKit
 
 
+
 open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSource,QBImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate{
     fileprivate var _collectionView:UICollectionView!
     fileprivate var _cellImage:UICollectionViewCell!;
@@ -169,9 +170,9 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     
     
     func funcChooseFromCamera(_ avc:UIAlertAction) -> Void {
-        let v = CarmerViewController()
-        let navigationController = UINavigationController(rootViewController:v);
-        self.viewController?.present(navigationController, animated:true, completion:nil);
+       // let v = CarmerViewController()
+       // let navigationController = UINavigationController(rootViewController:v);
+       // self.viewController?.present(navigationController, animated:true, completion:nil);
         
     }
     
