@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		189B796E1EE52546004D1AA3 /* CarmerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B796C1EE52546004D1AA3 /* CarmerViewController.swift */; };
 		3E03B7E21A6D805E00882F6B /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E03B7E11A6D805E00882F6B /* Controls.swift */; };
 		3E0789561A7943650087A3CC /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0789551A7943650087A3CC /* Log.swift */; };
 		3E078A421A7A22B90087A3CC /* ALAssetsLibrarys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E078A411A7A22B90087A3CC /* ALAssetsLibrarys.swift */; };
@@ -404,6 +405,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		189B796C1EE52546004D1AA3 /* CarmerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarmerViewController.swift; sourceTree = "<group>"; };
 		3E03B7E11A6D805E00882F6B /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		3E0789551A7943650087A3CC /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		3E078A411A7A22B90087A3CC /* ALAssetsLibrarys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALAssetsLibrarys.swift; sourceTree = "<group>"; };
@@ -951,6 +953,7 @@
 				3E5917C91CF8C62300CCFBC2 /* IOS7ScrollView.h */,
 				3E121A281CF8942600D43267 /* ScrollImagesView.swift */,
 				3E121A1E1CF845E700D43267 /* ImagesView.swift */,
+				189B796C1EE52546004D1AA3 /* CarmerViewController.swift */,
 				3E12199E1CF845A400D43267 /* camera */,
 				3E12199C1CF8360400D43267 /* ImageViews.swift */,
 				3E1219981CF8358D00D43267 /* ImageViews.m */,
@@ -1620,6 +1623,7 @@
 				3E08547B1A8A6DE30052DCEE /* JATableViewController.m in Sources */,
 				3ECD40951CEDC1E300D57372 /* MRWeakProxy.m in Sources */,
 				3E1219961CF8353200D43267 /* ImagesView.m in Sources */,
+				189B796E1EE52546004D1AA3 /* CarmerViewController.swift in Sources */,
 				3E6AF2E71EB188E800B5DB1F /* MJRefreshComponent.m in Sources */,
 				3E426D221A4A988E00A1C815 /* RBStoryboardModalSegue.m in Sources */,
 				3E73DAA21A8795A30052C16A /* FormGeneralRowDescriptor.swift in Sources */,

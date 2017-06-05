@@ -10,7 +10,7 @@ import MediaPlayer
 import UIKit
 
 
-open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSource,QBImagePickerControllerDelegate,UIActionSheetDelegate{
+open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSource,QBImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate{
     fileprivate var _collectionView:UICollectionView!
     fileprivate var _cellImage:UICollectionViewCell!;
     fileprivate var _cellVideo:ImagesViewAddVedioCollectionViewCell!;
@@ -140,6 +140,20 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     
     @objc fileprivate func imagePacker(_:NSObject){
         
+        let userIconAlert = UIAlertController(title: "请选择操作", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let chooseFromPhotoAlbum = UIAlertAction(title: "相册选取", style: UIAlertActionStyle.default, handler: funcChooseFromPhotoAlbum)
+        userIconAlert.addAction(chooseFromPhotoAlbum)
+        let chooseFromCamera = UIAlertAction(title: "拍照", style: UIAlertActionStyle.default,handler:funcChooseFromCamera)
+        userIconAlert.addAction(chooseFromCamera)
+        let canelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel,handler: nil)
+        userIconAlert.addAction(canelAction)
+        self.viewController?.present(userIconAlert, animated: true, completion: nil)
+
+    }
+    
+    
+    func funcChooseFromPhotoAlbum(_ avc:UIAlertAction) -> Void {
+        
         let imagePickerController = QBImagePickerController();
         imagePickerController.delegate = self;
         imagePickerController.filterType = QBImagePickerFilterTypeAllPhotos;
@@ -150,10 +164,20 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         imagePickerController.limitsMaximumNumberOfSelection = true;
         let navigationController = UINavigationController(rootViewController:imagePickerController);
         self.viewController?.present(navigationController, animated:true, completion:nil);
+        
     }
     
     
-    @objc open func imagePickerController(_ imagePickerController:QBImagePickerController, didFinishPickingMediaWithInfo info:AnyObject){
+    func funcChooseFromCamera(_ avc:UIAlertAction) -> Void {
+        let v = CarmerViewController()
+        let navigationController = UINavigationController(rootViewController:v);
+        self.viewController?.present(navigationController, animated:true, completion:nil);
+        
+    }
+    
+
+    
+    @objc open func imagePickerController(_ imagePickerController:QBImagePickerController, didFinishPickingMediaWithInfo info:Any){
         
         if (imagePickerController.filterType == QBImagePickerFilterTypeAllVideos) {
             
