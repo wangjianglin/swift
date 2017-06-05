@@ -15,7 +15,6 @@
 #import "SCEmptyOverlayView.h"
 #import "SCRecordSessionManager.h"
 #import "LeafButton.h"
-//#import "LinUtil/util.h"
 #import "MRProgressOverlayView.h"
 
 #define kVideoPreset AVCaptureSessionPresetHigh
@@ -24,9 +23,10 @@
     SCRecorder *_recorder;
     SCRecordSession *_recordSession;
     UIButton * cancelButton;
+    UIButton * setButton;
     UIButton * flashButton;
     volatile BOOL isRecording;
-//    NSDate * startTime;
+    //    NSDate * startTime;
     volatile NSTimeInterval minInterval;//单位为 秒
     volatile NSTimeInterval maxInterval;//单位为 秒
     UILabel * timeLabel;
@@ -35,6 +35,10 @@
     NSURL * outputFile;
 }
 @property (strong, nonatomic) SCRecorderToolsView *focusView;
+@property (nonatomic)UIView *focusViews;
+@property (nonatomic)BOOL canCa;
+@property(nonatomic)AVCaptureDevice *device;
+
 
 @end
 
@@ -42,7 +46,95 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _canCa = [self canUserCamear];
+    if (_canCa) {
+        
+        [self customUI];
+        
+    }else{
+        [self setUI];
+    }
+}
 
+
+- (void)setUI {
+    
+    
+    self.view.backgroundColor = [[UIColor alloc] initWithRed:0.02 green:0.02 blue:0.02 alpha:1.0];
+    
+    UIView * previewView = [[UIView alloc] init];
+    CGRect rect = CGRectMake(0, (self.view.bounds.size.height - self.view.bounds.size.width - 40)/2.0, self.view.bounds.size.width, self.view.bounds.size.width);
+    previewView.frame = rect;
+    previewView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:previewView];
+    
+    
+    setButton = [[UIButton alloc]init];
+    [setButton setTitle:@"开打相机" forState:UIControlStateNormal];
+    setButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    setButton.frame = CGRectMake(previewView.frame.size.width / 2  , (previewView.frame.size.height - 40 )/ 2, 90, 45);
+    setButton.titleLabel.font = [UIFont fontWithName:@"STHeitiSC-Light" size:17.0];
+    [setButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [setButton addTarget:self action:@selector(setCarmer:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:setButton];
+    
+    cancelButton = [[UIButton alloc] init];
+    [cancelButton setTitle:@"取 消" forState:UIControlStateNormal];
+    cancelButton.frame = CGRectMake(0, self.view.bounds.size.height - 70, 90, 45);
+    cancelButton.titleLabel.font = [UIFont fontWithName:@"STHeitiSC-Light" size:16.0];
+    cancelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [cancelButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:cancelButton];
+    
+    
+    
+}
+
+
+- (void)focusGesture:(UITapGestureRecognizer*)gesture{
+    CGPoint point = [gesture locationInView:gesture.view];
+    [self focusAtPoint:point];
+}
+
+- (void)focusAtPoint:(CGPoint)point{
+    CGSize size = self.view.bounds.size;
+    CGPoint focusPoint = CGPointMake( point.y /size.height ,1-point.x/size.width );
+    
+    if ( [_device lockForConfiguration:nil]) {
+        
+        if ([self.device isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
+            [self.device setFocusPointOfInterest:focusPoint];
+            [self.device setFocusMode:AVCaptureFocusModeAutoFocus];
+        }
+        
+        if ([self.device isExposureModeSupported:AVCaptureExposureModeAutoExpose ]) {
+            [self.device setExposurePointOfInterest:focusPoint];
+            [self.device setExposureMode:AVCaptureExposureModeAutoExpose];
+        }
+        
+        [self.device unlockForConfiguration];
+        _focusViews.center = point;
+        _focusViews.hidden = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            _focusViews.transform = CGAffineTransformMakeScale(1.25, 1.25);
+        }completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.5 animations:^{
+                _focusViews.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL finished) {
+                _focusViews.hidden = YES;
+            }];
+        }];
+    }
+    
+}
+
+- (void)customUI{
+    
     isRecording = false;
     
     minInterval = 10.0;
@@ -52,10 +144,8 @@
     //设定时间格式,这里可以设置成自己需要的格式
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
-    // Do any additional setup after loading the view.
-    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-
+    
     self.view.backgroundColor = [[UIColor alloc] initWithRed:0.02 green:0.02 blue:0.02 alpha:1.0];
     
     UIView * previewView = [[UIView alloc] init];
@@ -64,14 +154,20 @@
     previewView.backgroundColor = [[UIColor alloc] initWithRed:0.1 green:0.1 blue:0.1 alpha:1.0];;
     [self.view addSubview:previewView];
     
+    _focusViews = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];
+    _focusViews.layer.borderWidth = 1.0;
+    _focusViews.layer.borderColor =[UIColor greenColor].CGColor;
+    _focusViews.backgroundColor = [UIColor clearColor];
+    [previewView addSubview:_focusViews];
+    _focusViews.hidden = YES;
+    
+    
     _recorder = [SCRecorder recorder];
     
     _recorder.audioConfiguration.enabled = FALSE;
     
     _recorder.captureSessionPreset = [SCRecorderTools bestCaptureSessionPresetCompatibleWithAllDevices];
     _recorder.maxRecordDuration = CMTimeMake(15, 1);
-//    _recorder.
-    //    _recorder.fastRecordMethodEnabled = YES;
     _recorder.flashMode = SCFlashModeOff;
     
     _recorder.delegate = self;
@@ -79,44 +175,10 @@
     
     _recorder.previewView = previewView;
     
-    //self.focusView = [[SCRecorderToolsView alloc] initWithFrame:previewView.frame];
-    //self.focusView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-    //self.focusView.recorder = _recorder;
-    //[previewView addSubview:self.focusView];
-    
-    //    self.focusView.outsideFocusTargetImage = [UIImage imageNamed:@"capture_flip"];
-    //    self.focusView.insideFocusTargetImage = [UIImage imageNamed:@"capture_flip"];
-    
-    //_recorder.initializeSessionLazily = NO;
-    
     NSError *error;
     if (![_recorder prepare:&error]) {
         NSLog(@"Prepare error: %@", error.localizedDescription);
     }
-    
-    //    UIView * button = [[UIView alloc] init];
-    //
-    //    button.backgroundColor = [UIColor grayColor];
-    //    button.userInteractionEnabled = YES;
-    //
-    //    button.frame = CGRectMake(60, 420, 100, 40);
-    //    //button.
-    //    //button.titleLabel.textColor = [UIColor redColor];
-    //    [self.view addSubview:button];
-    //    [self.view bringSubviewToFront:button];
-    //
-    //
-    //    [button addGestureRecognizer:[[SCTouchDetector alloc] initWithTarget:self action:@selector(handleTouchDetected:)]];
-    
-    
-    //    LeafButton *button = [[LeafButton alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
-    //    button.tag = 100;
-    //    button.center = self.view.center;
-    //    [button setClickedBlock:^(LeafButton *button) {
-    //        NSLog(@"我被点中了");
-    //    }];
-    
-    //[button addGestureRecognizer:[[SCTouchDetector alloc] initWithTarget:self action:@selector(handleTouchDetected:)]];
     
     
     button = [[LeafButton alloc] initWithFrame:CGRectMake(80, 80, 80, 80)];
@@ -126,7 +188,7 @@
     
     __weak CameraViewController * wself = self;
     [button setClickedBlock:^(LeafButton *button) {
-        //NSLog(@"我被点中了");
+        
         [wself recorderClick];
     }];
     
@@ -135,16 +197,12 @@
     
     //CGRect frame = CGRectMake(10, 70, 60, 30);
     cancelButton = [[UIButton alloc] init];
-    //cancelButton = [[UIButton alloc] initWithFrame:frame];
-    
     [cancelButton setTitle:@"取 消" forState:UIControlStateNormal];
     cancelButton.frame = CGRectMake(0, self.view.bounds.size.height - 70, 90, 45);
     cancelButton.titleLabel.font = [UIFont fontWithName:@"STHeitiSC-Light" size:16.0];
     cancelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    //cancelButton.titleLabel.text = @"取消";
-//    cancelButton.tintColor = [UIColor redColor];
+    
     [cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//    cancelButton.backgroundColor = [UIColor whiteColor];
     [cancelButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:cancelButton];
@@ -153,13 +211,8 @@
     
     UIButton * cameraButton = [[UIButton alloc] init];
     cameraButton.frame = CGRectMake(self.view.frame.size.width - 75, 20, 60, 35);
-    //[cameraButton setImage:[UIImage imageNamed:@"LinCore.bundle/camera/camera_icon_camera.png"] forState:UIControlStateNormal];
     [cameraButton setImage:[UIImage imageNamed:@"LinCore.bundle/camera/capture_flip.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [cameraButton addTarget:self action:@selector(switchCameraMode:) forControlEvents:UIControlEventTouchUpInside];
-    //[cameraButton setTitle:@"取消00" forState:UIControlStateNormal];
-    
-    //cameraButton.backgroundColor = [UIColor grayColor];
-    
     [self.view addSubview:cameraButton];
     
     
@@ -168,7 +221,7 @@
     [flashButton setImage:[UIImage imageNamed:@"LinCore.bundle/camera/camera_icon_toggle_flash.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [flashButton setTitle:@"  关" forState:UIControlStateNormal];
     flashButton.titleLabel.font = [UIFont fontWithName:@"STHeitiSC-Light" size:14.0];
-    //cameraButton.backgroundColor = [UIColor grayColor];
+    
     [flashButton addTarget:self action:@selector(switchFlash:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:flashButton];
@@ -182,48 +235,57 @@
     timeLabel.textColor = [UIColor whiteColor];
     
     [self.view addSubview:timeLabel];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(focusGesture:)];
+    [previewView addGestureRecognizer:tapGesture];
+    
+    
+    _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    //更改这个设置的时候必须先锁定设备，修改完后再解锁，否则崩溃
+    [_device lockForConfiguration:nil];
+    if ([_device isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]) {
+        [_device setWhiteBalanceMode:AVCaptureWhiteBalanceModeAutoWhiteBalance];
+    }
+    [_device unlockForConfiguration];
+    
+    
+    
 }
 
+
+#pragma mark - 检查相机权限
+- (BOOL)canUserCamear{
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus == AVAuthorizationStatusDenied) {
+        
+        return NO;
+    }
+    
+    else{
+        return YES;
+    }
+    return YES;
+}
 
 // 监听焦距发生改变
 -(void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context {
     
     if([keyPath isEqualToString:@"adjustingFocus"]){
         BOOL adjustingFocus =[[change objectForKey:NSKeyValueChangeNewKey] isEqualToNumber:[NSNumber numberWithInt:1]];
-        
         NSLog(@"adjustingFocus~~%d  change~~%@", adjustingFocus, change);
-        
     }
 }
 
+-(void)setCarmer:(UIButton*)_{
+    
+    
+    NSURL *settingUrl = [NSURL URLWithString: UIApplicationOpenSettingsURLString];
+    [[UIApplication sharedApplication] openURL:settingUrl];
+    
+}
 
 - (void)switchCameraMode:(id)sender {
     [_recorder switchCaptureDevices];
-//    if ([_recorder.captureSessionPreset isEqualToString:AVCaptureSessionPresetPhoto]) {
-//        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//            //self.capturePhotoButton.alpha = 0.0;
-//            //self.recordView.alpha = 1.0;
-//            //self.retakeButton.alpha = 1.0;
-//            //self.stopButton.alpha = 1.0;
-//        } completion:^(BOOL finished) {
-//            _recorder.captureSessionPreset = kVideoPreset;
-//            //[self.switchCameraModeButton setTitle:@"Switch Photo" forState:UIControlStateNormal];
-//            //[self.flashModeButton setTitle:@"Flash : Off" forState:UIControlStateNormal];
-//            //_recorder.flashMode = SCFlashModeOff;
-//        }];
-//    } else {
-//        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//            //self.recordView.alpha = 0.0;
-//            //self.retakeButton.alpha = 0.0;
-//            //self.stopButton.alpha = 0.0;
-//            //self.capturePhotoButton.alpha = 1.0;
-//        } completion:^(BOOL finished) {
-//            _recorder.captureSessionPreset = AVCaptureSessionPresetPhoto;
-//            //[self.switchCameraModeButton setTitle:@"Switch Video" forState:UIControlStateNormal];
-//            //[self.flashModeButton setTitle:@"Flash : Auto" forState:UIControlStateNormal];
-//            //_recorder.flashMode = SCFlashModeAuto;
-//        }];
-//    }
 }
 
 - (void)switchFlash:(id)_ {
@@ -274,9 +336,6 @@
     }
 }
 
--(void)dealloc{
-//    NSLog(@"----------------------=====================");
-}
 
 -(void)updateTimeAction:(id)_{
     //__weak CameraViewController * wself = self;
@@ -312,13 +371,9 @@
             timeLabel.text = sb;
         });
         CMTime ctime = _recorder.session.duration;
-        //if ([_recorder ratioRecorded] > 15) {
         double v = ctime.value * 1.0 / ctime.timescale;
-        
         if (v > minInterval) {
-            
             dispatch_async(dispatch_get_main_queue(), ^{
-//                [self recorderClick];
                 button.enable = TRUE;
             });
         }
@@ -328,11 +383,7 @@
             });
             break;
         }
-//        if (ctime.value <= preValue) {
-//            preValue++;
-//        }else{
-        preValue = v;//ctime.value * 1.0 / ctime.timescale;
-//        }
+        preValue = v;
         [NSThread sleepForTimeInterval:0.1];
         
     }
@@ -343,28 +394,12 @@
         [_recorder record];
         button.state = LeafButtonStateSelected;
         button.enable = FALSE;
-        
-//        startTime = [NSDate date];
-        
-//        void (^updateTime)() = ^{
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                
-//            });
-        
-            [[[NSThread alloc] initWithTarget:self selector:@selector(updateTimeAction:) object:nil] start];
-            
-        //};
-        
+        [[[NSThread alloc] initWithTarget:self selector:@selector(updateTimeAction:) object:nil] start];
     }else{
         CMTime time = _recorder.session.duration;
         if (time.value * 1.0 / time.timescale > minInterval) {
             isRecording = false;
             button.state = LeafButtonStateNormal;
-//            [_recorder pause];
-//            [self saveVideo];
-            
-            
             __block MRProgressOverlayView *progressView = [MRProgressOverlayView new];
             progressView.mode = MRProgressOverlayViewModeIndeterminateSmallDefault;
             [self.view addSubview:progressView];
@@ -384,13 +419,10 @@
     }
 }
 - (void)handleTouchDetected:(SCTouchDetector*)touchDetector {
-    //NSLog(@"-------------------------");
     if (touchDetector.state == UIGestureRecognizerStateBegan) {
-        //_ghostImageView.hidden = YES;
+        
         [_recorder record];
     } else if (touchDetector.state == UIGestureRecognizerStateEnded) {
-//        [_recorder pause];
-//        [self saveVideo];
         [_recorder pause:^{
             [self saveVideo];
         }];
@@ -401,7 +433,6 @@
     [[SCRecordSessionManager sharedInstance] saveRecordSession:recordSession];
     
     _recordSession = recordSession;
-    //[self showVideo];
 }
 
 -(void)saveVideo{
@@ -412,60 +443,22 @@
         currentTime = _recorder.session.duration;
     }
     currentTime.value = currentTime.value - 3 * currentTime.timescale / 10;
-//    _recorder.maxRecordDuration = currentTime;
     _recordSession = _recorder.session;
     SCAssetExportSession *exportSession = [[SCAssetExportSession alloc] initWithAsset:_recordSession.assetRepresentingSegments];
-    //exportSession.videoConfiguration.
     exportSession.videoConfiguration.filter = [SCFilter emptyFilter];
-    //exportSession.videoConfiguration.preset = SCPresetHighestQuality;
     exportSession.audioConfiguration.preset = SCPresetMediumQuality;
     exportSession.videoConfiguration.maxFrameRate = 30;
-    //NSLog(@"_recordSession.outputUrl:%@",_recordSession.outputUrl);
     exportSession.outputUrl = _recordSession.outputUrl;
     exportSession.outputFileType = AVFileTypeMPEG4;
     exportSession.delegate = self;
-    
-    //    self.exportView.hidden = NO;
-    //    self.exportView.alpha = 0;
-    //    CGRect frame =  self.progressView.frame;
-    //    frame.size.width = 0;
-    //    self.progressView.frame = frame;
-    
-    //    [UIView animateWithDuration:0.3 animations:^{
-    //        //self.exportView.alpha = 1;
-    //    }];
-    
     SCEmptyOverlayView *overlay = [[SCEmptyOverlayView alloc] init];
     overlay.date = _recordSession.date;
     
     exportSession.videoConfiguration.overlay = overlay;//水印
     
-    //    UIGraphicsBeginImageContext(label.frame.size);
-    //
-    //    [label.layer renderInContext:UIGraphicsGetCurrentContext()];
-    //
-    //    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    //
-    //    UIGraphicsEndImageContext();
-    //
-    //    exportSession.videoConfiguration.watermarkImage = image;
-    //    exportSession.videoConfiguration.watermarkFrame = CGRectMake(10, 10, label.frame.size.width, label.frame.size.height);
-    //    exportSession.videoConfiguration.watermarkAnchorLocation = SCWatermarkAnchorLocationBottomRight;
-    
-    
     __weak CameraViewController * wself = self;
     
     void(^completionHandler)(NSURL *url, NSError *error) = ^(NSURL *url, NSError *error) {
-        //NSLog(@"**********************************");
-        //        if (error == nil) {
-        //            //UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
-        //        } else {
-        //            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-        //
-        //            [[[UIAlertView alloc] initWithTitle:@"Failed to save" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        //        }
-        
-        //outputFile = _recordSession.outputUrl;
         CameraViewController * sself = wself;
         sself->outputFile = sself->_recordSession.outputUrl;
         [wself back:nil];
@@ -474,11 +467,6 @@
     
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-        
-//        [UIView animateWithDuration:0.3 animations:^{
-//            //self.exportView.alpha = 0;
-//        }];
-        
         completionHandler(exportSession.outputUrl, exportSession.error);
     }];
 }
@@ -488,26 +476,19 @@
     if (_recorder.session == nil) {
         
         SCRecordSession *session = [SCRecordSession recordSession];
-        //session.fileType = AVFileTypeQuickTimeMovie;
         session.fileType = AVFileTypeMPEG4;
         
         _recorder.session = session;
     }
-    
-    //[self updateTimeRecordedLabel];
-    //[self updateGhostImage];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    
     AVCaptureDevice *camDevice =[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     int flags =NSKeyValueObservingOptionNew;
     [camDevice addObserver:self forKeyPath:@"adjustingFocus" options:flags context:nil];
     
-    
     [self prepareSession];
-
-    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -549,24 +530,5 @@
     return UIInterfaceOrientationMaskPortrait;//只支持这一个方向(正常的方向)
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 
 @end
-
-
-
-//@interface CameraViewController()
-//
-//-(void)setResult:(void(^)(NSURL * file))result;
-//
-//@end
-
