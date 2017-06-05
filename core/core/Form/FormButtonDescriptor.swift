@@ -14,6 +14,7 @@ open class FormButtonDescriptor:FormRowDescriptor{
         super.init(title: title, name: "", value: nil);
     }
     
+    
     open override func formBaseCellClassFromRowDescriptor() -> FormBaseCell.Type! {
         
         return FormButtonCell.self;
