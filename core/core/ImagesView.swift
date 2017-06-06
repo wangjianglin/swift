@@ -170,10 +170,11 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     
     
     func funcChooseFromCamera(_ avc:UIAlertAction) -> Void {
-       // let v = CarmerViewController()
+        let v = ZLCameraViewController()
+        v.cameraType = .continuous;
        // let navigationController = UINavigationController(rootViewController:v);
        // self.viewController?.present(navigationController, animated:true, completion:nil);
-        
+         v.showPickerVc(self.viewController)
     }
     
 
@@ -534,7 +535,6 @@ open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
         
         let iconImage = CacheImageView();
         
-        //iconImage.setFillImage("LinCore.bundle/camera/camera_icon_camera.png");
         iconImage.setImageObj(UIImage(named: "LinCore.bundle/camera/camera_icon_camera.png", in: Bundle(for:self.classForCoder), compatibleWith: nil));
         iconImage.contentMode = .scaleAspectFit;
         iconImage.frame = CGRect(x: 15, y: 10, width: _dashImageView.frame.size.width - 10, height: _dashImageView.frame.size.width - 10);

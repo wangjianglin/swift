@@ -196,11 +196,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     [flashBtn addTarget:self action:@selector(flashCameraDevice:) forControlEvents:UIControlEventTouchUpInside];
     [flashBtn setTitle:@"关闭" forState:UIControlStateNormal];
     _flashBtn = flashBtn;
-    
-//    UIButton *closeBtn = [self setupButtonWithImageName:@"shanguangdeng2" andX:60];
-//    [closeBtn addTarget:self action:@selector(closeFlashlight:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
+        
     // 底部View
     UIView *controlView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height-BOTTOM_HEIGHT, self.view.width, BOTTOM_HEIGHT)];
     controlView.backgroundColor = [UIColor blackColor];
@@ -225,7 +221,10 @@ static CGFloat BOTTOM_HEIGHT = 60;
     cameraBtn.frame = CGRectMake(x+margin, margin / 4, x, controlView.height - margin / 2);
     cameraBtn.showsTouchWhenHighlighted = YES;
     cameraBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [cameraBtn setImage:[UIImage imageNamed:@"paizhao.png"] forState:UIControlStateNormal];
+   
+    NSBundle * b = [NSBundle bundleForClass:[ZLCameraViewController class]];
+    [cameraBtn setImage:[UIImage imageNamed:@"LinCore.boundle/camera/paizhao.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    
     [cameraBtn addTarget:self action:@selector(stillImage:) forControlEvents:UIControlEventTouchUpInside];
     [controlView addSubview:cameraBtn];
     // 完成
@@ -625,10 +624,8 @@ static CGFloat BOTTOM_HEIGHT = 60;
     //关闭相册界面
     if(self.callback){
         self.callback(self.images);
-    
     }
     [self cancel:nil];
-    
 }
 @end
 

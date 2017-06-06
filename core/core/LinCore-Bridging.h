@@ -46,7 +46,7 @@
 #import "Tables.h"
 
 #import "UILabels.h"
-//#import "ZLCameraViewController.h"
+#import "ZLCameraViewController.h"
 
 
 #import "Vedios.h"

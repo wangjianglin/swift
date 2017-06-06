@@ -7,7 +7,6 @@
 
 #import "LGPhotoPickerBrowserPhotoScrollView.h"
 #import "LGPhotoPickerDatas.h"
-#import "DACircularProgressView.h"
 #import "LGPhotoPickerCommon.h"
 #import "LGPhotoRect.h"
 
@@ -27,7 +26,6 @@
 }
 
 @property (nonatomic, assign) CGFloat                progress;
-@property (strong,nonatomic ) DACircularProgressView *progressView;
 @property (nonatomic, assign) BOOL                   isLoadingDone;
 
 @end
@@ -70,43 +68,11 @@
         UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesture:)];
         [self addGestureRecognizer:longGesture];
         
-        DACircularProgressView *progressView = [[DACircularProgressView alloc] init];
-        progressView.frame = CGRectMake(0, 0, LGPickerProgressViewW, LGPickerProgressViewH);
-        progressView.center = CGPointMake([UIScreen mainScreen].bounds.size.width * 0.5, [UIScreen mainScreen].bounds.size.height * 0.5);
-        progressView.roundedCorners = YES;
-        if (iOS7gt) {
-            progressView.thicknessRatio = 0.1;
-            progressView.roundedCorners = NO;
-        } else {
-            progressView.thicknessRatio = 0.2;
-            progressView.roundedCorners = YES;
-        }
-        progressView.hidden = YES;
-        
-        [self addSubview:progressView];
-        self.progressView = progressView;
-        
+
         //addObservers
         [self addObservers];
     }
     return self;
-}
-
-#pragma mark - setProgress
-
-- (void)setProgress:(CGFloat)progress {
-    _progress = progress;
-    
-    self.progressView.hidden = NO;
-    if (progress == 0) return ;
-    if (progress / 1.0 != 1.0) {
-        [self.progressView setProgress:progress animated:YES];
-    }else{
-		dispatch_async(dispatch_get_main_queue(), ^{
-			[self.progressView removeFromSuperview];
-			self.progressView = nil;
-		});
-    }
 }
 
 - (void)addObservers {
