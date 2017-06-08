@@ -172,12 +172,25 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     func funcChooseFromCamera(_ avc:UIAlertAction) -> Void {
         let v = ZLCameraViewController()
         v.cameraType = .continuous;
-       // let navigationController = UINavigationController(rootViewController:v);
-       // self.viewController?.present(navigationController, animated:true, completion:nil);
-         v.showPickerVc(self.viewController)
+        v.maxCount = maxSelection - _imagePaths.count
+        
+        v.callback = {(ZLCameraCallBack) -> Void in
+         
+         let carmer : [ZLCamera] = ZLCameraCallBack as! [ZLCamera]
+         
+            
+            for i in carmer {
+             let s = i.photoImage
+            // 得到所选图片
+            
+            self._imagePaths.append(s!)
+            }
+            self._collectionView.reloadData();
+        }
+        
+        v.showPickerVc(self.viewController)
     }
     
-
     
     @objc open func imagePickerController(_ imagePickerController:QBImagePickerController, didFinishPickingMediaWithInfo info:Any){
         

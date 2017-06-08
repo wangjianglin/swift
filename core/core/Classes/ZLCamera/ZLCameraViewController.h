@@ -17,7 +17,6 @@ typedef NS_ENUM(NSInteger, ZLCameraType) {
 typedef void(^ZLCameraCallBack)(id object);
 
 @interface ZLCameraViewController : UIViewController
-
 // 顶部View
 @property (weak, nonatomic) UIView *topView;
 // 底部View
@@ -31,4 +30,5 @@ typedef void(^ZLCameraCallBack)(id object);
 @property (copy, nonatomic) ZLCameraCallBack callback;
 
 - (void)showPickerVc:(UIViewController *)vc;
+
 @end

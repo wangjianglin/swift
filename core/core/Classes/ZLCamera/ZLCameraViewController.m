@@ -222,8 +222,10 @@ static CGFloat BOTTOM_HEIGHT = 60;
     cameraBtn.showsTouchWhenHighlighted = YES;
     cameraBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
    
+    
+    
     NSBundle * b = [NSBundle bundleForClass:[ZLCameraViewController class]];
-    [cameraBtn setImage:[UIImage imageNamed:@"LinCore.boundle/camera/paizhao.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+   [cameraBtn setImage:[UIImage imageNamed:@"LinCore.boundle/camera/paizhao.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     
     [cameraBtn addTarget:self action:@selector(stillImage:) forControlEvents:UIControlEventTouchUpInside];
     [controlView addSubview:cameraBtn];
