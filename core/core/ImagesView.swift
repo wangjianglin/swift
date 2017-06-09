@@ -12,6 +12,8 @@ import UIKit
 
 
 open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSource,QBImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate{
+   
+    
     fileprivate var _collectionView:UICollectionView!
     fileprivate var _cellImage:UICollectionViewCell!;
     fileprivate var _cellVideo:ImagesViewAddVedioCollectionViewCell!;
@@ -20,9 +22,16 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     fileprivate var _vedioUrl:URL?;
     fileprivate var _heightConstraint:NSLayoutConstraint!;
     fileprivate var _vedioImage:UIImage?;
-    
     fileprivate var _vc:VedioConvert!;
     
+  
+    public enum SelectPhotoType {
+        case photoAlbum
+        case carmer
+        case allSelect
+    }
+   
+   public var selectType = SelectPhotoType.allSelect
     
     fileprivate func delete(_ pos:Int){
         _imagePaths.remove(at: pos);
@@ -38,6 +47,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             _cellVideo.setVedioImage(_vedioImage)
         }
     }
+    
     
     open var hasVedio = true{
         didSet{
@@ -141,15 +151,58 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     
     @objc fileprivate func imagePacker(_:NSObject){
         
-        let userIconAlert = UIAlertController(title: "请选择操作", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
-        let chooseFromPhotoAlbum = UIAlertAction(title: "相册选取", style: UIAlertActionStyle.default, handler: funcChooseFromPhotoAlbum)
-        userIconAlert.addAction(chooseFromPhotoAlbum)
-        let chooseFromCamera = UIAlertAction(title: "拍照", style: UIAlertActionStyle.default,handler:funcChooseFromCamera)
-        userIconAlert.addAction(chooseFromCamera)
-        let canelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel,handler: nil)
-        userIconAlert.addAction(canelAction)
-        self.viewController?.present(userIconAlert, animated: true, completion: nil)
+       
+        switch selectType {
+        case .allSelect:
+        
+            let userIconAlert = UIAlertController(title: "请选择操作", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
+            let chooseFromPhotoAlbum = UIAlertAction(title: "相册选取", style: UIAlertActionStyle.default, handler: funcChooseFromPhotoAlbum)
+            userIconAlert.addAction(chooseFromPhotoAlbum)
+            let chooseFromCamera = UIAlertAction(title: "拍照", style: UIAlertActionStyle.default,handler:funcChooseFromCamera)
+            userIconAlert.addAction(chooseFromCamera)
+            let canelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel,handler: nil)
+            userIconAlert.addAction(canelAction)
+            self.viewController?.present(userIconAlert, animated: true, completion: nil)
 
+        case .carmer:
+        
+            let v = ZLCameraViewController()
+            v.cameraType = .continuous;
+            v.maxCount = maxSelection - _imagePaths.count
+            
+            v.callback = {(ZLCameraCallBack) -> Void in
+                
+                let carmer : [ZLCamera] = ZLCameraCallBack as! [ZLCamera]
+                
+                
+                for i in carmer {
+                    let s = i.photoImage
+                    // 得到所选图片
+                    
+                    self._imagePaths.append(s!)
+                }
+                self._collectionView.reloadData();
+            }
+            v.showPickerVc(self.viewController)
+        case .photoAlbum:
+          
+            let imagePickerController = QBImagePickerController();
+            imagePickerController.delegate = self;
+            imagePickerController.filterType = QBImagePickerFilterTypeAllPhotos;
+            
+            imagePickerController.allowsMultipleSelection = true;
+            
+            imagePickerController.maximumNumberOfSelection = UInt(maxSelection - _imagePaths.count);
+            imagePickerController.limitsMaximumNumberOfSelection = true;
+            let navigationController = UINavigationController(rootViewController:imagePickerController);
+            self.viewController?.present(navigationController, animated:true, completion:nil);
+
+
+            print("dsa")
+       
+        }
+        
+       
     }
     
     

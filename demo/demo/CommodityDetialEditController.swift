@@ -60,8 +60,7 @@ open class CommodityDetialEditController:UIViewController, BaseView{
         
         
         self.view.backgroundColor = UIColor.white
-        
-        
+    
         super.viewDidLoad();
         _spreadcommission = "加价";
         _percentageCommission = "提成";
@@ -95,10 +94,11 @@ open class CommodityDetialEditController:UIViewController, BaseView{
     fileprivate func initView(){
         
         _imagesView = ImagesView();
-    scrollView.addSubview(_imagesView);
+        _imagesView.selectType = .photoAlbum
         
-        
-        
+        scrollView.addSubview(_imagesView);
+
+    
         _imagesView.translatesAutoresizingMaskIntoConstraints = false;
         
         self.view.addConstraints([
