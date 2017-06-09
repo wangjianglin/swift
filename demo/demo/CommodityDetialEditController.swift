@@ -90,6 +90,8 @@ open class CommodityDetialEditController:UIViewController, BaseView{
         //self.update();
     }
     
+       
+   
     fileprivate func initView(){
         
         _imagesView = ImagesView();

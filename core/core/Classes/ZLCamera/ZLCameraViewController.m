@@ -167,10 +167,12 @@ static CGFloat BOTTOM_HEIGHT = 60;
 #pragma mark 初始化按钮
 - (UIButton *) setupButtonWithImageName : (NSString *) imageName andX : (CGFloat ) x{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    NSBundle * b = [NSBundle bundleForClass:[self class]];
+   [button setImage:[UIImage imageNamed:imageName inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+   // [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     button.backgroundColor = [UIColor clearColor];
     button.width = 80;
-    button.y = 0;
+    button.y = 24;
     button.height = self.topView.height;
     button.x = x;
     [self.view addSubview:button];
@@ -179,20 +181,21 @@ static CGFloat BOTTOM_HEIGHT = 60;
 
 #pragma mark -初始化界面
 - (void) setup{
+    NSBundle * b = [NSBundle bundleForClass:[self class]];
     CGFloat width = 50;
     CGFloat margin = 20;
     
     UIView *topView = [[UIView alloc] init];
     topView.backgroundColor = [UIColor blackColor];
-    topView.frame = CGRectMake(0, 0, self.view.width, 40);
+    topView.frame = CGRectMake(0, 24, self.view.width, 40);
     [self.view addSubview:topView];
     self.topView = topView;
     
     // 头部View
-    UIButton *deviceBtn = [self setupButtonWithImageName:@"xiang.png" andX:self.view.width - margin - width];
+    UIButton *deviceBtn = [self setupButtonWithImageName:@"LinCore.bundle/camera/capture_flip.png" andX:self.view.width - margin - width];
     [deviceBtn addTarget:self action:@selector(changeCameraDevice:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *flashBtn = [self setupButtonWithImageName:@"shanguangdeng2.png" andX:10];
+    UIButton *flashBtn = [self setupButtonWithImageName:@"LinCore.bundle/camera/camera_icon_toggle_flash.png" andX:10];
     [flashBtn addTarget:self action:@selector(flashCameraDevice:) forControlEvents:UIControlEventTouchUpInside];
     [flashBtn setTitle:@"关闭" forState:UIControlStateNormal];
     _flashBtn = flashBtn;
@@ -218,16 +221,14 @@ static CGFloat BOTTOM_HEIGHT = 60;
     [controlView addSubview:cancalBtn];
     //拍照
     UIButton *cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cameraBtn.frame = CGRectMake(x+margin, margin / 4, x, controlView.height - margin / 2);
+    //x+margin, margin / 4 - 30, 80, controlView.height - margin / 2 + 30
+    cameraBtn.frame = CGRectMake(x+margin + 10, margin / 4 - 30, x - 10, controlView.height - margin / 2 + 30);
+    [cameraBtn setImage:[UIImage imageNamed:@"LinCore.bundle/camera/paizhao.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [cameraBtn setImage:[UIImage imageNamed:@"LinCore.bundle/camera/paizhaoLight.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+    
     cameraBtn.showsTouchWhenHighlighted = YES;
     cameraBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-   
-    
-    
-    NSBundle * b = [NSBundle bundleForClass:[ZLCameraViewController class]];
-   [cameraBtn setImage:[UIImage imageNamed:@"LinCore.boundle/camera/paizhao.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-    
-    [cameraBtn addTarget:self action:@selector(stillImage:) forControlEvents:UIControlEventTouchUpInside];
+       [cameraBtn addTarget:self action:@selector(stillImage:) forControlEvents:UIControlEventTouchUpInside];
     [controlView addSubview:cameraBtn];
     // 完成
     if (self.cameraType == ZLCameraContinuous) {
@@ -394,17 +395,6 @@ static CGFloat BOTTOM_HEIGHT = 60;
     return img;
     
     
-//    CGImageRef subImageRef = CGImageCreateWithImageInRect(srcImg.CGImage, rect);
-//    CGRect smallBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
-//    
-//    UIGraphicsBeginImageContext(smallBounds.size);
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextDrawImage(context, smallBounds, subImageRef);
-//    UIImage* smallImage = [UIImage imageWithCGImage:subImageRef scale:1 orientation:UIImageOrientationRight];//由于直接从subImageRef中得到uiimage的方向是逆时针转了90°的
-//    UIGraphicsEndImageContext();
-//    CGImageRelease(subImageRef);
-//    
-//    return smallImage;
 }
 
 //旋转image
@@ -574,8 +564,10 @@ static CGFloat BOTTOM_HEIGHT = 60;
 }
 
 //拍照
-- (void)stillImage:(id)sender
+- (void)stillImage:(UIButton *)sender
 {
+   
+    
     // 判断图片的限制个数
     if (self.maxCount > 0 && self.images.count >= self.maxCount) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"拍照的个数不能超过%ld",(long)self.maxCount]delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
@@ -584,15 +576,6 @@ static CGFloat BOTTOM_HEIGHT = 60;
     }
     
     [self Captureimage];
-//    UIView *maskView = [[UIView alloc] init];
-//    maskView.frame = self.view.bounds;
-//    maskView.backgroundColor = [UIColor whiteColor];
-//    [self.view addSubview:maskView];
-//    [UIView animateWithDuration:.5 animations:^{
-//        maskView.alpha = 0;
-//    } completion:^(BOOL finished) {
-//        [maskView removeFromSuperview];
-//    }];
 }
 
 - (BOOL)shouldAutorotate{

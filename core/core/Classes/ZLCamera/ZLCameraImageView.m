@@ -20,11 +20,12 @@
 - (UIImageView *)deleBjView{
     if (!_deleBjView) {
         _deleBjView = [[UIImageView alloc] init];
-        _deleBjView.image = [UIImage imageNamed:@"X.png"];
+         NSBundle * b = [NSBundle bundleForClass:[ZLCameraImageView class]];
+       _deleBjView.image = [UIImage imageNamed:@"LinCore.bundle/camera/X.png"  inBundle:b compatibleWithTraitCollection:nil];
         _deleBjView.width = 25;
         _deleBjView.height = 25;
         _deleBjView.hidden = YES;
-        _deleBjView.x = 50;
+        _deleBjView.x = 55;
         _deleBjView.y = 0;
         _deleBjView.userInteractionEnabled = YES;
         [_deleBjView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleImage:)]];

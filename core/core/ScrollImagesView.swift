@@ -99,7 +99,7 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
     }
     
     fileprivate func update(){
-        var contentViewRect = _contentView.bounds;
+        let contentViewRect = _contentView.bounds;
         if self.bounds.size.width == 0 || self.bounds.size.height == 0 {
             return;
         }

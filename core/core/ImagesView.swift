@@ -187,8 +187,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             }
             self._collectionView.reloadData();
         }
-        
-        v.showPickerVc(self.viewController)
+         v.showPickerVc(self.viewController)
     }
     
     
