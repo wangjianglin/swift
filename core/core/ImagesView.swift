@@ -177,8 +177,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
                 
                 for i in carmer {
                     let s = i.photoImage
-                    // 得到所选图片
-                    
+                  
                     self._imagePaths.append(s!)
                 }
                 self._collectionView.reloadData();
@@ -186,23 +185,17 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             v.showPickerVc(self.viewController)
         case .photoAlbum:
           
-            let imagePickerController = QBImagePickerController();
-            imagePickerController.delegate = self;
-            imagePickerController.filterType = QBImagePickerFilterTypeAllPhotos;
+            let imagePickerController = QBImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.filterType = QBImagePickerFilterTypeAllPhotos
             
-            imagePickerController.allowsMultipleSelection = true;
+            imagePickerController.allowsMultipleSelection = true
             
-            imagePickerController.maximumNumberOfSelection = UInt(maxSelection - _imagePaths.count);
-            imagePickerController.limitsMaximumNumberOfSelection = true;
-            let navigationController = UINavigationController(rootViewController:imagePickerController);
-            self.viewController?.present(navigationController, animated:true, completion:nil);
-
-
-            print("dsa")
-       
+            imagePickerController.maximumNumberOfSelection = UInt(maxSelection - _imagePaths.count)
+            imagePickerController.limitsMaximumNumberOfSelection = true
+            let navigationController = UINavigationController(rootViewController:imagePickerController)
+            self.viewController?.present(navigationController, animated:true, completion:nil)
         }
-        
-       
     }
     
     
@@ -233,10 +226,10 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
          
             
             for i in carmer {
-             let s = i.photoImage
-            // 得到所选图片
+             let getImage = i.photoImage
+             let scaleImage = getImage?.scaledToSize(CGSize.init(width:498, height:664),fill:false)
             
-            self._imagePaths.append(s!)
+            self._imagePaths.append(scaleImage!)
             }
             self._collectionView.reloadData();
         }
