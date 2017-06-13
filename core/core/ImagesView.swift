@@ -29,6 +29,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         case photoAlbum
         case carmer
         case allSelect
+        
     }
    
    public var selectType = SelectPhotoType.allSelect
@@ -97,6 +98,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     public init(){
         
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0));
+        
         //层声明实列化
         _flowLayout = UICollectionViewFlowLayout();
         _flowLayout.itemSize = CGSize(width: 50,height: 50); //设置每个cell显示数据的宽和高必须
@@ -304,7 +306,6 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     open func movieFinishedCallback(_ sender:AnyObject){
         let playerViewController = (sender as! Notification).object;
         (playerViewController as AnyObject).view.removeFromSuperview();
-        
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object:nil);
         
     }

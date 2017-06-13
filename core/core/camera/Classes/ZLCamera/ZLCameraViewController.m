@@ -77,7 +77,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
         
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, collectionViewY, self.view.width, collectionViewH)
                                                               collectionViewLayout:layout];
-        collectionView.alpha = 0.5;
+        collectionView.alpha = 0.8;
         collectionView.backgroundColor = [UIColor clearColor];
         [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
         collectionView.delegate = self;
@@ -196,9 +196,9 @@ static CGFloat BOTTOM_HEIGHT = 60;
     UIButton *deviceBtn = [self setupButtonWithImageName:@"LinCore.bundle/camera/capture_flip.png" andX:self.view.width - margin - width];
     [deviceBtn addTarget:self action:@selector(changeCameraDevice:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *flashBtn = [self setupButtonWithImageName:@"LinCore.bundle/camera/camera_icon_toggle_flash.png" andX:-5];
+    UIButton *flashBtn = [self setupButtonWithImageName:@"LinCore.bundle/camera/camera_icon_toggle_flash.png" andX:5];
     [flashBtn addTarget:self action:@selector(flashCameraDevice:) forControlEvents:UIControlEventTouchUpInside];
-    [flashBtn setTitle:@"关闭" forState:UIControlStateNormal];
+    [flashBtn setTitle:@"  关闭" forState:UIControlStateNormal];
     _flashBtn = flashBtn;
         
     // 底部View
@@ -266,6 +266,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
         imageView.edit = YES;
         imageView.image = image;
         imageView.frame = cell.bounds;
+        imageView.deleBjView.frame = CGRectMake(cell.bounds.origin.x + 10, cell.bounds.origin.y + 10,cell.bounds.size.width - 20, cell.bounds.size.height - 20);
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         [cell.contentView addSubview:imageView];
     }

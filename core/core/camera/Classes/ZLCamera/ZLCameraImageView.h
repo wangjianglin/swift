@@ -21,7 +21,7 @@
 @end
 
 @interface ZLCameraImageView : UIImageView
-
+@property (strong, nonatomic) UIImageView *deleBjView;
 @property (weak, nonatomic) id <ZLCameraImageViewDelegate> delegatge;
 /**
  *  是否是编辑模式 , YES 代表是

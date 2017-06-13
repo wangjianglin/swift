@@ -58,6 +58,7 @@
 }
 
 
+
 - (void)setUI {
     
     
@@ -411,7 +412,6 @@
                 dispatch_after(popTime , dispatch_get_main_queue(), ^{
                     [self saveVideo];
                 });
-                
             }];
         }else{
             button.state = LeafButtonStateSelected;
@@ -474,10 +474,8 @@
 
 - (void)prepareSession {
     if (_recorder.session == nil) {
-        
         SCRecordSession *session = [SCRecordSession recordSession];
         session.fileType = AVFileTypeMPEG4;
-        
         _recorder.session = session;
     }
 }
@@ -505,11 +503,14 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
     AVCaptureDevice*camDevice =[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     [camDevice removeObserver:self forKeyPath:@"adjustingFocus"];
     
     [_recorder stopRunning];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

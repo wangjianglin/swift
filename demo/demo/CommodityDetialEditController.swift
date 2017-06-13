@@ -58,6 +58,7 @@ open class CommodityDetialEditController:UIViewController, BaseView{
     var priceType:Int = 0;// 是否已经同步到纯翠网  0未定义 1单件价  2多件价
     
     
+    
     open override func viewDidLoad() {
         
         
@@ -100,45 +101,6 @@ open class CommodityDetialEditController:UIViewController, BaseView{
             NSLayoutConstraint(item:_imagesView, attribute:NSLayoutAttribute.right, relatedBy:NSLayoutRelation.equal, toItem:self.view, attribute:NSLayoutAttribute.right, multiplier:1.0, constant:-10.0)
             ]);
         
-        let lab = UILabel()
-        lab.frame = CGRect(x: 170, y: _imagesView.frame.origin.y + 40, width: 200, height: 30);
-        lab.text = "相机相册获取图片"
-        self.scrollView.addSubview(lab)
-        
-        imagesViewOne = ImagesView();
-        imagesViewOne.selectType = .carmer
-        scrollView.addSubview(imagesViewOne);
-        imagesViewOne.translatesAutoresizingMaskIntoConstraints = false;
-
-        self.view.addConstraints([
-            NSLayoutConstraint(item:imagesViewOne, attribute:NSLayoutAttribute.top, relatedBy:NSLayoutRelation.equal, toItem:_imagesView, attribute:NSLayoutAttribute.top, multiplier:1.0, constant:100.0),
-            NSLayoutConstraint(item:imagesViewOne, attribute:NSLayoutAttribute.left, relatedBy:NSLayoutRelation.equal, toItem:self.view, attribute:NSLayoutAttribute.left, multiplier:1.0, constant:10.0),
-            NSLayoutConstraint(item:imagesViewOne, attribute:NSLayoutAttribute.right, relatedBy:NSLayoutRelation.equal, toItem:self.view, attribute:NSLayoutAttribute.right, multiplier:1.0, constant:-10.0)
-            ]);
-        
-        let lab1 = UILabel()
-        lab1.frame = CGRect(x: 170, y: imagesViewOne.frame.origin.y + 155, width: 200, height: 30);
-        lab1.text = "相机获取图片"
-        self.scrollView.addSubview(lab1)
-
-        
-        imagesViewTwo = ImagesView();
-        imagesViewTwo.selectType = .photoAlbum
-        scrollView.addSubview(imagesViewTwo);
-        imagesViewTwo.translatesAutoresizingMaskIntoConstraints = false;
-        
-        self.view.addConstraints([
-            NSLayoutConstraint(item:imagesViewTwo, attribute:NSLayoutAttribute.top, relatedBy:NSLayoutRelation.equal, toItem:imagesViewOne, attribute:NSLayoutAttribute.top, multiplier:1.0, constant:100.0),
-            NSLayoutConstraint(item:imagesViewTwo, attribute:NSLayoutAttribute.left, relatedBy:NSLayoutRelation.equal, toItem:self.view, attribute:NSLayoutAttribute.left, multiplier:1.0, constant:10.0),
-            NSLayoutConstraint(item:imagesViewTwo, attribute:NSLayoutAttribute.right, relatedBy:NSLayoutRelation.equal, toItem:self.view, attribute:NSLayoutAttribute.right, multiplier:1.0, constant:-10.0)
-            ]);
-        
-        let lab2 = UILabel()
-        lab2.frame = CGRect(x: 170, y: imagesViewTwo.frame.origin.y + 240, width: 200, height: 30);
-        lab2.text = "相册获取图片"
-        self.scrollView.addSubview(lab2)
-
-        
         let infoLabel = UILabel();
         infoLabel.text = " ";
         infoLabel.font = UIFont(name:"STHeitiSC-Light", size:12.0);
@@ -156,49 +118,33 @@ open class CommodityDetialEditController:UIViewController, BaseView{
         pre = infoLabel;
         
         priceText = UITextField();
-//        priceText.setup();
-        
-        
         holdGoldView = UILabel();
         
-             holdGoldView.textColor = textColor;//[UIColor colorWithRed:0xc7/255.0 green:0xc7/255.0 blue:0xc7/255.0 alpha:1.0];
+        holdGoldView.textColor = textColor;
         holdGoldView.backgroundColor = UIColor.white;
         holdGoldView.font = UIFont(name:"STHeitiSC-Light", size:12.0);
         
         holdGoldView.isUserInteractionEnabled = true;
         onePieceButton = QCheckBox();
        
-        
-        
         let pieceView = UIView();
-        
-      
-        
         onePieceButton.frame = CGRect(x: 10, y: 0, width: 67, height: 30);
         pieceView.translatesAutoresizingMaskIntoConstraints = false;
-        
         descText = UITextView();
-//        descText.setup();
         descText.font = UIFont(name:"STHeitiSC-Light", size:12.0);
         descText.textColor = textColor;
         descText.returnKeyType = UIReturnKeyType.done;
         descText.textViewShouldBeginEditing = {[weak self](_:UITextView)->Bool in
             
-            
-            //        if self?.pickView != nil {
-            self?.pickView?.remove();
-            //        }
+        self?.pickView?.remove();
+        
             return true;
         };
-        
-        
-        
         
         var h = pre.frame.size.height+pre.frame.origin.y;
         if h<scrollView.frame.size.height {
             h = scrollView.frame.size.height;
         }
-       
         
         scrollView.contentSize = CGSize(width: scrollView.bounds.size.width,height: h + self.protocolLabel.frame.size.height - 20 + 10);
          }
@@ -208,7 +154,4 @@ open class CommodityDetialEditController:UIViewController, BaseView{
         _imagesView.images = images as [AnyObject];
         
     }
-    
-
-    
 }

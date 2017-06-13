@@ -12,6 +12,7 @@
 #import "LGPhotoPickerCustomToolBarView.h"
 #import "LGPhotoAssets.h"
 #import "LGPhotoPickerCommon.h"
+#import "ZLCameraImageView.h"
 
 static NSString *_cellIdentifier = @"collectionViewCell";
 
@@ -21,7 +22,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     RIGHT
 };
 
-@interface LGPhotoPickerBrowserViewController () <UIScrollViewDelegate,LGPhotoPickerPhotoScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,LGPhotoPickerCustomToolBarViewDelegate>
+@interface LGPhotoPickerBrowserViewController () <UIScrollViewDelegate,LGPhotoPickerPhotoScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,LGPhotoPickerCustomToolBarViewDelegate,ZLCameraImageViewDelegate>
 
 // 控件
 @property (nonatomic, weak  ) UILabel                             *pageLabel;
@@ -96,6 +97,8 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         self.pageLabel.hidden = NO;
     }
 }
+
+
 
 #pragma mark pageLabel
 
@@ -556,9 +559,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     return _cellScrollView.photo;
 }
 
-- (void)forwardImageChatMessage{
-    
-}
+
 
 - (void)hiddenSavingStatusView{
     for (UIView *view in [self.view subviews]) {
