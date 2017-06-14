@@ -836,7 +836,6 @@
 				18F8B21B1EF0D34400E9947C /* LGPhotoBrowser */,
 				18F8B22F1EF0D34400E9947C /* LGPhotoPicker */,
 				18F8B2491EF0D34400E9947C /* LGPhotoPickerCommon.h */,
-				18F8B24A1EF0D34400E9947C /* Third */,
 				18F8B24D1EF0D34400E9947C /* Utils */,
 				18F8B2511EF0D34400E9947C /* ZLCamera */,
 			);
@@ -941,29 +940,6 @@
 				18F8B2481EF0D34400E9947C /* LGPhotoPickerImageView.m */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		18F8B24A1EF0D34400E9947C /* Third */ = {
-			isa = PBXGroup;
-			children = (
-				18F8B24B1EF0D34400E9947C /* DACircularProgress */,
-				18F8B24C1EF0D34400E9947C /* SDWebImage */,
-			);
-			path = Third;
-			sourceTree = "<group>";
-		};
-		18F8B24B1EF0D34400E9947C /* DACircularProgress */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DACircularProgress;
-			sourceTree = "<group>";
-		};
-		18F8B24C1EF0D34400E9947C /* SDWebImage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SDWebImage;
 			sourceTree = "<group>";
 		};
 		18F8B24D1EF0D34400E9947C /* Utils */ = {
