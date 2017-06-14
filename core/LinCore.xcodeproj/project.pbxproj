@@ -188,8 +188,6 @@
 		3E121A191CF845A400D43267 /* SCTouchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E1219DA1CF845A400D43267 /* SCTouchDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E121A1A1CF845A400D43267 /* SCTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1219DB1CF845A400D43267 /* SCTouchDetector.m */; };
 		3E121A1B1CF845A400D43267 /* SCWatermarkOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1219DC1CF845A400D43267 /* SCWatermarkOverlayView.m */; };
-		3E121A1C1CF845A400D43267 /* Vedios.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E1219DD1CF845A400D43267 /* Vedios.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E121A1D1CF845A400D43267 /* Vedios.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1219DE1CF845A400D43267 /* Vedios.m */; };
 		3E121A1F1CF845E700D43267 /* ImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E121A1E1CF845E700D43267 /* ImagesView.swift */; };
 		3E121A211CF880F300D43267 /* Vedios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E121A201CF880F300D43267 /* Vedios.swift */; };
 		3E121A231CF8848400D43267 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E121A221CF8848400D43267 /* CameraViewController.swift */; };
@@ -600,8 +598,6 @@
 		3E1219DA1CF845A400D43267 /* SCTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTouchDetector.h; sourceTree = "<group>"; };
 		3E1219DB1CF845A400D43267 /* SCTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTouchDetector.m; sourceTree = "<group>"; };
 		3E1219DC1CF845A400D43267 /* SCWatermarkOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWatermarkOverlayView.m; sourceTree = "<group>"; };
-		3E1219DD1CF845A400D43267 /* Vedios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vedios.h; sourceTree = "<group>"; };
-		3E1219DE1CF845A400D43267 /* Vedios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vedios.m; sourceTree = "<group>"; };
 		3E121A1E1CF845E700D43267 /* ImagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesView.swift; sourceTree = "<group>"; };
 		3E121A201CF880F300D43267 /* Vedios.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vedios.swift; sourceTree = "<group>"; };
 		3E121A221CF8848400D43267 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -833,7 +829,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		18C20DF11EEAA90B0001D78E /* Classes */ = {
+		18C20DF11EEAA90B0001D78E /* LGPhoto */ = {
 			isa = PBXGroup;
 			children = (
 				18C20DF21EEAA90B0001D78E /* LGPhoto.h */,
@@ -844,6 +840,7 @@
 				18C20E251EEAA90B0001D78E /* Utils */,
 				18C20E291EEAA90B0001D78E /* ZLCamera */,
 			);
+			name = LGPhoto;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -1067,7 +1064,7 @@
 		3E12199E1CF845A400D43267 /* camera */ = {
 			isa = PBXGroup;
 			children = (
-				18C20DF11EEAA90B0001D78E /* Classes */,
+				18C20DF11EEAA90B0001D78E /* LGPhoto */,
 				3E12199F1CF845A400D43267 /* CameraViewController.h */,
 				3E1219A01CF845A400D43267 /* CameraViewController.m */,
 				3E121A221CF8848400D43267 /* CameraViewController.swift */,
@@ -1080,8 +1077,6 @@
 				3E1219DA1CF845A400D43267 /* SCTouchDetector.h */,
 				3E1219DB1CF845A400D43267 /* SCTouchDetector.m */,
 				3E1219DC1CF845A400D43267 /* SCWatermarkOverlayView.m */,
-				3E1219DD1CF845A400D43267 /* Vedios.h */,
-				3E1219DE1CF845A400D43267 /* Vedios.m */,
 				3E121A201CF880F300D43267 /* Vedios.swift */,
 			);
 			path = camera;
@@ -1662,7 +1657,6 @@
 				3E1219DF1CF845A400D43267 /* CameraViewController.h in Headers */,
 				3E1219F21CF845A400D43267 /* SCFilterAnimation.h in Headers */,
 				3E121A0B1CF845A400D43267 /* SCRecordSessionSegment.h in Headers */,
-				3E121A1C1CF845A400D43267 /* Vedios.h in Headers */,
 				3E1219ED1CF845A400D43267 /* SCAudioVideoRecorder-Prefix.pch in Headers */,
 				3E121A061CF845A400D43267 /* SCRecorderToolsView.h in Headers */,
 				3E1219F61CF845A400D43267 /* SCFilterSelectorViewInternal.h in Headers */,
@@ -2042,7 +2036,6 @@
 				3E42425D1B2B6D75004DF7C5 /* UIButtons.swift in Sources */,
 				3E6AF2E31EB188E800B5DB1F /* MJRefreshAutoFooter.m in Sources */,
 				3E76AD811A412FB400B0C2BB /* Storage.swift in Sources */,
-				3E121A1D1CF845A400D43267 /* Vedios.m in Sources */,
 				3E1219E01CF845A400D43267 /* CameraViewController.m in Sources */,
 				3E20C7D41E53682A000C9698 /* MyRelativeLayout.m in Sources */,
 				3E73DADE1A8795A30052C16A /* ZHPickView.m in Sources */,

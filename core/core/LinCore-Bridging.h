@@ -49,7 +49,6 @@
 #import "ZLCameraViewController.h"
 
 
-#import "Vedios.h"
 
 #import "QBImagePickerController.h"
 
