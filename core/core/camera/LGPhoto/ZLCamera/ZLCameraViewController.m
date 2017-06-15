@@ -27,7 +27,6 @@ static CGFloat BOTTOM_HEIGHT = 60;
 @property (strong, nonatomic) UIViewController *currentViewController;
 
 // Datas
-@property (strong, nonatomic) NSMutableArray *images;
 @property (strong, nonatomic) NSMutableDictionary *dictM;
 
 // AVFoundation
@@ -282,7 +281,13 @@ static CGFloat BOTTOM_HEIGHT = 60;
     browserVc.dataSource = self;
     browserVc.delegate = self;
     browserVc.showType = LGShowImageTypeImageBroswer;
+    browserVc.image = self.images;
     browserVc.currentIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:0];
+    browserVc.callback = ^(NSMutableArray *cameras){
+        self.images = cameras;
+        [self.collectionView reloadData];
+        
+    };
     [self presentViewController:browserVc animated:NO completion:nil];
 }
 

@@ -70,7 +70,7 @@
 - (void)photoBrowserSendBtnTouched:(LGPhotoPickerBrowserViewController *)pickerBrowser isOriginal:(BOOL)isOriginal;
 
 @end
-
+typedef void(^blockBack)(id object);
 @interface LGPhotoPickerBrowserViewController : UIViewController
 
 // @require
@@ -82,6 +82,7 @@
 @property (nonatomic, copy  ) NSArray<__kindof LGPhotoPickerBrowserPhoto*> *photos;
 
 @property (nonatomic, strong) NSMutableArray<__kindof LGPhotoAssets*>  *selectedAssets;
+@property (nonatomic, strong) NSMutableArray  *image;
 // 当前提供的组
 @property (strong,nonatomic ) NSIndexPath     *currentIndexPath;
 
@@ -90,10 +91,11 @@
 @property (nonatomic, strong) UIActionSheet   *sheet;
 // 需要增加的导航高度
 @property (nonatomic, assign) CGFloat         navigationHeight;
-
+@property (copy, nonatomic) blockBack callback;
 @property (nonatomic, assign) NSInteger       maxCount;
 
 @property (nonatomic, assign) BOOL            isOriginal;
+
 // 放大缩小一张图片的情况下（查看头像）
 - (void)showHeadPortrait:(UIImageView *)toImageView;
 // 放大缩小一张图片的情况下（查看头像）/ 缩略图是toImageView.image 原图URL

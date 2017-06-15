@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     RIGHT
 };
 
-@interface LGPhotoPickerBrowserViewController () <UIScrollViewDelegate,LGPhotoPickerPhotoScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,LGPhotoPickerCustomToolBarViewDelegate,ZLCameraImageViewDelegate>
+@interface LGPhotoPickerBrowserViewController () <UIScrollViewDelegate,LGPhotoPickerPhotoScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,LGPhotoPickerCustomToolBarViewDelegate>
 
 // 控件
 @property (nonatomic, weak  ) UILabel                             *pageLabel;
@@ -95,10 +95,31 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         [self.view addSubview:collectionView];
         self.collectionView = collectionView;
         self.pageLabel.hidden = NO;
+        
+        
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 40) / 2,29,40,40)];
+        [btn setTitle:@"删除" forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(deleteImage:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btn];
+      
     }
 }
 
-
+-(void)deleteImage:(UIButton*)_{
+    
+    NSMutableArray *muArry = [self.photos mutableCopy];
+    
+    if (self.currentPage < muArry.count) {
+        [muArry removeObjectAtIndex:self.currentPage];
+        [self.image removeObjectAtIndex:self.currentPage];
+        self.callback(self.image);
+    }
+  
+    
+    self.photos = muArry;
+    [self reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark pageLabel
 
@@ -124,6 +145,8 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     }
     return _pageLabel;
 }
+
+
 
 #pragma mark getPhotos
 
@@ -291,11 +314,12 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     }
     if (self.photos.count) {
         LGPhotoPickerBrowserPhoto *photo = nil;
+    //  question
         photo = self.photos[indexPath.item];
         if([[cell.contentView.subviews lastObject] isKindOfClass:[UIView class]]){
             [[cell.contentView.subviews lastObject] removeFromSuperview];
         }
-        
+
         CGRect tempF = [UIScreen mainScreen].bounds;
         UIView *scrollBoxView = [[UIView alloc] init];
         scrollBoxView.frame = tempF;

@@ -25,7 +25,7 @@ typedef void(^ZLCameraCallBack)(id object);
 @property (assign,nonatomic) NSInteger maxCount;
 // 单张还是连拍
 @property (nonatomic, assign) ZLCameraType cameraType;
-
+@property (strong, nonatomic) NSMutableArray *images;
 // 完成后回调
 @property (copy, nonatomic) ZLCameraCallBack callback;
 
