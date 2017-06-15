@@ -96,9 +96,9 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         self.collectionView = collectionView;
         self.pageLabel.hidden = NO;
         
-        
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 40) / 2,29,40,40)];
-        [btn setTitle:@"删除" forState:UIControlStateNormal];
+        NSBundle * b = [NSBundle bundleForClass:[self class]];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 60,self.view.frame.size.height - 52,40,40)];
+         [btn setImage:[UIImage imageNamed:@"LinCore.bundle/camera/delete.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(deleteImage:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];
       
@@ -115,7 +115,6 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         self.callback(self.image);
     }
   
-    
     self.photos = muArry;
     [self reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
