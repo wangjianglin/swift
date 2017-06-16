@@ -187,6 +187,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     
     UIView *topView = [[UIView alloc] init];
     topView.backgroundColor = [UIColor blackColor];
+   
     topView.frame = CGRectMake(0, 24, self.view.width, 40);
     [self.view addSubview:topView];
     self.topView = topView;
@@ -201,7 +202,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     _flashBtn = flashBtn;
         
     // 底部View
-    UIView *controlView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height-BOTTOM_HEIGHT, self.view.width, BOTTOM_HEIGHT)];
+    UIView *controlView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height-BOTTOM_HEIGHT, self.view.width, (BOTTOM_HEIGHT * 1.3))];
     controlView.backgroundColor = [UIColor blackColor];
     controlView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     self.controlView = controlView;
@@ -215,14 +216,14 @@ static CGFloat BOTTOM_HEIGHT = 60;
     CGFloat x = (self.view.width - width) / 3;
     //取消
     UIButton *cancalBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancalBtn.frame = CGRectMake(0, 0, x, controlView.height);
+    cancalBtn.frame = CGRectMake(0, -13, x, controlView.height);
     [cancalBtn setTitle:@"取消" forState:UIControlStateNormal];
     [cancalBtn addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
     [controlView addSubview:cancalBtn];
     //拍照
     UIButton *cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     //x+margin, margin / 4 - 30, 80, controlView.height - margin / 2 + 30
-    cameraBtn.frame = CGRectMake(x+margin + 10, margin / 4 - 20, x - 10, controlView.height - margin / 2 + 30);
+    cameraBtn.frame = CGRectMake(x+margin + 10, margin / 4 - 33, x - 10, controlView.height - margin / 2 + 30);
     [cameraBtn setImage:[UIImage imageNamed:@"LinCore.bundle/camera/paizhao.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [cameraBtn setImage:[UIImage imageNamed:@"LinCore.bundle/camera/paizhaoLight.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
     
@@ -233,7 +234,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     // 完成
     if (self.cameraType == ZLCameraContinuous) {
         UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        doneBtn.frame = CGRectMake(self.view.width - 2 * margin - width + 20, 0, width, controlView.height);
+        doneBtn.frame = CGRectMake(self.view.width - 2 * margin - width + 20, -13, width, controlView.height);
         [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
         [doneBtn addTarget:self action:@selector(doneAction) forControlEvents:UIControlEventTouchUpInside];
         [controlView addSubview:doneBtn];
@@ -255,19 +256,24 @@ static CGFloat BOTTOM_HEIGHT = 60;
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
     ZLCamera *camera = self.images[indexPath.item];
-    
+
     ZLCameraImageView *lastView = [cell.contentView.subviews lastObject];
     if(![lastView isKindOfClass:[ZLCameraImageView class]]){
         // 解决重用问题
         UIImage *image = camera.thumbImage;
+        UIGraphicsBeginImageContext(CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width *1.3));
+        [image drawInRect:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 1.3)];
+        UIGraphicsEndImageContext();
         ZLCameraImageView *imageView = [[ZLCameraImageView alloc] init];
         imageView.delegatge = self;
         imageView.edit = YES;
         imageView.image = image;
         imageView.frame = cell.bounds;
-        imageView.deleBjView.frame = CGRectMake(cell.bounds.origin.x + 10, cell.bounds.origin.y + 10,cell.bounds.size.width - 20, cell.bounds.size.height - 20);
+        imageView.deleBjView.frame = CGRectMake(cell.bounds.origin.x + 10, cell.bounds.origin.y + 10,cell.bounds.size.width - 20, cell.bounds.size.height);
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         [cell.contentView addSubview:imageView];
+        
+        
     }
     
     lastView.image = camera.thumbImage;

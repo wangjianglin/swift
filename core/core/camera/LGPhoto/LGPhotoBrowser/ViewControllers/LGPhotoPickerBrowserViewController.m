@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         self.pageLabel.hidden = NO;
         
         NSBundle * b = [NSBundle bundleForClass:[self class]];
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 60,self.view.frame.size.height - 57,50,50)];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 60,self.view.frame.size.height - 53,40,40)];
          [btn setImage:[UIImage imageNamed:@"LinCore.bundle/camera/delete.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(deleteImage:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];
@@ -324,7 +324,6 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     }
     if (self.photos.count) {
         LGPhotoPickerBrowserPhoto *photo = nil;
-    //  question
         photo = self.photos[indexPath.item];
         if([[cell.contentView.subviews lastObject] isKindOfClass:[UIView class]]){
             [[cell.contentView.subviews lastObject] removeFromSuperview];
