@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         self.pageLabel.hidden = NO;
         
         NSBundle * b = [NSBundle bundleForClass:[self class]];
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 60,self.view.frame.size.height - 52,40,40)];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 60,self.view.frame.size.height - 57,50,50)];
          [btn setImage:[UIImage imageNamed:@"LinCore.bundle/camera/delete.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(deleteImage:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];
@@ -108,16 +108,27 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 -(void)deleteImage:(UIButton*)_{
     
     NSMutableArray *muArry = [self.photos mutableCopy];
-    
-    if (self.currentPage < muArry.count) {
+    if (self.currentPage == nil) {
         [muArry removeObjectAtIndex:self.currentPage];
         [self.image removeObjectAtIndex:self.currentPage];
         self.callback(self.image);
+        self.photos = muArry;
+        [self reloadData];
+        [self.collectionView reloadData];
+    }else if (self.currentPage < muArry.count) {
+        [muArry removeObjectAtIndex:self.currentPage];
+        [self.image removeObjectAtIndex:self.currentPage];
+        self.callback(self.image);
+        self.photos = muArry;
+        [self reloadData];
+        [self.collectionView reloadData];
     }
-  
-    self.photos = muArry;
-    [self reloadData];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if ((muArry.count) == 0)  {
+        self.callback(self.image);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 
 #pragma mark pageLabel
