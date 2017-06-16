@@ -21,6 +21,7 @@
     if (!_deleBjView) {
         _deleBjView = [[UIImageView alloc] init];
         _deleBjView.hidden = YES;
+        _deleBjView.contentMode = UIViewContentModeScaleAspectFit;
         _deleBjView.userInteractionEnabled = YES;
           UISwipeGestureRecognizer *_swipe;
          _swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(deleImage:)];

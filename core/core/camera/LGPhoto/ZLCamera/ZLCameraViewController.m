@@ -261,9 +261,6 @@ static CGFloat BOTTOM_HEIGHT = 60;
     if(![lastView isKindOfClass:[ZLCameraImageView class]]){
         // 解决重用问题
         UIImage *image = camera.thumbImage;
-        UIGraphicsBeginImageContext(CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width *1.3));
-        [image drawInRect:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 1.3)];
-        UIGraphicsEndImageContext();
         ZLCameraImageView *imageView = [[ZLCameraImageView alloc] init];
         imageView.delegatge = self;
         imageView.edit = YES;
