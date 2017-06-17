@@ -68,7 +68,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        layout.itemSize = CGSizeMake(ZLCameraColletionViewW, ZLCameraColletionViewW);
+        layout.itemSize = CGSizeMake(ZLCameraColletionViewW * 3 / 4, ZLCameraColletionViewW);
         layout.minimumLineSpacing = ZLCameraColletionViewPadding;
         
         CGFloat collectionViewH = ZLCameraColletionViewW;
@@ -266,7 +266,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
         imageView.edit = YES;
         imageView.image = image;
         imageView.frame = cell.bounds;
-        imageView.deleBjView.frame = CGRectMake(cell.bounds.origin.x + 10, cell.bounds.origin.y + 10,cell.bounds.size.width - 20, cell.bounds.size.height);
+        imageView.deleBjView.frame = cell.bounds;
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         [cell.contentView addSubview:imageView];
         
