@@ -56,11 +56,6 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
         }
     }
     
-    
-    @objc fileprivate func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return _contentView;
-    }
-    
     fileprivate func initView(){
         
         self.backgroundColor = UIColor.clear;
