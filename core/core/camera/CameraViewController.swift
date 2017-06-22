@@ -51,6 +51,9 @@ private class __CameraViewControllerDelegateAction : DelegateAction,CameraViewDe
 
 extension CameraViewController{
     
+    
+    
+    
     public func setResult(_ action:@escaping ((_ url:URL?)->())){
         
         let delegateAction = __CameraViewControllerDelegateAction(action:action);

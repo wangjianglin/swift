@@ -10,7 +10,10 @@ import MediaPlayer
 import UIKit
 
 
-open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSource,QBImagePickerControllerDelegate,UIActionSheetDelegate{
+
+open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSource,QBImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate{
+   
+    
     fileprivate var _collectionView:UICollectionView!
     fileprivate var _cellImage:UICollectionViewCell!;
     fileprivate var _cellVideo:ImagesViewAddVedioCollectionViewCell!;
@@ -19,9 +22,17 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     fileprivate var _vedioUrl:URL?;
     fileprivate var _heightConstraint:NSLayoutConstraint!;
     fileprivate var _vedioImage:UIImage?;
-    
     fileprivate var _vc:VedioConvert!;
     
+  
+    public enum SelectPhotoType {
+        case photoAlbum
+        case carmer
+        case allSelect
+        
+    }
+   
+   public var selectType = SelectPhotoType.allSelect
     
     fileprivate func delete(_ pos:Int){
         _imagePaths.remove(at: pos);
@@ -37,6 +48,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             _cellVideo.setVedioImage(_vedioImage)
         }
     }
+    
     
     open var hasVedio = true{
         didSet{
@@ -86,6 +98,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     public init(){
         
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0));
+        
         //层声明实列化
         _flowLayout = UICollectionViewFlowLayout();
         _flowLayout.itemSize = CGSize(width: 50,height: 50); //设置每个cell显示数据的宽和高必须
@@ -140,6 +153,56 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     
     @objc fileprivate func imagePacker(_:NSObject){
         
+       
+        switch selectType {
+        case .allSelect:
+        
+            let userIconAlert = UIAlertController(title: "请选择操作", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
+            let chooseFromPhotoAlbum = UIAlertAction(title: "相册选取", style: UIAlertActionStyle.default, handler: funcChooseFromPhotoAlbum)
+            userIconAlert.addAction(chooseFromPhotoAlbum)
+            let chooseFromCamera = UIAlertAction(title: "拍照", style: UIAlertActionStyle.default,handler:funcChooseFromCamera)
+            userIconAlert.addAction(chooseFromCamera)
+            let canelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel,handler: nil)
+            userIconAlert.addAction(canelAction)
+            self.viewController?.present(userIconAlert, animated: true, completion: nil)
+
+        case .carmer:
+        
+            let v = ZLCameraViewController()
+            v.cameraType = .continuous;
+            v.maxCount = maxSelection - _imagePaths.count
+            
+            v.callback = {(ZLCameraCallBack) -> Void in
+                
+                let carmer : [ZLCamera] = ZLCameraCallBack as! [ZLCamera]
+                
+                
+                for i in carmer {
+                    let s = i.photoImage
+                  
+                    self._imagePaths.append(s!)
+                }
+                self._collectionView.reloadData();
+            }
+            v.showPickerVc(self.viewController)
+        case .photoAlbum:
+          
+            let imagePickerController = QBImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.filterType = QBImagePickerFilterTypeAllPhotos
+            
+            imagePickerController.allowsMultipleSelection = true
+            
+            imagePickerController.maximumNumberOfSelection = UInt(maxSelection - _imagePaths.count)
+            imagePickerController.limitsMaximumNumberOfSelection = true
+            let navigationController = UINavigationController(rootViewController:imagePickerController)
+            self.viewController?.present(navigationController, animated:true, completion:nil)
+        }
+    }
+    
+    
+    func funcChooseFromPhotoAlbum(_ avc:UIAlertAction) -> Void {
+        
         let imagePickerController = QBImagePickerController();
         imagePickerController.delegate = self;
         imagePickerController.filterType = QBImagePickerFilterTypeAllPhotos;
@@ -150,10 +213,33 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         imagePickerController.limitsMaximumNumberOfSelection = true;
         let navigationController = UINavigationController(rootViewController:imagePickerController);
         self.viewController?.present(navigationController, animated:true, completion:nil);
+        
     }
     
     
-    @objc open func imagePickerController(_ imagePickerController:QBImagePickerController, didFinishPickingMediaWithInfo info:AnyObject){
+    func funcChooseFromCamera(_ avc:UIAlertAction) -> Void {
+        let v = ZLCameraViewController()
+        v.cameraType = .continuous;
+        v.maxCount = maxSelection - _imagePaths.count
+        
+        v.callback = {(ZLCameraCallBack) -> Void in
+         
+         let carmer : [ZLCamera] = ZLCameraCallBack as! [ZLCamera]
+         
+            
+            for i in carmer {
+             let getImage = i.photoImage
+             let scaleImage = getImage?.scaledToSize(CGSize.init(width:498, height:664),fill:false)
+            
+            self._imagePaths.append(scaleImage!)
+            }
+            self._collectionView.reloadData();
+        }
+         v.showPickerVc(self.viewController)
+    }
+    
+    
+    @objc open func imagePickerController(_ imagePickerController:QBImagePickerController, didFinishPickingMediaWithInfo info:Any){
         
         if (imagePickerController.filterType == QBImagePickerFilterTypeAllVideos) {
             
@@ -220,7 +306,6 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     open func movieFinishedCallback(_ sender:AnyObject){
         let playerViewController = (sender as! Notification).object;
         (playerViewController as AnyObject).view.removeFromSuperview();
-        
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object:nil);
         
     }
@@ -509,7 +594,6 @@ open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
         
         let iconImage = CacheImageView();
         
-        //iconImage.setFillImage("LinCore.bundle/camera/camera_icon_camera.png");
         iconImage.setImageObj(UIImage(named: "LinCore.bundle/camera/camera_icon_camera.png", in: Bundle(for:self.classForCoder), compatibleWith: nil));
         iconImage.contentMode = .scaleAspectFit;
         iconImage.frame = CGRect(x: 15, y: 10, width: _dashImageView.frame.size.width - 10, height: _dashImageView.frame.size.width - 10);
