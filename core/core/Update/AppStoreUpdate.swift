@@ -38,7 +38,7 @@ open class AppStoreUpdate{
     }
     
     
-    fileprivate class func updateImpl(_ appId:String){
+    private class func updateImpl(_ appId:String){
         
         
         let url = URL(string:"https://itunes.apple.com/lookup?id=\(appId)");
@@ -57,57 +57,53 @@ open class AppStoreUpdate{
                 return;
             }
             
-            let updateVersionsOption = parserVersion(json["results"][0]["version"].asString(""));
-            if updateVersionsOption == nil {
+            var result = json["results"];
+            if result.count < 1{
+                return;
+            }
+            result = result[0];
+            
+            let bundleId = result["bundleId"].asString("");
+            
+            if Bundle.main.object(forInfoDictionaryKey: kCFBundleIdentifierKey as String) as? String ?? "" != bundleId{
                 return;
             }
             
-            let updateVersions = updateVersionsOption!;
+            let minimumOsVersion = result["minimumOsVersion"].asString("0.0");
             
-            let appVersionsOption = parserVersion(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String);
-            if appVersionsOption == nil {
+            let systemVersion = UIDevice.current.systemVersion;
+            
+            if compareVersion(systemVersion,minimumOsVersion) < 0 {
                 return;
             }
             
-            let appVersions = appVersionsOption!;
             
-            var flag = 0;//0不需要更新，1、必须更新，2、非必须更新
+            let flag = compareVersion(result["version"].asString("0.0.0"), Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "100000.0.0")
             
-            
-            if updateVersions[0] > appVersions[0] {
-                flag = 1;
-            }else if updateVersions[0] == appVersions[0] {
-                if updateVersions[1] > appVersions[1] {
-                    flag = 1;
-                }else if updateVersions[1] == appVersions[1] {
-                    if updateVersions[2] > appVersions[2] {
-                        flag = 2;
-                    }
-                }
-            }
-            if (flag == 0) {
+            if (flag <= 0) {
                 return;
             }
             
             
             var updateString:String!;
-            if (flag == 1) {
+            if flag == 1 || flag == 2 {
                 updateString = "应用有新版本，为了正常使用，请更新！";
             }else{
                 updateString = "应用有新版本，是否需要更新！";
             }
-            updateString = json["results"][0]["releaseNotes"].asString(updateString);
+            updateString = result["releaseNotes"].asString(updateString);
             
             Queue.mainQueue{
                 
                 var alert:UIAlertView! = nil;
                 
+                let trackViewUrl = result["trackViewUrl"].asString("https://itunes.apple.com/cn/app/wei/id\(appId)");
                 
-                if flag == 1 {
+                if flag == 1 || flag == 2 {
                     
                     alert = UIAlertView(title:"", message:updateString, delegate:nil, cancelButtonTitle:"更新");
                     alert.clickedButtonAtIndexAction = {(alertView:UIAlertView, buttonIndex:Int) in
-                        if let url = URL(string:"https://itunes.apple.com/cn/app/wei/id\(appId)") {
+                        if let url = URL(string:trackViewUrl) {
                             UIApplication.shared.openURL(url);
                         }
                     };
@@ -116,7 +112,7 @@ open class AppStoreUpdate{
                     alert.clickedButtonAtIndexAction = {(alertView:UIAlertView, buttonIndex:Int) in
                         if (buttonIndex == 1) {
                             
-                            if let url = URL(string:"https://itunes.apple.com/cn/app/wei/id\(appId)") {
+                            if let url = URL(string:trackViewUrl) {
                                 UIApplication.shared.openURL(url);
                             }
                         }
@@ -137,6 +133,40 @@ open class AppStoreUpdate{
             };
             
         }
+    }
+    
+    private class func compareVersion(_ ver1:String,_ ver2:String)->Int{
+        
+        
+        let vers1 = parserVersion(ver1);
+        if vers1 == nil {
+            return -2;
+        }
+        
+        
+        let vers2 = parserVersion(ver2);
+        
+        if vers2 == nil {
+            return -2;
+        }
+        
+        var flag = -1;//0不需要更新，1/2、必须更新，3、非必须更新
+        
+        
+        if vers1![0] > vers2![0] {
+            flag = 1;
+        }else if vers1![0] == vers2![0] {
+            if vers1![1] > vers2![1] {
+                flag = 2;
+            }else if vers1![1] == vers2![1] {
+                if vers1![2] > vers2![2] {
+                    flag = 3;
+                }else if vers1![2] == vers2![2] {
+                    flag = 0;
+                }
+            }
+        }
+        return flag;
     }
     
     fileprivate class func parserVersion(_ version:String!)->[Int]!{

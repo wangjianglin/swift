@@ -47,6 +47,8 @@ public class HttpCommunicate{
         open var isDebug:Bool? = nil;
         
         open var timeout:TimeInterval? = nil;//以秒为单位
+        
+        internal var header = [String:String]();
     }
     
     struct YRSingleton{
