@@ -44,6 +44,7 @@
                         <segue destination="dpo-i5-uBj" kind="push" identifier="table" id="zbf-OP-Wr4"/>
                         <segue destination="tF1-UX-thH" kind="push" identifier="rac" id="8dh-77-7Km"/>
                         <segue destination="mJL-Gq-PTz" kind="push" identifier="tableVC" id="JmY-kg-JDD"/>
+                        <segue destination="cPr-mI-b8e" kind="push" identifier="property" id="cwm-At-h3b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vWn-gA-uWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -271,6 +272,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRB-UK-MoD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-105" y="477"/>
+        </scene>
+        <!--Property View Controller-->
+        <scene sceneID="SL0-Ei-pKr">
+            <objects>
+                <viewController id="cPr-mI-b8e" customClass="PropertyViewController" customModule="demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="slJ-t8-3tB"/>
+                        <viewControllerLayoutGuide type="bottom" id="8Rk-CN-S7L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="N3D-sA-Q4d">
+                        <rect key="frame" x="0.0" y="0.0" width="175" height="167"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZEx-Rk-40t"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4uf-8k-Tz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-71" y="-191"/>
         </scene>
         <!--From Controller-->
         <scene sceneID="sKk-kC-emV">

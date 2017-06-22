@@ -27,6 +27,12 @@ open class FormSegueDescriptor:FormRowDescriptor{
         super.init(title: title, imageName:imageName, name:"")
     }
     
+    public init(title:String,imageName:String,count:String ,segue:String){
+        self._segue = segue
+        
+        super.init(title: title, imageName:imageName, name:"")
+    }
+    
     override open func formBaseCellClassFromRowDescriptor() -> FormBaseCell.Type! {
         
         return FormSegueCell.self;

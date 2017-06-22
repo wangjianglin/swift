@@ -17,8 +17,14 @@ open class FormBaseCell: UITableViewCell {
             if let backgroundColor = self.rowDescriptor.backgroundColor{
                 self.backgroundColor = backgroundColor
             }
+            //self.rowDescriptor.valueChange2 = {}
+            self.rowDescriptor.valueChange2 = v;
             self.update()
         }
+    }
+    
+    private func v(_ v1:Any?,_ v2:Any?){
+        valueLabel?.text = "\(v1 ?? "")";
     }
     
     /// MARK: Init
@@ -58,7 +64,7 @@ open class FormBaseCell: UITableViewCell {
         contentView.addSubview(valueLabel!)
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[titleLabel]-10-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[valueLabel]-30-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[valueLabel]-0-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
        
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[titleLabel(24)]-10-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[valueLabel(24)]-10-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
@@ -74,7 +80,7 @@ open class FormBaseCell: UITableViewCell {
         contentView.addSubview(valueLabel!)
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[imv(24)]-10-[titleLabel]-10-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["imv":imgView,"titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[imv(24)]-10-[valueLabel]-30-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["imv":imgView,"titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[imv(24)]-10-[valueLabel]-0-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["imv":imgView,"titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[imv(24)]-10-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["imv":imgView,"titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[titleLabel(24)]-10-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["imv":imgView,"titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
          contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-10-[valueLabel(24)]-10-|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:["imv":imgView,"titleLabel":self.titleLabel!,"valueLabel":valueLabel]))
