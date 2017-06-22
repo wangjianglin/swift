@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     RIGHT
 };
 
-@interface LGPhotoPickerBrowserViewController () <UIScrollViewDelegate,LGPhotoPickerPhotoScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,LGPhotoPickerCustomToolBarViewDelegate,ZLCameraImageViewDelegate>
+@interface LGPhotoPickerBrowserViewController () <UIScrollViewDelegate,LGPhotoPickerPhotoScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,LGPhotoPickerCustomToolBarViewDelegate>
 
 // 控件
 @property (nonatomic, weak  ) UILabel                             *pageLabel;
@@ -95,10 +95,41 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         [self.view addSubview:collectionView];
         self.collectionView = collectionView;
         self.pageLabel.hidden = NO;
+        
+        NSBundle * b = [NSBundle bundleForClass:[self class]];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 60,self.view.frame.size.height - 53,40,40)];
+         [btn setImage:[UIImage imageNamed:@"LinCore.bundle/camera/delete.png" inBundle:b compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(deleteImage:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btn];
+      
     }
 }
 
-
+-(void)deleteImage:(UIButton*)_{
+    
+    NSMutableArray *muArry = [self.photos mutableCopy];
+    if (self.currentPage == nil) {
+        [muArry removeObjectAtIndex:self.currentPage];
+        [self.image removeObjectAtIndex:self.currentPage];
+        self.callback(self.image);
+        self.photos = muArry;
+        [self reloadData];
+        [self.collectionView reloadData];
+    }else if (self.currentPage < muArry.count) {
+        [muArry removeObjectAtIndex:self.currentPage];
+        [self.image removeObjectAtIndex:self.currentPage];
+        self.callback(self.image);
+        self.photos = muArry;
+        [self reloadData];
+        [self.collectionView reloadData];
+    }
+    
+    if ((muArry.count) == 0)  {
+        self.callback(self.image);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+}
 
 #pragma mark pageLabel
 
@@ -124,6 +155,8 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     }
     return _pageLabel;
 }
+
+
 
 #pragma mark getPhotos
 
@@ -295,7 +328,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         if([[cell.contentView.subviews lastObject] isKindOfClass:[UIView class]]){
             [[cell.contentView.subviews lastObject] removeFromSuperview];
         }
-        
+
         CGRect tempF = [UIScreen mainScreen].bounds;
         UIView *scrollBoxView = [[UIView alloc] init];
         scrollBoxView.frame = tempF;

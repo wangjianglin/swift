@@ -20,17 +20,14 @@
 - (UIImageView *)deleBjView{
     if (!_deleBjView) {
         _deleBjView = [[UIImageView alloc] init];
-       
         _deleBjView.hidden = YES;
+        _deleBjView.contentMode = UIViewContentModeScaleAspectFit;
         _deleBjView.userInteractionEnabled = YES;
           UISwipeGestureRecognizer *_swipe;
+          
          _swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(deleImage:)];
          _swipe.direction = UISwipeGestureRecognizerDirectionUp;
         [_deleBjView addGestureRecognizer:_swipe];
-       // _pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(deleImage:)];
-       
-      //  [_deleBjView addGestureRecognizer:_pan];
-       // [_deleBjView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleImage:)]];
         [self addSubview:_deleBjView];
     }
     return _deleBjView;

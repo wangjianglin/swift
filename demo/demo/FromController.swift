@@ -14,7 +14,15 @@ import LinRac
 import ReactiveCocoa
 import ReactiveSwift
 
-public class FromController: FormViewController,FormViewControllerDelegate {
+public class FromController: FormViewController,FormViewControllerDelegate ,BaseView{
+    
+    private lazy var vm:FromViewModel = {
+        var _vm = FromViewModel()
+        _vm.view = self
+        return _vm
+    }()
+    
+    var countRow:FormRowDescriptor = FormRowDescriptor(title: "", name: "")
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -47,9 +55,13 @@ public class FromController: FormViewController,FormViewControllerDelegate {
         
         let section2 = FormSectionDescriptor()
         
-        row = FormSegueDescriptor(title:"设置", imageName:"设置icon", segue:"test")
-        row.backgroundColor = cellBackgroundColor
-        section2.addRow(row)
+        countRow = FormSegueDescriptor(title:"设置", imageName:"设置icon", segue:"test")
+        
+        //row.value = ""
+        countRow.reactive.value <~ vm.bind.property(keyPath: "count")
+        
+        countRow.backgroundColor = cellBackgroundColor
+        section2.addRow(countRow)
         
         let section3 = FormSectionDescriptor()
         row = FormSegueDescriptor(title:"听话", imageName:"听话icon", segue:"test")
@@ -78,6 +90,8 @@ public class FromController: FormViewController,FormViewControllerDelegate {
         
         
         self.form = form
+        
+        self.vm.testCount()
     }
     
 }

@@ -23,17 +23,24 @@ open class FormRowDescriptor: NSObject {
     fileprivate var _value:Any?;
     open var value: Any? {
         set {
+            if let vc = self.valueChange2{
+                let oldValue = self._value;
+                self._value = newValue;
+                vc(newValue, oldValue);
+            }
             if let vc = self.valueChange{
                 let oldValue = self._value;
                 self._value = newValue;
                 vc(newValue, oldValue);
-            }else{
-                self._value = newValue;
             }
+            
+            self._value = newValue;
+            
         }
         get {return _value;}
     }
     open var valueChange:((_ newValue:Any?,_ oldValue:Any?)->())?;
+    internal var valueChange2:((_ newValue:Any?,_ oldValue:Any?)->())?;
     //public var options: [NSObject]!
     
     open var titleFormatter: TitleFormatter!

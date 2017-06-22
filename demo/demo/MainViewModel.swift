@@ -38,9 +38,9 @@ public class MainViewModel : NSObject,ViewModel{
         ["RAC","carmer","",CommodityDetialEditController.self],
         ["RAC","bind","rac",nil],
         ["RAC","bind","table",nil],
-        ["Form","个人中心表格设置","tableVC",nil]
-        
-        
+        ["Form","个人中心表格设置","tableVC",nil],
+        ["Property","属性替换","property",nil]
+
     ];
     
     private func genDatas(){
