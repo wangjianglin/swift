@@ -10,12 +10,12 @@ import Foundation
 
 open class HttpError :NSObject,Error{
     
-    public init(code:Int,message:String? = nil,cause:String? = nil,strackTrace:String? = nil){
+    public init(code:Int,message:String? = nil,cause:String? = nil,stackTrace:String? = nil){
         super.init();
         self.__code = code;
         self._message = message;
         self._cause = cause;
-        self._strackTrace = strackTrace;
+        self._stackTrace = stackTrace;
     }
     private var __code:Int = -1;
     open var code:Int{
@@ -27,9 +27,9 @@ open class HttpError :NSObject,Error{
         return _message;
     }
     
-    private var _strackTrace:String?;
-    open var strackTrace:String?{
-        return _strackTrace;
+    private var _stackTrace:String?;
+    open var stackTrace:String?{
+        return _stackTrace;
     }
     
     private var _cause:String?;
@@ -64,7 +64,7 @@ open class HttpError :NSObject,Error{
 public extension HttpError{
     
     public func toNSError()->NSError{
-        return NSError(domain: self.message ?? "", code: self._code, userInfo: ["cause":self.cause ?? "","strackTrace":self.strackTrace ?? ""]);
+        return NSError(domain: self.message ?? "", code: self._code, userInfo: ["cause":self.cause ?? "","stackTrace":self.stackTrace ?? ""]);
     }
 }
 

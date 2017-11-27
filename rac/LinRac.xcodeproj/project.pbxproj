@@ -18,6 +18,7 @@
 		3E8AA15A1D2A5904006E4922 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA1591D2A5904006E4922 /* Action.swift */; };
 		3E8AA15C1D2A628F006E4922 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA15B1D2A628F006E4922 /* Signal.swift */; };
 		3E8AA1601D2A64F8006E4922 /* RACSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA15F1D2A64F8006E4922 /* RACSubscriber.swift */; };
+		3E96DF251F976B4400681116 /* tasks.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3E96DF241F976B4400681116 /* tasks.txt */; };
 		BC779778E5EA0E1496E719D7 /* Pods_LinRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF4A7D206427ED9655063152 /* Pods_LinRac.framework */; };
 		FE424A9A1EFA6535001DCC2C /* FormBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE424A991EFA6535001DCC2C /* FormBaseCell.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 		3E8AA1591D2A5904006E4922 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		3E8AA15B1D2A628F006E4922 /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
 		3E8AA15F1D2A64F8006E4922 /* RACSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACSubscriber.swift; sourceTree = "<group>"; };
+		3E96DF241F976B4400681116 /* tasks.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = tasks.txt; sourceTree = "<group>"; };
 		7E4CDAF2B3E38BCABE01224F /* Pods-LinRac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinRac.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LinRac/Pods-LinRac.release.xcconfig"; sourceTree = "<group>"; };
 		9ADAE0B38D9AE84342F293A9 /* Pods-LinRac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinRac.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LinRac/Pods-LinRac.debug.xcconfig"; sourceTree = "<group>"; };
 		BF4A7D206427ED9655063152 /* Pods_LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 				3E519A161DE1F9D100B60C0E /* UIControls.swift */,
 				3E519A181DE1FA0000B60C0E /* ViewModel.swift */,
 				3E20C7571E52C7C1000C9698 /* AbsViewModel.swift */,
+				3E96DF241F976B4400681116 /* tasks.txt */,
 			);
 			path = rac;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E96DF251F976B4400681116 /* tasks.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

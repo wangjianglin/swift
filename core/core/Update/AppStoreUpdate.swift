@@ -28,20 +28,42 @@ open class AppStoreUpdate{
         }
     }
     
-    open class func update(_ appId:String){
+    
+    open class func update(){
+        update(appId: nil, bundleId: nil);
+    }
+    
+    open class func update(appId:String){
+        update(appId:appId,bundleId:nil)
+    }
+    
+    open class func update(bundleId:String){
+        update(appId:nil,bundleId:bundleId)
+    }
+    
+    private class func update(appId:String?,bundleId:String?){
         Queue.asynThread {
             while(true){
-                updateImpl(appId);
+                updateImpl(appId:appId,bundleId:bundleId);
                 Thread.sleep(forTimeInterval: YRSignal.TIME_INTERVAL);
             }
         }
     }
     
     
-    private class func updateImpl(_ appId:String){
+    private class func updateImpl(appId:String?,bundleId:String?){
         
+        let infoDic = Bundle.main.infoDictionary;
         
-        let url = URL(string:"https://itunes.apple.com/lookup?id=\(appId)");
+        var url:URL!;
+        if let appId = appId {
+            url = URL(string:"https://itunes.apple.com/cn/lookup?id=\(appId)");
+        }else if let bundleId = bundleId {
+            url = URL(string:"https://itunes.apple.com/lookup?bundleId=\(bundleId)&country=cn")
+        }else{
+            let currentBundleId = infoDic?[kCFBundleIdentifierKey as String] ?? "";
+            url = URL(string:"https://itunes.apple.com/lookup?bundleId=\(currentBundleId)&country=cn")
+        }
         let  request = NSMutableURLRequest();
         request.url = url;
         let data = try? NSURLConnection.sendSynchronousRequest(request as URLRequest, returning:nil);
@@ -93,11 +115,13 @@ open class AppStoreUpdate{
             }
             updateString = result["releaseNotes"].asString(updateString);
             
+            let artistId = result["artistId"].asString("");
+            
             Queue.mainQueue{
                 
                 var alert:UIAlertView! = nil;
                 
-                let trackViewUrl = result["trackViewUrl"].asString("https://itunes.apple.com/cn/app/wei/id\(appId)");
+                let trackViewUrl = result["trackViewUrl"].asString("https://itunes.apple.com/us/app/id\(artistId)?ls=1&mt=8");
                 
                 if flag == 1 || flag == 2 {
                     
@@ -187,3 +211,4 @@ open class AppStoreUpdate{
     }
     
 }
+

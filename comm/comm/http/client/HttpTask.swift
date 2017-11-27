@@ -360,15 +360,16 @@ internal class HttpTask : NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: (Foundation.URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        if let a = auth {
-            let cred = a(challenge)
-            if let c = cred {
-                completionHandler(.useCredential, c)
-            }
-            completionHandler(.rejectProtectionSpace, nil)
-            return
-        }
-        completionHandler(.performDefaultHandling, nil)
+//        if let a = auth {
+//            let cred = a(challenge)
+//            if let c = cred {
+        let credential = URLCredential.init(trust: challenge.protectionSpace.serverTrust!)
+        completionHandler(.useCredential, credential)
+//            }
+//            completionHandler(.rejectProtectionSpace, nil)
+//            return
+//        }
+//        completionHandler(.performDefaultHandling, nil)
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

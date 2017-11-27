@@ -341,7 +341,7 @@ public class HttpCommunicateImpl{
             let e:HttpError = HttpError(code:-2
                 ,message:"net error."
                 ,cause:"net error."
-                ,strackTrace:error?.description
+                ,stackTrace:error?.description
             );
             //            e.message = "net error.";
             //            e.cause = "net error.";
@@ -447,7 +447,7 @@ public class HttpCommunicateImpl{
             let e:HttpError = HttpError(code:-1
                 ,message:"net error."
                 ,cause:"net error."
-                ,strackTrace:error.description
+                ,stackTrace:error.description
             );
             //            e.message = "net error.";
             //            e.cause = "net error.";

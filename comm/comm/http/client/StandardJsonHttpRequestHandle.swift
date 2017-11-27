@@ -57,7 +57,7 @@ open class StandardJsonHttpRequestHandle:HttpRequestHandle{
                 let error = HttpError(code:-0x11
                     ,message:"json parser error."
                     ,cause:""
-                    ,strackTrace : resp);
+                    ,stackTrace : resp);
                 //                error.message = "json parser error.";
                 //                error.cause = "json parser error.";
                 //                error.strackTrace = resp;
@@ -70,7 +70,7 @@ open class StandardJsonHttpRequestHandle:HttpRequestHandle{
                     let error = HttpError(code:code
                         ,message:json["message"].asString
                         ,cause:json["cause"].asString
-                        ,strackTrace:json["strackTrace"].asString
+                        ,stackTrace:json["stackTrace"].asString
                     )
                     //                    error.message = json["message"].asString;
                     //                    error.strackTrace = json["stackTrace"].asString;
