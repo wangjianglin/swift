@@ -17,8 +17,6 @@ public struct ArrayExt<Element>{
     }
 }
 
-
-
 public extension Array{
     
     public var ext:ArrayExt<Element>{
@@ -30,8 +28,8 @@ public extension Array{
         }
     }
 }
-
 extension ArrayExt{
+    
     public mutating func addObjectsFromArray(_ arr:Array<Element>?){
         if let arr = arr {
             for item in arr {

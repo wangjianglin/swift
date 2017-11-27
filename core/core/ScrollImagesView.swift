@@ -109,6 +109,7 @@ private class LinImagesContentView : UIScrollView,UIScrollViewDelegate{
             _contentView.frame = contentViewRect2;
             self.zoomScale = 1;
         }
+
     }
     
     fileprivate override func layoutSubviews() {
@@ -307,13 +308,15 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
     @objc private func playVedio(_:AnyObject){
         let playerViewController = MPMoviePlayerViewController(contentURL:vedioUrl);
         
-        self.rootViewController?.addChildViewController(playerViewController!);
+        
+        
+        self.ext.rootViewController?.addChildViewController(playerViewController!);
         
         NotificationCenter.default.addObserver(self, selector:#selector(self.movieFinishedCallback),
                                                name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
                                                object:(playerViewController?.moviePlayer));
         //-- add to view---
-        self.rootViewController?.view.addSubview((playerViewController?.view)!);
+        self.ext.rootViewController?.view.addSubview((playerViewController?.view)!);
         
         
         //---play movie---
@@ -527,7 +530,7 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
                 camera.setResult({[weak self] (url) in
                     self?._vedioURL = url;
                 })
-                self.viewController?.present(camera, animated: true, completion: nil);
+                self.ext.viewController?.present(camera, animated: true, completion: nil);
                 return;
             }
             
@@ -557,12 +560,12 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
             
             let navigationController = UINavigationController(rootViewController: imagePickerController);
             
-            self.viewController?.present(navigationController, animated: true, completion: nil);
+            self.ext.viewController?.present(navigationController, animated: true, completion: nil);
             
         }else {
             if self._isFullScreen {//退出全屏
                 
-                self.viewController?.dismiss(animated: true, completion:nil);
+                self.ext.viewController?.dismiss(animated: true, completion:nil);
             }else if self.fullScreen {//进入全屏
                 
                 
@@ -587,8 +590,7 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
                 fullScreenController.view.addSubview(fullScreenView);
                 fullScreenView.frame = CGRect(x: 0, y: 0, width: fullScreenController.view.bounds.size.width, height: fullScreenController.view.bounds.size.height);
                 fullScreenView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
-                
-                self.viewController?.present(fullScreenController, animated:true, completion:nil);
+                self.ext.viewController?.present(fullScreenController, animated:true, completion:nil);
             }
         }
     }

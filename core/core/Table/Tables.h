@@ -19,7 +19,7 @@
 //#import "PureLayout+Internal.h"
 //#import "PureLayout.h"
 //#import "PureLayoutDefines.h"
-//
+////
 //#import "MJRefresh.h"
 //#import "MJRefreshBaseView.h"
 //#import "MJRefreshConst.h"
@@ -29,7 +29,7 @@
 //#import "UIScrollView+MJRefresh.h"
 //#import "UIView+MJExtension.h"
 
-
+#import "PureLayout.h"
 #import "MGSwipeButton.h"
 #import "MGSwipeTableCell.h"
 

@@ -225,9 +225,11 @@ open class CacheImageView : UIImageView{
     }
     
     open override func removeFromSuperview() {
+        super.removeFromSuperview()
         if let operation = self.operation {
             operation.cancel();
         }
+        self.image = nil
     }
     
     //    public func reuse(){

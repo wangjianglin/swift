@@ -146,7 +146,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         imagePickerController.maximumNumberOfSelection = (10 - UInt(_imagePaths.count));
         imagePickerController.limitsMaximumNumberOfSelection = true;
         let navigationController = UINavigationController(rootViewController:imagePickerController);
-        self.viewController?.present(navigationController, animated:true, completion:nil);
+        self.ext.viewController?.present(navigationController, animated:true, completion:nil);
     }
     
     
@@ -164,7 +164,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             userIconAlert.addAction(chooseFromCamera)
             let canelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel,handler: nil)
             userIconAlert.addAction(canelAction)
-            self.viewController?.present(userIconAlert, animated: true, completion: nil)
+            self.ext.viewController?.present(userIconAlert, animated: true, completion: nil)
 
         case .carmer:
         
@@ -184,7 +184,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
                 }
                 self._collectionView.reloadData();
             }
-            v.showPickerVc(self.viewController)
+            v.showPickerVc(self.ext.viewController)
         case .photoAlbum:
           
             let imagePickerController = QBImagePickerController()
@@ -196,7 +196,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             imagePickerController.maximumNumberOfSelection = UInt(maxSelection - _imagePaths.count)
             imagePickerController.limitsMaximumNumberOfSelection = true
             let navigationController = UINavigationController(rootViewController:imagePickerController)
-            self.viewController?.present(navigationController, animated:true, completion:nil)
+            self.ext.viewController?.present(navigationController, animated:true, completion:nil)
         }
     }
     
@@ -212,7 +212,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         imagePickerController.maximumNumberOfSelection = UInt(maxSelection - _imagePaths.count);
         imagePickerController.limitsMaximumNumberOfSelection = true;
         let navigationController = UINavigationController(rootViewController:imagePickerController);
-        self.viewController?.present(navigationController, animated:true, completion:nil);
+        self.ext.viewController?.present(navigationController, animated:true, completion:nil);
         
     }
     
@@ -235,7 +235,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             }
             self._collectionView.reloadData();
         }
-         v.showPickerVc(self.viewController)
+         v.showPickerVc(self.ext.viewController)
     }
     
     
@@ -256,7 +256,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
                 self?._vedioImage = image;
                 self?._cellVideo.setVedioImage(image);
             };
-            _vc.start(self.viewController!.view);
+            _vc.start(self.ext.viewController!.view);
         }
         else if imagePickerController.allowsMultipleSelection {
             let mediaInfoArray = info as! NSArray;
@@ -321,13 +321,13 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             
             let playerViewController = MPMoviePlayerViewController(contentURL:_vedioUrl);
             
-            self.rootViewController?.addChildViewController(playerViewController!);
+            self.ext.rootViewController?.addChildViewController(playerViewController!);
             
             NotificationCenter.default.addObserver(self, selector:#selector(self.movieFinishedCallback),
                                                    name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
                                                    object:playerViewController?.moviePlayer);
             //-- add to view---
-            self.rootViewController?.view.addSubview((playerViewController?.view)!);
+            self.ext.rootViewController?.view.addSubview((playerViewController?.view)!);
             
             
             //---play movie---
@@ -368,7 +368,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             }
             self?.vedioUrl = file;
         });
-        self.viewController?.present(camera, animated:true, completion:nil);
+        self.ext.viewController?.present(camera, animated:true, completion:nil);
         return;
     }
     

@@ -37,6 +37,7 @@
 		3EF90C701A5E71A3004F2E85 /* Synchronized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF90C6F1A5E71A3004F2E85 /* Synchronized.swift */; };
 		3EF90C771A5E7211004F2E85 /* ObjCSynchronized.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF90C751A5E7211004F2E85 /* ObjCSynchronized.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EF90C781A5E7211004F2E85 /* ObjCSynchronized.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF90C761A5E7211004F2E85 /* ObjCSynchronized.m */; };
+		8EC99B991FB19F90009C099A /* UIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC99B981FB19F90009C099A /* UIColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,12 @@
 		3EF90C6F1A5E71A3004F2E85 /* Synchronized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronized.swift; sourceTree = "<group>"; };
 		3EF90C751A5E7211004F2E85 /* ObjCSynchronized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCSynchronized.h; sourceTree = "<group>"; };
 		3EF90C761A5E7211004F2E85 /* ObjCSynchronized.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCSynchronized.m; sourceTree = "<group>"; };
+		8EC99B5C1FB196A0009C099A /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC99B8B1FB19C0F009C099A /* LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC99B8D1FB19C15009C099A /* ReactiveCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC99B8F1FB19C19009C099A /* ReactiveSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC99B911FB19C21009C099A /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC99B981FB19F90009C099A /* UIColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +157,7 @@
 				3EA3B3F31D8F962200FC8EB7 /* KeyValueStorage.swift */,
 				3E519A141DE1F97500B60C0E /* NSObject.swift */,
 				3EB352401E44CAA100CF83FA /* Lifetime.swift */,
+				8EC99B981FB19F90009C099A /* UIColors.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -183,6 +191,11 @@
 		3EA3B3F61D8FA0E600FC8EB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EC99B911FB19C21009C099A /* Result.framework */,
+				8EC99B8F1FB19C19009C099A /* ReactiveSwift.framework */,
+				8EC99B8D1FB19C15009C099A /* ReactiveCocoa.framework */,
+				8EC99B8B1FB19C0F009C099A /* LinRac.framework */,
+				8EC99B5C1FB196A0009C099A /* LinCore.framework */,
 				3EA3B3F71D8FA0E600FC8EB7 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
@@ -288,6 +301,7 @@
 				3E1DF47A1D9033CF0041D2AA /* KeyValueDatabase.m in Sources */,
 				3E9927BB1A8BC0DE00D9246A /* Queue.swift in Sources */,
 				3EB352411E44CAA100CF83FA /* Lifetime.swift in Sources */,
+				8EC99B991FB19F90009C099A /* UIColors.swift in Sources */,
 				3E64C1E71A6BF685007185E2 /* cryptos.m in Sources */,
 				3E64C1E11A6BF612007185E2 /* Strings.swift in Sources */,
 				3E9842F11CF8EF36003FD60B /* JsonModel.swift in Sources */,

@@ -62,8 +62,6 @@
 		3E03B7E21A6D805E00882F6B /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E03B7E11A6D805E00882F6B /* Controls.swift */; };
 		3E0789561A7943650087A3CC /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0789551A7943650087A3CC /* Log.swift */; };
 		3E078A421A7A22B90087A3CC /* ALAssetsLibrarys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E078A411A7A22B90087A3CC /* ALAssetsLibrarys.swift */; };
-		3E08546D1A8A6DE30052DCEE /* ALView+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0854551A8A6DE30052DCEE /* ALView+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E08546E1A8A6DE30052DCEE /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0854561A8A6DE30052DCEE /* ALView+PureLayout.m */; };
 		3E08546F1A8A6DE30052DCEE /* AppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0854571A8A6DE30052DCEE /* AppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E0854701A8A6DE30052DCEE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0854581A8A6DE30052DCEE /* AppDelegate.m */; };
 		3E0854741A8A6DE30052DCEE /* JAActionButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E08545D1A8A6DE30052DCEE /* JAActionButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -74,13 +72,6 @@
 		3E0854791A8A6DE30052DCEE /* JATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0854621A8A6DE30052DCEE /* JATableViewCell.m */; };
 		3E08547A1A8A6DE30052DCEE /* JATableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0854631A8A6DE30052DCEE /* JATableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E08547B1A8A6DE30052DCEE /* JATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0854641A8A6DE30052DCEE /* JATableViewController.m */; };
-		3E08547D1A8A6DE30052DCEE /* NSArray+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0854661A8A6DE30052DCEE /* NSArray+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E08547E1A8A6DE30052DCEE /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0854671A8A6DE30052DCEE /* NSArray+PureLayout.m */; };
-		3E08547F1A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0854681A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E0854801A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0854691A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.m */; };
-		3E0854811A8A6DE30052DCEE /* PureLayout+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E08546A1A8A6DE30052DCEE /* PureLayout+Internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E0854821A8A6DE30052DCEE /* PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E08546B1A8A6DE30052DCEE /* PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E0854831A8A6DE30052DCEE /* PureLayoutDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E08546C1A8A6DE30052DCEE /* PureLayoutDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E0854961A8A6EEA0052DCEE /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E0854861A8A6EEA0052DCEE /* MJRefresh.bundle */; };
 		3E0854971A8A6EEA0052DCEE /* MJRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0854871A8A6EEA0052DCEE /* MJRefresh.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E08549A1A8A6EEA0052DCEE /* MJRefreshConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E08548A1A8A6EEA0052DCEE /* MJRefreshConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -97,17 +88,11 @@
 		3E0854AE1A8A7E1B0052DCEE /* UIScrollView+MJExtension.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E0854901A8A6EEA0052DCEE /* UIScrollView+MJExtension.h */; };
 		3E0854AF1A8A7E1B0052DCEE /* UIScrollView+MJRefresh.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E0854921A8A6EEA0052DCEE /* UIScrollView+MJRefresh.h */; };
 		3E0854B01A8A7E1B0052DCEE /* UIView+MJExtension.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E0854941A8A6EEA0052DCEE /* UIView+MJExtension.h */; };
-		3E0854B11A8A7E1B0052DCEE /* ALView+PureLayout.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E0854551A8A6DE30052DCEE /* ALView+PureLayout.h */; };
 		3E0854B21A8A7E1B0052DCEE /* AppDelegate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E0854571A8A6DE30052DCEE /* AppDelegate.h */; };
 		3E0854B31A8A7E1B0052DCEE /* JAActionButton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E08545D1A8A6DE30052DCEE /* JAActionButton.h */; };
 		3E0854B41A8A7E1B0052DCEE /* JASwipeCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E08545F1A8A6DE30052DCEE /* JASwipeCell.h */; };
 		3E0854B51A8A7E1B0052DCEE /* JATableViewCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E0854611A8A6DE30052DCEE /* JATableViewCell.h */; };
 		3E0854B61A8A7E1B0052DCEE /* JATableViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E0854631A8A6DE30052DCEE /* JATableViewController.h */; };
-		3E0854B71A8A7E1B0052DCEE /* NSArray+PureLayout.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E0854661A8A6DE30052DCEE /* NSArray+PureLayout.h */; };
-		3E0854B81A8A7E1B0052DCEE /* NSLayoutConstraint+PureLayout.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E0854681A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.h */; };
-		3E0854B91A8A7E1B0052DCEE /* PureLayout+Internal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E08546A1A8A6DE30052DCEE /* PureLayout+Internal.h */; };
-		3E0854BA1A8A7E1B0052DCEE /* PureLayout.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E08546B1A8A6DE30052DCEE /* PureLayout.h */; };
-		3E0854BB1A8A7E1B0052DCEE /* PureLayoutDefines.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E08546C1A8A6DE30052DCEE /* PureLayoutDefines.h */; };
 		3E0854BC1A8A7E1B0052DCEE /* Tables.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E0854841A8A6E5C0052DCEE /* Tables.h */; };
 		3E0854BD1A8A7E1B0052DCEE /* QCheckBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E73DA4D1A8795A20052C16A /* QCheckBox.h */; };
 		3E0854BE1A8A7E1B0052DCEE /* QBAssetCollectionViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E73DA661A8795A30052C16A /* QBAssetCollectionViewController.h */; };
@@ -391,6 +376,15 @@
 		3EF997FD1A7229930030C4D3 /* UIBarButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF997FC1A7229930030C4D3 /* UIBarButtonItems.swift */; };
 		3EF998021A728CE90030C4D3 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF998001A728CE90030C4D3 /* TextFields.swift */; };
 		3EF998031A728CE90030C4D3 /* TextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF998011A728CE90030C4D3 /* TextViews.swift */; };
+		8EC99BA51FB1A681009C099A /* ALView+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EC99BA61FB1A681009C099A /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC99B9D1FB1A681009C099A /* ALView+PureLayout.m */; };
+		8EC99BA71FB1A681009C099A /* NSArray+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99B9E1FB1A681009C099A /* NSArray+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EC99BA81FB1A681009C099A /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC99B9F1FB1A681009C099A /* NSArray+PureLayout.m */; };
+		8EC99BA91FB1A681009C099A /* NSLayoutConstraint+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99BA01FB1A681009C099A /* NSLayoutConstraint+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EC99BAA1FB1A681009C099A /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC99BA11FB1A681009C099A /* NSLayoutConstraint+PureLayout.m */; };
+		8EC99BAB1FB1A681009C099A /* PureLayout+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99BA21FB1A681009C099A /* PureLayout+Internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EC99BAC1FB1A681009C099A /* PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99BA31FB1A681009C099A /* PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EC99BAD1FB1A681009C099A /* PureLayoutDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99BA41FB1A681009C099A /* PureLayoutDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -415,17 +409,11 @@
 				3E0854AE1A8A7E1B0052DCEE /* UIScrollView+MJExtension.h in CopyFiles */,
 				3E0854AF1A8A7E1B0052DCEE /* UIScrollView+MJRefresh.h in CopyFiles */,
 				3E0854B01A8A7E1B0052DCEE /* UIView+MJExtension.h in CopyFiles */,
-				3E0854B11A8A7E1B0052DCEE /* ALView+PureLayout.h in CopyFiles */,
 				3E0854B21A8A7E1B0052DCEE /* AppDelegate.h in CopyFiles */,
 				3E0854B31A8A7E1B0052DCEE /* JAActionButton.h in CopyFiles */,
 				3E0854B41A8A7E1B0052DCEE /* JASwipeCell.h in CopyFiles */,
 				3E0854B51A8A7E1B0052DCEE /* JATableViewCell.h in CopyFiles */,
 				3E0854B61A8A7E1B0052DCEE /* JATableViewController.h in CopyFiles */,
-				3E0854B71A8A7E1B0052DCEE /* NSArray+PureLayout.h in CopyFiles */,
-				3E0854B81A8A7E1B0052DCEE /* NSLayoutConstraint+PureLayout.h in CopyFiles */,
-				3E0854B91A8A7E1B0052DCEE /* PureLayout+Internal.h in CopyFiles */,
-				3E0854BA1A8A7E1B0052DCEE /* PureLayout.h in CopyFiles */,
-				3E0854BB1A8A7E1B0052DCEE /* PureLayoutDefines.h in CopyFiles */,
 				3E0854BC1A8A7E1B0052DCEE /* Tables.h in CopyFiles */,
 				3E0854BD1A8A7E1B0052DCEE /* QCheckBox.h in CopyFiles */,
 				3E0854BE1A8A7E1B0052DCEE /* QBAssetCollectionViewController.h in CopyFiles */,
@@ -504,8 +492,6 @@
 		3E03B7E11A6D805E00882F6B /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		3E0789551A7943650087A3CC /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		3E078A411A7A22B90087A3CC /* ALAssetsLibrarys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALAssetsLibrarys.swift; sourceTree = "<group>"; };
-		3E0854551A8A6DE30052DCEE /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
-		3E0854561A8A6DE30052DCEE /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
 		3E0854571A8A6DE30052DCEE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3E0854581A8A6DE30052DCEE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3E08545D1A8A6DE30052DCEE /* JAActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JAActionButton.h; sourceTree = "<group>"; };
@@ -516,13 +502,6 @@
 		3E0854621A8A6DE30052DCEE /* JATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JATableViewCell.m; sourceTree = "<group>"; };
 		3E0854631A8A6DE30052DCEE /* JATableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JATableViewController.h; sourceTree = "<group>"; };
 		3E0854641A8A6DE30052DCEE /* JATableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JATableViewController.m; sourceTree = "<group>"; };
-		3E0854661A8A6DE30052DCEE /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PureLayout.h"; sourceTree = "<group>"; };
-		3E0854671A8A6DE30052DCEE /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PureLayout.m"; sourceTree = "<group>"; };
-		3E0854681A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
-		3E0854691A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
-		3E08546A1A8A6DE30052DCEE /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
-		3E08546B1A8A6DE30052DCEE /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
-		3E08546C1A8A6DE30052DCEE /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
 		3E0854841A8A6E5C0052DCEE /* Tables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Tables.h; path = Table/Tables.h; sourceTree = "<group>"; };
 		3E0854861A8A6EEA0052DCEE /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		3E0854871A8A6EEA0052DCEE /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
@@ -805,6 +784,15 @@
 		3EF997FC1A7229930030C4D3 /* UIBarButtonItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItems.swift; sourceTree = "<group>"; };
 		3EF998001A728CE90030C4D3 /* TextFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
 		3EF998011A728CE90030C4D3 /* TextViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViews.swift; sourceTree = "<group>"; };
+		8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
+		8EC99B9D1FB1A681009C099A /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
+		8EC99B9E1FB1A681009C099A /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PureLayout.h"; sourceTree = "<group>"; };
+		8EC99B9F1FB1A681009C099A /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PureLayout.m"; sourceTree = "<group>"; };
+		8EC99BA01FB1A681009C099A /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
+		8EC99BA11FB1A681009C099A /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
+		8EC99BA21FB1A681009C099A /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
+		8EC99BA31FB1A681009C099A /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
+		8EC99BA41FB1A681009C099A /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -990,8 +978,6 @@
 		3E0854541A8A6DE30052DCEE /* JASwipeCell */ = {
 			isa = PBXGroup;
 			children = (
-				3E0854551A8A6DE30052DCEE /* ALView+PureLayout.h */,
-				3E0854561A8A6DE30052DCEE /* ALView+PureLayout.m */,
 				3E0854571A8A6DE30052DCEE /* AppDelegate.h */,
 				3E0854581A8A6DE30052DCEE /* AppDelegate.m */,
 				3E08545D1A8A6DE30052DCEE /* JAActionButton.h */,
@@ -1002,13 +988,6 @@
 				3E0854621A8A6DE30052DCEE /* JATableViewCell.m */,
 				3E0854631A8A6DE30052DCEE /* JATableViewController.h */,
 				3E0854641A8A6DE30052DCEE /* JATableViewController.m */,
-				3E0854661A8A6DE30052DCEE /* NSArray+PureLayout.h */,
-				3E0854671A8A6DE30052DCEE /* NSArray+PureLayout.m */,
-				3E0854681A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.h */,
-				3E0854691A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.m */,
-				3E08546A1A8A6DE30052DCEE /* PureLayout+Internal.h */,
-				3E08546B1A8A6DE30052DCEE /* PureLayout.h */,
-				3E08546C1A8A6DE30052DCEE /* PureLayoutDefines.h */,
 			);
 			name = JASwipeCell;
 			path = Table/JASwipeCell;
@@ -1181,6 +1160,7 @@
 		3E3746491A26365A00B980E9 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				8EC99B9B1FB1A681009C099A /* pureLayout */,
 				3E20C7981E53682A000C9698 /* MyLayout */,
 				3EBEC22D1CFD4B6D005ABB52 /* Update */,
 				3E5917C81CF8C62300CCFBC2 /* IOS7ScrollView.m */,
@@ -1578,6 +1558,22 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		8EC99B9B1FB1A681009C099A /* pureLayout */ = {
+			isa = PBXGroup;
+			children = (
+				8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */,
+				8EC99B9D1FB1A681009C099A /* ALView+PureLayout.m */,
+				8EC99B9E1FB1A681009C099A /* NSArray+PureLayout.h */,
+				8EC99B9F1FB1A681009C099A /* NSArray+PureLayout.m */,
+				8EC99BA01FB1A681009C099A /* NSLayoutConstraint+PureLayout.h */,
+				8EC99BA11FB1A681009C099A /* NSLayoutConstraint+PureLayout.m */,
+				8EC99BA21FB1A681009C099A /* PureLayout+Internal.h */,
+				8EC99BA31FB1A681009C099A /* PureLayout.h */,
+				8EC99BA41FB1A681009C099A /* PureLayoutDefines.h */,
+			);
+			path = pureLayout;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1585,6 +1581,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EC99BA91FB1A681009C099A /* NSLayoutConstraint+PureLayout.h in Headers */,
+				8EC99BAC1FB1A681009C099A /* PureLayout.h in Headers */,
+				8EC99BA51FB1A681009C099A /* ALView+PureLayout.h in Headers */,
+				8EC99BAB1FB1A681009C099A /* PureLayout+Internal.h in Headers */,
+				8EC99BA71FB1A681009C099A /* NSArray+PureLayout.h in Headers */,
+				8EC99BAD1FB1A681009C099A /* PureLayoutDefines.h in Headers */,
 				3E6AF2F21EB188E800B5DB1F /* MJRefreshBackGifFooter.h in Headers */,
 				3E6AF2F01EB188E800B5DB1F /* MJRefreshAutoStateFooter.h in Headers */,
 				3E6AF2FE1EB188E800B5DB1F /* NSBundle+MJRefresh.h in Headers */,
@@ -1677,7 +1679,6 @@
 				3E73DADD1A8795A30052C16A /* ZHPickView.h in Headers */,
 				3E3AA2D41A7F6736008FBD7F /* UncaughtExceptionHandlers.m in Headers */,
 				3E0854971A8A6EEA0052DCEE /* MJRefresh.h in Headers */,
-				3E0854811A8A6DE30052DCEE /* PureLayout+Internal.h in Headers */,
 				3E426D211A4A988E00A1C815 /* RBStoryboardModalSegue.h in Headers */,
 				3E0854A41A8A6EEA0052DCEE /* UIView+MJExtension.h in Headers */,
 				3E3AA2D11A7F5ECF008FBD7F /* UncaughtExceptionHandlers.h in Headers */,
@@ -1685,7 +1686,6 @@
 				3E73DAC11A8795A30052C16A /* QBImagePickerVideoInfoView.h in Headers */,
 				3E0854781A8A6DE30052DCEE /* JATableViewCell.h in Headers */,
 				3E426D231A4A988E00A1C815 /* RBStoryboardPopoverSegue.h in Headers */,
-				3E0854821A8A6DE30052DCEE /* PureLayout.h in Headers */,
 				3E73DA9A1A8795A30052C16A /* QCheckBox.h in Headers */,
 				3E426D251A4A988E00A1C815 /* RBStoryboardPushSegue.h in Headers */,
 				3E73DAB41A8795A30052C16A /* QBImagePickerAssetCell.h in Headers */,
@@ -1722,18 +1722,14 @@
 				3E73DABD1A8795A30052C16A /* QBImagePickerFooterView.h in Headers */,
 				3E426D271A4A988E00A1C815 /* RBStoryboardSegue.h in Headers */,
 				3E08549A1A8A6EEA0052DCEE /* MJRefreshConst.h in Headers */,
-				3E08547F1A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.h in Headers */,
 				3E73DAB61A8795A30052C16A /* QBImagePickerAssetCellDelegate.h in Headers */,
 				3E426D201A4A988E00A1C815 /* RBStoryboardLinkSource.h in Headers */,
-				3E0854831A8A6DE30052DCEE /* PureLayoutDefines.h in Headers */,
 				3E73DABB1A8795A30052C16A /* QBImagePickerController.h in Headers */,
 				3E08547A1A8A6DE30052DCEE /* JATableViewController.h in Headers */,
 				3E73DABF1A8795A30052C16A /* QBImagePickerGroupCell.h in Headers */,
 				3E08546F1A8A6DE30052DCEE /* AppDelegate.h in Headers */,
-				3E08546D1A8A6DE30052DCEE /* ALView+PureLayout.h in Headers */,
 				3E73DAB31A8795A30052C16A /* QBAssetCollectionViewControllerDelegate.h in Headers */,
 				3E73DAB11A8795A30052C16A /* QBAssetCollectionViewController.h in Headers */,
-				3E08547D1A8A6DE30052DCEE /* NSArray+PureLayout.h in Headers */,
 				3E0854761A8A6DE30052DCEE /* JASwipeCell.h in Headers */,
 				3E73DAB91A8795A30052C16A /* QBImagePickerAssetViewDelegate.h in Headers */,
 				3E8EB4511A66BB1700324952 /* LinCore-Bridging.h in Headers */,
@@ -1794,7 +1790,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = lin;
 				TargetAttributes = {
 					3E3746461A26365A00B980E9 = {
@@ -1858,7 +1854,6 @@
 				18F8B2601EF0D34400E9947C /* LGPhotoRect.m in Sources */,
 				3EF997FD1A7229930030C4D3 /* UIBarButtonItems.swift in Sources */,
 				18F8B2741EF0D34400E9947C /* LGPhotoPickerAssetsViewController.m in Sources */,
-				3E08546E1A8A6DE30052DCEE /* ALView+PureLayout.m in Sources */,
 				3E73DABC1A8795A30052C16A /* QBImagePickerController.m in Sources */,
 				3E21FB2C1A810BC5009CF738 /* UIDevices.swift in Sources */,
 				3E1219F31CF845A400D43267 /* SCFilterAnimation.m in Sources */,
@@ -1886,7 +1881,6 @@
 				3E121A071CF845A400D43267 /* SCRecorderToolsView.m in Sources */,
 				3E20C7CE1E53682A000C9698 /* MyLinearLayout.m in Sources */,
 				3E121A091CF845A400D43267 /* SCRecordSession.m in Sources */,
-				3E08547E1A8A6DE30052DCEE /* NSArray+PureLayout.m in Sources */,
 				18F8B2661EF0D34400E9947C /* LGPhotoPickerBrowserPhotoImageView.m in Sources */,
 				3E73DAA01A8795A30052C16A /* FormDateCell.swift in Sources */,
 				3E0854791A8A6DE30052DCEE /* JATableViewCell.m in Sources */,
@@ -1923,6 +1917,7 @@
 				18F8B2851EF0D34400E9947C /* UIView+Layout.m in Sources */,
 				3E20C7D01E53682A000C9698 /* MyMaker.m in Sources */,
 				3ECD40841CEDC1E300D57372 /* MRProgressView.m in Sources */,
+				8EC99BAA1FB1A681009C099A /* NSLayoutConstraint+PureLayout.m in Sources */,
 				3ECD40801CEDC1E300D57372 /* MRNavigationBarProgressView.m in Sources */,
 				3E73DAA51A8795A30052C16A /* FormRowDescriptor.swift in Sources */,
 				3E6AF2F31EB188E800B5DB1F /* MJRefreshBackGifFooter.m in Sources */,
@@ -1952,7 +1947,6 @@
 				3E73DA9C1A8795A30052C16A /* FormBaseCell.swift in Sources */,
 				3E6AF2EB1EB188E800B5DB1F /* MJRefreshHeader.m in Sources */,
 				18F8B27E1EF0D34400E9947C /* LGPhotoPickerFooterCollectionReusableView.m in Sources */,
-				3E0854801A8A6DE30052DCEE /* NSLayoutConstraint+PureLayout.m in Sources */,
 				3E121A231CF8848400D43267 /* CameraViewController.swift in Sources */,
 				18F8B26C1EF0D34400E9947C /* LGPhotoPickerCustomToolBarView.m in Sources */,
 				3EBEC2381CFD4C21005ABB52 /* AppStoreUpdate.swift in Sources */,
@@ -2031,7 +2025,9 @@
 				3E73DA991A8795A30052C16A /* CacheImageView.swift in Sources */,
 				3E6AF2FD1EB188E800B5DB1F /* MJRefreshStateHeader.m in Sources */,
 				18F8B28B1EF0D34400E9947C /* ZLCameraImageView.m in Sources */,
+				8EC99BA61FB1A681009C099A /* ALView+PureLayout.m in Sources */,
 				3E6AF2F71EB188E800B5DB1F /* MJRefreshBackStateFooter.m in Sources */,
+				8EC99BA81FB1A681009C099A /* NSArray+PureLayout.m in Sources */,
 				3E73DAAA1A8795A30052C16A /* FormSelector.swift in Sources */,
 				3E426D241A4A988E00A1C815 /* RBStoryboardPopoverSegue.m in Sources */,
 				3ECD40781CEDC1E300D57372 /* UIImage+MRImageEffects.m in Sources */,
@@ -2065,21 +2061,31 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2111,13 +2117,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2126,6 +2140,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2135,6 +2150,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2146,6 +2162,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -2164,6 +2181,7 @@
 				);
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "lin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = LinCore;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -2176,6 +2194,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -2194,6 +2213,7 @@
 				);
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "lin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = LinCore;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -2214,6 +2234,7 @@
 				);
 				INFOPLIST_FILE = coreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "lin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = LinCoreTests;
 			};
 			name = Debug;
@@ -2227,6 +2248,7 @@
 				);
 				INFOPLIST_FILE = coreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "lin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = LinCoreTests;
 			};
 			name = Release;

@@ -8,9 +8,8 @@
 
 import Foundation
 
-
-
 @objc
+
 open class DelegateAction :NSObject {
     
 //    open weak var withObjectSameLifecycle:NSObject? {
