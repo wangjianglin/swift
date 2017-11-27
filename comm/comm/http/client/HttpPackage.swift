@@ -351,7 +351,7 @@ extension HttpPackage{
     }
     
     fileprivate static var __STANDARD_HANDLE: () = {
-        YRSingleton.NONE_HANDLE_INSTANCE = StandardHttpRequestHandle()
+        YRSingleton.STANDARD_HANDLE_INSTANCE = StandardHttpRequestHandle()
         
     }()
     public class var STANDARD_HANDLE:HttpRequestHandle {
@@ -371,7 +371,7 @@ extension HttpPackage{
     }
     
     fileprivate static var __ENCRYPT_JSON_HANDLE: () = {
-        YRSingleton.NONE_HANDLE_INSTANCE = EncryptJsonHttpRequestHandle()
+        YRSingleton.ENCRYPT_JSON_HANDLE_INSTANCE = EncryptJsonHttpRequestHandle()
         
     }()
     public class var ENCRYPT_JSON_HANDLE:HttpRequestHandle {

@@ -278,7 +278,7 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
             let itemAddImage = UIImageView();
             _addImages.insert(itemAddImage, at:0);
             
-            itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png", in: Bundle(for:self.classForCoder), compatibleWith: nil);
+            itemAddImage.image = UIImage(named:"imagesEditAdd.png", in: imageBundle, compatibleWith: nil);
             
             _scrollView.addSubview(itemAddImage);
             
@@ -370,7 +370,7 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
                 
                 let itemAddImage = UIImageView();
                 _addImages.append(itemAddImage);
-                itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png", in: Bundle(for:self.classForCoder), compatibleWith: nil);
+                itemAddImage.image = UIImage(named:"imagesEditAdd.png", in: imageBundle, compatibleWith: nil);
                 _scrollView.addSubview(itemAddImage);
                 
                 itemAddImage.frame = CGRect(x: 0, y: 0, width: 60, height: 60);
@@ -450,6 +450,14 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
         self.isUserInteractionEnabled = true;
     }
     
+    
+    var imageBundle:Bundle? {
+        get {
+            
+            return  Bundle(path: Bundle(for: ScrollImagesView.classForCoder()).path(forResource:"LinCore", ofType: "bundle")!)
+        }
+    }
+    
     private func update(){
         self.isUserInteractionEnabled = true;
         let rect = self.bounds;
@@ -481,9 +489,9 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
             if _playImageView != nil && n == 0 {
                 itemAddImage.isHidden = false;
                 if (self.edited) {
-                    itemAddImage.image = UIImage(named:"LinCore.bundle/imagesEditAdd.png",in: Bundle(for: self.classForCoder),compatibleWith: nil);
+                    itemAddImage.image = UIImage(named:"imagesEditAdd.png",in: imageBundle,compatibleWith: nil);
                 }else{
-                    itemAddImage.image = UIImage(named:"LinCore.bundle/play.png",in: Bundle(for: self.classForCoder),compatibleWith: nil);
+                    itemAddImage.image = UIImage(named:"play.png",in: imageBundle,compatibleWith: nil);
                 }
             }
             

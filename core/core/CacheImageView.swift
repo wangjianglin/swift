@@ -229,7 +229,7 @@ open class CacheImageView : UIImageView{
         if let operation = self.operation {
             operation.cancel();
         }
-        self.image = nil
+        self.image = nil;
     }
     
     //    public func reuse(){

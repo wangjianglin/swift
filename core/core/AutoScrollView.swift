@@ -37,7 +37,7 @@ open class AutoScrollView : UIScrollView{
         views.append(view);
     }
     
-    private func size()-> CGRect {
+    private func calcSize()-> CGRect {
         var rect:CGRect!;
         var scount = 0;
         if self.showsHorizontalScrollIndicator {
@@ -46,17 +46,19 @@ open class AutoScrollView : UIScrollView{
         if self.showsVerticalScrollIndicator {
             scount += 2;
         }
-        for n in 0 ..< self.views.count - scount {
-            let view = self.views[n];
-            if view.isHidden {
-                continue;
-            }
-            let srect = view.convert(view.bounds, to: self);
-            
-            if rect == nil {
-                rect = srect;
-            }else{
-                rect = mergeRect(srect,rect2: rect);
+        if views.count > 2 {
+            for n in 2 ..< self.views.count - scount {
+                let view = self.views[n];
+                if view.isHidden {
+                    continue;
+                }
+                let srect = view.convert(view.bounds, to: self);
+                
+                if rect == nil {
+                    rect = srect;
+                }else{
+                    rect = mergeRect(srect,rect2: rect);
+                }
             }
         }
         if rect == nil {
@@ -93,16 +95,16 @@ open class AutoScrollView : UIScrollView{
     private func thread(){
         var interval:TimeInterval = 0.2;
         while(run){
-            Thread.sleep(forTimeInterval: interval);
             if(isHidden){
-                interval = 1.2;
+                interval = 0.4;
                 continue;
             }
             if self.resetContentSize() {
-                interval = 1.2;
+                interval = 0.8;
             }else{
-                interval = 0.6;
+                interval = 0.1;
             }
+            Thread.sleep(forTimeInterval: interval);
         }
     }
     
@@ -111,7 +113,7 @@ open class AutoScrollView : UIScrollView{
     }
     
     private func resetContentSize()->Bool{
-        var rect = self.size();
+        var rect = self.calcSize();
         
         let bounds = self.bounds;
         

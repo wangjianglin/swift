@@ -54,6 +54,7 @@ public class MoreBarButtonCell : UITableViewCell{
     private func initView(){
         
         _image = CacheImageView();
+        _image?.contentMode = UIViewContentMode.center;
         _image?.translatesAutoresizingMaskIntoConstraints = false;
         self.addSubview(_image!);
         

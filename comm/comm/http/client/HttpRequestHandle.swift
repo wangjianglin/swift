@@ -30,11 +30,24 @@ public protocol HttpRequestHandle{
 
 open class AbstractHttpRequestHandle : HttpRequestHandle{
     
+    public init(){}
+    
     open func preprocess(_ package:HttpPackage,params:HttpCommunicate.Params)->HttpRequestPreprocessResult!{
         return nil;
     }
     
     open func getParams(_ package:HttpPackage)->Dictionary<String,AnyObject>?{
+        
+        if package is HttpUploadPackage {
+            var params = Dictionary<String,AnyObject>();
+            for (name,value) in package.json.toParams() {
+                params[name] = value as NSString?;
+            }
+            for (name,value) in (package as! HttpUploadPackage).files {
+                params[name] = value;
+            }
+            return params;
+        }
         return package.json.toParams() as Dictionary<String, AnyObject>?;
     }
     

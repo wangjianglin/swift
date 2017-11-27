@@ -17,7 +17,7 @@ open class GlobalArgs{
     }
     
     open subscript(name:String)->AnyObject?{
-        get{ return datas[name]!;}
+        get{ return datas[name] ?? nil;}
         set{ self.datas[name] = newValue;}
     }
 }

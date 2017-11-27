@@ -1,0 +1,2 @@
+
+CoaoaAction.show  //显示错误 方法 改为 show(error:true)

@@ -26,7 +26,7 @@ public class MainViewModel : NSObject,ViewModel{
             Thread.sleep(forTimeInterval: 3);
             //self.datas = ["one","two","three"];
             
-            let e = HttpError.init(code: -34, message: "error.", cause: "", strackTrace: "");
+            let e = HttpError.init(code: -34, message: "error.", cause: "", stackTrace: "");
             action(e);
         }
         

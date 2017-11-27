@@ -47,6 +47,8 @@ public class HttpCommunicate{
         open var isDebug:Bool? = nil;
         
         open var timeout:TimeInterval? = nil;//以秒为单位
+        
+        internal var header = [String:String]();
     }
     
     struct YRSingleton{
@@ -339,7 +341,7 @@ public class HttpCommunicateImpl{
             let e:HttpError = HttpError(code:-2
                 ,message:"net error."
                 ,cause:"net error."
-                ,strackTrace:error?.description
+                ,stackTrace:error?.description
             );
             //            e.message = "net error.";
             //            e.cause = "net error.";
@@ -445,7 +447,7 @@ public class HttpCommunicateImpl{
             let e:HttpError = HttpError(code:-1
                 ,message:"net error."
                 ,cause:"net error."
-                ,strackTrace:error.description
+                ,stackTrace:error.description
             );
             //            e.message = "net error.";
             //            e.cause = "net error.";
