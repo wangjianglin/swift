@@ -35,6 +35,7 @@ final class Splice: NSObject {
     
     init(asset: AVURLAsset) {
         sourceVideoAsset = asset
+        
         if let firstVideoTrack = sourceVideoAsset.tracks(withMediaType: .video).first {
             sourceVideoTrack = firstVideoTrack
         }
@@ -62,11 +63,12 @@ final class Splice: NSObject {
     }
 
     func makeExportable() -> AVAssetExportSession? {
+        
         let path = NSTemporaryDirectory() + "spliceOutput.mov"
         if FileManager.default.fileExists(atPath: path) {
             try? FileManager.default.removeItem(atPath: path)
         }
-        let session = AVAssetExportSession(asset: composition.copy() as! AVAsset, presetName: AVAssetExportPreset960x540)
+        let session = AVAssetExportSession(asset: composition.copy() as! AVAsset, presetName: AVAssetExportPreset640x480)
         session?.outputFileType = .mov
         session?.outputURL = URL(fileURLWithPath: path)
         if let videoComposition = videoComposition {
@@ -97,6 +99,7 @@ final class Splice: NSObject {
         videoComposition = AVMutableVideoComposition(propertiesOf: composition)
         let scale = max(outputSize.width / sourceVideoTrack.dimensions.width,
                         outputSize.height / sourceVideoTrack.dimensions.height)
+        
         videoComposition.renderSize = CGSize(width: sourceVideoTrack.dimensions.width * scale,
                                              height: sourceVideoTrack.dimensions.height * scale)
 

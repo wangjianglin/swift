@@ -8,9 +8,8 @@
 
 import MediaPlayer
 import UIKit
-
-
-
+import Foundation
+import AVKit
 open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSource,QBImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate{
    
     
@@ -77,9 +76,9 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             return _vedioUrl;
         }
         set{
-            if _vedioUrl == newValue {
-                return;
-            }
+//            if _vedioUrl == newValue {
+//                return;
+//            }
             _vedioUrl = newValue;
             self.setVedioImage();
         }
@@ -238,6 +237,28 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
          v.showPickerVc(self.ext.viewController)
     }
     
+    //录制视频
+    func recordVideoWithCarema(_ avc:UIAlertAction){
+        let recordVC = RecordVideoViewController()
+        recordVC.finishRecordHandle = self.finishRecordVideo
+       self.ext.rootViewController?.present(recordVC, animated: true, completion: nil)
+    }
+    
+    //剪辑视频
+    func editingVideoWithCarema(_ avc:UIAlertAction){
+        
+        //选择视频
+        let picker = VideoPickerController()
+        picker.pickerDelegate = self
+        self.ext.rootViewController?.present(picker, animated: true, completion: nil)
+    }
+    
+    func finishRecordVideo(_ url:URL) {
+        self.vedioUrl = url
+        print(url)
+    }
+    
+    
     
     @objc open func imagePickerController(_ imagePickerController:QBImagePickerController, didFinishPickingMediaWithInfo info:Any){
         
@@ -303,11 +324,11 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     //MARK: video
     
     
-    open func movieFinishedCallback(_ sender:AnyObject){
-        let playerViewController = (sender as! Notification).object;
-        (playerViewController as AnyObject).view.removeFromSuperview();
-        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object:nil);
-        
+    @objc open func movieFinishedCallback(_ sender:AnyObject){
+//        let playerViewController = (sender as! Notification).object;
+//        (playerViewController as AnyObject).view.removeFromSuperview();
+//        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object:nil);
+//
     }
     
     @objc public func actionSheet(_ actionSheet:UIActionSheet, clickedButtonAt buttonIndex:Int){
@@ -315,26 +336,30 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         let title = actionSheet.buttonTitle(at: buttonIndex);
         
         if "播放" == title {
-            
             //播放
             //NSURL * url = [NSURL URLWithString:@"http://i.feicuibaba.com/test.mp4"];
+//            let playerViewController = MPMoviePlayerViewController(contentURL:_vedioUrl);
             
-            let playerViewController = MPMoviePlayerViewController(contentURL:_vedioUrl);
+            let player =    AVPlayerViewController()
+            player.player = AVPlayer.init(url: _vedioUrl!)
+            self.ext.rootViewController?.present(player, animated: true, completion: {
+                player.player?.play()
+            })
             
-            self.ext.rootViewController?.addChildViewController(playerViewController!);
+//            self.ext.rootViewController?.addChildViewController(playerViewController!);
             
-            NotificationCenter.default.addObserver(self, selector:#selector(self.movieFinishedCallback),
-                                                   name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                                                   object:playerViewController?.moviePlayer);
+//            NotificationCenter.default.addObserver(self, selector:#selector(self.movieFinishedCallback),
+//                                                   name:NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+//                                                   object:player);
             //-- add to view---
-            self.ext.rootViewController?.view.addSubview((playerViewController?.view)!);
+//            self.ext.rootViewController?.view.addSubview((playerViewController?.view)!);
             
             
             //---play movie---
-            let player = playerViewController?.moviePlayer;
+//            let player = playerViewController?.moviePlayer;
             
-            player?.prepareToPlay();
-        }else if "重新拍摄" == title {
+//            player?.prepareToPlay();
+        }else if "重新选择视频" == title {
             self.recordVedio();
             //}else if((buttonIndex == 1 && _vedioUrl == nil) || (buttonIndex == 2 && _vedioUrl != nil)){
         }else if "选取一个视频" == title {
@@ -350,25 +375,38 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
                                             cancelButtonTitle:"取消",
                                             destructiveButtonTitle:nil,
                                             //                                      otherButtonTitles:@"播放",@"重新拍摄", @"选取一个视频",nil];
-                otherButtonTitles:"播放","重新拍摄");
+                otherButtonTitles:"播放","重新选择视频");
             actionSheet.actionSheetStyle = UIActionSheetStyle.blackOpaque;
             actionSheet.show(in: self);
         }else{
             self.recordVedio();
         }
-        
     }
     
+    
+    //拍摄视频
     private func recordVedio(){
-        let camera = CameraViewController();
         
-        camera.setResult({[weak self](file:URL?) in
-            if (file == nil) {
-                return ;
-            }
-            self?.vedioUrl = file;
-        });
-        self.ext.viewController?.present(camera, animated:true, completion:nil);
+        
+        let userIconAlert = UIAlertController(title: "请选择操作", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let chooseFromPhotoAlbum = UIAlertAction(title: "录制视频", style: UIAlertActionStyle.default, handler:recordVideoWithCarema )
+        userIconAlert.addAction(chooseFromPhotoAlbum)
+
+        let chooseFromCamera = UIAlertAction(title: "选择视频", style: UIAlertActionStyle.default,handler:editingVideoWithCarema)
+
+        userIconAlert.addAction(chooseFromCamera)
+        let canelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel,handler: nil)
+        userIconAlert.addAction(canelAction)
+        self.ext.rootViewController?.present(userIconAlert, animated: true, completion: nil)
+        
+//        let camera = CameraViewController();
+//        camera.setResult({[weak self](file:URL?) in
+//            if (file == nil) {
+//                return ;
+//            }
+//            self?.vedioUrl = file;
+//        });
+//        self.ext.viewController?.present(camera, animated:true, completion:nil);
         return;
     }
     
@@ -387,13 +425,9 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         }else{
             _vedioImage = nil;
         }
-        
         _cellVideo.setVedioImage(_vedioImage);
     }
-    
-    
     //MARK: data source
-    
     public func collectionView(_ collectionView:UICollectionView, numberOfItemsInSection section:Int)->Int{
         var row = _imagePaths.count;
         if (row == maxSelection) {
@@ -402,7 +436,6 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
             row += (hasVedio ? 2 : 1);
         }
         self.resetLayout();
-        
         return row;
     }
     
@@ -461,6 +494,32 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         self.addConstraint(_heightConstraint);
     }
 }
+
+
+extension ImagesView:VideoPickerControllerDelegate{
+    
+    public func videoPickerControllerDidCancel(_ controller: VideoPickerController) {
+        print("cancel")
+    }
+    
+    public func videoPickerController(_ controller: VideoPickerController, didPickVideoAt url: URL) {
+        
+        self.vedioUrl = url
+        
+        
+        
+        print("url = \(url)")
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//            self.showMsgAndExit(url.absoluteString)
+//            //            let player = AVPlayer(url: url)
+//            //            let controller = AVPlayerViewController()
+//            //            controller.player = player
+//            //            self.present(controller, animated: true, completion: nil)
+//        }
+    }
+    
+}
+
 
 
 public class ImagesViewAddImageCollectionViewCell : UICollectionViewCell{
@@ -621,7 +680,8 @@ open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
         self.addSubview(_imageView);
         
         _imageView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height);
-        _imageView.contentMode = .scaleAspectFit;
+        _imageView.contentMode = .scaleAspectFill;
+        _imageView.clipsToBounds = true
         _imageView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
         
         _imageView.isHidden = true;
@@ -650,9 +710,7 @@ open class ImagesViewAddVedioCollectionViewCell : UICollectionViewCell{
         line?.addLine(to: CGPoint(x: size.width, y: size.height));
         line?.addLine(to: CGPoint(x: 0.0, y: size.height));
         line?.addLine(to: CGPoint(x: 0.0, y: 0.0));
-        
         line?.strokePath();
-        
         _dashImageView.image = UIGraphicsGetImageFromCurrentImageContext();
         
     }
@@ -684,6 +742,8 @@ class ImagesViewUICollectionViewCell : UICollectionViewCell{
         
         _imageView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height);
         _imageView.autoresizingMask = UIViewAutoresizing(rawValue:UIViewAutoresizing.flexibleWidth.rawValue | UIViewAutoresizing.flexibleHeight.rawValue);
+//        _imageView.contentMode = .scaleAspectFill
+//        _imageView.clipsToBounds = true
         
         self.addSubview(_imageView);
         
@@ -706,7 +766,7 @@ class ImagesViewUICollectionViewCell : UICollectionViewCell{
     }
     
     
-    internal func deleteImage(_:AnyObject){
+    @objc internal func deleteImage(_:AnyObject){
         self.imagesView!.delete(self.pos);
         
     }

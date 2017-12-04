@@ -199,10 +199,10 @@ public class MoreBarButtonItem : UIBarButtonItem{
     
     private func textWidth()->CGFloat{
         //        NSDictionary *attrs = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:17]};
-        let attrs = [NSFontAttributeName:UIFont.boldSystemFont(ofSize: 18)];
+        let attrs = [NSAttributedStringKey.font:UIFont.boldSystemFont(ofSize: 18)];
         var w:CGFloat = 90.0;
         for button in buttons {
-            let bw = (button.title as NSString?)?.size(attributes: attrs).width ?? 0;
+            let bw = (button.title as NSString?)?.size(withAttributes: attrs).width ?? 0;
             if w < bw {
                 w = bw;
             }

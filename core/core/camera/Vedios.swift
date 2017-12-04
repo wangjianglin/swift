@@ -70,7 +70,7 @@ open class VedioConvert : NSObject, SCAssetExportSessionDelegate{
     exportSession.videoConfiguration.maxFrameRate = 30;
     //NSLog(@"_recordSession.outputUrl:%@",_recordSession.outputUrl);
     exportSession.outputUrl = outUrl;
-    exportSession.outputFileType = AVFileTypeMPEG4;
+        exportSession.outputFileType = AVFileType.mp4.rawValue;
     exportSession.delegate = self;
     
     //    self.exportView.hidden = NO;

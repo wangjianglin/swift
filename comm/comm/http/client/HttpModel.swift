@@ -35,7 +35,7 @@ open class HttpModel : JsonModel{
         
         let list = class_copyPropertyList(object_getClass(self), &count)
         
-        print("类名:\(String(utf8String: object_getClassName(self)!)!)" + "属性个数:\(count)")
+        print("类名:\(String(utf8String: object_getClassName(self))!)" + "属性个数:\(count)")
         
         for i in 0..<Int(count) {
             
@@ -44,7 +44,7 @@ open class HttpModel : JsonModel{
             let cName = property_getName(pty!)
             let cType = property_getAttributes(pty!)
             
-            let name:String = String(utf8String: cName!)!
+            let name:String = String(utf8String: cName)!
             let type:String = String(utf8String: cType!)!
             print(name + " type:" +  type)
             
@@ -99,7 +99,7 @@ open class HttpModel : JsonModel{
             
             //            let imp_f = method_getImplementation(aMet)
             
-            print("\(String(utf8String:sel_getName(method_getName(aMet))!)!)")
+            print("\(String(utf8String:sel_getName(method_getName(aMet!)))!)")
             
         }
         
@@ -111,11 +111,11 @@ open class HttpModel : JsonModel{
     
     //double 设置
     func doubleGetSet(pName:String){
-        let getSelector = sel_registerName(pName)!
+        let getSelector = sel_registerName(pName)
         let getMethod = class_getInstanceMethod(object_getClass(self),getSelector)
 
         
-        let setSelector = sel_registerName(self.getSetMethodName(pName: pName))!
+        let setSelector = sel_registerName(self.getSetMethodName(pName: pName))
         let setMethod = class_getInstanceMethod(object_getClass(self),setSelector)
         
         

@@ -29,13 +29,12 @@ public class MainViewModel : NSObject,ViewModel{
             let e = HttpError.init(code: -34, message: "error.", cause: "", stackTrace: "");
             action(e);
         }
-        
     }
     
     private let tables:[Any] = [
         ["RAC","bind","rac",RACViewController2.self],
         ["RAC","bind","",RACViewController2.self],
-        ["RAC","carmer","",CommodityDetialEditController.self],
+        ["RAC","camera","",CommodityDetialEditController.self],
         ["RAC","bind","rac",nil],
         ["RAC","bind","table",nil],
         ["Form","个人中心表格设置","tableVC",nil],

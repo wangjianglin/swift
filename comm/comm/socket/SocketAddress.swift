@@ -10,7 +10,7 @@ import Darwin
 // import Darwin.POSIX.netinet.`in` - this doesn't seem to work
 // import struct Darwin.POSIX.netinet.`in`.sockaddr_in - neither
 
-let INADDR_ANY = in_addr(s_addr: 0)
+public let INADDR_ANY = in_addr(s_addr: 0)
 
 /**
  * in_addr represents an IPv4 address in Unix. We extend that a little bit

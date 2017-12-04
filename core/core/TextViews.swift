@@ -106,7 +106,7 @@ extension UITextView{
     }
     
     //-(void) keyboardDidShow:(NSNotification *) notification
-    public func keyboardDidShow(_ notification:Notification)
+    @objc public func keyboardDidShow(_ notification:Notification)
     {
         var info = (notification as NSNotification).userInfo;
         
@@ -116,7 +116,7 @@ extension UITextView{
         self.scrollToTextView(keyboardSize);
     
     }
-    public func keyboardWillHide(_ notification:Notification)
+    @objc public func keyboardWillHide(_ notification:Notification)
     {
         //println("**********************");
         var frame = self.window!.frame;
@@ -126,7 +126,7 @@ extension UITextView{
         self.resignFirstResponder();
     }
     
-    public func doneButtonIsClicked(_ sender:AnyObject)
+    @objc public func doneButtonIsClicked(_ sender:AnyObject)
     {
         var frame = self.window!.frame;
         frame.origin.y = 0;

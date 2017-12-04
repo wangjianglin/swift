@@ -109,7 +109,7 @@ extension Ext where Base: NSObject {
             let obj = objcClass as AnyObject;
             //            let objcClassAssociations = Associations(objcClass as AnyObject)
             //
-            let deallocSelector = sel_registerName("dealloc")!
+            let deallocSelector = sel_registerName("dealloc")
             //
             //            // Swizzle `-dealloc` so that the lifetime token is released at the
             //            // beginning of the deallocation chain, and only after the KVO `-dealloc`.
@@ -135,8 +135,8 @@ extension Ext where Base: NSObject {
                         if let existingImpl = existingImpl {
                             impl = existingImpl
                         } else {
-                            let superclass: AnyClass = class_getSuperclass(objcClass)
-                            impl = class_getMethodImplementation(superclass, deallocSelector)
+                            let superclass: AnyClass = class_getSuperclass(objcClass)!
+                            impl = class_getMethodImplementation(superclass, deallocSelector)!
                         }
                         
                         typealias Impl = @convention(c) (UnsafeRawPointer, Selector) -> Void
@@ -151,11 +151,11 @@ extension Ext where Base: NSObject {
                         
                         // Store the existing implementation to `existingImpl` to ensure it is
                         // available before our version is swapped in.
-                        existingImpl = method_getImplementation(deallocMethod)
+                        existingImpl = method_getImplementation(deallocMethod!)
                         
                         // Store the swapped-out implementation to `existingImpl` in case
                         // the implementation has been changed concurrently.
-                        existingImpl = method_setImplementation(deallocMethod, newImpl)
+                        existingImpl = method_setImplementation(deallocMethod!, newImpl)
                     }
                     
                 }

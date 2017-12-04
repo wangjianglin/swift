@@ -42,8 +42,9 @@ public class Recorder: NSObject {
         super.init()
         setup()
     }
-    
+
     private func setup() {
+        
         camera = GPUImageVideoCamera(sessionPreset: sessionPreset.rawValue, cameraPosition: cameraPosition)
         camera.outputImageOrientation = .portrait
         camera.addAudioInputsAndOutputs()
@@ -111,7 +112,6 @@ public extension Recorder {
                 strongSelf.stop()
             })
         }
-        
     }
     /// 停止录制
     public func stop()  {

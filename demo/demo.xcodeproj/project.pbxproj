@@ -28,6 +28,8 @@
 		3EB565C01DD435D300828FF7 /* RACVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565BF1DD435D300828FF7 /* RACVM.swift */; };
 		3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EAE1D0AEF2500717357 /* WebViewController.swift */; };
 		3EE51EE31CE8C9B90032729F /* web in Resources */ = {isa = PBXBuildFile; fileRef = 3EE51EE21CE8C9B90032729F /* web */; };
+		8EA5F36A1FCD573200C85AE4 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA5F3681FCD573200C85AE4 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8EA5F36B1FCD573200C85AE4 /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA5F3691FCD573200C85AE4 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FE424A9C1EFA6A77001DCC2C /* FromViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE424A9B1EFA6A77001DCC2C /* FromViewModel.swift */; };
 		FE6467831EE7E2ED007115B6 /* CategoryVo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6467821EE7E2ED007115B6 /* CategoryVo.swift */; };
 		FE6467861EE7E386007115B6 /* PropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6467841EE7E386007115B6 /* PropertyViewController.swift */; };
@@ -68,6 +70,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				8EA5F36A1FCD573200C85AE4 /* SVProgressHUD.framework in Embed Frameworks */,
+				8EA5F36B1FCD573200C85AE4 /* GPUImage.framework in Embed Frameworks */,
 				FE7DDA611EE1163900D86B35 /* LinUtil.framework in Embed Frameworks */,
 				FE7DDA641EE1164500D86B35 /* LinRac.framework in Embed Frameworks */,
 				FE7DDA5B1EE1162B00D86B35 /* LinComm.framework in Embed Frameworks */,
@@ -108,6 +112,8 @@
 		3EC64EB01D0AF00100717357 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3EE51EE21CE8C9B90032729F /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
 		6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EA5F3681FCD573200C85AE4 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = ../core/SVProgressHUD.framework; sourceTree = "<group>"; };
+		8EA5F3691FCD573200C85AE4 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../core/GPUImage.framework; sourceTree = "<group>"; };
 		DC0BAD3412467BC34B233B21 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		DDBED86DD6B8B51E312AE66A /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
 		FE424A9B1EFA6A77001DCC2C /* FromViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromViewModel.swift; sourceTree = "<group>"; };
@@ -164,6 +170,8 @@
 		3E200E9B1C4D5FB000A00A10 = {
 			isa = PBXGroup;
 			children = (
+				8EA5F3691FCD573200C85AE4 /* GPUImage.framework */,
+				8EA5F3681FCD573200C85AE4 /* SVProgressHUD.framework */,
 				FE7DDA621EE1164500D86B35 /* LinRac.framework */,
 				FE7DDA5F1EE1163900D86B35 /* LinUtil.framework */,
 				FE7DDA5C1EE1163200D86B35 /* LinCore.framework */,

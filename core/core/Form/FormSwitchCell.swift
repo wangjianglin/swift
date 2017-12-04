@@ -39,7 +39,7 @@ open class FormSwitchCell: FormBaseCell {
     
     /// MARK: Actions
     
-    func valueChanged(_: UISwitch) {
+    @objc func valueChanged(_: UISwitch) {
         rowDescriptor.value = switchView.isOn as Bool
     }
 }

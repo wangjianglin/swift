@@ -55,7 +55,7 @@ open class EventDelegateAction : DelegateAction{
     }
     fileprivate var delegateAction:((AnyObject)->());
     
-    open func action(_ send:AnyObject){
+   @objc open func action(_ send:AnyObject){
 //        let tmp: AnyObject? = self.withObjectSameLifecycle;
 //        if isWithObjectSameLifecycle == false || tmp != nil {
             delegateAction(send);

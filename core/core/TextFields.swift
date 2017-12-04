@@ -81,7 +81,7 @@ extension UITextField{
     }
     
     //-(void) keyboardDidShow:(NSNotification *) notification
-    public func keyboardDidShow(_ notification:Notification)
+    @objc public func keyboardDidShow(_ notification:Notification)
     {
         var info = (notification as NSNotification).userInfo;
         
@@ -92,12 +92,12 @@ extension UITextField{
         self.scrollToTextView(keyboardSize);
         
     }
-    public func keyboardWillHide(_ notification:Notification)
+    @objc  public func keyboardWillHide(_ notification:Notification)
     {
         self.resignFirstResponder();
     }
     
-    public func doneButtonIsClicked(_ sender:AnyObject)
+    @objc public func doneButtonIsClicked(_ sender:AnyObject)
     {
         self.hiddenWindow();
     }

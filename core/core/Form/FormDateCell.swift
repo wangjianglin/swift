@@ -69,7 +69,7 @@ open class FormDateCell: FormBaseCell {
     
     /// MARK: Actions
     
-    func valueChanged(_ sender: UIDatePicker) {
+    @objc func valueChanged(_ sender: UIDatePicker) {
         rowDescriptor.value = sender.date
         detailTextLabel?.text = getDateFormatter().string(from: sender.date)
     }

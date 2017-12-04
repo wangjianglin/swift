@@ -104,12 +104,12 @@ open class FormTextEditController: UITableViewController{
         }
     }
     
-    open func cancelClick(_:AnyObject){
+    @objc open func cancelClick(_:AnyObject){
         print("canecl click.");
         self.navigationController?.popViewController(animated: true);
     }
     
-    open func okClick(_:AnyObject){
+    @objc open func okClick(_:AnyObject){
         print("ok click.");
         backValue();
     }
@@ -134,7 +134,7 @@ open class FormTextEditController: UITableViewController{
         return cell;
     }
     
-    open func keyReturn(_:AnyObject){
+    @objc open func keyReturn(_:AnyObject){
         print("key return ok.");
         backValue();
     }

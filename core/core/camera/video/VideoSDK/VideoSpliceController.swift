@@ -31,14 +31,24 @@ final class VideoSpliceController: UIViewController {
     
     private var progressTimer: Timer!
     private var exportSession: AVAssetExportSession!
+    fileprivate var maxTimeInterval = 15.0
+    
+    
     
     convenience init(asset: PHAsset) {
         self.init(nibName: nil, bundle: nil)
-        assetResource = PHAssetResource.assetResources(for: asset).filter{ $0.type == .video }.first
-        resourceManager = PHAssetResourceManager.default()
+        if #available(iOS 9.0, *) {
+        } else {
+            // Fallback on earlier versions
+        }
+        if #available(iOS 9.0, *) {
+            
+            assetResource = PHAssetResource.assetResources(for: asset).filter{ $0.type == .video }.first
+            resourceManager = PHAssetResourceManager.default()
+        } else {
+            // Fallback on earlier versions
+        }
     }
-    
-
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
@@ -52,13 +62,19 @@ final class VideoSpliceController: UIViewController {
         title = "剪辑"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "下一步", style: .plain, target: self, action: #selector(nextAction))
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
         setupUI()
         loadData()
-        
     }
     @objc func nextAction() {
+        
         player?.pause()
         playBtn?.isHidden = false
+        if   !self.timeOver() {
+            SVProgressHUD.showError(withStatus: "导出长度最长为\(maxTimeInterval)秒")
+            return
+        }
+
         let splice = Splice(asset: sourceAsset)
         splice.makeEditParamaters(startTime: startTime, endTime: endTime, outputSize: CGSize(width: 960, height: 540))
         guard let session = splice.makeExportable() else { return }
@@ -71,7 +87,14 @@ final class VideoSpliceController: UIViewController {
             DispatchQueue.main.async {
                 strongSelf.progressTimer.invalidate()
                 SVProgressHUD.dismiss()
+                
                 if strongSelf.exportSession.status == .completed, let outputURL = strongSelf.exportSession.outputURL {
+                    
+//                    PHPhotoLibrary.shared().performChanges({
+//                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL:outputURL)
+//                    }, completionHandler: { (finish, error) in
+//                    })
+//
                     if let picker = strongSelf.navigationController as? VideoPickerController {
                         picker.pickerDelegate?.videoPickerController(picker, didPickVideoAt: outputURL)
                     }
@@ -85,6 +108,15 @@ final class VideoSpliceController: UIViewController {
     
     @objc func timerAction() {
         SVProgressHUD.showProgress(exportSession.progress, status: "导出中...")
+    }
+    
+    func timeOver()->Bool{
+        let endsecond = CGFloat(endTime.value) / CGFloat(endTime.timescale)
+        let startSecond = CGFloat(startTime.value) / CGFloat(startTime.timescale)
+        if endsecond - startSecond > CGFloat(TimeInterval(maxTimeInterval)){
+            return false
+        }
+        return true
     }
     
     override func viewDidLayoutSubviews() {

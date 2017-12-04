@@ -17,7 +17,7 @@ import Result
 open class CommodityDetialEditController:UIViewController, BaseView{
     
        //
- 
+    
     var scrollView:AutoScrollView!;
     var priceText:UITextField!;
     var descText:UITextView!;
@@ -79,8 +79,6 @@ open class CommodityDetialEditController:UIViewController, BaseView{
         scrollView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height);
         scrollView.showsHorizontalScrollIndicator = false;
         scrollView.showsVerticalScrollIndicator = false;
-        
-        
         
         self.initView();
     }

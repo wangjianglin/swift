@@ -221,7 +221,7 @@ open class ScrollImagesView:UIView,QBImagePickerControllerDelegate,UIScrollViewD
         return images;
     }
     
-    dynamic var images:NSArray{
+    @objc dynamic var images:NSArray{
         let _images = NSMutableArray();
         for item in _views {
             if item is LinImagesContentView {

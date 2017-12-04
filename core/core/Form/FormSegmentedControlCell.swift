@@ -24,8 +24,8 @@ open class FormSegmentedControlCell: FormBaseCell {
         selectionStyle = .none
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.setContentCompressionResistancePriority(500, for: .horizontal)
-        segmentedControl.setContentCompressionResistancePriority(500, for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 500), for: .horizontal)
+        segmentedControl.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 500), for: .horizontal)
         titleLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         contentView.addSubview(titleLabel)
         contentView.addSubview(segmentedControl)
@@ -54,7 +54,7 @@ open class FormSegmentedControlCell: FormBaseCell {
     
     fileprivate func layoutConstraints() -> [NSLayoutConstraint] {
         var result: [NSLayoutConstraint] = []
-        titleLabel.setContentHuggingPriority(500, for: .horizontal)
+        titleLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 500), for: .horizontal)
         result.append(NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1.0, constant: 0.0))
         result.append(NSLayoutConstraint(item: segmentedControl, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1.0, constant: 0.0))
         return result
@@ -81,7 +81,7 @@ open class FormSegmentedControlCell: FormBaseCell {
     
     /// MARK: Actions
     
-    func valueChanged(_ sender: UISegmentedControl) {
+    @objc func valueChanged(_ sender: UISegmentedControl) {
 //        let optionValue = rowDescriptor.options[sender.selectedSegmentIndex]
 //        rowDescriptor.value = optionValue
     }

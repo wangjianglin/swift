@@ -112,7 +112,9 @@ internal class HttpRequestSerializer: NSObject {
             var newUrl = "\(request.url!.absoluteString)"
             if queryString.characters.count > 0 {
                 newUrl += "\(para)\(queryString)"
-                newUrl = newUrl.addingPercentEscapes(using: String.Encoding.utf8) ?? "";
+//                'addingPercentEscapes(using:)' is unavailable: Use addingPercentEncoding(withAllowedCharacters:) instead, which always uses the recommended UTF-8 encoding, and which encodes for a specific URL component or subcomponent since each URL component or subcomponent has different rules for what characters are valid.
+                let cs = NSCharacterSet(charactersIn:"`#%^{}\"[]|\\<>//").inverted
+                newUrl = newUrl.addingPercentEncoding(withAllowedCharacters: cs) ?? "";
             }
             request.url = URL(string: newUrl)
         } else {

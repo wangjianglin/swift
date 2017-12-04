@@ -376,6 +376,19 @@
 		3EF997FD1A7229930030C4D3 /* UIBarButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF997FC1A7229930030C4D3 /* UIBarButtonItems.swift */; };
 		3EF998021A728CE90030C4D3 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF998001A728CE90030C4D3 /* TextFields.swift */; };
 		3EF998031A728CE90030C4D3 /* TextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF998011A728CE90030C4D3 /* TextViews.swift */; };
+		8E777F5F1FCD559F00815B85 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E777F5E1FCD559E00815B85 /* GPUImage.framework */; };
+		8E979AB51FCC11070079D9BF /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA41FCC11070079D9BF /* Recorder.swift */; };
+		8E979AB71FCC11070079D9BF /* VideoSpliceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA61FCC11070079D9BF /* VideoSpliceController.swift */; };
+		8E979AB81FCC11070079D9BF /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA71FCC11070079D9BF /* VideoCell.swift */; };
+		8E979AB91FCC11070079D9BF /* VideoPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA81FCC11070079D9BF /* VideoPickerController.swift */; };
+		8E979ABB1FCC11070079D9BF /* Editer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAA1FCC11070079D9BF /* Editer.swift */; };
+		8E979ABC1FCC11070079D9BF /* TimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAB1FCC11070079D9BF /* TimeLineView.swift */; };
+		8E979ABD1FCC11070079D9BF /* Splice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAC1FCC11070079D9BF /* Splice.swift */; };
+		8E979ABF1FCC11070079D9BF /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAE1FCC11070079D9BF /* Helper.swift */; };
+		8E979AC21FCC11070079D9BF /* VideoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AB11FCC11070079D9BF /* VideoListController.swift */; };
+		8E979AC31FCC11070079D9BF /* VideoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E979AB21FCC11070079D9BF /* VideoSDK.h */; };
+		8EA5F3671FCD55D400C85AE4 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA5F3661FCD55D300C85AE4 /* SVProgressHUD.framework */; };
+		8EA5F36F1FCD600000C85AE4 /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */; };
 		8EC99BA51FB1A681009C099A /* ALView+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EC99BA61FB1A681009C099A /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC99B9D1FB1A681009C099A /* ALView+PureLayout.m */; };
 		8EC99BA71FB1A681009C099A /* NSArray+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99B9E1FB1A681009C099A /* NSArray+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -784,6 +797,20 @@
 		3EF997FC1A7229930030C4D3 /* UIBarButtonItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItems.swift; sourceTree = "<group>"; };
 		3EF998001A728CE90030C4D3 /* TextFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
 		3EF998011A728CE90030C4D3 /* TextViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViews.swift; sourceTree = "<group>"; };
+		8E5F86E91FCD498800170E6A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8E777F5E1FCD559E00815B85 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
+		8E979AA41FCC11070079D9BF /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		8E979AA61FCC11070079D9BF /* VideoSpliceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSpliceController.swift; sourceTree = "<group>"; };
+		8E979AA71FCC11070079D9BF /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		8E979AA81FCC11070079D9BF /* VideoPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPickerController.swift; sourceTree = "<group>"; };
+		8E979AAA1FCC11070079D9BF /* Editer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editer.swift; sourceTree = "<group>"; };
+		8E979AAB1FCC11070079D9BF /* TimeLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineView.swift; sourceTree = "<group>"; };
+		8E979AAC1FCC11070079D9BF /* Splice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splice.swift; sourceTree = "<group>"; };
+		8E979AAE1FCC11070079D9BF /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		8E979AB11FCC11070079D9BF /* VideoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListController.swift; sourceTree = "<group>"; };
+		8E979AB21FCC11070079D9BF /* VideoSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSDK.h; sourceTree = "<group>"; };
+		8EA5F3661FCD55D300C85AE4 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = "<group>"; };
+		8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
 		8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
 		8EC99B9D1FB1A681009C099A /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
 		8EC99B9E1FB1A681009C099A /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PureLayout.h"; sourceTree = "<group>"; };
@@ -801,6 +828,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EB8A2CB1BBB110D00871123 /* SystemConfiguration.framework in Frameworks */,
+				8EA5F3671FCD55D400C85AE4 /* SVProgressHUD.framework in Frameworks */,
+				8E777F5F1FCD559F00815B85 /* GPUImage.framework in Frameworks */,
 				3EC4FE221A55D97300E05771 /* LinUtil.framework in Frameworks */,
 				3E76AD941A41C7D400B0C2BB /* libsqlite3.dylib in Frameworks */,
 			);
@@ -1018,6 +1047,7 @@
 		3E12199E1CF845A400D43267 /* camera */ = {
 			isa = PBXGroup;
 			children = (
+				8E979AA21FCC11070079D9BF /* video */,
 				18F8B2191EF0D34400E9947C /* LGPhoto */,
 				3E12199F1CF845A400D43267 /* CameraViewController.h */,
 				3E1219A01CF845A400D43267 /* CameraViewController.m */,
@@ -1135,6 +1165,8 @@
 		3E37463D1A26365A00B980E9 = {
 			isa = PBXGroup;
 			children = (
+				8EA5F3661FCD55D300C85AE4 /* SVProgressHUD.framework */,
+				8E777F5E1FCD559E00815B85 /* GPUImage.framework */,
 				3E9842F61CF9A98B003FD60B /* LinCore.bundle */,
 				3EB8A2CA1BBB110D00871123 /* SystemConfiguration.framework */,
 				3EB8A2C81BBB10E800871123 /* libsystem_configuration.tbd */,
@@ -1145,6 +1177,7 @@
 				3E76AE0A1A41D9F900B0C2BB /* Targets */,
 				3E76ADC31A41D8F200B0C2BB /* coreTests */,
 				3E3746481A26365A00B980E9 /* Products */,
+				8E5F86E81FCD498800170E6A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1558,6 +1591,40 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		8E5F86E81FCD498800170E6A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E5F86E91FCD498800170E6A /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E979AA21FCC11070079D9BF /* video */ = {
+			isa = PBXGroup;
+			children = (
+				8E979AA31FCC11070079D9BF /* VideoSDK */,
+			);
+			path = video;
+			sourceTree = "<group>";
+		};
+		8E979AA31FCC11070079D9BF /* VideoSDK */ = {
+			isa = PBXGroup;
+			children = (
+				8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */,
+				8E979AA41FCC11070079D9BF /* Recorder.swift */,
+				8E979AA61FCC11070079D9BF /* VideoSpliceController.swift */,
+				8E979AA71FCC11070079D9BF /* VideoCell.swift */,
+				8E979AA81FCC11070079D9BF /* VideoPickerController.swift */,
+				8E979AAA1FCC11070079D9BF /* Editer.swift */,
+				8E979AAB1FCC11070079D9BF /* TimeLineView.swift */,
+				8E979AAC1FCC11070079D9BF /* Splice.swift */,
+				8E979AAE1FCC11070079D9BF /* Helper.swift */,
+				8E979AB11FCC11070079D9BF /* VideoListController.swift */,
+				8E979AB21FCC11070079D9BF /* VideoSDK.h */,
+			);
+			path = VideoSDK;
+			sourceTree = "<group>";
+		};
 		8EC99B9B1FB1A681009C099A /* pureLayout */ = {
 			isa = PBXGroup;
 			children = (
@@ -1699,6 +1766,7 @@
 				18F8B2881EF0D34400E9947C /* ZLCamera.h in Headers */,
 				18F8B2771EF0D34400E9947C /* LGPhotoPickerViewController.h in Headers */,
 				18F8B2691EF0D34400E9947C /* LGPhotoPickerBrowserPhotoView.h in Headers */,
+				8E979AC31FCC11070079D9BF /* VideoSDK.h in Headers */,
 				18F8B27B1EF0D34400E9947C /* LGPhotoPickerCollectionViewCell.h in Headers */,
 				18F8B25C1EF0D34400E9947C /* LGPhoto.h in Headers */,
 				18F8B25F1EF0D34400E9947C /* LGPhotoRect.h in Headers */,
@@ -1847,7 +1915,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E121A001CF845A400D43267 /* SCRecorder.m in Sources */,
+				8EA5F36F1FCD600000C85AE4 /* RecordVideoViewController.swift in Sources */,
 				3E20C7BB1E53682A000C9698 /* MyDimeScale.m in Sources */,
+				8E979AB71FCC11070079D9BF /* VideoSpliceController.swift in Sources */,
 				3E73DA9F1A8795A30052C16A /* FormCheckCell.swift in Sources */,
 				3E6AF2F91EB188E800B5DB1F /* MJRefreshGifHeader.m in Sources */,
 				3E73DAD81A8795A30052C16A /* HZAreaPickerView.m in Sources */,
@@ -1898,6 +1968,7 @@
 				3E20C7CB1E53682A000C9698 /* MyLayoutSizeClass.m in Sources */,
 				3ECD407C1CEDC1E300D57372 /* MRCircularProgressView.m in Sources */,
 				3ECD40901CEDC1E300D57372 /* MRMessageInterceptor.m in Sources */,
+				8E979ABC1FCC11070079D9BF /* TimeLineView.swift in Sources */,
 				3E73DAC01A8795A30052C16A /* QBImagePickerGroupCell.m in Sources */,
 				3E6AF2E51EB188E800B5DB1F /* MJRefreshBackFooter.m in Sources */,
 				3E121A141CF845A400D43267 /* SCVideoPlayerView.m in Sources */,
@@ -1926,6 +1997,7 @@
 				3E73DAC61A8795A30052C16A /* MHTextField.m in Sources */,
 				3E1219E61CF845A400D43267 /* CIImageRendererUtils.m in Sources */,
 				3E73DA9B1A8795A30052C16A /* QCheckBox.m in Sources */,
+				8E979AB81FCC11070079D9BF /* VideoCell.swift in Sources */,
 				3E20C7D21E53682A000C9698 /* MyPathLayout.m in Sources */,
 				3E08549B1A8A6EEA0052DCEE /* MJRefreshConst.m in Sources */,
 				3E121A101CF845A400D43267 /* SCSwipeableFilterView.m in Sources */,
@@ -1964,6 +2036,7 @@
 				3E20C7BD1E53682A000C9698 /* MyFloatLayout.m in Sources */,
 				3E20C74E1E51B018000C9698 /* AutoScrollView.swift in Sources */,
 				3E20C7C61E53682A000C9698 /* MyLayoutPos.m in Sources */,
+				8E979ABF1FCC11070079D9BF /* Helper.swift in Sources */,
 				3E73DAAD1A8795A30052C16A /* FormTextCell.swift in Sources */,
 				3E0854A71A8A76F80052DCEE /* QCheckBox.swift in Sources */,
 				3E6AF2FB1EB188E800B5DB1F /* MJRefreshNormalHeader.m in Sources */,
@@ -1978,6 +2051,7 @@
 				3E121A1A1CF845A400D43267 /* SCTouchDetector.m in Sources */,
 				18F8B2641EF0D34400E9947C /* LGImagePickerSelectView.m in Sources */,
 				3E121A1F1CF845E700D43267 /* ImagesView.swift in Sources */,
+				8E979ABD1FCC11070079D9BF /* Splice.swift in Sources */,
 				3E73DA9E1A8795A30052C16A /* FormButtonDescriptor.swift in Sources */,
 				3E426D2A1A4A988E00A1C815 /* UIViewController+RBStoryboardLink.m in Sources */,
 				3E0854771A8A6DE30052DCEE /* JASwipeCell.m in Sources */,
@@ -1997,6 +2071,7 @@
 				3E73DADC1A8795A30052C16A /* HZLocation.m in Sources */,
 				3E73DAC21A8795A30052C16A /* QBImagePickerVideoInfoView.m in Sources */,
 				3E121A211CF880F300D43267 /* Vedios.swift in Sources */,
+				8E979AB91FCC11070079D9BF /* VideoPickerController.swift in Sources */,
 				3E73DAB81A8795A30052C16A /* QBImagePickerAssetView.m in Sources */,
 				18F8B2721EF0D34400E9947C /* LGPhotoPickerGroup.m in Sources */,
 				3E6AF2F51EB188E800B5DB1F /* MJRefreshBackNormalFooter.m in Sources */,
@@ -2009,14 +2084,17 @@
 				3E73DADE1A8795A30052C16A /* ZHPickView.m in Sources */,
 				3E121A031CF845A400D43267 /* SCRecorderFocusTargetView.m in Sources */,
 				3E73DA981A8795A30052C16A /* UIAlertController.swift in Sources */,
+				8E979ABB1FCC11070079D9BF /* Editer.swift in Sources */,
 				3E121A1B1CF845A400D43267 /* SCWatermarkOverlayView.m in Sources */,
 				3E73DAA71A8795A30052C16A /* FormSegmentedControlCell.swift in Sources */,
 				3E73DAB21A8795A30052C16A /* QBAssetCollectionViewController.m in Sources */,
 				3E121A0C1CF845A400D43267 /* SCRecordSessionSegment.m in Sources */,
 				3E76AE0D1A41DC0F00B0C2BB /* Keychain.swift in Sources */,
+				8E979AC21FCC11070079D9BF /* VideoListController.swift in Sources */,
 				3E73DAAF1A8795A30052C16A /* FormTextEditController.swift in Sources */,
 				3E6AF2EF1EB188E800B5DB1F /* MJRefreshAutoNormalFooter.m in Sources */,
 				3E6AF2FF1EB188E800B5DB1F /* NSBundle+MJRefresh.m in Sources */,
+				8E979AB51FCC11070079D9BF /* Recorder.swift in Sources */,
 				3EA768691A70230D00FF8C57 /* UIGestureRecognizers.swift in Sources */,
 				18F8B2781EF0D34400E9947C /* LGPhotoPickerViewController.m in Sources */,
 				3E20C7B91E53682A000C9698 /* MyBaseLayout.m in Sources */,
@@ -2170,10 +2248,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/lin-gxczwykgogkdagbgjamhtdcqlhnr/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)/core/camera/video",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2186,7 +2266,8 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2202,10 +2283,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/lin-gxczwykgogkdagbgjamhtdcqlhnr/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)/core/camera/video",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2217,7 +2300,8 @@
 				PRODUCT_NAME = LinCore;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -2236,6 +2320,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "lin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = LinCoreTests;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -2250,6 +2335,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "lin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = LinCoreTests;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
