@@ -25,6 +25,8 @@ target :'LinRac' do
 #    pod 'ReactiveCocoa','5.0.0'
     pod 'ReactiveCocoa', '~> 5.0.0'
     #pod 'ReactiveCocoa',:git=>'https://github.com/ReactiveCocoa/ReactiveCocoa.git'
+   pod 'GPUImage',:git=>'https://github.com/BradLarson/GPUImage.git'
+   pod 'SVProgressHUD',:git=>'https://github.com/SVProgressHUD/SVProgressHUD'
     project 'rac/LinRac.xcodeproj'
 end
 

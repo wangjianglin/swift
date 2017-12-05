@@ -376,7 +376,6 @@
 		3EF997FD1A7229930030C4D3 /* UIBarButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF997FC1A7229930030C4D3 /* UIBarButtonItems.swift */; };
 		3EF998021A728CE90030C4D3 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF998001A728CE90030C4D3 /* TextFields.swift */; };
 		3EF998031A728CE90030C4D3 /* TextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF998011A728CE90030C4D3 /* TextViews.swift */; };
-		8E777F5F1FCD559F00815B85 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E777F5E1FCD559E00815B85 /* GPUImage.framework */; };
 		8E979AB51FCC11070079D9BF /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA41FCC11070079D9BF /* Recorder.swift */; };
 		8E979AB71FCC11070079D9BF /* VideoSpliceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA61FCC11070079D9BF /* VideoSpliceController.swift */; };
 		8E979AB81FCC11070079D9BF /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA71FCC11070079D9BF /* VideoCell.swift */; };
@@ -387,7 +386,6 @@
 		8E979ABF1FCC11070079D9BF /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAE1FCC11070079D9BF /* Helper.swift */; };
 		8E979AC21FCC11070079D9BF /* VideoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AB11FCC11070079D9BF /* VideoListController.swift */; };
 		8E979AC31FCC11070079D9BF /* VideoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E979AB21FCC11070079D9BF /* VideoSDK.h */; };
-		8EA5F3671FCD55D400C85AE4 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA5F3661FCD55D300C85AE4 /* SVProgressHUD.framework */; };
 		8EA5F36F1FCD600000C85AE4 /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */; };
 		8EC99BA51FB1A681009C099A /* ALView+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EC99BA61FB1A681009C099A /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC99B9D1FB1A681009C099A /* ALView+PureLayout.m */; };
@@ -398,6 +396,8 @@
 		8EC99BAB1FB1A681009C099A /* PureLayout+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99BA21FB1A681009C099A /* PureLayout+Internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EC99BAC1FB1A681009C099A /* PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99BA31FB1A681009C099A /* PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EC99BAD1FB1A681009C099A /* PureLayoutDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99BA41FB1A681009C099A /* PureLayoutDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EC9DDB91FD684AA00833029 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDBA1FD684AA00833029 /* GPUImage.framework */; };
+		8EC9DDBB1FD684B600833029 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDBC1FD684B600833029 /* SVProgressHUD.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -798,7 +798,6 @@
 		3EF998001A728CE90030C4D3 /* TextFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
 		3EF998011A728CE90030C4D3 /* TextViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViews.swift; sourceTree = "<group>"; };
 		8E5F86E91FCD498800170E6A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		8E777F5E1FCD559E00815B85 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
 		8E979AA41FCC11070079D9BF /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		8E979AA61FCC11070079D9BF /* VideoSpliceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSpliceController.swift; sourceTree = "<group>"; };
 		8E979AA71FCC11070079D9BF /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
@@ -809,7 +808,6 @@
 		8E979AAE1FCC11070079D9BF /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		8E979AB11FCC11070079D9BF /* VideoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListController.swift; sourceTree = "<group>"; };
 		8E979AB21FCC11070079D9BF /* VideoSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSDK.h; sourceTree = "<group>"; };
-		8EA5F3661FCD55D300C85AE4 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = "<group>"; };
 		8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
 		8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
 		8EC99B9D1FB1A681009C099A /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
@@ -820,6 +818,12 @@
 		8EC99BA21FB1A681009C099A /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
 		8EC99BA31FB1A681009C099A /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
 		8EC99BA41FB1A681009C099A /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
+		8EC9DDB11FD6808100833029 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = ../demo/SVProgressHUD.framework; sourceTree = "<group>"; };
+		8EC9DDB21FD6808100833029 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../demo/GPUImage.framework; sourceTree = "<group>"; };
+		8EC9DDB71FD6849300833029 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC9DDB81FD6849300833029 /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC9DDBA1FD684AA00833029 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC9DDBC1FD684B600833029 /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -827,9 +831,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EC9DDBB1FD684B600833029 /* SVProgressHUD.framework in Frameworks */,
+				8EC9DDB91FD684AA00833029 /* GPUImage.framework in Frameworks */,
 				3EB8A2CB1BBB110D00871123 /* SystemConfiguration.framework in Frameworks */,
-				8EA5F3671FCD55D400C85AE4 /* SVProgressHUD.framework in Frameworks */,
-				8E777F5F1FCD559F00815B85 /* GPUImage.framework in Frameworks */,
 				3EC4FE221A55D97300E05771 /* LinUtil.framework in Frameworks */,
 				3E76AD941A41C7D400B0C2BB /* libsqlite3.dylib in Frameworks */,
 			);
@@ -1165,8 +1169,6 @@
 		3E37463D1A26365A00B980E9 = {
 			isa = PBXGroup;
 			children = (
-				8EA5F3661FCD55D300C85AE4 /* SVProgressHUD.framework */,
-				8E777F5E1FCD559E00815B85 /* GPUImage.framework */,
 				3E9842F61CF9A98B003FD60B /* LinCore.bundle */,
 				3EB8A2CA1BBB110D00871123 /* SystemConfiguration.framework */,
 				3EB8A2C81BBB10E800871123 /* libsystem_configuration.tbd */,
@@ -1594,6 +1596,12 @@
 		8E5F86E81FCD498800170E6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EC9DDBC1FD684B600833029 /* SVProgressHUD.framework */,
+				8EC9DDBA1FD684AA00833029 /* GPUImage.framework */,
+				8EC9DDB71FD6849300833029 /* GPUImage.framework */,
+				8EC9DDB81FD6849300833029 /* SVProgressHUD.framework */,
+				8EC9DDB21FD6808100833029 /* GPUImage.framework */,
+				8EC9DDB11FD6808100833029 /* SVProgressHUD.framework */,
 				8E5F86E91FCD498800170E6A /* AVFoundation.framework */,
 			);
 			name = Frameworks;

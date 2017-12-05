@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import GPUImage
+//import GPUImage
 
 
 public class Editer: NSObject {

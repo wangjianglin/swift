@@ -48,14 +48,9 @@
 #import "UILabels.h"
 #import "ZLCameraViewController.h"
 
-
-
 #import "QBImagePickerController.h"
-
 #import "CameraViewController.h"
-
 #import "IOS7ScrollView.h"
-
 #import "MyLayout.h"
 
 

@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import GPUImage
+//import GPUImage
+//import ReactiveSwift
+//import ReactiveCocoa
 import AVFoundation
 
 public class Recorder: NSObject {

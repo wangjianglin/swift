@@ -28,8 +28,12 @@
 		3EB565C01DD435D300828FF7 /* RACVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565BF1DD435D300828FF7 /* RACVM.swift */; };
 		3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EAE1D0AEF2500717357 /* WebViewController.swift */; };
 		3EE51EE31CE8C9B90032729F /* web in Resources */ = {isa = PBXBuildFile; fileRef = 3EE51EE21CE8C9B90032729F /* web */; };
-		8EA5F36A1FCD573200C85AE4 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA5F3681FCD573200C85AE4 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8EA5F36B1FCD573200C85AE4 /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA5F3691FCD573200C85AE4 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8EC9DDBD1FD685E700833029 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDBF1FD685E700833029 /* GPUImage.framework */; };
+		8EC9DDBE1FD685E700833029 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDC01FD685E700833029 /* SVProgressHUD.framework */; };
+		8EC9DDC21FD6879500833029 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDC11FD6879500833029 /* GPUImage.framework */; };
+		8EC9DDC31FD6879500833029 /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDC11FD6879500833029 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8EC9DDC51FD6879500833029 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDC41FD6879500833029 /* SVProgressHUD.framework */; };
+		8EC9DDC61FD6879500833029 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDC41FD6879500833029 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FE424A9C1EFA6A77001DCC2C /* FromViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE424A9B1EFA6A77001DCC2C /* FromViewModel.swift */; };
 		FE6467831EE7E2ED007115B6 /* CategoryVo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6467821EE7E2ED007115B6 /* CategoryVo.swift */; };
 		FE6467861EE7E386007115B6 /* PropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6467841EE7E386007115B6 /* PropertyViewController.swift */; };
@@ -70,9 +74,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8EA5F36A1FCD573200C85AE4 /* SVProgressHUD.framework in Embed Frameworks */,
-				8EA5F36B1FCD573200C85AE4 /* GPUImage.framework in Embed Frameworks */,
+				8EC9DDC61FD6879500833029 /* SVProgressHUD.framework in Embed Frameworks */,
 				FE7DDA611EE1163900D86B35 /* LinUtil.framework in Embed Frameworks */,
+				8EC9DDC31FD6879500833029 /* GPUImage.framework in Embed Frameworks */,
 				FE7DDA641EE1164500D86B35 /* LinRac.framework in Embed Frameworks */,
 				FE7DDA5B1EE1162B00D86B35 /* LinComm.framework in Embed Frameworks */,
 				FE7DDA5E1EE1163200D86B35 /* LinCore.framework in Embed Frameworks */,
@@ -112,8 +116,10 @@
 		3EC64EB01D0AF00100717357 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3EE51EE21CE8C9B90032729F /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
 		6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8EA5F3681FCD573200C85AE4 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = ../core/SVProgressHUD.framework; sourceTree = "<group>"; };
-		8EA5F3691FCD573200C85AE4 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../core/GPUImage.framework; sourceTree = "<group>"; };
+		8EC9DDBF1FD685E700833029 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC9DDC01FD685E700833029 /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC9DDC11FD6879500833029 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EC9DDC41FD6879500833029 /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0BAD3412467BC34B233B21 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		DDBED86DD6B8B51E312AE66A /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
 		FE424A9B1EFA6A77001DCC2C /* FromViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromViewModel.swift; sourceTree = "<group>"; };
@@ -133,9 +139,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EC9DDBD1FD685E700833029 /* GPUImage.framework in Frameworks */,
+				8EC9DDBE1FD685E700833029 /* SVProgressHUD.framework in Frameworks */,
 				FE7DDA631EE1164500D86B35 /* LinRac.framework in Frameworks */,
 				FE7DDA5A1EE1162B00D86B35 /* LinComm.framework in Frameworks */,
 				FE7DDA5D1EE1163200D86B35 /* LinCore.framework in Frameworks */,
+				8EC9DDC21FD6879500833029 /* GPUImage.framework in Frameworks */,
+				8EC9DDC51FD6879500833029 /* SVProgressHUD.framework in Frameworks */,
 				FE7DDA601EE1163900D86B35 /* LinUtil.framework in Frameworks */,
 				3C6E4C9CA47250D281F85C0D /* Pods_demo.framework in Frameworks */,
 			);
@@ -161,6 +171,8 @@
 		3E1974551DB4C97000C5A6EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EC9DDBF1FD685E700833029 /* GPUImage.framework */,
+				8EC9DDC01FD685E700833029 /* SVProgressHUD.framework */,
 				3E519A1A1DE1FA2F00B60C0E /* LinRac.framework */,
 				6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */,
 			);
@@ -170,8 +182,8 @@
 		3E200E9B1C4D5FB000A00A10 = {
 			isa = PBXGroup;
 			children = (
-				8EA5F3691FCD573200C85AE4 /* GPUImage.framework */,
-				8EA5F3681FCD573200C85AE4 /* SVProgressHUD.framework */,
+				8EC9DDC41FD6879500833029 /* SVProgressHUD.framework */,
+				8EC9DDC11FD6879500833029 /* GPUImage.framework */,
 				FE7DDA621EE1164500D86B35 /* LinRac.framework */,
 				FE7DDA5F1EE1163900D86B35 /* LinUtil.framework */,
 				FE7DDA5C1EE1163200D86B35 /* LinCore.framework */,
@@ -412,9 +424,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/../Pods/Target Support Files/Pods-demo/Pods-demo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -442,13 +461,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-demo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -621,6 +643,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 52EW4R7GEM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -640,6 +666,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 52EW4R7GEM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

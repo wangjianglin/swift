@@ -1,18 +1,38 @@
 PODS:
+  - GPUImage (0.1.7)
   - ReactiveCocoa (5.0.3):
     - ReactiveSwift (~> 1.1)
   - ReactiveSwift (1.1.1):
     - Result (~> 3.2)
   - Result (3.2.1)
+  - SVProgressHUD (2.2.2)
 
 DEPENDENCIES:
+  - GPUImage (from `https://github.com/BradLarson/GPUImage.git`)
   - ReactiveCocoa (~> 5.0.0)
+  - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD`)
+
+EXTERNAL SOURCES:
+  GPUImage:
+    :git: https://github.com/BradLarson/GPUImage.git
+  SVProgressHUD:
+    :git: https://github.com/SVProgressHUD/SVProgressHUD
+
+CHECKOUT OPTIONS:
+  GPUImage:
+    :commit: 167b0389bc6e9dc4bb0121550f91d8d5d6412c53
+    :git: https://github.com/BradLarson/GPUImage.git
+  SVProgressHUD:
+    :commit: bb4e4e460d4f8e2ecf20af99797f781e7cc09d8f
+    :git: https://github.com/SVProgressHUD/SVProgressHUD
 
 SPEC CHECKSUMS:
+  GPUImage: bd7e201b9aa91e85f401ed7a6d9867a07a404693
   ReactiveCocoa: 066a855f613fb72f68258771095805fdb10312d2
   ReactiveSwift: 2489549e3231a6ff68ec99f3d320bb264f10ba0a
   Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
+  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
 
-PODFILE CHECKSUM: fbfc2f8743e780fa5c12c24398edf8bc1a161801
+PODFILE CHECKSUM: ded2a92fe601d8ddb5b17fd192ddd6b234468485
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.3.1
