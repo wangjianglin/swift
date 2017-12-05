@@ -9,13 +9,8 @@
 import UIKit
 import Photos
 import GPUImage
-
 import AVFoundation
 import AVKit
-
-
-
-
 
 class RecordVideoViewController: UIViewController {
     
@@ -48,7 +43,7 @@ class RecordVideoViewController: UIViewController {
         self.setUI()
         //录制一段10S的960*540视频, 右上角有文字水印,录制完成后写入相册
         //裁剪录制的视频为540*540, 右下角添加图片水印, 完成后写入相册
-        recorder = Recorder(maximumDuration: 15)
+        recorder = Recorder(maximumDuration: 13)
     }
     
     func setUI(){
