@@ -239,9 +239,18 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     
     //录制视频
     func recordVideoWithCarema(_ avc:UIAlertAction){
-        let recordVC = RecordVideoViewController()
-        recordVC.finishRecordHandle = self.finishRecordVideo
-       self.ext.rootViewController?.present(recordVC, animated: true, completion: nil)
+//        let recordVC = RecordVideoViewController()
+//        recordVC.finishRecordHandle = self.finishRecordVideo
+//       self.ext.rootViewController?.present(recordVC, animated: true, completion: nil)
+//
+                let camera = CameraViewController();
+                camera.setResult({[weak self](file:URL?) in
+                    if (file == nil) {
+                        return ;
+                    }
+                    self?.vedioUrl = file;
+                });
+                self.ext.viewController?.present(camera, animated:true, completion:nil);
     }
     
     //剪辑视频
@@ -399,14 +408,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
         userIconAlert.addAction(canelAction)
         self.ext.rootViewController?.present(userIconAlert, animated: true, completion: nil)
         
-//        let camera = CameraViewController();
-//        camera.setResult({[weak self](file:URL?) in
-//            if (file == nil) {
-//                return ;
-//            }
-//            self?.vedioUrl = file;
-//        });
-//        self.ext.viewController?.present(camera, animated:true, completion:nil);
+
         return;
     }
     

@@ -141,7 +141,7 @@ final class Splice: NSObject {
 
     private func buildOverlayLayer() {
         
-        let overlayString = "文字水印"
+        let overlayString = "" //文字水印
         let fontSize = 20 * (videoComposition.renderSize.width / ScreenSize.width)
         let font = UIFont.systemFont(ofSize: fontSize)
         let overlayLayer = CATextLayer()

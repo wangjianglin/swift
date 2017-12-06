@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import GPUImage
+import GPUImage
 //import ReactiveSwift
 //import ReactiveCocoa
 import AVFoundation
@@ -73,7 +73,7 @@ public class Recorder: NSObject {
         let boardView = UIView(frame: CGRect(x: 0, y: 0, width: 540, height: 960))
         boardView.backgroundColor = .clear
         let label = UILabel()
-        label.text = "文字水印"
+        label.text = "" //文字水印
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 30)
