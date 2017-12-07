@@ -28,10 +28,6 @@
 		3EB565C01DD435D300828FF7 /* RACVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565BF1DD435D300828FF7 /* RACVM.swift */; };
 		3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EAE1D0AEF2500717357 /* WebViewController.swift */; };
 		3EE51EE31CE8C9B90032729F /* web in Resources */ = {isa = PBXBuildFile; fileRef = 3EE51EE21CE8C9B90032729F /* web */; };
-		8EE3D9A11FD697BC00545851 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDBF1FD685E700833029 /* GPUImage.framework */; };
-		8EE3D9A21FD697BC00545851 /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDBF1FD685E700833029 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8EE3D9A31FD697BC00545851 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDC01FD685E700833029 /* SVProgressHUD.framework */; };
-		8EE3D9A41FD697BC00545851 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC9DDC01FD685E700833029 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FE424A9C1EFA6A77001DCC2C /* FromViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE424A9B1EFA6A77001DCC2C /* FromViewModel.swift */; };
 		FE6467831EE7E2ED007115B6 /* CategoryVo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6467821EE7E2ED007115B6 /* CategoryVo.swift */; };
 		FE6467861EE7E386007115B6 /* PropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6467841EE7E386007115B6 /* PropertyViewController.swift */; };
@@ -72,9 +68,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8EE3D9A41FD697BC00545851 /* SVProgressHUD.framework in Embed Frameworks */,
 				FE7DDA611EE1163900D86B35 /* LinUtil.framework in Embed Frameworks */,
-				8EE3D9A21FD697BC00545851 /* GPUImage.framework in Embed Frameworks */,
 				FE7DDA641EE1164500D86B35 /* LinRac.framework in Embed Frameworks */,
 				FE7DDA5B1EE1162B00D86B35 /* LinComm.framework in Embed Frameworks */,
 				FE7DDA5E1EE1163200D86B35 /* LinCore.framework in Embed Frameworks */,
@@ -116,6 +110,16 @@
 		6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EC9DDBF1FD685E700833029 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EC9DDC01FD685E700833029 /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EDEE4BC1FD8041200DCCB9C /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EDEE4BE1FD8042400DCCB9C /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		8EDEE4BF1FD8042400DCCB9C /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		8EDEE4C01FD8042400DCCB9C /* SVProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		8EDEE4C11FD8042400DCCB9C /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVProgressAnimatedView.m; sourceTree = "<group>"; };
+		8EDEE4C21FD8042400DCCB9C /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		8EDEE4C31FD8042400DCCB9C /* SVProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		8EDEE4C41FD8042400DCCB9C /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		8EDEE4C51FD8042400DCCB9C /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		8EDEE4C61FD8042400DCCB9C /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
 		DC0BAD3412467BC34B233B21 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		DDBED86DD6B8B51E312AE66A /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "../Pods/Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
 		FE424A9B1EFA6A77001DCC2C /* FromViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromViewModel.swift; sourceTree = "<group>"; };
@@ -135,13 +139,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EE3D9A31FD697BC00545851 /* SVProgressHUD.framework in Frameworks */,
 				FE7DDA631EE1164500D86B35 /* LinRac.framework in Frameworks */,
 				FE7DDA5A1EE1162B00D86B35 /* LinComm.framework in Frameworks */,
 				FE7DDA5D1EE1163200D86B35 /* LinCore.framework in Frameworks */,
 				FE7DDA601EE1163900D86B35 /* LinUtil.framework in Frameworks */,
 				3C6E4C9CA47250D281F85C0D /* Pods_demo.framework in Frameworks */,
-				8EE3D9A11FD697BC00545851 /* GPUImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +167,8 @@
 		3E1974551DB4C97000C5A6EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EDEE4BD1FD8042400DCCB9C /* SVProgressHUD */,
+				8EDEE4BC1FD8041200DCCB9C /* SVProgressHUD.framework */,
 				8EC9DDBF1FD685E700833029 /* GPUImage.framework */,
 				8EC9DDC01FD685E700833029 /* SVProgressHUD.framework */,
 				3E519A1A1DE1FA2F00B60C0E /* LinRac.framework */,
@@ -255,6 +259,23 @@
 				DDBED86DD6B8B51E312AE66A /* Pods-demo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8EDEE4BD1FD8042400DCCB9C /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				8EDEE4BE1FD8042400DCCB9C /* SVRadialGradientLayer.m */,
+				8EDEE4BF1FD8042400DCCB9C /* SVIndefiniteAnimatedView.h */,
+				8EDEE4C01FD8042400DCCB9C /* SVProgressHUD.h */,
+				8EDEE4C11FD8042400DCCB9C /* SVProgressAnimatedView.m */,
+				8EDEE4C21FD8042400DCCB9C /* SVRadialGradientLayer.h */,
+				8EDEE4C31FD8042400DCCB9C /* SVProgressHUD.m */,
+				8EDEE4C41FD8042400DCCB9C /* SVIndefiniteAnimatedView.m */,
+				8EDEE4C51FD8042400DCCB9C /* SVProgressHUD.bundle */,
+				8EDEE4C61FD8042400DCCB9C /* SVProgressAnimatedView.h */,
+			);
+			name = SVProgressHUD;
+			path = ../Pods/SVProgressHUD/SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		FE6467811EE7E2E6007115B6 /* property */ = {
@@ -420,12 +441,16 @@
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
