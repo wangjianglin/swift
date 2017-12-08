@@ -69,9 +69,8 @@ post_install do |installer|
             "#{target}" != 'ReactiveSwift'
             next;
         end
-        
-        target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '3.0.1'
+   target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0.2'
         end
     end
 end

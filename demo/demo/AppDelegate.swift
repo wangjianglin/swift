@@ -33,13 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         HttpCommunicate.httpDns?.setPreResolveHosts("s.feicuibaba.com","s.feicuibaba.com");
-        
-        
-        LocalStorage["v"] = "name";
+    LocalStorage["v"] = "name";
         print(LocalStorage["v"])
-        
+
         LocalStorage["v"] = 5.0;
         print(LocalStorage["v"] as! Double)
+        crashHandle { (infoStr) in
+            print("infoStr:------------>:\(infoStr)")
+        }
         
         return true
     }

@@ -28,6 +28,10 @@
 		3EB565C01DD435D300828FF7 /* RACVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB565BF1DD435D300828FF7 /* RACVM.swift */; };
 		3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC64EAE1D0AEF2500717357 /* WebViewController.swift */; };
 		3EE51EE31CE8C9B90032729F /* web in Resources */ = {isa = PBXBuildFile; fileRef = 3EE51EE21CE8C9B90032729F /* web */; };
+		8E20F1E91FD9204B004AE8E4 /* crashNSExceptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20F1E41FD9204A004AE8E4 /* crashNSExceptionManager.swift */; };
+		8E20F1EA1FD9204B004AE8E4 /* SlideAdressTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E20F1E61FD9204A004AE8E4 /* SlideAdressTool.m */; };
+		8E20F1EB1FD9204B004AE8E4 /* crashSignalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20F1E71FD9204A004AE8E4 /* crashSignalManager.swift */; };
+		8E20F1EC1FD9204B004AE8E4 /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20F1E81FD9204A004AE8E4 /* CrashManager.swift */; };
 		FE424A9C1EFA6A77001DCC2C /* FromViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE424A9B1EFA6A77001DCC2C /* FromViewModel.swift */; };
 		FE6467831EE7E2ED007115B6 /* CategoryVo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6467821EE7E2ED007115B6 /* CategoryVo.swift */; };
 		FE6467861EE7E386007115B6 /* PropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6467841EE7E386007115B6 /* PropertyViewController.swift */; };
@@ -108,6 +112,12 @@
 		3EC64EB01D0AF00100717357 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3EE51EE21CE8C9B90032729F /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
 		6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E20F1E31FD92049004AE8E4 /* demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "demo-Bridging-Header.h"; sourceTree = "<group>"; };
+		8E20F1E41FD9204A004AE8E4 /* crashNSExceptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = crashNSExceptionManager.swift; sourceTree = "<group>"; };
+		8E20F1E51FD9204A004AE8E4 /* SlideAdressTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideAdressTool.h; sourceTree = "<group>"; };
+		8E20F1E61FD9204A004AE8E4 /* SlideAdressTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideAdressTool.m; sourceTree = "<group>"; };
+		8E20F1E71FD9204A004AE8E4 /* crashSignalManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = crashSignalManager.swift; sourceTree = "<group>"; };
+		8E20F1E81FD9204A004AE8E4 /* CrashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
 		8EC9DDBF1FD685E700833029 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EC9DDC01FD685E700833029 /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDEE4BC1FD8041200DCCB9C /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +218,7 @@
 		3E200EA61C4D5FB000A00A10 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				8E20F1E21FD9200C004AE8E4 /* CrashCapture */,
 				FE6467811EE7E2E6007115B6 /* property */,
 				3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */,
 				3E200EA91C4D5FB000A00A10 /* ViewController.swift */,
@@ -259,6 +270,19 @@
 				DDBED86DD6B8B51E312AE66A /* Pods-demo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8E20F1E21FD9200C004AE8E4 /* CrashCapture */ = {
+			isa = PBXGroup;
+			children = (
+				8E20F1E81FD9204A004AE8E4 /* CrashManager.swift */,
+				8E20F1E41FD9204A004AE8E4 /* crashNSExceptionManager.swift */,
+				8E20F1E71FD9204A004AE8E4 /* crashSignalManager.swift */,
+				8E20F1E51FD9204A004AE8E4 /* SlideAdressTool.h */,
+				8E20F1E61FD9204A004AE8E4 /* SlideAdressTool.m */,
+				8E20F1E31FD92049004AE8E4 /* demo-Bridging-Header.h */,
+			);
+			name = CrashCapture;
 			sourceTree = "<group>";
 		};
 		8EDEE4BD1FD8042400DCCB9C /* SVProgressHUD */ = {
@@ -361,7 +385,7 @@
 					3E200EA31C4D5FB000A00A10 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 52EW4R7GEM;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -506,11 +530,15 @@
 				3E6AF3031EB21F3000B5DB1F /* TableTestController.swift in Sources */,
 				3E200EAA1C4D5FB000A00A10 /* ViewController.swift in Sources */,
 				FE424A9C1EFA6A77001DCC2C /* FromViewModel.swift in Sources */,
+				8E20F1EA1FD9204B004AE8E4 /* SlideAdressTool.m in Sources */,
 				3EC64EAF1D0AEF2500717357 /* WebViewController.swift in Sources */,
+				8E20F1E91FD9204B004AE8E4 /* crashNSExceptionManager.swift in Sources */,
 				FE6467861EE7E386007115B6 /* PropertyViewController.swift in Sources */,
+				8E20F1EB1FD9204B004AE8E4 /* crashSignalManager.swift in Sources */,
 				3E200EA81C4D5FB000A00A10 /* AppDelegate.swift in Sources */,
 				FECE83A11EE4FCAA0072BC55 /* TestViewController.swift in Sources */,
 				3E6AF3051EB21F4000B5DB1F /* TableTestViewModel.swift in Sources */,
+				8E20F1EC1FD9204B004AE8E4 /* CrashManager.swift in Sources */,
 				3E519A131DDEEF4900B60C0E /* MainViewModel.swift in Sources */,
 				3E519A111DDEED7200B60C0E /* MainViewController.swift in Sources */,
 				FE6467831EE7E2ED007115B6 /* CategoryVo.swift in Sources */,
@@ -657,6 +685,7 @@
 			baseConfigurationReference = DC0BAD3412467BC34B233B21 /* Pods-demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 52EW4R7GEM;
@@ -671,6 +700,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "demo/demo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -680,6 +711,7 @@
 			baseConfigurationReference = DDBED86DD6B8B51E312AE66A /* Pods-demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 52EW4R7GEM;
@@ -694,6 +726,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lin.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "demo/demo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

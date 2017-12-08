@@ -26,11 +26,9 @@ public class MainViewController : UIViewController,UITableViewDataSource,UITable
     
     
     public override func loadView() {
-        table = UITableView();
-        
+        table = UITableView();        
         table.dataSource = self;
         table.delegate = self;
-        
         table.reactive.reloadData <~ vm.bind.changed(keyPath: "datas");
         self.view = table;
     }
@@ -97,8 +95,8 @@ public class MainViewController : UIViewController,UITableViewDataSource,UITable
         let cell = UITableViewCell();
         cell.textLabel?.text = vm.datas?[indexPath.section].items[indexPath.row].title ?? "";
         
-        return cell;
-    }
+        
+        return cell;    }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = vm.datas?[indexPath.section].items[indexPath.row];
