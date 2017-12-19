@@ -626,13 +626,13 @@ fileprivate static var __once: () = {
             
 //            let HA2 = (HA2str.data(using: String.Encoding.utf8)! as Data).md5Digest().hexStringValue();
             
-            let HA1 = HA1str.md5;
-            let HA2 = HA2str.md5;
+            let HA1 = HA1str.ext.md5;
+            let HA2 = HA2str.ext.md5;
             
             let responseStr = "\(HA1):\(auth.nonce):\(auth.nc):\(auth.cnonce):\(auth.qop):\(HA2)";
             
 //            let response = (responseStr.data(using: String.Encoding.utf8)! as NSData).md5Digest().hexStringValue();
-            let response = responseStr.md5;
+            let response = responseStr.ext.md5;
             
             return response == auth.response;
         }
@@ -905,8 +905,8 @@ fileprivate static var __once: () = {
         
 //        CFStringTrimWhitespace((__bridge CFMutableStringRef)rangeType);
 //        CFStringTrimWhitespace((__bridge CFMutableStringRef)rangeValue);
-        rangeType = rangeType.trim();
-        rangeValue = rangeValue.trim();
+        rangeType = rangeType.ext.trim();
+        rangeValue = rangeValue.ext.trim();
         
         if rangeType.caseInsensitiveCompare("bytes") != ComparisonResult.orderedSame {
             return false;

@@ -35,7 +35,7 @@ open class TcpJsonProtocolParser : TcpAbstractProtocolParser{
                     break;
                 }
                 
-                tmp = String.fromBuffer(buffer,offset: start,count: end - start)
+                tmp = StringExt.fromBuffer(buffer,offset: start,count: end - start)
                 
                 var tmp2 = tmp?.components(separatedBy: ":");
                 
@@ -49,7 +49,7 @@ open class TcpJsonProtocolParser : TcpAbstractProtocolParser{
             }
         }
         
-        let jsonString = String.fromBuffer(buffer, offset: start, count: (size - start));
+        let jsonString = StringExt.fromBuffer(buffer, offset: start, count: (size - start));
         
         let path = headers["path"]!;
         //let cls = TcpJsonPackageManager.

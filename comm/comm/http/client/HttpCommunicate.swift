@@ -156,13 +156,13 @@ public class HttpCommunicate{
 public class HttpCommunicateImpl{
     
     public func addHandleEventsForBackgroundURLSession(identifier: String, completionHandler: @escaping () -> Swift.Void){
-        httpTask.addHandleEventsForBackgroundURLSession(identifier: identifier, completionHandler: completionHandler);
+        httpSession.addHandleEventsForBackgroundURLSession(identifier: identifier, completionHandler: completionHandler);
     }
-    private var httpTask:HttpTask!;
+    private var httpSession:HttpCommunicateSession!;
     fileprivate init(name:String){
         self.name = name;
         //        super();
-        httpTask = HttpTask(impl: self);
+        httpSession = HttpCommunicateSession(impl: self);
         //        URLSessionConfiguration.init()
         //        var c = config.HTTPCookieStorage;
         //        config.HTTPCookieStorage = NSHTTPCookieStorage()
@@ -187,7 +187,7 @@ public class HttpCommunicateImpl{
     
     open var httpDns:HttpDNS?{
         didSet{
-            self.httpTask.httpDns = self.httpDns;
+            self.httpSession.httpDns = self.httpDns;
         }
     }
     
@@ -321,7 +321,7 @@ public class HttpCommunicateImpl{
             return httpResult;
         }
         
-        let params = HttpTaskParams(url:url);
+        let params = HttpCommunicateSessionParams(url:url);
         params.method = package.method;
         params.parameters = p.params;
         params.headers = p.headers.toDict();
@@ -348,7 +348,7 @@ public class HttpCommunicateImpl{
             //            e.strackTrace = error?.description;
             self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
         };
-        self.httpTask.create(params: params)?.start();
+        self.httpSession.create(params: params)?.start();
         //        self.httpTask.create(url,method: package.method,parameters: p.params,headers:p.headers.toDict(), success: {(response: HttpResponse) in
         //
         //            package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,result:result), fault: self.mainThreadFault(httpResult,pack:package,fault:fault));
@@ -423,7 +423,7 @@ public class HttpCommunicateImpl{
                 }
             }
             
-            backgroundIdentifier = "\(url);\(package.method.rawValue);\(paramsString)%$#@!^&*()-=%$#@".hmac(key: "identifier", algorithm: CryptoAlgorithm.SHA384);
+            backgroundIdentifier = "\(url);\(package.method.rawValue);\(paramsString)%$#@!^&*()-=%$#@".ext.hmac(key: "identifier", algorithm: CryptoAlgorithm.SHA384);
         }else{
             backgroundIdentifier = nil;
         }
@@ -432,7 +432,7 @@ public class HttpCommunicateImpl{
         httpResult.setIdentifier(backgroundIdentifier);
         
         
-        let params = HttpTaskParams(url: url);
+        let params = HttpCommunicateSessionParams(url: url);
         params.identifier = backgroundIdentifier;
         params.parameters = p.params;
         params.headers = p.headers.toDict();
@@ -456,7 +456,7 @@ public class HttpCommunicateImpl{
             self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
             
         };
-        self.httpTask.uploadFile(params: params);
+        self.httpSession.uploadFile(params: params);
         
         //        self.httpTask.uploadFile(HttpUtils.url(self, pack: package),identifier: nil, parameters: p.params,headers:p.headers.toDict(),progress: progress, success: { (response) -> Void in
         //            package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,result:result), fault: self.mainThreadFault(httpResult,pack:package,fault:fault));
@@ -511,12 +511,12 @@ public class HttpCommunicateImpl{
                 }
             }
             
-            backgroundIdentifier = "\(url);\(package.method.rawValue);\(paramsString)%$#@!^&*()-=%$#@".hmac(key: "identifier", algorithm: CryptoAlgorithm.SHA384);
+            backgroundIdentifier = "\(url);\(package.method.rawValue);\(paramsString)%$#@!^&*()-=%$#@".ext.hmac(key: "identifier", algorithm: CryptoAlgorithm.SHA384);
         }else{
             backgroundIdentifier = nil;
         }
         
-        let params = HttpTaskParams(url: url);
+        let params = HttpCommunicateSessionParams(url: url);
         params.identifier = backgroundIdentifier;
         httpResult.setIdentifier(backgroundIdentifier);
         params.method = package.method;
@@ -551,7 +551,7 @@ public class HttpCommunicateImpl{
         
         params.progress = progress;
         
-        self.httpTask.download(params: params);
+        self.httpSession.download(params: params);
         
         //        self.httpTask.download(url,identifier: backgroundIdentifier,method: package.method, parameters: p.params,headers: p.headers.toDict(), success: { (response) in
         //

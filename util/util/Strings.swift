@@ -7,7 +7,29 @@
 
 import Foundation
 
-extension String {
+
+public struct StringExt{
+    public var base: String
+    
+    fileprivate init(_ str: String) {
+        self.base = str
+    }
+}
+
+public extension String{
+    
+    public var ext:StringExt{
+        get{
+            return StringExt.init(self);
+        }
+        mutating set{
+            self = newValue.base
+        }
+    }
+}
+
+
+extension StringExt {
     
     public static func fromBuffer(_ buffer:[UInt8],offset:Int = 0,count:Int = 0,encoding: String.Encoding = String.Encoding.utf8)->String!{
         var buffer = buffer, count = count
@@ -18,8 +40,7 @@ extension String {
         if(count == 0){
             count = buffer.count;
         }
-        let s = NSString(data: data, encoding: encoding.rawValue) as! String
-        return s;
+        return NSString(data: data, encoding: encoding.rawValue) as! String
     }
     
     //分割字符
@@ -35,7 +56,7 @@ extension String {
 //    }
     //去掉左右空格
     public func trim()->String{
-        return self.trimmingCharacters(in: CharacterSet.whitespaces)
+        return base.trimmingCharacters(in: CharacterSet.whitespaces)
     }
     //是否包含字符串
 //    public func has(s:String)->Bool{
@@ -92,6 +113,7 @@ extension String {
 //    }
 }
 
+
 public enum CryptoAlgorithm:String {
     case MD5, SHA1, SHA224, SHA256, SHA384, SHA512
     
@@ -108,22 +130,22 @@ public enum CryptoAlgorithm:String {
 //        return result;
 //    }
 }
-extension String {
+extension StringExt {
     
     public func hmac(key:String,algorithm:CryptoAlgorithm = CryptoAlgorithm.MD5)->String{
-        return cryptosHmac(self, key, algorithm.rawValue);
+        return cryptosHmac(base, key, algorithm.rawValue);
     }
     
     public var md2 : String{
-        return cryptosDigestWithString(self,"MD2");
+        return cryptosDigestWithString(base,"MD2");
     }
     
     public var md4 : String{
-        return cryptosDigestWithString(self,"MD4");
+        return cryptosDigestWithString(base,"MD4");
     }
     
     public var md5 : String{
-        return cryptosDigestWithString(self,"MD5");
+        return cryptosDigestWithString(base,"MD5");
         //        let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
         //        let strLen = CC_LONG(self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
         //        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
@@ -142,18 +164,24 @@ extension String {
     
     
     public var sha1:String{
-        return cryptosDigestWithString(self, "SHA1");
+        return cryptosDigestWithString(base, "SHA1");
     }
     public var sha224:String{
-        return cryptosDigestWithString(self, "SHA224");
+        return cryptosDigestWithString(base, "SHA224");
     }
     public var sha256:String{
-        return cryptosDigestWithString(self, "SHA256");
+        return cryptosDigestWithString(base, "SHA256");
     }
     public var sha384:String{
-        return cryptosDigestWithString(self, "SHA384");
+        return cryptosDigestWithString(base, "SHA384");
     }
     public var sha512:String{
-        return cryptosDigestWithString(self, "SHA512");
+        return cryptosDigestWithString(base, "SHA512");
+    }
+}
+
+extension StringExt {
+    public var escaped: String {
+        return CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,base as CFString!,"[]." as CFString!,":/?&=;+!@#$()',*" as CFString!,CFStringConvertNSStringEncodingToEncoding(String.Encoding.utf8.rawValue)) as String;
     }
 }

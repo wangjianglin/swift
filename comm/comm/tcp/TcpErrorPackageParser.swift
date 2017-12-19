@@ -67,7 +67,7 @@ open class TcpErrorPackageParser : TcpAbstractProtocolParser{
     }
     
     open override func parse() -> TcpPackage! {
-        let json = Json.parse(String.fromBuffer(buffer, count: size));
+        let json = Json.parse(StringExt.fromBuffer(buffer, count: size));
         return TcpErrorPackage(json: json);
     }
 }

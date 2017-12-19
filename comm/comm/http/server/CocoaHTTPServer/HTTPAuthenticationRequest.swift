@@ -48,7 +48,7 @@ open class HTTPAuthenticationRequest{
 		if _isBasic {
             let temp = (authInfo as NSString).substring(from: 6);// mutableCopy];
 //			CFStringTrimWhitespace(temp);
-            _base64Credentials = temp.trim();
+            _base64Credentials = temp.ext.trim();
 			
 //            _base64Credentials =  temp;//[temp copy];
 		}

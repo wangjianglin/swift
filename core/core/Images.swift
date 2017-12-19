@@ -109,7 +109,7 @@ extension UIImage{
         
         let url = urlOpt!;
         
-        let md5 = "\(url)".md5 + ".imagecache";
+        let md5 = "\(url)".ext.md5 + ".imagecache";
         
         var filename:String!;
         if UIImage.cachePath.hasSuffix("/") {
