@@ -119,7 +119,7 @@ extension ViewModelStruct where Base: ReactiveExtensionsProvider {
 public func <~ (target: @escaping (Any!)->(), result: HttpCommunicateResult) {
     
     result.onSuccess { (obj) in
-        target(obj);
+        target(nil);
     }
     result.onFault { (error) in
         target(error);

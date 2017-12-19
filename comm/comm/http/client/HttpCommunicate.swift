@@ -10,6 +10,14 @@ import Foundation
 import LinUtil
 
 
+public protocol HttpMockResultListener {
+    func result(pack:HttpPackage)->Any?;
+}
+
+public protocol HttpMockErrorListener {
+    func error(pack:HttpPackage)->HttpError?;
+}
+
 //HTTP通信实现类
 public class HttpCommunicate{
     
@@ -151,9 +159,121 @@ public class HttpCommunicate{
         }
     }
     
+    open class var http:Mock{
+        return global.http;
+    }
+    
+    public class Mock {
+        
+        private var httpResult = [NSObject:Any]();
+        private var httpError = [NSObject:HttpError]();
+        private var resultListener:HttpMockResultListener?;
+        private var errorListener:HttpMockErrorListener?;
+        
+        fileprivate init(){}
+        
+        public func clear() {
+            httpResult.removeAll();
+            httpError.removeAll();
+            resultListener = nil;
+            errorListener = nil;
+        }
+        
+        public func mock(pack:HttpPackage, result:Any) {
+            httpResult[pack] = result;
+        }
+        
+        public func mock(cls : HttpPackage.Type, result:Any) {
+            httpResult["cls:\(NSStringFromClass(cls))" as NSString] = result;
+        }
+        
+        public func mock(pack:HttpPackage, error:HttpError ) {
+            httpError[pack] = error;
+        }
+        
+        public func mock(cls:HttpPackage.Type, error:HttpError) {
+            httpError["cls:\(NSStringFromClass(cls))" as NSString] = error;
+        }
+        
+        public func removeMock(packe:HttpPackage) {
+            httpResult.removeValue(forKey: packe);
+            httpError.removeValue(forKey: packe);
+        }
+        
+        public func removeMock(cls:HttpPackage.Type) {
+            httpResult.removeValue(forKey: "cls:\(NSStringFromClass(cls))" as NSString);
+            httpError.removeValue(forKey: "cls:\(NSStringFromClass(cls))" as NSString);
+        }
+        
+        public func setResultListener(listener:HttpMockResultListener) {
+            resultListener = listener;
+        }
+        
+        public func setErrorListener(listener:HttpMockErrorListener) {
+            errorListener = listener;
+        }
+        
+        
+        
+        //func process(ThreadPoolExecutor executor, final lin.comm.http.ResultListener listener, HttpPackage pack) {
+        func process(queue:Queue,pack:HttpPackage, result:((_ obj:AnyObject?,_ warning:[HttpError])->())! = nil,fault:((_ error:HttpError)->())! = nil)->Bool {
+        
+            var error = httpError[pack];
+            if (error == nil) {
+                error = httpError["cls:\(NSStringFromClass(pack.classForCoder))" as NSString];
+            }
+            
+            if (error == nil && errorListener != nil) {
+                error = errorListener?.error(pack: pack);
+            }
+            
+            if (error != nil) {
+                if(fault != nil){
+                    queue.asynQueue {
+                        fault?(error!)
+                    }
+                }
+                return true;
+            }
+            
+            var resultObj = httpResult[pack];
+            var hasResult = httpResult.index(forKey: pack) != nil;
+            if (resultObj == nil && !hasResult) {
+                resultObj = httpResult["cls:\(NSStringFromClass(pack.classForCoder))" as NSString];
+            }
+            
+            hasResult = hasResult || httpResult.index(forKey: "cls:\(NSStringFromClass(pack.classForCoder))" as NSString) != nil;
+            
+            if (resultObj == nil && resultListener != nil && !hasResult) {
+                resultObj = resultListener?.result(pack: pack);
+            }
+            
+            if (resultObj != nil || hasResult) {
+                if(result != nil){
+                    queue.asynQueue {
+                        result?(resultObj as AnyObject, [HttpError]());
+                    }
+                }
+                return true;
+            }
+            
+            return false;
+        }
+        
+    }
+    
+    
 }
 
 public class HttpCommunicateImpl{
+    
+    private var lazyMock:HttpCommunicate.Mock! = nil
+    private var lazyQueue:Queue! = nil;
+    
+//    private lazy let __init:() = {
+//        lazyMock = HttpCommunicate.Mock();
+//        lazyQueue = Queue.init(count: 5);
+//    }()
     
     public func addHandleEventsForBackgroundURLSession(identifier: String, completionHandler: @escaping () -> Swift.Void){
         httpSession.addHandleEventsForBackgroundURLSession(identifier: identifier, completionHandler: completionHandler);
@@ -235,6 +355,19 @@ public class HttpCommunicateImpl{
         return timeout;
     }
     
+    open var http:HttpCommunicate.Mock{
+        if let lazyMock = lazyMock {
+            return lazyMock;
+        }
+        objc_sync_enter(self);
+        if lazyMock == nil {
+            lazyMock = HttpCommunicate.Mock();
+            lazyQueue = Queue.init(count: 5);
+        }
+        objc_sync_exit(self);
+        return lazyMock;
+    }
+    
     open var httprequestComplete:((HttpPackage,AnyObject?,[HttpError])->())?
     
     
@@ -302,6 +435,16 @@ public class HttpCommunicateImpl{
     }
     
     open func request(_ package:HttpPackage,result:((_ obj:AnyObject?,_ warning:[HttpError])->())! = nil,fault:((_ error:HttpError)->())! = nil)->HttpCommunicateResult{
+        
+    
+        if let mock = lazyMock {
+            let mockHttpResult = HttpCommunicateResult();
+            
+            if(mock.process(queue:lazyQueue!,pack: package, result: self.mainThreadResult(mockHttpResult,pack:package,result:result), fault: self.mainThreadFault(mockHttpResult,pack:package,fault:fault))){
+                return mockHttpResult;
+            }
+        }
+        
         if let uploadPackage = package as? HttpUploadPackage{
             return self.upload(uploadPackage,result:result,fault:fault,progress:nil);
         }
