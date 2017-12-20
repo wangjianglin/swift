@@ -9,15 +9,6 @@
 import Foundation
 import LinUtil
 
-
-public protocol HttpMockResultListener {
-    func result(pack:HttpPackage)->Any?;
-}
-
-public protocol HttpMockErrorListener {
-    func error(pack:HttpPackage)->HttpError?;
-}
-
 //HTTP通信实现类
 public class HttpCommunicate{
     
@@ -167,8 +158,8 @@ public class HttpCommunicate{
         
         private var httpResult = [NSObject:Any]();
         private var httpError = [NSObject:HttpError]();
-        private var resultListener:HttpMockResultListener?;
-        private var errorListener:HttpMockErrorListener?;
+        private var resultListener:((HttpPackage)->Any?)?;
+        private var errorListener:((HttpPackage)->HttpError?)?;
         
         fileprivate init(){}
         
@@ -179,15 +170,15 @@ public class HttpCommunicate{
             errorListener = nil;
         }
         
-        public func mock(pack:HttpPackage, result:Any) {
+        public func mock(pack:HttpPackage, result:Any?) {
             httpResult[pack] = result;
         }
         
-        public func mock(cls : HttpPackage.Type, result:Any) {
+        public func mock(cls : HttpPackage.Type, result:Any?) {
             httpResult["cls:\(NSStringFromClass(cls))" as NSString] = result;
         }
         
-        public func mock(pack:HttpPackage, error:HttpError ) {
+        public func mock(pack:HttpPackage, error:HttpError) {
             httpError[pack] = error;
         }
         
@@ -205,11 +196,11 @@ public class HttpCommunicate{
             httpError.removeValue(forKey: "cls:\(NSStringFromClass(cls))" as NSString);
         }
         
-        public func setResultListener(listener:HttpMockResultListener) {
+        public func result(listener:@escaping ((HttpPackage)->Any?)) {
             resultListener = listener;
         }
         
-        public func setErrorListener(listener:HttpMockErrorListener) {
+        public func error(listener:@escaping ((HttpPackage)->HttpError?)) {
             errorListener = listener;
         }
         
@@ -224,7 +215,7 @@ public class HttpCommunicate{
             }
             
             if (error == nil && errorListener != nil) {
-                error = errorListener?.error(pack: pack);
+                error = errorListener?(pack);
             }
             
             if (error != nil) {
@@ -245,7 +236,7 @@ public class HttpCommunicate{
             hasResult = hasResult || httpResult.index(forKey: "cls:\(NSStringFromClass(pack.classForCoder))" as NSString) != nil;
             
             if (resultObj == nil && resultListener != nil && !hasResult) {
-                resultObj = resultListener?.result(pack: pack);
+                resultObj = resultListener?(pack);
             }
             
             if (resultObj != nil || hasResult) {
