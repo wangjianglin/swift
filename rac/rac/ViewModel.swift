@@ -116,7 +116,7 @@ extension ViewModelStruct where Base: ReactiveExtensionsProvider {
         return CocoaAction<Value>.init(a)
     }
 }
-public func <~ (target: @escaping (Any!)->(), result: HttpCommunicateResult) {
+public func <~ (target: @escaping (Any?)->(), result: HttpCommunicateResult) {
     
     result.onSuccess { (obj) in
         target(nil);
