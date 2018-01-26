@@ -46,8 +46,10 @@ final class VideoListController: UIViewController {
 extension VideoListController {
     func setupUI() {
         title = "选择"
-        let closeImage = UIImage(named: "close", in: Bundle(for: VideoListController.self), compatibleWith: nil)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(closeAction))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(closeAction))
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+//        let closeImage = UIImage(named: "close", in: Bundle(for: VideoListController.self), compatibleWith: nil)
         flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: (ScreenSize.width - 3) / 4, height: (ScreenSize.width - 3) / 4)
         flowLayout.minimumLineSpacing = 1
@@ -69,6 +71,7 @@ extension VideoListController {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
     }
+  
     
     
 }

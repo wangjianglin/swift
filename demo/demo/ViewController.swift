@@ -135,8 +135,8 @@ class ViewController: UIViewController {
 //        let data = NSData(bytesNoCopy: basePtr, length: count,freeWhenDone:false);
 //        let s = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
         
-        let s = String.fromBuffer(buffer, count: count);
-        print("s:\(s)")
+//        let s = String.fromBuffer(buffer, count: count);
+//        print("s:\(s)")
         socket.write("ok.");
         
         socket.close();

@@ -62,15 +62,21 @@ post_install do |installer|
     
     puts installer.pods_project.targets.class
     puts installer.pods_project.targets[1]
-
+    
     installer.pods_project.targets.each do |target|
+
+     target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.0'
+            end
+    
+
+        if "#{target}" == 'ReactiveCocoa' or
+            "#{target}" == 'ReactiveSwift'
+            
+           target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '3.0.2'
+            end
+        end
         
-        if "#{target}" != 'ReactiveCocoa' and
-            "#{target}" != 'ReactiveSwift'
-            next;
-        end
-   target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '3.0.2'
-        end
     end
 end

@@ -382,9 +382,7 @@
 		8E979AB91FCC11070079D9BF /* VideoPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA81FCC11070079D9BF /* VideoPickerController.swift */; };
 		8E979ABB1FCC11070079D9BF /* Editer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAA1FCC11070079D9BF /* Editer.swift */; };
 		8E979ABC1FCC11070079D9BF /* TimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAB1FCC11070079D9BF /* TimeLineView.swift */; };
-		8E979ABD1FCC11070079D9BF /* Splice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAC1FCC11070079D9BF /* Splice.swift */; };
 		8E979ABF1FCC11070079D9BF /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAE1FCC11070079D9BF /* Helper.swift */; };
-		8E979AC21FCC11070079D9BF /* VideoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AB11FCC11070079D9BF /* VideoListController.swift */; };
 		8E979AC31FCC11070079D9BF /* VideoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E979AB21FCC11070079D9BF /* VideoSDK.h */; };
 		8EA5F36F1FCD600000C85AE4 /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */; };
 		8EC99BA51FB1A681009C099A /* ALView+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -398,6 +396,8 @@
 		8EC99BAD1FB1A681009C099A /* PureLayoutDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99BA41FB1A681009C099A /* PureLayoutDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EE3D9A81FD6994D00545851 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE3D9AA1FD6994D00545851 /* GPUImage.framework */; };
 		8EE3D9A91FD6994D00545851 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE3D9AB1FD6994D00545851 /* SVProgressHUD.framework */; };
+		8EF24B40201B7CA70085422C /* Splice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF24B3F201B7CA70085422C /* Splice.swift */; };
+		8EF24B42201B7CBA0085422C /* VideoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF24B41201B7CB90085422C /* VideoListController.swift */; };
 		BA94962AF84136B408F415B6 /* Pods_LinCore_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC8B5121E1D0BDDDE3149937 /* Pods_LinCore_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -807,9 +807,7 @@
 		8E979AA81FCC11070079D9BF /* VideoPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPickerController.swift; sourceTree = "<group>"; };
 		8E979AAA1FCC11070079D9BF /* Editer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editer.swift; sourceTree = "<group>"; };
 		8E979AAB1FCC11070079D9BF /* TimeLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineView.swift; sourceTree = "<group>"; };
-		8E979AAC1FCC11070079D9BF /* Splice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splice.swift; sourceTree = "<group>"; };
 		8E979AAE1FCC11070079D9BF /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		8E979AB11FCC11070079D9BF /* VideoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListController.swift; sourceTree = "<group>"; };
 		8E979AB21FCC11070079D9BF /* VideoSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSDK.h; sourceTree = "<group>"; };
 		8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
 		8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
@@ -823,6 +821,8 @@
 		8EC99BA41FB1A681009C099A /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
 		8EE3D9AA1FD6994D00545851 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE3D9AB1FD6994D00545851 /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EF24B3F201B7CA70085422C /* Splice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splice.swift; sourceTree = "<group>"; };
+		8EF24B41201B7CB90085422C /* VideoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListController.swift; sourceTree = "<group>"; };
 		FC8B5121E1D0BDDDE3149937 /* Pods_LinCore_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LinCore_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1617,6 +1617,8 @@
 		8E979AA31FCC11070079D9BF /* VideoSDK */ = {
 			isa = PBXGroup;
 			children = (
+				8EF24B41201B7CB90085422C /* VideoListController.swift */,
+				8EF24B3F201B7CA70085422C /* Splice.swift */,
 				8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */,
 				8E979AA41FCC11070079D9BF /* Recorder.swift */,
 				8E979AA61FCC11070079D9BF /* VideoSpliceController.swift */,
@@ -1624,9 +1626,7 @@
 				8E979AA81FCC11070079D9BF /* VideoPickerController.swift */,
 				8E979AAA1FCC11070079D9BF /* Editer.swift */,
 				8E979AAB1FCC11070079D9BF /* TimeLineView.swift */,
-				8E979AAC1FCC11070079D9BF /* Splice.swift */,
 				8E979AAE1FCC11070079D9BF /* Helper.swift */,
-				8E979AB11FCC11070079D9BF /* VideoListController.swift */,
 				8E979AB21FCC11070079D9BF /* VideoSDK.h */,
 			);
 			path = VideoSDK;
@@ -1959,7 +1959,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2014,6 +2014,7 @@
 				3E1219EF1CF845A400D43267 /* SCContext.m in Sources */,
 				3E1219F11CF845A400D43267 /* SCFilter.m in Sources */,
 				18F8B28F1EF0D34400E9947C /* ZLCameraViewController.m in Sources */,
+				8EF24B40201B7CA70085422C /* Splice.swift in Sources */,
 				3E121A181CF845A400D43267 /* SCRecordSessionManager.m in Sources */,
 				3E73DAB51A8795A30052C16A /* QBImagePickerAssetCell.m in Sources */,
 				3E6AF2E91EB188E800B5DB1F /* MJRefreshFooter.m in Sources */,
@@ -2106,7 +2107,6 @@
 				3E121A1A1CF845A400D43267 /* SCTouchDetector.m in Sources */,
 				18F8B2641EF0D34400E9947C /* LGImagePickerSelectView.m in Sources */,
 				3E121A1F1CF845E700D43267 /* ImagesView.swift in Sources */,
-				8E979ABD1FCC11070079D9BF /* Splice.swift in Sources */,
 				3E73DA9E1A8795A30052C16A /* FormButtonDescriptor.swift in Sources */,
 				3E426D2A1A4A988E00A1C815 /* UIViewController+RBStoryboardLink.m in Sources */,
 				3E0854771A8A6DE30052DCEE /* JASwipeCell.m in Sources */,
@@ -2141,11 +2141,11 @@
 				3E73DA981A8795A30052C16A /* UIAlertController.swift in Sources */,
 				8E979ABB1FCC11070079D9BF /* Editer.swift in Sources */,
 				3E121A1B1CF845A400D43267 /* SCWatermarkOverlayView.m in Sources */,
+				8EF24B42201B7CBA0085422C /* VideoListController.swift in Sources */,
 				3E73DAA71A8795A30052C16A /* FormSegmentedControlCell.swift in Sources */,
 				3E73DAB21A8795A30052C16A /* QBAssetCollectionViewController.m in Sources */,
 				3E121A0C1CF845A400D43267 /* SCRecordSessionSegment.m in Sources */,
 				3E76AE0D1A41DC0F00B0C2BB /* Keychain.swift in Sources */,
-				8E979AC21FCC11070079D9BF /* VideoListController.swift in Sources */,
 				3E73DAAF1A8795A30052C16A /* FormTextEditController.swift in Sources */,
 				3E6AF2EF1EB188E800B5DB1F /* MJRefreshAutoNormalFooter.m in Sources */,
 				3E6AF2FF1EB188E800B5DB1F /* NSBundle+MJRefresh.m in Sources */,

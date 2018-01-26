@@ -36,6 +36,9 @@ final class Splice: NSObject {
     init(asset: AVURLAsset) {
         sourceVideoAsset = asset
         
+        print(asset)
+        
+        
         if let firstVideoTrack = sourceVideoAsset.tracks(withMediaType: .video).first {
             sourceVideoTrack = firstVideoTrack
         }
@@ -49,6 +52,9 @@ final class Splice: NSObject {
         self.startTime = startTime
         self.endTime = endTime
         self.outputSize = outputSize
+    
+        
+        
         buildComposition()
         buildVideoComposition()
         buildOverlayLayer()
@@ -68,7 +74,8 @@ final class Splice: NSObject {
         if FileManager.default.fileExists(atPath: path) {
             try? FileManager.default.removeItem(atPath: path)
         }
-        let session = AVAssetExportSession(asset: composition.copy() as! AVAsset, presetName: AVAssetExportPreset640x480)
+        let session = AVAssetExportSession(asset: composition.copy() as! AVAsset, presetName: AVAssetExportPresetPassthrough)
+
         session?.outputFileType = .mov
         session?.outputURL = URL(fileURLWithPath: path)
         if let videoComposition = videoComposition {
@@ -95,14 +102,14 @@ final class Splice: NSObject {
     }
 
     private func buildVideoComposition() {
+        
         guard let sourceVideoTrack = sourceVideoTrack else { return }
         videoComposition = AVMutableVideoComposition(propertiesOf: composition)
-        let scale = max(outputSize.width / sourceVideoTrack.dimensions.width,
-                        outputSize.height / sourceVideoTrack.dimensions.height)
+        let scale = max(outputSize.width / sourceVideoTrack.naturalSize.width,
+                        outputSize.height / sourceVideoTrack.naturalSize.height)
         
         videoComposition.renderSize = CGSize(width: sourceVideoTrack.dimensions.width * scale,
-                                             height: sourceVideoTrack.dimensions.height * scale)
-
+                                              height: sourceVideoTrack.dimensions.height * scale)
         buildVideoCompositionInstructions()
     }
 
@@ -131,11 +138,15 @@ final class Splice: NSObject {
         videoCompositionInstruction = AVMutableVideoCompositionInstruction()
         videoCompositionInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeSubtract(endTime, startTime))
         videoCompositionLayerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
-        let scale = max(outputSize.width / sourceVideoTrack.dimensions.width,
-                        outputSize.height / sourceVideoTrack.dimensions.height )
-        let transform = sourceVideoTrack.preferredTransform.concatenating(CGAffineTransform(scaleX: scale, y: scale))
-        videoCompositionLayerInstruction.setTransform(transform, at: kCMTimeZero)
-        videoCompositionInstruction.layerInstructions = [videoCompositionLayerInstruction]
+        let scale:CGFloat =  max(outputSize.width / sourceVideoTrack.naturalSize.width,
+                      outputSize.height / sourceVideoTrack.naturalSize.height)
+        let t = sourceVideoTrack.preferredTransform
+        //90度
+        let transform = sourceVideoTrack.preferredTransform
+        if t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0 {
+            videoTrack.preferredTransform =  CGAffineTransform.init(rotationAngle: CGFloat(M_PI / 2));
+        }
+        videoCompositionInstruction.layerInstructions = [videoCompositionLayerInstruction] //sourceVideoTrack.preferredTransform
         videoComposition.instructions = [videoCompositionInstruction]
     }
 

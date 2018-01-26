@@ -47,7 +47,7 @@ open class AutoScrollView : UIScrollView{
             scount += 2;
         }
         if views.count > 2 {
-            for n in 2 ..< self.views.count - scount {
+            for n in 0 ..< self.views.count - scount {
                 let view = self.views[n];
                 if view.isHidden {
                     continue;
