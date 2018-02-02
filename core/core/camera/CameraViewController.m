@@ -56,7 +56,25 @@
         [self setUI];
     }
 }
+- (id)initWithMaxInterval:(NSTimeInterval)interval{
+    
+    self = [super init];
+    if (self != nil) {
+        minInterval = 30.0;
+        maxInterval = interval;
+    }
+    return self;
+}
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        maxInterval = 10.0;
+        maxInterval = 15.0;
+    }
+    return self;
+}
 
 
 - (void)setUI {
@@ -138,8 +156,8 @@
     
     isRecording = false;
     
-    minInterval = 10.0;
-    maxInterval = 15.0;
+//    minInterval = 10.0;
+//    maxInterval = 15.0;
     
     dateFormatter = [[NSDateFormatter alloc] init];
     //设定时间格式,这里可以设置成自己需要的格式

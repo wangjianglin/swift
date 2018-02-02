@@ -19,6 +19,11 @@ public class VideoPickerController: UINavigationController {
     }
     
     
+    public convenience init(_ maxInterVal:Double) {
+        self.init(rootViewController: VideoListController.init(maxInterVal))
+        navigationBar.barTintColor = .white
+        navigationBar.tintColor = .black
+    }
     override public func viewDidLoad() {
         super.viewDidLoad()
 

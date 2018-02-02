@@ -32,10 +32,10 @@ final class VideoSpliceController: UIViewController {
     private var progressTimer: Timer!
     private var exportSession: AVAssetExportSession!
     fileprivate var maxTimeInterval = 15.0
+
     
-    
-    
-    convenience init(asset: PHAsset) {
+    convenience init(asset:PHAsset) {
+        
         self.init(nibName: nil, bundle: nil)
         if #available(iOS 9.0, *) {
         } else {
@@ -45,6 +45,22 @@ final class VideoSpliceController: UIViewController {
             
             assetResource = PHAssetResource.assetResources(for: asset).filter{ $0.type == .video }.first
             resourceManager = PHAssetResourceManager.default()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    convenience init(asset: PHAsset,time interval:Double) {
+        self.init(nibName: nil, bundle: nil)
+        if #available(iOS 9.0, *) {
+        } else {
+            // Fallback on earlier versions
+        }
+        if #available(iOS 9.0, *) {
+            
+            assetResource = PHAssetResource.assetResources(for: asset).filter{ $0.type == .video }.first
+            resourceManager = PHAssetResourceManager.default()
+            self.maxTimeInterval = interval
         } else {
             // Fallback on earlier versions
         }
@@ -111,9 +127,10 @@ final class VideoSpliceController: UIViewController {
     }
     
     func timeOver()->Bool{
-        let endsecond = CGFloat(endTime.value) / CGFloat(endTime.timescale)
-        let startSecond = CGFloat(startTime.value) / CGFloat(startTime.timescale)
-        if endsecond - startSecond > CGFloat(TimeInterval(maxTimeInterval)){
+        
+        let endsecond = Double(endTime.value) / Double(endTime.timescale)
+        let startSecond = Double(startTime.value) / Double(startTime.timescale)
+        if endsecond - startSecond > Double(TimeInterval(maxTimeInterval)){
             return false
         }
         return true

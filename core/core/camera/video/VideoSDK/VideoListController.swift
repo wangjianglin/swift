@@ -18,6 +18,8 @@ final class VideoListController: UIViewController {
     var thumbnailSize = CGSize.zero
     let imageManager = PHCachingImageManager()
     var previousPreheatRect = CGRect.zero
+    var maxInterVal:Double = 15.0
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,11 @@ final class VideoListController: UIViewController {
         resetCachedAssets()
     }
 
+    convenience init(_ interVal:Double){
+        self.init()
+        self.maxInterVal = interVal
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -169,7 +176,7 @@ extension VideoListController {
 extension VideoListController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let asset = fetchResult?.object(at: indexPath.item) else { return }
-        let spliceController = VideoSpliceController(asset: asset)
+      let spliceController =   VideoSpliceController.init(asset: asset, time: self.maxInterVal)
         navigationController?.pushViewController(spliceController, animated: true)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
