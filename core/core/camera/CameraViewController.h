@@ -17,13 +17,14 @@
 @optional
 - (void)cameraViewResponse:(NSURL*)file;
 
+
 @end
 
 @interface CameraViewController : UIViewController
 
 @property(nonatomic, assign) id<CameraViewDelegate> delegate;
 
-
+- (instancetype)initWithMaxInterval:(NSTimeInterval)interval;
 //+(NSURL*)coverVedio:(NSURL*)url;
 
 @end

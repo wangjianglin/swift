@@ -56,7 +56,7 @@
         [self setUI];
     }
 }
-- (id)initWithMaxInterval:(NSTimeInterval)interval{
+- (instancetype)initWithMaxInterval:(NSTimeInterval)interval{
     
     self = [super init];
     if (self != nil) {
