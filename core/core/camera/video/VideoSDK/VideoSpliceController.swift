@@ -32,7 +32,7 @@ final class VideoSpliceController: UIViewController {
     private var progressTimer: Timer!
     private var exportSession: AVAssetExportSession!
     fileprivate var maxTimeInterval = 15.0
-
+    private var hasSound = false
     
     convenience init(asset:PHAsset) {
         
@@ -65,6 +65,22 @@ final class VideoSpliceController: UIViewController {
             // Fallback on earlier versions
         }
     }
+    convenience init(asset: PHAsset,time interval:Double,needSound:Bool) {
+        self.init(nibName: nil, bundle: nil)
+        if #available(iOS 9.0, *) {
+        } else {
+            // Fallback on earlier versions
+        }
+        if #available(iOS 9.0, *) {
+            assetResource = PHAssetResource.assetResources(for: asset).filter{ $0.type == .video }.first
+            resourceManager = PHAssetResourceManager.default()
+            self.maxTimeInterval = interval
+            self.hasSound = needSound
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
@@ -82,6 +98,18 @@ final class VideoSpliceController: UIViewController {
         setupUI()
         loadData()
     }
+    func fileSize(_ path:URL)->Double {
+        if let d = try? Data.init(contentsOf: path) {
+            let data = d as NSData
+            
+            let size =  Double(data .length) / 1024.00 / 1024.0
+            
+            print("size:\(size)M\n")
+            return Double(data .length) / 1024.00 / 1024.0
+        }
+        return 0.00
+    }
+    
     @objc func nextAction() {
         
         player?.pause()
@@ -90,9 +118,14 @@ final class VideoSpliceController: UIViewController {
             SVProgressHUD.showError(withStatus: "导出长度最长为\(maxTimeInterval)秒")
             return
         }
+        var  size = CGSize(width: 960, height: 540)
+        if self.timeLarge() > 60 {
+            size = CGSize.init(width: 640, height: 480)
+        }
+        let splice = Splice(asset: sourceAsset,sound:hasSound)
+        
+        splice.makeEditParamaters(startTime: startTime, endTime: endTime, outputSize:  size)
 
-        let splice = Splice(asset: sourceAsset)
-        splice.makeEditParamaters(startTime: startTime, endTime: endTime, outputSize: CGSize(width: 960, height: 540))
         guard let session = splice.makeExportable() else { return }
         exportSession = session
         progressTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
@@ -106,10 +139,12 @@ final class VideoSpliceController: UIViewController {
                 
                 if strongSelf.exportSession.status == .completed, let outputURL = strongSelf.exportSession.outputURL {
                     
+                    self?.fileSize(outputURL)
 //                    PHPhotoLibrary.shared().performChanges({
 //                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL:outputURL)
 //                    }, completionHandler: { (finish, error) in
 //                    })
+                    
 //
                     if let picker = strongSelf.navigationController as? VideoPickerController {
                         picker.pickerDelegate?.videoPickerController(picker, didPickVideoAt: outputURL)
@@ -128,13 +163,20 @@ final class VideoSpliceController: UIViewController {
     
     func timeOver()->Bool{
         
-        let endsecond = Double(endTime.value) / Double(endTime.timescale)
-        let startSecond = Double(startTime.value) / Double(startTime.timescale)
-        if endsecond - startSecond > Double(TimeInterval(maxTimeInterval)){
+        if timeLarge() > Double(TimeInterval(maxTimeInterval)){
             return false
         }
         return true
     }
+    
+    func timeLarge()->Double {
+        
+        let endsecond = Double(endTime.value) / Double(endTime.timescale)
+        let startSecond = Double(startTime.value) / Double(startTime.timescale)
+        
+        return endsecond - startSecond
+    }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -259,4 +301,7 @@ extension VideoSpliceController: TimeLineViewDelegate {
         self.endTime = CMTimeMake(Int64(endTime * CGFloat(sourceAsset.duration.timescale)), sourceAsset.duration.timescale)
         player?.seek(to: self.startTime)
     }
+
 }
+
+

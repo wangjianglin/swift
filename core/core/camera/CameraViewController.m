@@ -186,7 +186,7 @@
     _recorder.audioConfiguration.enabled = FALSE;
     
     _recorder.captureSessionPreset = [SCRecorderTools bestCaptureSessionPresetCompatibleWithAllDevices];
-    _recorder.maxRecordDuration = CMTimeMake(15, 1);
+    _recorder.maxRecordDuration = CMTimeMake(maxInterval, 1);
     _recorder.flashMode = SCFlashModeOff;
     
     _recorder.delegate = self;
