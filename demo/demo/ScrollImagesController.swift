@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LinCore
+import CessCore
 
 
 open class ScrollImagesController : UIViewController{

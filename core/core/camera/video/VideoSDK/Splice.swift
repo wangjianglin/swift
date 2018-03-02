@@ -11,11 +11,14 @@ import AVFoundation
 
 final class Splice: NSObject {
 
+    
+    private var litterThan:Bool = false
+    
     private let sourceVideoAsset: AVURLAsset
     private var outputSize: CGSize!
     
     private var sourceVideoTrack: AVAssetTrack!
-//    private var sourceAudioTrack: AVAssetTrack!
+    private var sourceAudioTrack: AVAssetTrack!
 
     private var composition: AVMutableComposition!
     private var videoComposition: AVMutableVideoComposition!
@@ -23,25 +26,41 @@ final class Splice: NSObject {
     private var videoCompositionLayerInstruction: AVMutableVideoCompositionLayerInstruction!
     private var videoTrack: AVMutableCompositionTrack!
     
-//    private var audioTrack: AVMutableCompositionTrack!
-//    private var audioMix: AVMutableAudioMix!
-//    private var audioMixInputParameters: AVMutableAudioMixInputParameters!
+    private var audioTrack: AVMutableCompositionTrack!
+    private var audioMix: AVMutableAudioMix!
+    private var audioMixInputParameters: AVMutableAudioMixInputParameters!
     
     private var parentLayer: CALayer!
     private var videoLayer: CALayer!
     
     private var startTime: CMTime!
     private var endTime: CMTime!
+    public var needSound = false
     
     init(asset: AVURLAsset) {
         sourceVideoAsset = asset
-        
         if let firstVideoTrack = sourceVideoAsset.tracks(withMediaType: .video).first {
             sourceVideoTrack = firstVideoTrack
         }
-//        if let firstAudioTrack = sourceVideoAsset.tracks(withMediaType: .audio).first {
-//            sourceAudioTrack = firstAudioTrack
-//        }
+        if needSound {
+           if let firstAudioTrack = sourceVideoAsset.tracks(withMediaType: .audio).first {
+        sourceAudioTrack = firstAudioTrack
+          }
+        }
+        super.init()
+    }
+    
+    init(asset: AVURLAsset,sound:Bool) {
+        self.needSound = sound
+        sourceVideoAsset = asset
+        if let firstVideoTrack = sourceVideoAsset.tracks(withMediaType: .video).first {
+            sourceVideoTrack = firstVideoTrack
+        }
+        if needSound {
+            if let firstAudioTrack = sourceVideoAsset.tracks(withMediaType: .audio).first {
+                sourceAudioTrack = firstAudioTrack
+            }
+        }
         super.init()
     }
 
@@ -58,25 +77,36 @@ final class Splice: NSObject {
     func makePlayable() -> AVPlayerItem {
         let playerItem = AVPlayerItem(asset: composition.copy() as! AVAsset)
         playerItem.videoComposition = videoComposition
-        //playerItem.audioMix = audioMix
+        if needSound {
+        playerItem.audioMix = audioMix
+        }
         return playerItem
     }
 
     func makeExportable() -> AVAssetExportSession? {
-        
         let path = NSTemporaryDirectory() + "spliceOutput.mov"
         if FileManager.default.fileExists(atPath: path) {
             try? FileManager.default.removeItem(atPath: path)
         }
-        let session = AVAssetExportSession(asset: composition.copy() as! AVAsset, presetName: AVAssetExportPreset640x480)
+        var presetName = AVAssetExportPreset640x480
+        if outputSize.width == 960 && outputSize.height == 540 {
+            presetName = AVAssetExportPreset960x540
+        }
+        if self.litterThan == true {
+            presetName = AVAssetExportPresetPassthrough
+        }
+        let session = AVAssetExportSession(asset: composition.copy() as! AVAsset, presetName: presetName)
         session?.outputFileType = .mov
         session?.outputURL = URL(fileURLWithPath: path)
         if let videoComposition = videoComposition {
             session?.videoComposition = videoComposition
         }
-//        if let audioMix = audioMix {
-//            session?.audioMix = audioMix
-//        }
+        if needSound {
+          if let audioMix = audioMix {
+            session?.audioMix = audioMix
+          }
+        }
+
         return session
     }
 
@@ -86,31 +116,43 @@ final class Splice: NSObject {
             videoTrack = composition.addMutableTrack(withMediaType: AVMediaType.video,
                                                      preferredTrackID: kCMPersistentTrackID_Invalid)
         }
-//        if sourceAudioTrack != nil {
-//            audioTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio,
-//                                                     preferredTrackID: kCMPersistentTrackID_Invalid)
-//        }
         
+        if needSound {
+        if sourceAudioTrack != nil {
+                audioTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio,
+                                                                 preferredTrackID: kCMPersistentTrackID_Invalid)
+            }
+        }
         buildCompositionTracks()
     }
-
+    
     private func buildVideoComposition() {
         guard let sourceVideoTrack = sourceVideoTrack else { return }
         videoComposition = AVMutableVideoComposition(propertiesOf: composition)
         let scale = max(outputSize.width / sourceVideoTrack.dimensions.width,
                         outputSize.height / sourceVideoTrack.dimensions.height)
+        if sourceVideoTrack.naturalSize.width < outputSize.width && sourceVideoTrack.naturalSize.height < outputSize.height {
+            self.litterThan = true
+            videoComposition.renderSize = CGSize(width: sourceVideoTrack.dimensions.width * scale,
+                                                 height:sourceVideoTrack.dimensions.height * scale)
+        }else {
+            self.litterThan = false
+            videoComposition.renderSize = CGSize(width: sourceVideoTrack.dimensions.width * scale,
+                                                 height: sourceVideoTrack.dimensions.height * scale)
+        }
         
-        videoComposition.renderSize = CGSize(width: sourceVideoTrack.dimensions.width * scale,
-                                             height: sourceVideoTrack.dimensions.height * scale)
+      
 
         buildVideoCompositionInstructions()
     }
 
     private func buildAudioMix() {
-//        guard let audioTrack = audioTrack else { return }
-//        audioMixInputParameters = AVMutableAudioMixInputParameters(track: audioTrack)
-//        audioMix = AVMutableAudioMix()
-//        audioMix.inputParameters = [audioMixInputParameters]
+        if needSound {
+                    guard let audioTrack = audioTrack else { return }
+                    audioMixInputParameters = AVMutableAudioMixInputParameters(track: audioTrack)
+                    audioMix = AVMutableAudioMix()
+                    audioMix.inputParameters = [audioMixInputParameters]
+        }
     }
 
     private func buildCompositionTracks() {
@@ -118,9 +160,12 @@ final class Splice: NSObject {
             if let sourceVideoTrack = sourceVideoTrack {
                 try videoTrack.insertTimeRange(CMTimeRangeFromTimeToTime(startTime, endTime), of: sourceVideoTrack, at: kCMTimeZero)
             }
-//            if let sourceAudioTrack = sourceAudioTrack {
-//                try audioTrack.insertTimeRange(CMTimeRangeFromTimeToTime(startTime, endTime), of: sourceAudioTrack, at: kCMTimeZero)
-//            }
+            if needSound {
+                            if let sourceAudioTrack = sourceAudioTrack {
+                                try audioTrack.insertTimeRange(CMTimeRangeFromTimeToTime(startTime, endTime), of: sourceAudioTrack, at: kCMTimeZero)
+                            }
+            }
+
         } catch  {
             print(error)
         }
@@ -133,6 +178,12 @@ final class Splice: NSObject {
         videoCompositionLayerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
         let scale = max(outputSize.width / sourceVideoTrack.dimensions.width,
                         outputSize.height / sourceVideoTrack.dimensions.height )
+        
+        let t = sourceVideoTrack.preferredTransform
+        if t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0 {
+            videoTrack.preferredTransform =  CGAffineTransform.init(rotationAngle: CGFloat(Double.pi / 2));
+        }
+        
         let transform = sourceVideoTrack.preferredTransform.concatenating(CGAffineTransform(scaleX: scale, y: scale))
         videoCompositionLayerInstruction.setTransform(transform, at: kCMTimeZero)
         videoCompositionInstruction.layerInstructions = [videoCompositionLayerInstruction]
@@ -141,7 +192,7 @@ final class Splice: NSObject {
 
     private func buildOverlayLayer() {
         
-        let overlayString = "" //文字水印
+        let overlayString = ""
         let fontSize = 20 * (videoComposition.renderSize.width / ScreenSize.width)
         let font = UIFont.systemFont(ofSize: fontSize)
         let overlayLayer = CATextLayer()

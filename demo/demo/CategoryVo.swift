@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LinComm
+import CessComm
 
 
 public class CategoryVO : HttpModel{

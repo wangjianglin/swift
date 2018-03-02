@@ -18,7 +18,9 @@ final class VideoListController: UIViewController {
     var thumbnailSize = CGSize.zero
     let imageManager = PHCachingImageManager()
     var previousPreheatRect = CGRect.zero
-
+    var maxInterVal:Double = 15.0
+    var needSound:Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +31,17 @@ final class VideoListController: UIViewController {
         resetCachedAssets()
     }
 
+    convenience init(_ interVal:Double){
+        self.init()
+        self.maxInterVal = interVal
+    }
+    
+    convenience init(_ interVal:Double,needSound:Bool){
+        self.init()
+        self.maxInterVal = interVal
+        self.needSound = needSound
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,8 +59,10 @@ final class VideoListController: UIViewController {
 extension VideoListController {
     func setupUI() {
         title = "选择"
-        let closeImage = UIImage(named: "close", in: Bundle(for: VideoListController.self), compatibleWith: nil)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(closeAction))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(closeAction))
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+//        let closeImage = UIImage(named: "close", in: Bundle(for: VideoListController.self), compatibleWith: nil)
         flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: (ScreenSize.width - 3) / 4, height: (ScreenSize.width - 3) / 4)
         flowLayout.minimumLineSpacing = 1
@@ -69,6 +84,7 @@ extension VideoListController {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
     }
+  
     
     
 }
@@ -166,7 +182,8 @@ extension VideoListController {
 extension VideoListController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let asset = fetchResult?.object(at: indexPath.item) else { return }
-        let spliceController = VideoSpliceController(asset: asset)
+        let spliceController = VideoSpliceController.init(asset: asset, time: self.maxInterVal,needSound:needSound)
+        
         navigationController?.pushViewController(spliceController, animated: true)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

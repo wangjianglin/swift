@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3E8AA14D1D2A55D8006E4922"
-               BuildableName = "LinRac.framework"
-               BlueprintName = "LinRac"
-               ReferencedContainer = "container:LinRac.xcodeproj">
+               BuildableName = "CessRac.framework"
+               BlueprintName = "CessRac"
+               ReferencedContainer = "container:CessRac.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -48,9 +48,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E8AA14D1D2A55D8006E4922"
-            BuildableName = "LinRac.framework"
-            BlueprintName = "LinRac"
-            ReferencedContainer = "container:LinRac.xcodeproj">
+            BuildableName = "CessRac.framework"
+            BlueprintName = "CessRac"
+            ReferencedContainer = "container:CessRac.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E8AA14D1D2A55D8006E4922"
-            BuildableName = "LinRac.framework"
-            BlueprintName = "LinRac"
-            ReferencedContainer = "container:LinRac.xcodeproj">
+            BuildableName = "CessRac.framework"
+            BlueprintName = "CessRac"
+            ReferencedContainer = "container:CessRac.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import LinUtil
-import LinComm
+import CessUtil
+import CessComm
 
 //public class TcpCommandDetectPackage2 : TcpCommandPackage{
 //    
@@ -149,7 +149,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func http(){
-        LinComm.HttpCommunicate.commUrl = "http://s.feicuibaba.com";
+        CessComm.HttpCommunicate.commUrl = "http://s.feicuibaba.com";
         
         let pack = TestPackage();
         pack.data = "测试数据！";
@@ -205,7 +205,7 @@ class ViewController: UIViewController {
     
     @IBAction func upload(){
         
-        LinComm.HttpCommunicate.commUrl = "http://192.168.1.66:8080";
+        CessComm.HttpCommunicate.commUrl = "http://192.168.1.66:8080";
         
         let uploadPackage = HttpUploadPackage(url: "upload.action");
         uploadPackage.addFile("file", file: "data2.zip");

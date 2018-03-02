@@ -6,7 +6,7 @@
 //  Copyright © 2016 lin. All rights reserved.
 //
 
-import LinUtil
+import CessUtil
 
 open class TcpCommandProtocolParser_010:TcpAbstractProtocolParser{
     required public init(){

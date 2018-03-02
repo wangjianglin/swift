@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import LinUtil
+import CessUtil
 
 public enum LogLevel:Int{
     case off = 0
@@ -157,7 +157,7 @@ open class Log{
         let format = DateFormatter();
         format.dateFormat = "yyyy-MM-dd";
        
-        let path = LinUtil.pathFor(Documents.document,path: "log")!;
+        let path = CessUtil.pathFor(Documents.document,path: "log")!;
         
         
 //        var isDir = UnsafeMutablePointer<ObjCBool>(allocatingCapacity: 1);

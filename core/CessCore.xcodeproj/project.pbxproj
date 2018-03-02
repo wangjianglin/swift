@@ -109,7 +109,7 @@
 		3E0854C91A8A7E1B0052DCEE /* HZAreaPickerView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E73DA901A8795A30052C16A /* HZAreaPickerView.h */; };
 		3E0854CA1A8A7E1B0052DCEE /* HZLocation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E73DA941A8795A30052C16A /* HZLocation.h */; };
 		3E0854CB1A8A7E1B0052DCEE /* ZHPickView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E73DA961A8795A30052C16A /* ZHPickView.h */; };
-		3E0854CC1A8A7E1B0052DCEE /* LinCore-Bridging.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E8EB4501A66BB1700324952 /* LinCore-Bridging.h */; };
+		3E0854CC1A8A7E1B0052DCEE /* CessCore-Bridging.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E8EB4501A66BB1700324952 /* CessCore-Bridging.h */; };
 		3E1219921CF8312500D43267 /* UILabels.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1219901CF8312500D43267 /* UILabels.m */; };
 		3E1219931CF8312500D43267 /* UILabels.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E1219911CF8312500D43267 /* UILabels.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E1219DF1CF845A400D43267 /* CameraViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12199F1CF845A400D43267 /* CameraViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -177,6 +177,7 @@
 		3E121A211CF880F300D43267 /* Vedios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E121A201CF880F300D43267 /* Vedios.swift */; };
 		3E121A231CF8848400D43267 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E121A221CF8848400D43267 /* CameraViewController.swift */; };
 		3E121A291CF8942600D43267 /* ScrollImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E121A281CF8942600D43267 /* ScrollImagesView.swift */; };
+		3E1941B72049B93300CA0BD7 /* CessUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1941B82049B93300CA0BD7 /* CessUtil.framework */; };
 		3E1D83181A629A0E006217A3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D83171A629A0E006217A3 /* Global.swift */; };
 		3E202C6F1A806EC1006D5C14 /* NSExceptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E202C6E1A806EC1006D5C14 /* NSExceptions.swift */; };
 		3E20C74E1E51B018000C9698 /* AutoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C74D1E51B017000C9698 /* AutoScrollView.swift */; };
@@ -212,8 +213,8 @@
 		3E20C7D51E53682A000C9698 /* MyTableLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E20C7B61E53682A000C9698 /* MyTableLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E20C7D61E53682A000C9698 /* MyTableLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C7B71E53682A000C9698 /* MyTableLayout.m */; };
 		3E21FB2C1A810BC5009CF738 /* UIDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21FB2B1A810BC5009CF738 /* UIDevices.swift */; };
-		3E37464D1A26365A00B980E9 /* LinCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E37464C1A26365A00B980E9 /* LinCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E3746531A26365A00B980E9 /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3746471A26365A00B980E9 /* LinCore.framework */; };
+		3E37464D1A26365A00B980E9 /* CessCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E37464C1A26365A00B980E9 /* CessCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E3746531A26365A00B980E9 /* CessCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3746471A26365A00B980E9 /* CessCore.framework */; };
 		3E37465A1A26365A00B980E9 /* coreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3746591A26365A00B980E9 /* coreTests.swift */; };
 		3E3AA2D11A7F5ECF008FBD7F /* UncaughtExceptionHandlers.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E3AA2D01A7F5ECF008FBD7F /* UncaughtExceptionHandlers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E3AA2D31A7F6304008FBD7F /* UncaughtExceptionHandlers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AA2D21A7F6304008FBD7F /* UncaughtExceptionHandlers.m */; };
@@ -329,7 +330,7 @@
 		3E76AE0D1A41DC0F00B0C2BB /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E76AE0C1A41DC0F00B0C2BB /* Keychain.swift */; };
 		3E76AE111A41DC5000B0C2BB /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E76AE101A41DC5000B0C2BB /* UserDefaults.swift */; };
 		3E8AA13F1D238323006E4922 /* AutoScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AA13E1D238323006E4922 /* AutoScrollViewController.swift */; };
-		3E8EB4511A66BB1700324952 /* LinCore-Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8EB4501A66BB1700324952 /* LinCore-Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E8EB4511A66BB1700324952 /* CessCore-Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8EB4501A66BB1700324952 /* CessCore-Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E8EB4531A66C2B000324952 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8EB4521A66C2B000324952 /* Images.swift */; };
 		3E9842F71CF9A98C003FD60B /* LinCore.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E9842F61CF9A98B003FD60B /* LinCore.bundle */; };
 		3EA768691A70230D00FF8C57 /* UIGestureRecognizers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA768681A70230D00FF8C57 /* UIGestureRecognizers.swift */; };
@@ -338,7 +339,6 @@
 		3EBEC2381CFD4C21005ABB52 /* AppStoreUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEC2361CFD4C21005ABB52 /* AppStoreUpdate.swift */; };
 		3EBEC2391CFD4C21005ABB52 /* EnterpriseUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBEC2371CFD4C21005ABB52 /* EnterpriseUpdate.swift */; };
 		3EC3B9521E55A04300EED4B5 /* MoreBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC3B9511E55A04300EED4B5 /* MoreBarButtonItem.swift */; };
-		3EC4FE221A55D97300E05771 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC4FE211A55D97300E05771 /* LinUtil.framework */; };
 		3ECB95CE1C48EA4800E5E67C /* Tables.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0854841A8A6E5C0052DCEE /* Tables.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ECD40751CEDC1E300D57372 /* MRBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECD40501CEDC1E300D57372 /* MRBlurView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ECD40761CEDC1E300D57372 /* MRBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD40511CEDC1E300D57372 /* MRBlurView.m */; };
@@ -376,15 +376,15 @@
 		3EF997FD1A7229930030C4D3 /* UIBarButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF997FC1A7229930030C4D3 /* UIBarButtonItems.swift */; };
 		3EF998021A728CE90030C4D3 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF998001A728CE90030C4D3 /* TextFields.swift */; };
 		3EF998031A728CE90030C4D3 /* TextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF998011A728CE90030C4D3 /* TextViews.swift */; };
+		5501FE946EBDE42AD4B6D01C /* Pods_CessCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A17BAB3FADDA055118F687 /* Pods_CessCore.framework */; };
+		8E1809CD202AE9FB0013D9DE /* Splice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1809CC202AE9FB0013D9DE /* Splice.swift */; };
 		8E979AB51FCC11070079D9BF /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA41FCC11070079D9BF /* Recorder.swift */; };
 		8E979AB71FCC11070079D9BF /* VideoSpliceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA61FCC11070079D9BF /* VideoSpliceController.swift */; };
 		8E979AB81FCC11070079D9BF /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA71FCC11070079D9BF /* VideoCell.swift */; };
 		8E979AB91FCC11070079D9BF /* VideoPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AA81FCC11070079D9BF /* VideoPickerController.swift */; };
 		8E979ABB1FCC11070079D9BF /* Editer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAA1FCC11070079D9BF /* Editer.swift */; };
 		8E979ABC1FCC11070079D9BF /* TimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAB1FCC11070079D9BF /* TimeLineView.swift */; };
-		8E979ABD1FCC11070079D9BF /* Splice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAC1FCC11070079D9BF /* Splice.swift */; };
 		8E979ABF1FCC11070079D9BF /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AAE1FCC11070079D9BF /* Helper.swift */; };
-		8E979AC21FCC11070079D9BF /* VideoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E979AB11FCC11070079D9BF /* VideoListController.swift */; };
 		8E979AC31FCC11070079D9BF /* VideoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E979AB21FCC11070079D9BF /* VideoSDK.h */; };
 		8EA5F36F1FCD600000C85AE4 /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */; };
 		8EC99BA51FB1A681009C099A /* ALView+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -398,7 +398,7 @@
 		8EC99BAD1FB1A681009C099A /* PureLayoutDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC99BA41FB1A681009C099A /* PureLayoutDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EE3D9A81FD6994D00545851 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE3D9AA1FD6994D00545851 /* GPUImage.framework */; };
 		8EE3D9A91FD6994D00545851 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE3D9AB1FD6994D00545851 /* SVProgressHUD.framework */; };
-		BA94962AF84136B408F415B6 /* Pods_LinCore_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC8B5121E1D0BDDDE3149937 /* Pods_LinCore_iOS.framework */; };
+		8EF24B42201B7CBA0085422C /* VideoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF24B41201B7CB90085422C /* VideoListController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -444,13 +444,14 @@
 				3E0854C91A8A7E1B0052DCEE /* HZAreaPickerView.h in CopyFiles */,
 				3E0854CA1A8A7E1B0052DCEE /* HZLocation.h in CopyFiles */,
 				3E0854CB1A8A7E1B0052DCEE /* ZHPickView.h in CopyFiles */,
-				3E0854CC1A8A7E1B0052DCEE /* LinCore-Bridging.h in CopyFiles */,
+				3E0854CC1A8A7E1B0052DCEE /* CessCore-Bridging.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		14A17BAB3FADDA055118F687 /* Pods_CessCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CessCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F8B21A1EF0D34400E9947C /* LGPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPhoto.h; sourceTree = "<group>"; };
 		18F8B21D1EF0D34400E9947C /* LGPhotoPickerBrowserPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPhotoPickerBrowserPhoto.h; sourceTree = "<group>"; };
 		18F8B21E1EF0D34400E9947C /* LGPhotoPickerBrowserPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPhotoPickerBrowserPhoto.m; sourceTree = "<group>"; };
@@ -503,6 +504,7 @@
 		18F8B2591EF0D34400E9947C /* ZLCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCameraView.m; sourceTree = "<group>"; };
 		18F8B25A1EF0D34400E9947C /* ZLCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCameraViewController.h; sourceTree = "<group>"; };
 		18F8B25B1EF0D34400E9947C /* ZLCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCameraViewController.m; sourceTree = "<group>"; };
+		27D9790921684EC0D91619B9 /* Pods-CessCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CessCore.release.xcconfig"; path = "../Pods/Target Support Files/Pods-CessCore/Pods-CessCore.release.xcconfig"; sourceTree = "<group>"; };
 		36D7B93A923A5C0D29FCC577 /* Pods-LinCore iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinCore iOS.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LinCore iOS/Pods-LinCore iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		3E03B7E11A6D805E00882F6B /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		3E0789551A7943650087A3CC /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 		3E121A201CF880F300D43267 /* Vedios.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vedios.swift; sourceTree = "<group>"; };
 		3E121A221CF8848400D43267 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		3E121A281CF8942600D43267 /* ScrollImagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollImagesView.swift; sourceTree = "<group>"; };
+		3E1941B82049B93300CA0BD7 /* CessUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CessUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E1D83171A629A0E006217A3 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		3E202C6E1A806EC1006D5C14 /* NSExceptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSExceptions.swift; sourceTree = "<group>"; };
 		3E20C74D1E51B017000C9698 /* AutoScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollView.swift; sourceTree = "<group>"; };
@@ -631,10 +634,10 @@
 		3E20C7B61E53682A000C9698 /* MyTableLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableLayout.h; sourceTree = "<group>"; };
 		3E20C7B71E53682A000C9698 /* MyTableLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableLayout.m; sourceTree = "<group>"; };
 		3E21FB2B1A810BC5009CF738 /* UIDevices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDevices.swift; sourceTree = "<group>"; };
-		3E3746471A26365A00B980E9 /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E3746471A26365A00B980E9 /* CessCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CessCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E37464B1A26365A00B980E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E37464C1A26365A00B980E9 /* LinCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinCore.h; sourceTree = "<group>"; };
-		3E3746521A26365A00B980E9 /* LinCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E37464C1A26365A00B980E9 /* CessCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CessCore.h; sourceTree = "<group>"; };
+		3E3746521A26365A00B980E9 /* CessCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CessCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E3746581A26365A00B980E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E3746591A26365A00B980E9 /* coreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coreTests.swift; sourceTree = "<group>"; };
 		3E3AA2D01A7F5ECF008FBD7F /* UncaughtExceptionHandlers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandlers.h; sourceTree = "<group>"; };
@@ -752,7 +755,7 @@
 		3E76AE0C1A41DC0F00B0C2BB /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		3E76AE101A41DC5000B0C2BB /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		3E8AA13E1D238323006E4922 /* AutoScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollViewController.swift; sourceTree = "<group>"; };
-		3E8EB4501A66BB1700324952 /* LinCore-Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LinCore-Bridging.h"; sourceTree = "<group>"; };
+		3E8EB4501A66BB1700324952 /* CessCore-Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CessCore-Bridging.h"; sourceTree = "<group>"; };
 		3E8EB4521A66C2B000324952 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		3E9842F61CF9A98B003FD60B /* LinCore.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LinCore.bundle; sourceTree = "<group>"; };
 		3EA768681A70230D00FF8C57 /* UIGestureRecognizers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizers.swift; sourceTree = "<group>"; };
@@ -800,6 +803,7 @@
 		3EF998001A728CE90030C4D3 /* TextFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
 		3EF998011A728CE90030C4D3 /* TextViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViews.swift; sourceTree = "<group>"; };
 		3F3319E7739C2191431A6C70 /* Pods-LinCore iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinCore iOS.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LinCore iOS/Pods-LinCore iOS.release.xcconfig"; sourceTree = "<group>"; };
+		8E1809CC202AE9FB0013D9DE /* Splice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splice.swift; sourceTree = "<group>"; };
 		8E5F86E91FCD498800170E6A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8E979AA41FCC11070079D9BF /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		8E979AA61FCC11070079D9BF /* VideoSpliceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSpliceController.swift; sourceTree = "<group>"; };
@@ -807,9 +811,7 @@
 		8E979AA81FCC11070079D9BF /* VideoPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPickerController.swift; sourceTree = "<group>"; };
 		8E979AAA1FCC11070079D9BF /* Editer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editer.swift; sourceTree = "<group>"; };
 		8E979AAB1FCC11070079D9BF /* TimeLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineView.swift; sourceTree = "<group>"; };
-		8E979AAC1FCC11070079D9BF /* Splice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splice.swift; sourceTree = "<group>"; };
 		8E979AAE1FCC11070079D9BF /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		8E979AB11FCC11070079D9BF /* VideoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListController.swift; sourceTree = "<group>"; };
 		8E979AB21FCC11070079D9BF /* VideoSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSDK.h; sourceTree = "<group>"; };
 		8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
 		8EC99B9C1FB1A681009C099A /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
@@ -823,6 +825,8 @@
 		8EC99BA41FB1A681009C099A /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
 		8EE3D9AA1FD6994D00545851 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE3D9AB1FD6994D00545851 /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EF24B41201B7CB90085422C /* VideoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListController.swift; sourceTree = "<group>"; };
+		E09EE67B6D1FADA0E4E936DA /* Pods-CessCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CessCore.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-CessCore/Pods-CessCore.debug.xcconfig"; sourceTree = "<group>"; };
 		FC8B5121E1D0BDDDE3149937 /* Pods_LinCore_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LinCore_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -831,12 +835,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E1941B72049B93300CA0BD7 /* CessUtil.framework in Frameworks */,
 				8EE3D9A81FD6994D00545851 /* GPUImage.framework in Frameworks */,
 				8EE3D9A91FD6994D00545851 /* SVProgressHUD.framework in Frameworks */,
 				3EB8A2CB1BBB110D00871123 /* SystemConfiguration.framework in Frameworks */,
-				3EC4FE221A55D97300E05771 /* LinUtil.framework in Frameworks */,
 				3E76AD941A41C7D400B0C2BB /* libsqlite3.dylib in Frameworks */,
-				BA94962AF84136B408F415B6 /* Pods_LinCore_iOS.framework in Frameworks */,
+				5501FE946EBDE42AD4B6D01C /* Pods_CessCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,7 +848,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E3746531A26365A00B980E9 /* LinCore.framework in Frameworks */,
+				3E3746531A26365A00B980E9 /* CessCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1188,8 +1192,8 @@
 		3E3746481A26365A00B980E9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3E3746471A26365A00B980E9 /* LinCore.framework */,
-				3E3746521A26365A00B980E9 /* LinCoreTests.xctest */,
+				3E3746471A26365A00B980E9 /* CessCore.framework */,
+				3E3746521A26365A00B980E9 /* CessCoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1222,9 +1226,9 @@
 				3E21FB2B1A810BC5009CF738 /* UIDevices.swift */,
 				3EF998001A728CE90030C4D3 /* TextFields.swift */,
 				3EF998011A728CE90030C4D3 /* TextViews.swift */,
-				3E8EB4501A66BB1700324952 /* LinCore-Bridging.h */,
+				3E8EB4501A66BB1700324952 /* CessCore-Bridging.h */,
 				3E426D101A4A96A500A1C815 /* Storyboards */,
-				3E37464C1A26365A00B980E9 /* LinCore.h */,
+				3E37464C1A26365A00B980E9 /* CessCore.h */,
 				3E37464A1A26365A00B980E9 /* Supporting Files */,
 				3E76AD801A412FB400B0C2BB /* Storage.swift */,
 				3E76AD821A4135D800B0C2BB /* StoragePosition.swift */,
@@ -1598,10 +1602,12 @@
 		8E5F86E81FCD498800170E6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E1941B82049B93300CA0BD7 /* CessUtil.framework */,
 				8EE3D9AA1FD6994D00545851 /* GPUImage.framework */,
 				8EE3D9AB1FD6994D00545851 /* SVProgressHUD.framework */,
 				8E5F86E91FCD498800170E6A /* AVFoundation.framework */,
 				FC8B5121E1D0BDDDE3149937 /* Pods_LinCore_iOS.framework */,
+				14A17BAB3FADDA055118F687 /* Pods_CessCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1617,6 +1623,8 @@
 		8E979AA31FCC11070079D9BF /* VideoSDK */ = {
 			isa = PBXGroup;
 			children = (
+				8E1809CC202AE9FB0013D9DE /* Splice.swift */,
+				8EF24B41201B7CB90085422C /* VideoListController.swift */,
 				8EA5F36E1FCD600000C85AE4 /* RecordVideoViewController.swift */,
 				8E979AA41FCC11070079D9BF /* Recorder.swift */,
 				8E979AA61FCC11070079D9BF /* VideoSpliceController.swift */,
@@ -1624,9 +1632,7 @@
 				8E979AA81FCC11070079D9BF /* VideoPickerController.swift */,
 				8E979AAA1FCC11070079D9BF /* Editer.swift */,
 				8E979AAB1FCC11070079D9BF /* TimeLineView.swift */,
-				8E979AAC1FCC11070079D9BF /* Splice.swift */,
 				8E979AAE1FCC11070079D9BF /* Helper.swift */,
-				8E979AB11FCC11070079D9BF /* VideoListController.swift */,
 				8E979AB21FCC11070079D9BF /* VideoSDK.h */,
 			);
 			path = VideoSDK;
@@ -1653,6 +1659,8 @@
 			children = (
 				36D7B93A923A5C0D29FCC577 /* Pods-LinCore iOS.debug.xcconfig */,
 				3F3319E7739C2191431A6C70 /* Pods-LinCore iOS.release.xcconfig */,
+				E09EE67B6D1FADA0E4E936DA /* Pods-CessCore.debug.xcconfig */,
+				27D9790921684EC0D91619B9 /* Pods-CessCore.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1816,22 +1824,22 @@
 				3E73DAB11A8795A30052C16A /* QBAssetCollectionViewController.h in Headers */,
 				3E0854761A8A6DE30052DCEE /* JASwipeCell.h in Headers */,
 				3E73DAB91A8795A30052C16A /* QBImagePickerAssetViewDelegate.h in Headers */,
-				3E8EB4511A66BB1700324952 /* LinCore-Bridging.h in Headers */,
+				3E8EB4511A66BB1700324952 /* CessCore-Bridging.h in Headers */,
 				3E0854A01A8A6EEA0052DCEE /* UIScrollView+MJExtension.h in Headers */,
 				3E426D1E1A4A988E00A1C815 /* RBStoryboardLink.h in Headers */,
 				3E73DAD71A8795A30052C16A /* HZAreaPickerView.h in Headers */,
 				3E73DAB71A8795A30052C16A /* QBImagePickerAssetView.h in Headers */,
 				3E0854741A8A6DE30052DCEE /* JAActionButton.h in Headers */,
-				3E37464D1A26365A00B980E9 /* LinCore.h in Headers */,
+				3E37464D1A26365A00B980E9 /* CessCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3E3746461A26365A00B980E9 /* LinCore iOS */ = {
+		3E3746461A26365A00B980E9 /* CessCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E37465D1A26365A00B980E9 /* Build configuration list for PBXNativeTarget "LinCore iOS" */;
+			buildConfigurationList = 3E37465D1A26365A00B980E9 /* Build configuration list for PBXNativeTarget "CessCore" */;
 			buildPhases = (
 				D9778E87D93EC70DBA40BF0C /* [CP] Check Pods Manifest.lock */,
 				3E3746421A26365A00B980E9 /* Sources */,
@@ -1845,14 +1853,14 @@
 			);
 			dependencies = (
 			);
-			name = "LinCore iOS";
+			name = CessCore;
 			productName = core;
-			productReference = 3E3746471A26365A00B980E9 /* LinCore.framework */;
+			productReference = 3E3746471A26365A00B980E9 /* CessCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		3E3746511A26365A00B980E9 /* LinCoreTests iOS */ = {
+		3E3746511A26365A00B980E9 /* CessCoreTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E3746601A26365A00B980E9 /* Build configuration list for PBXNativeTarget "LinCoreTests iOS" */;
+			buildConfigurationList = 3E3746601A26365A00B980E9 /* Build configuration list for PBXNativeTarget "CessCoreTests" */;
 			buildPhases = (
 				3E37464E1A26365A00B980E9 /* Sources */,
 				3E37464F1A26365A00B980E9 /* Frameworks */,
@@ -1863,9 +1871,9 @@
 			dependencies = (
 				3E3746551A26365A00B980E9 /* PBXTargetDependency */,
 			);
-			name = "LinCoreTests iOS";
+			name = CessCoreTests;
 			productName = coreTests;
-			productReference = 3E3746521A26365A00B980E9 /* LinCoreTests.xctest */;
+			productReference = 3E3746521A26365A00B980E9 /* CessCoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1889,7 +1897,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3E3746411A26365A00B980E9 /* Build configuration list for PBXProject "LinCore" */;
+			buildConfigurationList = 3E3746411A26365A00B980E9 /* Build configuration list for PBXProject "CessCore" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1902,8 +1910,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3E3746461A26365A00B980E9 /* LinCore iOS */,
-				3E3746511A26365A00B980E9 /* LinCoreTests iOS */,
+				3E3746461A26365A00B980E9 /* CessCore */,
+				3E3746511A26365A00B980E9 /* CessCoreTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1941,7 +1949,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-LinCore iOS/Pods-LinCore iOS-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-CessCore/Pods-CessCore-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D9778E87D93EC70DBA40BF0C /* [CP] Check Pods Manifest.lock */ = {
@@ -2014,6 +2022,7 @@
 				3E1219EF1CF845A400D43267 /* SCContext.m in Sources */,
 				3E1219F11CF845A400D43267 /* SCFilter.m in Sources */,
 				18F8B28F1EF0D34400E9947C /* ZLCameraViewController.m in Sources */,
+				8E1809CD202AE9FB0013D9DE /* Splice.swift in Sources */,
 				3E121A181CF845A400D43267 /* SCRecordSessionManager.m in Sources */,
 				3E73DAB51A8795A30052C16A /* QBImagePickerAssetCell.m in Sources */,
 				3E6AF2E91EB188E800B5DB1F /* MJRefreshFooter.m in Sources */,
@@ -2106,7 +2115,6 @@
 				3E121A1A1CF845A400D43267 /* SCTouchDetector.m in Sources */,
 				18F8B2641EF0D34400E9947C /* LGImagePickerSelectView.m in Sources */,
 				3E121A1F1CF845E700D43267 /* ImagesView.swift in Sources */,
-				8E979ABD1FCC11070079D9BF /* Splice.swift in Sources */,
 				3E73DA9E1A8795A30052C16A /* FormButtonDescriptor.swift in Sources */,
 				3E426D2A1A4A988E00A1C815 /* UIViewController+RBStoryboardLink.m in Sources */,
 				3E0854771A8A6DE30052DCEE /* JASwipeCell.m in Sources */,
@@ -2141,11 +2149,11 @@
 				3E73DA981A8795A30052C16A /* UIAlertController.swift in Sources */,
 				8E979ABB1FCC11070079D9BF /* Editer.swift in Sources */,
 				3E121A1B1CF845A400D43267 /* SCWatermarkOverlayView.m in Sources */,
+				8EF24B42201B7CBA0085422C /* VideoListController.swift in Sources */,
 				3E73DAA71A8795A30052C16A /* FormSegmentedControlCell.swift in Sources */,
 				3E73DAB21A8795A30052C16A /* QBAssetCollectionViewController.m in Sources */,
 				3E121A0C1CF845A400D43267 /* SCRecordSessionSegment.m in Sources */,
 				3E76AE0D1A41DC0F00B0C2BB /* Keychain.swift in Sources */,
-				8E979AC21FCC11070079D9BF /* VideoListController.swift in Sources */,
 				3E73DAAF1A8795A30052C16A /* FormTextEditController.swift in Sources */,
 				3E6AF2EF1EB188E800B5DB1F /* MJRefreshAutoNormalFooter.m in Sources */,
 				3E6AF2FF1EB188E800B5DB1F /* NSBundle+MJRefresh.m in Sources */,
@@ -2180,7 +2188,7 @@
 /* Begin PBXTargetDependency section */
 		3E3746551A26365A00B980E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3E3746461A26365A00B980E9 /* LinCore iOS */;
+			target = 3E3746461A26365A00B980E9 /* CessCore */;
 			targetProxy = 3E3746541A26365A00B980E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2293,7 +2301,7 @@
 		};
 		3E37465E1A26365A00B980E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36D7B93A923A5C0D29FCC577 /* Pods-LinCore iOS.debug.xcconfig */;
+			baseConfigurationReference = E09EE67B6D1FADA0E4E936DA /* Pods-CessCore.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -2318,8 +2326,8 @@
 				);
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "lin.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = LinCore;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cess.core;
+				PRODUCT_NAME = CessCore;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2330,7 +2338,7 @@
 		};
 		3E37465F1A26365A00B980E9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F3319E7739C2191431A6C70 /* Pods-LinCore iOS.release.xcconfig */;
+			baseConfigurationReference = 27D9790921684EC0D91619B9 /* Pods-CessCore.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -2355,8 +2363,8 @@
 				);
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "lin.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = LinCore;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cess.core;
+				PRODUCT_NAME = CessCore;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
@@ -2379,7 +2387,7 @@
 				INFOPLIST_FILE = coreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "lin.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = LinCoreTests;
+				PRODUCT_NAME = CessCoreTests;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -2395,7 +2403,7 @@
 				INFOPLIST_FILE = coreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "lin.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = LinCoreTests;
+				PRODUCT_NAME = CessCoreTests;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -2403,7 +2411,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3E3746411A26365A00B980E9 /* Build configuration list for PBXProject "LinCore" */ = {
+		3E3746411A26365A00B980E9 /* Build configuration list for PBXProject "CessCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E37465B1A26365A00B980E9 /* Debug */,
@@ -2412,7 +2420,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E37465D1A26365A00B980E9 /* Build configuration list for PBXNativeTarget "LinCore iOS" */ = {
+		3E37465D1A26365A00B980E9 /* Build configuration list for PBXNativeTarget "CessCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E37465E1A26365A00B980E9 /* Debug */,
@@ -2421,7 +2429,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E3746601A26365A00B980E9 /* Build configuration list for PBXNativeTarget "LinCoreTests iOS" */ = {
+		3E3746601A26365A00B980E9 /* Build configuration list for PBXNativeTarget "CessCoreTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E3746611A26365A00B980E9 /* Debug */,

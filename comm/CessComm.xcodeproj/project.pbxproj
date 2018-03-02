@@ -10,11 +10,11 @@
 		3E018CF31CF36F44006CC29F /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E018CF21CF36F44006CC29F /* WebSocket.swift */; };
 		3E018CF51CF37393006CC29F /* HTTPMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E018CF41CF37393006CC29F /* HTTPMessage.swift */; };
 		3E018CF71CF37BAB006CC29F /* HTTPAuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E018CF61CF37BAB006CC29F /* HTTPAuthenticationRequest.swift */; };
+		3E1941B52049B92200CA0BD7 /* CessUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1941B62049B92200CA0BD7 /* CessUtil.framework */; };
 		3E1974451DB4BBD400C5A6EC /* download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1974431DB4BBA000C5A6EC /* download.swift */; };
 		3E19745B1DB50B9400C5A6EC /* HttpDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19745A1DB50B9400C5A6EC /* HttpDataResponse.swift */; };
 		3E19745D1DB50FD800C5A6EC /* ServerHttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19745C1DB50FD800C5A6EC /* ServerHttpResponse.swift */; };
 		3E19745F1DB516A000C5A6EC /* AbstractServerHttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19745E1DB516A000C5A6EC /* AbstractServerHttpResponse.swift */; };
-		3E1974601DB5214900C5A6EC /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3B40171C58892600F4E519 /* LinUtil.framework */; };
 		3E19747C1DB7BB5600C5A6EC /* HttpDownloadPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19747B1DB7BB5600C5A6EC /* HttpDownloadPackage.swift */; };
 		3E20C6611E4DC385000C9698 /* AbstractHttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20C6601E4DC385000C9698 /* AbstractHttpResponse.swift */; };
 		3E34A7101E88A18F001E0E4E /* NetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E34A70F1E88A18F001E0E4E /* NetWorkTool.swift */; };
@@ -91,7 +91,7 @@
 		3EE51D751CE7BB920032729F /* AliHttpDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE51D291CE7BB920032729F /* AliHttpDNS.swift */; };
 		3EE51D761CE7BB920032729F /* HttpDNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE51D2A1CE7BB920032729F /* HttpDNS.swift */; };
 		3EE51D771CE7BB920032729F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EE51D2B1CE7BB920032729F /* Info.plist */; };
-		3EE51D781CE7BB920032729F /* LinComm.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE51D2C1CE7BB920032729F /* LinComm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3EE51D781CE7BB920032729F /* CessComm.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE51D2C1CE7BB920032729F /* CessComm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EE51D7D1CE7BB920032729F /* ServerSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE51D341CE7BB920032729F /* ServerSocket.swift */; };
 		3EE51D7E1CE7BB920032729F /* ServerSocketBSDImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE51D351CE7BB920032729F /* ServerSocketBSDImpl.swift */; };
 		3EE51D7F1CE7BB920032729F /* ServerSocketCFNetworkImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE51D361CE7BB920032729F /* ServerSocketCFNetworkImpl.swift */; };
@@ -183,6 +183,7 @@
 		3E018CF21CF36F44006CC29F /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		3E018CF41CF37393006CC29F /* HTTPMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMessage.swift; sourceTree = "<group>"; };
 		3E018CF61CF37BAB006CC29F /* HTTPAuthenticationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPAuthenticationRequest.swift; sourceTree = "<group>"; };
+		3E1941B62049B92200CA0BD7 /* CessUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CessUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E1974431DB4BBA000C5A6EC /* download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = download.swift; sourceTree = "<group>"; };
 		3E19745A1DB50B9400C5A6EC /* HttpDataResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpDataResponse.swift; sourceTree = "<group>"; };
 		3E19745C1DB50FD800C5A6EC /* ServerHttpResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerHttpResponse.swift; sourceTree = "<group>"; };
@@ -191,8 +192,8 @@
 		3E20C6601E4DC385000C9698 /* AbstractHttpResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractHttpResponse.swift; sourceTree = "<group>"; };
 		3E34A70F1E88A18F001E0E4E /* NetWorkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkTool.swift; sourceTree = "<group>"; };
 		3E34A7111E88A4C1001E0E4E /* Readchability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Readchability.swift; sourceTree = "<group>"; };
-		3E3746A61A27757B00B980E9 /* LinComm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinComm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E3746B11A27757C00B980E9 /* LinComm.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinComm.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E3746A61A27757B00B980E9 /* CessComm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CessComm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E3746B11A27757C00B980E9 /* CessComm.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CessComm.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E3B40171C58892600F4E519 /* LinUtil.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinUtil.framework; path = "../../../../../Users/lin/Library/Developer/Xcode/DerivedData/swift-gucsdkohbxefndgbshsyzyzfdbdh/Build/Products/Debug-iphoneos/LinUtil.framework"; sourceTree = "<group>"; };
 		3E53F8801DBE06DE00E79390 /* httpclient.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = httpclient.xcdatamodel; sourceTree = "<group>"; };
 		3E53F8821DBE0A1100E79390 /* HttpClientModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClientModel.swift; sourceTree = "<group>"; };
@@ -268,7 +269,7 @@
 		3EE51D291CE7BB920032729F /* AliHttpDNS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AliHttpDNS.swift; sourceTree = "<group>"; };
 		3EE51D2A1CE7BB920032729F /* HttpDNS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpDNS.swift; sourceTree = "<group>"; };
 		3EE51D2B1CE7BB920032729F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3EE51D2C1CE7BB920032729F /* LinComm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinComm.h; sourceTree = "<group>"; };
+		3EE51D2C1CE7BB920032729F /* CessComm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CessComm.h; sourceTree = "<group>"; };
 		3EE51D341CE7BB920032729F /* ServerSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerSocket.swift; sourceTree = "<group>"; };
 		3EE51D351CE7BB920032729F /* ServerSocketBSDImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerSocketBSDImpl.swift; sourceTree = "<group>"; };
 		3EE51D361CE7BB920032729F /* ServerSocketCFNetworkImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerSocketCFNetworkImpl.swift; sourceTree = "<group>"; };
@@ -347,7 +348,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E1974601DB5214900C5A6EC /* LinUtil.framework in Frameworks */,
+				3E1941B52049B92200CA0BD7 /* CessUtil.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +364,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E1941B42049B92200CA0BD7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3E1941B62049B92200CA0BD7 /* CessUtil.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3E37469C1A27757B00B980E9 = {
 			isa = PBXGroup;
 			children = (
@@ -372,14 +381,15 @@
 				3E73DA161A87630F0052C16A /* MobileCoreServices.framework */,
 				3EE51D0B1CE7BB920032729F /* commTests */,
 				3E3746A71A27757B00B980E9 /* Products */,
+				3E1941B42049B92200CA0BD7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		3E3746A71A27757B00B980E9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3E3746A61A27757B00B980E9 /* LinComm.framework */,
-				3E3746B11A27757C00B980E9 /* LinComm.xctest */,
+				3E3746A61A27757B00B980E9 /* CessComm.framework */,
+				3E3746B11A27757C00B980E9 /* CessComm.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -523,7 +533,7 @@
 				3EE51D121CE7BB920032729F /* http */,
 				3EE51D281CE7BB920032729F /* httpdns */,
 				3EE51D2B1CE7BB920032729F /* Info.plist */,
-				3EE51D2C1CE7BB920032729F /* LinComm.h */,
+				3EE51D2C1CE7BB920032729F /* CessComm.h */,
 				3EE51D331CE7BB920032729F /* socket */,
 				3EE51D3F1CE7BB920032729F /* tcp */,
 				3E34A70F1E88A18F001E0E4E /* NetWorkTool.swift */,
@@ -702,16 +712,16 @@
 				3EE51ED71CE7C17A0032729F /* Server-Bridging.h in Headers */,
 				3EE51ED41CE7C17A0032729F /* mongoose.h in Headers */,
 				3EE51ED51CE7C17A0032729F /* MongooseDaemon.h in Headers */,
-				3EE51D781CE7BB920032729F /* LinComm.h in Headers */,
+				3EE51D781CE7BB920032729F /* CessComm.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3E3746A51A27757B00B980E9 /* LinComm */ = {
+		3E3746A51A27757B00B980E9 /* CessComm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E3746BC1A27757C00B980E9 /* Build configuration list for PBXNativeTarget "LinComm" */;
+			buildConfigurationList = 3E3746BC1A27757C00B980E9 /* Build configuration list for PBXNativeTarget "CessComm" */;
 			buildPhases = (
 				3E3746A11A27757B00B980E9 /* Sources */,
 				3E3746A21A27757B00B980E9 /* Frameworks */,
@@ -722,14 +732,14 @@
 			);
 			dependencies = (
 			);
-			name = LinComm;
+			name = CessComm;
 			productName = client;
-			productReference = 3E3746A61A27757B00B980E9 /* LinComm.framework */;
+			productReference = 3E3746A61A27757B00B980E9 /* CessComm.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		3E3746B01A27757C00B980E9 /* LinCommTests */ = {
+		3E3746B01A27757C00B980E9 /* CessCommTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E3746BF1A27757C00B980E9 /* Build configuration list for PBXNativeTarget "LinCommTests" */;
+			buildConfigurationList = 3E3746BF1A27757C00B980E9 /* Build configuration list for PBXNativeTarget "CessCommTests" */;
 			buildPhases = (
 				3E3746AD1A27757C00B980E9 /* Sources */,
 				3E3746AE1A27757C00B980E9 /* Frameworks */,
@@ -740,9 +750,9 @@
 			dependencies = (
 				3E1974591DB4CAE000C5A6EC /* PBXTargetDependency */,
 			);
-			name = LinCommTests;
+			name = CessCommTests;
 			productName = clientTests;
-			productReference = 3E3746B11A27757C00B980E9 /* LinComm.xctest */;
+			productReference = 3E3746B11A27757C00B980E9 /* CessComm.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -767,7 +777,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3E3746A01A27757B00B980E9 /* Build configuration list for PBXProject "LinComm" */;
+			buildConfigurationList = 3E3746A01A27757B00B980E9 /* Build configuration list for PBXProject "CessComm" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -779,8 +789,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3E3746A51A27757B00B980E9 /* LinComm */,
-				3E3746B01A27757C00B980E9 /* LinCommTests */,
+				3E3746A51A27757B00B980E9 /* CessComm */,
+				3E3746B01A27757C00B980E9 /* CessCommTests */,
 			);
 		};
 /* End PBXProject section */
@@ -948,7 +958,7 @@
 /* Begin PBXTargetDependency section */
 		3E1974591DB4CAE000C5A6EC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3E3746A51A27757B00B980E9 /* LinComm */;
+			target = 3E3746A51A27757B00B980E9 /* CessComm */;
 			targetProxy = 3E1974581DB4CAE000C5A6EC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1061,7 +1071,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
-				PRODUCT_NAME = LinComm;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cess.comm;
+				PRODUCT_NAME = CessComm;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1089,7 +1100,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
-				PRODUCT_NAME = LinComm;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cess.comm;
+				PRODUCT_NAME = CessComm;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -1112,7 +1124,7 @@
 				);
 				INFOPLIST_FILE = commTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = LinComm;
+				PRODUCT_NAME = CessComm;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1129,7 +1141,7 @@
 				);
 				INFOPLIST_FILE = commTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = LinComm;
+				PRODUCT_NAME = CessComm;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -1137,7 +1149,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3E3746A01A27757B00B980E9 /* Build configuration list for PBXProject "LinComm" */ = {
+		3E3746A01A27757B00B980E9 /* Build configuration list for PBXProject "CessComm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E3746BA1A27757C00B980E9 /* Debug */,
@@ -1146,7 +1158,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E3746BC1A27757C00B980E9 /* Build configuration list for PBXNativeTarget "LinComm" */ = {
+		3E3746BC1A27757C00B980E9 /* Build configuration list for PBXNativeTarget "CessComm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E3746BD1A27757C00B980E9 /* Debug */,
@@ -1155,7 +1167,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E3746BF1A27757C00B980E9 /* Build configuration list for PBXNativeTarget "LinCommTests" */ = {
+		3E3746BF1A27757C00B980E9 /* Build configuration list for PBXNativeTarget "CessCommTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E3746C01A27757C00B980E9 /* Debug */,

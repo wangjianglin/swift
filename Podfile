@@ -9,7 +9,7 @@ project 'rac/LinRac.xcodeproj'
 
 platform:ios,'8.0'
 
-target :'LinRac' do
+target :'CessRac' do
 #    platform:ios,'8.0'
     #指定podspec文件
     #    pod 'LinUtil.swift', :podspec => "/lin/code/lib/Specs/LinUtil.swift/0.0.0/LinUtil.swift.podspec"
@@ -26,16 +26,16 @@ target :'LinRac' do
     pod 'ReactiveCocoa', '~> 5.0.0'
     #pod 'ReactiveCocoa',:git=>'https://github.com/ReactiveCocoa/ReactiveCocoa.git'
   
-    project 'rac/LinRac.xcodeproj'
+    project 'rac/CessRac.xcodeproj'
 end
 
-target :'LinCore iOS' do
+target :'CessCore' do
     
     pod 'GPUImage',:git=>'https://github.com/BradLarson/GPUImage.git'
     
     pod 'SVProgressHUD',:git=>'https://github.com/SVProgressHUD/SVProgressHUD'
     
-    project 'core/LinCore.xcodeproj'
+    project 'core/CessCore.xcodeproj'
     
 end
 
@@ -62,15 +62,21 @@ post_install do |installer|
     
     puts installer.pods_project.targets.class
     puts installer.pods_project.targets[1]
-
+    
     installer.pods_project.targets.each do |target|
+
+     target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.0'
+            end
+    
+
+        if "#{target}" == 'ReactiveCocoa' or
+            "#{target}" == 'ReactiveSwift'
+            
+           target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '3.0.2'
+            end
+        end
         
-        if "#{target}" != 'ReactiveCocoa' and
-            "#{target}" != 'ReactiveSwift'
-            next;
-        end
-   target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '3.0.2'
-        end
     end
 end

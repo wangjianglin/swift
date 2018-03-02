@@ -12,7 +12,7 @@ import Foundation
 //http://www.feicuibaba.com/data.zip
 
 import XCTest
-import LinComm
+import CessComm
 
 class Download : XCTestCase {
     

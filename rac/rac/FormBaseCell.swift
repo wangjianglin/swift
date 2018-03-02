@@ -10,7 +10,7 @@ import Foundation
 import ReactiveCocoa
 import ReactiveSwift
 import Result
-import LinCore
+import CessCore
 
 extension Reactive where Base: FormRowDescriptor{
     

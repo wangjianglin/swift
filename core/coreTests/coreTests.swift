@@ -8,7 +8,7 @@
 
 //import Cocoa
 import XCTest
-import LinCore
+import CessCore
 
 class coreTests: XCTestCase {
     

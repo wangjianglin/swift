@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LinUtil
+import CessUtil
 
 //public class HttpPackageDataArgsBool{
 //    private var package:HttpPackage!;

@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import LinComm
+import CessComm
 import Foundation
-import LinUtil
-import LinCore
+import CessUtil
+import CessCore
 
 func httpMock(){
     let arr = [String]();
@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        LinComm.HttpCommunicate.commUrl = "http://s.feicuibaba.com";
-        LinComm.HttpCommunicate.commUrl = "https://api-t.fcbb.io"
+        CessComm.HttpCommunicate.commUrl = "https://api-t.fcbb.io"
         HttpCommunicate.httpDns = AliHttpDNS(account: "172280");
         HttpCommunicate.httpDns?.setDelegateForDegradationFilter({ (hostName) -> Bool in
             if hostName.hasSuffix("feicuibaba.com"){

@@ -17,7 +17,7 @@
                BlueprintIdentifier = "3E37466C1A26368100B980E9"
                BuildableName = "LinUtil.framework"
                BlueprintName = "LinUtil"
-               ReferencedContainer = "container:LinUtil.xcodeproj">
+               ReferencedContainer = "container:CessUtil.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "3E3746771A26368100B980E9"
                BuildableName = "LinUtilTests.xctest"
                BlueprintName = "LinUtilTests"
-               ReferencedContainer = "container:LinUtil.xcodeproj">
+               ReferencedContainer = "container:CessUtil.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -50,7 +50,7 @@
                BlueprintIdentifier = "3E3746771A26368100B980E9"
                BuildableName = "LinUtilTests.xctest"
                BlueprintName = "LinUtilTests"
-               ReferencedContainer = "container:LinUtil.xcodeproj">
+               ReferencedContainer = "container:CessUtil.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -60,7 +60,7 @@
             BlueprintIdentifier = "3E37466C1A26368100B980E9"
             BuildableName = "LinUtil.framework"
             BlueprintName = "LinUtil"
-            ReferencedContainer = "container:LinUtil.xcodeproj">
+            ReferencedContainer = "container:CessUtil.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,7 +83,7 @@
             BlueprintIdentifier = "3E37466C1A26368100B980E9"
             BuildableName = "LinUtil.framework"
             BlueprintName = "LinUtil"
-            ReferencedContainer = "container:LinUtil.xcodeproj">
+            ReferencedContainer = "container:CessUtil.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -101,7 +101,7 @@
             BlueprintIdentifier = "3E37466C1A26368100B980E9"
             BuildableName = "LinUtil.framework"
             BlueprintName = "LinUtil"
-            ReferencedContainer = "container:LinUtil.xcodeproj">
+            ReferencedContainer = "container:CessUtil.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

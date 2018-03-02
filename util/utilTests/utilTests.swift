@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-import LinUtil
+import CessUtil
 
 
 infix operator => { associativity left precedence 95 }

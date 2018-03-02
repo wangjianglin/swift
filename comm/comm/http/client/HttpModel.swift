@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LinUtil
+import CessUtil
 
 open class HttpModel : JsonModel{
     

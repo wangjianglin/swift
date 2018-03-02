@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		189B79451EDFEF62004D1AA3 /* CommodityDetialEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B79441EDFEF62004D1AA3 /* CommodityDetialEditController.swift */; };
 		3C6E4C9CA47250D281F85C0D /* Pods_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA8FF08E862C99CB9D657D4 /* Pods_demo.framework */; };
+		3E1941BA2049B95900CA0BD7 /* CessCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1941B92049B95900CA0BD7 /* CessCore.framework */; };
+		3E1941BB2049B95900CA0BD7 /* CessCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1941B92049B95900CA0BD7 /* CessCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E1941BD2049B95900CA0BD7 /* CessUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1941BC2049B95900CA0BD7 /* CessUtil.framework */; };
+		3E1941BE2049B95900CA0BD7 /* CessUtil.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1941BC2049B95900CA0BD7 /* CessUtil.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E1941C02049B95900CA0BD7 /* CessComm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1941BF2049B95900CA0BD7 /* CessComm.framework */; };
+		3E1941C12049B95900CA0BD7 /* CessComm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1941BF2049B95900CA0BD7 /* CessComm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E1941C32049B95900CA0BD7 /* CessRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1941C22049B95900CA0BD7 /* CessRac.framework */; };
+		3E1941C42049B95900CA0BD7 /* CessRac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1941C22049B95900CA0BD7 /* CessRac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E200EA81C4D5FB000A00A10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */; };
 		3E200EAA1C4D5FB000A00A10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E200EA91C4D5FB000A00A10 /* ViewController.swift */; };
 		3E200EAD1C4D5FB000A00A10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E200EAB1C4D5FB000A00A10 /* Main.storyboard */; };
@@ -36,14 +44,6 @@
 		FE6467831EE7E2ED007115B6 /* CategoryVo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6467821EE7E2ED007115B6 /* CategoryVo.swift */; };
 		FE6467861EE7E386007115B6 /* PropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6467841EE7E386007115B6 /* PropertyViewController.swift */; };
 		FE6467871EE7E386007115B6 /* PropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE6467851EE7E386007115B6 /* PropertyViewController.xib */; };
-		FE7DDA5A1EE1162B00D86B35 /* LinComm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA591EE1162B00D86B35 /* LinComm.framework */; };
-		FE7DDA5B1EE1162B00D86B35 /* LinComm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA591EE1162B00D86B35 /* LinComm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FE7DDA5D1EE1163200D86B35 /* LinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA5C1EE1163200D86B35 /* LinCore.framework */; };
-		FE7DDA5E1EE1163200D86B35 /* LinCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA5C1EE1163200D86B35 /* LinCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FE7DDA601EE1163900D86B35 /* LinUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA5F1EE1163900D86B35 /* LinUtil.framework */; };
-		FE7DDA611EE1163900D86B35 /* LinUtil.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA5F1EE1163900D86B35 /* LinUtil.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FE7DDA631EE1164500D86B35 /* LinRac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA621EE1164500D86B35 /* LinRac.framework */; };
-		FE7DDA641EE1164500D86B35 /* LinRac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE7DDA621EE1164500D86B35 /* LinRac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FECE839F1EE4F91C0072BC55 /* FromController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECE839E1EE4F91C0072BC55 /* FromController.swift */; };
 		FECE83A11EE4FCAA0072BC55 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECE83A01EE4FCAA0072BC55 /* TestViewController.swift */; };
 /* End PBXBuildFile section */
@@ -66,16 +66,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3E66A72B1DC79177005628AC /* Embed Frameworks */ = {
+		3E1941C52049B95A00CA0BD7 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FE7DDA611EE1163900D86B35 /* LinUtil.framework in Embed Frameworks */,
-				FE7DDA641EE1164500D86B35 /* LinRac.framework in Embed Frameworks */,
-				FE7DDA5B1EE1162B00D86B35 /* LinComm.framework in Embed Frameworks */,
-				FE7DDA5E1EE1163200D86B35 /* LinCore.framework in Embed Frameworks */,
+				3E1941BE2049B95900CA0BD7 /* CessUtil.framework in Embed Frameworks */,
+				3E1941C42049B95900CA0BD7 /* CessRac.framework in Embed Frameworks */,
+				3E1941BB2049B95900CA0BD7 /* CessCore.framework in Embed Frameworks */,
+				3E1941C12049B95900CA0BD7 /* CessComm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +84,10 @@
 
 /* Begin PBXFileReference section */
 		189B79441EDFEF62004D1AA3 /* CommodityDetialEditController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommodityDetialEditController.swift; sourceTree = "<group>"; };
+		3E1941B92049B95900CA0BD7 /* CessCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CessCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E1941BC2049B95900CA0BD7 /* CessUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CessUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E1941BF2049B95900CA0BD7 /* CessComm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CessComm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E1941C22049B95900CA0BD7 /* CessRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CessRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E200EA41C4D5FB000A00A10 /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E200EA71C4D5FB000A00A10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E200EA91C4D5FB000A00A10 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -136,10 +140,6 @@
 		FE6467821EE7E2ED007115B6 /* CategoryVo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryVo.swift; sourceTree = "<group>"; };
 		FE6467841EE7E386007115B6 /* PropertyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyViewController.swift; sourceTree = "<group>"; };
 		FE6467851EE7E386007115B6 /* PropertyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyViewController.xib; sourceTree = "<group>"; };
-		FE7DDA591EE1162B00D86B35 /* LinComm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinComm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE7DDA5C1EE1163200D86B35 /* LinCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE7DDA5F1EE1163900D86B35 /* LinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE7DDA621EE1164500D86B35 /* LinRac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinRac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECE839E1EE4F91C0072BC55 /* FromController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromController.swift; sourceTree = "<group>"; };
 		FECE83A01EE4FCAA0072BC55 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,11 +149,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE7DDA631EE1164500D86B35 /* LinRac.framework in Frameworks */,
-				FE7DDA5A1EE1162B00D86B35 /* LinComm.framework in Frameworks */,
-				FE7DDA5D1EE1163200D86B35 /* LinCore.framework in Frameworks */,
-				FE7DDA601EE1163900D86B35 /* LinUtil.framework in Frameworks */,
+				3E1941C02049B95900CA0BD7 /* CessComm.framework in Frameworks */,
+				3E1941C32049B95900CA0BD7 /* CessRac.framework in Frameworks */,
 				3C6E4C9CA47250D281F85C0D /* Pods_demo.framework in Frameworks */,
+				3E1941BA2049B95900CA0BD7 /* CessCore.framework in Frameworks */,
+				3E1941BD2049B95900CA0BD7 /* CessUtil.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,10 +190,10 @@
 		3E200E9B1C4D5FB000A00A10 = {
 			isa = PBXGroup;
 			children = (
-				FE7DDA621EE1164500D86B35 /* LinRac.framework */,
-				FE7DDA5F1EE1163900D86B35 /* LinUtil.framework */,
-				FE7DDA5C1EE1163200D86B35 /* LinCore.framework */,
-				FE7DDA591EE1162B00D86B35 /* LinComm.framework */,
+				3E1941C22049B95900CA0BD7 /* CessRac.framework */,
+				3E1941BF2049B95900CA0BD7 /* CessComm.framework */,
+				3E1941BC2049B95900CA0BD7 /* CessUtil.framework */,
+				3E1941B92049B95900CA0BD7 /* CessCore.framework */,
 				3EC64EB01D0AF00100717357 /* WebKit.framework */,
 				3EE51EE21CE8C9B90032729F /* web */,
 				3E200EA61C4D5FB000A00A10 /* demo */,
@@ -323,9 +323,9 @@
 				3E200EA01C4D5FB000A00A10 /* Sources */,
 				3E200EA11C4D5FB000A00A10 /* Frameworks */,
 				3E200EA21C4D5FB000A00A10 /* Resources */,
-				3E66A72B1DC79177005628AC /* Embed Frameworks */,
 				0212C0213A7A34F82FA3A1DD /* [CP] Embed Pods Frameworks */,
 				0FCE91EDCE0F0781456F4CA4 /* [CP] Copy Pods Resources */,
+				3E1941C52049B95A00CA0BD7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -697,7 +697,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = lin.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cess.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "demo/demo-Bridging-Header.h";
@@ -723,7 +723,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = lin.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = io.cess.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "demo/demo-Bridging-Header.h";

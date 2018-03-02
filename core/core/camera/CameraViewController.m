@@ -56,7 +56,25 @@
         [self setUI];
     }
 }
+- (instancetype)initWithMaxInterval:(NSTimeInterval)interval{
+    
+    self = [super init];
+    if (self != nil) {
+        minInterval = 30.0;
+        maxInterval = interval;
+    }
+    return self;
+}
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        maxInterval = 10.0;
+        maxInterval = 15.0;
+    }
+    return self;
+}
 
 
 - (void)setUI {
@@ -138,8 +156,8 @@
     
     isRecording = false;
     
-    minInterval = 10.0;
-    maxInterval = 15.0;
+//    minInterval = 10.0;
+//    maxInterval = 15.0;
     
     dateFormatter = [[NSDateFormatter alloc] init];
     //设定时间格式,这里可以设置成自己需要的格式
@@ -168,7 +186,7 @@
     _recorder.audioConfiguration.enabled = FALSE;
     
     _recorder.captureSessionPreset = [SCRecorderTools bestCaptureSessionPresetCompatibleWithAllDevices];
-    _recorder.maxRecordDuration = CMTimeMake(15, 1);
+    _recorder.maxRecordDuration = CMTimeMake(maxInterval, 1);
     _recorder.flashMode = SCFlashModeOff;
     
     _recorder.delegate = self;

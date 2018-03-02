@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LinUtil
+import CessUtil
 import CoreData
 
 
@@ -101,7 +101,8 @@ class HttpCommunicateSession  : NSObject, URLSessionDelegate, URLSessionTaskDele
         let task = session.dataTask(with: serialReq.request,
                                     completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
 //                                        opt.finish()
-        self.processResponse(params.success,failure:params.failure,data:data,response:response,error:error as NSError!);
+        self.processResponse(params.success,failure:params.failure,data:data as AnyObject,response:response,error:error as NSError!);
+                                        
         });
         
         task.resume();
@@ -109,13 +110,15 @@ class HttpCommunicateSession  : NSObject, URLSessionDelegate, URLSessionTaskDele
         httpResult.setURLSessionTask(task: task);
     }
     
-    private func processResponse(_ success:((HttpClientResponse) -> Void)!, failure:((NSError, HttpClientResponse?) -> Void)!,data: Data!, response: URLResponse!, error: NSError!){
+
+    private func processResponse(_ success:((HttpClientResponse) -> Void)!, failure:((NSError, HttpClientResponse?) -> Void)!,data: AnyObject!, response: URLResponse!, error: NSError!){
         
         if let hresponse = response as? HTTPURLResponse {
             if hresponse.statusCode == 401 {
                 self.impl.authentication?.badAuth();
             }
         }
+        
         if error != nil {
             if failure != nil {
                 failure(error, nil)
@@ -123,7 +126,7 @@ class HttpCommunicateSession  : NSObject, URLSessionDelegate, URLSessionTaskDele
             return
         }
         if let data = data {
-            let responseObject: AnyObject = data as AnyObject
+            let responseObject: AnyObject = data
             let extraResponse = HttpClientResponse()
             if let hresponse = response as? HTTPURLResponse {
                 extraResponse.headers = hresponse.allHeaderFields as? Dictionary<String,String>
@@ -160,10 +163,12 @@ class HttpCommunicateSession  : NSObject, URLSessionDelegate, URLSessionTaskDele
             ident = createBackgroundIdent();
         }
         
-        let config = URLSessionConfiguration.background(withIdentifier: ident);
-        let session = Foundation.URLSession(configuration: config, delegate: self, delegateQueue: nil);
+        let session = Foundation.URLSession.shared
         
-        let task = session.downloadTask(with: serialReq.request)
+        let task =   session.downloadTask(with: serialReq.request) { (location, response, error) in
+            
+            self.processResponse(params.success,failure:params.failure,data:location as AnyObject,response:response,error:error as NSError!);
+        }
         
         YSInstance.backgroundTaskMap["\(ident)\(task.hash)"] = params;
         task.resume()

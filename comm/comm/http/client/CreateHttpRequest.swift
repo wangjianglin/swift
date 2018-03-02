@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 import Foundation
-import LinUtil
+import CessUtil
 
 internal class CreateHttpRequest: NSObject {
     let contentTypeKey = "Content-Type"

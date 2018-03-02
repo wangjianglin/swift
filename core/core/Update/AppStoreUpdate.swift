@@ -8,7 +8,7 @@
 
 
 import UIKit
-import LinUtil
+import CessUtil
 
 open class AppStoreUpdate{
     

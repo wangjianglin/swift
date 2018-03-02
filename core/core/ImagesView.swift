@@ -257,7 +257,7 @@ open class ImagesView : UIView, UICollectionViewDelegate,UICollectionViewDataSou
     func editingVideoWithCarema(_ avc:UIAlertAction){
         
         //选择视频
-        let picker = VideoPickerController()
+        let picker = VideoPickerController.init(maxTime: 121, needSound: true)
         picker.pickerDelegate = self
         self.ext.rootViewController?.present(picker, animated: true, completion: nil)
     }

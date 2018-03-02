@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LinUtil
+import CessUtil
 
 //HTTP通信实现类
 public class HttpCommunicate{

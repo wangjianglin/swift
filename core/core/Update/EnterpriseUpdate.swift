@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LinUtil
+import CessUtil
 
 open class EnterpriseUpdate{
     

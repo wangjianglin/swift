@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import AssetsLibrary
-import LinUtil
+import CessUtil
 
 public extension ALAssetsLibrary{
     

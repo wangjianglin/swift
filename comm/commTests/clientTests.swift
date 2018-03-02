@@ -8,7 +8,7 @@
 //
 //import UIKit
 //import XCTest
-//import LinClient
+//import CessClient
 //import Foundation
 //
 ////class clientTests: XCTestCase {

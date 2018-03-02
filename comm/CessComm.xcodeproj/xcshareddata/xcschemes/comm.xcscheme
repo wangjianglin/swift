@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3E3746A51A27757B00B980E9"
                BuildableName = "LinComm.framework"
-               BlueprintName = "LinComm"
-               ReferencedContainer = "container:LinComm.xcodeproj">
+               BlueprintName = "CessComm"
+               ReferencedContainer = "container:CessComm.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,8 +49,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E3746A51A27757B00B980E9"
             BuildableName = "LinComm.framework"
-            BlueprintName = "LinComm"
-            ReferencedContainer = "container:LinComm.xcodeproj">
+            BlueprintName = "CessComm"
+            ReferencedContainer = "container:CessComm.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,8 +67,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E3746A51A27757B00B980E9"
             BuildableName = "LinComm.framework"
-            BlueprintName = "LinComm"
-            ReferencedContainer = "container:LinComm.xcodeproj">
+            BlueprintName = "CessComm"
+            ReferencedContainer = "container:CessComm.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

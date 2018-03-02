@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LinComm
+import CessComm
 
 class PropertyViewController: UIViewController {
     @IBOutlet var textView: UITextView!

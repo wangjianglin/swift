@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LinUtil
+import CessUtil
 
 //public protocol HttpDNSDegradationDelegate :NSObjectProtocol{
 //    func shouldDegradeHTTPDNS(hostName:String) -> Bool;
