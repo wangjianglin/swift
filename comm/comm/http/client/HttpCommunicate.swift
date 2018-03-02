@@ -85,6 +85,11 @@ public class HttpCommunicate{
         set{ global.isDebug = newValue; }
     }
     
+    open class var authentication:Authentication?{
+        get{return global.authentication;}
+        set{global.authentication = newValue;}
+    }
+    
     open class var httpDns:HttpDNS?{
         get{return global.httpDns;}
         set{global.httpDns = newValue;}
@@ -260,7 +265,7 @@ public class HttpCommunicateImpl{
     
     private var lazyMock:HttpCommunicate.Mock! = nil
     private var lazyQueue:Queue! = nil;
-    
+    open var authentication:Authentication?;
 //    private lazy let __init:() = {
 //        lazyMock = HttpCommunicate.Mock();
 //        lazyQueue = Queue.init(count: 5);
@@ -446,15 +451,15 @@ public class HttpCommunicateImpl{
         
         self.httprequest?(package);
         
-        let url = HttpUtils.url(self, pack: package);
-        let p = self.generParams(package: package);
-        
         if !NetWorkTool.isEnable3G() && !NetWorkTool.isEnableWIFI() {
             let error = HttpError(code:-2,message:"无网络，请检查系统设置");
             self.mainThreadFault(httpResult,pack:package,fault:fault)(error);
             return httpResult;
         }
         
+        let url = HttpUtils.url(self, pack: package);
+        let p = self.generParams(package: package);
+
         let params = HttpCommunicateSessionParams(url:url);
         params.method = package.method;
         params.parameters = p.params;
@@ -482,7 +487,7 @@ public class HttpCommunicateImpl{
             //            e.strackTrace = error?.description;
             self.mainThreadFault(httpResult,pack:package,fault:fault)(e);
         };
-        self.httpSession.create(params: params)?.start();
+        self.httpSession.request(params: params,httpResult:httpResult)
         //        self.httpTask.create(url,method: package.method,parameters: p.params,headers:p.headers.toDict(), success: {(response: HttpResponse) in
         //
         //            package.handle.response(package, response: response.responseObject, result: self.mainThreadResult(httpResult,pack:package,result:result), fault: self.mainThreadFault(httpResult,pack:package,fault:fault));

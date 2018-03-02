@@ -15,7 +15,7 @@ public class MainViewModel : NSObject,ViewModel{
     public typealias ViewType = MainViewController;
 
     
-    public dynamic var datas:[VMData]?;
+    @objc public dynamic var datas:[VMData]?;
     
     public func start(){
         genDatas();

@@ -26,6 +26,7 @@
 		3E73DA191A8763DF0052C16A /* MobileCoreServices.framework in Resources */ = {isa = PBXBuildFile; fileRef = 3E73DA161A87630F0052C16A /* MobileCoreServices.framework */; };
 		3E9842F31CF8EF4E003FD60B /* HttpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9842F21CF8EF4E003FD60B /* HttpModel.swift */; };
 		3EA7DDC51FE8B71300ED9978 /* HttpCommunicateSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7DDC41FE8B71300ED9978 /* HttpCommunicateSession.swift */; };
+		3EAB4E952008B15C00339022 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAB4E942008B15C00339022 /* Authentication.swift */; };
 		3EB75E521CEFBD350020C013 /* HTTPFileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB75E511CEFBD350020C013 /* HTTPFileResponse.swift */; };
 		3EBE3CF01CF04D6600469D8E /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE3CEF1CF04D6600469D8E /* HTTPResponse.swift */; };
 		3EBE3CF21CF04E9A00469D8E /* HTTPConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE3CF11CF04E9A00469D8E /* HTTPConnection.swift */; };
@@ -198,6 +199,7 @@
 		3E73DA161A87630F0052C16A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3E9842F21CF8EF4E003FD60B /* HttpModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpModel.swift; sourceTree = "<group>"; };
 		3EA7DDC41FE8B71300ED9978 /* HttpCommunicateSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpCommunicateSession.swift; sourceTree = "<group>"; };
+		3EAB4E942008B15C00339022 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		3EB75E511CEFBD350020C013 /* HTTPFileResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPFileResponse.swift; sourceTree = "<group>"; };
 		3EBE3CEF1CF04D6600469D8E /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
 		3EBE3CF11CF04E9A00469D8E /* HTTPConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPConnection.swift; sourceTree = "<group>"; };
@@ -631,6 +633,7 @@
 				3E19747B1DB7BB5600C5A6EC /* HttpDownloadPackage.swift */,
 				3E53F87F1DBE06DE00E79390 /* httpclient.xcdatamodeld */,
 				3E53F8821DBE0A1100E79390 /* HttpClientModel.swift */,
+				3EAB4E942008B15C00339022 /* Authentication.swift */,
 			);
 			path = client;
 			sourceTree = "<group>";
@@ -819,6 +822,7 @@
 				3ECD40E41CEE1E8000D57372 /* DDRange.m in Sources */,
 				3EE51D991CE7BB920032729F /* TcpPackageResponse.swift in Sources */,
 				3EBE3CF21CF04E9A00469D8E /* HTTPConnection.swift in Sources */,
+				3EAB4E952008B15C00339022 /* Authentication.swift in Sources */,
 				3EE51E861CE7C17A0032729F /* EncryptJsonHttpRequestHandle.swift in Sources */,
 				3EE51EE11CE84A7D0032729F /* CocoaHttpServerRequest.swift in Sources */,
 				3ECD410D1CEE1E8000D57372 /* HTTPDynamicFileResponse.m in Sources */,

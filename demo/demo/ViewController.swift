@@ -135,7 +135,7 @@ class ViewController: UIViewController {
 //        let data = NSData(bytesNoCopy: basePtr, length: count,freeWhenDone:false);
 //        let s = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
         
-        let s = String.fromBuffer(buffer, count: count);
+        let s = StringExt.fromBuffer(buffer, count: count);
         print("s:\(s)")
         socket.write("ok.");
         
@@ -223,7 +223,8 @@ class ViewController: UIViewController {
 class TestPackage: HttpPackage {
     
     init(){
-        super.init(url: "/core/comm/test.action", method: HttpMethod.POST);
+//        super.init(url: "/core/comm/test.action", method: HttpMethod.POST);
+        super.init(url: "http://127.0.0.1:5555/shorturl/", method: HttpMethod.POST);
     }
     
     var data:String{

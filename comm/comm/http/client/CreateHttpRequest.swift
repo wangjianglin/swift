@@ -104,9 +104,9 @@ internal class CreateHttpRequest: NSObject {
             }
             request.url = URL(string: newUrl)
         } else {
-            let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.stringEncoding.rawValue));
+            let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.stringEncoding.rawValue)) as String!;
             if request.value(forHTTPHeaderField: contentTypeKey) == nil {
-                request.setValue("application/x-www-form-urlencoded; charset=\(charset)",
+                request.setValue("application/x-www-form-urlencoded; charset=\(charset ?? "")",
                     forHTTPHeaderField:contentTypeKey)
             }
 //            request.httpBody = queryString.data(using: String.Encoding(rawValue: self.stringEncoding))

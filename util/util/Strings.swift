@@ -40,7 +40,7 @@ extension StringExt {
         if(count == 0){
             count = buffer.count;
         }
-        return NSString(data: data, encoding: encoding.rawValue) as! String
+        return NSString(data: data, encoding: encoding.rawValue)! as String
     }
     
     //分割字符

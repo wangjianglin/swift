@@ -108,7 +108,7 @@ public class RACViewController2 : UIViewController,BaseView{
 //        let s:NSString
         //arr.ext.
 //        self.initFromXIB();
-        self.ext.initFromXIB();
+        self.ext.initFromXIB("RACViewController2");
         vm.start();
 //        let a = Action.init { (a) -> SignalProducer<_;, _> in
 //            return SignalProducer<(),NSError>.init(value: ());

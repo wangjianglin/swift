@@ -12,6 +12,42 @@ import Foundation
 import LinUtil
 import LinCore
 
+func httpMock(){
+    let arr = [String]();
+    HttpCommunicate.http.mock(cls: TestPackage.self, result: nil);
+    
+    HttpCommunicate.http.error { (pack) -> HttpError? in
+        switch pack{
+        case let pack as TestPackage:
+            if pack.data == "123" {
+                return HttpError.init(code: -3);
+            }
+            break
+            
+        default:
+            break
+        }
+        
+        return nil;
+    }
+    
+    HttpCommunicate.http.result { (pack) -> Any? in
+        switch pack{
+        case let pack as TestPackage:
+            return mockTestPackage(pack);
+            
+        default:
+            break
+        }
+        
+        return nil;
+    }
+}
+
+func mockTestPackage(_ page:TestPackage)->Any?{
+    return nil;
+}
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,7 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        LinComm.HttpCommunicate.commUrl = "http://s.feicuibaba.com";
+//        LinComm.HttpCommunicate.commUrl = "http://s.feicuibaba.com";
+        LinComm.HttpCommunicate.commUrl = "https://api-t.fcbb.io"
         HttpCommunicate.httpDns = AliHttpDNS(account: "172280");
         HttpCommunicate.httpDns?.setDelegateForDegradationFilter({ (hostName) -> Bool in
             if hostName.hasSuffix("feicuibaba.com"){
@@ -42,6 +79,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("infoStr:------------>:\(infoStr)")
         }
         
+        //https://api-t.fcbb.io/shorturl/a
+        let auth = OAuth2Authentication(tokenUrl:"https://api-t.fcbb.io/oauth/token");
+        auth.clientId = "web_app"
+        auth.secret = "123456"
+        auth.username = "admin"
+        auth.password = "admin"
+        
+        auth.grantType = .password
+//        auth.grantType = .client
+        
+        auth.tokenStore = LocaleOAuth2TokenStore(name:"token_store")
+        
+        HttpCommunicate.authentication = auth;
+        
+        let p = OAuth2Package();
+        
+//        HttpCommunicate.request(p,())
+        HttpCommunicate.request(p, result: { (obj, warning) in
+            print(obj);
+        }) { (error) in
+            print(error);
+        }
+//        httpMock();
         return true
     }
 
@@ -92,3 +152,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+class OAuth2Package : HttpPackage {
+    public init(){
+        super.init(url:"/shorturl/a");
+    }
+}

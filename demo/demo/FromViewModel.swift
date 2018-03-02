@@ -18,7 +18,7 @@ import Photos
 
 class FromViewModel: AbsViewModel<FromController> {
 
-    public dynamic var count:Int = 0
+    @objc public dynamic var count:Int = 0
     
     func testCount() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {

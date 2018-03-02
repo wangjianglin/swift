@@ -19,6 +19,7 @@ open class StandardJsonHttpRequestHandle:HttpRequestHandle{
         //        package.commParams
         let result = HttpRequestPreprocessResult();
         result.headers[HttpConstants.HTTP_COMM_PROTOCOL] = HttpConstants.HTTP_VERSION;
+        result.headers["Accept"] = "application/cess2+json";
         if params.isDebug == true {
             result.headers[HttpConstants.HTTP_COMM_PROTOCOL_DEBUG] = "";
         }
@@ -46,7 +47,7 @@ open class StandardJsonHttpRequestHandle:HttpRequestHandle{
         
         if response != nil {
             let data = response as! Data
-            resp = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String;
+            resp = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String?;
             //println("response: \(resp)") //prints the HTML of the page
         }
         if let resp = resp,resp.lengthOfBytes(using: String.Encoding.utf8) > 0 {

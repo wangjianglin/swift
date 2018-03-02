@@ -32,7 +32,7 @@ public class RACVM :NSObject,ViewModel {
     }
 
     
-    public dynamic var text = "label text!";
+    @objc public dynamic var text = "label text!";
     
 //    @discardableResult
 //    static func <~ <Source: SignalProtocol>(target: RACVM, signal: Source) -> Disposable?{
@@ -49,9 +49,13 @@ public class RACVM :NSObject,ViewModel {
         //            comple(nil);
         let pack = TestPackage();
         pack.data = "test,data";
+        
+        
         complete <~ HttpCommunicate.request(pack, result: { (obj, warning) in
 //            self.text = "\(obj!)";
-//            print(self.text)
+            print(obj)
+        },fault: {error in
+            print(error)
         })
         //        }
     }

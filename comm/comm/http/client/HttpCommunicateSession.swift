@@ -16,6 +16,7 @@ class HttpCommunicateSession  : NSObject, URLSessionDelegate, URLSessionTaskDele
         static var backgroundTaskMap = Dictionary<String,HttpCommunicateSessionParams>();
         static var completionHandlerDictionary = Dictionary<String,() -> Swift.Void>();
         static var coreDataContext:NSManagedObjectContext! = nil;
+        static let queue:Queue = Queue(count:5);
     }
     
     private static let __init:() = {
@@ -75,28 +76,46 @@ class HttpCommunicateSession  : NSObject, URLSessionDelegate, URLSessionTaskDele
         
     }
     
-    public func create(params:HttpCommunicateSessionParams)->HttpOperation?{
+    public func request(params:HttpCommunicateSessionParams,httpResult:HttpCommunicateResult){
+        YSInstance.queue.asynQueue { [weak self] in
+            self?.requestImpl(params: params,httpResult:httpResult)
+        }
+    }
+    
+    private func requestImpl(params:HttpCommunicateSessionParams,httpResult:HttpCommunicateResult){
+        
+        
+        if let authentication = self.impl.authentication{
+            if params.headers == nil {
+                params.headers = [:];
+            }
+            params.headers!["Authorization"] = authentication.auth();
+        }
         
         let serialReq = createRequest(params: params);
         if let error = serialReq.error {
             params.failure?(error, nil)
-            return nil
+            return
         }
-        let opt = HttpOperation()
         
         let task = session.dataTask(with: serialReq.request,
                                     completionHandler: {(data: Data?, response: URLResponse?, error: Error?) -> Void in
-                                        opt.finish()
+//                                        opt.finish()
         self.processResponse(params.success,failure:params.failure,data:data,response:response,error:error as NSError!);
         });
         
-//        let task = session.dataTask(with: serialReq.request)
-//        YSInstance.backgroundTaskMap["\(String(describing: session.configuration.identifier))\(task.hash)"] = params;
-        opt.task = task
-        return opt
+        task.resume();
+        
+        httpResult.setURLSessionTask(task: task);
     }
     
     private func processResponse(_ success:((HttpClientResponse) -> Void)!, failure:((NSError, HttpClientResponse?) -> Void)!,data: Data!, response: URLResponse!, error: NSError!){
+        
+        if let hresponse = response as? HTTPURLResponse {
+            if hresponse.statusCode == 401 {
+                self.impl.authentication?.badAuth();
+            }
+        }
         if error != nil {
             if failure != nil {
                 failure(error, nil)
@@ -389,68 +408,73 @@ internal class HttpCommunicateSessionParams{
 }
 
 /// Subclass of NSOperation for handling and scheduling HTTPTask on a NSOperationQueue.
-internal class HttpOperation : Operation {
-    fileprivate var task: URLSessionDataTask!
-    fileprivate var stopped = false
-    fileprivate var running = false
-    
-    /// Controls if the task is finished or not.
-    open var done = false
-    
-    //MARK: Subclassed NSOperation Methods
-    
-    /// Returns if the task is asynchronous or not. This should always be false.
-    override open var isAsynchronous: Bool {
-        return false
-    }
-    
-    /// Returns if the task has been cancelled or not.
-    override open var isCancelled: Bool {
-        return stopped
-    }
-    
-    /// Returns if the task is current running.
-    override open var isExecuting: Bool {
-        return running
-    }
-    
-    /// Returns if the task is finished.
-    override open var isFinished: Bool {
-        return done
-    }
-    
-    /// Returns if the task is ready to be run or not.
-    override open var isReady: Bool {
-        return !running
-    }
-    
-    /// Starts the task.
-    override open func start() {
-        super.start()
-        stopped = false
-        running = true
-        done = false
-        task.resume()
-    }
-    
-    /// Cancels the running task.
-    override open func cancel() {
-        super.cancel()
-        running = false
-        stopped = true
-        done = true
-        task.cancel()
-    }
-    
-    /// Sets the task to finished.
-    open func finish() {
-        self.willChangeValue(forKey: "isExecuting")
-        self.willChangeValue(forKey: "isFinished")
-        
-        running = false
-        done = true
-        
-        self.didChangeValue(forKey: "isExecuting")
-        self.didChangeValue(forKey: "isFinished")
-    }
-}
+//internal class HttpOperation : Operation {
+//    fileprivate var task: URLSessionDataTask!
+//    fileprivate var stopped = false
+//    fileprivate var running = false
+//    
+//    /// Controls if the task is finished or not.
+//    open var done = false
+//    
+//    //MARK: Subclassed NSOperation Methods
+//    
+//    /// Returns if the task is asynchronous or not. This should always be false.
+//    override open var isAsynchronous: Bool {
+//        return false
+//    }
+//    
+//    /// Returns if the task has been cancelled or not.
+//    override open var isCancelled: Bool {
+//        return stopped
+//    }
+//    
+//    /// Returns if the task is current running.
+//    override open var isExecuting: Bool {
+//        return running
+//    }
+//    
+//    /// Returns if the task is finished.
+//    override open var isFinished: Bool {
+//        return done
+//    }
+//    
+//    /// Returns if the task is ready to be run or not.
+//    override open var isReady: Bool {
+//        return !running
+//    }
+//    
+//    /// Starts the task.
+//    override open func start() {
+//        super.start()
+//        stopped = false
+//        running = true
+//        done = false
+//        task.resume()
+//    }
+//    
+//    override func main() {
+//        super.main();
+//    }
+//    
+//    /// Cancels the running task.
+//    override open func cancel() {
+//        super.cancel()
+//        running = false
+//        stopped = true
+//        done = true
+//        task.cancel()
+//    }
+//    
+//    /// Sets the task to finished.
+//    open func finish() {
+//        self.willChangeValue(forKey: "isExecuting")
+//        self.willChangeValue(forKey: "isFinished")
+//        
+//        running = false
+//        done = true
+//        
+//        self.didChangeValue(forKey: "isExecuting")
+//        self.didChangeValue(forKey: "isFinished")
+//    }
+//}
+

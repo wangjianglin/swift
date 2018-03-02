@@ -56,14 +56,42 @@ open class HttpCommunicateResult {
         }
     }
     
-    public func pause(){
+    private var _pause = false;
+    private var _abort = false;
+    private var _task:URLSessionTask?;
+    
+    func setURLSessionTask(task:URLSessionTask) {
+        objc_sync_enter(self);
+        _task = task;
+        if _pause == true {
+            task.suspend();
+        }
         
+        if _abort == true {
+            task.cancel();
+        }
+        objc_sync_exit(self);
+    }
+    
+    public func pause(){
+        objc_sync_enter(self);
+        _pause = true;
+        _task?.suspend();
+        objc_sync_exit(self);
     }
     public func resume(){
-        
+        objc_sync_enter(self);
+        _pause = false;
+        _task?.resume();
+        objc_sync_exit(self);
     }
     open func abort(){
-    
+        objc_sync_enter(self);
+        _abort = true;
+        if !_abort {
+            _task?.cancel();
+        }
+        objc_sync_exit(self);
     }
     
     open func waitForEnd(){

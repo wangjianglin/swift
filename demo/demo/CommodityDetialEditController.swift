@@ -27,9 +27,9 @@ open class CommodityDetialEditController:UIViewController, BaseView{
     var pricePos:UIView!;
     var textColor:UIColor!;
     
-    dynamic var _imagesView:ImagesView!;
-    dynamic var imagesViewOne:ImagesView!;
-    dynamic var imagesViewTwo:ImagesView!;
+    @objc dynamic var _imagesView:ImagesView!;
+    @objc dynamic var imagesViewOne:ImagesView!;
+    @objc dynamic var imagesViewTwo:ImagesView!;
     var holdGoldView:UILabel!;
     var pickView:ZHPickView!;
     var _spreadcommission:String!;// * _spreadcommission;//差价提成
@@ -51,7 +51,7 @@ open class CommodityDetialEditController:UIViewController, BaseView{
     var multiGoodsPriceButton:QCheckBox!;
     
     var  masterCheckButton:QCheckBox!
-    dynamic var protocolLabel = UILabel();
+    @objc dynamic var protocolLabel = UILabel();
     
     var masterView:UILabel!;
     var pre:UIView!
